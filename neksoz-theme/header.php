@@ -388,15 +388,22 @@
             gap: 40px;
         }
 
-        .hero__actions--right {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 16px;
-            align-items: center;
-            justify-content: flex-end;
-            margin-bottom: 40px;
-         display: flex !important; flex-direction: row !important; gap: 20px !important; align-items: center !important;}
+        
+        .hero__actions--right { 
+            display: flex !important; 
+            flex-direction: row !important; 
+            flex-wrap: nowrap !important; 
+            gap: 20px !important; 
+            align-items: center !important; 
+            margin-top: 35px !important;
+            justify-content: flex-start !important;
+        }
+        .hero__actions--right .btn {
+            width: auto !important;
+            display: inline-flex !important;
+            white-space: nowrap !important;
+        }
+
 
         .btn-animated {
             animation: pulse-primary 3s infinite;
@@ -1163,12 +1170,22 @@
                 text-align: center;
                 gap: 32px;
             }
-            .hero__actions--right {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                margin-top: 24px;
-             display: flex !important; flex-direction: row !important; gap: 20px !important; align-items: center !important;}
+            
+        .hero__actions--right { 
+            display: flex !important; 
+            flex-direction: row !important; 
+            flex-wrap: nowrap !important; 
+            gap: 20px !important; 
+            align-items: center !important; 
+            margin-top: 35px !important;
+            justify-content: flex-start !important;
+        }
+        .hero__actions--right .btn {
+            width: auto !important;
+            display: inline-flex !important;
+            white-space: nowrap !important;
+        }
+
             .stats-ribbon__inner {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 24px 0;
