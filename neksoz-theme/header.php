@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEKSOZ ??î Business Consulting Group</title>
+    <title>NEKSOZ ‚Äî Business Consulting Group</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           NEKSOZ.LUXURY ??î Premium Corporate Design System v2
+           NEKSOZ.LUXURY ‚Äî Premium Corporate Design System v2
            Built around logo geometry: angular lines, red/blue gradients
            ============================================================ */
 
         :root {
-            /* ?î??î? Logo-Derived Palette ?î??î? */
+            /* ‚îÄ‚îÄ Logo-Derived Palette ‚îÄ‚îÄ */
             --nk-red: #E30613;
             --nk-red-dark: #B50510;
             --nk-red-bright: #FF1A2D;
@@ -25,7 +25,7 @@
             --nk-blue-deep: #001A66;
             --nk-navy: #000D33;
 
-            /* ?î??î? Gradients (matching logo brush strokes) ?î??î? */
+            /* ‚îÄ‚îÄ Gradients (matching logo brush strokes) ‚îÄ‚îÄ */
             --nk-grad-red: linear-gradient(135deg, #E30613 0%, #FF3344 100%);
             --nk-grad-blue: linear-gradient(135deg, #0044CC 0%, #2277FF 100%);
             --nk-grad-brand: linear-gradient(135deg, #E30613 0%, #CC0033 25%, #0044CC 75%, #2277FF 100%);
@@ -33,7 +33,7 @@
             --nk-grad-dark: linear-gradient(180deg, #000D33 0%, #001133 100%);
             --nk-grad-subtle: linear-gradient(135deg, rgba(0,68,204,0.04) 0%, rgba(227,6,19,0.03) 100%);
 
-            /* ?î??î? Neutrals ?î??î? */
+            /* ‚îÄ‚îÄ Neutrals ‚îÄ‚îÄ */
             --nk-white: #FFFFFF;
             --nk-off-white: #F7F8FA;
             --nk-gray-50: #F2F4F7;
@@ -44,23 +44,23 @@
             --nk-gray-800: #1D2939;
             --nk-gray-900: #101828;
 
-            /* ?î??î? Typography ?î??î? */
+            /* ‚îÄ‚îÄ Typography ‚îÄ‚îÄ */
             --font-display: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
 
-            /* ?î??î? Geometry ?î??î? */
+            /* ‚îÄ‚îÄ Geometry ‚îÄ‚îÄ */
             --radius-sm: 4px;
             --radius-md: 8px;
             --radius-lg: 16px;
             --radius-xl: 24px;
 
-            /* ?î??î? Motion ?î??î? */
+            /* ‚îÄ‚îÄ Motion ‚îÄ‚îÄ */
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-out: cubic-bezier(0, 0, 0.2, 1);
             --duration: 0.4s;
         }
 
-        /* ?î??î? Reset ?î??î? */
+        /* ‚îÄ‚îÄ Reset ‚îÄ‚îÄ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         body {
@@ -75,11 +75,11 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* ?î??î? Container ?î??î? */
+        /* ‚îÄ‚îÄ Container ‚îÄ‚îÄ */
         .container { max-width: 100%; margin: 0 auto; padding: 0 10px; }
 
         /* ============================================================
-           HEADER ??î Premium Fixed Bar
+           HEADER ‚Äî Premium Fixed Bar
            ============================================================ */
         .header {
             position: fixed;
@@ -218,7 +218,7 @@
         }
 
         /* ============================================================
-           HERO ??î Dark Corporate with Angular Geometry
+           HERO ‚Äî Dark Corporate with Angular Geometry
            ============================================================ */
         .hero {
             position: relative;
@@ -438,7 +438,7 @@
             z-index: 1;
         }
 
-        /* ?î??î? Spectacular Apple-Style Mesh Gradient Glares ?î??î? */
+        /* ‚îÄ‚îÄ Spectacular Apple-Style Mesh Gradient Glares ‚îÄ‚îÄ */
         .stats-ribbon__inner::before,
         .stats-ribbon__inner::after {
             content: '';
@@ -567,7 +567,7 @@
             color: var(--nk-gray-600);
         }
 
-        /* ?î??î? Header Accents ?î??î? */
+        /* ‚îÄ‚îÄ Header Accents ‚îÄ‚îÄ */
         .text-gradient {
             background: var(--nk-grad-brand);
             -webkit-background-clip: text;
@@ -752,7 +752,7 @@
         .section__header--center .section__subtitle { margin-left: auto; margin-right: auto; }
 
         /* ============================================================
-           SERVICE CARDS ??î Angular Corporate Style
+           SERVICE CARDS ‚Äî Angular Corporate Style
            ============================================================ */
         .services-grid {
             display: grid;
@@ -770,7 +770,7 @@
             overflow: hidden;
         }
 
-        /* Angular top accent ??î matching logo's diagonal cuts */
+        /* Angular top accent ‚Äî matching logo's diagonal cuts */
         .service-card::before {
             content: '';
             position: absolute;
@@ -868,7 +868,7 @@
             font-size: 1.05rem;
         }
 
-        /* ?î??î? CEO Photo & Quote Layout ?î??î? */
+        /* ‚îÄ‚îÄ CEO Photo & Quote Layout ‚îÄ‚îÄ */
         .about__right {
             position: relative;
             display: flex;
@@ -1197,7 +1197,7 @@
             .header__nav { display: none; }
         }
 
-        /* ?î??î? Animations ?î??î? */
+        /* ‚îÄ‚îÄ Animations ‚îÄ‚îÄ */
         .fade-up {
             opacity: 0;
             transform: translateY(24px);
@@ -1214,19 +1214,19 @@
 
 <body <?php body_class(); ?>>
 
-<!-- ?ï??ï??ï??ï??ï??ï??ï??ï??ï??ï??ï? HEADER ?ï??ï??ï??ï??ï??ï??ï??ï??ï??ï??ï? -->
+<!-- ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê HEADER ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê -->
 <header class="header">
     <div class="container header__inner">
         <a href="#" class="header__logo-link">
             <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
         <nav class="header__nav">
-            <a href="#">?ì?ª?∞?????∞??</a>
-            <a href="#services">?????ª??????</a>
-            <a href="#">?? ?????????∞??????</a>
-            <a href="#">???????????Ç??</a>
-            <a href="#">?í?∞???∞????????</a>
-            <a href="#contacts">???????Ç?∞???Ç?ã</a>
+            <a href="#">–ì–ª–∞–≤–Ω–∞—è</a>
+            <a href="#services">–£—Å–ª—É–≥–∏</a>
+            <a href="#">–û –∫–æ–º–ø–∞–Ω–∏–∏</a>
+            <a href="#">–ù–æ–≤–æ—Å—Ç–∏</a>
+            <a href="#">–í–∞–∫–∞–Ω—Å–∏–∏</a>
+            <a href="#contacts">–ö–æ–Ω—Ç–∞–∫—Ç—ã</a>
         </nav>
         <div class="header__actions">
             <!-- Telegram -->
@@ -1244,4 +1244,3 @@
         </div>
     </div>
 </header>
-

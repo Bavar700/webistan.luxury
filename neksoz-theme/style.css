@@ -1,11 +1,11 @@
-﻿
+
         /* ============================================================
-           NEKSOZ.LUXURY вЂ” Premium Corporate Design System v2
+           NEKSOZ.LUXURY — Premium Corporate Design System v2
            Built around logo geometry: angular lines, red/blue gradients
            ============================================================ */
 
         :root {
-            /* в”Ђв”Ђ Logo-Derived Palette в”Ђв”Ђ */
+            /* ── Logo-Derived Palette ── */
             --nk-red: #E30613;
             --nk-red-dark: #B50510;
             --nk-red-bright: #FF1A2D;
@@ -15,7 +15,7 @@
             --nk-blue-deep: #001A66;
             --nk-navy: #000D33;
 
-            /* в”Ђв”Ђ Gradients (matching logo brush strokes) в”Ђв”Ђ */
+            /* ── Gradients (matching logo brush strokes) ── */
             --nk-grad-red: linear-gradient(135deg, #E30613 0%, #FF3344 100%);
             --nk-grad-blue: linear-gradient(135deg, #0044CC 0%, #2277FF 100%);
             --nk-grad-brand: linear-gradient(135deg, #E30613 0%, #CC0033 25%, #0044CC 75%, #2277FF 100%);
@@ -23,7 +23,7 @@
             --nk-grad-dark: linear-gradient(180deg, #000D33 0%, #001133 100%);
             --nk-grad-subtle: linear-gradient(135deg, rgba(0,68,204,0.04) 0%, rgba(227,6,19,0.03) 100%);
 
-            /* в”Ђв”Ђ Neutrals в”Ђв”Ђ */
+            /* ── Neutrals ── */
             --nk-white: #FFFFFF;
             --nk-off-white: #F7F8FA;
             --nk-gray-50: #F2F4F7;
@@ -34,23 +34,23 @@
             --nk-gray-800: #1D2939;
             --nk-gray-900: #101828;
 
-            /* в”Ђв”Ђ Typography в”Ђв”Ђ */
+            /* ── Typography ── */
             --font-display: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
 
-            /* в”Ђв”Ђ Geometry в”Ђв”Ђ */
+            /* ── Geometry ── */
             --radius-sm: 4px;
             --radius-md: 8px;
             --radius-lg: 16px;
             --radius-xl: 24px;
 
-            /* в”Ђв”Ђ Motion в”Ђв”Ђ */
+            /* ── Motion ── */
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-out: cubic-bezier(0, 0, 0.2, 1);
             --duration: 0.4s;
         }
 
-        /* в”Ђв”Ђ Reset в”Ђв”Ђ */
+        /* ── Reset ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         body {
@@ -65,11 +65,11 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* в”Ђв”Ђ Container в”Ђв”Ђ */
+        /* ── Container ── */
         .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
 
         /* ============================================================
-           HEADER вЂ” Premium Fixed Bar
+           HEADER — Premium Fixed Bar
            ============================================================ */
         .header {
             position: fixed;
@@ -208,7 +208,7 @@
         }
 
         /* ============================================================
-           HERO вЂ” Dark Corporate with Angular Geometry
+           HERO — Dark Corporate with Angular Geometry
            ============================================================ */
         .hero {
             position: relative;
@@ -428,7 +428,7 @@
             z-index: 1;
         }
 
-        /* в”Ђв”Ђ Spectacular Apple-Style Mesh Gradient Glares в”Ђв”Ђ */
+        /* ── Spectacular Apple-Style Mesh Gradient Glares ── */
         .stats-ribbon__inner::before,
         .stats-ribbon__inner::after {
             content: '';
@@ -557,7 +557,7 @@
             color: var(--nk-gray-600);
         }
 
-        /* в”Ђв”Ђ Header Accents в”Ђв”Ђ */
+        /* ── Header Accents ── */
         .text-gradient {
             background: var(--nk-grad-brand);
             -webkit-background-clip: text;
@@ -742,7 +742,7 @@
         .section__header--center .section__subtitle { margin-left: auto; margin-right: auto; }
 
         /* ============================================================
-           SERVICE CARDS вЂ” Angular Corporate Style
+           SERVICE CARDS — Angular Corporate Style
            ============================================================ */
         .services-grid {
             display: grid;
@@ -760,7 +760,7 @@
             overflow: hidden;
         }
 
-        /* Angular top accent вЂ” matching logo's diagonal cuts */
+        /* Angular top accent — matching logo's diagonal cuts */
         .service-card::before {
             content: '';
             position: absolute;
@@ -858,7 +858,7 @@
             font-size: 1.05rem;
         }
 
-        /* в”Ђв”Ђ CEO Photo & Quote Layout в”Ђв”Ђ */
+        /* ── CEO Photo & Quote Layout ── */
         .about__right {
             position: relative;
             display: flex;
@@ -1187,7 +1187,7 @@
             .header__nav { display: none; }
         }
 
-        /* в”Ђв”Ђ Animations в”Ђв”Ђ */
+        /* ── Animations ── */
         .fade-up {
             opacity: 0;
             transform: translateY(24px);
