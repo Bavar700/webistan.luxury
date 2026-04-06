@@ -80,7 +80,7 @@
         <div class="section__header section__header--center">
             <div class="section__label">Направления</div>
             <h2 class="section__title section__title--huge"><span class="text-gradient">Комплексные решения</span><br>для Вашего бизнеса</h2>
-            <p class="section__subtitle section__subtitle--free">Каждая услуга адаптируется под индивидуальные потребности клиента и обеспечивает максимальную <strong>защиту Ваших интересов</strong>.</p>
+            <p class="section__subtitle section__subtitle--free">Каждая услуга адаптируется под индивидуальные потребности клиента и обеспечивает максимальную <br><strong>защиту Ваших интересов</strong>.</p>
         </div>
 
         <div class="services-grid">
