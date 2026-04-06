@@ -1,0 +1,6 @@
+﻿ACADEMY_WEBISTAN_FULL_RESTORE_2026.zip
+*.zip
+backups/
+neksoz-env/db/
+.php.bak
+*~

@@ -1,0 +1,79 @@
+/*
+Theme Name: Yaghnob Heritage
+Theme URI: https://yaghnob-heritage.com
+Author: Webistan Luxury
+Author URI: https://yaghnob-heritage.com
+Description: Academic portal for preserving the living Sogdian legacy. Built with Tailwind CSS.
+Version: 1.1.0
+Text Domain: yaghnob-heritage
+*/
+
+/* Foundational Safety CSS - Prevents 'corrupted' look if Tailwind CDN is slow */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: #FDFBF7;
+    /* Ivory base */
+    color: #1c1917;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+main {
+    display: block;
+    min-height: 80vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+/* Sticky Header Safety */
+header.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}

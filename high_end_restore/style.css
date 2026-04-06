@@ -1,0 +1,586 @@
+﻿/*
+Theme Name: Академия (High-End Academic)
+Description: Премиальный академический дизайн. Классические пропорции, четкая типографика (Lora/Inter) и безупречная чистота.
+Version: 13.0.0
+*/
+
+/* --- 1. Foundation --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Sophisticated Palette */
+    --ink: #0f172a;
+    --paper: #ffffff;
+    --paper-alt: #fcfaf7;
+    --gold: #92400e;
+    --gold-light: #fdf2f2;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-500: #64748b;
+    --slate-800: #1e293b;
+
+    /* Typography - Classical Academic Pair */
+    --font-heading: 'Lora', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing & Proportions */
+    --container-max: 1200px;
+    --section-gap: 160px;
+    /* Increased for breathing room */
+    --section-gap-mobile: 80px;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    position: relative;
+    font-family: var(--font-body);
+    font-size: 18px;
+    /* Slightly larger for premium readability */
+    line-height: 1.7;
+    background-color: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+@media (max-width: 1024px) {
+    body {
+        font-size: 16px;
+    }
+
+    :root {
+        --section-gap: var(--section-gap-mobile);
+    }
+}
+
+/* Admin Bar Fix */
+body.admin-bar .site-header {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .site-header {
+        top: 46px;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    /* Slightly lighter for elegance */
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+}
+
+h2 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    border-bottom: 3px solid var(--gold-light);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin-bottom: 3.5rem;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--slate-800);
+}
+
+.text-muted {
+    color: var(--slate-500);
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+/* --- 3. Header --- */
+.site-header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--slate-200);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 80px;
+    /* Refined height */
+    display: flex;
+    align-items: center;
+    transition: all 0.4s var(--ease);
+}
+
+.site-header.is-scrolled {
+    height: 70px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    border-bottom-color: transparent;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.site-branding {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -3px;
+    /* Nudged 1px higher from -2px */
+}
+
+.brand-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: 20px;
+    /* Shift menu right */
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.site-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: block;
+    line-height: 1;
+    /* Match alignment */
+}
+
+.site-title:hover {
+    color: var(--gold);
+}
+
+/* Navigation */
+.nav-menu,
+.menu {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-menu a,
+.menu a {
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.7rem;
+    /* Slightly smaller for premium look */
+    letter-spacing: 0.12em;
+    /* Adjusted for readability */
+    text-transform: uppercase;
+    transition: all 0.3s var(--ease);
+    padding: 0.5rem 0;
+    position: relative;
+    display: block;
+}
+
+.nav-menu a::after,
+.menu a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s var(--ease);
+}
+
+.nav-menu a:hover::after,
+.menu a:hover::after,
+.nav-menu .current-menu-item>a::after,
+.menu .current-menu-item>a::after,
+.nav-menu .current-page-ancestor>a::after,
+.menu .current-page-ancestor>a::after,
+.nav-menu .current-menu-ancestor>a::after,
+.menu .current-menu-ancestor>a::after,
+.nav-menu .current_page_item>a::after,
+.menu .current_page_item>a::after {
+    width: 100%;
+}
+
+.nav-menu a:hover,
+.menu a:hover,
+.nav-menu .current-menu-item>a,
+.menu .current-menu-item>a,
+.nav-menu .current-page-ancestor>a,
+.menu .current-page-ancestor>a,
+.nav-menu .current-menu-ancestor>a,
+.menu .current-menu-ancestor>a,
+.nav-menu .current_page_item>a,
+.menu .current_page_item>a {
+    color: var(--gold);
+}
+
+/* Sub-menus */
+.nav-menu li,
+.menu li {
+    position: relative;
+}
+
+.nav-menu ul,
+.menu ul {
+    position: absolute;
+    top: 100%;
+    left: -1rem;
+    background: #ffffff;
+    min-width: 220px;
+    padding: 1rem 0;
+    border: 1px solid var(--slate-100);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.nav-menu li:hover>ul,
+.menu li:hover>ul {
+    display: flex;
+    animation: menuAppear 0.3s var(--ease) forwards;
+}
+
+@keyframes menuAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-menu ul a,
+.menu ul a {
+    padding: 0.6rem 1.5rem;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.nav-menu ul a::after,
+.menu ul a::after {
+    display: none;
+}
+
+/* Language Switcher */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.header-separator {
+    font-weight: 300;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+.lang-switch a {
+    text-decoration: none;
+    color: var(--slate-300);
+    transition: color 0.3s ease;
+}
+
+.lang-switch a.active {
+    color: var(--ink);
+}
+
+/* --- 4. Content Sections --- */
+.section {
+    position: relative;
+    padding: var(--section-gap) 0;
+}
+
+.bg-alt {
+    background-color: var(--paper-alt);
+}
+
+/* Hero Manuscript Overlay */
+.hero-manuscript-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/manuscript.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.archive-card {
+    background: white;
+    padding: 3.5rem;
+    border: 1px solid var(--slate-100);
+    transition: all 0.5s var(--ease);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.archive-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+}
+
+.archive-card:hover {
+    border-color: transparent;
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08);
+    transform: translateY(-8px);
+}
+
+.archive-card:hover::after {
+    transform: scaleX(1);
+}
+
+.archive-card .label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+}
+
+.archive-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Editorial Helpers */
+.lead-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--slate-800);
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+.text-ink {
+    color: var(--ink);
+}
+
+.italic-heritage {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* --- Elegant Editorial Hero (Ultra-Compact) --- */
+.hero-editorial {
+    padding: 48px 0;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    background-position: center center !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-editorial-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hero-editorial .pre-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.hero-editorial h1 {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    /* Reduced size to fit one line */
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    /* Force one line if space allows */
+}
+
+.hero-editorial .heritage-focus {
+    display: inline;
+    color: var(--gold);
+    font-style: normal;
+    font-weight: inherit;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Remove bracket decoration for ultra-compactness */
+.hero-editorial .heritage-focus::before {
+    display: none;
+}
+
+.hero-editorial p {
+    font-size: 1rem;
+    max-width: 750px;
+    margin: 0 auto 2rem;
+    color: var(--slate-700);
+    line-height: 1.6;
+}
+
+.hero-editorial .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.site-main section:nth-child(even) {
+    background-color: var(--paper-alt);
+}
+
+/* --- 5. Buttons --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background: var(--ink);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--gold);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+}
+
+.btn-outline:hover {
+    background: var(--ink);
+    color: white;
+}
+
+/* --- 6. Footer --- */
+.site-footer {
+    background: var(--ink);
+    color: white;
+    padding: 80px 0 40px;
+}
+
+.site-footer h4 {
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.site-footer p {
+    color: var(--slate-300);
+    font-size: 0.9rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}

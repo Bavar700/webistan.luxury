@@ -1,0 +1,19 @@
+/*
+Theme Name: Yaghnob Heritage
+Theme URI: https://yaghnob-heritage.com
+Author: Webistan Luxury
+Author URI: https://yaghnob-heritage.com
+Description: Academic portal for preserving the living Sogdian legacy. Built with Tailwind CSS.
+Version: 1.0.0
+Text Domain: yaghnob-heritage
+*/
+
+/* 
+ * Tailwind CSS is loaded via CDN in functions.php. 
+ * This file is mainly for WordPress theme recognition and custom overrides if needed.
+ */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
