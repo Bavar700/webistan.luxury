@@ -76,7 +76,7 @@
         ul { list-style: none; }
 
         /* ── Container ── */
-        .container { max-width: 1720px; margin: 0 auto; padding: 0 4rem; }
+        .container { max-width: 100%; margin: 0 auto; padding: 0 5%; }
 
         /* ============================================================
            HEADER — Premium Fixed Bar
@@ -299,7 +299,7 @@
         .hero__content {
             position: relative;
             z-index: 2;
-            max-width: 960px;
+            max-width: 1200px;
         }
 
         .hero__badge {
@@ -735,7 +735,7 @@
         .section__subtitle {
             font-size: 1.05rem;
             color: var(--nk-gray-400);
-            max-width: 1040px;
+            max-width: 1400px;
             line-height: 1.65;
             font-weight: 400;
         }
