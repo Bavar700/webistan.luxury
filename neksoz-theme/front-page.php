@@ -184,40 +184,26 @@
             <!-- Left: Strategic Content -->
             <div class="about__content fade-up is-visible">
                 <div class="section__label">О компании</div>
-                <h2 class="section__title section__title--huge">
-                    <span class="text-gradient">Ваш стратегический</span><br>бизнес-партнер
-                </h2>
-                <p>За 18 лет работы NEKSOZ эволюционировала из узкопрофильной фирмы в мощный консалтинговый хаб. Мы не просто ведем учет — мы создаем фундамент для масштабирования вашего бизнеса.</p>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
-                    <div style="border-left: 3px solid var(--nk-red-600); padding-left: 15px;">
-                        <h4 style="font-weight: 700; margin-bottom: 5px;">Прозрачность</h4>
-                        <p style="font-size: 0.95rem; margin: 0;">Внедряем системы, где каждый тенге под полным контролем.</p>
-                    </div>
-                    <div style="border-left: 3px solid var(--nk-red-600); padding-left: 15px;">
-                        <h4 style="font-weight: 700; margin-bottom: 5px;">Рост</h4>
-                        <p style="font-size: 0.95rem; margin: 0;">Освобождаем вас от рутины для глобальных целей.</p>
-                    </div>
-                </div>
-
-                <div class="about__btn-row">
-                    <a href="#contacts" class="btn btn--outline" style="border-color: var(--nk-gray-200); color: var(--nk-gray-800);">Подробнее о миссии</a>
+                <h1 class="about__title">
+                    Ваш стратегический<br>
+                    <span class="text-gradient">бизнес-партнер</span>
+                </h1>
+                <div class="about__main-text">
+                    <p>За 18 лет работы NEKSOZ эволюционировала из узкопрофильной фирмы в мощный консалтинговый хаб. Мы не просто ведем учет — мы создаем фундамент для масштабирования вашего бизнеса, обеспечивая его устойчивость и безопасность.</p>
                 </div>
             </div>
 
-            <!-- Right: CEO & Identity -->
-            <div class="about__right fade-up is-visible fade-up-delay-2">
-                <div class="about__ceo-image">
-                    <img src='<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg' alt="Генеральный директор NEKSOZ">
-                    <div class="quote-card">
-                        <div class="quote-card__mark">"</div>
-                        <p class="quote-card__text">
-                            Наша миссия — превратить сложные бизнес-процессы в простую и прибыльную систему для каждого клиента. Мы работаем на ваш результат.
-                        </p>
-                        <div class="quote-card__author">
-                            <div class="quote-card__author-line"></div>
-                            <div class="quote-card__author-name">Акмарал Ибрагимова, CEO</div>
-                        </div>
+            <!-- Right: CEO & Linking Element -->
+            <div class="about__right">
+                <div class="about__ceo-wrapper">
+                    <div class="about__ceo-image">
+                        <img src='<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg' alt="Генеральный директор NEKSOZ">
+                    </div>
+                    
+                    <!-- The Bridging Quote -->
+                    <div class="bridging-quote fade-up is-visible fade-up-delay-2">
+                        <p>«Наша миссия — превратить сложные бизнес-процессы в простую и прибыльную систему для вас. Мы работаем на ваш результат и обеспечиваем максимальную <br><strong>защиту Ваших интересов</strong>.»</p>
+                        <span>Акмарал Ибрагимова — CEO NEKSOZ</span>
                     </div>
                 </div>
             </div>
