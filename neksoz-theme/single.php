@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Single Post / Service Template â€” Neksoz.Luxury
  *
@@ -15,7 +15,7 @@ get_header();
     <!-- Hero Banner -->
     <section class="nk-section--dark" style="padding: 60px 0;">
         <div class="nk-container">
-            <div style="max-width: 700px;">
+            <div style="max-width: 100% !important;">
                 <?php if ( 'neksoz_service' === get_post_type() ) : ?>
                     <span class="section-label" style="color: rgba(255,255,255,0.5);"><?php esc_html_e( 'Ð£ÑÐ»ÑƒÐ³Ð¸', 'neksoz' ); ?></span>
                 <?php else : ?>

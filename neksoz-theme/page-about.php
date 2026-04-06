@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Ðž ÐÐ°Ñ
  * Template Post Type: page
@@ -16,7 +16,7 @@ get_header();
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
         <div class="nk-container uk-position-relative uk-position-z-index">
             <h1 class="fade-up is-visible" style="color: #fff; font-size: 3.5rem; margin-bottom: 1rem;"><?php esc_html_e('Ðž ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸', 'neksoz'); ?></h1>
-            <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 600px;">
+            <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 100% !important;">
                 ÐžÐžÐž Â«ÐÐ•ÐšÐ¡ÐžÐ—-Ð‘Ð˜Ð—ÐÐ•Ð¡ ÐšÐžÐÐ¡ÐÐ›Ð¢Ð˜ÐÐ“ Ð“Ð Ð£ÐŸÂ»
             </p>
         </div>
@@ -39,7 +39,7 @@ get_header();
     <!-- Mission & Goals -->
     <section class="nk-section" style="background: var(--nk-bg-alt); padding-top: 4rem; padding-bottom: 5rem;">
         <div class="nk-container">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 4rem;" class="fade-up is-visible">
+            <div style="max-width: 100% !important; margin: 0 auto; text-align: center; margin-bottom: 4rem;" class="fade-up is-visible">
                 <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--nk-text);">Ð¦ÐµÐ»ÑŒ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸</h2>
                 <p style="font-size: 1.2rem; color: var(--nk-text-secondary);">Ð¦ÐµÐ»ÑŒ Ð¸ Ð¼Ð¸ÑÑÐ¸Ñ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸ Ð¿Ñ€Ð¾ÑÑ‚Ð° Ð¸ Ð¿Ð¾Ð½ÑÑ‚Ð½Ð° ÐºÐ°Ðº 2Ñ…2. ÐžÐ½Ð° Ð·Ð°ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ÑÑ Ð² Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ð¸ Ð¿Ð¾Ñ‡Ð²Ñ‹ Ð´Ð»Ñ Ñ€Ð°Ð·Ð²Ð¸Ñ‚Ð¸Ñ, ÐºÐ¾Ð¼Ñ„Ð¾Ñ€Ñ‚Ð° Ð¸ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸ ÑƒÑ‡Ñ‘Ñ‚Ð° Ð—Ð°ÐºÐ°Ð·Ñ‡Ð¸ÐºÐ° ÑÐ¾Ð³Ð»Ð°ÑÐ½Ð¾ ÑÐ»ÐµÐ´ÑƒÑŽÑ‰Ð¸Ð¼ Ð¿Ñ€Ð¸Ð½Ñ†Ð¸Ð¿Ð°Ð¼:</p>
             </div>

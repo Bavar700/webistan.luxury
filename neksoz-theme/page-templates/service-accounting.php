@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Ð£ÑÐ»ÑƒÐ³Ð°: Ð’Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ñ„Ð¸Ð½. ÑƒÑ‡ÐµÑ‚Ð° Ð¸ ÐºÐ°Ð´Ñ€Ð¾Ð²
  * Template Post Type: page
@@ -13,7 +13,7 @@ get_header();
 
     <section class="nk-section--dark" style="padding: 60px 0; background: linear-gradient(135deg, var(--nk-primary-dark) 0%, var(--nk-primary) 100%);">
         <div class="nk-container">
-            <div style="max-width: 800px;">
+            <div style="max-width: 100% !important;">
                 <span class="section-label" style="color: rgba(255,255,255,0.6);"><?php esc_html_e( 'ÐÐ°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ', 'neksoz' ); ?></span>
                 <h1 style="color: #fff; margin-bottom: 1rem; font-size: 2.5rem; line-height: 1.2;"><?php esc_html_e( 'Ð’Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ ÑƒÑ‡ÐµÑ‚Ð° Ð¸ ÑƒÑ‡ÐµÑ‚Ð° ÐºÐ°Ð´Ñ€Ð¾Ð² Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ðµ Ð°ÑƒÑ‚ÑÐ¾Ñ€ÑÐ¸Ð½Ð³Ð°', 'neksoz' ); ?></h1>
             </div>

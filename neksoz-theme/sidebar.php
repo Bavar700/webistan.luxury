@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Sidebar â€” Neksoz.Luxury
  *

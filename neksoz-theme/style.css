@@ -66,7 +66,7 @@
         ul { list-style: none; }
 
         /* ── Container ── */
-        .container { max-width: 100% !important; margin: 0 auto; padding: 0 20px !important; }
+        .container { max-width: 100% !important; margin: 0 auto; padding: 0 40px !important; }
 
         /* ============================================================
            HEADER — Premium Fixed Bar

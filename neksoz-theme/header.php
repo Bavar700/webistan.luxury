@@ -76,7 +76,7 @@
         ul { list-style: none; }
 
         /* ── Container ── */
-        .container { max-width: 100%; margin: 0 auto; padding: 0 20px !important; }
+        .container { max-width: 100%; margin: 0 auto; padding: 0 40px !important; }
 
         /* ============================================================
            HEADER — Premium Fixed Bar
@@ -396,7 +396,7 @@
             align-items: center;
             justify-content: flex-end;
             margin-bottom: 40px;
-        }
+         display: flex !important; flex-direction: row !important; gap: 20px !important; align-items: center !important;}
 
         .btn-animated {
             animation: pulse-primary 3s infinite;
@@ -1168,7 +1168,7 @@
                 align-items: center;
                 justify-content: center;
                 margin-top: 24px;
-            }
+             display: flex !important; flex-direction: row !important; gap: 20px !important; align-items: center !important;}
             .stats-ribbon__inner {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 24px 0;

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Index Template â€” Neksoz.Luxury
  * Default loop for displaying posts (news).

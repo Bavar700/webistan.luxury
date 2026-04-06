@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Nexoz Corporate Theme Functions
  * Registered by Senior WordPress Developer / UI/UX Designer

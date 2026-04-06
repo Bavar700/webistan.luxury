@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Ð¡Ñ‚Ñ€Ð°Ð½Ð¸Ñ†Ð° Ð£ÑÐ»ÑƒÐ³
  * Template Post Type: page
@@ -16,7 +16,7 @@ get_header();
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
         <div class="nk-container uk-position-relative uk-position-z-index">
             <h1 class="fade-up is-visible" style="color: #fff; font-size: 3rem; margin-bottom: 1rem;"><?php the_title(); ?></h1>
-            <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 600px;">
+            <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 100% !important;">
                 ÐšÐ¾Ð¼Ð¿Ð»ÐµÐºÑÐ½Ñ‹Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ Ð´Ð»Ñ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ°. ÐžÑ‚ Ð°ÑƒÐ´Ð¸Ñ‚Ð° Ð´Ð¾ Ð¿Ð¾Ð»Ð½Ð¾Ð³Ð¾ ÑŽÑ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð¸ Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ ÑÐ¾Ð¿Ñ€Ð¾Ð²Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ.
             </p>
         </div>

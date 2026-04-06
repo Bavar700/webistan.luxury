@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Archive Template â€” Neksoz.Luxury
  *
@@ -15,7 +15,7 @@ get_header();
         <div class="nk-container">
             <span class="section-label" style="color: rgba(255,255,255,0.5);"><?php esc_html_e( 'ÐÑ€Ñ…Ð¸Ð²', 'neksoz' ); ?></span>
             <h1 style="color: #fff;"><?php the_archive_title(); ?></h1>
-            <?php the_archive_description( '<p style="color: rgba(255,255,255,0.7); max-width: 600px;">', '</p>' ); ?>
+            <?php the_archive_description( '<p style="color: rgba(255,255,255,0.7); max-width: 100% !important;">', '</p>' ); ?>
         </div>
     </section>
 

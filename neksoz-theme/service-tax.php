@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Ð£ÑÐ»ÑƒÐ³Ð°: ÐÐ°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸
  * Template Post Type: page
@@ -14,7 +14,7 @@ get_header();
     <!-- Hero Banner -->
     <section class="nk-section--dark" style="padding: 60px 0; background: linear-gradient(135deg, var(--nk-primary-dark) 0%, var(--nk-primary) 100%);">
         <div class="nk-container">
-            <div style="max-width: 800px;">
+            <div style="max-width: 100% !important;">
                 <span class="section-label" style="color: rgba(255,255,255,0.6);"><?php esc_html_e( 'ÐÐ°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ', 'neksoz' ); ?></span>
                 <h1 style="color: #fff; margin-bottom: 1rem; font-size: 2.5rem; line-height: 1.2;"><?php esc_html_e( 'ÐÐ°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸ Ð¸ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð¾Ð±Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ', 'neksoz' ); ?></h1>
             </div>
