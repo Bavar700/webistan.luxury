@@ -76,7 +76,7 @@
         ul { list-style: none; }
 
         /* ── Container ── */
-        .container { max-width: 100%; margin: 0 auto; padding: 0 10px; }
+        .container { max-width: 100%; margin: 0 auto; padding: 0 20px !important; }
 
         /* ============================================================
            HEADER — Premium Fixed Bar
@@ -299,7 +299,7 @@
         .hero__content {
             position: relative;
             z-index: 2;
-            max-width: 640px;
+            max-width: 100% !important;
         }
 
         .hero__badge {
@@ -376,7 +376,7 @@
             line-height: 1.75;
             color: rgba(255,255,255,0.55);
             margin-bottom: 40px;
-            max-width: 500px;
+            max-width: 100% !important;
             font-weight: 400;
         }
 
@@ -589,7 +589,7 @@
         .section__subtitle--free {
             font-size: 1.15rem;
             color: var(--nk-gray-600);
-            max-width: 760px;
+            max-width: 100% !important;
             margin: 24px auto 0;
             line-height: 1.6;
         }
@@ -735,7 +735,7 @@
         .section__subtitle {
             font-size: 1.05rem;
             color: var(--nk-gray-400);
-            max-width: 520px;
+            max-width: 100% !important;
             line-height: 1.65;
             font-weight: 400;
         }
@@ -878,7 +878,7 @@
         .about__ceo-image {
             position: relative;
             width: 100%;
-            max-width: 340px;
+            max-width: 100% !important;
             margin-left: auto;
             margin-bottom: -40px; /* Stylish overlap */
             z-index: 2;
@@ -1039,7 +1039,7 @@
             font-size: 1.05rem;
             color: rgba(255,255,255,0.5);
             margin-bottom: 32px;
-            max-width: 480px;
+            max-width: 100% !important;
             margin-left: auto;
             margin-right: auto;
             position: relative;
@@ -1152,7 +1152,7 @@
         /* ============================================================
            RESPONSIVE
            ============================================================ */
-        @media (max-width: 1024px) {
+        @media (max-width: 100% !important) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
             .hero__content { max-width: 100%; text-align: center; }
@@ -1179,7 +1179,7 @@
             .hero__accent-line, .hero__accent-line-2 { display: none; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 100% !important) {
             .section { padding: 64px 0; }
             .container { padding: 0 1.25rem; }
             .services-grid { grid-template-columns: 1fr; }
