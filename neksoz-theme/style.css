@@ -66,7 +66,7 @@
         ul { list-style: none; }
 
         /* ── Container ── */
-        .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+        .container { max-width: 100% !important; margin: 0 auto !important; padding: 0 40px !important; }
 
         /* ============================================================
            HEADER — Premium Fixed Bar
@@ -286,11 +286,7 @@
             pointer-events: none;
         }
 
-        .hero__content {
-            position: relative;
-            z-index: 2;
-            max-width: 640px;
-        }
+        .hero__content { position: relative; z-index: 2; max-width: 100% !important; }
 
         .hero__badge {
             display: inline-flex;
@@ -722,13 +718,7 @@
             line-height: 1.1;
         }
 
-        .section__subtitle {
-            font-size: 1.05rem;
-            color: var(--nk-gray-400);
-            max-width: 520px;
-            line-height: 1.65;
-            font-weight: 400;
-        }
+        .section__subtitle { font-size: 1.05rem; color: var(--nk-gray-400); max-width: 100% !important; line-height: 1.65; font-weight: 400; }
 
         .section__header {
             margin-bottom: 64px;
@@ -739,7 +729,7 @@
         }
 
         .section__header--center .section__label { margin: 0 auto 24px auto; }
-        .section__header--center .section__subtitle { margin-left: auto; margin-right: auto; }
+        .section__header--center .section__subtitle { font-size: 1.05rem; color: var(--nk-gray-400); max-width: 100% !important; line-height: 1.65; font-weight: 400; }
 
         /* ============================================================
            SERVICE CARDS — Angular Corporate Style
@@ -1145,7 +1135,7 @@
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero__content { max-width: 100%; text-align: center; }
+            .hero__content { position: relative; z-index: 2; max-width: 100% !important; }
             .hero__desc { margin-left: auto; margin-right: auto; }
             .hero__container {
                 flex-direction: column;
@@ -1171,7 +1161,7 @@
 
         @media (max-width: 768px) {
             .section { padding: 64px 0; }
-            .container { padding: 0 1.25rem; }
+            .container { max-width: 100% !important; margin: 0 auto !important; padding: 0 40px !important; }
             .services-grid { grid-template-columns: 1fr; }
             .stats-ribbon__inner { grid-template-columns: 1fr; gap: 24px; padding: 24px 0; }
             .stats-card { border-right: none; border-bottom: 1px solid var(--nk-gray-100); padding-bottom: 24px; }

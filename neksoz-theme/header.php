@@ -76,7 +76,7 @@
         ul { list-style: none; }
 
         /* ── Container ── */
-        .container { max-width: 100%; margin: 0 auto; padding: 0 40px !important; }
+        .container { max-width: 100% !important; margin: 0 auto !important; padding: 0 40px !important; }
 
         /* ============================================================
            HEADER — Premium Fixed Bar
@@ -296,11 +296,7 @@
             pointer-events: none;
         }
 
-        .hero__content {
-            position: relative;
-            z-index: 2;
-            max-width: 100% !important;
-        }
+        .hero__content { position: relative; z-index: 2; max-width: 100% !important; }
 
         .hero__badge {
             display: inline-flex;
@@ -739,13 +735,7 @@
             line-height: 1.1;
         }
 
-        .section__subtitle {
-            font-size: 1.05rem;
-            color: var(--nk-gray-400);
-            max-width: 100% !important;
-            line-height: 1.65;
-            font-weight: 400;
-        }
+        .section__subtitle { font-size: 1.05rem; color: var(--nk-gray-400); max-width: 100% !important; line-height: 1.65; font-weight: 400; }
 
         .section__header {
             margin-bottom: 64px;
@@ -756,7 +746,7 @@
         }
 
         .section__header--center .section__label { margin: 0 auto 24px auto; }
-        .section__header--center .section__subtitle { margin-left: auto; margin-right: auto; }
+        .section__header--center .section__subtitle { font-size: 1.05rem; color: var(--nk-gray-400); max-width: 100% !important; line-height: 1.65; font-weight: 400; }
 
         /* ============================================================
            SERVICE CARDS — Angular Corporate Style
@@ -1162,7 +1152,7 @@
         @media (max-width: 100% !important) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero__content { max-width: 100%; text-align: center; }
+            .hero__content { position: relative; z-index: 2; max-width: 100% !important; }
             .hero__desc { margin-left: auto; margin-right: auto; }
             .hero__container {
                 flex-direction: column;
@@ -1198,7 +1188,7 @@
 
         @media (max-width: 100% !important) {
             .section { padding: 64px 0; }
-            .container { padding: 0 1.25rem; }
+            .container { max-width: 100% !important; margin: 0 auto !important; padding: 0 40px !important; }
             .services-grid { grid-template-columns: 1fr; }
             .stats-ribbon__inner { grid-template-columns: 1fr; gap: 24px; padding: 24px 0; }
             .stats-card { border-right: none; border-bottom: 1px solid var(--nk-gray-100); padding-bottom: 24px; }
@@ -1225,7 +1215,134 @@
         .fade-up-delay-1 { transition-delay: 0.1s; }
         .fade-up-delay-2 { transition-delay: 0.2s; }
         .fade-up-delay-3 { transition-delay: 0.3s; }
-    </style>
+    
+        /* ── Advanced About Section ── */
+        .about {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            padding: 120px 0 !important;
+        }
+
+        .about::before {
+            content: 'ESTABLISHED 2006';
+            position: absolute;
+            top: 10%;
+            left: -5%;
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(0,0,0,0.02);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            font-family: var(--font-display);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about__content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--nk-gray-700);
+            margin-bottom: 25px;
+        }
+
+        .about__btn-row {
+            margin-top: 40px;
+        }
+
+        .about__right {
+            position: relative;
+        }
+
+        .about__ceo-image {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 30px 30px 80px rgba(0,0,0,0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.6s var(--ease);
+        }
+
+        .about__ceo-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .about__ceo-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Glassmorphism Quote Card */
+        .quote-card {
+            position: absolute;
+            bottom: -30px;
+            left: -60px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,1);
+            max-width: 420px;
+            z-index: 5;
+        }
+
+        .quote-card__mark {
+            font-family: Georgia, serif;
+            font-size: 80px;
+            line-height: 1;
+            color: var(--nk-red-600);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            opacity: 0.15;
+        }
+
+        .quote-card__text {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--nk-gray-800);
+            margin-bottom: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .quote-card__author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quote-card__author-line {
+            width: 30px;
+            height: 2px;
+            background: var(--nk-red-600);
+        }
+
+        .quote-card__author-name {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            color: var(--nk-red-600);
+        }
+
+        /* Responsive adjustments for About */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .quote-card { position: relative; bottom: 0; left: 0; max-width: 100%; margin-top: -20px; }
+            .about__ceo-image { transform: none; }
+        }
+</style>
 <?php wp_head(); ?>
 </head>
 
