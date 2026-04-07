@@ -178,32 +178,46 @@
 </section>
 
 <!-- ═══════════ ABOUT ═══════════ -->
-<section id="about" class="about">
+<section id="about" class="about section">
     <div class="container">
-        <div class="about-grid">
-            <!-- Left: Strategic Content -->
-            <div class="about__content fade-up is-visible">
-                <div class="section__label">О компании</div>
-                <h1 class="about__title">
-                    Ваш стратегический<br>
-                    <span class="text-gradient">бизнес-партнер</span>
-                </h1>
-                <div class="about__main-text">
-                    <p>За 18 лет работы NEKSOZ эволюционировала из узкопрофильной фирмы в мощный консалтинговый хаб. Мы не просто ведем учет — мы создаем фундамент для масштабирования вашего бизнеса, обеспечивая его устойчивость и безопасность.</p>
+        <!-- Section Header — matching services style -->
+        <div class="section__header section__header--center fade-up is-visible">
+            <div class="section__label">О компании</div>
+            <h2 class="section__title section__title--huge"><span class="text-gradient">Ваш стратегический</span><br>бизнес-партнер</h2>
+            <p class="section__subtitle section__subtitle--free">ООО «НЕКСОЗ-БИЗНЕС КОНСАЛТИНГ ГРУП» — основана в 2016 году. За это время мы эволюционировали из узкопрофильной фирмы в <strong>мощный консалтинговый хаб</strong>, обеспечивая устойчивость и безопасность бизнеса на каждом этапе роста.</p>
+        </div>
+
+        <!-- CEO Editorial Block -->
+        <div class="ceo-editorial fade-up is-visible">
+            <div class="ceo-editorial__photo-col">
+                <div class="ceo-editorial__frame">
+                    <!-- Accent corners -->
+                    <span class="ceo-corner ceo-corner--tl"></span>
+                    <span class="ceo-corner ceo-corner--tr"></span>
+                    <span class="ceo-corner ceo-corner--bl"></span>
+                    <span class="ceo-corner ceo-corner--br"></span>
+                    <img src='<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg' alt="Акмарал Ибрагимова — Генеральный директор NEKSOZ">
+                    <div class="ceo-editorial__badge">
+                        <span class="ceo-editorial__badge-role">Основатель & CEO</span>
+                    </div>
                 </div>
             </div>
-
-            <!-- Right: CEO & Linking Element -->
-            <div class="about__right">
-                <div class="about__ceo-wrapper">
-                    <div class="about__ceo-image">
-                        <img src='<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg' alt="Генеральный директор NEKSOZ">
-                    </div>
-                    
-                    <!-- The Bridging Quote -->
-                    <div class="bridging-quote fade-up is-visible fade-up-delay-2">
-                        <p>«Наша миссия — превратить сложные бизнес-процессы в простую и прибыльную систему для вас. Мы работаем на ваш результат и обеспечиваем максимальную <br><strong>защиту Ваших интересов</strong>.»</p>
-                        <span>Акмарал Ибрагимова — CEO NEKSOZ</span>
+            <div class="ceo-editorial__content-col">
+                <div class="ceo-editorial__quote-card">
+                    <div class="ceo-editorial__quote-open">«</div>
+                    <blockquote class="ceo-editorial__quote-text">
+                        Наша миссия — превратить сложные бизнес-процессы в прозрачную и прибыльную систему. Мы работаем на ваш результат и обеспечиваем защиту Ваших интересов на высшем уровне.
+                    </blockquote>
+                    <div class="ceo-editorial__quote-close">»</div>
+                    <div class="ceo-editorial__author">
+                        <div class="ceo-editorial__author-avatar">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <div class="ceo-editorial__author-line"></div>
+                        <div>
+                            <div class="ceo-editorial__author-name">Акмарал Ибрагимова</div>
+                            <div class="ceo-editorial__author-title">Генеральный директор, NEKSOZ</div>
+                        </div>
                     </div>
                 </div>
             </div>
