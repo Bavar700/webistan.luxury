@@ -8,6 +8,7 @@
 
 (function ($) {
     'use strict';
+    console.log("NEKSOZ DEV: main.js loaded");
 
     /* ==========================================================================
        1. Mobile Menu Toggle

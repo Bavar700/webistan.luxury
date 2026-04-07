@@ -189,6 +189,7 @@
 
         <!-- CEO Editorial Block -->
         <div class="ceo-editorial fade-up is-visible">
+            <div class="ceo-editorial__bridge"></div>
             <div class="ceo-editorial__photo-col">
                 <div class="ceo-editorial__frame">
                     <!-- Accent corners -->

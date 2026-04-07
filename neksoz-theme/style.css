@@ -863,14 +863,21 @@
 
         /* ── CEO Editorial Layout ── */
         .ceo-editorial {
-            display: grid;
-            grid-template-columns: 0.85fr 1.15fr;
-            gap: 64px;
+            display: flex;
             align-items: center;
+            justify-content: center;
             position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            perspective: 1000px;
         }
 
-        /* Photo Column */
+        .ceo-editorial.fade-up {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
         .ceo-editorial__photo-col {
             position: relative;
         }
@@ -879,12 +886,20 @@
             position: relative;
             border-radius: var(--radius-lg);
             overflow: visible;
-            padding: 16px;
-            transition: transform 0.6s var(--ease);
+            padding: 12px;
+            transition: transform 0.8s var(--ease), box-shadow 0.8s var(--ease);
+            transform: rotateY(10deg) translateX(-20px);
+            opacity: 0;
+        }
+
+        .ceo-editorial.is-visible .ceo-editorial__frame {
+            transform: rotateY(0) translateX(0);
+            opacity: 1;
         }
 
         .ceo-editorial__frame:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 40px 80px rgba(0,13,51,0.15);
         }
 
         .ceo-editorial__frame img {
@@ -918,6 +933,14 @@
             border-top: 3px solid var(--nk-red);
             border-left: 3px solid var(--nk-red);
             border-top-left-radius: var(--radius-md);
+            transform: translate(20px, 20px);
+            opacity: 0;
+            transition: all 1.2s var(--ease);
+            transition-delay: 0.6s;
+        }
+        .is-visible .ceo-corner--tl {
+            transform: translate(0, 0);
+            opacity: 1;
         }
 
         /* Top-right — Blue */
@@ -927,6 +950,14 @@
             border-top: 3px solid var(--nk-blue);
             border-right: 3px solid var(--nk-blue);
             border-top-right-radius: var(--radius-md);
+            transform: translate(-20px, 20px);
+            opacity: 0;
+            transition: all 1.2s var(--ease);
+            transition-delay: 0.6s;
+        }
+        .is-visible .ceo-corner--tr {
+            transform: translate(0, 0);
+            opacity: 1;
         }
 
         /* Bottom-left — Blue */
@@ -936,6 +967,14 @@
             border-bottom: 3px solid var(--nk-blue);
             border-left: 3px solid var(--nk-blue);
             border-bottom-left-radius: var(--radius-md);
+            transform: translate(20px, -20px);
+            opacity: 0;
+            transition: all 1.2s var(--ease);
+            transition-delay: 0.6s;
+        }
+        .is-visible .ceo-corner--bl {
+            transform: translate(0, 0);
+            opacity: 1;
         }
 
         /* Bottom-right — Red */
@@ -945,6 +984,14 @@
             border-bottom: 3px solid var(--nk-red);
             border-right: 3px solid var(--nk-red);
             border-bottom-right-radius: var(--radius-md);
+            transform: translate(-20px, -20px);
+            opacity: 0;
+            transition: all 1.2s var(--ease);
+            transition-delay: 0.6s;
+        }
+        .is-visible .ceo-corner--br {
+            transform: translate(0, 0);
+            opacity: 1;
         }
 
         /* Corner hover animation */
@@ -1014,10 +1061,25 @@
 
         .ceo-editorial__quote-card {
             position: relative;
-            padding: 56px;
-            background: var(--nk-grad-hero);
+            padding: 64px;
+            background: rgba(0, 13, 51, 0.85);
+            backdrop-filter: blur(24px) saturate(160%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--radius-xl);
-            overflow: hidden;
+            margin-left: -120px;
+            margin-top: 40px;
+            z-index: 5;
+            box-shadow: 0 32px 64px rgba(0,0,0,0.3);
+            transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
+            transition-delay: 0.2s;
+            transform: translateX(40px);
+            opacity: 0;
+        }
+
+        .ceo-editorial.is-visible .ceo-editorial__quote-card {
+            transform: translateX(0);
+            opacity: 1;
         }
 
         /* Geometric decoration inside quote card */
@@ -1340,6 +1402,35 @@
             .hero__stat-divider { width: 40px; height: 1px; }
             .hero__actions { flex-direction: column; align-items: stretch; }
             .header__nav { display: none; }
+        }
+
+        /* ── Responsive Overhaul for CEO Section ── */
+        @media (max-width: 1100px) {
+            .ceo-editorial {
+                flex-direction: column !important;
+                padding-bottom: 20px;
+                text-align: center;
+            }
+            .ceo-editorial__frame {
+                transform: none !important;
+                margin-bottom: -60px;
+                max-width: 100%;
+                padding: 0;
+            }
+            .ceo-editorial__quote-card {
+                margin-left: 0 !important;
+                margin-top: 0 !important;
+                padding: 48px 24px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                border-radius: var(--radius-lg) !important;
+            }
+            .ceo-editorial__author {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            .ceo-editorial__author-line { display: none; }
         }
 
         /* ── Animations ── */
