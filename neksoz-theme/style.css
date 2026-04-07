@@ -1575,4 +1575,203 @@
         .ceo-editorial__team-link:hover::before {
             left: 100%;
         }
-    
+
+        /* ============================================================
+           CTA CRYSTAL — MODERN ELEGANCE
+           ============================================================ */
+        .cta-crystal {
+            padding: 140px 0;
+            background: #FFFFFF !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .cta-crystal__glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cta-crystal__glow--blue {
+            top: -200px;
+            right: -200px;
+            background: var(--nk-blue);
+            animation: mesh-float 15s infinite alternate ease-in-out;
+        }
+
+        .cta-crystal__glow--red {
+            bottom: -200px;
+            left: -200px;
+            background: var(--nk-red);
+            animation: mesh-float 18s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes mesh-float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.1); }
+        }
+
+        .cta-crystal__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-crystal__title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--nk-gray-900);
+            margin: 0 0 24px 0;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-crystal__text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--nk-gray-600);
+            margin-bottom: 40px;
+        }
+
+        .cta-crystal__status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(0,255,100,0.05);
+            border: 1px solid rgba(0,255,100,0.1);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #008844;
+        }
+
+        .cta-crystal__status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00CC66;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .cta-crystal__status-dot::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid #00CC66;
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.5); opacity: 0.8; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* --- CRYSTAL FORM --- */
+        .cta-crystal__form-wrapper {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 40px 100px rgba(0,13,51,0.08);
+        }
+
+        .cta-crystal__field {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .cta-crystal__field input,
+        .cta-crystal__field select,
+        .cta-crystal__field textarea {
+            width: 100%;
+            padding: 16px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(0,13,51,0.05);
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--nk-gray-900);
+            transition: all 0.3s ease;
+            outline: none;
+            resize: none;
+        }
+
+        .cta-crystal__field label {
+            position: absolute;
+            left: 0;
+            top: 16px;
+            font-size: 16px;
+            color: var(--nk-gray-400);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-crystal__field input:focus ~ label,
+        .cta-crystal__field input:not(:placeholder-shown) ~ label,
+        .cta-crystal__field textarea:focus ~ label,
+        .cta-crystal__field textarea:not(:placeholder-shown) ~ label {
+            top: -10px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--nk-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-crystal__field input:focus,
+        .cta-crystal__field textarea:focus {
+            border-bottom-color: var(--nk-blue);
+        }
+
+        .cta-crystal__btn {
+            width: 100%;
+            padding: 22px !important;
+            background: var(--nk-grad-brand) !important;
+            color: #FFFFFF !important;
+            border-radius: 16px !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.15em !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 12px !important;
+            box-shadow: 0 20px 40px rgba(227,6,19,0.2) !important;
+            margin-top: 20px !important;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+        }
+
+        .cta-crystal__btn svg {
+            transition: transform 0.3s var(--ease);
+        }
+
+        .cta-crystal__btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        .cta-crystal__secure {
+            font-size: 11px;
+            color: var(--nk-gray-400);
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 1024px) {
+            .cta-crystal__grid { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+            .cta-crystal__form-wrapper { padding: 40px 30px; }
+        }

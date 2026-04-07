@@ -218,15 +218,64 @@
     </div> <!-- Closing container -->
 </section>
 
-<!-- ═══════════ CTA ═══════════ -->
-<section id="contacts" class="cta">
+<!-- ═══════════ CTA — CRYSTAL ELEGANCE EDITION ═══════════ -->
+<section id="contacts" class="cta-crystal">
+    <!-- Animated Mesh Glows -->
+    <div class="cta-crystal__glow cta-crystal__glow--blue"></div>
+    <div class="cta-crystal__glow cta-crystal__glow--red"></div>
+    
     <div class="container">
-        <h2 class="cta__title">Готовы начать?</h2>
-        <p class="cta__text">Свяжитесь с нами для бесплатной консультации. Мы подберём оптимальное решение для Вашего бизнеса.</p>
-        <a href="#" class="btn btn--primary" style="padding: 16px 40px; font-size: 15px;">
-            Получить консультацию
-            <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
+        <div class="cta-crystal__grid">
+            
+            <!-- Left Side: Soft Modern Persuasion -->
+            <div class="cta-crystal__content fade-up is-visible">
+                <div class="section__label">Быстрая связь</div>
+                <h2 class="cta-crystal__title"><span class="text-gradient">Готовы масштабировать</span><br>свой успех?</h2>
+                <p class="cta-crystal__text">Оставьте заявку сегодня, и мы разработаем для вас персональную стратегию развития и обеспечения безопасности вашего бизнеса.</p>
+                <div class="cta-crystal__status">
+                    <span class="cta-crystal__status-dot"></span>
+                    Мы онлайн • Ответ в течение 15 минут
+                </div>
+            </div>
+
+            <!-- Right Side: Crystal Tech Form -->
+            <div class="cta-crystal__form-wrapper fade-up is-visible">
+                <form action="#" class="cta-crystal__form">
+                    <div class="cta-crystal__field">
+                        <input type="text" placeholder=" " required id="f-name">
+                        <label for="f-name">Ваше имя</label>
+                    </div>
+                    <div class="cta-crystal__field">
+                        <input type="tel" placeholder=" " required id="f-phone">
+                        <label for="f-phone">Телефон (+992)</label>
+                    </div>
+                    <div class="cta-crystal__field">
+                        <select required id="f-service">
+                            <option value="" disabled selected>Выберите направление</option>
+                            <option>Юридическое сопровождение</option>
+                            <option>Налоговое консультирование</option>
+                            <option>Аудит и бух. учет</option>
+                            <option>Автоматизация бизнеса</option>
+                            <option>HR-консалтинг</option>
+                            <option>Инвестиционный консалтинг</option>
+                            <option>Маркетинговые стратегии</option>
+                            <option>Бизнес-планирование</option>
+                            <option>Оптимизация процессов</option>
+                        </select>
+                    </div>
+                    <div class="cta-crystal__field">
+                        <textarea placeholder=" " id="f-msg" rows="3"></textarea>
+                        <label for="f-msg">Суть вашего запроса</label>
+                    </div>
+                    <button type="submit" class="cta-crystal__btn">
+                        <span>Отправить заявку</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </button>
+                    <p class="cta-crystal__secure">🛡️ Защищённое соединение (SSL 256-bit)</p>
+                </form>
+            </div>
+
+        </div>
     </div>
 </section>
 </main>
