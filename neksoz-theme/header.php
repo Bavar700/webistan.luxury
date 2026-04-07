@@ -434,140 +434,132 @@
             100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
         }
 
-        /* Stats Ribbon — Hero Dark Edition */
+        /* Stats Ribbon — High-Visibility Sleek Ribbon (100px) */
         .stats-ribbon {
             position: relative;
-            z-index: 10;
-            margin-top: 0;
-            margin-bottom: 0;
+            z-index: 20;
+            padding: 80px 0;
+            background: transparent;
         }
         
         .stats-ribbon__inner {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            background: var(--nk-grad-hero);
-            padding: 72px 0;
-            position: relative;
+            height: 100px;
+            background: #FFFFFF;
+            border-radius: 50px;
+            box-shadow: 0 40px 100px rgba(0, 13, 51, 0.08);
+            border: 1px solid rgba(0, 68, 204, 0.04);
             overflow: hidden;
+            position: relative;
         }
 
-        /* Hero geometric overlays */
+        /* Subtlest background tint to define the ribbon */
         .stats-ribbon__inner::before {
             content: '';
             position: absolute;
-            top: -10%;
-            right: -5%;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(227,6,19,0.08) 0%, rgba(227,6,19,0.02) 100%);
-            transform: rotate(45deg);
-            pointer-events: none;
-        }
-        .stats-ribbon__inner::after {
-            content: '';
-            position: absolute;
-            bottom: -15%;
-            left: 10%;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(0,68,204,0.12) 0%, rgba(34,119,255,0.04) 100%);
-            transform: rotate(-20deg);
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,68,204,0.02), rgba(227,6,19,0.01));
+            z-index: 0;
             pointer-events: none;
         }
 
         .stats-card {
-            position: relative;
-            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 24px;
-            padding: 0 32px;
-            border-right: 1px solid rgba(255,255,255,0.08);
-            transition: transform 0.4s var(--ease);
-        }
-        .stats-card:last-child {
-            border-right: none;
-        }
-        .stats-card:hover {
-            transform: translateY(-6px);
-        }
-
-        .stats-card__icon {
-            width: 64px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(227,6,19,0.15);
-            color: rgba(255,255,255,0.9);
-            position: relative;
-            flex-shrink: 0;
+            gap: 16px;
+            padding: 0 24px;
+            border-right: 1px solid rgba(0, 68, 204, 0.03);
             transition: all 0.4s var(--ease);
-            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 1;
         }
-        
-        .stats-card__icon::after {
-            content: '';
-            position: absolute;
-            inset: -5px;
+        .stats-card:last-child { border-right: none; }
+
+        .stats-card:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.02);
+            box-shadow: inset 0 0 40px rgba(0,68,204,0.02);
+        }
+
+        .stats-card__icon-box {
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            border: 1px dashed rgba(255,255,255,0.2);
-            animation: rotate-dash 12s linear infinite;
+            background: var(--nk-gray-50);
+            color: var(--nk-gray-900);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s var(--ease);
+            flex-shrink: 0;
         }
 
-        @keyframes rotate-dash {
-            100% { transform: rotate(360deg); }
-        }
-
-        .stats-card__icon svg { 
-            width: 28px; 
-            height: 28px; 
-            z-index: 2; 
-            position: relative; 
-            transition: transform 0.4s var(--ease); 
-        }
-
-        .stats-card:hover .stats-card__icon {
-            background: rgba(227,6,19,0.3);
-            box-shadow: 0 0 30px rgba(227,6,19,0.4);
-        }
-        .stats-card:hover .stats-card__icon svg {
-            transform: scale(1.15);
-        }
-        
-        .stats-card:nth-child(even) .stats-card__icon {
-            background: rgba(0,68,204,0.2);
-        }
-        .stats-card:nth-child(even) .stats-card__icon::after {
-            border-color: rgba(100,160,255,0.3);
-            animation-direction: reverse;
-        }
-        .stats-card:nth-child(even):hover .stats-card__icon {
-            background: rgba(0,68,204,0.4);
-            box-shadow: 0 0 30px rgba(0,68,204,0.4);
+        .stats-card:hover .stats-card__icon-box {
+            background: var(--nk-white);
+            box-shadow: 0 8px 24px rgba(0,68,204,0.12);
+            color: var(--nk-blue);
         }
 
         .stats-card__value {
             font-family: var(--font-display);
-            font-size: 2.75rem;
+            font-size: 2.2rem; /* Increased size significantly for visibility */
             font-weight: 900;
-            color: #FFFFFF;
+            color: var(--nk-gray-900);
             line-height: 1;
-            margin-bottom: 8px;
             letter-spacing: -0.02em;
         }
-        .stats-card__value span { color: var(--nk-red); }
-        .stats-card:nth-child(even) .stats-card__value span { color: var(--nk-blue-bright); }
         
         .stats-card__label {
             font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.1em;
+            color: var(--nk-gray-500); /* Slightly darker for better visibility */
+            line-height: 1.2;
+            max-width: 100px;
         }
+
+        .stats-card__value span { color: var(--nk-red); margin-left: 2px; }
+        .stats-card:nth-child(even) .stats-card__value span { color: var(--nk-blue); }
+        
+        .stats-card__label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--nk-gray-400);
+            line-height: 1.2;
+            max-width: 60px; /* Force small two-line text if needed */
+        }
+
+        /* Unique Animation: Soft Neon Glow Pulse on Hover */
+        .stats-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 3px;
+            background: var(--nk-grad-brand);
+            transform: scaleX(0);
+            transition: transform 0.4s var(--ease);
+            transform-origin: center;
+        }
+        .stats-card:hover::after { transform: scaleX(1); }
+        .stats-card__value span { color: var(--nk-red); }
+        .stats-card:nth-child(even) .stats-card__value span { color: var(--nk-blue); }
+        
+        .stats-card__label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--nk-gray-400);
+            margin-top: 2px;
+        }
+        .stats-card__value span { color: var(--nk-red); margin-left: 2px; }
+        .stats-card:nth-child(even) .stats-card__value span { color: var(--nk-blue); }
+        
+        .stats-card:hover .stats-card__label { color: var(--nk-gray-900); }
+        .stats-card__line { display: none; }
 
         /* ── Header Accents ── */
         .text-gradient {
@@ -1243,86 +1235,94 @@
             color: var(--nk-blue);
         }
         .cta-crystal__field input,
+        .cta-crystal__field select,
         .cta-crystal__field textarea {
             width: 100%;
-            padding: 16px 0;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid rgba(0,13,51,0.05);
-            font-family: var(--font-body);
-            font-size: 16px;
+            padding: 22px 36px;
+            background: rgba(253, 253, 255, 0.7); /* Breathable Glassy background */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid transparent; 
+            border-radius: 100px; 
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
             color: var(--nk-gray-900);
-            transition: all 0.3s ease;
-            outline: none;
+            transition: all 0.4s var(--ease);
+            outline: none; /* No blue focus corners */
             resize: none;
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: 0 10px 40px rgba(0, 13, 51, 0.04);
+            line-height: 1.6;
         }
 
-        /* Premium Custom Select */
         .cta-crystal__field select {
-            width: 100%;
-            padding: 18px 44px 18px 20px;
-            background: var(--nk-grad-hero);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px;
-            font-family: var(--font-display);
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.7);
-            transition: all 0.3s var(--ease);
-            outline: none;
             cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234B5468' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 16px center;
-            background-size: 18px;
+            background-position: right 30px center;
+            background-size: 16px;
         }
 
         .cta-crystal__field select:focus {
-            border-color: rgba(227,6,19,0.5);
-            box-shadow: 0 0 0 4px rgba(227,6,19,0.08);
-            color: #FFFFFF;
+            background-color: #FFFFFF;
+            box-shadow: 0 20px 60px rgba(0, 13, 51, 0.08);
+            outline: none; /* Crucial to remove native blue focus */
         }
 
         .cta-crystal__field select option {
-            background: #001133;
-            color: rgba(255,255,255,0.85);
-            font-family: var(--font-body);
-            font-size: 14px;
-            text-transform: none;
-            font-weight: 400;
-            letter-spacing: 0;
+            background: #FFFFFF;
+            color: var(--nk-gray-900);
+            padding: 10px;
         }
 
         .cta-crystal__field label {
             position: absolute;
-            left: 0;
-            top: 16px;
-            font-size: 16px;
+            left: 36px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 13px;
             color: var(--nk-gray-400);
             pointer-events: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s var(--ease);
+            z-index: 5;
+            font-family: var(--font-display);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
         }
 
         .cta-crystal__field input:focus ~ label,
         .cta-crystal__field input:not(:placeholder-shown) ~ label,
         .cta-crystal__field textarea:focus ~ label,
-        .cta-crystal__field textarea:not(:placeholder-shown) ~ label {
-            top: -10px;
-            font-size: 12px;
-            font-weight: 800;
+        .cta-crystal__field textarea:not(:placeholder-shown) ~ label,
+        .cta-crystal__field select:valid ~ label {
+            top: -12px;
+            left: 36px;
+            font-size: 10px;
             color: var(--nk-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            background: #FFFFFF;
+            padding: 2px 14px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Remove Blue focus from and add Soft Glow */
+        .cta-crystal__field input:focus,
+        .cta-crystal__field textarea:focus {
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 68, 204, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 68, 204, 0.1);
+            outline: none;
         }
 
         .cta-crystal__field input:focus,
+        .cta-crystal__field select:focus,
         .cta-crystal__field textarea:focus {
-            border-bottom-color: var(--nk-blue);
+            border-color: var(--nk-blue);
+            background: #FFFFFF;
+            box-shadow: 0 8px 24px rgba(0,68,204,0.08);
         }
         .ceo-editorial__author-name {
             font-family: var(--font-display);
@@ -1382,8 +1382,199 @@
         .fade-up-delay-3 { transition-delay: 0.3s; }
     
 
-</style>
 <?php wp_head(); ?>
+    <style>
+        /* ── Master Design Overhaul (Master Overrides) ── */
+
+        /* 1. Restore Button Animations (Safety First) */
+        .btn-animated {
+            animation: pulse-primary 3s infinite !important;
+        }
+        @keyframes pulse-primary {
+            0% { box-shadow: 0 0 0 0 rgba(227,6,19,0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(227,6,19,0); }
+            100% { box-shadow: 0 0 0 0 rgba(227,6,19,0); }
+        }
+        .btn-animated-light {
+            animation: pulse-light 3s infinite !important;
+            animation-delay: 1.5s;
+        }
+        @keyframes pulse-light {
+            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+            70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        }
+
+        /* [PRISM PLATINUM] Stats Ribbon — Strict & Vibrant (400px) */
+        .stats-ribbon {
+            position: relative !important;
+            padding: 100px 0 !important;
+            background: #FFFFFF !important; /* Infinite White Background */
+            overflow: hidden !important;
+        }
+
+        .stats-ribbon__inner {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 0 !important; /* Seamless connection */
+            max-width: var(--container-width) !important;
+            margin: 0 auto !important;
+            height: 400px !important;
+            position: relative !important;
+            z-index: 5 !important;
+        }
+
+        .stats-card {
+            background: transparent !important;
+            padding: 80px 30px !important; /* Fixed Top Padding */
+            display: flex !important;
+            flex-direction: column !important; /* Back to Vertical */
+            align-items: center !important;
+            justify-content: flex-start !important; /* Align to the top of padding */
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            border-right: 1px solid rgba(0, 13, 51, 0.05) !important;
+            height: 400px !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        .stats-card:last-child { border-right: none !important; }
+
+        /* Logic-Driven Brand Accents */
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: var(--nk-blue) !important; /* Default Blue */
+            transition: height 0.4s var(--ease) !important;
+        }
+        .stats-card:nth-child(even)::before { background: var(--nk-red) !important; }
+
+        .stats-card:hover {
+            background: rgba(0, 68, 204, 0.01) !important;
+        }
+
+        .stats-card__value {
+            font-family: var(--font-display) !important;
+            font-size: 3.2rem !important; /* Breathable Vertical Scale */
+            font-weight: 900 !important;
+            color: #001340 !important;
+            letter-spacing: -0.04em !important;
+            line-height: 1 !important;
+            margin-bottom: 15px !important;
+        }
+        .stats-card__value span {
+            color: var(--nk-blue) !important;
+        }
+        .stats-card:nth-child(even) .stats-card__value span {
+            color: var(--nk-red) !important;
+        }
+
+        .stats-card__label {
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            color: var(--nk-gray-400) !important;
+            letter-spacing: 0.15em !important;
+            text-align: center !important; /* Back to Centered */
+            line-height: 1.6 !important;
+            max-width: 200px !important;
+        }
+
+        .stats-card__icon-box {
+            width: 64px !important;
+            height: 64px !important;
+            border-radius: 18px !important;
+            background: #F1F4F9 !important;
+            color: var(--nk-blue) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 40px !important; /* Fixed Vertical Gap */
+            transition: all 0.4s var(--ease) !important;
+            flex-shrink: 0 !important;
+        }
+        .stats-card:nth-child(even) .stats-card__icon-box { color: var(--nk-red) !important; } /* MAXIMUM BRAND RED */
+
+        .stats-card:hover .stats-card__icon-box {
+            transform: scale(1.15) !important;
+            background: #FFFFFF !important;
+            box-shadow: 0 10px 30px rgba(0, 51, 153, 0.1) !important;
+        }
+
+        .stats-ribbon__glow {
+            display: none !important;
+        }
+
+        /* [CLEAN MONOCHROME] Form Inputs — No Blue Focus, Absolute Consistency */
+        .cta-crystal__field input,
+        .cta-crystal__field select,
+        .cta-crystal__field textarea {
+            width: 100% !important;
+            padding: 20px 30px !important;
+            background: #FFFFFF !important;
+            border: 2px solid rgba(0, 13, 51, 0.08) !important; 
+            border-radius: 8px !important;
+            font-family: var(--font-display) !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: var(--nk-gray-900) !important;
+            outline: none !important; /* Removes blue lines forever */
+            transition: all 0.3s var(--ease) !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Dropdown Logic Sync */
+        .cta-crystal__field select {
+            cursor: pointer !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234B5468' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 30px center !important;
+            background-size: 16px !important;
+            padding-right: 70px !important;
+        }
+
+        /* Slate-Grey Subtle Focus (No Blue) */
+        .cta-crystal__field input:focus,
+        .cta-crystal__field select:focus,
+        .cta-crystal__field textarea:focus {
+            border-color: rgba(0, 13, 51, 0.15) !important;
+            background: #FDFDFF !important;
+            box-shadow: 0 10px 40px rgba(0, 13, 51, 0.03) !important;
+        }
+
+        .cta-crystal__field label {
+            position: absolute !important;
+            left: 30px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            font-family: var(--font-display) !important;
+            font-weight: 700 !important;
+            color: var(--nk-gray-400) !important;
+            pointer-events: none !important;
+            transition: all 0.3s var(--ease) !important;
+            z-index: 10 !important;
+            font-size: 14px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+        }
+
+        .cta-crystal__field input:focus ~ label,
+        .cta-crystal__field input:not(:placeholder-shown) ~ label,
+        .cta-crystal__field textarea:focus ~ label,
+        .cta-crystal__field textarea:not(:placeholder-shown) ~ label,
+        .cta-crystal__field select:valid ~ label {
+            top: -12px !important;
+            left: 24px !important;
+            font-size: 11px !important;
+            font-weight: 800 !important;
+            color: var(--nk-gray-800) !important; /* No Blue Label */
+            background: #FFFFFF !important;
+            padding: 0 12px !important;
+            border-radius: 4px !important;
+        }
+    </style>
 </head>
 
 <body <?php body_class(); ?>>
