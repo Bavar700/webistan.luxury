@@ -24,8 +24,8 @@ function nexoz_scripts() {
     // Tailwind CSS CDN (Script for JIT)
     wp_enqueue_script( 'tailwind', 'https://cdn.tailwindcss.com', array(), null, false );
     
-    // Google Fonts: Inter
-    wp_enqueue_style( 'nexoz-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap', array(), null );
+    // Google Fonts: Inter, Rock Salt & Playfair Display (Solid/Classic)
+    wp_enqueue_style( 'nexoz-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Rock+Salt&family=Playfair+Display:ital,wght@0,700;1,700&display=swap', array(), null );
     
     // Custom Style (just in case)
     wp_enqueue_style( 'nexoz-main', get_stylesheet_uri(), array('nexoz-fonts'), time() );
