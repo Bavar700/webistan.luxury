@@ -1384,70 +1384,65 @@
 
 <?php wp_head(); ?>
     <style>
-        /* ── Master Design Overhaul (Master Overrides) ── */
-
-        /* 1. Restore Button Animations (Safety First) */
-        .btn-animated {
-            animation: pulse-primary 3s infinite !important;
-        }
-        @keyframes pulse-primary {
-            0% { box-shadow: 0 0 0 0 rgba(227,6,19,0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(227,6,19,0); }
-            100% { box-shadow: 0 0 0 0 rgba(227,6,19,0); }
-        }
-        .btn-animated-light {
-            animation: pulse-light 3s infinite !important;
-            animation-delay: 1.5s;
-        }
-        @keyframes pulse-light {
-            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
-            70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
-            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-        }
-
-        /* [PRISM PLATINUM] Stats Ribbon — Strict & Vibrant (400px) */
+        /* [PRISM PLATINUM] Unified Elite Silver Canvas */
         .stats-ribbon {
             position: relative !important;
-            padding: 100px 0 !important;
-            background: #FFFFFF !important; /* Infinite White Background */
+            padding: 0 !important; 
+            background: #E8EDF5 !important; /* Premium Light Silver */
             overflow: hidden !important;
+            height: 480px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        @keyframes metallic-shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .stats-ribbon__inner {
             display: grid !important;
             grid-template-columns: repeat(4, 1fr) !important;
-            gap: 0 !important; /* Seamless connection */
+            gap: 0 !important;
             max-width: var(--container-width) !important;
             margin: 0 auto !important;
             height: 400px !important;
             position: relative !important;
             z-index: 5 !important;
+            border: none !important;
+            background: transparent !important;
         }
 
         .stats-card {
             background: transparent !important;
-            padding: 80px 30px !important; /* Fixed Top Padding */
+            padding: 30px !important; 
             display: flex !important;
-            flex-direction: column !important; /* Back to Vertical */
+            flex-direction: column !important;
             align-items: center !important;
-            justify-content: flex-start !important; /* Align to the top of padding */
+            justify-content: center !important;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            border-right: 1px solid rgba(0, 13, 51, 0.05) !important;
-            height: 400px !important;
+            border-right: 1px solid rgba(0, 13, 51, 0.03) !important;
+            height: 480px !important;
             position: relative !important;
             overflow: hidden !important;
+            border-bottom: none !important;
+            box-shadow: none !important; /* NO SHADOWS */
         }
-        .stats-card:last-child { border-right: none !important; }
+        .stats-card:hover {
+            background: rgba(0, 51, 153, 0.02) !important;
+            box-shadow: none !important; /* NO HOVER SHADOWS */
+        }
+        .stats-card:last-child { border-right: none !important; } /* GHOST EASE AT EDGES */
+        
+        /* [CLEAN REMOVAL] No more 'Dashes' (Bars) anywhere in Ribbon */
+        .stats-card::before,
+        .stats-card:nth-child(even)::before {
+            display: none !important;
+        }
 
-        /* Logic-Driven Brand Accents */
-        .stats-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 6px;
-            background: var(--nk-blue) !important; /* Default Blue */
-            transition: height 0.4s var(--ease) !important;
-        }
-        .stats-card:nth-child(even)::before { background: var(--nk-red) !important; }
+        /* Disabling legacy red-blue dash if it exists */
+        .stats-card__line { display: none !important; }
 
         .stats-card:hover {
             background: rgba(0, 68, 204, 0.01) !important;
@@ -1455,27 +1450,29 @@
 
         .stats-card__value {
             font-family: var(--font-display) !important;
-            font-size: 3.2rem !important; /* Breathable Vertical Scale */
+            font-size: 3.8rem !important; /* Restored Grand Size */
             font-weight: 900 !important;
             color: #001340 !important;
             letter-spacing: -0.04em !important;
             line-height: 1 !important;
-            margin-bottom: 15px !important;
+            margin-bottom: 12px !important;
+            white-space: nowrap !important;
         }
         .stats-card__value span {
-            color: var(--nk-blue) !important;
+            color: var(--nk-blue) !important; /* Alternating '+' Symbol */
         }
         .stats-card:nth-child(even) .stats-card__value span {
             color: var(--nk-red) !important;
         }
 
         .stats-card__label {
-            font-size: 13px !important;
+            font-family: var(--font-display) !important;
+            font-size: 13px !important; /* Restored Grand Size */
             font-weight: 800 !important;
             text-transform: uppercase !important;
             color: var(--nk-gray-400) !important;
             letter-spacing: 0.15em !important;
-            text-align: center !important; /* Back to Centered */
+            text-align: center !important;
             line-height: 1.6 !important;
             max-width: 200px !important;
         }
@@ -1485,11 +1482,11 @@
             height: 64px !important;
             border-radius: 18px !important;
             background: #F1F4F9 !important;
-            color: var(--nk-blue) !important;
+            color: var(--nk-blue) !important; /* Alternating Icons */
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            margin-bottom: 40px !important; /* Fixed Vertical Gap */
+            margin-bottom: 40px !important; /* Fixed gap for value alignment */
             transition: all 0.4s var(--ease) !important;
             flex-shrink: 0 !important;
         }
@@ -1498,14 +1495,154 @@
         .stats-card:hover .stats-card__icon-box {
             transform: scale(1.15) !important;
             background: #FFFFFF !important;
-            box-shadow: 0 10px 30px rgba(0, 51, 153, 0.1) !important;
+            box-shadow: 0 10px 30px rgba(0, 51, 153, 0.08) !important;
+        }
+        
+        /* 4. TOTAL ELITE SILVER — Unified Seamless Background */
+        .services {
+            background: #E8EDF5 !important; 
+            padding: 0 0 140px 0 !important; 
+            position: relative !important;
+            border-top: none !important;
         }
 
-        .stats-ribbon__glow {
+        /* [STEALTH TRANSITION MASK] Fades from Platinum to Navy #000D33 */
+        .services::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 180px;
+            background: linear-gradient(to bottom, transparent, #000D33) !important;
+            z-index: 5 !important;
+            pointer-events: none !important;
+        }
+
+        .services__grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 0 !important;
+            border: none !important;
+            max-width: var(--container-width) !important;
+            margin: 0 auto !important;
+            background: transparent !important;
+        }
+
+        .service-card {
+            background: transparent !important;
+            padding: 80px 40px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important; /* Left-aligned content */
+            justify-content: flex-start !important;
+            transition: all 0.4s var(--ease) !important;
+            border-right: 1px solid rgba(0, 13, 51, 0.05) !important; /* Internal Vertical Separators */
+            border-bottom: 1px solid rgba(0, 13, 51, 0.05) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            text-align: left !important; /* Left-aligned text */
+            min-height: 480px !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        
+        /* Remove the Right Border on the third card of each row (Right Margin) */
+        .service-card:nth-child(3n) { border-right: none !important; }
+
+        /* [CLEAN REMOVAL] No more 'Dashes' in Service cards either */
+        .service-card::before,
+        .service-card:nth-child(even)::before {
             display: none !important;
         }
 
-        /* [CLEAN MONOCHROME] Form Inputs — No Blue Focus, Absolute Consistency */
+        .service-card:hover {
+            background: #FDFDFF !important;
+        }
+        .service-card:hover::before { 
+            height: 12px !important; 
+        }
+
+        .service-card__icon {
+            width: 72px !important; /* Slightly larger for vibrancy */
+            height: 72px !important;
+            border-radius: 20px !important;
+            background: rgba(0, 68, 204, 0.06) !important; /* Subtle Brand Tint */
+            color: var(--nk-blue) !important; /* SHARP VIBRANT BLUE */
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 40px !important;
+            transition: all 0.4s var(--ease) !important;
+            flex-shrink: 0 !important;
+            border: 1px solid rgba(0, 68, 204, 0.1) !important;
+        }
+        .service-card:nth-child(even) .service-card__icon { 
+            background: rgba(227, 6, 19, 0.06) !important;
+            color: var(--nk-red) !important; /* SHARP VIBRANT RED */
+            border-color: rgba(227, 6, 19, 0.1) !important;
+        }
+
+        .service-card:hover .service-card__icon {
+            transform: scale(1.1) rotate(-5deg) !important;
+            background: #FFFFFF !important;
+            box-shadow: 0 15px 40px rgba(0, 51, 153, 0.12) !important;
+        }
+        .service-card:nth-child(even):hover .service-card__icon {
+            box-shadow: 0 15px 40px rgba(227, 6, 19, 0.12) !important;
+        }
+
+        .service-card__title {
+            font-family: var(--font-display) !important;
+            font-size: 22px !important; /* Restored Original Grand Size */
+            font-weight: 900 !important;
+            color: #001340 !important;
+            margin-bottom: 22px !important;
+            line-height: 1.3 !important;
+            letter-spacing: -0.01em !important;
+        }
+
+        .service-card__text {
+            font-size: 15px !important;
+            color: var(--nk-gray-500) !important;
+            line-height: 1.7 !important;
+            margin-bottom: 30px !important;
+            max-width: 280px !important;
+        }
+
+        .service-card__link {
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            color: var(--nk-blue) !important;
+            text-decoration: none !important;
+            margin-top: auto !important;
+            transition: all 0.3s var(--ease) !important;
+        }
+        .service-card:nth-child(even) .service-card__link { 
+            color: var(--nk-red) !important; 
+        }
+        .service-card__link:hover {
+            letter-spacing: 0.2em !important;
+            opacity: 0.8 !important;
+        }
+rvice-card__link:hover {
+            letter-spacing: 0.2em !important;
+            opacity: 0.8 !important;
+        }
+
+        /* [PRISM PLATINUM] Stats Ribbon — Inner Alignment Correction */
+        .stats-ribbon__inner {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 0 !important;
+            max-width: var(--container-width) !important;
+            margin: 0 auto !important;
+            height: 400px !important;
+            position: relative !important;
+            z-index: 5 !important;
+            border: 1px solid rgba(0, 13, 51, 0.05) !important;
+            border-bottom: none !important; /* Seamless flow to grid below */
+            border-right: none !important;
+        }
         .cta-crystal__field input,
         .cta-crystal__field select,
         .cta-crystal__field textarea {
