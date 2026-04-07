@@ -179,7 +179,13 @@
 
 <!-- ═══════════ ABOUT ═══════════ -->
 <section id="about" class="about section">
-        <div class="ceo-editorial fade-up is-visible">
+    <!-- Geometric Background mirroring Hero -->
+    <div class="hero__geo"></div>
+    <div class="hero__accent-line"></div>
+    <div class="hero__accent-line-2"></div>
+    <div class="hero__grid-pattern"></div>
+    
+    <div class="ceo-editorial fade-up is-visible">
             <div class="section__label section__label--on-dark">О компании</div>
             <h2 class="section__title section__title--huge section__title--on-dark">
                 <span class="text-gradient">Ваш стратегический</span><br>бизнес-партнер

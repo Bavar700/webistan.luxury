@@ -1367,13 +1367,18 @@
         }
 
         #about {
-            background: var(--nk-grad-dark) !important;
+            background: var(--nk-grad-hero) !important;
             padding-bottom: 20px !important;
+            position: relative !important;
+            overflow: hidden !important;
         }
 
         #about .section__title, 
-        #about .section__subtitle {
-            color: #FFFFFF !important;
+        #about .section__subtitle,
+        #about .ceo-editorial__intro,
+        #about .section__label {
+            position: relative !important;
+            z-index: 5 !important;
         }
 
         #about .section__subtitle--free strong {
@@ -1388,8 +1393,8 @@
             justify-content: center !important;
             align-items: center !important;
             position: relative !important;
-            z-index: 2 !important;
-            padding: 20px 0 120px !important;
+            z-index: 10 !important;
+            padding: 100px 0 120px !important;
             text-align: center !important;
         }
 
