@@ -24,47 +24,49 @@
             <a href="#contacts" class="btn btn--outline-light btn-animated-light">Связаться с нами</a>
         </div>
     </div>
+
 </section>
 
-<!-- ═══════════ STATS RIBBON ═══════════ -->
+<!-- ═══════════ STATS RIBBON (CLASSIC CORPORATE) ═══════════ -->
 <section class="stats-ribbon">
     <div class="container">
         <div class="stats-ribbon__inner">
             <!-- 1 -->
             <div class="stats-card">
                 <div class="stats-card__icon-box">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
-                <div class="stats-card__value">500<span>+</span></div>
-                <div class="stats-card__label">Довольных клиентов</div>
+                <div class="stats-card__value">500<em>+</em></div>
+                <div class="stats-card__label"><span>Довольных клиентов</span></div>
             </div>
             <!-- 2 -->
             <div class="stats-card">
                 <div class="stats-card__icon-box">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
-                <div class="stats-card__value">18<span>+</span></div>
-                <div class="stats-card__label">Лет на рынке</div>
+                <div class="stats-card__value">18<em>+</em></div>
+                <div class="stats-card__label"><span>Лет&nbsp;на<br>рынке</span></div>
             </div>
             <!-- 3 -->
             <div class="stats-card">
                 <div class="stats-card__icon-box">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
                 </div>
-                <div class="stats-card__value">50<span>+</span></div>
-                <div class="stats-card__label">Квалифицированных экспертов</div>
+                <div class="stats-card__value">50<em>+</em></div>
+                <div class="stats-card__label"><span>Квалифицированных экспертов</span></div>
             </div>
             <!-- 4 -->
             <div class="stats-card">
                 <div class="stats-card__icon-box">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
-                <div class="stats-card__value">1200<span>+</span></div>
-                <div class="stats-card__label">Успешных проектов</div>
+                <div class="stats-card__value">1200<em>+</em></div>
+                <div class="stats-card__label"><span>Успешных проектов</span></div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- ═══════════ SERVICES ═══════════ -->
 <section id="services" class="section section--gray">

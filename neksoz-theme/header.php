@@ -1384,119 +1384,116 @@
 
 <?php wp_head(); ?>
     <style>
-        /* [PRISM PLATINUM] Unified Elite Silver Canvas */
+        /* ══════════════ STATS RIBBON — STATIC CARDS ══════════════ */
         .stats-ribbon {
             position: relative !important;
-            padding: 0 !important; 
-            background: #E8EDF5 !important; /* Premium Light Silver */
-            overflow: hidden !important;
-            height: 480px !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-
-        @keyframes metallic-shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            padding: 80px 0 100px 0 !important;
+            background: linear-gradient(135deg, #F4F6F9 0%, #DFE4EB 100%) !important; /* Общий серебристый фон блока */
+            border-bottom: none !important;
         }
 
         .stats-ribbon__inner {
             display: grid !important;
             grid-template-columns: repeat(4, 1fr) !important;
-            gap: 0 !important;
-            max-width: var(--container-width) !important;
+            gap: 0 !important; /* Слитная сетка как в направлениях */
+            max-width: 1400px !important;
             margin: 0 auto !important;
-            height: 400px !important;
-            position: relative !important;
-            z-index: 5 !important;
-            border: none !important;
-            background: transparent !important;
+            background: #FFFFFF !important; /* Единый белый блок */
+            border: 1px solid rgba(0, 13, 51, 0.05) !important; /* Обводка всего блока */
         }
 
         .stats-card {
             background: transparent !important;
-            padding: 30px !important; 
+            border-radius: 0 !important;
+            padding: 60px 40px !important;
             display: flex !important;
             flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            border-right: 1px solid rgba(0, 13, 51, 0.03) !important;
-            height: 480px !important;
+            align-items: flex-start !important; /* Выравнивание по левому краю как в направлениях */
+            text-align: left !important;
+            box-shadow: none !important;
             position: relative !important;
-            overflow: hidden !important;
+            border-top: none !important;
             border-bottom: none !important;
-            box-shadow: none !important; /* NO SHADOWS */
+            border-left: none !important;
+            border-right: 1px solid rgba(0, 13, 51, 0.05) !important; /* Внутренние разделители */
         }
+
+        .stats-card:last-child {
+            border-right: none !important;
+        }
+
+        /* ── ЖЕСТКАЯ БЛОКИРОВКА АНИМАЦИИ ОТ СТАРЫХ СТИЛЕЙ ── */
         .stats-card:hover {
-            background: rgba(0, 51, 153, 0.02) !important;
-            box-shadow: none !important; /* NO HOVER SHADOWS */
-        }
-        .stats-card:last-child { border-right: none !important; } /* GHOST EASE AT EDGES */
-        
-        /* [CLEAN REMOVAL] No more 'Dashes' (Bars) anywhere in Ribbon */
-        .stats-card::before,
-        .stats-card:nth-child(even)::before {
-            display: none !important;
+            transform: none !important; /* Никакого дребезжания */
+            z-index: 1 !important;
+            background: transparent !important; /* Обнуление эффекта наведения */
+            box-shadow: none !important; /* Обнуление объемной тени */
         }
 
-        /* Disabling legacy red-blue dash if it exists */
-        .stats-card__line { display: none !important; }
-
-        .stats-card:hover {
-            background: rgba(0, 68, 204, 0.01) !important;
-        }
-
-        .stats-card__value {
-            font-family: var(--font-display) !important;
-            font-size: 3.8rem !important; /* Restored Grand Size */
-            font-weight: 900 !important;
-            color: #001340 !important;
-            letter-spacing: -0.04em !important;
-            line-height: 1 !important;
-            margin-bottom: 12px !important;
-            white-space: nowrap !important;
-        }
-        .stats-card__value span {
-            color: var(--nk-blue) !important; /* Alternating '+' Symbol */
-        }
-        .stats-card:nth-child(even) .stats-card__value span {
-            color: var(--nk-red) !important;
-        }
-
-        .stats-card__label {
-            font-family: var(--font-display) !important;
-            font-size: 13px !important; /* Restored Grand Size */
-            font-weight: 800 !important;
-            text-transform: uppercase !important;
-            color: var(--nk-gray-400) !important;
-            letter-spacing: 0.15em !important;
-            text-align: center !important;
-            line-height: 1.6 !important;
-            max-width: 200px !important;
-        }
-
+        /* ── Иконка ── */
         .stats-card__icon-box {
             width: 64px !important;
             height: 64px !important;
-            border-radius: 18px !important;
-            background: #F1F4F9 !important;
-            color: var(--nk-blue) !important; /* Alternating Icons */
+            border-radius: 50% !important;
+            background: rgba(227, 6, 19, 0.08) !important;
+            color: var(--nk-red) !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            margin-bottom: 40px !important; /* Fixed gap for value alignment */
-            transition: all 0.4s var(--ease) !important;
-            flex-shrink: 0 !important;
+            font-size: 26px !important;
+            margin-bottom: 25px !important;
         }
-        .stats-card:nth-child(even) .stats-card__icon-box { color: var(--nk-red) !important; } /* MAXIMUM BRAND RED */
 
-        .stats-card:hover .stats-card__icon-box {
-            transform: scale(1.15) !important;
-            background: #FFFFFF !important;
-            box-shadow: 0 10px 30px rgba(0, 51, 153, 0.08) !important;
+        /* ── Интересные цифры ── */
+        .stats-card__value {
+            font-family: var(--font-display) !important;
+            font-size: 4rem !important;
+            font-weight: 900 !important;
+            line-height: 1 !important;
+            margin-bottom: 20px !important;
+            /* Градиент для объемности цифр */
+            background: linear-gradient(135deg, var(--nk-blue) 0%, #30588e 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            display: inline-flex !important;
+            align-items: flex-start !important;
         }
+
+        /* Тот самый плюсик с особым дизайном */
+        .stats-card__value em {
+            font-style: normal !important;
+            color: var(--nk-red) !important;
+            -webkit-text-fill-color: var(--nk-red) !important;
+            font-weight: 300 !important; /* Контраст: толстая цифра, тонкий плюс */
+            font-size: 3rem !important;
+            margin-left: 4px !important;
+            margin-top: -5px !important;
+        }
+
+        /* ── Интересный текст ── */
+        .stats-card__label {
+            font-family: var(--font-display) !important;
+            font-size: 14px !important;
+            font-weight: 750 !important;
+            color: var(--text-light) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            line-height: 1.4 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important; /* Левое выравнивание */
+            gap: 15px !important;
+        }
+
+        /* Декоративная структурная линия */
+        .stats-card__label::before {
+            content: '' !important;
+            width: 30px !important;
+            height: 3px !important;
+            background: var(--nk-blue) !important;
+            border-radius: 2px !important;
+        }
+
         
         /* 4. TOTAL ELITE SILVER — Unified Seamless Background */
         .services {
