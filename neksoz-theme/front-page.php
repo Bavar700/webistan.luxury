@@ -47,7 +47,7 @@
                 <div class="service-card__icon" style="width: 52px !important; height: 52px !important; position: absolute !important; top: 30px !important; right: 30px !important; margin-bottom: 0 !important; opacity: 0.12 !important; background: transparent !important; color: var(--nk-red) !important; border: none !important;">
                     <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; color: var(--nk-red) !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">18<em style="color: var(--nk-blue) !important; font-style: normal !important; -webkit-text-fill-color: var(--nk-blue) !important;">+</em></div>
+                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; color: var(--nk-red) !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;"><?php echo (date('Y') - 2016); ?><em style="color: var(--nk-blue) !important; font-style: normal !important; -webkit-text-fill-color: var(--nk-blue) !important;">+</em></div>
                 <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Лет на рынке</p>
             </div>
             <!-- 3 -->
