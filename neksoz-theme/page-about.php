@@ -150,7 +150,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">О компании</div>
-                <h1 class="hero__title" style="background:linear-gradient(90deg,#E30613 0%,#CC0033 30%,#0044CC 75%,#2277FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                <h1 class="hero__title" style="background:linear-gradient(180deg, #E30613 0%, #CC0033 35%, #1a3fcc 65%, #2277FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
                     Архитектура финансовой<br>устойчивости бизнеса
                 </h1>
                 <p class="hero__desc">
