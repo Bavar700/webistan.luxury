@@ -95,12 +95,16 @@ get_header();
                         <p style="color: var(--nk-gray-600); line-height: 1.6; margin-bottom: 20px; font-size: 15px;">Мы ценим ваше время и придерживаемся строгого графика:</p>
                         <div style="background: rgba(0, 13, 51, 0.02); border: 1px solid rgba(0, 13, 51, 0.05); border-radius: 12px; padding: 24px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(0, 13, 51, 0.1);">
-                                <span style="color: var(--nk-gray-700);">Понедельник — Пятница</span>
-                                <strong style="color: var(--nk-gray-900);">09:00 — 18:00</strong>
+                                <span style="color: var(--nk-gray-700);">Пн – Пт</span>
+                                <strong style="color: var(--nk-gray-900);">09:00 – 18:00</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(0, 13, 51, 0.1);">
+                                <span style="color: var(--nk-gray-700);">Суббота</span>
+                                <strong style="color: var(--nk-gray-900);">10:00 – 14:00</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between;">
-                                <span style="color: var(--nk-gray-700);">Суббота — Воскресенье</span>
-                                <span style="color: var(--nk-red); font-weight: 500;">Выходные дни</span>
+                                <span style="color: var(--nk-gray-700);">Воскресенье</span>
+                                <span style="color: var(--nk-red); font-weight: 500;">Выходной</span>
                             </div>
                         </div>
                     </div>
@@ -108,15 +112,21 @@ get_header();
                     <!-- 4. Социальные сети -->
                     <div>
                         <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">Мы в социальных сетях</h3>
-                        <div style="display: flex; gap: 16px;">
-                            <a href="https://t.me/neksoz" class="footer-platinum__social-btn" title="Telegram" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <a href="https://t.me/neksoz" class="footer-platinum__social-btn" title="Telegram" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                             </a>
-                            <a href="https://wa.me/992446000000" class="footer-platinum__social-btn" title="WhatsApp" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
+                            <a href="https://wa.me/992446000000" class="footer-platinum__social-btn" title="WhatsApp" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
                             </a>
-                            <a href="#" class="footer-platinum__social-btn" title="X (Twitter)" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
+                            <a href="#" class="footer-platinum__social-btn" title="X (Twitter)" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M13.232 10.768L20 4"/></svg>
+                            </a>
+                            <a href="tel:+992446000000" class="footer-platinum__social-btn" title="Позвонить" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </a>
+                            <a href="mailto:info@neksoz.com" class="footer-platinum__social-btn" title="E-mail" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                             </a>
                         </div>
                     </div>
