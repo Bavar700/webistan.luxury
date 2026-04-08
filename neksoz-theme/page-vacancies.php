@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Ð’Ð°ÐºÐ°Ð½ÑÐ¸Ð¸
+ * Template Name: Вакансии
  * Template Post Type: page
  *
  * @package Neksoz
@@ -11,93 +11,177 @@ get_header();
 
 <main id="primary" class="site-main">
 
-    <section class="nk-page-header uk-flex uk-flex-middle" style="min-height: 40vh; background: var(--nk-primary-dark); position: relative; overflow: hidden; padding: 60px 0;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="nk-container uk-position-relative uk-position-z-index">
-            <h1 class="fade-up is-visible" style="color: #fff; font-size: 3.5rem; margin-bottom: 1rem;"><?php esc_html_e('ÐšÐ°Ñ€ÑŒÐµÑ€Ð°', 'neksoz'); ?></h1>
-            <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 100% !important;">
-                Ð¡Ñ‚Ð°Ð½ÑŒÑ‚Ðµ Ñ‡Ð°ÑÑ‚ÑŒÑŽ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ Ð¿Ñ€Ð¾Ñ„ÐµÑÑÐ¸Ð¾Ð½Ð°Ð»Ð¾Ð²
+<!-- ═══════════ PAGE HERO ═══════════ -->
+<section class="hero" style="min-height: 50vh; display: flex; align-items: center;">
+    <div class="hero__geo"></div>
+    <div class="hero__accent-line"></div>
+    <div class="hero__accent-line-2"></div>
+    <div class="hero__grid-pattern"></div>
+    <div class="container hero__inner" style="position: relative; z-index: 2;">
+        <div class="hero__content">
+            <div class="hero__badge fade-up is-visible">Карьера в NEKSOZ</div>
+            <h1 class="hero__title fade-up is-visible fade-up-delay-1">
+                <span class="text-gradient">Вакансии</span><br>и возможности
+            </h1>
+            <p class="hero__subtitle fade-up is-visible fade-up-delay-2">
+                Мы ищем талантливых специалистов, готовых расти вместе с нами.<br>
+                Присоединяйтесь к <strong>команде профессионалов</strong> NEKSOZ.
             </p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="nk-section" style="padding-bottom: 6rem;">
-        <div class="nk-container">
-            
-            <div class="fade-up is-visible" style="margin-bottom: 3rem;">
-                <h2 style="font-size: 2rem; color: var(--nk-text); margin-bottom: 1rem;">ÐžÑ‚ÐºÑ€Ñ‹Ñ‚Ñ‹Ðµ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¸</h2>
-                <p style="color: var(--nk-text-secondary); font-size: 1.1rem;">ÐœÑ‹ Ð²ÑÐµÐ³Ð´Ð° Ð½Ð°Ñ…Ð¾Ð´Ð¸Ð¼ÑÑ Ð² Ð¿Ð¾Ð¸ÑÐºÐµ Ñ‚Ð°Ð»Ð°Ð½Ñ‚Ð»Ð¸Ð²Ñ‹Ñ… Ð¸ Ñ†ÐµÐ»ÐµÐ½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… ÑÐ¿ÐµÑ†Ð¸Ð°Ð»Ð¸ÑÑ‚Ð¾Ð².</p>
-            </div>
-
-            <!-- Vacancy Card -->
-            <div class="nk-vacancy-card fade-up is-visible fade-up-delay-1" style="background: var(--nk-bg-alt); border-radius: 12px; border: 1px solid var(--nk-border); overflow: hidden;">
-                <!-- Header -->
-                <div style="padding: 2rem; border-bottom: 1px solid var(--nk-border); background: rgba(59, 130, 246, 0.02); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
-                    <div>
-                        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.5rem; color: var(--nk-text);">ÐŸÐ¾Ð¼Ð¾Ñ‰Ð½Ð¸Ðº Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€Ð°</h3>
-                        <p style="margin: 0; color: var(--nk-text-secondary); font-size: 0.95rem;">ÐŸÐ¾Ð»Ð½Ð°Ñ Ð·Ð°Ð½ÑÑ‚Ð¾ÑÑ‚ÑŒ, Ð¿Ð¾Ð»Ð½Ñ‹Ð¹ Ð´ÐµÐ½ÑŒ â€¢ Ð³. Ð”ÑƒÑˆÐ°Ð½Ð±Ðµ</p>
-                    </div>
-                    <a href="<?php echo esc_url( home_url( '/contacts' ) ); ?>" class="btn btn--primary">ÐžÑ‚ÐºÐ»Ð¸ÐºÐ½ÑƒÑ‚ÑŒÑÑ</a>
-                </div>
-
-                <!-- Body -->
-                <div style="padding: 2.5rem 2rem;">
-                    <p style="font-size: 1.05rem; line-height: 1.7; color: var(--nk-text-secondary); margin-bottom: 2rem;">Ð˜Ñ‰ÐµÐ¼ Ð¿Ð¾Ð¼Ð¾Ñ‰Ð½Ð¸ÐºÐ° Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€Ð° â€” Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ°, Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð½Ð° Ð±Ñ‹ÑÑ‚Ñ€Ð¾Ðµ Ð¾Ð±ÑƒÑ‡ÐµÐ½Ð¸Ðµ, Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾ Ð²Ð½Ð¸Ð¼Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ð³Ð¾ Ð¸ ÑÐºÑ€ÑƒÐ¿ÑƒÐ»ÐµÐ·Ð½Ð¾Ð³Ð¾ Ð² Ñ€Ð°Ð±Ð¾Ñ‚Ðµ. Ð•ÑÐ»Ð¸ Ð²Ñ‹ Ð½Ðµ Ð±Ð¾Ð¸Ñ‚ÐµÑÑŒ Ð½Ð¾Ð²Ð¾Ð³Ð¾, Ð»ÐµÐ³ÐºÐ¾ Ð¿Ð¾Ð´Ð´Ð°ÐµÑ‚ÐµÑÑŒ Ð¾Ð±ÑƒÑ‡ÐµÐ½Ð¸ÑŽ Ð¿Ð¾Ð´ Ñ€ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾Ð¼ Ð²ÐµÐ´ÑƒÑ‰ÐµÐ³Ð¾ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€Ð°, Ð¼Ð¾Ð¶ÐµÑ‚Ðµ ÑÐ¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒÑÑ Ñ Ð±Ð¾Ð»ÑŒÑˆÐ¸Ð¼ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾Ð¼ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¸ Ð»ÑŽÐ±Ð¸Ñ‚Ðµ Ñ†Ð¸Ñ„Ñ€Ñ‹ â€” Ñ‚Ð¾ Ð¼Ñ‹ Ñ Ñ€Ð°Ð´Ð¾ÑÑ‚ÑŒÑŽ Ñ Ð²Ð°Ð¼Ð¸ Ð¿Ð¾Ð·Ð½Ð°ÐºÐ¾Ð¼Ð¸Ð¼ÑÑ!</p>
-
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
-                        
-                        <div>
-                            <h4 style="font-size: 1.15rem; color: var(--nk-text); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--nk-accent)" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                                Ð§Ñ‚Ð¾ Ð½ÑƒÐ¶Ð½Ð¾ Ð´ÐµÐ»Ð°Ñ‚ÑŒ:
-                            </h4>
-                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--nk-text-secondary);">
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ Ð¿ÐµÑ€Ð²Ð¸Ñ‡Ð½Ð¾Ð¹ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸ÐµÐ¹;</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ Ð¿Ð»Ð°Ñ‚ÐµÐ¶Ð°Ð¼Ð¸ (ÐºÐ»Ð¸ÐµÐ½Ñ‚-Ð±Ð°Ð½Ðº, ÐºÐ°ÑÑÐ°);</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ Ð¿Ð¾ÑÑ‚Ð°Ð²Ñ‰Ð¸ÐºÐ°Ð¼Ð¸;</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð’ÐµÐ´ÐµÐ½Ð¸Ðµ ÐºÐ°Ð´Ñ€Ð¾Ð²Ñ‹Ñ… Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð²;</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð Ð°ÑÑ‡ÐµÑ‚ Ð·Ð°Ñ€Ð¿Ð»Ð°Ñ‚Ñ‹, ÑÐ¸ÑÑ‚ÐµÐ¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ñ;</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð Ð°Ð±Ð¾Ñ‚Ð° Ð² 1Ð¡, CRM/Bitrix24 (Ð¸Ð·ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¿Ð¾ Ñ…Ð¾Ð´Ñƒ);</li>
-                                <li style="margin-bottom: 0; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>ÐŸÐ¾Ñ€ÑƒÑ‡ÐµÐ½Ð¸Ñ Ð²ÐµÐ´ÑƒÑ‰ÐµÐ³Ð¾ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€Ð°.</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 style="font-size: 1.15rem; color: var(--nk-text); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--nk-accent)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                Ð’Ñ‹ Ð½Ð°Ñˆ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐº, ÐµÑÐ»Ð¸:
-                            </h4>
-                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--nk-text-secondary);">
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð—Ð½Ð°ÐµÑ‚Ðµ Ð¸Ð»Ð¸ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹ Ð±Ñ‹ÑÑ‚Ñ€Ð¾ Ñ€Ð°Ð·Ð¾Ð±Ñ€Ð°Ñ‚ÑŒÑÑ Ð² Ð½Ð°Ð»Ð¾Ð³Ð¾Ð¾Ð±Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸ ÐžÐžÐž/Ð¡ÐŸÐ”;</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð”Ñ€ÑƒÐ¶Ð¸Ñ‚Ðµ Ñ ÐŸÐš, Google Docs, 1C 8, ÐšÐ»Ð¸ÐµÐ½Ñ‚-Ð±Ð°Ð½Ðº;</li>
-                                <li style="margin-bottom: 0.6rem; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð˜ÑÐ¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹, Ð²Ð½Ð¸Ð¼Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹ Ð¸ Ð°ÐºÐºÑƒÑ€Ð°Ñ‚Ð½Ñ‹;</li>
-                                <li style="margin-bottom: 0; padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð“Ð¾Ñ‚Ð¾Ð²Ñ‹ ÑƒÑ‡Ð¸Ñ‚ÑŒÑÑ Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ñ‚ÑŒ Ñ Ð±Ð¾Ð»ÑŒÑˆÐ¸Ð¼Ð¸ Ð¾Ð±ÑŠÑ‘Ð¼Ð°Ð¼Ð¸ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸.</li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <div style="margin-top: 3rem; background: var(--nk-bg); padding: 2rem; border-radius: 8px;">
-                        <h4 style="font-size: 1.15rem; color: var(--nk-text); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--nk-accent)" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            ÐœÑ‹ Ð¿Ñ€ÐµÐ´Ð»Ð°Ð³Ð°ÐµÐ¼:
-                        </h4>
-                        <ul style="list-style: none; padding: 0; margin: 0; color: var(--nk-text-secondary); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                            <li style="padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>ÐžÐ±ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¸ Ñ€Ð¾ÑÑ‚ Ð¾Ñ‚ Ð¿Ð¾Ð¼Ð¾Ñ‰Ð½Ð¸ÐºÐ° Ð´Ð¾ ÑÐ°Ð¼Ð¾ÑÑ‚Ð¾ÑÑ‚ÐµÐ»ÑŒÐ½Ð¾Ð³Ð¾ ÑÐ¿ÐµÑ†Ð¸Ð°Ð»Ð¸ÑÑ‚Ð°.</li>
-                            <li style="padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>ÐšÑ€ÑƒÐ³ Ð»ÑŽÐ´ÐµÐ¹-ÐµÐ´Ð¸Ð½Ð¾Ð¼Ñ‹ÑˆÐ»ÐµÐ½Ð½Ð¸ÐºÐ¾Ð², Ñƒ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… ÐµÑÑ‚ÑŒ Ñ‡ÐµÐ¼Ñƒ Ð¿Ð¾ÑƒÑ‡Ð¸Ñ‚ÑŒÑÑ.</li>
-                            <li style="padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð“Ñ€Ð°Ñ„Ð¸Ðº Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹: ÐŸÐ½-ÐŸÑ‚, 08:00 â€” 17:00.</li>
-                            <li style="padding-left: 1.2rem; position: relative;"><span style="position: absolute; left: 0; top: 0.5rem; width: 4px; height: 4px; background: var(--nk-primary); border-radius: 50%;"></span>Ð“Ð¸Ð±ÐºÐ°Ñ ÑÑ‚Ð°Ñ€Ñ‚Ð¾Ð²Ð°Ñ Ð—ÐŸ Ð¿Ð¾ Ð¸Ñ‚Ð¾Ð³Ð°Ð¼ ÑÐ¾Ð±ÐµÑÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ñ.</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 2rem; border-left: 4px solid var(--nk-accent); padding-left: 1.5rem;">
-                        <p style="margin: 0; font-size: 0.95rem; color: var(--nk-text-secondary);"><strong>ÐžÐ‘Ð ÐÐ©Ð•ÐÐ˜Ð• Ðš Ð’ÐÐœ:</strong> Ð•ÑÐ»Ð¸ Ð²Ñ‹ Ð´Ð¾Ñ‡Ð¸Ñ‚Ð°Ð»Ð¸ Ð²Ð°ÐºÐ°Ð½ÑÐ¸ÑŽ Ð´Ð¾ ÐºÐ¾Ð½Ñ†Ð° â€” ÑÑ‚Ð¾ Ð¾Ñ‚Ð»Ð¸Ñ‡Ð½Ð¾. Ð•ÑÐ»Ð¸ Ð¿Ð¾Ð·Ð½Ð°ÐºÐ¾Ð¼Ð¸Ð»Ð¸ÑÑŒ Ñ Ð½Ð°Ð¼Ð¸ Ñ‡ÐµÑ€ÐµÐ· ÑÐ¾Ñ†ÑÐµÑ‚Ð¸ Ð¸ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ ÑÐµÐ±Ðµ Ð¾Ð±ÑŠÑÑÐ½Ð¸Ñ‚ÑŒ, Ð¿Ð¾Ñ‡ÐµÐ¼Ñƒ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÑ‚Ðµ Ñ€ÐµÐ·ÑŽÐ¼Ðµ Ð¸Ð¼ÐµÐ½Ð½Ð¾ Ð½Ð°Ð¼ â€” ÐµÑ‰Ðµ Ð»ÑƒÑ‡ÑˆÐµ! Ð–Ð´ÐµÐ¼ Ð²Ð°ÑˆÐµ Ñ€ÐµÐ·ÑŽÐ¼Ðµ.</p>
-                    </div>
-                </div>
-            </div>
-
+<!-- ═══════════ WHY JOIN US ═══════════ -->
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header section__header--center fade-up is-visible">
+            <div class="section__label">Почему NEKSOZ</div>
+            <h2 class="section__title section__title--huge">Работа, которая<br><span class="text-gradient">вдохновляет</span></h2>
         </div>
-    </section>
+        <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="service-card fade-up is-visible">
+                <div class="service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+                <h3 class="service-card__title">Профессиональный рост</h3>
+                <p class="service-card__text">Мы инвестируем в развитие каждого сотрудника. Регулярные тренинги, семинары и доступ к лучшим отраслевым знаниям.</p>
+            </div>
+            <div class="service-card service-card--alt fade-up is-visible fade-up-delay-1">
+                <div class="service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 class="service-card__title">Дружная команда</h3>
+                <p class="service-card__text">Сплочённый коллектив профессионалов, где каждый голос услышан. Открытая корпоративная культура и взаимная поддержка.</p>
+            </div>
+            <div class="service-card fade-up is-visible fade-up-delay-2">
+                <div class="service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <h3 class="service-card__title">Конкурентная зарплата</h3>
+                <p class="service-card__text">Достойное вознаграждение, привязанное к результатам. Бонусы, премии и своевременная выплата без задержек.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ VACANCIES LIST ═══════════ -->
+<section class="section">
+    <div class="container">
+        <div class="section__header fade-up is-visible">
+            <div class="section__label">Открытые позиции</div>
+            <h2 class="section__title section__title--huge">Текущие<br><span class="text-gradient">вакансии</span></h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;" class="fade-up is-visible">
+
+            <!-- Vacancy 1 -->
+            <div style="background: var(--nk-gray-50); border: 1px solid var(--nk-gray-100); border-radius: 20px; padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 8px 32px rgba(0,68,204,0.1)'; this.style.borderColor='rgba(0,68,204,0.2)'; this.style.background='white'" onmouseout="this.style.boxShadow='none'; this.style.borderColor='var(--nk-gray-100)'; this.style.background='var(--nk-gray-50)'">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span style="background: rgba(0,68,204,0.08); color: var(--nk-blue); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">Полная занятость</span>
+                        <span style="background: rgba(0,180,0,0.08); color: #00a000; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">• Открыта</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--nk-gray-900); margin-bottom: 10px; letter-spacing: -0.01em;">Главный бухгалтер</h3>
+                    <p style="color: var(--nk-gray-600); font-size: 0.95rem; line-height: 1.6; margin: 0;">Опыт работы от 5 лет. Знание налогового законодательства Таджикистана. Ответственность за ведение полного цикла бухгалтерского учёта.</p>
+                </div>
+                <a href="#apply" class="btn btn--primary" style="white-space: nowrap;">Откликнуться →</a>
+            </div>
+
+            <!-- Vacancy 2 -->
+            <div style="background: var(--nk-gray-50); border: 1px solid var(--nk-gray-100); border-radius: 20px; padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 8px 32px rgba(0,68,204,0.1)'; this.style.borderColor='rgba(0,68,204,0.2)'; this.style.background='white'" onmouseout="this.style.boxShadow='none'; this.style.borderColor='var(--nk-gray-100)'; this.style.background='var(--nk-gray-50)'">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span style="background: rgba(0,68,204,0.08); color: var(--nk-blue); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">Полная занятость</span>
+                        <span style="background: rgba(0,180,0,0.08); color: #00a000; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">• Открыта</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--nk-gray-900); margin-bottom: 10px; letter-spacing: -0.01em;">Аудитор</h3>
+                    <p style="color: var(--nk-gray-600); font-size: 0.95rem; line-height: 1.6; margin: 0;">Проведение финансовых проверок и аудита отчётности. Опыт от 3 лет. Знание МСФО и национальных стандартов бухгалтерского учёта.</p>
+                </div>
+                <a href="#apply" class="btn btn--primary" style="white-space: nowrap;">Откликнуться →</a>
+            </div>
+
+            <!-- Vacancy 3 -->
+            <div style="background: var(--nk-gray-50); border: 1px solid var(--nk-gray-100); border-radius: 20px; padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 8px 32px rgba(0,68,204,0.1)'; this.style.borderColor='rgba(0,68,204,0.2)'; this.style.background='white'" onmouseout="this.style.boxShadow='none'; this.style.borderColor='var(--nk-gray-100)'; this.style.background='var(--nk-gray-50)'">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span style="background: rgba(227,6,19,0.06); color: var(--nk-red); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">Частичная занятость</span>
+                        <span style="background: rgba(0,180,0,0.08); color: #00a000; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">• Открыта</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--nk-gray-900); margin-bottom: 10px; letter-spacing: -0.01em;">Юрист-консультант</h3>
+                    <p style="color: var(--nk-gray-600); font-size: 0.95rem; line-height: 1.6; margin: 0;">Правовое сопровождение бизнес-клиентов. Опыт в корпоративном праве от 2 лет. Знание гражданского и налогового законодательства.</p>
+                </div>
+                <a href="#apply" class="btn btn--primary" style="white-space: nowrap;">Откликнуться →</a>
+            </div>
+
+            <!-- Vacancy 4 -->
+            <div style="background: var(--nk-gray-50); border: 1px solid var(--nk-gray-100); border-radius: 20px; padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; transition: all 0.3s;" onmouseover="this.style.boxShadow='0 8px 32px rgba(0,68,204,0.1)'; this.style.borderColor='rgba(0,68,204,0.2)'; this.style.background='white'" onmouseout="this.style.boxShadow='none'; this.style.borderColor='var(--nk-gray-100)'; this.style.background='var(--nk-gray-50)'">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span style="background: rgba(0,68,204,0.08); color: var(--nk-blue); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">Полная занятость</span>
+                        <span style="background: rgba(0,180,0,0.08); color: #00a000; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 100px;">• Открыта</span>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--nk-gray-900); margin-bottom: 10px; letter-spacing: -0.01em;">Налоговый консультант</h3>
+                    <p style="color: var(--nk-gray-600); font-size: 0.95rem; line-height: 1.6; margin: 0;">Консультирование клиентов по вопросам налогообложения. Оптимизация налоговой нагрузки. Опыт от 3 лет в налоговой сфере.</p>
+                </div>
+                <a href="#apply" class="btn btn--primary" style="white-space: nowrap;">Откликнуться →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ APPLY FORM ═══════════ -->
+<section id="apply" class="cta-crystal">
+    <div class="cta-crystal__glow cta-crystal__glow--blue"></div>
+    <div class="cta-crystal__glow cta-crystal__glow--red"></div>
+    <div class="container">
+        <div class="cta-crystal__grid">
+            <div class="cta-crystal__content fade-up is-visible">
+                <div class="section__label">Присоединяйтесь</div>
+                <h2 class="cta-crystal__title"><span class="text-gradient">Стать частью</span><br>команды NEKSOZ</h2>
+                <p class="cta-crystal__text">Отправьте своё резюме и мы свяжемся с вами в ближайшее время. Мы всегда рады новым талантам.</p>
+                <div class="cta-crystal__status">
+                    <span class="cta-crystal__status-dot"></span>
+                    Рассматриваем заявки ежедневно
+                </div>
+            </div>
+            <div class="cta-crystal__form-wrapper fade-up is-visible">
+                <form action="#" class="cta-crystal__form">
+                    <div class="cta-crystal__field">
+                        <input type="text" placeholder=" " required id="v-name">
+                        <label for="v-name">Ваше имя</label>
+                    </div>
+                    <div class="cta-crystal__field">
+                        <input type="tel" placeholder=" " required id="v-phone">
+                        <label for="v-phone">Телефон (+992)</label>
+                    </div>
+                    <div class="cta-crystal__field">
+                        <input type="email" placeholder=" " required id="v-email">
+                        <label for="v-email">Email</label>
+                    </div>
+                    <div class="cta-crystal__field nx-dropdown">
+                        <input type="text" placeholder=" " required id="v-position" class="nx-dropdown__trigger" readonly>
+                        <label for="v-position">Желаемая позиция</label>
+                        <div class="nx-dropdown__list">
+                            <div class="nx-dropdown__item" data-value="accountant">Главный бухгалтер</div>
+                            <div class="nx-dropdown__item" data-value="auditor">Аудитор</div>
+                            <div class="nx-dropdown__item" data-value="lawyer">Юрист-консультант</div>
+                            <div class="nx-dropdown__item" data-value="tax">Налоговый консультант</div>
+                            <div class="nx-dropdown__item" data-value="other">Другая позиция</div>
+                        </div>
+                    </div>
+                    <div class="cta-crystal__field">
+                        <textarea placeholder=" " id="v-about" rows="3"></textarea>
+                        <label for="v-about">О себе / опыт работы</label>
+                    </div>
+                    <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center;">
+                        Отправить резюме
+                        <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 </main>
 

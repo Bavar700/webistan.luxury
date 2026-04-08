@@ -1,0 +1,15 @@
+INSERT INTO wp_posts (post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt, post_status, comment_status, ping_status, post_name, post_type, post_modified, post_modified_gmt, to_ping, pinged, post_content_filtered) VALUES
+(1, NOW(), NOW(), '', 'About', '', 'publish', 'closed', 'closed', 'about', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Services', '', 'publish', 'closed', 'closed', 'services', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Contacts', '', 'publish', 'closed', 'closed', 'contacts', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Vacancies', '', 'publish', 'closed', 'closed', 'vacancies', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'News', '', 'publish', 'closed', 'closed', 'news', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Audit', '', 'publish', 'closed', 'closed', 'audit', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Restore', '', 'publish', 'closed', 'closed', 'restore', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Legal', '', 'publish', 'closed', 'closed', 'legal', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Accounting', '', 'publish', 'closed', 'closed', 'accounting', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Secretariat', '', 'publish', 'closed', 'closed', 'secretariat', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Consulting', '', 'publish', 'closed', 'closed', 'consulting', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Tax', '', 'publish', 'closed', 'closed', 'tax', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Management Accounting', '', 'publish', 'closed', 'closed', 'management-accounting', 'page', NOW(), NOW(), '', '', ''),
+(1, NOW(), NOW(), '', 'Automation', '', 'publish', 'closed', 'closed', 'automation', 'page', NOW(), NOW(), '', '', '');

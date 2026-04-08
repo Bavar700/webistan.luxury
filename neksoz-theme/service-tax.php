@@ -1,100 +1,106 @@
 <?php
 /**
- * Template Name: Ð£ÑÐ»ÑƒÐ³Ð°: ÐÐ°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸
+ * Template Name: Налоговые консультации
  * Template Post Type: page
- *
  * @package Neksoz
  */
-
 get_header();
 ?>
-
 <main id="primary" class="site-main">
 
-    <!-- Hero Banner -->
-    <section class="nk-section--dark" style="padding: 60px 0; background: linear-gradient(135deg, var(--nk-primary-dark) 0%, var(--nk-primary) 100%);">
-        <div class="nk-container">
-            <div style="max-width: 100% !important;">
-                <span class="section-label" style="color: rgba(255,255,255,0.6);"><?php esc_html_e( 'ÐÐ°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ', 'neksoz' ); ?></span>
-                <h1 style="color: #fff; margin-bottom: 1rem; font-size: 2.5rem; line-height: 1.2;"><?php esc_html_e( 'ÐÐ°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸ Ð¸ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð¾Ð±Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ', 'neksoz' ); ?></h1>
+<section class="hero" style="min-height: 55vh; display: flex; align-items: center;">
+    <div class="hero__geo"></div><div class="hero__accent-line"></div>
+    <div class="hero__accent-line-2"></div><div class="hero__grid-pattern"></div>
+    <div class="container hero__inner" style="position: relative; z-index: 2;">
+        <div class="hero__content">
+            <div class="hero__badge fade-up is-visible">Наши услуги</div>
+            <h1 class="hero__title fade-up is-visible fade-up-delay-1">
+                <span class="text-gradient">Налоговые</span><br>консультации
+            </h1>
+            <p class="hero__subtitle fade-up is-visible fade-up-delay-2">
+                Законная оптимизация налоговой нагрузки и минимизация рисков<br>перед <strong>визитами контролирующих органов</strong>.
+            </p>
+            <div class="hero__actions fade-up is-visible fade-up-delay-3">
+                <a href="#contacts" class="btn btn--primary">Получить консультацию <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+                <a href="<?php echo home_url('/services'); ?>" class="btn btn--outline-light">← Все услуги</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Content -->
-    <section class="nk-section">
-        <div class="nk-container">
-            <div style="display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start;">
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header section__header--center fade-up is-visible">
+            <div class="section__label">Направления</div>
+            <h2 class="section__title section__title--huge">Что входит<br><span class="text-gradient">в услугу?</span></h2>
+        </div>
+        <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <?php $services = [
+                ['icon' => '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', 'title' => 'Налоговое планирование', 'text' => 'Разработка оптимальной системы налогообложения под специфику вашего бизнеса.', 'alt' => false],
+                ['icon' => '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>', 'title' => 'Налоговая оптимизация', 'text' => 'Законные методы снижения налоговой нагрузки без риска санкций от контролирующих органов.', 'alt' => true],
+                ['icon' => '<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>', 'title' => 'Защита при проверках', 'text' => 'Подготовка к налоговым проверкам. Сопровождение и защита интересов компании.', 'alt' => false],
+                ['icon' => '<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>', 'title' => 'Подготовка деклараций', 'text' => 'Правильное заполнение и своевременная подача налоговых деклараций всех форм.', 'alt' => true],
+                ['icon' => '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>', 'title' => 'Сопровождение споров', 'text' => 'Представление интересов в налоговых спорах и в судебных инстанциях.', 'alt' => false],
+                ['icon' => '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>', 'title' => 'Налоговый мониторинг', 'text' => 'Постоянный контроль за изменениями налогового законодательства и своевременная адаптация.', 'alt' => true],
+            ]; foreach ($services as $svc): ?>
+            <div class="service-card <?php echo $svc['alt'] ? 'service-card--alt' : ''; ?> fade-up is-visible">
+                <div class="service-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><?php echo $svc['icon']; ?></svg></div>
+                <h3 class="service-card__title"><?php echo $svc['title']; ?></h3>
+                <p class="service-card__text"><?php echo $svc['text']; ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 
-                <!-- Main Content -->
-                <article class="nk-content page-content fade-up is-visible">
-                    
-                    <h2 style="margin-top: 0; margin-bottom: 1.5rem; color: var(--nk-text);">ÐÐ°Ð»Ð¾Ð³Ð¾Ð¾Ð±Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑŽÑ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¸ Ñ„Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð»Ð¸Ñ†</h2>
-                    <p style="font-size: 1.1rem; color: var(--nk-text-secondary); line-height: 1.8; margin-bottom: 2rem;">ÐœÑ‹ Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ²Ð°Ð»Ð¸Ñ„Ð¸Ñ†Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½ÑƒÑŽ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒ Ð² Ð²Ð¾Ð¿Ñ€Ð¾ÑÐ°Ñ… Ð½Ð°Ð»Ð¾Ð³Ð¾Ð¾Ð±Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ, Ð¿Ð¾Ð¼Ð¾Ð³Ð°Ñ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸ÑÐ¼ Ð¸ Ñ„Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ð¼ Ð»Ð¸Ñ†Ð°Ð¼ ÑÐ¾Ð±Ð»ÑŽÐ´Ð°Ñ‚ÑŒ Ð·Ð°ÐºÐ¾Ð½Ð¾Ð´Ð°Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð¾, Ð¼Ð¸Ð½Ð¸Ð¼Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ€Ð¸ÑÐºÐ¸ Ð¸ Ð¾Ð¿Ñ‚Ð¸Ð¼Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²ÑƒÑŽ Ð½Ð°Ð³Ñ€ÑƒÐ·ÐºÑƒ.</p>
-
-                    <div style="display: grid; gap: 1.5rem;">
-                        <div style="background: var(--nk-bg-alt); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--nk-accent); transition: transform 0.3s; cursor: default;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
-                            <h3 style="margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 12px;">
-                                <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(59, 130, 246, 0.1); color: var(--nk-accent); border-radius: 50%; font-size: 0.9rem;">1</span>
-                                ÐÐ°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸
-                            </h3>
-                            <p style="margin: 0; color: var(--nk-text-secondary); padding-left: 44px;">Ð Ð°Ð·ÑŠÑÑÐ½ÐµÐ½Ð¸Ðµ Ð½Ð¾Ñ€Ð¼ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð·Ð°ÐºÐ¾Ð½Ð¾Ð´Ð°Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð°, Ð¾Ñ†ÐµÐ½ÐºÐ° Ñ€Ð¸ÑÐºÐ¾Ð² Ð¿Ñ€Ð¸ Ð·Ð°ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ð¸ ÑÐ´ÐµÐ»Ð¾Ðº Ð¸ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð²Ð¾Ð¿Ñ€Ð¾ÑÐ°Ð¼ Ð¸ÑÑ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ Ð¸ ÑƒÐ¿Ð»Ð°Ñ‚Ñ‹ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð².</p>
-                        </div>
-
-                        <div style="background: var(--nk-bg-alt); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--nk-accent); transition: transform 0.3s; cursor: default;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
-                            <h3 style="margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 12px;">
-                                <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(59, 130, 246, 0.1); color: var(--nk-accent); border-radius: 50%; font-size: 0.9rem;">2</span>
-                                Ð Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð¹ Ð¿Ð¾Ð»Ð¸Ñ‚Ð¸ÐºÐ¸
-                            </h3>
-                            <p style="margin: 0; color: var(--nk-text-secondary); padding-left: 44px;">Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑÑ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾Ð¹ Ð¸ Ð·Ð°ÐºÐ¾Ð½Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð¿Ð»Ð°Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ, Ð°Ð´Ð°Ð¿Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð¾Ð¹ Ð¿Ð¾Ð´ ÑÐ¿ÐµÑ†Ð¸Ñ„Ð¸ÐºÑƒ Ð²Ð°ÑˆÐµÐ¹ Ð´ÐµÑÑ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸ Ð´Ð»Ñ ÑÐ½Ð¸Ð¶ÐµÐ½Ð¸Ñ Ñ€Ð°ÑÑ…Ð¾Ð´Ð¾Ð².</p>
-                        </div>
-
-                        <div style="background: var(--nk-bg-alt); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--nk-accent); transition: transform 0.3s; cursor: default;" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform='translateX(0)'">
-                            <h3 style="margin-top: 0; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 12px;">
-                                <span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(59, 130, 246, 0.1); color: var(--nk-accent); border-radius: 50%; font-size: 0.9rem;">3</span>
-                                Ð ÐµÑˆÐµÐ½Ð¸Ðµ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ñ… ÑÐ¿Ð¾Ñ€Ð¾Ð²
-                            </h3>
-                            <p style="margin: 0; color: var(--nk-text-secondary); padding-left: 44px;">Ð¡Ð¾Ð¿Ñ€Ð¾Ð²Ð¾Ð¶Ð´ÐµÐ½Ð¸Ðµ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ñ… Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¾Ðº, Ð´Ð¾ÑÑƒÐ´ÐµÐ±Ð½Ð¾Ðµ ÑƒÑ€ÐµÐ³ÑƒÐ»Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¾Ñ€Ð¾Ð² Ð¸ Ð·Ð°Ñ‰Ð¸Ñ‚Ð° Ð²Ð°ÑˆÐ¸Ñ… Ð¸Ð½Ñ‚ÐµÑ€ÐµÑÐ¾Ð² Ð² ÑÑƒÐ´ÐµÐ±Ð½Ñ‹Ñ… Ð¸Ð½ÑÑ‚Ð°Ð½Ñ†Ð¸ÑÑ….</p>
-                        </div>
+<section class="section">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+            <div class="fade-up is-visible">
+                <div class="section__label">Наш подход</div>
+                <h2 class="section__title section__title--huge">Работаем<br><span class="text-gradient">на результат</span></h2>
+                <p style="color: var(--nk-gray-600); font-size: 1.05rem; line-height: 1.8; margin-bottom: 24px;">
+                    Мы не просто консультируем — мы берём на себя ответственность за налоговую чистоту вашего бизнеса. Наши специалисты следят за изменениями законодательства и своевременно информируют вас.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <?php foreach ([['18+', 'лет опыта', 'blue'], ['500+', 'клиентов', 'red'], ['0', 'штрафов', 'blue'], ['100%', 'законно', 'red']] as $stat): ?>
+                    <div class="service-card <?php echo $stat[2] === 'red' ? 'service-card--alt' : ''; ?>" style="padding: 24px; text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--nk-<?php echo $stat[2]; ?>); line-height: 1; margin-bottom: 6px;"><?php echo $stat[0]; ?></div>
+                        <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--nk-gray-500); font-weight: 700; margin: 0;"><?php echo $stat[1]; ?></p>
                     </div>
-
-                </article>
-
-                <!-- Sidebar -->
-                <aside class="nk-sidebar fade-up is-visible fade-up-delay-1" style="position: sticky; top: 100px;">
-                    <!-- Menu of Services -->
-                    <div style="background: var(--nk-bg-alt); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--nk-border);">
-                        <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--nk-text);"><?php esc_html_e( 'Ð’ÑÐµ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ', 'neksoz' ); ?></h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="margin-bottom: 0.6rem;"><a href="#" style="font-size: 0.95rem; font-weight: 500; color: var(--nk-text-secondary); transition: 0.3s;">ÐÑƒÐ´Ð¸Ñ‚ Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð¹ Ð´ÐµÑÑ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸</a></li>
-                            <li style="margin-bottom: 0.6rem;">
-                                <a href="#" style="font-size: 0.95rem; font-weight: 600; color: var(--nk-primary); display: flex; align-items: center; gap: 8px;">
-                                    <span style="width: 4px; height: 4px; background: var(--nk-accent); border-radius: 50%;"></span>
-                                    ÐÐ°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸
-                                </a>
-                            </li>
-                            <li style="margin-bottom: 0.6rem;"><a href="#" style="font-size: 0.95rem; font-weight: 500; color: var(--nk-text-secondary); transition: 0.3s;">Ð®Ñ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸</a></li>
-                            <li style="margin-bottom: 0.6rem;"><a href="#" style="font-size: 0.95rem; font-weight: 500; color: var(--nk-text-secondary); transition: 0.3s;">Ð’Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ ÑƒÑ‡ÐµÑ‚Ð°</a></li>
-                            <li style="margin-bottom: 0.6rem;"><a href="#" style="font-size: 0.95rem; font-weight: 500; color: var(--nk-text-secondary); transition: 0.3s;">Ð’Ð¾ÑÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ ÑƒÑ‡ÐµÑ‚Ð°</a></li>
-                            <li style="margin-bottom: 0.6rem;"><a href="#" style="font-size: 0.95rem; font-weight: 500; color: var(--nk-text-secondary); transition: 0.3s;">Ð‘Ð¸Ð·Ð½ÐµÑ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ð¸</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- CTA -->
-                    <div style="padding: 2rem; background: var(--nk-primary-dark); border-radius: 12px; text-align: center; position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
-                        <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem; position: relative; z-index: 1;">Ð¡Ñ‚Ð¾Ð»ÐºÐ½ÑƒÐ»Ð¸ÑÑŒ Ñ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ñ‹Ð¼Ð¸ Ñ‚Ñ€ÑƒÐ´Ð½Ð¾ÑÑ‚ÑÐ¼Ð¸?</h4>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1.5rem; position: relative; z-index: 1;">Ð¡Ð²ÑÐ¶Ð¸Ñ‚ÐµÑÑŒ Ñ Ð½Ð°Ð¼Ð¸ Ð´Ð»Ñ Ð·Ð°Ñ‰Ð¸Ñ‚Ñ‹ Ð²Ð°ÑˆÐ¸Ñ… Ð·Ð°ÐºÐ¾Ð½Ð½Ñ‹Ñ… Ð¸Ð½Ñ‚ÐµÑ€ÐµÑÐ¾Ð².</p>
-                        <a href="<?php echo esc_url( home_url( '/contacts' ) ); ?>" class="btn btn--primary" style="width: 100%; justify-content: center; position: relative; z-index: 1;">
-                            ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸ÑŽ
-                        </a>
-                    </div>
-                </aside>
-
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="fade-up is-visible fade-up-delay-1">
+                <div style="background: linear-gradient(135deg, #f8faff 0%, white 100%); border: 1px solid var(--nk-gray-100); border-radius: 20px; padding: 44px 40px;">
+                    <blockquote style="font-size: 1.15rem; font-style: italic; color: var(--nk-gray-800); line-height: 1.7; margin: 0 0 28px; font-weight: 600;">
+                        «Мы помогаем законно оптимизировать налоговую нагрузку и минимизировать риски перед контролирующими органами.»
+                    </blockquote>
+                    <a href="#contacts" class="btn btn--primary" style="width: 100%; justify-content: center;">Получить консультацию →</a>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-</main><!-- #primary -->
-
+<section id="contacts" class="cta-crystal">
+    <div class="cta-crystal__glow cta-crystal__glow--blue"></div><div class="cta-crystal__glow cta-crystal__glow--red"></div>
+    <div class="container"><div class="cta-crystal__grid">
+        <div class="cta-crystal__content fade-up is-visible">
+            <div class="section__label">Быстрая связь</div>
+            <h2 class="cta-crystal__title"><span class="text-gradient">Оптимизируйте</span><br>налоги законно</h2>
+            <p class="cta-crystal__text">Получите профессиональную налоговую консультацию. Защитите бизнес от штрафов и претензий.</p>
+            <div class="cta-crystal__status"><span class="cta-crystal__status-dot"></span>Мы онлайн • Ответ в течение 15 минут</div>
+        </div>
+        <div class="cta-crystal__form-wrapper fade-up is-visible">
+            <form action="#" class="cta-crystal__form">
+                <div class="cta-crystal__field"><input type="text" placeholder=" " required id="t-name"><label for="t-name">Ваше имя</label></div>
+                <div class="cta-crystal__field"><input type="tel" placeholder=" " required id="t-phone"><label for="t-phone">Телефон (+992)</label></div>
+                <div class="cta-crystal__field"><textarea placeholder=" " id="t-msg" rows="3"></textarea><label for="t-msg">Ваш вопрос</label></div>
+                <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center;">Задать вопрос <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+            </form>
+        </div>
+    </div></div>
+</section>
+</main>
 <?php get_footer(); ?>
