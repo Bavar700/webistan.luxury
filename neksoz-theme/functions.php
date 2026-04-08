@@ -88,3 +88,39 @@ function nexoz_the_logo() {
     echo '<img src="' . esc_url( $logo_url ) . '" alt="ÐÐµÐºÑÐ¾Ð·" class="h-10 w-auto">';
     echo '</a>';
 }
+
+/* 5. Automatic Page Setup (Auto-fix for 404s) */
+function nexoz_auto_create_pages() {
+    $pages = array(
+        'service-audit'      => array('title' => 'Аудит финансовой деятельности', 'template' => 'service-audit.php'),
+        'service-restore'    => array('title' => 'Восстановление финансового учета', 'template' => 'service-restore.php'),
+        'service-legal'      => array('title' => 'Юридические консультации', 'template' => 'service-legal.php'),
+        'service-accounting'   => array('title' => 'Ведение финансового учета', 'template' => 'service-accounting.php'),
+        'service-secretariat' => array('title' => 'Услуги секретариата', 'template' => 'service-secretariat.php'),
+        'service-consulting'  => array('title' => 'Бизнес-консультации', 'template' => 'service-consulting.php'),
+        'service-tax'         => array('title' => 'Налоговые консультации', 'template' => 'service-tax.php'),
+        'service-management'  => array('title' => 'Управленческий учет', 'template' => 'service-management.php'),
+        'service-automation'  => array('title' => 'Автоматизация бизнес-процессов', 'template' => 'service-automation.php'),
+        'about'               => array('title' => 'О компании', 'template' => 'page-about.php'),
+        'services'            => array('title' => 'Наши услуги', 'template' => 'page-services.php'),
+        'contacts'            => array('title' => 'Контакты', 'template' => 'page-contacts.php'),
+        'vacancies'           => array('title' => 'Вакансии', 'template' => 'page-vacancies.php'),
+        'news'                => array('title' => 'Новости', 'template' => 'page-news.php'),
+    );
+
+    foreach ($pages as $slug => $data) {
+        $page_check = get_page_by_path($slug);
+        if (!isset($page_check->ID)) {
+            $page_id = wp_insert_post(array(
+                'post_type'   => 'page',
+                'post_title'  => $data['title'],
+                'post_name'   => $slug,
+                'post_status' => 'publish',
+            ));
+            if ($page_id) {
+                update_post_meta($page_id, '_wp_page_template', $data['template']);
+            }
+        }
+    }
+}
+add_action('init', 'nexoz_auto_create_pages');

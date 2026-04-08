@@ -100,32 +100,143 @@
     </div>
 </div>
 
+<!-- ═══════════ SERVICE REQUEST MODAL ═══════════ -->
+<div class="modal" id="requestModal">
+    <div class="modal__overlay" id="closeRequestBg"></div>
+    <div class="modal__container">
+        <button class="modal__close" id="closeRequestBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="modal__content" style="padding: 0;">
+            <div class="cta-crystal__grid">
+                <!-- Left Side: Persuasion (without label) -->
+                <div class="cta-crystal__content">
+                    <h3 class="cta-crystal__title"><span class="text-gradient">Готовы масштабировать</span><br>свой успех?</h3>
+                    <p class="cta-crystal__text">Оставьте заявку сегодня, и мы разработаем для вас персональную стратегию развития вашего бизнеса.</p>
+                </div>
+
+                <!-- Right Side: Form -->
+                <div class="cta-crystal__form-wrapper">
+                    <form action="#" class="cta-crystal__form">
+                        <div class="cta-crystal__field">
+                            <input type="text" placeholder=" " required id="m-f-name">
+                            <label for="m-f-name">Ваше имя</label>
+                        </div>
+                        <div class="cta-crystal__field">
+                            <input type="tel" placeholder=" " required id="m-f-phone">
+                            <label for="m-f-phone">Телефон (+992)</label>
+                        </div>
+                        <div class="cta-crystal__field nx-dropdown" id="modalDropdown">
+                            <input type="text" placeholder=" " required id="m-f-service-input" class="nx-dropdown__trigger" readonly>
+                            <label for="m-f-service-input">Выбрать направление <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; display: inline-block; vertical-align: middle;"><path d="m6 9 6 6 6-6"/></svg></label>
+                            <div class="nx-dropdown__panel">
+                                <div class="nx-dropdown__option" data-val="legal">Юридическое сопровождение</div>
+                                <div class="nx-dropdown__option" data-val="tax">Налоговое консультирование</div>
+                                <div class="nx-dropdown__option" data-val="audit">Аудит и бух. учет</div>
+                                <div class="nx-dropdown__option" data-val="accounting">Аудит и бух. учет</div>
+                                <div class="nx-dropdown__option" data-val="automation">Автоматизация бизнеса</div>
+                                <div class="nx-dropdown__option" data-val="consulting">Бизнес-консалтинг</div>
+                                <div class="nx-dropdown__option" data-val="secretariat">Услуги секретариата</div>
+                                <div class="nx-dropdown__option" data-val="restore">Восстановление учета</div>
+                                <div class="nx-dropdown__option" data-val="management">Управленческий учет</div>
+                            </div>
+                        </div>
+                        <div class="cta-crystal__field">
+                            <textarea placeholder=" " id="m-f-msg" rows="3"></textarea>
+                            <label for="m-f-msg">Суть вашего запроса</label>
+                        </div>
+                        <button type="submit" class="cta-crystal__btn">
+                            <span>Отправить заявку</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Map Modal
     const mapTrigger = document.getElementById('openFooterMap');
-    const modal = document.getElementById('footerMapModal');
-    const closeBtn = document.getElementById('closeFooterMapBtn');
-    const closeBg = document.getElementById('closeFooterMapBg');
+    const mapModal = document.getElementById('footerMapModal');
+    const closeMapBtn = document.getElementById('closeFooterMapBtn');
+    const closeMapBg = document.getElementById('closeFooterMapBg');
 
-    if (mapTrigger && modal) {
-        mapTrigger.addEventListener('click', () => modal.classList.add('is-active'));
-        [closeBtn, closeBg].forEach(el => {
-            el.addEventListener('click', () => modal.classList.remove('is-active'));
+    if (mapTrigger && mapModal) {
+        mapTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            mapModal.classList.add('is-active');
+        });
+        [closeMapBtn, closeMapBg].forEach(el => {
+            el.addEventListener('click', () => mapModal.classList.remove('is-active'));
         });
     }
-});
 
-// Intersection Observer for fade-in animations
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+    // Modal Dropdown Logic
+    const drp = document.getElementById('modalDropdown');
+    if (drp) {
+        const trigger = drp.querySelector('.nx-dropdown__trigger');
+        const options = drp.querySelectorAll('.nx-dropdown__option');
+
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            drp.classList.toggle('is-open');
+        });
+
+        options.forEach(opt => {
+            opt.addEventListener('click', function(e) {
+                e.stopPropagation();
+                trigger.value = this.innerText;
+                drp.classList.remove('is-open');
+                trigger.classList.add('has-value');
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!drp.contains(e.target)) {
+                drp.classList.remove('is-open');
+            }
+        });
+    }
+
+    // Request Modal Global Controller
+    const requestModal = document.getElementById('requestModal');
+    const closeRequestBtn = document.getElementById('closeRequestBtn');
+    const closeRequestBg = document.getElementById('closeRequestBg');
+
+    window.openRequestModal = function(serviceSlug = '') {
+        if (requestModal) {
+            const trigger = requestModal.querySelector('.nx-dropdown__trigger');
+            if (serviceSlug && trigger) {
+                const opt = requestModal.querySelector('.nx-dropdown__option[data-val="' + serviceSlug + '"]');
+                if (opt) {
+                    trigger.value = opt.innerText;
+                    trigger.classList.add('has-value');
+                }
+            }
+            requestModal.classList.add('is-active');
         }
-    });
-}, { rootMargin: '0px 0px -40px 0px', threshold: 0.1 });
+    };
 
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    [closeRequestBtn, closeRequestBg].forEach(el => {
+        if (el) el.addEventListener('click', () => requestModal.classList.remove('is-active'));
+    });
+
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+});
 </script>
 
 <?php wp_footer(); ?>

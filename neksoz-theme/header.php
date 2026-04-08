@@ -1678,7 +1678,7 @@ rvice-card__link:hover {
         </a>
         <nav class="header__nav">
             <a href="<?php echo home_url('/'); ?>">Главная</a>
-            <a href="<?php echo home_url('/services'); ?>">Услуги</a>
+            <a href="<?php echo home_url('/#services'); ?>">Услуги</a>
             <a href="<?php echo home_url('/about'); ?>">О компании</a>
             <a href="<?php echo home_url('/news'); ?>">Новости</a>
             <a href="<?php echo home_url('/vacancies'); ?>">Вакансии</a>

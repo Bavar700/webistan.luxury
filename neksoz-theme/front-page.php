@@ -88,7 +88,7 @@
                 </div>
                 <h3 class="service-card__title">Аудит финансовой деятельности</h3>
                 <p class="service-card__text">Вы получаете независимую проверку отчетности, которая подтверждает прозрачность бизнеса и выявляет скрытые финансовые риски.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-audit'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 2. Восстановление финансового учета -->
@@ -98,7 +98,7 @@
                 </div>
                 <h3 class="service-card__title">Восстановление финансового учета</h3>
                 <p class="service-card__text">Мы приведем вашу запущенную документацию в полный порядок, устранив ошибки и защитив вас от претензий госорганов.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-restore'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 3. Юридические консультации -->
@@ -108,7 +108,7 @@
                 </div>
                 <h3 class="service-card__title">Юридические консультации</h3>
                 <p class="service-card__text">Вы обеспечиваете правовую безопасность своей компании и надежную защиту интересов в любых договорах и спорах.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-legal'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 4. Ведение финансового и кадрового учета -->
@@ -118,7 +118,7 @@
                 </div>
                 <h3 class="service-card__title">Ведение финансового и кадрового учета</h3>
                 <p class="service-card__text">Мы берем на себя всю рутину по бухгалтерии и кадрам, гарантируя вам отсутствие штрафов и стабильную работу штата.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-accounting'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 5. Услуги секретариата -->
@@ -128,7 +128,7 @@
                 </div>
                 <h3 class="service-card__title">Услуги секретариата</h3>
                 <p class="service-card__text">Вы делегируете администрирование документации и звонков профессионалам, освобождая свое время для решения стратегических задач.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-secretariat'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 6. Бизнес-консультации -->
@@ -138,7 +138,7 @@
                 </div>
                 <h3 class="service-card__title">Бизнес-консультации</h3>
                 <p class="service-card__text">Вы получаете экспертную поддержку в поиске новых точек роста и разработке эффективной модели развития вашего предприятия.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-consulting'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 7. Налоговые консультации -->
@@ -148,7 +148,7 @@
                 </div>
                 <h3 class="service-card__title">Налоговые консультации</h3>
                 <p class="service-card__text">Мы помогаем вам законно оптимизировать налоговую нагрузку и минимизировать риски перед визитами контролирующих органов.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-tax'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 8. Управленческий учет -->
@@ -158,7 +158,7 @@
                 </div>
                 <h3 class="service-card__title">Управленческий учет</h3>
                 <p class="service-card__text">Вы получаете полную финансовую прозрачность и точные данные для принятия решений, которые реально увеличивают вашу чистую прибыль.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-management'); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 9. Автоматизация бизнес-процессов -->
@@ -168,7 +168,7 @@
                 </div>
                 <h3 class="service-card__title">Автоматизация бизнес-процессов</h3>
                 <p class="service-card__text">Вы освобождаете команду от рутины и исключаете ошибки человеческого фактора, переводя управление в быструю и точную цифровую среду.</p>
-                <a href="#" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo home_url('/service-automation'); ?>" class="service-card__link">Подробнее →</a>
             </div>
         </div>
     </div>
@@ -293,7 +293,8 @@
                         transform: translateY(-10px);
                         transition: all 0.3s var(--ease);
                         z-index: 1000;
-                        overflow: hidden;
+                        max-height: 250px;
+                        overflow-y: auto;
                         padding: 10px 0;
                         margin-top: 5px;
                     }

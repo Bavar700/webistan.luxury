@@ -58,7 +58,7 @@
             font-size: 16px;
             line-height: 1.65;
             color: var(--nk-gray-800);
-            background: var(--nk-white);
+            background: var(--nk-gray-50); /* Global Silver Background */
             overflow-x: hidden;
         }
         img { max-width: 100%; height: auto; display: block; }
@@ -522,6 +522,7 @@
             background: var(--nk-grad-brand);
             color: var(--nk-white);
             box-shadow: 0 15px 35px rgba(227,6,19,0.25);
+            animation: pulse-primary 3s infinite;
         }
 
         .btn--primary:hover, .btn--blue:hover {
@@ -534,13 +535,22 @@
             color: var(--nk-white);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
+            animation: pulse-light 3s infinite;
+            animation-delay: 1.5s;
         }
 
         .btn--outline-light:hover {
             background: var(--nk-white);
             color: var(--nk-blue);
             border-color: var(--nk-white);
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.2);
+        }
+
+        @keyframes pulse-light {
+            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+            70% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
         }
 
         .btn--ghost {
@@ -1815,23 +1825,34 @@
 
 
         .cta-crystal__btn {
-            width: 100%;
-            padding: 22px !important;
             background: var(--nk-grad-brand) !important;
-            color: #FFFFFF !important;
-            border-radius: 16px !important;
-            font-weight: 800 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.15em !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 12px !important;
-            box-shadow: 0 20px 40px rgba(227,6,19,0.2) !important;
-            margin-top: 20px !important;
+            color: var(--nk-white) !important;
+            width: 100%;
+            padding: 16px 36px !important;
             border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             cursor: pointer;
-            transition: all 0.3s var(--ease);
+            box-shadow: 0 15px 35px rgba(17, 102, 255, 0.25);
+            animation: pulse-primary 3s infinite;
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+            background-size: 200% auto;
+        }
+
+        .cta-crystal__btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(17, 102, 255, 0.35);
+            background-position: right center;
         }
 
         .cta-crystal__btn svg {
@@ -2145,6 +2166,7 @@
             .footer-platinum__bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
 
+
         /* ── Modern Map Modal (Premium Experience) ── */
         .map-modal {
             position: fixed;
@@ -2290,4 +2312,272 @@
         @keyframes marker-shadow {
             0%, 100% { transform: scale(1); opacity: 0.4; }
             50% { transform: scale(1.5); opacity: 0.2; }
+        }
+
+        /* ============================================================
+           MODAL SYSTEM (General)
+           ============================================================ */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .modal.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 31, 63, 0.4);
+            backdrop-filter: blur(12px);
+        }
+
+        /* ── Global Dropdown Component ── */
+        .nx-dropdown { position: relative; }
+        .nx-dropdown__trigger { cursor: pointer !important; }
+        .nx-dropdown__panel {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(235, 238, 243, 0.98); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 13, 51, 0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s var(--ease);
+            z-index: 1000;
+            max-height: 250px; /* Limit height */
+            overflow-y: auto; /* Enable scroll */
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+
+        .nx-dropdown.is-open .nx-dropdown__panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nx-dropdown__option {
+            padding: 14px 24px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: var(--font-display);
+            color: var(--nk-gray-900);
+            transition: all 0.2s ease;
+        }
+
+        .nx-dropdown__option:hover {
+            background: rgba(0, 68, 204, 0.08); 
+            color: var(--nk-blue);
+            padding-left: 30px;
+        }
+
+        /* ── Modal Grid Restoration ── */
+        .modal__container {
+            position: relative;
+            background: var(--nk-white);
+            width: 95%;
+            max-width: 1000px;
+            max-height: 95vh;
+            border-radius: 32px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+            overflow: hidden;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* 2-Column Modal Layout */
+        .modal .cta-crystal__grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 40px;
+            padding: 50px 60px;
+        }
+
+        .modal .cta-crystal__form-wrapper {
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+        }
+
+        .modal .cta-crystal__field {
+            margin-bottom: 12px;
+        }
+
+        .modal .cta-crystal__field input,
+        .modal .cta-crystal__field textarea {
+            padding: 12px 18px;
+            font-size: 14px;
+        }
+
+        .modal .cta-crystal__content {
+            padding: 0 !important;
+            text-align: left;
+        }
+        
+        .editorial-sidebar {
+            flex: 0 0 350px;
+        }
+
+        .editorial-sidebar .simple-card {
+            background: var(--nk-gray-900) !important;
+            color: #FFFFFF !important;
+            border-radius: 24px !important;
+            padding: 40px !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25) !important;
+            position: sticky;
+            top: 120px;
+            transition: all 0.4s var(--ease);
+        }
+
+        .editorial-sidebar .simple-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4) !important;
+            border-color: rgba(227,6,19,0.2) !important;
+        }
+
+        .editorial-sidebar .simple-card h4 {
+            color: #FFFFFF !important;
+            font-family: var(--font-display);
+            font-size: 1.5rem !important;
+            font-weight: 800 !important;
+            margin-bottom: 15px !important;
+            letter-spacing: -0.01em;
+        }
+
+        .editorial-sidebar .simple-card p {
+            color: rgba(255,255,255,0.7) !important;
+            font-size: 0.95rem !important;
+            line-height: 1.6;
+            margin-bottom: 25px !important;
+        }
+
+        .editorial-sidebar .simple-card .cta-crystal__btn {
+            width: 100% !important;
+            font-size: 11px !important;
+            letter-spacing: 0.05em !important;
+            padding: 14px 20px !important;
+            white-space: nowrap !important;
+        }
+
+        .editorial-sidebar .simple-card .cta-crystal__secure {
+            margin-top: 20px;
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .modal .cta-crystal__title {
+            font-size: 2.1rem;
+            margin-bottom: 20px;
+        }
+
+        .modal .cta-crystal__text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--nk-gray-600);
+            margin-bottom: 20px;
+        }
+
+        /* Inherit global cta-crystal__btn styles */
+        .modal .cta-crystal__btn {
+            margin-top: 10px !important;
+        }
+
+        .modal.is-active .modal__container {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: transparent;
+            border: none;
+            color: var(--nk-gray-400);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal__close:hover {
+            color: var(--nk-red);
+            transform: rotate(90deg);
+        }
+
+        .modal__content {
+            padding: 48px;
+        }
+
+        .modal__header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .modal__title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--nk-blue);
+            margin-top: 12px;
+        }
+
+        .modal__subtitle {
+            font-size: 0.95rem;
+            color: var(--nk-gray-500);
+            margin-top: 8px;
+        }
+
+        /* ── Form Elements ── */
+        .modal__form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--nk-gray-50);
+            border: 1.5px solid var(--nk-gray-100);
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--nk-red);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.1);
+        }
+
+        .btn--full {
+            width: 100%;
         }
