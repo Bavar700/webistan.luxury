@@ -69,8 +69,8 @@
         <div class="footer-platinum__bottom">
             <p>&copy; <?php echo date('Y'); ?> NEKSOZ. Все права защищены.</p>
             <div class="footer-platinum__legal">
-                <a href="#">Конфиденциальность</a>
-                <a href="#">Условия</a>
+                <a href="<?php echo home_url('/privacy-policy'); ?>">Конфиденциальность</a>
+                <a href="<?php echo home_url('/privacy-policy'); ?>">Условия</a>
             </div>
         </div>
     </div>
@@ -149,6 +149,9 @@
                             <span>Отправить заявку</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
+                        <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 15px; line-height: 1.4; opacity: 0.8; width: 100%;">
+                            Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
+                        </p>
                     </form>
                 </div>
             </div>
