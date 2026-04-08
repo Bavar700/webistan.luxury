@@ -31,7 +31,7 @@ get_header(); ?>
     </section>
 
     <!-- Content Section -->
-    <section class="legal-content" style="padding-bottom: 120px;">
+    <section class="legal-content" style="padding-top: 100px; padding-bottom: 120px;">
         <div class="nx-container">
             <div class="service-card" style="padding: 60px; max-width: 960px; margin: 0 auto; min-height: auto; cursor: default; transform: none; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.05);">
                 
