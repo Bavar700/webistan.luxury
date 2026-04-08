@@ -35,7 +35,11 @@ get_header();
     </section>
 
     <!-- ═══════════ CONTACT GRID & FORM ═══════════ -->
-    <section class="section" style="padding-bottom: 120px;">
+    <section class="section cta-crystal" style="padding-top: 80px; padding-bottom: 120px;">
+        <!-- Animated Mesh Glows -->
+        <div class="cta-crystal__glow cta-crystal__glow--blue"></div>
+        <div class="cta-crystal__glow cta-crystal__glow--red"></div>
+
         <div class="container fade-up">
             
             <!-- Section Header Above Columns -->
@@ -47,39 +51,39 @@ get_header();
 
             <div class="cta-crystal__grid">
                 
-                <!-- Left Side: Contact Information (Cinematic Dark Mode + Card) -->
-                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 50px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; flex-direction: column; gap: 40px;">
+                <!-- Left Side: Contact Information (Light Crystal Card) -->
+                <div style="background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 13, 51, 0.05); border-radius: 32px; padding: 50px; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 2;">
                     
                     <!-- 1. Основная информация -->
                     <div>
-                        <h3 class="cta-crystal__title" style="font-size: 28px; margin-bottom: 24px; text-transform: none; color: white;">Основная информация</h3>
+                        <h3 class="cta-crystal__title" style="font-size: 28px; margin-bottom: 24px; text-transform: none; color: var(--nk-gray-900);">Основная информация</h3>
                         <ul style="list-style: none; padding: 0; display: grid; gap: 24px;">
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: white; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="color: var(--nk-blue); background: rgba(0, 68, 204, 0.05); padding: 12px; border-radius: 12px;">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                 </div>
                                 <div>
-                                    <strong style="display: block; color: white; font-size: 16px; margin-bottom: 4px; font-weight: 500;">Адрес:</strong>
-                                    <span style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 15px;">734000, Республика Таджикистан,<br>г. Душанбе, проспект Рудаки 55, 3-этаж.</span>
-                                    <span style="display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px;">(Ориентир: Центр города, удобная транспортная доступность)</span>
+                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 4px; font-weight: 600;">Адрес:</strong>
+                                    <span style="color: var(--nk-gray-600); line-height: 1.6; font-size: 15px;">734000, Республика Таджикистан,<br>г. Душанбе, проспект Рудаки 55, 3-этаж.</span>
+                                    <span style="display: block; font-size: 13px; color: var(--nk-gray-500); margin-top: 4px;">(Ориентир: Центр города, удобная транспортная доступность)</span>
                                 </div>
                             </li>
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: white; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="color: var(--nk-blue); background: rgba(0, 68, 204, 0.05); padding: 12px; border-radius: 12px;">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                 </div>
                                 <div>
-                                    <strong style="display: block; color: white; font-size: 16px; margin-bottom: 4px; font-weight: 500;">Телефон:</strong>
-                                    <a href="tel:+992985641010" style="color: white; text-decoration: none; font-size: 18px; font-weight: 500; transition: opacity 0.3s ease;">+992 985 64-10-10</a>
+                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 4px; font-weight: 600;">Телефон:</strong>
+                                    <a href="tel:+992985641010" style="color: var(--nk-gray-900); text-decoration: none; font-size: 18px; font-weight: 500; transition: color 0.3s ease;">+992 985 64-10-10</a>
                                 </div>
                             </li>
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: white; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="color: var(--nk-blue); background: rgba(0, 68, 204, 0.05); padding: 12px; border-radius: 12px;">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                                 </div>
                                 <div>
-                                    <strong style="display: block; color: white; font-size: 16px; margin-bottom: 4px; font-weight: 500;">E-mail:</strong>
-                                    <a href="mailto:info@neksoz.tj" style="color: rgba(255,255,255,0.9); text-decoration: none; font-size: 16px; font-weight: 400; border-bottom: 1px dotted rgba(255,255,255,0.4);">info@neksoz.tj</a>
+                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 4px; font-weight: 600;">E-mail:</strong>
+                                    <a href="mailto:info@neksoz.tj" style="color: var(--nk-blue); text-decoration: none; font-size: 16px; font-weight: 500;">info@neksoz.tj</a>
                                 </div>
                             </li>
                         </ul>
@@ -87,31 +91,31 @@ get_header();
 
                     <!-- 2. Режим работы -->
                     <div>
-                        <h3 class="cta-crystal__title" style="font-size: 24px; margin-bottom: 16px; text-transform: none; color: white;">Режим работы</h3>
-                        <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px; font-size: 15px;">Мы ценим ваше время и придерживаемся строгого графика:</p>
-                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; backdrop-filter: blur(10px);">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2);">
-                                <span style="color: rgba(255,255,255,0.8);">Понедельник — Пятница</span>
-                                <strong style="color: white;">09:00 — 18:00</strong>
+                        <h3 class="cta-crystal__title" style="font-size: 24px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">Режим работы</h3>
+                        <p style="color: var(--nk-gray-600); line-height: 1.6; margin-bottom: 20px; font-size: 15px;">Мы ценим ваше время и придерживаемся строгого графика:</p>
+                        <div style="background: rgba(0, 13, 51, 0.02); border: 1px solid rgba(0, 13, 51, 0.05); border-radius: 12px; padding: 24px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(0, 13, 51, 0.1);">
+                                <span style="color: var(--nk-gray-700);">Понедельник — Пятница</span>
+                                <strong style="color: var(--nk-gray-900);">09:00 — 18:00</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between;">
-                                <span style="color: rgba(255,255,255,0.8);">Суббота — Воскресенье</span>
-                                <span style="color: #F87171; font-weight: 500;">Выходные дни</span>
+                                <span style="color: var(--nk-gray-700);">Суббота — Воскресенье</span>
+                                <span style="color: var(--nk-red); font-weight: 500;">Выходные дни</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- 4. Социальные сети -->
                     <div>
-                        <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: white;">Мы в социальных сетях</h3>
+                        <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">Мы в социальных сетях</h3>
                         <div style="display: flex; gap: 16px;">
-                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                             </a>
-                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                             </a>
-                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                             </a>
                         </div>
@@ -120,9 +124,9 @@ get_header();
                 </div>
 
                 <!-- Right Side: Glassmorphism Form (Identical Twin Card) -->
-                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 50px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: flex-start;">
-                    <h3 style="font-size: 28px; color: white; font-family: var(--font-display); margin-bottom: 12px; margin-top: 0;">Обсудим ваш бизнес?</h3>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 40px; font-size: 15px; line-height: 1.6;">Заполните форму ниже, и мы подготовим для вас индивидуальное предложение. Наши старшие эксперты свяжутся с вами в приоритетном порядке.</p>
+                <div style="background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 13, 51, 0.05); border-radius: 32px; padding: 50px; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; justify-content: flex-start; position: relative; z-index: 2;">
+                    <h3 style="font-size: 28px; color: var(--nk-gray-900); font-family: var(--font-display); font-weight: 800; margin-bottom: 12px; margin-top: 0; letter-spacing: -0.02em;">Обсудим ваш бизнес?</h3>
+                    <p style="color: var(--nk-gray-600); margin-bottom: 40px; font-size: 15px; line-height: 1.6;">Заполните форму ниже, и мы подготовим для вас индивидуальное предложение. Наши старшие эксперты свяжутся с вами в приоритетном порядке.</p>
 
                     <form action="#" class="cta-crystal__form">
                         <div class="cta-crystal__field">
