@@ -27,41 +27,41 @@
 
 </section>
 
-<!-- ═══════════ STATS RIBBON (CLASSIC CORPORATE) ═══════════ -->
-<section class="stats-ribbon">
+<!-- ═══════════ STATS RIBBON (RESTYLED TO MATCH SERVICES) ═══════════ -->
+<section class="section section--gray stats-ribbon-block">
     <div class="container">
-        <div class="stats-ribbon__inner">
+        <div class="services-grid">
             <!-- 1 -->
-            <div class="stats-card">
-                <div class="stats-card__icon-box">
+            <div class="service-card fade-up">
+                <div class="service-card__icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
-                <div class="stats-card__value">500<em>+</em></div>
-                <div class="stats-card__label"><span>Довольных клиентов</span></div>
+                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">500<em>+</em></div>
+                <p class="service-card__text">Довольных клиентов</p>
             </div>
             <!-- 2 -->
-            <div class="stats-card">
-                <div class="stats-card__icon-box">
+            <div class="service-card service-card--alt fade-up fade-up-delay-1">
+                <div class="service-card__icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
-                <div class="stats-card__value">18<em>+</em></div>
-                <div class="stats-card__label"><span>Лет&nbsp;на<br>рынке</span></div>
+                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">18<em>+</em></div>
+                <p class="service-card__text">Лет на рынке</p>
             </div>
             <!-- 3 -->
-            <div class="stats-card">
-                <div class="stats-card__icon-box">
+            <div class="service-card fade-up fade-up-delay-2">
+                <div class="service-card__icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
                 </div>
-                <div class="stats-card__value">50<em>+</em></div>
-                <div class="stats-card__label"><span>Квалифицированных экспертов</span></div>
+                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">50<em>+</em></div>
+                <p class="service-card__text">Квалифицированных экспертов</p>
             </div>
             <!-- 4 -->
-            <div class="stats-card">
-                <div class="stats-card__icon-box">
+            <div class="service-card service-card--alt fade-up fade-up-delay-3">
+                <div class="service-card__icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
-                <div class="stats-card__value">1200<em>+</em></div>
-                <div class="stats-card__label"><span>Успешных проектов</span></div>
+                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">1200<em>+</em></div>
+                <p class="service-card__text">Успешных проектов</p>
             </div>
         </div>
     </div>
@@ -243,19 +243,21 @@
                         <input type="tel" placeholder=" " required id="f-phone">
                         <label for="f-phone">Телефон (+992)</label>
                     </div>
-                    <div class="cta-crystal__field">
-                        <select required id="f-service">
-                            <option value="" disabled selected>Выбрать направление</option>
-                            <option>Юридическое сопровождение</option>
-                            <option>Налоговое консультирование</option>
-                            <option>Аудит и бух. учет</option>
-                            <option>Автоматизация бизнеса</option>
-                            <option>HR-консалтинг</option>
-                            <option>Инвестиционный консалтинг</option>
-                            <option>Маркетинговые стратегии</option>
-                            <option>Бизнес-планирование</option>
-                            <option>Оптимизация процессов</option>
-                        </select>
+                    <div class="cta-crystal__field nx-dropdown">
+                        <input type="text" placeholder=" " required id="f-service-input" class="nx-dropdown__trigger" readonly>
+                        <label for="f-service-input">Выбрать направление <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; display: inline-block; vertical-align: middle;"><path d="m6 9 6 6 6-6"/></svg></label>
+                        
+                        <div class="nx-dropdown__panel">
+                            <div class="nx-dropdown__option">Юридическое сопровождение</div>
+                            <div class="nx-dropdown__option">Налоговое консультирование</div>
+                            <div class="nx-dropdown__option">Аудит и бух. учет</div>
+                            <div class="nx-dropdown__option">Автоматизация бизнеса</div>
+                            <div class="nx-dropdown__option">HR-консалтинг</div>
+                            <div class="nx-dropdown__option">Инвестиционный консалтинг</div>
+                            <div class="nx-dropdown__option">Маркетинговые стратегии</div>
+                            <div class="nx-dropdown__option">Бизнес-планирование</div>
+                            <div class="nx-dropdown__option">Оптимизация процессов</div>
+                        </div>
                     </div>
                     <div class="cta-crystal__field">
                         <textarea placeholder=" " id="f-msg" rows="3"></textarea>
@@ -266,7 +268,82 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                     <p class="cta-crystal__secure">🛡️ Защищённое соединение (SSL 256-bit)</p>
+                    <div id="nk-form-status" style="margin-top: 15px; display: none;"></div>
                 </form>
+
+                <style>
+                    .nx-dropdown { position: relative; }
+                    .nx-dropdown__trigger { cursor: pointer !important; }
+                    .nx-dropdown__panel {
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                        background: rgba(235, 238, 243, 0.98); /* Чуть темнее */
+                        backdrop-filter: blur(25px);
+                        -webkit-backdrop-filter: blur(25px);
+                        border: none; /* Убрал бордюр */
+                        border-radius: 20px; /* Закруглил углы */
+                        box-shadow: 0 30px 60px rgba(0, 13, 51, 0.12);
+                        opacity: 0;
+                        visibility: hidden;
+                        transform: translateY(-10px);
+                        transition: all 0.3s var(--ease);
+                        z-index: 1000;
+                        overflow: hidden;
+                        padding: 10px 0;
+                        margin-top: 5px;
+                    }
+                    .nx-dropdown.is-open .nx-dropdown__panel {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateY(0);
+                    }
+                    .nx-dropdown__option {
+                        padding: 14px 24px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-family: var(--font-display);
+                        color: var(--nk-gray-900);
+                        transition: all 0.2s ease;
+                    }
+                    .nx-dropdown__option:hover {
+                        background: rgba(0, 68, 204, 0.08); /* Светло-синий акцент */
+                        color: var(--nk-blue);
+                        padding-left: 30px;
+                    }
+                </style>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const drp = document.querySelector('.nx-dropdown');
+                        const trigger = drp.querySelector('.nx-dropdown__trigger');
+                        const options = drp.querySelectorAll('.nx-dropdown__option');
+
+                        trigger.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            drp.classList.toggle('is-open');
+                        });
+
+                        options.forEach(opt => {
+                            opt.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                trigger.value = this.innerText;
+                                drp.classList.remove('is-open');
+                                // Trigger CSS pseudo-classes
+                                trigger.classList.add('has-value');
+                                trigger.focus();
+                                trigger.blur();
+                            });
+                        });
+
+                        document.addEventListener('click', function(e) {
+                            if (!drp.contains(e.target)) {
+                                drp.classList.remove('is-open');
+                            }
+                        });
+                    });
+                </script>
             </div>
 
         </div>

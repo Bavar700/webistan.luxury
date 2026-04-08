@@ -417,41 +417,35 @@
 
         .btn-animated {
             animation: pulse-primary 3s infinite;
+            transition: all 0.4s var(--ease) !important;
+        }
+        .btn-animated:hover {
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 15px 40px rgba(227,6,19,0.3) !important;
         }
         @keyframes pulse-primary {
             0% { box-shadow: 0 0 0 0 rgba(227,6,19,0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(227,6,19,0); }
+            70% { box-shadow: 0 0 0 20px rgba(227,6,19,0); }
             100% { box-shadow: 0 0 0 0 rgba(227,6,19,0); }
         }
 
         .btn-animated-light {
             animation: pulse-light 3s infinite;
             animation-delay: 1.5s;
+            transition: all 0.4s var(--ease) !important;
+        }
+        .btn-animated-light:hover {
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 15px 40px rgba(255,255,255,0.2) !important;
+            background: #FFFFFF !important;
+            color: var(--nk-blue) !important;
         }
         @keyframes pulse-light {
             0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
-            70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+            70% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
             100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
         }
 
-        /* Stats Ribbon — High-Visibility Sleek Ribbon (100px) */
-        .stats-ribbon {
-            position: relative;
-            z-index: 20;
-            padding: 80px 0;
-            background: transparent;
-        }
-        
-        .stats-ribbon__inner {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            height: 100px;
-            background: #FFFFFF;
-            border-radius: 50px;
-            box-shadow: 0 40px 100px rgba(0, 13, 51, 0.08);
-            border: 1px solid rgba(0, 68, 204, 0.04);
-            overflow: hidden;
-            position: relative;
         }
 
         /* Subtlest background tint to define the ribbon */
@@ -1384,134 +1378,7 @@
 
 <?php wp_head(); ?>
     <style>
-        /* ══════════════ STATS RIBBON — STATIC CARDS ══════════════ */
-        .stats-ribbon {
-            position: relative !important;
-            padding: 80px 0 100px 0 !important;
-            background: linear-gradient(135deg, #F4F6F9 0%, #DFE4EB 100%) !important; /* Общий серебристый фон блока */
-            border-bottom: none !important;
-        }
 
-        .stats-ribbon__inner {
-            display: grid !important;
-            grid-template-columns: repeat(4, 1fr) !important;
-            gap: 0 !important; /* Слитная сетка как в направлениях */
-            max-width: 1400px !important;
-            margin: 0 auto !important;
-            background: #FFFFFF !important; /* Единый белый блок */
-            border: 1px solid rgba(0, 13, 51, 0.05) !important; /* Обводка всего блока */
-        }
-
-        .stats-card {
-            background: transparent !important;
-            border-radius: 0 !important;
-            padding: 60px 40px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important; /* Выравнивание по левому краю как в направлениях */
-            text-align: left !important;
-            box-shadow: none !important;
-            position: relative !important;
-            border-top: none !important;
-            border-bottom: none !important;
-            border-left: none !important;
-            border-right: 1px solid rgba(0, 13, 51, 0.05) !important; /* Внутренние разделители */
-        }
-
-        .stats-card:last-child {
-            border-right: none !important;
-        }
-
-        /* ── ЖЕСТКАЯ БЛОКИРОВКА АНИМАЦИИ ОТ СТАРЫХ СТИЛЕЙ ── */
-        .stats-card:hover {
-            transform: none !important; /* Никакого дребезжания */
-            z-index: 1 !important;
-            background: transparent !important; /* Обнуление эффекта наведения */
-            box-shadow: none !important; /* Обнуление объемной тени */
-        }
-
-        /* ── Иконка ── */
-        .stats-card__icon-box {
-            width: 64px !important;
-            height: 64px !important;
-            border-radius: 50% !important;
-            background: rgba(227, 6, 19, 0.08) !important;
-            color: var(--nk-red) !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            font-size: 26px !important;
-            margin-bottom: 25px !important;
-        }
-
-        /* ── Интересные цифры ── */
-        .stats-card__value {
-            font-family: var(--font-display) !important;
-            font-size: 4rem !important;
-            font-weight: 900 !important;
-            line-height: 1 !important;
-            margin-bottom: 20px !important;
-            /* Градиент для объемности цифр */
-            background: linear-gradient(135deg, var(--nk-blue) 0%, #30588e 100%) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            display: inline-flex !important;
-            align-items: flex-start !important;
-        }
-
-        /* Тот самый плюсик с особым дизайном */
-        .stats-card__value em {
-            font-style: normal !important;
-            color: var(--nk-red) !important;
-            -webkit-text-fill-color: var(--nk-red) !important;
-            font-weight: 300 !important; /* Контраст: толстая цифра, тонкий плюс */
-            font-size: 3rem !important;
-            margin-left: 4px !important;
-            margin-top: -5px !important;
-        }
-
-        /* ── Интересный текст ── */
-        .stats-card__label {
-            font-family: var(--font-display) !important;
-            font-size: 14px !important;
-            font-weight: 750 !important;
-            color: var(--text-light) !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.1em !important;
-            line-height: 1.4 !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important; /* Левое выравнивание */
-            gap: 15px !important;
-        }
-
-        /* Декоративная структурная линия */
-        .stats-card__label::before {
-            content: '' !important;
-            width: 30px !important;
-            height: 3px !important;
-            background: var(--nk-blue) !important;
-            border-radius: 2px !important;
-        }
-
-        
-        /* 4. TOTAL ELITE SILVER — Unified Seamless Background */
-        .services {
-            background: #E8EDF5 !important; 
-            padding: 0 0 140px 0 !important; 
-            position: relative !important;
-            border-top: none !important;
-        }
-
-        /* [STEALTH TRANSITION MASK] Fades from Platinum to Navy #000D33 */
-        .services::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 180px;
-            background: linear-gradient(to bottom, transparent, #000D33) !important;
-            z-index: 5 !important;
-            pointer-events: none !important;
-        }
 
         .services__grid {
             display: grid !important;
