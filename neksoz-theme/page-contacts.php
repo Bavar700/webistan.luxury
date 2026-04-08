@@ -48,11 +48,11 @@ get_header();
             <div class="cta-crystal__grid">
                 
                 <!-- Left Side: Contact Information (Cinematic Dark Mode + Card) -->
-                <div class="cta-crystal__content" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 40px;">
+                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 50px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; flex-direction: column; gap: 40px;">
                     
                     <!-- 1. Основная информация -->
                     <div>
-                        <h3 class="cta-crystal__title" style="font-size: 28px; margin-bottom: 24px; text-transform: none;">Основная информация</h3>
+                        <h3 class="cta-crystal__title" style="font-size: 28px; margin-bottom: 24px; text-transform: none; color: white;">Основная информация</h3>
                         <ul style="list-style: none; padding: 0; display: grid; gap: 24px;">
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
                                 <div style="color: white; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; backdrop-filter: blur(10px);">
@@ -70,7 +70,7 @@ get_header();
                                 </div>
                                 <div>
                                     <strong style="display: block; color: white; font-size: 16px; margin-bottom: 4px; font-weight: 500;">Телефон:</strong>
-                                    <a href="tel:+992985641010" style="color: white; text-decoration: none; font-size: 18px; font-weight: 500; transition: color 0.3s ease;">+992 985 64-10-10</a>
+                                    <a href="tel:+992985641010" style="color: white; text-decoration: none; font-size: 18px; font-weight: 500; transition: opacity 0.3s ease;">+992 985 64-10-10</a>
                                 </div>
                             </li>
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
@@ -87,7 +87,7 @@ get_header();
 
                     <!-- 2. Режим работы -->
                     <div>
-                        <h3 class="cta-crystal__title" style="font-size: 24px; margin-bottom: 16px; text-transform: none;">Режим работы</h3>
+                        <h3 class="cta-crystal__title" style="font-size: 24px; margin-bottom: 16px; text-transform: none; color: white;">Режим работы</h3>
                         <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px; font-size: 15px;">Мы ценим ваше время и придерживаемся строгого графика:</p>
                         <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; backdrop-filter: blur(10px);">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2);">
@@ -103,7 +103,7 @@ get_header();
 
                     <!-- 4. Социальные сети -->
                     <div>
-                        <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none;">Мы в социальных сетях</h3>
+                        <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: white;">Мы в социальных сетях</h3>
                         <div style="display: flex; gap: 16px;">
                             <a href="#" class="footer-platinum__social-btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.1);">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -119,10 +119,10 @@ get_header();
 
                 </div>
 
-                <!-- Right Side: Glassmorphism Form -->
-                <div class="cta-crystal__form-wrapper">
-                    <h3 style="font-size: 24px; color: white; font-family: var(--font-display); margin-bottom: 12px;">Обсудим ваш бизнес?</h3>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 32px; font-size: 15px;">Заполните форму ниже, и мы подготовим для вас индивидуальное предложение. Наши старшие эксперты свяжутся с вами в приоритетном порядке.</p>
+                <!-- Right Side: Glassmorphism Form (Identical Twin Card) -->
+                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 50px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: flex-start;">
+                    <h3 style="font-size: 28px; color: white; font-family: var(--font-display); margin-bottom: 12px; margin-top: 0;">Обсудим ваш бизнес?</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 40px; font-size: 15px; line-height: 1.6;">Заполните форму ниже, и мы подготовим для вас индивидуальное предложение. Наши старшие эксперты свяжутся с вами в приоритетном порядке.</p>
 
                     <form action="#" class="cta-crystal__form">
                         <div class="cta-crystal__field">
