@@ -195,6 +195,12 @@ get_header();
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3119.2635489025816!2d68.7844!3d38.5737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38b5d1645e05494d%3A0xc66517a264d1f56!2sRudaki%20Ave%2042%2C%20Dushanbe!5e0!3m2!1sen!2stj!4v1712465000000!5m2!1sen!2stj" 
                 width="100%" height="100%" style="border:0; filter: grayscale(1) invert(0.9) contrast(1.2);" allowfullscreen="" loading="lazy"></iframe>
             
+            <!-- Red Accent Custom Marker Overlay -->
+            <div class="map-modal__marker">
+                <svg class="map-modal__marker-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <div class="map-modal__marker-pulse"></div>
+            </div>
+
             <div style="position: absolute; bottom: 40px; right: 40px; background: white; padding: 20px 30px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0, 13, 51, 0.1); display: flex; align-items: center; gap: 16px;">
                 <div style="width: 48px; height: 48px; background: var(--nk-grad-brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
