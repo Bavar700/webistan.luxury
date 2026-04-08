@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Бизнес консалтинг
+ * Template Name: Услуга: Бизнес-планирование
  */
 get_header();
 ?>
@@ -16,18 +16,18 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <div class="hero__badge">Стратегическое развитие</div>
+                <div class="hero__badge">Инвестиционный консалтинг</div>
                 <h1 class="hero__title">
-                    <span class="text-gradient">Бизнес</span><br>консультации
+                    <span class="text-gradient">Бизнес-планы</span><br>и ТЭО
                 </h1>
                 <p class="hero__desc">
-                    Экспертная поддержка в поиске новых точек роста и разработке эффективной модели развития вашего предприятия.
+                    Подготовка детального финансового документа, доказывающего окупаемость проекта для инвесторов и банков.
                 </p>
             </div>
             
             <div class="hero__actions--right">
                 <a href="#lead-form" class="cta-crystal__btn" style="padding: 18px 50px; font-size: 13px;">
-                    <span>Масштабировать бизнес</span>
+                    <span>Привлечь инвестиции</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </a>
             </div>
@@ -38,9 +38,9 @@ get_header();
     <section class="section">
         <div class="container">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
-                <div class="section__label">Вектор роста</div>
-                <h2 class="section__title">От хаоса к управляемой прибыли</h2>
-                <p class="section__subtitle">Мы помогаем увидеть скрытые возможности и превратить их в конкретные финансовые результаты.</p>
+                <div class="section__label">Инвестиционный фундамент</div>
+                <h2 class="section__title">Ваша идея в цифрах и фактах</h2>
+                <p class="section__subtitle">Мы создаем документы, которые убеждают самых требовательных кредиторов и инвесторов.</p>
             </div>
 
             <div class="services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px;">
@@ -48,16 +48,16 @@ get_header();
                 <!-- CARD 1: В каких случаях вам нужна эта услуга? -->
                 <div class="service-card service-card--alt" style="height: 100%;">
                     <div class="service-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5 5-5-5"/><path d="m17 19-5-5-5 5"/></svg>
                     </div>
-                    <h3 class="service-card__title">Когда нужны <br>консультации?</h3>
+                    <h3 class="service-card__title">Когда нужен <br>бизнес-план?</h3>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Бизнес "замер" и нет путей роста</li>
-                            <li>Внутренние процессы стали хаотичными</li>
-                            <li>Планируется запуск нового направления</li>
-                            <li>Нужен порядок в фин. планировании</li>
-                            <li>Предстоит крупная реорганизация</li>
+                            <li>Привлечение инвестиций или кредита</li>
+                            <li>Оценка идеи перед запуском проекта</li>
+                            <li>Получение льгот или гос. грантов</li>
+                            <li>Защита стратегии перед акционерами</li>
+                            <li>Масштабирование текущего бизнеса</li>
                         </ul>
                     </div>
                 </div>
@@ -65,16 +65,16 @@ get_header();
                 <!-- CARD 2: Что входит в услугу -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
                     </div>
                     <h3 class="service-card__title">Что входит <br>в услугу?</h3>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Разработка системы стратегии управления</li>
-                            <li>Глубокий аудит и оптимизация процессов</li>
-                            <li>Финансовое планирование и бюджет</li>
-                            <li>Консультации по реструктуризации активов</li>
-                            <li>Разработка KPI и систем мотивации</li>
+                            <li>Анализ рынка, конкурентов и аудитории</li>
+                            <li>Разработка детальной финансовой модели</li>
+                            <li>Составление ТЭО по стандартам</li>
+                            <li>Подготовка Pitch Deck для инвесторов</li>
+                            <li>Защита плана перед фин. институтами</li>
                         </ul>
                     </div>
                 </div>
@@ -82,16 +82,16 @@ get_header();
                 <!-- CARD 3: Как мы работаем -->
                 <div class="service-card service-card--alt" style="height: 100%;">
                     <div class="service-card__icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
                     </div>
                     <h3 class="service-card__title">Как мы <br>работаем?</h3>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Диагностика и анализ текущих показателей</li>
-                            <li>Поиск "узких мест" и потерь прибыли</li>
-                            <li>Создание пошагового плана изменений</li>
-                            <li>Внедрение новых инструментов управления</li>
-                            <li>Сопровождение на этапе реализации</li>
+                            <li>Сбор и систематизация вводных данных</li>
+                            <li>Математическое моделирование прибыли</li>
+                            <li>Написание описательной части по стандартам</li>
+                            <li>Корректировка под требования банков</li>
+                            <li>Финальное согласование и печать</li>
                         </ul>
                     </div>
                 </div>
@@ -104,11 +104,11 @@ get_header();
                     <h3 class="service-card__title">Результат для <br>вашего бизнеса</h3>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Понятный вектор развития на 3-5 лет</li>
-                            <li>Оптимизированная структура компании</li>
-                            <li>Повышение операционной эффективности</li>
-                            <li>Рост чистой прибыли и оборотов</li>
-                            <li>Штат, где каждый на своем месте</li>
+                            <li>Документ, повышающий шансы на капитал</li>
+                            <li>Четкое понимание всех рисков и сроков</li>
+                            <li>Готовый план действий по запуску</li>
+                            <li>Профессиональная финансовая модель</li>
+                            <li>Обоснование окупаемости для партнеров</li>
                         </ul>
                     </div>
                 </div>
@@ -121,29 +121,29 @@ get_header();
     <section id="lead-form" class="section section--gray" style="border-top: 1px solid var(--nk-gray-100); padding-top: 40px; padding-bottom: 80px;">
         <div class="container" style="max-width: 800px;">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
-                <div class="section__label">Диагностика бизнеса</div>
-                <h2 class="section__title">Бесплатная консультация</h2>
-                <p class="section__subtitle" style="margin-bottom: 0;">Оставьте заявку на предварительный аудит бизнес-процессов. Мы свяжемся с вами в течение 30 минут.</p>
+                <div class="section__label">Инвест аудит</div>
+                <h2 class="section__title">Бесплатная экспресс-консультация</h2>
+                <p class="section__subtitle" style="margin-bottom: 0;">Оставьте заявку на предварительную оценку вашего проекта. Мы свяжемся с вами в течение 30 минут.</p>
             </div>
 
             <div class="cta-crystal__form-box" style="background: var(--nk-white); padding: 60px; border-radius: 32px; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.08); border: 1px solid var(--nk-gray-50);">
                 <form class="cta-crystal__form" action="#" method="POST" style="display: grid; gap: 24px;">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                         <div class="cta-crystal__field">
-                            <input type="text" placeholder=" " required id="bc-name">
-                            <label for="bc-name">Ваше имя</label>
+                            <input type="text" placeholder=" " required id="pl-name">
+                            <label for="pl-name">Ваше имя</label>
                         </div>
                         <div class="cta-crystal__field">
-                            <input type="tel" placeholder=" " required id="bc-phone">
-                            <label for="bc-phone">Телефон (+992)</label>
+                            <input type="tel" placeholder=" " required id="pl-phone">
+                            <label for="pl-phone">Телефон (+992)</label>
                         </div>
                     </div>
                     <div class="cta-crystal__field">
-                        <input type="text" placeholder=" " id="bc-company">
-                        <label for="bc-company">Название компании (опционально)</label>
+                        <input type="text" placeholder=" " id="pl-company">
+                        <label for="pl-company">Название компании (опционально)</label>
                     </div>
                     <button type="submit" class="cta-crystal__btn" style="width: 100%; justify-content: center; height: 64px; margin-top: 10px;">
-                        <span>Начать диагностику</span>
+                        <span>Получить план</span>
                     </button>
                     <p class="cta-crystal__secure" style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--nk-gray-500); opacity: 0.8; width: 100%;">
                         🛡️ Защищённое соединение (SSL 256-bit)

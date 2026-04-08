@@ -144,8 +144,11 @@ get_header();
                         <label for="sr-company">Название компании (опционально)</label>
                     </div>
                     <button type="submit" class="cta-crystal__btn" style="width: 100%; justify-content: center; height: 64px; margin-top: 10px;">
-                        <span>Оставить заявку</span>
+                        <span>Оценить стоимость</span>
                     </button>
+                    <p class="cta-crystal__secure" style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--nk-gray-500); opacity: 0.8; width: 100%;">
+                        🛡️ Защищённое соединение (SSL 256-bit)
+                    </p>
                 </form>
             </div>
         </div>
