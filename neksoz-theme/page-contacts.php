@@ -49,7 +49,7 @@ get_header();
                 <p class="section__subtitle">Выберите удобный способ связи или оставьте прямой запрос в наш консалтинговый отдел.</p>
             </div>
 
-            <div class="cta-crystal__grid">
+            <div class="cta-crystal__grid" style="align-items: stretch;">
                 
                 <!-- Left Side: Contact Information (Light Crystal Card) -->
                 <div style="background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 13, 51, 0.05); border-radius: 32px; padding: 50px; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 2;">
@@ -59,7 +59,7 @@ get_header();
                         <h3 class="cta-crystal__title" style="font-size: 28px; margin-bottom: 24px; text-transform: none; color: var(--nk-gray-900);">Основная информация</h3>
                         <ul style="list-style: none; padding: 0; display: grid; gap: 24px;">
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: var(--nk-blue); background: rgba(0, 68, 204, 0.05); padding: 12px; border-radius: 12px;">
+                                <div style="color: white; background: var(--nk-grad-brand); padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                 </div>
                                 <div>
@@ -69,7 +69,7 @@ get_header();
                                 </div>
                             </li>
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: var(--nk-blue); background: rgba(0, 68, 204, 0.05); padding: 12px; border-radius: 12px;">
+                                <div style="color: white; background: var(--nk-grad-brand); padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                 </div>
                                 <div>
@@ -78,7 +78,7 @@ get_header();
                                 </div>
                             </li>
                             <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: var(--nk-blue); background: rgba(0, 68, 204, 0.05); padding: 12px; border-radius: 12px;">
+                                <div style="color: white; background: var(--nk-grad-brand); padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                                 </div>
                                 <div>
@@ -109,14 +109,14 @@ get_header();
                     <div>
                         <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">Мы в социальных сетях</h3>
                         <div style="display: flex; gap: 16px;">
-                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                            <a href="https://t.me/neksoz" class="footer-platinum__social-btn" title="Telegram" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                             </a>
-                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            <a href="https://wa.me/992446000000" class="footer-platinum__social-btn" title="WhatsApp" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
                             </a>
-                            <a href="#" class="footer-platinum__social-btn" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                            <a href="#" class="footer-platinum__social-btn" title="X (Twitter)" style="background: rgba(0, 68, 204, 0.05); color: var(--nk-blue); border: 1px solid rgba(0, 68, 204, 0.1);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M13.232 10.768L20 4"/></svg>
                             </a>
                         </div>
                     </div>
