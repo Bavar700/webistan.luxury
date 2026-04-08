@@ -70,7 +70,7 @@
             <p>&copy; <?php echo date('Y'); ?> NEKSOZ. Все права защищены.</p>
             <div class="footer-platinum__legal">
                 <a href="<?php echo home_url('/privacy-policy'); ?>">Конфиденциальность</a>
-                <a href="<?php echo home_url('/privacy-policy'); ?>">Условия</a>
+                <a href="<?php echo home_url('/terms'); ?>">Условия</a>
             </div>
         </div>
     </div>
