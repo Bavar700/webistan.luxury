@@ -171,9 +171,9 @@ get_header();
     <section class="section" style="padding-top: 80px; padding-bottom: 80px;">
         <div class="container">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
-                <div class="section__label">С 2016 года</div>
+                <div class="section__label">Основана в 2016 году</div>
                 <h2 class="section__title">Наш фундамент: Опыт,<br>проверенный временем</h2>
-                <p class="section__subtitle">За более чем 9 лет мы прошли путь от амбициозной команды до признанного лидера в области бухгалтерского консалтинга в Таджикистане.</p>
+                <p class="section__subtitle">За <?php echo (date('Y') - 2016); ?> лет работы на рынке Таджикистана мы прошли путь от амбициозной команды до признанного лидера в области бухгалтерского консалтинга в Таджикистане.</p>
             </div>
 
             <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:30px;">
@@ -184,7 +184,7 @@ get_header();
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     </div>
                     <h3 class="about-card__title">Компания основана в 2016 году</h3>
-                    <p class="about-card__body">ООО «НЕКСОЗ-БИЗНЕС КОНСАЛТИНГ ГРУП» была создана группой экспертов высшего звена из сфер налогового консультирования, банковского сектора и международного аудита.</p>
+                    <p class="about-card__body">ООО «НЕКСОЗ-БИЗНЕС КОНСАЛТИНГ ГРУП» была создана в <strong>2016 году</strong> экспертами, уже имеющими значительный опыт в сфере налогообложения, финансового учёта, банковского дела и аудита.</p></p>
                     <p class="about-card__body" style="margin-top:-4px;">Мы не просто «ведем учет» — мы выстраиваем прозрачные и устойчивые бизнес-модели, которые позволяют нашим клиентам уверенно масштабироваться.</p>
                 </div>
 
