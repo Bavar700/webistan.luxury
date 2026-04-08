@@ -218,7 +218,7 @@ get_header();
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
                 <div class="section__label">Кодекс Neksoz</div>
                 <h2 class="section__title">Миссия и принципы</h2>
-                <p class="section__subtitle">"Создавать безупречную почву для роста бизнеса, внедряя культуру правильного учета и финансовой прозрачности."</p>
+                <p class="section__subtitle">"Наша миссия — превратить сложные бизнес-процессы в прозрачную и прибыльную систему. Мы работаем на ваш результат и обеспечиваем защиту Ваших интересов на высшем уровне."</p>
             </div>
 
             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:30px;">
