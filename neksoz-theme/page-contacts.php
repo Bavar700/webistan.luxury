@@ -37,10 +37,18 @@ get_header();
     <!-- ═══════════ CONTACT GRID & FORM ═══════════ -->
     <section class="section" style="padding-bottom: 120px;">
         <div class="container fade-up">
+            
+            <!-- Section Header Above Columns -->
+            <div class="section__header section__header--center" style="margin-bottom: 60px;">
+                <div class="section__label">Прямой контакт</div>
+                <h2 class="section__title">Открыты к диалогу</h2>
+                <p class="section__subtitle">Выберите удобный способ связи или оставьте прямой запрос в наш консалтинговый отдел.</p>
+            </div>
+
             <div class="cta-crystal__grid">
                 
-                <!-- Left Side: Contact Information (Cinematic Dark Mode) -->
-                <div class="cta-crystal__content" style="display: flex; flex-direction: column; gap: 40px; padding-right: 20px;">
+                <!-- Left Side: Contact Information (Cinematic Dark Mode + Card) -->
+                <div class="cta-crystal__content" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 40px;">
                     
                     <!-- 1. Основная информация -->
                     <div>
@@ -113,8 +121,8 @@ get_header();
 
                 <!-- Right Side: Glassmorphism Form -->
                 <div class="cta-crystal__form-wrapper">
-                    <h3 style="font-size: 24px; color: white; font-family: var(--font-display); margin-bottom: 12px;">Обратная связь</h3>
-                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 32px; font-size: 15px;">Если у вас есть конкретный вопрос или вы хотите заказать предварительный аудит, заполните форму ниже. Наши эксперты свяжутся с вами в течение рабочего дня.</p>
+                    <h3 style="font-size: 24px; color: white; font-family: var(--font-display); margin-bottom: 12px;">Обсудим ваш бизнес?</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 32px; font-size: 15px;">Заполните форму ниже, и мы подготовим для вас индивидуальное предложение. Наши старшие эксперты свяжутся с вами в приоритетном порядке.</p>
 
                     <form action="#" class="cta-crystal__form">
                         <div class="cta-crystal__field">
