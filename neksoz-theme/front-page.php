@@ -28,40 +28,43 @@
 </section>
 
 <!-- ═══════════ STATS RIBBON (RESTYLED TO MATCH SERVICES) ═══════════ -->
-<section class="section section--gray stats-ribbon-block">
+<section class="section section--gray stats-ribbon-block" style="padding-top: 80px; padding-bottom: 0;">
     <div class="container">
-        <div class="services-grid">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 50px;">
+            <div class="section__label" style="margin-bottom: 0;">Наш опыт</div>
+        </div>
+        <div class="services-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
             <!-- 1 -->
-            <div class="service-card fade-up">
-                <div class="service-card__icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div class="service-card fade-up" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
+                <div class="service-card__icon" style="width: 52px !important; height: 52px !important; position: absolute !important; top: 30px !important; right: 30px !important; margin-bottom: 0 !important; opacity: 0.12 !important; background: transparent !important; color: var(--nk-blue) !important; border: none !important;">
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
-                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">500<em>+</em></div>
-                <p class="service-card__text">Довольных клиентов</p>
+                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; color: var(--nk-blue) !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">500<em style="color: var(--nk-red) !important; font-style: normal !important; -webkit-text-fill-color: var(--nk-red) !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Довольных клиентов</p>
             </div>
             <!-- 2 -->
-            <div class="service-card service-card--alt fade-up fade-up-delay-1">
-                <div class="service-card__icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div class="service-card service-card--alt fade-up fade-up-delay-1" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
+                <div class="service-card__icon" style="width: 52px !important; height: 52px !important; position: absolute !important; top: 30px !important; right: 30px !important; margin-bottom: 0 !important; opacity: 0.12 !important; background: transparent !important; color: var(--nk-red) !important; border: none !important;">
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
-                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">18<em>+</em></div>
-                <p class="service-card__text">Лет на рынке</p>
+                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; color: var(--nk-red) !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">18<em style="color: var(--nk-blue) !important; font-style: normal !important; -webkit-text-fill-color: var(--nk-blue) !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Лет на рынке</p>
             </div>
             <!-- 3 -->
-            <div class="service-card fade-up fade-up-delay-2">
-                <div class="service-card__icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+            <div class="service-card fade-up fade-up-delay-2" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
+                <div class="service-card__icon" style="width: 52px !important; height: 52px !important; position: absolute !important; top: 30px !important; right: 30px !important; margin-bottom: 0 !important; opacity: 0.12 !important; background: transparent !important; color: var(--nk-blue) !important; border: none !important;">
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
                 </div>
-                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">50<em>+</em></div>
-                <p class="service-card__text">Квалифицированных экспертов</p>
+                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; color: var(--nk-blue) !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">50<em style="color: var(--nk-red) !important; font-style: normal !important; -webkit-text-fill-color: var(--nk-red) !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Квалифицированных экспертов</p>
             </div>
             <!-- 4 -->
-            <div class="service-card service-card--alt fade-up fade-up-delay-3">
-                <div class="service-card__icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div class="service-card service-card--alt fade-up fade-up-delay-3" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
+                <div class="service-card__icon" style="width: 52px !important; height: 52px !important; position: absolute !important; top: 30px !important; right: 30px !important; margin-bottom: 0 !important; opacity: 0.12 !important; background: transparent !important; color: var(--nk-red) !important; border: none !important;">
+                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
-                <div class="service-card__title" style="font-size: 2rem; margin-bottom: 5px;">1200<em>+</em></div>
-                <p class="service-card__text">Успешных проектов</p>
+                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; color: var(--nk-red) !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">1200<em style="color: var(--nk-blue) !important; font-style: normal !important; -webkit-text-fill-color: var(--nk-blue) !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Успешных проектов</p>
             </div>
         </div>
     </div>
