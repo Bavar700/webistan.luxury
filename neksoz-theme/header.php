@@ -555,7 +555,50 @@
         .stats-card:hover .stats-card__label { color: var(--nk-gray-900); }
         .stats-card__line { display: none; }
 
-        /* ── Header Accents ── */
+        /* ── Stats Ribbon: Subtle Background Shimmer ── */
+        .stats-ribbon-block .service-card {
+            isolation: isolate;
+        }
+        .stats-ribbon-block .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 68, 204, 0.06) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(227, 6, 19, 0.04) 100%
+            );
+            background-size: 250% 250%;
+            animation: stats-shimmer 6s ease-in-out infinite alternate;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 0;
+        }
+        .stats-ribbon-block .service-card--alt::after {
+            background: linear-gradient(
+                135deg,
+                rgba(227, 6, 19, 0.05) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(0, 68, 204, 0.04) 100%
+            );
+            background-size: 250% 250%;
+            animation: stats-shimmer-alt 7s ease-in-out infinite alternate;
+        }
+        @keyframes stats-shimmer {
+            0%   { background-position: 0% 0%; opacity: 0.6; }
+            50%  { background-position: 100% 100%; opacity: 1; }
+            100% { background-position: 0% 100%; opacity: 0.7; }
+        }
+        @keyframes stats-shimmer-alt {
+            0%   { background-position: 100% 0%; opacity: 0.7; }
+            50%  { background-position: 0% 100%; opacity: 1; }
+            100% { background-position: 100% 100%; opacity: 0.6; }
+        }
+
+
         .text-gradient {
             background: var(--nk-grad-brand);
             -webkit-background-clip: text;
