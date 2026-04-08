@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸
+ * Template Name: Новости
  * Template Post Type: page
  *
  * @package Neksoz
@@ -11,74 +11,112 @@ get_header();
 
 <main id="primary" class="site-main">
 
-    <section class="nk-page-header uk-flex uk-flex-middle" style="min-height: 40vh; background: var(--nk-primary-dark); position: relative; overflow: hidden; padding: 60px 0;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        <div class="nk-container uk-position-relative uk-position-z-index">
-            <h1 class="fade-up is-visible" style="color: #fff; font-size: 3.5rem; margin-bottom: 1rem;"><?php esc_html_e('ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸', 'neksoz'); ?></h1>
-            <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 100% !important;">
-                ÐÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ðµ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ, ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸ Ð¸ Ð½Ð¾Ð²Ð¾ÑÑ‚Ð¸ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸
+<!-- ═══════════ PAGE HERO ═══════════ -->
+<section class="hero" style="min-height: 50vh; display: flex; align-items: center;">
+    <div class="hero__geo"></div>
+    <div class="hero__accent-line"></div>
+    <div class="hero__accent-line-2"></div>
+    <div class="hero__grid-pattern"></div>
+    <div class="container hero__inner" style="position: relative; z-index: 2;">
+        <div class="hero__content">
+            <div class="hero__badge fade-up is-visible">Пресс-центр</div>
+            <h1 class="hero__title fade-up is-visible fade-up-delay-1">
+                <span class="text-gradient">Новости</span><br>и аналитика
+            </h1>
+            <p class="hero__subtitle fade-up is-visible fade-up-delay-2">
+                Актуальные события компании, экспертные мнения<br>
+                и важные изменения в <strong>законодательстве Таджикистана</strong>.
             </p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="nk-section" style="padding-bottom: 6rem;">
-        <div class="nk-container">
+<!-- ═══════════ NEWS GRID ═══════════ -->
+<section class="section section--gray">
+    <div class="container">
+        <div class="section__header section__header--center fade-up is-visible">
+            <div class="section__label">Последнее в блоге</div>
+            <h2 class="section__title section__title--huge">Актуальные<br><span class="text-gradient">материалы</span></h2>
+        </div>
+
+        <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
-                
-                <?php
-                // Query the latest news posts
-                $news_query = new WP_Query( array(
-                    'post_type'      => 'post',
-                    'posts_per_page' => 9,
-                    'post_status'    => 'publish',
-                ) );
+            <?php
+            $news_query = new WP_Query( array(
+                'post_type'      => 'post',
+                'posts_per_page' => 9,
+                'post_status'    => 'publish',
+            ) );
 
-                if ( $news_query->have_posts() ) :
-                    $delay = 1;
-                    while ( $news_query->have_posts() ) : $news_query->the_post();
-                        ?>
-                        <article class="nk-service-card fade-up is-visible fade-up-delay-<?php echo esc_attr($delay); ?>" style="background: var(--nk-bg-alt); border-radius: 12px; border: 1px solid var(--nk-border); overflow: hidden; display: flex; flex-direction: column;">
-                            <?php if ( has_post_thumbnail() ) : ?>
-                                <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 200px; overflow: hidden;">
-                                    <?php the_post_thumbnail( 'medium_large', array( 'style' => 'width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;' ) ); ?>
-                                </a>
-                            <?php else : ?>
-                                <a href="<?php the_permalink(); ?>" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 200px; background: rgba(59, 130, 246, 0.05); color: var(--nk-accent);">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                                </a>
-                            <?php endif; ?>
-                            
-                            <div style="padding: 2rem; flex-grow: 1; display: flex; flex-direction: column;">
-                                <div style="font-size: 0.9rem; color: var(--nk-primary); font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">
-                                    <?php echo get_the_date('d.m.Y'); ?>
-                                </div>
-                                <h2 style="font-size: 1.25rem; margin-bottom: 1rem; line-height: 1.4;">
-                                    <a href="<?php the_permalink(); ?>" style="color: var(--nk-text); text-decoration: none;"><?php the_title(); ?></a>
-                                </h2>
-                                <p style="color: var(--nk-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1;">
-                                    <?php echo wp_trim_words( get_the_excerpt(), 15, '...' ); ?>
-                                </p>
-                                <a href="<?php the_permalink(); ?>" style="color: var(--nk-primary); font-weight: 500; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-                                    Ð§Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð´Ð°Ð»ÐµÐµ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                            </div>
-                        </article>
-                        <?php
-                        $delay = ($delay % 3) + 1; // 1, 2, 3 loop
-                    endwhile;
-                    wp_reset_postdata();
-                else :
+            if ( $news_query->have_posts() ) :
+                $delay = 0;
+                while ( $news_query->have_posts() ) : $news_query->the_post();
                     ?>
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
-                        <p style="color: var(--nk-text-secondary); font-size: 1.1rem;"><?php esc_html_e('ÐÐ¾Ð²Ð¾ÑÑ‚ÐµÐ¹ Ð¿Ð¾ÐºÐ° Ð½ÐµÑ‚. Ð¡Ð»ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð° Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸ÑÐ¼Ð¸!', 'neksoz'); ?></p>
+                    <article class="service-card fade-up is-visible <?php echo ($delay % 2 == 1) ? 'service-card--alt' : ''; ?>">
+                        <div style="font-size: 0.7rem; font-weight: 800; color: var(--nk-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">
+                            <?php echo get_the_date('d F Y'); ?>
+                        </div>
+                        <h3 class="service-card__title" style="font-size: 1.25rem;">
+                            <a href="<?php the_permalink(); ?>" style="color: inherit; text-decoration: none;">
+                                <?php the_title(); ?>
+                            </a>
+                        </h3>
+                        <p class="service-card__text">
+                            <?php echo wp_trim_words( get_the_excerpt(), 18, '...' ); ?>
+                        </p>
+                        <a href="<?php the_permalink(); ?>" class="service-card__link" style="margin-top: auto;">Читать статью →</a>
+                    </article>
+                    <?php
+                    $delay++;
+                endwhile;
+                wp_reset_postdata();
+            else :
+                ?>
+                <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
+                    <div class="service-card" style="max-width: 500px; margin: 0 auto; padding: 40px;">
+                        <p style="color: var(--nk-gray-500); font-size: 1.1rem; margin-bottom: 24px;">Новостей пока нет. Мы готовим для вас интересные материалы.</p>
+                        <a href="<?php echo home_url('/'); ?>" class="btn btn--primary">Вернуться на главную</a>
                     </div>
-                <?php endif; ?>
-
-            </div>
+                </div>
+            <?php endif; ?>
 
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section id="contacts" class="cta-crystal">
+    <div class="cta-crystal__glow cta-crystal__glow--blue"></div>
+    <div class="cta-crystal__glow cta-crystal__glow--red"></div>
+    <div class="container">
+        <div class="cta-crystal__grid">
+            <div class="cta-crystal__content fade-up is-visible">
+                <div class="section__label">Подписка</div>
+                <h2 class="cta-crystal__title"><span class="text-gradient">Будьте в курсе</span><br>событий</h2>
+                <p class="cta-crystal__text">Оставьте свой email, и мы будем присылать вам только самые важные новости и аналитические обзоры не чаще раза в месяц.</p>
+                <div class="cta-crystal__status">
+                    <span class="cta-crystal__status-dot"></span>
+                    Уже 500+ подписчиков
+                </div>
+            </div>
+            <div class="cta-crystal__form-wrapper fade-up is-visible">
+                <form action="#" class="cta-crystal__form">
+                    <div class="cta-crystal__field">
+                        <input type="email" placeholder=" " required id="n-email">
+                        <label for="n-email">Ваш Email</label>
+                    </div>
+                    <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center;">
+                        Подписаться на новости
+                        <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </button>
+                    <p style="font-size: 0.75rem; color: var(--nk-gray-400); margin-top: 16px; text-align: center;">
+                        Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 </main>
 

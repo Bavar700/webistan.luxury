@@ -1,6 +1,6 @@
 <?php
 /**
- * Single Post / Service Template â€” Neksoz.Luxury
+ * Single Template — Neksoz.Luxury
  *
  * @package Neksoz
  */
@@ -10,145 +10,89 @@ get_header();
 
 <main id="primary" class="site-main">
 
-    <?php while ( have_posts() ) : the_post(); ?>
+<?php while ( have_posts() ) : the_post(); ?>
 
-    <!-- Hero Banner -->
-    <section class="nk-section--dark" style="padding: 60px 0;">
-        <div class="nk-container">
-            <div style="max-width: 100% !important;">
-                <?php if ( 'neksoz_service' === get_post_type() ) : ?>
-                    <span class="section-label" style="color: rgba(255,255,255,0.5);"><?php esc_html_e( 'Ð£ÑÐ»ÑƒÐ³Ð¸', 'neksoz' ); ?></span>
-                <?php else : ?>
-                    <span class="section-label" style="color: rgba(255,255,255,0.5);"><?php esc_html_e( 'ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸', 'neksoz' ); ?></span>
+<!-- ═══════════ PAGE HERO ═══════════ -->
+<section class="hero" style="min-height: 45vh; display: flex; align-items: center;">
+    <div class="hero__geo"></div>
+    <div class="hero__accent-line"></div>
+    <div class="hero__accent-line-2"></div>
+    <div class="hero__grid-pattern"></div>
+    <div class="container hero__inner" style="position: relative; z-index: 2;">
+        <div class="hero__content" style="max-width: 900px;">
+            <div class="hero__badge fade-up is-visible">
+                <?php echo get_post_type() === 'post' ? 'Новость' : 'Услуга'; ?>
+            </div>
+            <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="font-size: clamp(2.5rem, 5vw, 4rem);">
+                <span class="text-gradient"><?php the_title(); ?></span>
+            </h1>
+            <?php if ( get_post_type() === 'post' ) : ?>
+                <div class="fade-up is-visible fade-up-delay-2" style="color: rgba(255,255,255,0.6); font-weight: 500; font-size: 0.9rem; margin-top: 10px;">
+                    <?php echo get_the_date('d F Y'); ?> • <?php the_author(); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<section class="section section--gray">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start;">
+            
+            <article class="service-card fade-up is-visible" style="padding: 50px;">
+                <?php if ( has_post_thumbnail() ) : ?>
+                    <div style="margin-bottom: 30px; border-radius: 12px; overflow: hidden;">
+                        <?php the_post_thumbnail('large', ['style' => 'width: 100%; height: auto; display: block;']); ?>
+                    </div>
                 <?php endif; ?>
 
-                <h1 style="color: #fff; margin-bottom: 1rem;"><?php the_title(); ?></h1>
+                <div class="post-content" style="line-height: 1.8; color: var(--nk-gray-600); font-size: 1.05rem;">
+                    <?php the_content(); ?>
+                </div>
 
-                <?php if ( 'post' === get_post_type() ) : ?>
-                    <div style="display: flex; align-items: center; gap: 1rem; color: rgba(255,255,255,0.6); font-size: 0.85rem;">
-                        <time datetime="<?php echo get_the_date( 'c' ); ?>">
-                            <?php echo get_the_date(); ?>
-                        </time>
-                        <span>&bull;</span>
-                        <span><?php the_author(); ?></span>
+                <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--nk-gray-100); display: flex; justify-content: space-between; align-items: center;">
+                    <a href="<?php echo home_url('/news'); ?>" class="btn btn--outline-light" style="color: var(--nk-blue); border-color: var(--nk-blue);">← Назад к новостям</a>
+                    <div style="display: flex; gap: 10px;">
+                        <?php
+                        $prev = get_previous_post();
+                        $next = get_next_post();
+                        if ($prev) echo '<a href="'.get_permalink($prev).'" class="btn btn--ghost" style="padding: 10px 15px;" title="Предыдущая">←</a>';
+                        if ($next) echo '<a href="'.get_permalink($next).'" class="btn btn--ghost" style="padding: 10px 15px;" title="Следующая">→</a>';
+                        ?>
                     </div>
-                <?php endif; ?>
-            </div>
+                </div>
+            </article>
+
+            <aside style="position: sticky; top: 120px;">
+                <div class="service-card" style="padding: 30px;">
+                    <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--nk-gray-900); margin-bottom: 20px; border-left: 3px solid var(--nk-red); padding-left: 15px;">Популярно</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+                        <?php
+                        $recent = new WP_Query(['posts_per_page' => 5, 'post__not_in' => [get_the_ID()]]);
+                        while ($recent->have_posts()) : $recent->the_post();
+                        ?>
+                        <li>
+                            <a href="<?php the_permalink(); ?>" style="display: block; font-size: 0.9rem; font-weight: 600; color: var(--nk-gray-700); text-decoration: none; line-height: 1.4; transition: color 0.3s;" onmouseover="this.style.color='var(--nk-blue)'" onmouseout="this.style.color='var(--nk-gray-700)'"><?php the_title(); ?></a>
+                            <span style="font-size: 0.75rem; color: var(--nk-gray-400);"><?php echo get_the_date('d.m.Y'); ?></span>
+                        </li>
+                        <?php endwhile; wp_reset_postdata(); ?>
+                    </ul>
+                </div>
+
+                <div class="service-card service-card--alt" style="padding: 30px; margin-top: 30px; text-align: center;">
+                    <h4 style="font-size: 1.1rem; font-weight: 800; color: white; margin-bottom: 15px;">Нужна помощь?</h4>
+                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 20px;">Наши эксперты проконсультируют вас по любому вопросу.</p>
+                    <a href="<?php echo home_url('/contacts'); ?>" class="btn btn--primary" style="width: 100%; justify-content: center; padding: 12px 20px;">Связаться →</a>
+                </div>
+            </aside>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Content -->
-    <section class="nk-section">
-        <div class="nk-container">
-            <div style="display: grid; grid-template-columns: 1fr 320px; gap: 4rem; align-items: start;">
+<?php endwhile; ?>
 
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-                    <?php if ( has_post_thumbnail() ) : ?>
-                        <div style="margin-bottom: 2rem; border-radius: var(--nk-card-radius); overflow: hidden;">
-                            <?php the_post_thumbnail( 'neksoz-featured', array( 'style' => 'width:100%; height:auto; display:block;' ) ); ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="nk-content">
-                        <?php the_content(); ?>
-                    </div>
-
-                    <?php if ( 'post' === get_post_type() ) : ?>
-                        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--nk-border);">
-                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                <?php
-                                $tags = get_the_tags();
-                                if ( $tags ) :
-                                    foreach ( $tags as $tag ) :
-                                ?>
-                                    <a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>"
-                                       style="display: inline-block; padding: 0.3rem 0.8rem; background: var(--nk-bg-alt); border-radius: 6px; font-size: 0.8rem; font-weight: 500; color: var(--nk-text-secondary);">
-                                        #<?php echo esc_html( $tag->name ); ?>
-                                    </a>
-                                <?php
-                                    endforeach;
-                                endif;
-                                ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- Post Navigation -->
-                    <div style="margin-top: 3rem; display: flex; justify-content: space-between; gap: 2rem;">
-                        <div>
-                            <?php
-                            $prev = get_previous_post();
-                            if ( $prev ) :
-                            ?>
-                                <span style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--nk-text-muted); margin-bottom: 0.25rem;">
-                                    <?php esc_html_e( 'â† ÐŸÑ€ÐµÐ´Ñ‹Ð´ÑƒÑ‰Ð°Ñ', 'neksoz' ); ?>
-                                </span>
-                                <a href="<?php echo esc_url( get_permalink( $prev ) ); ?>" style="font-weight: 600; color: var(--nk-primary);">
-                                    <?php echo esc_html( $prev->post_title ); ?>
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                        <div style="text-align: right;">
-                            <?php
-                            $next = get_next_post();
-                            if ( $next ) :
-                            ?>
-                                <span style="display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--nk-text-muted); margin-bottom: 0.25rem;">
-                                    <?php esc_html_e( 'Ð¡Ð»ÐµÐ´ÑƒÑŽÑ‰Ð°Ñ â†’', 'neksoz' ); ?>
-                                </span>
-                                <a href="<?php echo esc_url( get_permalink( $next ) ); ?>" style="font-weight: 600; color: var(--nk-primary);">
-                                    <?php echo esc_html( $next->post_title ); ?>
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                </article>
-
-                <!-- Sidebar -->
-                <aside class="nk-sidebar" style="position: sticky; top: 100px;">
-                    <?php if ( 'neksoz_service' === get_post_type() ) : ?>
-                        <!-- Other Services -->
-                        <div style="background: var(--nk-bg-alt); padding: 1.5rem; border-radius: var(--nk-card-radius);">
-                            <h4 style="font-size: 1rem; margin-bottom: 1rem;"><?php esc_html_e( 'Ð”Ñ€ÑƒÐ³Ð¸Ðµ ÑƒÑÐ»ÑƒÐ³Ð¸', 'neksoz' ); ?></h4>
-                            <?php
-                            $related = new WP_Query( array(
-                                'post_type'      => 'neksoz_service',
-                                'posts_per_page' => 5,
-                                'post__not_in'   => array( get_the_ID() ),
-                            ) );
-
-                            if ( $related->have_posts() ) :
-                                echo '<ul style="list-style: none; padding: 0;">';
-                                while ( $related->have_posts() ) : $related->the_post();
-                                    echo '<li style="margin-bottom: 0.6rem;"><a href="' . esc_url( get_permalink() ) . '" style="font-size: 0.9rem; font-weight: 500; color: var(--nk-text-secondary);">' . esc_html( get_the_title() ) . '</a></li>';
-                                endwhile;
-                                echo '</ul>';
-                                wp_reset_postdata();
-                            endif;
-                            ?>
-                        </div>
-                    <?php else : ?>
-                        <?php get_sidebar(); ?>
-                    <?php endif; ?>
-
-                    <!-- CTA -->
-                    <div style="margin-top: 2rem; padding: 2rem; background: var(--nk-primary-dark); border-radius: var(--nk-card-radius); text-align: center;">
-                        <h4 style="color: #fff; font-size: 1rem; margin-bottom: 0.75rem;"><?php esc_html_e( 'ÐÑƒÐ¶Ð½Ð° ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ñ†Ð¸Ñ?', 'neksoz' ); ?></h4>
-                        <p style="color: rgba(255,255,255,0.65); font-size: 0.85rem; margin-bottom: 1.25rem;"><?php esc_html_e( 'ÐÐ°ÑˆÐ¸ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ñ‹ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹ Ð¿Ð¾Ð¼Ð¾Ñ‡ÑŒ Ð’Ð°Ð¼.', 'neksoz' ); ?></p>
-                        <a href="<?php echo esc_url( home_url( '/contacts' ) ); ?>" class="nk-btn nk-btn--gradient" style="width: 100%; justify-content: center;">
-                            <?php esc_html_e( 'Ð¡Ð²ÑÐ·Ð°Ñ‚ÑŒÑÑ', 'neksoz' ); ?>
-                        </a>
-                    </div>
-                </aside>
-
-            </div>
-        </div>
-    </section>
-
-    <?php endwhile; ?>
-
-</main><!-- #primary -->
+</main>
 
 <?php get_footer(); ?>

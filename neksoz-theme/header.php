@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEKSOZ — Business Consulting Group</title>
+    <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1618,6 +1618,53 @@ rvice-card__link:hover {
             padding: 0 12px !important;
             border-radius: 4px !important;
         }
+        /* Mobile Toggle Styles */
+        .nk-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 110;
+        }
+
+        .nk-mobile-toggle span {
+            width: 100%;
+            height: 2px;
+            background: var(--nk-gray-900);
+            border-radius: 10px;
+            transition: all 0.3s var(--ease);
+        }
+
+        @media (max-width: 1024px) {
+            .header__nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 40px;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                transition: right 0.4s var(--ease);
+                gap: 20px;
+            }
+            .header__nav.is-open {
+                right: 0;
+            }
+            .nk-mobile-toggle {
+                display: flex;
+            }
+            .nk-mobile-toggle.is-active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .nk-mobile-toggle.is-active span:nth-child(2) { opacity: 0; }
+            .nk-mobile-toggle.is-active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        }
     </style>
 </head>
 
@@ -1626,16 +1673,16 @@ rvice-card__link:hover {
 <!-- ═══════════ HEADER ═══════════ -->
 <header class="header">
     <div class="container header__inner">
-        <a href="#" class="header__logo-link">
+        <a href="<?php echo home_url('/'); ?>" class="header__logo-link">
             <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
         <nav class="header__nav">
-            <a href="#">Главная</a>
-            <a href="#services">Услуги</a>
-            <a href="#">О компании</a>
-            <a href="#">Новости</a>
-            <a href="#">Вакансии</a>
-            <a href="#contacts">Контакты</a>
+            <a href="<?php echo home_url('/'); ?>">Главная</a>
+            <a href="<?php echo home_url('/services'); ?>">Услуги</a>
+            <a href="<?php echo home_url('/about'); ?>">О компании</a>
+            <a href="<?php echo home_url('/news'); ?>">Новости</a>
+            <a href="<?php echo home_url('/vacancies'); ?>">Вакансии</a>
+            <a href="<?php echo home_url('/contacts'); ?>">Контакты</a>
         </nav>
         <div class="header__actions">
             <!-- Telegram -->
@@ -1647,9 +1694,14 @@ rvice-card__link:hover {
                 <svg viewBox="0 0 24 24"><path d="M12.031 2C6.495 2 2 6.494 2 12.031c0 1.764.464 3.486 1.348 5.006L2 22l5.109-1.332A9.971 9.971 0 0012.03 22c5.536 0 10.031-4.494 10.031-10.03v-.004C22.062 6.494 17.568 2 12.031 2zm5.795 14.18c-.244.686-1.42 1.3-1.966 1.353-.513.048-1.167.316-3.832-.727-3.411-1.336-5.61-4.852-5.783-5.083-.172-.232-1.38-1.841-1.38-3.513 0-1.671.867-2.5 1.185-2.836.317-.335.69-.42 1.94-.01.25.08.572.639.882 1.402.316.76.545 1.487.676 1.705.132.221.222.474.072.768-.148.291-.222.473-.443.727-.221.254-.464.55-.664.747-.221.221-.453.465-.198.887.254.42 1.135 1.86 2.43 3.02 1.676 1.5 3.084 1.965 3.484 2.14.398.175.632.148.868-.113.235-.262.998-1.162 1.266-1.564.267-.402.532-.335.888-.201.356.133 2.25 1.062 2.632 1.252.383.19.638.283.731.442.093.158.093.916-.15 1.602z"/></svg>
             </a>
             <!-- Phone -->
-            <a href="tel:#" class="header__icon header__icon--phone" aria-label="Call">
+            <a href="tel:+992446000000" class="header__icon header__icon--phone" aria-label="Call">
                 <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1C8.8 6.4 8.6 5.2 8.6 4c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z"/></svg>
             </a>
+            
+            <!-- Mobile Toggle -->
+            <button class="nk-mobile-toggle" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
 </header>
