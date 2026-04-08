@@ -150,8 +150,8 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">О компании</div>
-                <h1 class="hero__title">
-                    <span class="text-gradient">Архитектура финансовой</span><br>устойчивости бизнеса
+                <h1 class="hero__title" style="background:linear-gradient(90deg,#E30613 0%,#CC0033 30%,#0044CC 75%,#2277FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                    Архитектура финансовой<br>устойчивости бизнеса
                 </h1>
                 <p class="hero__desc">
                     Стратегический партнер и экспертный хаб, трансформирующий опыт в аудите и праве в реальную ценность для локального и международного бизнеса в Таджикистане.
@@ -167,37 +167,13 @@ get_header();
         </div>
     </section>
 
-    <!-- ═══════════ STATS RIBBON (matching front-page) ═══════════ -->
-    <section class="section section--gray" style="padding-top: 80px; padding-bottom: 80px;">
-        <div class="container">
-            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
-                <div class="about-stat fade-up">
-                    <div class="about-stat__num">500<em>+</em></div>
-                    <div class="about-stat__label">Довольных клиентов</div>
-                </div>
-                <div class="about-stat fade-up fade-up-delay-1">
-                    <div class="about-stat__num" style="color:var(--nk-red);">18<em style="color:var(--nk-blue);">+</em></div>
-                    <div class="about-stat__label">Лет на рынке</div>
-                </div>
-                <div class="about-stat fade-up fade-up-delay-2">
-                    <div class="about-stat__num">50<em>+</em></div>
-                    <div class="about-stat__label">Квалифицированных экспертов</div>
-                </div>
-                <div class="about-stat fade-up fade-up-delay-3">
-                    <div class="about-stat__num" style="color:var(--nk-red);">1200<em style="color:var(--nk-blue);">+</em></div>
-                    <div class="about-stat__label">Успешных проектов</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ═══════════ SECTION: ИСТОРИЯ ═══════════ -->
     <section class="section" style="padding-top: 80px; padding-bottom: 80px;">
         <div class="container">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
                 <div class="section__label">С 2016 года</div>
                 <h2 class="section__title">Наш фундамент: Опыт,<br>проверенный временем</h2>
-                <p class="section__subtitle">За 10 лет мы прошли путь от амбициозной команды до признанного лидера в области бухгалтерского консалтинга в Таджикистане.</p>
+                <p class="section__subtitle">За более чем 9 лет мы прошли путь от амбициозной команды до признанного лидера в области бухгалтерского консалтинга в Таджикистане.</p>
             </div>
 
             <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:30px;">
@@ -277,26 +253,6 @@ get_header();
                     <p class="about-card__body">В мире финансов время — это деньги. Мы гарантируем строжайшее соблюдение сроков, беря на себя полную ответственность за результат.</p>
                 </div>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════ FINAL CTA (GLASSMORPHISM) ═══════════ -->
-    <section class="cta-crystal" style="padding: 80px 0; position: relative;">
-        <div class="cta-crystal__glow cta-crystal__glow--blue"></div>
-        <div class="cta-crystal__glow cta-crystal__glow--red"></div>
-
-        <div class="container fade-up" style="position:relative;z-index:2;">
-            <div style="background:rgba(255,255,255,0.82);border:1px solid rgba(0,13,51,0.05);border-radius:32px;padding:80px 40px;text-align:center;box-shadow:0 40px 100px rgba(0,13,51,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);">
-                <div class="section__label" style="margin-bottom:20px;">Следующий шаг</div>
-                <h2 class="section__title" style="font-size:40px;margin-bottom:24px;">Готовы вывести бизнес<br>на новый уровень прозрачности?</h2>
-                <p style="font-size:17px;color:var(--nk-gray-600);max-width:560px;margin:0 auto 40px;line-height:1.7;">
-                    Доверьте финансовый и юридический фундамент экспертам Neksoz. Мы обеспечим комфорт, безопасность и ясность в каждой цифре.
-                </p>
-                <a href="<?php echo home_url('/contacts'); ?>" class="cta-crystal__btn" style="padding:18px 44px;font-size:14px;white-space:nowrap;">
-                    <span>Записаться на встречу с экспертом</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                </a>
             </div>
         </div>
     </section>
