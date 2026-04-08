@@ -145,6 +145,9 @@ get_header();
                     <button type="submit" class="cta-crystal__btn" style="width: 100%; justify-content: center; height: 64px; margin-top: 10px;">
                         <span>Запросить расчет</span>
                     </button>
+                    <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
+                        Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
+                    </p>
                     <p class="cta-crystal__secure" style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--nk-gray-500); opacity: 0.8; width: 100%;">
                         🛡️ Защищённое соединение (SSL 256-bit)
                     </p>
