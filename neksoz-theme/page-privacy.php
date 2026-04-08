@@ -6,13 +6,27 @@
 get_header(); ?>
 
 <main class="legal-page">
-    <!-- Hero Section -->
-    <section class="service-hero" style="min-height: 40vh; padding: 160px 0 80px; background: radial-gradient(circle at 0% 0%, rgba(0, 68, 204, 0.05) 0%, transparent 50%);">
-        <div class="nx-container">
-            <span class="service-hero__tag" style="display: inline-block; padding: 8px 16px; background: rgba(0, 68, 204, 0.1); color: var(--nk-blue); border-radius: 100px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px;">Правовая информация</span>
-            <h1 class="service-hero__title" style="font-size: clamp(32px, 5vw, 48px); max-width: 800px; margin-bottom: 0;">
-                Политика конфиденциальности и условия
-            </h1>
+    <!-- ═══════════ CINEMATIC HERO ═══════════ -->
+    <section class="hero hero--internal">
+        <div class="hero__geo"></div>
+        <div class="hero__grid-pattern"></div>
+        <div class="hero__accent-line"></div>
+        <div class="hero__accent-line-2"></div>
+
+        <div class="container hero__container" style="position:relative;z-index:2;">
+            <div class="hero__content">
+                <div class="hero__badge">Правовая информация</div>
+                <h1 class="hero__title">
+                    <span class="text-gradient">Политика</span><br>конфиденциальности
+                </h1>
+                <p class="hero__desc" style="max-width: 600px;">
+                    Официальная информация о правилах использования сайта, обработке персональных данных и нашей ответственности.
+                </p>
+            </div>
+            
+            <div class="hero__actions--right">
+                <!-- Оставлено пустым для соблюдения баланса сетки -->
+            </div>
         </div>
     </section>
 
