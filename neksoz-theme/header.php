@@ -186,7 +186,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-left: 24px;
+            margin-left: auto;
         }
 
         .header__icon {
@@ -240,6 +240,42 @@
             color: var(--nk-white);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
+        }
+
+        /* ── Language Switcher — Premium Oval Design ── */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 13, 51, 0.04);
+            border-radius: 100px;
+            padding: 4px;
+            gap: 2px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            margin-right: 10px;
+        }
+
+        .lang-switcher__item {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--nk-gray-400);
+            padding: 8px 16px;
+            border-radius: 100px;
+            transition: all 0.3s var(--ease);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+        }
+
+        .lang-switcher__item:hover {
+            color: var(--nk-blue);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .lang-switcher__item.is-active {
+            background: var(--nk-grad-blue);
+            color: var(--nk-white);
+            box-shadow: 0 4px 15px rgba(0, 68, 204, 0.25);
         }
 
         /* ============================================================
@@ -1662,18 +1698,12 @@
             <a href="<?php echo home_url('/contacts'); ?>">Контакты</a>
         </nav>
         <div class="header__actions">
-            <!-- Telegram -->
-            <a href="#" target="_blank" class="header__icon header__icon--tg" aria-label="Telegram">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.9 1.21-5.36 3.55-.51.35-.97.52-1.38.51-.45-.01-1.31-.25-1.95-.46-.79-.26-1.41-.4-1.36-.84.03-.22.34-.44.93-.68 3.62-1.58 6.04-2.62 7.25-3.13 3.45-1.44 4.16-1.69 4.63-1.69.1 0 .32.02.46.12.12.09.15.21.16.3z"/></svg>
-            </a>
-            <!-- WhatsApp -->
-            <a href="#" target="_blank" class="header__icon header__icon--wa" aria-label="WhatsApp">
-                <svg viewBox="0 0 24 24"><path d="M12.031 2C6.495 2 2 6.494 2 12.031c0 1.764.464 3.486 1.348 5.006L2 22l5.109-1.332A9.971 9.971 0 0012.03 22c5.536 0 10.031-4.494 10.031-10.03v-.004C22.062 6.494 17.568 2 12.031 2zm5.795 14.18c-.244.686-1.42 1.3-1.966 1.353-.513.048-1.167.316-3.832-.727-3.411-1.336-5.61-4.852-5.783-5.083-.172-.232-1.38-1.841-1.38-3.513 0-1.671.867-2.5 1.185-2.836.317-.335.69-.42 1.94-.01.25.08.572.639.882 1.402.316.76.545 1.487.676 1.705.132.221.222.474.072.768-.148.291-.222.473-.443.727-.221.254-.464.55-.664.747-.221.221-.453.465-.198.887.254.42 1.135 1.86 2.43 3.02 1.676 1.5 3.084 1.965 3.484 2.14.398.175.632.148.868-.113.235-.262.998-1.162 1.266-1.564.267-.402.532-.335.888-.201.356.133 2.25 1.062 2.632 1.252.383.19.638.283.731.442.093.158.093.916-.15 1.602z"/></svg>
-            </a>
-            <!-- Phone -->
-            <a href="tel:+992446000000" class="header__icon header__icon--phone" aria-label="Call">
-                <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1C8.8 6.4 8.6 5.2 8.6 4c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z"/></svg>
-            </a>
+            <!-- Language Switcher -->
+            <div class="lang-switcher">
+                <a href="?lang=en" class="lang-switcher__item">EN</a>
+                <a href="?lang=tj" class="lang-switcher__item">TJ</a>
+                <a href="?lang=ru" class="lang-switcher__item is-active">RU</a>
+            </div>
             
             <!-- Mobile Toggle -->
             <button class="nk-mobile-toggle" aria-label="Menu" aria-expanded="false">
