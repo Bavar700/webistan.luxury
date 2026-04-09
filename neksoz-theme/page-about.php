@@ -41,7 +41,7 @@ get_header();
     margin-bottom: 8px;
     background: rgba(0, 13, 51, 0.03);
     border-radius: 16px;
-    color: var(--nk-gray-500);
+    color: var(--nk-gray-400);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +73,6 @@ get_header();
 .about-card:hover .about-card__icon {
     border-color: transparent;
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
 }
 .about-card:hover .about-card__icon::before { opacity: 1; }
 .about-card:hover .about-card__icon svg {
@@ -166,7 +165,7 @@ get_header();
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--nk-gray-500);
+    color: var(--nk-gray-400);
 }
 </style>
 

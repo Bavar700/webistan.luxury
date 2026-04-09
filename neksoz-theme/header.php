@@ -509,7 +509,7 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--nk-gray-500); /* Slightly darker for better visibility */
+            color: var(--nk-gray-400); /* Slightly darker for better visibility */
             line-height: 1.2;
             max-width: 100px;
         }
@@ -815,7 +815,7 @@
             margin-bottom: 24px;
             background: rgba(0, 13, 51, 0.03);
             border-radius: 16px;
-            color: var(--nk-gray-500);
+            color: var(--nk-gray-400);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -850,7 +850,6 @@
         .service-card:hover .service-card__icon {
             border-color: transparent;
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 68, 204, 0.3);
         }
 
         .service-card:hover .service-card__icon::before { opacity: 1; }
@@ -861,12 +860,11 @@
         }
 
         .service-card--alt .service-card__icon { 
-            color: var(--nk-gray-500);
+            color: var(--nk-gray-400);
             background: rgba(0, 13, 51, 0.03);
         }
 
         .service-card--alt:hover .service-card__icon {
-            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
         }
 
         .stat-icon {

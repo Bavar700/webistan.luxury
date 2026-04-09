@@ -73,7 +73,7 @@ get_header();
                             width: 52px;
                             height: 52px;
                             background: rgba(0, 13, 51, 0.03);
-                            color: var(--nk-gray-500);
+                            color: var(--nk-gray-400);
                             display: flex;
                             align-items: center;
                             justify-content: center;
@@ -108,7 +108,6 @@ get_header();
                         .social-icon-wrapper:hover .contact-icon {
                             border-color: transparent;
                             transform: translateY(-5px);
-                            box-shadow: 0 10px 20px rgba(0, 68, 204, 0.3);
                         }
                         .contact-item:hover .contact-icon::before,
                         .social-icon-wrapper:hover .contact-icon::before { opacity: 1; }
@@ -134,7 +133,7 @@ get_header();
                                 <div style="padding-top: 4px;">
                                     <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 6px; font-weight: 600;">Адрес:</strong>
                                     <span style="color: var(--nk-gray-600); line-height: 1.6; font-size: 15px;">734000, Республика Таджикистан,<br>г. Душанбе, проспект Рудаки 55, 3-этаж.</span>
-                                    <span style="display: block; font-size: 13px; color: var(--nk-gray-500); margin-top: 6px;">(Ориентир: Центр города)</span>
+                                    <span style="display: block; font-size: 13px; color: var(--nk-gray-400); margin-top: 6px;">(Ориентир: Центр города)</span>
                                 </div>
                             </li>
                             <li class="contact-item">
@@ -241,7 +240,7 @@ get_header();
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
                         
-                        <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 24px; line-height: 1.4; opacity: 0.8; width: 100%;">
+                        <p style="font-size: 11px; color: var(--nk-gray-400); text-align: center; margin-top: 24px; line-height: 1.4; opacity: 0.8; width: 100%;">
                             Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                         </p>
                         <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; color: #10B981; font-size: 12px; font-weight: 500;">

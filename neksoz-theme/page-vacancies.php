@@ -52,7 +52,7 @@ get_header();
     margin-bottom: 28px;
     background: rgba(0, 13, 51, 0.03);
     border-radius: 16px;
-    color: var(--nk-gray-500);
+    color: var(--nk-gray-400);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,7 +87,6 @@ get_header();
 .why-card:hover .why-card__icon {
     border-color: transparent;
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 68, 204, 0.3);
 }
 
 .why-card:hover .why-card__icon::before { opacity: 1; }
@@ -98,12 +97,11 @@ get_header();
 }
 
 .why-card--alt .why-card__icon {
-    color: var(--nk-gray-500);
+    color: var(--nk-gray-400);
     background: rgba(0, 13, 51, 0.03);
 }
 
 .why-card--alt:hover .why-card__icon {
-    box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
 }
 
 .why-card__title {
@@ -626,7 +624,7 @@ get_header();
 
                     <button type="submit" class="cta-crystal__btn"><span>Отправить отклик</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     
-                    <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 24px; opacity: 0.7;">
+                    <p style="font-size: 11px; color: var(--nk-gray-400); text-align: center; margin-top: 24px; opacity: 0.7;">
                         Нажимая на кнопку, вы даете согласие на обработку персональных данных.
                     </p>
                 </form>
