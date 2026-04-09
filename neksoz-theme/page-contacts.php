@@ -72,38 +72,61 @@ get_header();
                         .contact-icon {
                             width: 52px;
                             height: 52px;
-                            background: rgba(0, 13, 51, 0.03);
-                            color: var(--nk-gray-500);
+                            border-radius: 50%;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            border-radius: 14px;
-                            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                            background: rgba(0, 68, 204, 0.06);
+                            color: var(--nk-blue);
+                            border: 1px solid rgba(0, 68, 204, 0.1);
                             flex-shrink: 0;
+                            position: relative;
+                            overflow: hidden;
+                            z-index: 2;
+                            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                         }
+                        .contact-icon::before {
+                            content: '';
+                            position: absolute;
+                            inset: 0;
+                            background: var(--nk-blue);
+                            border-radius: 50%;
+                            opacity: 0;
+                            transition: opacity 0.4s ease;
+                            z-index: 1;
+                        }
+                        .contact-icon--red {
+                            background: rgba(227, 6, 19, 0.06);
+                            color: var(--nk-red);
+                            border-color: rgba(227, 6, 19, 0.1);
+                        }
+                        .contact-icon--red::before { background: var(--nk-red); }
                         .contact-icon svg {
-                            width: 26px;
-                            height: 26px;
-                            transition: all 0.4s var(--ease);
+                            width: 22px;
+                            height: 22px;
                             stroke: currentColor;
                             stroke-width: 2;
                             fill: none;
+                            position: relative;
+                            z-index: 2;
+                            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                         }
-                        .contact-item:hover .contact-icon, .social-icon-wrapper:hover .contact-icon {
+                        .contact-item:hover .contact-icon,
+                        .social-icon-wrapper:hover .contact-icon {
+                            border-color: transparent;
+                            transform: translateY(-3px);
+                        }
+                        .contact-item:hover .contact-icon::before,
+                        .social-icon-wrapper:hover .contact-icon::before {
+                            opacity: 1;
+                        }
+                        .contact-item:hover .contact-icon svg,
+                        .social-icon-wrapper:hover .contact-icon svg {
+                            color: #ffffff;
                             transform: scale(1.1);
-                            background: var(--nk-blue);
-                            color: var(--nk-white);
                         }
-                        .contact-item:hover .contact-icon--red, .social-icon-wrapper:hover .contact-icon--red {
-                            background: var(--nk-red);
-                        }
-                        
                         .social-icon-wrapper .contact-icon {
-                            width: 38px; height: 38px; 
-                            border-radius: 10px;
-                        }
-                        .social-icon-wrapper .contact-icon svg {
-                            width: 20px; height: 20px;
+                            width: 44px; height: 44px;
                         }
                     </style>
                     <!-- 1. Основная информация -->
