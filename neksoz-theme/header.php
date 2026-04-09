@@ -7,7 +7,7 @@
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
            NEKSOZ.LUXURY — Premium Corporate Design System v2
@@ -45,8 +45,8 @@
             --nk-gray-900: #101828;
 
             /* ── Typography ── */
-            --font-display: 'Golos Text', 'Montserrat', sans-serif;
-            --font-body: 'Roboto', 'Inter', sans-serif;
+            --font-display: 'Noto Serif', serif;
+            --font-body: 'Montserrat', sans-serif;
 
             /* ── Geometry ── */
             --radius-sm: 4px;
@@ -246,20 +246,20 @@
         .lang-switcher {
             display: flex;
             align-items: center;
-            background: rgba(0, 13, 51, 0.04);
+            background: rgba(0, 13, 51, 0.03);
             border-radius: 100px;
-            padding: 4px;
-            gap: 2px;
-            border: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 3px;
+            gap: 1px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
             margin-left: auto;
         }
 
         .lang-switcher__item {
             font-family: var(--font-display);
-            font-size: 13px;
-            font-weight: 800;
+            font-size: 11px;
+            font-weight: 700;
             color: var(--nk-gray-400);
-            padding: 10px 18px;
+            padding: 8px 14px;
             border-radius: 100px;
             transition: all 0.3s var(--ease);
             text-transform: uppercase;
@@ -269,13 +269,13 @@
 
         .lang-switcher__item:hover {
             color: var(--nk-blue);
-            background: rgba(255, 255, 255, 0.5);
         }
 
         .lang-switcher__item.is-active {
-            background: var(--nk-grad-brand);
-            color: var(--nk-white);
-            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.25);
+            background: var(--nk-white);
+            color: var(--nk-blue);
+            box-shadow: 0 2px 8px rgba(0, 13, 51, 0.06);
+            font-weight: 800;
         }
 
         /* ============================================================
@@ -404,10 +404,10 @@
             font-family: var(--font-display);
             font-size: clamp(4rem, 10vw, 7.5rem);
             font-weight: 900;
-            line-height: 0.95;
+            line-height: 1.15;
             color: var(--nk-white);
             margin-bottom: 32px;
-            letter-spacing: -0.05em;
+            letter-spacing: -0.02em;
             text-transform: none;
         }
 
@@ -788,15 +788,17 @@
             font-size: clamp(2rem, 4vw, 2.75rem);
             font-weight: 800;
             color: var(--nk-gray-900);
-            line-height: 1.15;
+            line-height: 1.2;
             margin-bottom: 16px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
         
         .section__title--huge {
-            font-size: clamp(2.5rem, 6vw, 3.8rem);
-            margin-bottom: 24px;
-            line-height: 1.1;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 32px;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            font-weight: 900;
         }
 
         .section__subtitle { font-size: 1.05rem; color: var(--nk-gray-400); max-width: 100% !important; line-height: 1.65; font-weight: 400; }
@@ -1693,7 +1695,7 @@
         $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
         $nav_texts = [
             'ru' => ['Главная', 'Услуги', 'О компании', 'Новости', 'Вакансии', 'Контакты'],
-            'tj' => ['Асосӣ', 'Хидматрасониҳо', 'Дар бораи ширкат', 'Ахбор', 'Ҷойҳои корӣ', 'Тамос'],
+            'tj' => ['Асосӣ', 'Хидматрасониҳо', 'Дар бораи мо', 'Ахбор', 'Ҷойҳои корӣ', 'Тамос'],
             'en' => ['Home', 'Services', 'About us', 'News', 'Careers', 'Contacts']
         ];
         $texts = isset($nav_texts[$current_lang]) ? $nav_texts[$current_lang] : $nav_texts['ru'];

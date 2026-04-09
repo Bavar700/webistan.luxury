@@ -24,8 +24,8 @@ function nexoz_scripts() {
     // Tailwind CSS CDN (Script for JIT)
     wp_enqueue_script( 'tailwind', 'https://cdn.tailwindcss.com', array(), null, false );
     
-    // Google Fonts: Inter, Rock Salt & Playfair Display (Solid/Classic)
-    wp_enqueue_style( 'nexoz-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Rock+Salt&family=Playfair+Display:ital,wght@0,700;1,700&display=swap', array(), null );
+    // Google Fonts: Montserrat, Noto Serif (Standard for high-end editorial and universal support)
+    wp_enqueue_style( 'nexoz-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap', array(), null );
     
     // Custom Style (just in case)
     wp_enqueue_style( 'nexoz-main', get_stylesheet_uri(), array('nexoz-fonts'), time() );
@@ -42,7 +42,8 @@ function nexoz_scripts() {
                         'accent-blue': '#0044CC',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Noto Serif', 'serif'],
                     }
                 }
             }
@@ -56,8 +57,8 @@ function nexoz_register_cpts() {
     // Services
     register_post_type( 'services', array(
         'labels' => array(
-            'name' => 'Ð£ÑÐ»ÑƒÐ³Ð¸',
-            'singular_name' => 'Ð£ÑÐ»ÑƒÐ³Ð°'
+            'name' => 'Услуги',
+            'singular_name' => 'Услуга'
         ),
         'public' => true,
         'has_archive' => true,
@@ -69,8 +70,8 @@ function nexoz_register_cpts() {
     // Cases
     register_post_type( 'cases', array(
         'labels' => array(
-            'name' => 'ÐšÐµÐ¹ÑÑ‹',
-            'singular_name' => 'ÐšÐµÐ¹Ñ'
+            'name' => 'Кейсы',
+            'singular_name' => 'Кейс'
         ),
         'public' => true,
         'has_archive' => true,
@@ -85,7 +86,7 @@ add_action( 'init', 'nexoz_register_cpts' );
 function nexoz_the_logo() {
     $logo_url = get_template_directory_uri() . '/assets/images/logo.png';
     echo '<a href="' . esc_url( home_url( '/' ) ) . '" class="flex items-center">';
-    echo '<img src="' . esc_url( $logo_url ) . '" alt="ÐÐµÐºÑÐ¾Ð·" class="h-10 w-auto">';
+    echo '<img src="' . esc_url( $logo_url ) . '" alt="Нексоз" class="h-10 w-auto">';
     echo '</a>';
 }
 
@@ -138,4 +139,3 @@ function nk_get_current_lang() {
     }
     return "ru"; // Default
 }
-
