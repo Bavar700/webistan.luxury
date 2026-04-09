@@ -431,7 +431,7 @@ get_header();
             <div class="why-cards">
                 <!-- Info 1 -->
                 <div class="why-card fade-up">
-                    <div class="why-card__icon" style="color: var(--nk-blue); border-color: rgba(0,68,204,0.2);">
+                    <div class="why-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20m10-10H2"/></svg>
                     </div>
                     <h3 class="why-card__title">Экспертная среда</h3>
@@ -439,7 +439,7 @@ get_header();
                 </div>
                 <!-- Info 2 -->
                 <div class="why-card fade-up" style="animation-delay: 0.1s;">
-                    <div class="why-card__icon" style="color: var(--nk-red); border-color: rgba(227,6,19,0.2);">
+                    <div class="why-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                     </div>
                     <h3 class="why-card__title">Карьерная траектория</h3>
@@ -447,7 +447,7 @@ get_header();
                 </div>
                 <!-- Info 3 -->
                 <div class="why-card fade-up" style="animation-delay: 0.15s;">
-                    <div class="why-card__icon" style="color: var(--nk-blue); border-color: rgba(0,68,204,0.2);">
+                    <div class="why-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                     </div>
                     <h3 class="why-card__title">Инвестиции в знания</h3>
@@ -455,7 +455,7 @@ get_header();
                 </div>
                 <!-- Info 4 -->
                 <div class="why-card fade-up" style="animation-delay: 0.2s;">
-                    <div class="why-card__icon" style="color: var(--nk-red); border-color: rgba(227,6,19,0.2);">
+                    <div class="why-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                     </div>
                     <h3 class="why-card__title">Технологичность</h3>
@@ -463,7 +463,7 @@ get_header();
                 </div>
                 <!-- Info 5 -->
                 <div class="why-card fade-up" style="animation-delay: 0.25s;">
-                    <div class="why-card__icon" style="color: var(--nk-blue); border-color: rgba(0,68,204,0.2);">
+                    <div class="why-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>
                     <h3 class="why-card__title">Офис класса «А»</h3>
