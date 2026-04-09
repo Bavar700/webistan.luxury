@@ -26,8 +26,6 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ../neksoz-theme:/var/www/html/wp-content/themes/neksoz
-      - ../neksoz-variant-desktop:/var/www/html/wp-content/themes/neksoz-desk
-      - ../neksoz-variant-3pm:/var/www/html/wp-content/themes/neksoz-3pm
 
 volumes:
   db_data:
