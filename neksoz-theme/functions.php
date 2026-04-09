@@ -124,3 +124,18 @@ function nexoz_auto_create_pages() {
     }
 }
 add_action('init', 'nexoz_auto_create_pages');
+
+/* ============================================================ */
+/* LANGUAGE SWITCHER LOGIC                                        */
+/* ============================================================ */
+function nk_get_current_lang() {
+    if (isset($_GET["lang"])) {
+        $lang = sanitize_text_field($_GET["lang"]);
+        setcookie("nk_lang", $lang, time() + YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN);
+        return $lang;
+    } elseif (isset($_COOKIE["nk_lang"])) {
+        return $_COOKIE["nk_lang"];
+    }
+    return "ru"; // Default
+}
+

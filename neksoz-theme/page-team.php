@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 /**
- * Template Name: Команда V3
+ * Template Name: ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° V3
  */
 get_header();
 ?>
 
 <style>
-/* ── Team Layout ─────────────────────────────────────── */
+/* â”€â”€ Team Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .team-container {
     padding: 100px 0;
     max-width: 1400px;
@@ -26,7 +26,7 @@ get_header();
     .team-grid { grid-template-columns: 1fr; }
 }
 
-/* ── Team Card: Platinum V3 ────────────────────────────── */
+/* â”€â”€ Team Card: Platinum V3 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .expert-card {
     background: var(--nk-white);
     border-radius: var(--radius-lg);
@@ -140,7 +140,7 @@ get_header();
     font-weight: 400;
 }
 
-/* ── HR Block ────────────────────────────────────────── */
+/* â”€â”€ HR Block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .hr-block {
     background: var(--nk-white);
     border-radius: var(--radius-xl);
@@ -189,7 +189,7 @@ get_header();
 
 <main class="site-main">
 
-    <!-- ═══════════ PHILOSOPHY HERO ═══════════ -->
+    <!-- â•â•â•â•â•â•â•â•â•â•â• PHILOSOPHY HERO â•â•â•â•â•â•â•â•â•â•â• -->
     <section class="hero hero--internal">
         <div class="hero__geo"></div>
         <div class="hero__grid-pattern"></div>
@@ -198,14 +198,14 @@ get_header();
 
         <div class="container hero__container">
             <div class="hero__content" style="max-width: 900px;">
-                <div class="hero__badge">Команда Neksoz</div>
+                <div class="hero__badge">ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° Neksoz</div>
                 <h1 class="hero__title">
-                    Философия<br>
-                    <span class="text-gradient">экспертности</span><br>
-                    <span style="color: var(--nk-blue);">интеллекта</span>
+                    Ð¤Ð¸Ð»Ð¾ÑÐ¾Ñ„Ð¸Ñ<br>
+                    <span class="text-gradient">ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð½Ð¾ÑÑ‚Ð¸</span><br>
+                    <span style="color: var(--nk-blue);">Ð¸Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚Ð°</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 750px; color: rgba(255,255,255,0.85); font-size: 1.1rem;">
-                    «За каждой цифрой в отчете и каждой строчкой в договоре стоит интеллект наших экспертов. Мы объединили профессионалов из разных отраслей — от банковского дела до налогового права — чтобы вы получали комплексную защиту вашего бизнеса со всех сторон».
+                    Â«Ð—Ð° ÐºÐ°Ð¶Ð´Ð¾Ð¹ Ñ†Ð¸Ñ„Ñ€Ð¾Ð¹ Ð² Ð¾Ñ‚Ñ‡ÐµÑ‚Ðµ Ð¸ ÐºÐ°Ð¶Ð´Ð¾Ð¹ ÑÑ‚Ñ€Ð¾Ñ‡ÐºÐ¾Ð¹ Ð² Ð´Ð¾Ð³Ð¾Ð²Ð¾Ñ€Ðµ ÑÑ‚Ð¾Ð¸Ñ‚ Ð¸Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚ Ð½Ð°ÑˆÐ¸Ñ… ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð¾Ð². ÐœÑ‹ Ð¾Ð±ÑŠÐµÐ´Ð¸Ð½Ð¸Ð»Ð¸ Ð¿Ñ€Ð¾Ñ„ÐµÑÑÐ¸Ð¾Ð½Ð°Ð»Ð¾Ð² Ð¸Ð· Ñ€Ð°Ð·Ð½Ñ‹Ñ… Ð¾Ñ‚Ñ€Ð°ÑÐ»ÐµÐ¹ â€” Ð¾Ñ‚ Ð±Ð°Ð½ÐºÐ¾Ð²ÑÐºÐ¾Ð³Ð¾ Ð´ÐµÐ»Ð° Ð´Ð¾ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ Ð¿Ñ€Ð°Ð²Ð° â€” Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ñ‹ Ð¿Ð¾Ð»ÑƒÑ‡Ð°Ð»Ð¸ ÐºÐ¾Ð¼Ð¿Ð»ÐµÐºÑÐ½ÑƒÑŽ Ð·Ð°Ñ‰Ð¸Ñ‚Ñƒ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ° ÑÐ¾ Ð²ÑÐµÑ… ÑÑ‚Ð¾Ñ€Ð¾Ð½Â».
                 </p>
             </div>
             
@@ -217,16 +217,16 @@ get_header();
         </div>
     </section>
 
-    <!-- ═══════════ EXPERTS GRID ═══════════ -->
+    <!-- â•â•â•â•â•â•â•â•â•â•â• EXPERTS GRID â•â•â•â•â•â•â•â•â•â•â• -->
     <section class="section section--gray">
         <div class="container team-container">
 
             <!-- Transition Block -->
             <div class="section__header section__header--center fade-up" style="max-width: 800px; margin: 0 auto 80px;">
-                <div class="section__label">Компетенции</div>
-                <h2 class="section__title">Мастерство, подтвержденное годами практики</h2>
+                <div class="section__label">ÐšÐ¾Ð¼Ð¿ÐµÑ‚ÐµÐ½Ñ†Ð¸Ð¸</div>
+                <h2 class="section__title">ÐœÐ°ÑÑ‚ÐµÑ€ÑÑ‚Ð²Ð¾, Ð¿Ð¾Ð´Ñ‚Ð²ÐµÑ€Ð¶Ð´ÐµÐ½Ð½Ð¾Ðµ Ð³Ð¾Ð´Ð°Ð¼Ð¸ Ð¿Ñ€Ð°ÐºÑ‚Ð¸ÐºÐ¸</h2>
                 <p class="section__subtitle" style="font-size: 1.2rem; color: var(--nk-gray-600);">
-                    Мы не просто консультируем — мы погружаемся в специфику вашего бизнеса, обеспечивая юридическую чистоту и финансовую устойчивость на каждом этапе&nbsp;развития.
+                    ÐœÑ‹ Ð½Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð¸Ñ€ÑƒÐµÐ¼ â€” Ð¼Ñ‹ Ð¿Ð¾Ð³Ñ€ÑƒÐ¶Ð°ÐµÐ¼ÑÑ Ð² ÑÐ¿ÐµÑ†Ð¸Ñ„Ð¸ÐºÑƒ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ°, Ð¾Ð±ÐµÑÐ¿ÐµÑ‡Ð¸Ð²Ð°Ñ ÑŽÑ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÑƒÑŽ Ñ‡Ð¸ÑÑ‚Ð¾Ñ‚Ñƒ Ð¸ Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²ÑƒÑŽ ÑƒÑÑ‚Ð¾Ð¹Ñ‡Ð¸Ð²Ð¾ÑÑ‚ÑŒ Ð½Ð° ÐºÐ°Ð¶Ð´Ð¾Ð¼ ÑÑ‚Ð°Ð¿Ðµ&nbsp;Ñ€Ð°Ð·Ð²Ð¸Ñ‚Ð¸Ñ.
                 </p>
             </div>
             
@@ -235,22 +235,22 @@ get_header();
                 <!-- Expert 1 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-3.jpg" alt="Салимов Зоир Муминович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-3.jpg" alt="Ð¡Ð°Ð»Ð¸Ð¼Ð¾Ð² Ð—Ð¾Ð¸Ñ€ ÐœÑƒÐ¼Ð¸Ð½Ð¾Ð²Ð¸Ñ‡" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Директор / Основатель</div>
-                        <h3 class="expert-card__name">Салимов Зоир Муминович</h3>
+                        <div class="expert-card__role">Ð”Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€ / ÐžÑÐ½Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ</div>
+                        <h3 class="expert-card__name">Ð¡Ð°Ð»Ð¸Ð¼Ð¾Ð² Ð—Ð¾Ð¸Ñ€ ÐœÑƒÐ¼Ð¸Ð½Ð¾Ð²Ð¸Ñ‡</h3>
                         <div class="expert-card__regalia">ACCA, CAP/CIPA</div>
-                        <p class="expert-card__spec">Стратегическое управление, аудит и налоговое планирование для международного бизнеса.</p>
+                        <p class="expert-card__spec">Ð¡Ñ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ, Ð°ÑƒÐ´Ð¸Ñ‚ Ð¸ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ðµ Ð¿Ð»Ð°Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð´Ð»Ñ Ð¼ÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ°.</p>
                         
                         <div class="expert-card__meta">
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">15+ лет</span>
+                                <span class="expert-card__label">ÐžÐ¿Ñ‹Ñ‚:</span>
+                                <span class="expert-card__value">15+ Ð»ÐµÑ‚</span>
                             </div>
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ТНУ, Экономика</span>
+                                <span class="expert-card__label">ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ:</span>
+                                <span class="expert-card__value">Ð¢ÐÐ£, Ð­ÐºÐ¾Ð½Ð¾Ð¼Ð¸ÐºÐ°</span>
                             </div>
                         </div>
                     </div>
@@ -259,22 +259,22 @@ get_header();
                 <!-- Expert 2 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-1.jpg" alt="Фатхуддинзода Диловар Каромат" class="expert-card__img expert-card__img--top">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-1.jpg" alt="Ð¤Ð°Ñ‚Ñ…ÑƒÐ´Ð´Ð¸Ð½Ð·Ð¾Ð´Ð° Ð”Ð¸Ð»Ð¾Ð²Ð°Ñ€ ÐšÐ°Ñ€Ð¾Ð¼Ð°Ñ‚" class="expert-card__img expert-card__img--top">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Старший юрист</div>
-                        <h3 class="expert-card__name">Фатхуддинзода Диловар Каромат</h3>
-                        <div class="expert-card__regalia">LLM, Юрист года</div>
-                        <p class="expert-card__spec">Корпоративное право, арбитражная практика и правовое сопровождение инвестиционных проектов.</p>
+                        <div class="expert-card__role">Ð¡Ñ‚Ð°Ñ€ÑˆÐ¸Ð¹ ÑŽÑ€Ð¸ÑÑ‚</div>
+                        <h3 class="expert-card__name">Ð¤Ð°Ñ‚Ñ…ÑƒÐ´Ð´Ð¸Ð½Ð·Ð¾Ð´Ð° Ð”Ð¸Ð»Ð¾Ð²Ð°Ñ€ ÐšÐ°Ñ€Ð¾Ð¼Ð°Ñ‚</h3>
+                        <div class="expert-card__regalia">LLM, Ð®Ñ€Ð¸ÑÑ‚ Ð³Ð¾Ð´Ð°</div>
+                        <p class="expert-card__spec">ÐšÐ¾Ñ€Ð¿Ð¾Ñ€Ð°Ñ‚Ð¸Ð²Ð½Ð¾Ðµ Ð¿Ñ€Ð°Ð²Ð¾, Ð°Ñ€Ð±Ð¸Ñ‚Ñ€Ð°Ð¶Ð½Ð°Ñ Ð¿Ñ€Ð°ÐºÑ‚Ð¸ÐºÐ° Ð¸ Ð¿Ñ€Ð°Ð²Ð¾Ð²Ð¾Ðµ ÑÐ¾Ð¿Ñ€Ð¾Ð²Ð¾Ð¶Ð´ÐµÐ½Ð¸Ðµ Ð¸Ð½Ð²ÐµÑÑ‚Ð¸Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ñ… Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð¾Ð².</p>
                         
                         <div class="expert-card__meta">
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">14 лет</span>
+                                <span class="expert-card__label">ÐžÐ¿Ñ‹Ñ‚:</span>
+                                <span class="expert-card__value">14 Ð»ÐµÑ‚</span>
                             </div>
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ГЮУ, Магистр права</span>
+                                <span class="expert-card__label">ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ:</span>
+                                <span class="expert-card__value">Ð“Ð®Ð£, ÐœÐ°Ð³Ð¸ÑÑ‚Ñ€ Ð¿Ñ€Ð°Ð²Ð°</span>
                             </div>
                         </div>
                     </div>
@@ -283,22 +283,22 @@ get_header();
                 <!-- Expert 3 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ширинов Рустам Сухробович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ð¨Ð¸Ñ€Ð¸Ð½Ð¾Ð² Ð ÑƒÑÑ‚Ð°Ð¼ Ð¡ÑƒÑ…Ñ€Ð¾Ð±Ð¾Ð²Ð¸Ñ‡" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Ведущий бухгалтер</div>
-                        <h3 class="expert-card__name">Ширинов Рустам Сухробович</h3>
-                        <div class="expert-card__regalia">CAP, Сертиф. Бухгалтер</div>
-                        <p class="expert-card__spec">Ведение сложного бухгалтерского и налогового учета, подготовка финансовой отчетности и аудит.</p>
+                        <div class="expert-card__role">Ð’ÐµÐ´ÑƒÑ‰Ð¸Ð¹ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€</div>
+                        <h3 class="expert-card__name">Ð¨Ð¸Ñ€Ð¸Ð½Ð¾Ð² Ð ÑƒÑÑ‚Ð°Ð¼ Ð¡ÑƒÑ…Ñ€Ð¾Ð±Ð¾Ð²Ð¸Ñ‡</h3>
+                        <div class="expert-card__regalia">CAP, Ð¡ÐµÑ€Ñ‚Ð¸Ñ„. Ð‘ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€</div>
+                        <p class="expert-card__spec">Ð’ÐµÐ´ÐµÐ½Ð¸Ðµ ÑÐ»Ð¾Ð¶Ð½Ð¾Ð³Ð¾ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€ÑÐºÐ¾Ð³Ð¾ Ð¸ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ð³Ð¾ ÑƒÑ‡ÐµÑ‚Ð°, Ð¿Ð¾Ð´Ð³Ð¾Ñ‚Ð¾Ð²ÐºÐ° Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð¹ Ð¾Ñ‚Ñ‡ÐµÑ‚Ð½Ð¾ÑÑ‚Ð¸ Ð¸ Ð°ÑƒÐ´Ð¸Ñ‚.</p>
                         
                         <div class="expert-card__meta">
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">8 лет</span>
+                                <span class="expert-card__label">ÐžÐ¿Ñ‹Ñ‚:</span>
+                                <span class="expert-card__value">8 Ð»ÐµÑ‚</span>
                             </div>
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ТНУ, Бухгалтерский учет</span>
+                                <span class="expert-card__label">ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ:</span>
+                                <span class="expert-card__value">Ð¢ÐÐ£, Ð‘ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€ÑÐºÐ¸Ð¹ ÑƒÑ‡ÐµÑ‚</span>
                             </div>
                         </div>
                     </div>
@@ -307,22 +307,22 @@ get_header();
                 <!-- Expert 4 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Курбонов Шохрух Камолуддинович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="ÐšÑƒÑ€Ð±Ð¾Ð½Ð¾Ð² Ð¨Ð¾Ñ…Ñ€ÑƒÑ… ÐšÐ°Ð¼Ð¾Ð»ÑƒÐ´Ð´Ð¸Ð½Ð¾Ð²Ð¸Ñ‡" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Ведущий бухгалтер</div>
-                        <h3 class="expert-card__name">Курбонов Шохрух Камолуддинович</h3>
-                        <div class="expert-card__regalia">CAP, Сертиф. Бухгалтер</div>
-                        <p class="expert-card__spec">Комплексное бухгалтерское сопровождение, автоматизация учета в 1С и налоговое консультирование.</p>
+                        <div class="expert-card__role">Ð’ÐµÐ´ÑƒÑ‰Ð¸Ð¹ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€</div>
+                        <h3 class="expert-card__name">ÐšÑƒÑ€Ð±Ð¾Ð½Ð¾Ð² Ð¨Ð¾Ñ…Ñ€ÑƒÑ… ÐšÐ°Ð¼Ð¾Ð»ÑƒÐ´Ð´Ð¸Ð½Ð¾Ð²Ð¸Ñ‡</h3>
+                        <div class="expert-card__regalia">CAP, Ð¡ÐµÑ€Ñ‚Ð¸Ñ„. Ð‘ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€</div>
+                        <p class="expert-card__spec">ÐšÐ¾Ð¼Ð¿Ð»ÐµÐºÑÐ½Ð¾Ðµ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€ÑÐºÐ¾Ðµ ÑÐ¾Ð¿Ñ€Ð¾Ð²Ð¾Ð¶Ð´ÐµÐ½Ð¸Ðµ, Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ñ ÑƒÑ‡ÐµÑ‚Ð° Ð² 1Ð¡ Ð¸ Ð½Ð°Ð»Ð¾Ð³Ð¾Ð²Ð¾Ðµ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ.</p>
                         
                         <div class="expert-card__meta">
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">10 лет</span>
+                                <span class="expert-card__label">ÐžÐ¿Ñ‹Ñ‚:</span>
+                                <span class="expert-card__value">10 Ð»ÐµÑ‚</span>
                             </div>
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ДАТ, Финансы и кредит</span>
+                                <span class="expert-card__label">ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ:</span>
+                                <span class="expert-card__value">Ð”ÐÐ¢, Ð¤Ð¸Ð½Ð°Ð½ÑÑ‹ Ð¸ ÐºÑ€ÐµÐ´Ð¸Ñ‚</span>
                             </div>
                         </div>
                     </div>
@@ -331,21 +331,21 @@ get_header();
                 <!-- Expert 5 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-4.jpg" alt="Ливенгуд Джастин Рег" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-4.jpg" alt="Ð›Ð¸Ð²ÐµÐ½Ð³ÑƒÐ´ Ð”Ð¶Ð°ÑÑ‚Ð¸Ð½ Ð ÐµÐ³" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Менеджер по развитию бизнеса</div>
-                        <h3 class="expert-card__name">Ливенгуд Джастин Рег</h3>
+                        <div class="expert-card__role">ÐœÐµÐ½ÐµÐ´Ð¶ÐµÑ€ Ð¿Ð¾ Ñ€Ð°Ð·Ð²Ð¸Ñ‚Ð¸ÑŽ Ð±Ð¸Ð·Ð½ÐµÑÐ°</div>
+                        <h3 class="expert-card__name">Ð›Ð¸Ð²ÐµÐ½Ð³ÑƒÐ´ Ð”Ð¶Ð°ÑÑ‚Ð¸Ð½ Ð ÐµÐ³</h3>
                         <div class="expert-card__regalia">MBA, Global Strategy</div>
-                        <p class="expert-card__spec">Масштабирование бизнеса, поиск новых партнерств и вывод компании на международные рынки консалтинга.</p>
+                        <p class="expert-card__spec">ÐœÐ°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð±Ð¸Ð·Ð½ÐµÑÐ°, Ð¿Ð¾Ð¸ÑÐº Ð½Ð¾Ð²Ñ‹Ñ… Ð¿Ð°Ñ€Ñ‚Ð½ÐµÑ€ÑÑ‚Ð² Ð¸ Ð²Ñ‹Ð²Ð¾Ð´ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸ Ð½Ð° Ð¼ÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ñ‹Ðµ Ñ€Ñ‹Ð½ÐºÐ¸ ÐºÐ¾Ð½ÑÐ°Ð»Ñ‚Ð¸Ð½Ð³Ð°.</p>
                         
                         <div class="expert-card__meta">
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">20+ лет</span>
+                                <span class="expert-card__label">ÐžÐ¿Ñ‹Ñ‚:</span>
+                                <span class="expert-card__value">20+ Ð»ÐµÑ‚</span>
                             </div>
                             <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
+                                <span class="expert-card__label">ÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ:</span>
                                 <span class="expert-card__value">State Univ, MBA</span>
                             </div>
                         </div>
@@ -357,12 +357,12 @@ get_header();
             <!-- HR Block -->
             <div class="hr-block fade-up">
                 <div class="hr-block__content">
-                    <h2 class="hr-block__title">Хотите стать частью команды?</h2>
-                    <p class="hr-block__text">Мы всегда рады талантливым бухгалтерам, аудиторам и юристам, которые разделяют наши ценности и стремятся к профессиональному росту. Если вы готовы решать сложные задачи и создавать ценность для бизнеса — нам по пути.</p>
+                    <h2 class="hr-block__title">Ð¥Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑÑ‚Ð°Ñ‚ÑŒ Ñ‡Ð°ÑÑ‚ÑŒÑŽ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹?</h2>
+                    <p class="hr-block__text">ÐœÑ‹ Ð²ÑÐµÐ³Ð´Ð° Ñ€Ð°Ð´Ñ‹ Ñ‚Ð°Ð»Ð°Ð½Ñ‚Ð»Ð¸Ð²Ñ‹Ð¼ Ð±ÑƒÑ…Ð³Ð°Ð»Ñ‚ÐµÑ€Ð°Ð¼, Ð°ÑƒÐ´Ð¸Ñ‚Ð¾Ñ€Ð°Ð¼ Ð¸ ÑŽÑ€Ð¸ÑÑ‚Ð°Ð¼, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ñ€Ð°Ð·Ð´ÐµÐ»ÑÑŽÑ‚ Ð½Ð°ÑˆÐ¸ Ñ†ÐµÐ½Ð½Ð¾ÑÑ‚Ð¸ Ð¸ ÑÑ‚Ñ€ÐµÐ¼ÑÑ‚ÑÑ Ðº Ð¿Ñ€Ð¾Ñ„ÐµÑÑÐ¸Ð¾Ð½Ð°Ð»ÑŒÐ½Ð¾Ð¼Ñƒ Ñ€Ð¾ÑÑ‚Ñƒ. Ð•ÑÐ»Ð¸ Ð²Ñ‹ Ð³Ð¾Ñ‚Ð¾Ð²Ñ‹ Ñ€ÐµÑˆÐ°Ñ‚ÑŒ ÑÐ»Ð¾Ð¶Ð½Ñ‹Ðµ Ð·Ð°Ð´Ð°Ñ‡Ð¸ Ð¸ ÑÐ¾Ð·Ð´Ð°Ð²Ð°Ñ‚ÑŒ Ñ†ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ Ð´Ð»Ñ Ð±Ð¸Ð·Ð½ÐµÑÐ° â€” Ð½Ð°Ð¼ Ð¿Ð¾ Ð¿ÑƒÑ‚Ð¸.</p>
                 </div>
                 <div class="hr-block__actions">
                     <a href="<?php echo home_url('/vacancies'); ?>" class="btn btn--primary" style="width: 100%;">
-                        <span>Отправить резюме</span>
+                        <span>ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ Ñ€ÐµÐ·ÑŽÐ¼Ðµ</span>
                         <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
                 </div>
@@ -398,3 +398,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php get_footer(); ?>
+

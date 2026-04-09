@@ -7,7 +7,7 @@
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
            NEKSOZ.LUXURY — Premium Corporate Design System v2
@@ -45,8 +45,8 @@
             --nk-gray-900: #101828;
 
             /* ── Typography ── */
-            --font-display: 'Montserrat', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            --font-display: 'Golos Text', 'Montserrat', sans-serif;
+            --font-body: 'Roboto', 'Inter', sans-serif;
 
             /* ── Geometry ── */
             --radius-sm: 4px;
@@ -251,15 +251,15 @@
             padding: 4px;
             gap: 2px;
             border: 1px solid rgba(0, 0, 0, 0.03);
-            margin-right: 10px;
+            margin-left: auto;
         }
 
         .lang-switcher__item {
             font-family: var(--font-display);
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 800;
             color: var(--nk-gray-400);
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 100px;
             transition: all 0.3s var(--ease);
             text-transform: uppercase;
@@ -273,9 +273,9 @@
         }
 
         .lang-switcher__item.is-active {
-            background: var(--nk-grad-blue);
+            background: var(--nk-grad-brand);
             color: var(--nk-white);
-            box-shadow: 0 4px 15px rgba(0, 68, 204, 0.25);
+            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.25);
         }
 
         /* ============================================================
@@ -1689,20 +1689,29 @@
         <a href="<?php echo home_url('/'); ?>" class="header__logo-link">
             <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
+        <?php
+        $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
+        $nav_texts = [
+            'ru' => ['Главная', 'Услуги', 'О компании', 'Новости', 'Вакансии', 'Контакты'],
+            'tj' => ['Асосӣ', 'Хидматрасониҳо', 'Дар бораи ширкат', 'Ахбор', 'Ҷойҳои корӣ', 'Тамос'],
+            'en' => ['Home', 'Services', 'About us', 'News', 'Careers', 'Contacts']
+        ];
+        $texts = isset($nav_texts[$current_lang]) ? $nav_texts[$current_lang] : $nav_texts['ru'];
+        ?>
         <nav class="header__nav">
-            <a href="<?php echo home_url('/'); ?>">Главная</a>
-            <a href="<?php echo home_url('/#services'); ?>">Услуги</a>
-            <a href="<?php echo home_url('/about'); ?>">О компании</a>
-            <a href="<?php echo home_url('/news'); ?>">Новости</a>
-            <a href="<?php echo home_url('/vacancies'); ?>">Вакансии</a>
-            <a href="<?php echo home_url('/contacts'); ?>">Контакты</a>
+            <a href="<?php echo home_url('/'); ?>"><?php echo $texts[0]; ?></a>
+            <a href="<?php echo home_url('/#services'); ?>"><?php echo $texts[1]; ?></a>
+            <a href="<?php echo home_url('/about'); ?>"><?php echo $texts[2]; ?></a>
+            <a href="<?php echo home_url('/news'); ?>"><?php echo $texts[3]; ?></a>
+            <a href="<?php echo home_url('/vacancies'); ?>"><?php echo $texts[4]; ?></a>
+            <a href="<?php echo home_url('/contacts'); ?>"><?php echo $texts[5]; ?></a>
         </nav>
         <div class="header__actions">
             <!-- Language Switcher -->
             <div class="lang-switcher">
-                <a href="?lang=en" class="lang-switcher__item">EN</a>
-                <a href="?lang=tj" class="lang-switcher__item">TJ</a>
-                <a href="?lang=ru" class="lang-switcher__item is-active">RU</a>
+                <a href="?lang=en" class="lang-switcher__item <?php echo $current_lang == 'en' ? 'is-active' : ''; ?>">EN</a>
+                <a href="?lang=tj" class="lang-switcher__item <?php echo $current_lang == 'tj' ? 'is-active' : ''; ?>">TJ</a>
+                <a href="?lang=ru" class="lang-switcher__item <?php echo $current_lang == 'ru' ? 'is-active' : ''; ?>">RU</a>
             </div>
             
             <!-- Mobile Toggle -->
