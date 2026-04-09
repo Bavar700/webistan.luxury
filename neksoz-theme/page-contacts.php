@@ -54,37 +54,87 @@ get_header();
             <div class="cta-crystal__grid" style="align-items: stretch;">
                 
                 <!-- Left Side: Contact Information (Light Crystal Card) -->
-                <div style="background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 13, 51, 0.05); border-radius: 32px; padding: 50px; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 2;">
-                    
+                <div style="background: var(--nk-white); border: 1px solid var(--nk-gray-50); border-radius: 32px; padding: 50px; box-shadow: 0 10px 30px rgba(0, 13, 51, 0.03); display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 2;">
+                    <style>
+                        .contact-item {
+                            display: flex; gap: 24px; align-items: flex-start;
+                            padding: 24px 0;
+                            border-bottom: 1px dashed var(--nk-gray-100);
+                            transition: all 0.4s var(--ease);
+                        }
+                        .contact-item:last-child {
+                            border-bottom: none;
+                            padding-bottom: 0;
+                        }
+                        .contact-item:first-child {
+                            padding-top: 0;
+                        }
+                        .contact-icon {
+                            width: 52px;
+                            height: 52px;
+                            background: rgba(0, 13, 51, 0.03);
+                            color: var(--nk-gray-500);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 14px;
+                            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                            flex-shrink: 0;
+                        }
+                        .contact-icon svg {
+                            width: 26px;
+                            height: 26px;
+                            transition: all 0.4s var(--ease);
+                            stroke: currentColor;
+                            stroke-width: 2;
+                            fill: none;
+                        }
+                        .contact-item:hover .contact-icon, .social-icon-wrapper:hover .contact-icon {
+                            transform: scale(1.1);
+                            background: var(--nk-blue);
+                            color: var(--nk-white);
+                        }
+                        .contact-item:hover .contact-icon--red, .social-icon-wrapper:hover .contact-icon--red {
+                            background: var(--nk-red);
+                        }
+                        
+                        .social-icon-wrapper .contact-icon {
+                            width: 38px; height: 38px; 
+                            border-radius: 10px;
+                        }
+                        .social-icon-wrapper .contact-icon svg {
+                            width: 20px; height: 20px;
+                        }
+                    </style>
                     <!-- 1. Основная информация -->
                     <div>
                         <h3 class="cta-crystal__title" style="font-size: 28px; margin-bottom: 24px; text-transform: none; color: var(--nk-gray-900);">Основная информация</h3>
-                        <ul style="list-style: none; padding: 0; display: grid; gap: 24px;">
-                            <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: white; background: var(--nk-grad-brand); padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="contact-item">
+                                <div class="contact-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                 </div>
-                                <div>
-                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 4px; font-weight: 600;">Адрес:</strong>
+                                <div style="padding-top: 4px;">
+                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 6px; font-weight: 600;">Адрес:</strong>
                                     <span style="color: var(--nk-gray-600); line-height: 1.6; font-size: 15px;">734000, Республика Таджикистан,<br>г. Душанбе, проспект Рудаки 55, 3-этаж.</span>
-                                    <span style="display: block; font-size: 13px; color: var(--nk-gray-500); margin-top: 4px;">(Ориентир: Центр города, удобная транспортная доступность)</span>
+                                    <span style="display: block; font-size: 13px; color: var(--nk-gray-500); margin-top: 6px;">(Ориентир: Центр города)</span>
                                 </div>
                             </li>
-                            <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: white; background: var(--nk-grad-brand); padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <li class="contact-item">
+                                <div class="contact-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                 </div>
-                                <div>
-                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 4px; font-weight: 600;">Телефон:</strong>
+                                <div style="padding-top: 14px;">
+                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 6px; font-weight: 600;">Телефон:</strong>
                                     <a href="tel:+992985641010" style="color: var(--nk-gray-900); text-decoration: none; font-size: 18px; font-weight: 500; transition: color 0.3s ease;">+992 985 64-10-10</a>
                                 </div>
                             </li>
-                            <li style="display: flex; gap: 16px; align-items: flex-start;">
-                                <div style="color: white; background: var(--nk-grad-brand); padding: 12px; border-radius: 12px; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            <li class="contact-item">
+                                <div class="contact-icon contact-icon--red">
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                                 </div>
-                                <div>
-                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 4px; font-weight: 600;">E-mail:</strong>
+                                <div style="padding-top: 14px;">
+                                    <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 6px; font-weight: 600;">E-mail:</strong>
                                     <a href="mailto:info@neksoz.tj" style="color: var(--nk-blue); text-decoration: none; font-size: 16px; font-weight: 500;">info@neksoz.tj</a>
                                 </div>
                             </li>
@@ -115,20 +165,17 @@ get_header();
                     <div>
                         <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">Мы в социальных сетях</h3>
                         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <a href="https://t.me/neksoz" class="footer-platinum__social-btn" title="Telegram" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                            <a href="https://t.me/neksoz" class="social-icon-wrapper" title="Telegram">
+                                <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
                             </a>
-                            <a href="https://wa.me/992446000000" class="footer-platinum__social-btn" title="WhatsApp" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+                            <a href="https://wa.me/992446000000" class="social-icon-wrapper" title="WhatsApp">
+                                <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg></div>
                             </a>
-                            <a href="#" class="footer-platinum__social-btn" title="X (Twitter)" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M13.232 10.768L20 4"/></svg>
+                            <a href="#" class="social-icon-wrapper" title="X (Twitter)">
+                                <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M13.232 10.768L20 4"/></svg></div>
                             </a>
-                            <a href="tel:+992446000000" class="footer-platinum__social-btn" title="Позвонить" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            </a>
-                            <a href="mailto:info@neksoz.com" class="footer-platinum__social-btn" title="E-mail" style="background: var(--nk-grad-brand); color: white; border: none; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            <a href="tel:+992446000000" class="social-icon-wrapper" title="Позвонить">
+                                <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
                             </a>
                         </div>
                     </div>

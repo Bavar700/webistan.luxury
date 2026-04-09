@@ -30,49 +30,59 @@ get_header();
 
 .why-card {
     background: var(--nk-white);
-    padding: 85px 48px 60px;
-    border-radius: 32px;
-    border: 1px solid var(--nk-gray-50);
-    transition: all 0.5s var(--ease);
+    padding: 50px 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 13, 51, 0.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 13, 51, 0.03);
+    box-shadow: 0 4px 12px rgba(0, 13, 51, 0.015);
     isolation: isolate;
 }
 
 .why-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 40px 80px rgba(0, 13, 51, 0.08);
-    border-color: rgba(227, 6, 19, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 13, 51, 0.06);
+    border-color: rgba(0, 68, 204, 0.15);
 }
 
 .why-card__icon {
-    width: 52px;
-    height: 52px;
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    opacity: 0.15;
-    background: transparent;
-    color: var(--nk-blue);
+    width: 60px;
+    height: 60px;
+    margin-bottom: 28px;
+    background: rgba(0, 13, 51, 0.03);
+    border-radius: 16px;
+    color: var(--nk-gray-500);
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
-    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .why-card__icon svg {
-    width: 42px;
-    height: 42px;
-    transition: all 0.5s var(--ease);
+    width: 28px;
+    height: 28px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     stroke: currentColor;
+    stroke-width: 2;
     fill: none;
 }
 
 .why-card:hover .why-card__icon {
-    opacity: 1;
-    transform: scale(1.15) rotate(-10deg);
+    transform: scale(1.1);
+    background: var(--nk-blue);
+    color: var(--nk-white);
+}
+
+.why-card--alt .why-card__icon {
+    color: var(--nk-gray-500);
+    background: rgba(0, 13, 51, 0.03);
+}
+
+.why-card--alt:hover .why-card__icon {
+    background: var(--nk-red);
+    color: var(--nk-white);
 }
 
 .why-card__title {
@@ -385,7 +395,7 @@ get_header();
                     Открытые вакансии
                     <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
-                <a href="#apply" class="btn btn--outline-light btn-animated-light">Отправить резюме</a>
+
             </div>
         </div>
     </section>
