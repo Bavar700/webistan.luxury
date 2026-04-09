@@ -18,7 +18,9 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Пресс-центр</div>
                 <h1 class="hero__title">
-                    <span class="text-gradient">Новости</span><br>компании
+                    Главные<br>
+                    <span class="text-gradient">новости и события</span><br>
+                    <span style="color: var(--nk-blue);">neksoz</span>
                 </h1>
                 <p class="hero__desc">
                     Актуальные изменения в законодательстве, события компании и экспертные мнения.

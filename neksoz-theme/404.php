@@ -4,55 +4,115 @@
  */
 get_header(); ?>
 
-<main class="error-page">
-    <section class="error-hero" style="min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 20px; background: radial-gradient(circle at center, rgba(0, 68, 204, 0.05) 0%, transparent 70%); overflow: hidden; position: relative;">
-        
-        <!-- Background Elements -->
-        <div style="position: absolute; top: 20%; left: 10%; width: 300px; height: 300px; background: var(--nk-blue); filter: blur(150px); opacity: 0.03; z-index: 0;"></div>
-        <div style="position: absolute; bottom: 10%; right: 10%; width: 400px; height: 400px; background: var(--nk-blue); filter: blur(180px); opacity: 0.03; z-index: 0;"></div>
-
-        <div class="nx-container" style="position: relative; z-index: 1;">
-            <div class="error-visual" style="position: relative; margin-bottom: 20px;">
-                <!-- Large Decorative Number -->
-                <div style="font-size: clamp(150px, 30vw, 320px); font-weight: 900; color: var(--nk-blue); opacity: 0.04; letter-spacing: -10px; line-height: 0.8; user-select: none;">
-                    404
-                </div>
-                
-                <!-- Main Header -->
-                <div style="margin-top: -40px;">
-                    <h1 style="font-size: clamp(36px, 6vw, 56px); font-family: var(--font-display); color: var(--nk-gray-900); margin-bottom: 24px; font-weight: 700;">
-                        Страница не найдена
-                    </h1>
-                </div>
-            </div>
-            
-            <!-- Description -->
-            <p style="font-size: clamp(16px, 2vw, 20px); color: var(--nk-gray-600); max-width: 640px; margin: 0 auto 56px; line-height: 1.7; font-weight: 400;">
-                К сожалению, запрашиваемый ресурс был перемещен или никогда не существовал в нашей системе координат.
-            </p>
-            
-            <!-- Action Button -->
-            <div style="display: flex; justify-content: center;">
-                <a href="<?php echo home_url(); ?>" class="cta-crystal__btn" style="display: inline-flex; width: auto; padding: 0 48px; height: 64px; text-decoration: none; align-items: center; gap: 12px; transition: transform 0.3s ease;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transform: rotate(0deg);"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-                    <span>Вернуться на главную</span>
-                </a>
-            </div>
-            
-            <!-- Minimal Grid Decoration -->
-            <div style="margin-top: 80px; opacity: 0.1;">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" style="color: var(--nk-blue);">
-                    <path d="M20 0V40M0 20H40" stroke-width="0.5"/>
-                </svg>
-            </div>
-        </div>
-    </section>
-</main>
-
 <style>
-    .error-hero .cta-crystal__btn:hover {
-        transform: translateX(-5px);
-    }
+.error-v3 {
+    min-height: 100vh;
+    background: var(--nk-grad-hero);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    color: var(--nk-white);
+    padding-top: 77px;
+}
+
+.error-v3__geo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.15;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.error-v3__accent-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(227,6,19,0.1) 0%, transparent 70%);
+    filter: blur(80px);
+    z-index: 0;
+}
+
+.error-v3__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 40px;
+}
+
+.error-v3__number {
+    font-family: var(--font-display);
+    font-size: clamp(120px, 20vw, 240px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: -20px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.05em;
+    user-select: none;
+}
+
+.error-v3__title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+.error-v3__text {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 48px;
+    font-weight: 400;
+}
+
+/* Coordinates Crosshair Decoration */
+.error-v3__crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 1px;
+    background: rgba(255,255,255,0.05);
+    transform: translate(-50%, -50%);
+}
+.error-v3__crosshair--v {
+    width: 1px;
+    height: 100vh;
+}
+
 </style>
+
+<main class="error-v3">
+    <!-- Geometric Matrix Background -->
+    <div class="error-v3__geo"></div>
+    <div class="error-v3__crosshair"></div>
+    <div class="error-v3__crosshair error-v3__crosshair--v"></div>
+    <div class="error-v3__accent-orb" style="top: 10%; right: -10%;"></div>
+    <div class="error-v3__accent-orb" style="bottom: -10%; left: -10%; background: radial-gradient(circle, rgba(0,68,204,0.1) 0%, transparent 70%);"></div>
+
+    <div class="error-v3__content fade-up" style="opacity: 1; transform: translateY(0);">
+        <div class="error-v3__number">404</div>
+        <h1 class="error-v3__title">Страница не найдена</h1>
+        <p class="error-v3__text">
+            К сожалению, запрашиваемый ресурс был перемещен или никогда не существовал в нашей системе координат.
+        </p>
+        
+        <div style="display: flex; justify-content: center;">
+            <a href="<?php echo home_url(); ?>" class="btn btn--primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transform: rotate(180deg);"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                <span>Вернуться на главную</span>
+            </a>
+        </div>
+    </div>
+</main>
 
 <?php get_footer(); ?>

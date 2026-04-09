@@ -16,18 +16,19 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <div class="hero__badge">Стратегическое развитие</div>
                 <h1 class="hero__title">
-                    <span class="text-gradient">Бизнес</span><br>консультации
+                    Экспертные<br>
+                    <span class="text-gradient">бизнес-консультации</span><br>
+                    <span style="color: var(--nk-blue);">для роста</span>
                 </h1>
                 <p class="hero__desc">
-                    Экспертная поддержка в поиске новых точек роста и разработке эффективной модели развития вашего предприятия.
+                    Стратегическая поддержка в поиске точек роста и разработке эффективных моделей развития вашего предприятия.
                 </p>
             </div>
             
             <div class="hero__actions--right">
-                <a href="#lead-form" class="cta-crystal__btn" style="padding: 18px 50px; font-size: 13px;">
-                    <span>Масштабировать бизнес</span>
+                <a href="#lead-form" class="btn btn--primary" style="padding: 16px 36px; font-size: 11px;">
+                    <span>Обсудить проект</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </a>
             </div>
@@ -142,9 +143,7 @@ get_header();
                         <input type="text" placeholder=" " id="bc-company">
                         <label for="bc-company">Название компании (опционально)</label>
                     </div>
-                    <button type="submit" class="cta-crystal__btn" style="width: 100%; justify-content: center; height: 64px; margin-top: 10px;">
-                        <span>Начать диагностику</span>
-                    </button>
+                    <button type="submit" class="cta-crystal__btn"><span>Начать диагностику</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
                         Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                     </p>

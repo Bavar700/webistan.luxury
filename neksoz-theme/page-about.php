@@ -8,20 +8,24 @@ get_header();
 <style>
 /* ── Flat About Cards ──────────────────────────────── */
 .about-card {
-    background: #fff;
-    border: 1px solid rgba(0,13,51,0.07);
-    border-radius: 20px;
-    padding: 36px;
-    transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+    background: var(--nk-white);
+    padding: 85px 48px 60px;
+    border-radius: 32px;
+    border: 1px solid var(--nk-gray-50);
+    transition: all 0.5s var(--ease);
     display: flex;
     flex-direction: column;
     gap: 20px;
     height: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 13, 51, 0.03);
+    isolation: isolate;
 }
 .about-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0,13,51,0.10);
-    border-color: rgba(239,68,68,0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 40px 80px rgba(0, 13, 51, 0.08);
+    border-color: rgba(227, 6, 19, 0.12);
 }
 .about-card__num {
     font-size: 11px;
@@ -32,21 +36,30 @@ get_header();
     margin-bottom: 4px;
 }
 .about-card__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    opacity: 0.15;
+    background: transparent;
+    color: var(--nk-blue);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid rgba(0,13,51,0.08);
-    color: var(--nk-blue);
-    flex-shrink: 0;
-    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    border: none;
+    z-index: 1;
+}
+.about-card__icon svg {
+    width: 42px;
+    height: 42px;
+    transition: all 0.5s var(--ease);
+    stroke: currentColor;
+    fill: none;
 }
 .about-card:hover .about-card__icon {
-    background: var(--nk-grad-brand);
-    border-color: transparent;
-    color: white;
+    opacity: 1;
+    transform: scale(1.15) rotate(-10deg);
 }
 .about-card__title {
     font-size: 20px;
@@ -150,8 +163,10 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">О компании</div>
-                <h1 class="hero__title" style="background:linear-gradient(180deg, #E30613 0%, #CC0033 35%, #1a3fcc 65%, #2277FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-                    Архитектура финансовой<br>устойчивости бизнеса
+                <h1 class="hero__title">
+                    Успех<br>
+                    <span class="text-gradient">вашего бизнеса</span><br>
+                    <span style="color: var(--nk-blue);">наша миссия</span>
                 </h1>
                 <p class="hero__desc">
                     Стратегический партнер и экспертный хаб, трансформирующий опыт в аудите и праве в реальную ценность для локального и международного бизнеса в Таджикистане.
@@ -159,9 +174,9 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="<?php echo home_url('/contacts'); ?>" class="cta-crystal__btn" style="padding:18px 44px;font-size:13px;white-space:nowrap;">
-                    <span>Обсудить проект</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                <a href="<?php echo home_url('/team'); ?>" class="btn btn--primary btn-animated">
+                    Познакомиться с командой
+                    <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
             </div>
         </div>

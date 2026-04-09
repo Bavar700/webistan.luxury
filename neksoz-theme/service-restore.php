@@ -16,19 +16,20 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <div class="hero__badge">Кризис-менеджмент</div>
                 <h1 class="hero__title">
-                    <span class="text-gradient">Восстановление</span><br>финансового учета
+                    Полное<br>
+                    <span class="text-gradient">восстановление учета</span><br>
+                    <span style="color: var(--nk-blue);">бизнеса</span>
                 </h1>
                 <p class="hero__desc">
-                    Приведем запущенную документацию в полный порядок, устраним ошибки и защитим бизнес от претензий налоговых органов.
+                    Приведение запущенной документации в порядок, устранение ошибок и защита от претензий контролирующих органов.
                 </p>
             </div>
             
             <div class="hero__actions--right">
-                <a href="#lead-form" class="cta-crystal__btn" style="padding: 18px 50px; font-size: 13px;">
-                    <span>Получить консультацию</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                <a href="#lead-form" class="btn btn--primary" style="padding: 16px 36px; font-size: 11px;">
+                    <span>Вернуть порядок</span>
+                    <svg width="20" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
                 </a>
             </div>
         </div>
@@ -143,9 +144,7 @@ get_header();
                         <input type="text" placeholder=" " id="sr-company">
                         <label for="sr-company">Название компании (опционально)</label>
                     </div>
-                    <button type="submit" class="cta-crystal__btn" style="width: 100%; justify-content: center; height: 64px; margin-top: 10px;">
-                        <span>Оценить стоимость</span>
-                    </button>
+                    <button type="submit" class="cta-crystal__btn"><span>Оценить стоимость</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
                         Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                     </p>

@@ -18,7 +18,9 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент аудита</div>
                 <h1 class="hero__title">
-                    <span class="text-gradient">Аудит</span><br>финансовой деятельности
+                    Аудит<br>
+                    <span class="text-gradient">финансового состояния</span><br>
+                    <span style="color: var(--nk-blue);">бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Независимая проверка отчетности для подтверждения прозрачности бизнеса и выявления скрытых финансовых рисков.
@@ -26,7 +28,7 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="#lead-form" class="cta-crystal__btn" style="padding: 18px 50px; font-size: 13px;">
+                <a href="#lead-form" class="btn btn--primary" style="padding: 16px 36px; font-size: 11px;">
                     <span>Получить консультацию</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </a>
@@ -143,9 +145,7 @@ get_header();
                         <input type="text" placeholder=" " id="sa-company">
                         <label for="sa-company">Название компании (опционально)</label>
                     </div>
-                    <button type="submit" class="cta-crystal__btn" style="width: 100%; justify-content: center; height: 64px; margin-top: 10px;">
-                        <span>Заказать аудит</span>
-                    </button>
+                    <button type="submit" class="cta-crystal__btn"><span>Заказать аудит</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
                         Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                     </p>
