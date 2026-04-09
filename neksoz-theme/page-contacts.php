@@ -72,35 +72,28 @@ get_header();
                         .contact-icon {
                             width: 52px;
                             height: 52px;
-                            border-radius: 50%;
+                            background: rgba(0, 13, 51, 0.03);
+                            color: var(--nk-gray-500);
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            background: rgba(0, 68, 204, 0.06);
-                            color: var(--nk-blue);
-                            border: 1px solid rgba(0, 68, 204, 0.1);
+                            border-radius: 14px;
+                            border: 1px solid rgba(0, 13, 51, 0.04);
                             flex-shrink: 0;
                             position: relative;
                             overflow: hidden;
-                            z-index: 2;
-                            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                            transition: all 0.4s var(--ease);
                         }
                         .contact-icon::before {
                             content: '';
                             position: absolute;
                             inset: 0;
-                            background: var(--nk-blue);
-                            border-radius: 50%;
+                            background: var(--nk-grad-brand);
+                            border-radius: 14px;
                             opacity: 0;
                             transition: opacity 0.4s ease;
                             z-index: 1;
                         }
-                        .contact-icon--red {
-                            background: rgba(227, 6, 19, 0.06);
-                            color: var(--nk-red);
-                            border-color: rgba(227, 6, 19, 0.1);
-                        }
-                        .contact-icon--red::before { background: var(--nk-red); }
                         .contact-icon svg {
                             width: 22px;
                             height: 22px;
@@ -109,17 +102,16 @@ get_header();
                             fill: none;
                             position: relative;
                             z-index: 2;
-                            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                            transition: transform 0.4s var(--ease);
                         }
                         .contact-item:hover .contact-icon,
                         .social-icon-wrapper:hover .contact-icon {
                             border-color: transparent;
-                            transform: translateY(-3px);
+                            transform: translateY(-5px);
+                            box-shadow: 0 10px 20px rgba(0, 68, 204, 0.3);
                         }
                         .contact-item:hover .contact-icon::before,
-                        .social-icon-wrapper:hover .contact-icon::before {
-                            opacity: 1;
-                        }
+                        .social-icon-wrapper:hover .contact-icon::before { opacity: 1; }
                         .contact-item:hover .contact-icon svg,
                         .social-icon-wrapper:hover .contact-icon svg {
                             color: #ffffff;
@@ -127,7 +119,9 @@ get_header();
                         }
                         .social-icon-wrapper .contact-icon {
                             width: 44px; height: 44px;
+                            border-radius: 10px;
                         }
+                        .social-icon-wrapper .contact-icon::before { border-radius: 10px; }
                     </style>
                     <!-- 1. Основная информация -->
                     <div>

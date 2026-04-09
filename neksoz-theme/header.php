@@ -809,49 +809,48 @@
             border-color: rgba(227, 6, 19, 0.15);
         }
 
-        /* ─── Universal Icon (Footer Social Style) ────────────────────── */
         .service-card__icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 24px;
+            background: rgba(0, 13, 51, 0.03);
+            border-radius: 16px;
+            color: var(--nk-gray-500);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 68, 204, 0.06);
-            color: var(--nk-blue);
-            border: 1px solid rgba(0, 68, 204, 0.1);
-            margin-bottom: 28px;
+            border: 1px solid rgba(0, 13, 51, 0.04);
             position: relative;
             overflow: hidden;
-            z-index: 2;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s var(--ease);
         }
 
         .service-card__icon::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: var(--nk-blue);
-            border-radius: 50%;
+            background: var(--nk-grad-brand);
+            border-radius: 16px;
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1;
         }
 
         .service-card__icon svg {
-            width: 22px;
-            height: 22px;
+            width: 28px;
+            height: 28px;
             stroke: currentColor;
             stroke-width: 2;
             fill: none;
             position: relative;
             z-index: 2;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s var(--ease);
         }
 
         .service-card:hover .service-card__icon {
             border-color: transparent;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 68, 204, 0.3);
         }
 
         .service-card:hover .service-card__icon::before { opacity: 1; }
@@ -861,15 +860,15 @@
             transform: scale(1.1);
         }
 
-        .service-card--alt .service-card__icon {
-            background: rgba(227, 6, 19, 0.06);
-            color: var(--nk-red);
-            border-color: rgba(227, 6, 19, 0.1);
+        .service-card--alt .service-card__icon { 
+            color: var(--nk-gray-500);
+            background: rgba(0, 13, 51, 0.03);
         }
 
-        .service-card--alt .service-card__icon::before { background: var(--nk-red); }
+        .service-card--alt:hover .service-card__icon {
+            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
+        }
 
-        /* Stat ribbon: pin to top-right */
         .stat-icon {
             position: absolute !important;
             top: 24px !important;

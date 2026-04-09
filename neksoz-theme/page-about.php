@@ -36,44 +36,44 @@ get_header();
     margin-bottom: 4px;
 }
 .about-card__icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+    background: rgba(0, 13, 51, 0.03);
+    border-radius: 16px;
+    color: var(--nk-gray-500);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 68, 204, 0.06);
-    color: var(--nk-blue);
-    border: 1px solid rgba(0, 68, 204, 0.1);
-    margin-bottom: 20px;
+    border: 1px solid rgba(0, 13, 51, 0.04);
     position: relative;
     overflow: hidden;
-    z-index: 2;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s var(--ease);
 }
 .about-card__icon::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--nk-red);
-    border-radius: 50%;
+    background: var(--nk-grad-brand);
+    border-radius: 16px;
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 1;
 }
 .about-card__icon svg {
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
     stroke: currentColor;
     stroke-width: 2;
     fill: none;
     position: relative;
     z-index: 2;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s var(--ease);
 }
 .about-card:hover .about-card__icon {
     border-color: transparent;
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
 }
 .about-card:hover .about-card__icon::before { opacity: 1; }
 .about-card:hover .about-card__icon svg {
