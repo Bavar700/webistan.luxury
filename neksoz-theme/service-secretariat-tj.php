@@ -16,7 +16,11 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">Хизматрасониҳои<br><em>котибот</em></h1>
+                <h1 class="hero__title">
+                    Хидматрасониҳои касбии<br>
+                    <span class="text-gradient">котиботии</span><br>
+                    <span style="color: var(--nk-blue);">тиҷорат</span>
+                </h1>
                 <p class="hero__desc">
                     Идоракунии ҳуҷҷатҳо ва зангҳоро ба коршиносон вогузор карда, вақтро барои рушди стратегӣ озод кунед.
                 </p>

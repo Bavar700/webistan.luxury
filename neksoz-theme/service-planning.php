@@ -19,7 +19,7 @@ get_header();
                 <h1 class="hero__title">
                     Стратегическое<br>
                     <span class="text-gradient">бизнес-планирование</span><br>
-                    <span style="color: var(--nk-blue);">Neksoz</span>
+                    <span style="color: var(--nk-blue);">neksoz</span>
                 </h1>
                 <p class="hero__desc">
                     Разработка жизнеспособных стратегий и финансовых моделей для уверенного запуска и масштабирования бизнеса.

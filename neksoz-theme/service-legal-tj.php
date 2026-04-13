@@ -16,7 +16,11 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">Машваратҳои<br><em>ҳуқуқӣ</em></h1>
+                <h1 class="hero__title">
+                    Қарорҳои маҷмӯии<br>
+                    <span class="text-gradient">ҳуқуқии</span><br>
+                    <span style="color: var(--nk-blue);">тиҷорат</span>
+                </h1>
                 <p class="hero__desc">
                     Ҳифзи боэътимоди ҳуқуқии манфиатҳои шумо, ҳамроҳии муомилот ва коҳиш додани хавфҳои ҳуқуқӣ.
                 </p>

@@ -17,7 +17,11 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Департаменти аудит</div>
-                <h1 class="hero__title">Аудит<br><em>ва назорат</em></h1>
+                <h1 class="hero__title">
+                    Аудити<br>
+                    <span class="text-gradient">ҳолати молиявии</span><br>
+                    <span style="color: var(--nk-blue);">тиҷорат</span>
+                </h1>
                 <p class="hero__desc">
                     Санҷиши мустақили ҳисобот барои тасдиқи шаффофияти тиҷорат ва ошкор намудани хавфҳои молиявии пинҳоншуда.
                 </p>

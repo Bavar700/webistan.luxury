@@ -1,6 +1,6 @@
 
         /* ============================================================
-           Neksoz.LUXURY — Premium Corporate Design System v2
+           NEKSOZ.LUXURY — Premium Corporate Design System v2
            Built around logo geometry: angular lines, red/blue gradients
            ============================================================ */
 
@@ -365,11 +365,7 @@
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 6vw, 4.2rem);
             font-weight: 900;
-<<<<<<< HEAD
             line-height: 1.15;
-=======
-            line-height: 1.2;
->>>>>>> 2506475 (Fix encoding (mojibake) across internal pages, restore Tajik translations, and refine Cyrillic line-heights.)
             color: var(--nk-white);
             margin-bottom: 32px;
             letter-spacing: -0.02em;
@@ -442,7 +438,7 @@
             font-family: var(--font-display);
             font-size: clamp(3.5rem, 9vw, 6.5rem);
             font-weight: 900;
-            line-height: 1.1;
+            line-height: 0.95;
             color: var(--nk-white);
             margin-bottom: 32px;
             letter-spacing: -0.04em;
@@ -450,7 +446,7 @@
 
         .hero--internal .hero__title {
             font-size: clamp(2.5rem, 6vw, 3.8rem);
-            line-height: 1.2;
+            line-height: 1.05;
         }
 
         @keyframes inner-float {
@@ -1788,7 +1784,7 @@
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 6vw, 3.8rem);
             font-weight: 900;
-            line-height: 1.2;
+            line-height: 1.05;
             color: var(--nk-gray-900);
             margin: 0 0 32px 0;
             letter-spacing: -0.03em;

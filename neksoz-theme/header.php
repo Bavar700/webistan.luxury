@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Mr+Dafoe&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           Neksoz.LUXURY — Premium Corporate Design System v2
+           NEKSOZ.LUXURY — Premium Corporate Design System v2
            Built around logo geometry: angular lines, red/blue gradients
            ============================================================ */
 
@@ -1691,7 +1691,7 @@
 <header class="header">
     <div class="container header__inner">
         <a href="<?php echo home_url('/'); ?>" class="header__logo-link">
-            <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="Neksoz" class="header__logo">
+            <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
         <?php
         $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';

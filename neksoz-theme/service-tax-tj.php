@@ -16,7 +16,11 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">Банақшагирии<br><em>андоз</em></h1>
+                <h1 class="hero__title">
+                    Машваратҳои андозии<br>
+                    <span class="text-gradient">коршиносон барои</span><br>
+                    <span style="color: var(--nk-blue);">тиҷорат</span>
+                </h1>
                 <p class="hero__desc">
                     Беҳтарсозии қонунии сарбории андоз ва коҳиш додани хавфҳо пеш аз ташрифи мақомоти назоратӣ.
                 </p>

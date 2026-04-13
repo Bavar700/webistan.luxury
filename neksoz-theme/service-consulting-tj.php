@@ -16,7 +16,11 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">Консалтинги<br><em>тиҷоратӣ</em></h1>
+                <h1 class="hero__title">
+                    Машваратҳои тиҷоратии<br>
+                    <span class="text-gradient">коршиносон</span><br>
+                    <span style="color: var(--nk-blue);">барои рушд</span>
+                </h1>
                 <p class="hero__desc">
                     Дастгирии стратегӣ дар ҷустуҷӯи нуқтаҳои рушд ва таҳияи моделҳои муассири рушди корхонаи шумо.
                 </p>

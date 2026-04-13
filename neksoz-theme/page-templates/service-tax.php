@@ -15,8 +15,8 @@ get_header();
     <section class="nk-section--dark" style="padding: 60px 0; background: linear-gradient(135deg, var(--nk-primary-dark) 0%, var(--nk-primary) 100%);">
         <div class="nk-container">
             <div style="max-width: 100% !important;">
-                <span class="section-label" style="color: rgba(255,255,255,0.6);"><?php esc_html_e( 'Направление', 'Neksoz' ); ?></span>
-                <h1 style="color: #fff; margin-bottom: 1rem; font-size: 2.5rem; line-height: 1.2;"><?php esc_html_e( 'Налоговые консультации и налогообложение', 'Neksoz' ); ?></h1>
+                <span class="section-label" style="color: rgba(255,255,255,0.6);"><?php esc_html_e( 'Направление', 'neksoz' ); ?></span>
+                <h1 style="color: #fff; margin-bottom: 1rem; font-size: 2.5rem; line-height: 1.2;"><?php esc_html_e( 'Налоговые консультации и налогообложение', 'neksoz' ); ?></h1>
             </div>
         </div>
     </section>
@@ -64,7 +64,7 @@ get_header();
                 <aside class="nk-sidebar fade-up is-visible fade-up-delay-1" style="position: sticky; top: 100px;">
                     <!-- Menu of Services -->
                     <div style="background: var(--nk-bg-alt); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--nk-border);">
-                        <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--nk-text);"><?php esc_html_e( 'Все направления', 'Neksoz' ); ?></h4>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--nk-text);"><?php esc_html_e( 'Все направления', 'neksoz' ); ?></h4>
                         <ul style="list-style: none; padding: 0; margin: 0;">
                             <li style="margin-bottom: 0.6rem;"><a href="#" style="font-size: 0.95rem; font-weight: 500; color: var(--nk-text-secondary); transition: 0.3s;">Аудит финансовой деятельности</a></li>
                             <li style="margin-bottom: 0.6rem;">

@@ -1,5 +1,5 @@
 /**
- * Neksoz Theme — Main JavaScript
+ * NEKSOZ Theme — Main JavaScript
  *
  * Mobile menu, accordion, scroll effects, contact form AJAX, fade-in observer.
  *
@@ -8,7 +8,7 @@
 
 (function ($) {
     'use strict';
-    console.log("Neksoz DEV: main.js loaded");
+    console.log("NEKSOZ DEV: main.js loaded");
 
     /* ==========================================================================
        1. Mobile Menu Toggle
@@ -148,7 +148,7 @@
        6. Contact Form AJAX Submission
        ========================================================================== */
 
-    const contactForm = document.getElementById('Neksoz-contact-form');
+    const contactForm = document.getElementById('neksoz-contact-form');
 
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
@@ -164,10 +164,10 @@
             statusEl.style.display = 'none';
 
             const formData = new FormData(contactForm);
-            formData.append('action', 'Neksoz_contact');
-            formData.append('nonce', NeksozAjax.nonce);
+            formData.append('action', 'neksoz_contact');
+            formData.append('nonce', neksozAjax.nonce);
 
-            fetch(NeksozAjax.ajaxurl, {
+            fetch(neksozAjax.ajaxurl, {
                 method: 'POST',
                 body: formData,
             })

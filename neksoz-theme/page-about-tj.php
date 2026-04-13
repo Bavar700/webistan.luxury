@@ -181,7 +181,11 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Дар бораи ширкат</div>
-                <h1 class="hero__title">Муваффақият<br><em>тиҷорати Шумо</em></h1>
+                <h1 class="hero__title">
+                    Муваффақияти<br>
+                    <span class="text-gradient">тиҷорати шумо</span><br>
+                    <span style="color: var(--nk-blue);">ҳадафи мост</span>
+                </h1>
                 <p class="hero__desc">
                     Шарики стратегӣ ва маркази коршиносӣ, ки таҷрибаро дар аудит ва ҳуқуқ ба арзиши воқеӣ барои тиҷорати маҳаллӣ ва байналмилалӣ дар Тоҷикистон табдил медиҳад.
                 </p>

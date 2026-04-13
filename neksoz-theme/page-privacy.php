@@ -73,7 +73,7 @@ get_header(); ?>
 
                         <div class="legal-section">
                             <h3 style="font-size: 18px; margin-bottom: 16px; color: var(--nk-gray-900);">5. Ваши права</h3>
-                            <p style="color: var(--nk-gray-600); line-height: 1.7;">Вы имеете право в любой момент запросить удаление ваших данных из нашей базы или изменить их, связавшись с нами по адресу: <a href="mailto:info@Neksoz.tj" style="color: var(--nk-blue); font-weight: 500;">info@Neksoz.tj</a>.</p>
+                            <p style="color: var(--nk-gray-600); line-height: 1.7;">Вы имеете право в любой момент запросить удаление ваших данных из нашей базы или изменить их, связавшись с нами по адресу: <a href="mailto:info@neksoz.tj" style="color: var(--nk-blue); font-weight: 500;">info@neksoz.tj</a>.</p>
                         </div>
                     </div>
                 </article>

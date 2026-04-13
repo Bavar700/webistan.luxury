@@ -14,7 +14,7 @@ get_header();
     <section class="nk-page-header uk-flex uk-flex-middle" style="min-height: 40vh; background: var(--nk-primary-dark); position: relative; overflow: hidden; padding: 60px 0;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.05; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
         <div class="nk-container uk-position-relative uk-position-z-index">
-            <h1 class="fade-up is-visible" style="color: #fff; font-size: 3.5rem; margin-bottom: 1rem;"><?php esc_html_e('Новости', 'Neksoz'); ?></h1>
+            <h1 class="fade-up is-visible" style="color: #fff; font-size: 3.5rem; margin-bottom: 1rem;"><?php esc_html_e('Новости', 'neksoz'); ?></h1>
             <p class="fade-up is-visible fade-up-delay-1" style="color: rgba(255,255,255,0.7); font-size: 1.2rem; max-width: 100% !important;">
                 Актуальные события, экспертные статьи и новости компании
             </p>
@@ -71,7 +71,7 @@ get_header();
                 else :
                     ?>
                     <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
-                        <p style="color: var(--nk-text-secondary); font-size: 1.1rem;"><?php esc_html_e('Новостей пока нет. Следите за обновлениями!', 'Neksoz'); ?></p>
+                        <p style="color: var(--nk-text-secondary); font-size: 1.1rem;"><?php esc_html_e('Новостей пока нет. Следите за обновлениями!', 'neksoz'); ?></p>
                     </div>
                 <?php endif; ?>
 
