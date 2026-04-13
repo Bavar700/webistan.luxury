@@ -7,7 +7,7 @@
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Mr+Dafoe&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
            NEKSOZ.LUXURY — Premium Corporate Design System v2
@@ -533,7 +533,8 @@
 
         .stats-card__value {
             font-family: var(--font-display);
-            font-size: 2.2rem; /* Increased size significantly for visibility */
+            font-size: 2.8rem;
+            font-weight: 700; /* Increased size significantly for visibility */
             font-weight: 900;
             color: var(--nk-gray-900);
             line-height: 1;
@@ -1233,12 +1234,14 @@
         }
 
         .ceo-editorial__signature {
-            font-family: 'Rock Salt', cursive;
-            font-size: 2rem;
+            font-family: 'Mr Dafoe', cursive;
+            font-size: 3.5rem;
+            font-weight: 400;
             color: #001A4D; 
             margin: 20px 0;
-            transform: rotate(-2deg);
-            opacity: 0.9;
+            transform: rotate(-1.5deg);
+            opacity: 0.95;
+            letter-spacing: 0px;
         }
         .is-visible .ceo-editorial__quote-card {
             transform: none;

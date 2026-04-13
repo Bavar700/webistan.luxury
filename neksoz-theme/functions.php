@@ -25,7 +25,7 @@ function nexoz_scripts() {
     wp_enqueue_script( 'tailwind', 'https://cdn.tailwindcss.com', array(), null, false );
     
     // Google Fonts: Montserrat, Noto Serif (Standard for high-end editorial and universal support)
-    wp_enqueue_style( 'nexoz-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap', array(), null );
+    wp_enqueue_style( 'nexoz-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Mr+Dafoe&display=swap', array(), null );
     
     // Custom Style (just in case)
     wp_enqueue_style( 'nexoz-main', get_stylesheet_uri(), array('nexoz-fonts'), time() );
