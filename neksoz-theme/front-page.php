@@ -19,7 +19,7 @@ get_header();
                 Будем<br><em>решать!</em>
             </h1>
             <p class="hero__desc">
-                Профессиональный аудит, налоговое планирование и юридическое сопровождение бизнеса. Надёжность и экспертность для Вашего успеха.
+                Профессиональный аудит, налоговое планирование и юридическое сопровождение бизнеса. <strong>Надёжность и экспертность</strong> для Вашего успеха.
             </p>
         </div>
         <div class="hero__actions--right">
@@ -292,7 +292,7 @@ get_header();
     <div class="ceo-editorial fade-up is-visible">
             <div class="section__label section__label--on-dark">О компании</div>
             <h2 class="section__title section__title--huge section__title--on-dark">
-                <span class="text-gradient">Ваш стратегический</span><br>бизнес-партнер
+                <span class="text-gradient">Ваш стратегический партнер</span><br>в Вашем бизнесе
             </h2>
             <p class="ceo-editorial__intro">
                 ООО «НЕКСОЗ-БИЗНЕС КОНСАЛТИНГ ГРУП» — основана в 2016 году. За это время мы эволюционировали из узкопрофильной фирмы в <strong>мощный консалтинговый хаб</strong>, обеспечивая устойчивость и безопасность бизнеса на каждом этапе роста.

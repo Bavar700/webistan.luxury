@@ -7,7 +7,7 @@
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Mr+Dafoe&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
            NEKSOZ.LUXURY — Premium Corporate Design System v2
@@ -45,8 +45,8 @@
             --nk-gray-900: #101828;
 
             /* ── Typography ── */
-            --font-display: 'Noto Serif', serif;
-            --font-body: 'Montserrat', sans-serif;
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
 
             /* ── Geometry ── */
             --radius-sm: 4px;
@@ -186,7 +186,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-left: auto;
+            margin-left: 24px;
         }
 
         .header__icon {
@@ -240,42 +240,6 @@
             color: var(--nk-white);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
-        }
-
-        /* ── Language Switcher — Premium Oval Design ── */
-        .lang-switcher {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 13, 51, 0.03);
-            border-radius: 100px;
-            padding: 3px;
-            gap: 1px;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            margin-left: auto;
-        }
-
-        .lang-switcher__item {
-            font-family: var(--font-display);
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--nk-gray-400);
-            padding: 8px 14px;
-            border-radius: 100px;
-            transition: all 0.3s var(--ease);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-decoration: none;
-        }
-
-        .lang-switcher__item:hover {
-            color: var(--nk-blue);
-        }
-
-        .lang-switcher__item.is-active {
-            background: var(--nk-white);
-            color: var(--nk-blue);
-            box-shadow: 0 2px 8px rgba(0, 13, 51, 0.06);
-            font-weight: 800;
         }
 
         /* ============================================================
@@ -404,10 +368,10 @@
             font-family: var(--font-display);
             font-size: clamp(4rem, 10vw, 7.5rem);
             font-weight: 900;
-            line-height: 1.15;
+            line-height: 0.95;
             color: var(--nk-white);
             margin-bottom: 32px;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.05em;
             text-transform: none;
         }
 
@@ -533,8 +497,7 @@
 
         .stats-card__value {
             font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 700; /* Increased size significantly for visibility */
+            font-size: 2.2rem; /* Increased size significantly for visibility */
             font-weight: 900;
             color: var(--nk-gray-900);
             line-height: 1;
@@ -665,6 +628,7 @@
         .section__subtitle--free strong {
             color: var(--nk-gray-900);
             font-weight: 700;
+            border-bottom: 2px solid rgba(227, 6, 19, 0.2);
         }
 
         /* ============================================================
@@ -788,17 +752,15 @@
             font-size: clamp(2rem, 4vw, 2.75rem);
             font-weight: 800;
             color: var(--nk-gray-900);
-            line-height: 1.2;
+            line-height: 1.15;
             margin-bottom: 16px;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
         }
         
         .section__title--huge {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 32px;
-            line-height: 1.25;
-            letter-spacing: -0.01em;
-            font-weight: 900;
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            margin-bottom: 24px;
+            line-height: 1.1;
         }
 
         .section__subtitle { font-size: 1.05rem; color: var(--nk-gray-400); max-width: 100% !important; line-height: 1.65; font-weight: 400; }
@@ -914,19 +876,19 @@
 
         .service-card__title {
             font-family: var(--font-display);
-            font-size: 1.6rem;
+            font-size: 1.85rem;
             font-weight: 800;
             color: var(--nk-gray-900);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             letter-spacing: -0.01em;
-            line-height: 1.25;
+            line-height: 1.2;
         }
 
         .service-card__text {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             color: var(--nk-gray-600);
-            line-height: 1.7;
-            margin-bottom: 30px;
+            line-height: 1.65;
+            margin-bottom: 35px;
         }
 
         .service-card__tasks {
@@ -952,9 +914,9 @@
 
         .service-card__list li {
             position: relative;
-            padding-left: 28px;
-            margin-bottom: 14px;
-            font-size: 0.9rem;
+            padding-left: 32px;
+            margin-bottom: 18px;
+            font-size: 1rem;
             color: var(--nk-gray-800);
             line-height: 1.6;
             font-weight: 500;
@@ -964,8 +926,8 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 8px;
+            top: 11px;
+            width: 10px;
             height: 2px;
             background: var(--nk-blue);
             border-radius: 2px;
@@ -1233,14 +1195,12 @@
         }
 
         .ceo-editorial__signature {
-            font-family: 'Mr Dafoe', cursive;
-            font-size: 3.5rem;
-            font-weight: 400;
+            font-family: 'Rock Salt', cursive;
+            font-size: 2rem;
             color: #001A4D; 
             margin: 20px 0;
-            transform: rotate(-1.5deg);
-            opacity: 0.95;
-            letter-spacing: 0px;
+            transform: rotate(-2deg);
+            opacity: 0.9;
         }
         .is-visible .ceo-editorial__quote-card {
             transform: none;
@@ -1693,30 +1653,27 @@
         <a href="<?php echo home_url('/'); ?>" class="header__logo-link">
             <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
-        <?php
-        $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
-        $nav_texts = [
-            'ru' => ['Главная', 'Услуги', 'О компании', 'Новости', 'Вакансии', 'Контакты'],
-            'tj' => ['Асосӣ', 'Хидматрасониҳо', 'Дар бораи мо', 'Ахбор', 'Ҷойҳои корӣ', 'Тамос'],
-            'en' => ['Home', 'Services', 'About us', 'News', 'Careers', 'Contacts']
-        ];
-        $texts = isset($nav_texts[$current_lang]) ? $nav_texts[$current_lang] : $nav_texts['ru'];
-        ?>
         <nav class="header__nav">
-            <a href="<?php echo home_url('/'); ?>"><?php echo $texts[0]; ?></a>
-            <a href="<?php echo home_url('/#services'); ?>"><?php echo $texts[1]; ?></a>
-            <a href="<?php echo home_url('/about'); ?>"><?php echo $texts[2]; ?></a>
-            <a href="<?php echo home_url('/news'); ?>"><?php echo $texts[3]; ?></a>
-            <a href="<?php echo home_url('/vacancies'); ?>"><?php echo $texts[4]; ?></a>
-            <a href="<?php echo home_url('/contacts'); ?>"><?php echo $texts[5]; ?></a>
+            <a href="<?php echo home_url('/'); ?>">Главная</a>
+            <a href="<?php echo home_url('/#services'); ?>">Услуги</a>
+            <a href="<?php echo home_url('/about'); ?>">О компании</a>
+            <a href="<?php echo home_url('/news'); ?>">Новости</a>
+            <a href="<?php echo home_url('/vacancies'); ?>">Вакансии</a>
+            <a href="<?php echo home_url('/contacts'); ?>">Контакты</a>
         </nav>
         <div class="header__actions">
-            <!-- Language Switcher -->
-            <div class="lang-switcher">
-                <a href="?lang=en" class="lang-switcher__item <?php echo $current_lang == 'en' ? 'is-active' : ''; ?>">EN</a>
-                <a href="?lang=tj" class="lang-switcher__item <?php echo $current_lang == 'tj' ? 'is-active' : ''; ?>">TJ</a>
-                <a href="?lang=ru" class="lang-switcher__item <?php echo $current_lang == 'ru' ? 'is-active' : ''; ?>">RU</a>
-            </div>
+            <!-- Telegram -->
+            <a href="#" target="_blank" class="header__icon header__icon--tg" aria-label="Telegram">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.11.03-1.9 1.21-5.36 3.55-.51.35-.97.52-1.38.51-.45-.01-1.31-.25-1.95-.46-.79-.26-1.41-.4-1.36-.84.03-.22.34-.44.93-.68 3.62-1.58 6.04-2.62 7.25-3.13 3.45-1.44 4.16-1.69 4.63-1.69.1 0 .32.02.46.12.12.09.15.21.16.3z"/></svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="#" target="_blank" class="header__icon header__icon--wa" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M12.031 2C6.495 2 2 6.494 2 12.031c0 1.764.464 3.486 1.348 5.006L2 22l5.109-1.332A9.971 9.971 0 0012.03 22c5.536 0 10.031-4.494 10.031-10.03v-.004C22.062 6.494 17.568 2 12.031 2zm5.795 14.18c-.244.686-1.42 1.3-1.966 1.353-.513.048-1.167.316-3.832-.727-3.411-1.336-5.61-4.852-5.783-5.083-.172-.232-1.38-1.841-1.38-3.513 0-1.671.867-2.5 1.185-2.836.317-.335.69-.42 1.94-.01.25.08.572.639.882 1.402.316.76.545 1.487.676 1.705.132.221.222.474.072.768-.148.291-.222.473-.443.727-.221.254-.464.55-.664.747-.221.221-.453.465-.198.887.254.42 1.135 1.86 2.43 3.02 1.676 1.5 3.084 1.965 3.484 2.14.398.175.632.148.868-.113.235-.262.998-1.162 1.266-1.564.267-.402.532-.335.888-.201.356.133 2.25 1.062 2.632 1.252.383.19.638.283.731.442.093.158.093.916-.15 1.602z"/></svg>
+            </a>
+            <!-- Phone -->
+            <a href="tel:+992446000000" class="header__icon header__icon--phone" aria-label="Call">
+                <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1C8.8 6.4 8.6 5.2 8.6 4c0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z"/></svg>
+            </a>
             
             <!-- Mobile Toggle -->
             <button class="nk-mobile-toggle" aria-label="Menu" aria-expanded="false">

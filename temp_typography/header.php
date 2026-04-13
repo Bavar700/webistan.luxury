@@ -7,7 +7,7 @@
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Mr+Dafoe&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
            NEKSOZ.LUXURY — Premium Corporate Design System v2
@@ -533,8 +533,7 @@
 
         .stats-card__value {
             font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 700; /* Increased size significantly for visibility */
+            font-size: 2.2rem; /* Increased size significantly for visibility */
             font-weight: 900;
             color: var(--nk-gray-900);
             line-height: 1;
@@ -665,6 +664,7 @@
         .section__subtitle--free strong {
             color: var(--nk-gray-900);
             font-weight: 700;
+            border-bottom: 2px solid rgba(227, 6, 19, 0.2);
         }
 
         /* ============================================================
@@ -914,19 +914,19 @@
 
         .service-card__title {
             font-family: var(--font-display);
-            font-size: 1.6rem;
+            font-size: 1.85rem;
             font-weight: 800;
             color: var(--nk-gray-900);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             letter-spacing: -0.01em;
-            line-height: 1.25;
+            line-height: 1.2;
         }
 
         .service-card__text {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             color: var(--nk-gray-600);
-            line-height: 1.7;
-            margin-bottom: 30px;
+            line-height: 1.65;
+            margin-bottom: 35px;
         }
 
         .service-card__tasks {
@@ -952,9 +952,9 @@
 
         .service-card__list li {
             position: relative;
-            padding-left: 28px;
-            margin-bottom: 14px;
-            font-size: 0.9rem;
+            padding-left: 32px;
+            margin-bottom: 18px;
+            font-size: 1rem;
             color: var(--nk-gray-800);
             line-height: 1.6;
             font-weight: 500;
@@ -964,8 +964,8 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 8px;
+            top: 11px;
+            width: 10px;
             height: 2px;
             background: var(--nk-blue);
             border-radius: 2px;
@@ -1233,14 +1233,12 @@
         }
 
         .ceo-editorial__signature {
-            font-family: 'Mr Dafoe', cursive;
-            font-size: 3.5rem;
-            font-weight: 400;
+            font-family: 'Rock Salt', cursive;
+            font-size: 2rem;
             color: #001A4D; 
             margin: 20px 0;
-            transform: rotate(-1.5deg);
-            opacity: 0.95;
-            letter-spacing: 0px;
+            transform: rotate(-2deg);
+            opacity: 0.9;
         }
         .is-visible .ceo-editorial__quote-card {
             transform: none;

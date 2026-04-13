@@ -37,7 +37,6 @@
             /* ── Typography ── */
             --font-display: 'Noto Serif', serif;
             --font-body: 'Montserrat', sans-serif;
-            --font-footer: 'Inter', sans-serif;
 
             /* ── Geometry ── */
             --radius-sm: 4px;
@@ -489,6 +488,7 @@
         .section__subtitle--free strong {
             color: var(--nk-gray-900);
             font-weight: 700;
+            border-bottom: 2px solid rgba(227, 6, 19, 0.2);
         }
 
         /* ============================================================
@@ -715,8 +715,7 @@
 
         .editorial-main h2 {
             font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 2rem;
             color: var(--nk-gray-900);
             margin-bottom: 24px;
             font-weight: 800;
@@ -1538,6 +1537,7 @@
 
         #about .section__subtitle--free strong {
             color: var(--nk-white) !important;
+            border-bottom-color: var(--nk-red) !important;
         }
 
         .ceo-editorial {
@@ -1621,7 +1621,7 @@
             left: -15px;
             top: -25px;
             font-size: 3rem;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--nk-red);
             font-style: normal;
             font-weight: 800;
@@ -1635,7 +1635,7 @@
             right: -15px;
             bottom: -35px;
             font-size: 3rem;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--nk-blue);
             font-style: normal;
             font-weight: 800;
@@ -1645,14 +1645,13 @@
 
 
         .ceo-editorial__signature {
-            font-family: 'Mr Dafoe', cursive !important;
-            font-size: 3.5rem !important;
-            font-weight: 400 !important;
+            font-family: 'Rock Salt', cursive !important;
+            font-size: 2.2rem !important;
             color: #4D88FF !important; /* Bright Ink Blue for dark background */
             margin: 40px 0 !important;
-            transform: rotate(-1.5deg) !important;
+            transform: rotate(-3deg) !important;
             display: inline-block !important;
-            opacity: 0.95 !important;
+            opacity: 0.9 !important;
         }
 
         .ceo-editorial__circle-frame {
@@ -1972,7 +1971,6 @@
            FOOTER — PLATINUM FOUNDATION
            ======d====================================================== */
         .footer-platinum {
-            font-family: var(--font-footer) !important;
             background: var(--nk-grad-hero) !important;
             padding: 140px 0 40px !important;
             color: #FFFFFF !important;
@@ -2037,7 +2035,7 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            font-family: var(--font-footer);
+            font-family: var(--font-display);
             font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
@@ -2641,8 +2639,7 @@
 
         .modal__title {
             font-family: var(--font-display);
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 2rem;
             font-weight: 800;
             color: var(--nk-blue);
             margin-top: 12px;
@@ -2681,4 +2678,3 @@
         .btn--full {
             width: 100%;
         }
-
