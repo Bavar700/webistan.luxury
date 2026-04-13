@@ -16,11 +16,7 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">
-                    Ð¦Ð¸Ñ„Ñ€Ð¾Ð²Ð°Ñ<br>
-                    <span class="text-gradient">Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð²Ð°ÑˆÐµÐ³Ð¾</span><br>
-                    <span style="color: var(--nk-blue);">Ð±Ð¸Ð·Ð½ÐµÑÐ°</span>
-                </h1>
+                <h1 class="hero__title">Автоматизация<br><em>бизнеса</em></h1>
                 <p class="hero__desc">
                     Ð’Ð½ÐµÐ´Ñ€ÐµÐ½Ð¸Ðµ ÑÐ¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… IT-Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹ (1Ð¡, CRM, AI-Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹) Ð´Ð»Ñ Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ñ€ÑƒÑ‚Ð¸Ð½Ñ‹ Ð¸ Ð¿Ð¾Ð²Ñ‹ÑˆÐµÐ½Ð¸Ñ Ñ‚Ð¾Ñ‡Ð½Ð¾ÑÑ‚Ð¸ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ.
                 </p>

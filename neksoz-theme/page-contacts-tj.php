@@ -17,11 +17,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Тамос бо мо</div>
-                <h1 class="hero__title">
-                    Бо коршиносони<br>
-                    <span style="color: var(--nk-blue);">neksoz</span><br>
-                    <span class="text-gradient">тамос гиред</span>
-                </h1>
+                <h1 class="hero__title">Тамосҳои<br><em>мо</em></h1>
                 <p class="hero__desc">
                     Мо ҳамеша дар тамос ҳастем, то вазифаҳои стратегии тиҷорати шуморо баррасӣ намуда, ҳалли самараноки молиявӣ ва ҳуқуқиро пешниҳод кунем.
                 </p>
@@ -151,7 +147,7 @@ get_header();
                                 </div>
                                 <div style="padding-top: 14px;">
                                     <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 6px; font-weight: 600;">E-mail:</strong>
-                                    <a href="mailto:info@neksoz.tj" style="color: var(--nk-blue); text-decoration: none; font-size: 16px; font-weight: 500;">info@neksoz.tj</a>
+                                    <a href="mailto:info@Neksoz.tj" style="color: var(--nk-blue); text-decoration: none; font-size: 16px; font-weight: 500;">info@Neksoz.tj</a>
                                 </div>
                             </li>
                         </ul>
@@ -181,7 +177,7 @@ get_header();
                     <div>
                         <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">Мо дар шабакаҳои иҷтимоӣ</h3>
                         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <a href="https://t.me/neksoz" class="social-icon-wrapper" title="Telegram">
+                            <a href="https://t.me/Neksoz" class="social-icon-wrapper" title="Telegram">
                                 <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
                             </a>
                             <a href="https://wa.me/992446000000" class="social-icon-wrapper" title="WhatsApp">

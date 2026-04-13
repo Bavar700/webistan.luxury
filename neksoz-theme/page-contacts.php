@@ -17,11 +17,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">ÐžÐ±Ñ€Ð°Ñ‚Ð½Ð°Ñ ÑÐ²ÑÐ·ÑŒ</div>
-                <h1 class="hero__title">
-                    Ð¡Ð²ÑÐ¶Ð¸Ñ‚ÐµÑÑŒ<br>
-                    <span class="text-gradient">Ñ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð°Ð¼Ð¸</span><br>
-                    <span style="color: var(--nk-blue);">neksoz</span>
-                </h1>
+                <h1 class="hero__title">Наши<br><em>контакты</em></h1>
                 <p class="hero__desc">
                     ÐœÑ‹ Ð²ÑÐµÐ³Ð´Ð° Ð½Ð° ÑÐ²ÑÐ·Ð¸, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð¾Ð±ÑÑƒÐ´Ð¸Ñ‚ÑŒ ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð·Ð°Ð´Ð°Ñ‡Ð¸ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ° Ð¸ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶Ð¸Ñ‚ÑŒ ÑÑ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ñ‹Ðµ Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ñ‹Ðµ Ð¸ ÑŽÑ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ.
                 </p>
@@ -151,7 +147,7 @@ get_header();
                                 </div>
                                 <div style="padding-top: 14px;">
                                     <strong style="display: block; color: var(--nk-gray-900); font-size: 16px; margin-bottom: 6px; font-weight: 600;">E-mail:</strong>
-                                    <a href="mailto:info@neksoz.tj" style="color: var(--nk-blue); text-decoration: none; font-size: 16px; font-weight: 500;">info@neksoz.tj</a>
+                                    <a href="mailto:info@Neksoz.tj" style="color: var(--nk-blue); text-decoration: none; font-size: 16px; font-weight: 500;">info@Neksoz.tj</a>
                                 </div>
                             </li>
                         </ul>
@@ -181,7 +177,7 @@ get_header();
                     <div>
                         <h3 class="cta-crystal__title" style="font-size: 20px; margin-bottom: 16px; text-transform: none; color: var(--nk-gray-900);">ÐœÑ‹ Ð² ÑÐ¾Ñ†Ð¸Ð°Ð»ÑŒÐ½Ñ‹Ñ… ÑÐµÑ‚ÑÑ…</h3>
                         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <a href="https://t.me/neksoz" class="social-icon-wrapper" title="Telegram">
+                            <a href="https://t.me/Neksoz" class="social-icon-wrapper" title="Telegram">
                                 <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
                             </a>
                             <a href="https://wa.me/992446000000" class="social-icon-wrapper" title="WhatsApp">

@@ -17,11 +17,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Ð”ÐµÐ¿Ð°Ñ€Ñ‚Ð°Ð¼ÐµÐ½Ñ‚ Ð°ÑƒÐ´Ð¸Ñ‚Ð°</div>
-                <h1 class="hero__title">
-                    ÐÑƒÐ´Ð¸Ñ‚<br>
-                    <span class="text-gradient">Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ñ</span><br>
-                    <span style="color: var(--nk-blue);">Ð±Ð¸Ð·Ð½ÐµÑÐ°</span>
-                </h1>
+                <h1 class="hero__title">Аудит<br><em>и контроль</em></h1>
                 <p class="hero__desc">
                     ÐÐµÐ·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð°Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð¾Ñ‚Ñ‡ÐµÑ‚Ð½Ð¾ÑÑ‚Ð¸ Ð´Ð»Ñ Ð¿Ð¾Ð´Ñ‚Ð²ÐµÑ€Ð¶Ð´ÐµÐ½Ð¸Ñ Ð¿Ñ€Ð¾Ð·Ñ€Ð°Ñ‡Ð½Ð¾ÑÑ‚Ð¸ Ð±Ð¸Ð·Ð½ÐµÑÐ° Ð¸ Ð²Ñ‹ÑÐ²Ð»ÐµÐ½Ð¸Ñ ÑÐºÑ€Ñ‹Ñ‚Ñ‹Ñ… Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð²Ñ‹Ñ… Ñ€Ð¸ÑÐºÐ¾Ð².
                 </p>

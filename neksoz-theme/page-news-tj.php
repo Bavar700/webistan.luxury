@@ -17,11 +17,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Маркази матбуот</div>
-                <h1 class="hero__title">
-                    Муҳимтарин<br>
-                    ахбор ва рӯйдодҳо<br>
-                    <span class="text-gradient">дар Neksoz</span>
-                </h1>
+                <h1 class="hero__title">Хабарҳои<br><em>мо</em></h1>
                 <p class="hero__desc">
                     Тағйироти ҷорӣ дар қонунгузорӣ, рӯйдодҳои ширкат ва назари коршиносон.
                 </p>

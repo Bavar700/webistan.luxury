@@ -399,11 +399,7 @@ get_header();
         <div class="container hero__container">
             <div class="hero__content" style="max-width: 850px;">
                 <div class="hero__badge">ÐšÐ°Ñ€ÑŒÐµÑ€Ð° Ð² Neksoz</div>
-                <h1 class="hero__title">
-                    Ð’Ð°ÑˆÐ° Ñ‚Ð¾Ñ‡ÐºÐ°<br>
-                    <span class="text-gradient">Ð¿Ñ€Ð¾Ñ„ÐµÑÑÐ¸Ð¾Ð½Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾</span><br>
-                    <span style="color: var(--nk-blue);">Ñ€Ð¾ÑÑ‚Ð°</span>
-                </h1>
+                <h1 class="hero__title">Карьера<br><em>в Neksoz</em></h1>
                 <p class="hero__desc" style="max-width: 550px; font-size: 1rem; opacity: 0.9;">
                     ÐœÑ‹ Ð¾Ð±ÑŠÐµÐ´Ð¸Ð½ÑÐµÐ¼ Ñ‚Ð°Ð»Ð°Ð½Ñ‚Ñ‹ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð¸Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ñ… Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹ Ð² ÑÑ„ÐµÑ€Ðµ Ð°ÑƒÐ´Ð¸Ñ‚Ð°, Ñ„Ð¸Ð½Ð°Ð½ÑÐ¾Ð² Ð¸ Ð¿Ñ€Ð°Ð²Ð°. Ð¡Ñ‚Ð°Ð½ÑŒÑ‚Ðµ Ñ‡Ð°ÑÑ‚ÑŒÑŽ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ð°Ñ Ð·Ð°Ð´Ð°ÐµÑ‚ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ñ‹ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð° Ð² Ð¢Ð°Ð´Ð¶Ð¸ÐºÐ¸ÑÑ‚Ð°Ð½Ðµ.
                 </p>
@@ -529,7 +525,7 @@ get_header();
                 <div class="simple-card fade-up" style="background: var(--nk-gray-50); border: 1px dashed var(--nk-gray-200); margin-top: 40px; text-align: center;">
                     <h4 style="font-family: var(--font-display); margin-bottom: 15px;">ÐÐµ Ð½Ð°ÑˆÐ»Ð¸ Ð¿Ð¾Ð´Ñ…Ð¾Ð´ÑÑ‰ÑƒÑŽ Ð²Ð°ÐºÐ°Ð½ÑÐ¸ÑŽ?</h4>
                     <p style="color: var(--nk-gray-600); max-width: 600px; margin: 0 auto 24px;">ÐœÑ‹ Ð²ÑÐµÐ³Ð´Ð° Ð·Ð°Ð¸Ð½Ñ‚ÐµÑ€ÐµÑÐ¾Ð²Ð°Ð½Ñ‹ Ð² ÑÐ¸Ð»ÑŒÐ½Ñ‹Ñ… Ð°ÑƒÐ´Ð¸Ñ‚Ð¾Ñ€Ð°Ñ…, ÑŽÑ€Ð¸ÑÑ‚Ð°Ñ… Ð¸ ÐºÐ¾Ð½ÑÑƒÐ»ÑŒÑ‚Ð°Ð½Ñ‚Ð°Ñ…. Ð•ÑÐ»Ð¸ Ð²Ñ‹ Ð¿Ñ€Ð¾Ñ„ÐµÑÑÐ¸Ð¾Ð½Ð°Ð» ÑÐ²Ð¾ÐµÐ³Ð¾ Ð´ÐµÐ»Ð° â€” Ð¾Ñ‚Ð¿Ñ€Ð°Ð²ÑŒÑ‚Ðµ Ñ€ÐµÐ·ÑŽÐ¼Ðµ, Ð¸ Ð¼Ñ‹ ÑÐ²ÑÐ¶ÐµÐ¼ÑÑ Ñ Ð²Ð°Ð¼Ð¸.</p>
-                    <a href="mailto:info@neksoz.tj" style="font-weight: 800; color: var(--nk-blue); text-decoration: underline;">info@neksoz.tj</a>
+                    <a href="mailto:info@Neksoz.tj" style="font-weight: 800; color: var(--nk-blue); text-decoration: underline;">info@Neksoz.tj</a>
                 </div>
             </div>
 

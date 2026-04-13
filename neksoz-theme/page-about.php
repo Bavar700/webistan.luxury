@@ -181,11 +181,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Ðž ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ð¸</div>
-                <h1 class="hero__title">
-                    Ð£ÑÐ¿ÐµÑ…<br>
-                    <span class="text-gradient">Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ°</span><br>
-                    <span style="color: var(--nk-blue);">Ð½Ð°ÑˆÐ° Ð¼Ð¸ÑÑÐ¸Ñ</span>
-                </h1>
+                <h1 class="hero__title">Успех<br><em>вашего бизнеса</em></h1>
                 <p class="hero__desc">
                     Ð¡Ñ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð¿Ð°Ñ€Ñ‚Ð½ÐµÑ€ Ð¸ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð½Ñ‹Ð¹ Ñ…Ð°Ð±, Ñ‚Ñ€Ð°Ð½ÑÑ„Ð¾Ñ€Ð¼Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ð¹ Ð¾Ð¿Ñ‹Ñ‚ Ð² Ð°ÑƒÐ´Ð¸Ñ‚Ðµ Ð¸ Ð¿Ñ€Ð°Ð²Ðµ Ð² Ñ€ÐµÐ°Ð»ÑŒÐ½ÑƒÑŽ Ñ†ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ Ð´Ð»Ñ Ð»Ð¾ÐºÐ°Ð»ÑŒÐ½Ð¾Ð³Ð¾ Ð¸ Ð¼ÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ° Ð² Ð¢Ð°Ð´Ð¶Ð¸ÐºÐ¸ÑÑ‚Ð°Ð½Ðµ.
                 </p>

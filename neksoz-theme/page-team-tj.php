@@ -199,11 +199,7 @@ get_header();
         <div class="container hero__container">
             <div class="hero__content" style="max-width: 900px;">
                 <div class="hero__badge">Дастаи Neksoz</div>
-                <h1 class="hero__title">
-                    Фалсафаи<br>
-                    <span class="text-gradient">касбият ва</span><br>
-                    <span style="color: var(--nk-blue);">зеҳн</span>
-                </h1>
+                <h1 class="hero__title">Дастаи<br><em>мо</em></h1>
                 <p class="hero__desc" style="max-width: 750px; color: rgba(255,255,255,0.85); font-size: 1.1rem;">
                     «Дар паси ҳар як рақами ҳисобот ва ҳар як сатри шартнома зеҳни коршиносони мо пинҳон аст. Мо мутахассисонро аз соҳаҳои гуногун — аз кори бонкӣ то ҳуқуқи андоз — муттаҳид кардем, то шумо ҳимояи ҳамаҷонибаи тиҷорати худро аз ҳама ҷонибҳо ба даст оред».
                 </p>

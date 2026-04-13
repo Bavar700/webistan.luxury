@@ -47,7 +47,7 @@ get_header(); ?>
                         <div class="legal-section">
                             <h3 style="font-size: 18px; margin-bottom: 16px; color: var(--nk-gray-900);">1. Общие положения</h3>
                             <ul style="list-style: none; padding: 0; display: grid; gap: 12px;">
-                                <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">1.1.</strong> Настоящее Соглашение определяет условия использования материалов и сервисов сайта neksoz.tj (далее — «Сайт»).</li>
+                                <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">1.1.</strong> Настоящее Соглашение определяет условия использования материалов и сервисов сайта Neksoz.tj (далее — «Сайт»).</li>
                                 <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">1.2.</strong> Контент сайта предназначен для информирования потенциальных и действующих клиентов об услугах компании в сфере аудита, бухгалтерского учета, права и бизнес-консалтинга.</li>
                                 <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">1.3.</strong> Информация, размещенная на Сайте, не является публичной офертой и носит ознакомительный характер.</li>
                             </ul>
@@ -103,7 +103,7 @@ get_header(); ?>
                             <ul style="list-style: none; padding: 0; display: grid; gap: 12px;">
                                 <li style="color: var(--nk-gray-800);"><strong>Адрес:</strong> г. Душанбе, проспект Рудаки 55, 3-этаж</li>
                                 <li style="color: var(--nk-gray-800);"><strong>Телефон:</strong> <a href="tel:+992985641010" style="color: var(--nk-blue); text-decoration: none;">(+992) 985 64-10-10</a></li>
-                                <li style="color: var(--nk-gray-800);"><strong>E-mail:</strong> <a href="mailto:info@neksoz.tj" style="color: var(--nk-blue); text-decoration: none;">info@neksoz.tj</a></li>
+                                <li style="color: var(--nk-gray-800);"><strong>E-mail:</strong> <a href="mailto:info@Neksoz.tj" style="color: var(--nk-blue); text-decoration: none;">info@Neksoz.tj</a></li>
                             </ul>
                         </div>
 

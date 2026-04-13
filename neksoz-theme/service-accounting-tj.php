@@ -16,11 +16,7 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">
-                    Пешбурди баҳисобгирии<br>
-                    <span class="text-gradient">молиявӣ ва</span><br>
-                    <span style="color: var(--nk-blue);">кадрӣ</span>
-                </h1>
+                <h1 class="hero__title">Хизматрасонии<br><em>муҳосибӣ</em></h1>
                 <p class="hero__desc">
                     Ба коршиносон пурра вогузор кардани муҳосибот ва маъмурияти кадрӣ барои коҳиш додани хавфҳо ва хароҷот.
                 </p>

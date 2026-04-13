@@ -17,11 +17,7 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <div class="hero__badge">Маҷмӯи пурраи ҳалли масъалаҳо</div>
-                <h1 class="hero__title">
-                    Хидматрасониҳои<br>
-                    <span class="text-gradient">муҷаҳҳаз барои рушди</span><br>
-                    <span style="color: var(--nk-blue);">тиҷорати шумо</span>
-                </h1>
+                <h1 class="hero__title">Хизматрасониҳои<br><em>мо</em></h1>
                 <p class="hero__desc">
                     Мо дастгирии коршиносиро дар ҳар як марҳилаи давраи ҳаётии ширкат пешниҳод менамоем — аз бақайдгирӣ то рушд.
                 </p>

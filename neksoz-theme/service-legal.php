@@ -16,11 +16,7 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">
-                    ÐšÐ¾Ð¼Ð¿Ð»ÐµÐºÑÐ½Ñ‹Ðµ<br>
-                    <span class="text-gradient">ÑŽÑ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ</span><br>
-                    <span style="color: var(--nk-blue);">Ð±Ð¸Ð·Ð½ÐµÑÐ°</span>
-                </h1>
+                <h1 class="hero__title">Юридические<br><em>консультации</em></h1>
                 <p class="hero__desc">
                     ÐÐ°Ð´ÐµÐ¶Ð½Ð°Ñ Ð¿Ñ€Ð°Ð²Ð¾Ð²Ð°Ñ Ð·Ð°Ñ‰Ð¸Ñ‚Ð° Ð²Ð°ÑˆÐ¸Ñ… Ð¸Ð½Ñ‚ÐµÑ€ÐµÑÐ¾Ð², ÑÐ¾Ð¿Ñ€Ð¾Ð²Ð¾Ð¶Ð´ÐµÐ½Ð¸Ðµ ÑÐ´ÐµÐ»Ð¾Ðº Ð¸ Ð¼Ð¸Ð½Ð¸Ð¼Ð¸Ð·Ð°Ñ†Ð¸Ñ ÑŽÑ€Ð¸Ð´Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ñ€Ð¸ÑÐºÐ¾Ð².
                 </p>

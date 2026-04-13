@@ -16,11 +16,7 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">
-                    Барқарорсозии пурраи<br>
-                    <span class="text-gradient">баҳисобгирии</span><br>
-                    <span style="color: var(--nk-blue);">тиҷорат</span>
-                </h1>
+                <h1 class="hero__title">Барқароркунии<br><em>баҳисобгирӣ</em></h1>
                 <p class="hero__desc">
                     Ба тартиб овардани ҳуҷҷатҳои беэътиношуда, бартараф кардани хатогиҳо ва ҳифз аз даъвоҳои мақомоти назоратӣ.
                 </p>

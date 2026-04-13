@@ -23,7 +23,7 @@ get_header();
                 <!-- Meta information / Label -->
                 <div class="flex items-center gap-4 mb-8">
                     <div class="h-px w-8 bg-navy opacity-30"></div>
-                    <span class="text-xs font-black uppercase tracking-[0.3em] text-accent-blue">Ð’Ð°ÑˆÐ° Ð£ÑÐ»ÑƒÐ³Ð°</span>
+                    <span class="text-xs font-black uppercase tracking-[0.3em] text-accent-blue">Ваша Услуга</span>
                 </div>
 
                 <!-- Title and Breadcrumb Logic -->
@@ -47,13 +47,13 @@ get_header();
                 <div class="bg-navy p-12 md:p-20 rounded-sm text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
                     <div class="absolute inset-0 bg-white/5 opacity-10 pointer-events-none"></div>
                     <div class="max-w-lg relative z-10">
-                        <h2 class="text-3xl font-black mb-6">Ð“Ð¾Ñ‚Ð¾Ð²Ñ‹ Ð¾Ð±ÑÑƒÐ´Ð¸Ñ‚ÑŒ ÑÑ‚Ñƒ Ð·Ð°Ð´Ð°Ñ‡Ñƒ?</h2>
+                        <h2 class="text-3xl font-black mb-6">Готовы обсудить эту задачу?</h2>
                         <p class="text-white/70 text-lg font-semibold leading-relaxed">
-                            ÐžÑÑ‚Ð°Ð²ÑŒÑ‚Ðµ Ð·Ð°ÑÐ²ÐºÑƒ, Ð¸ Ð½Ð°ÑˆÐ¸ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ñ‹ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÑƒÑ‚ Ð¿ÐµÑ€Ð²Ð¸Ñ‡Ð½ÑƒÑŽ Ð±ÐµÑÐ¿Ð»Ð°Ñ‚Ð½ÑƒÑŽ Ð´Ð¸Ð°Ð³Ð½Ð¾ÑÑ‚Ð¸ÐºÑƒ ÑÑ‚Ð¾Ð¹ ÑÑ„ÐµÑ€Ñ‹ Ð² Ð²Ð°ÑˆÐµÐ¼ Ð±Ð¸Ð·Ð½ÐµÑÐµ.
+                            Оставьте заявку, и наши эксперты проведут первичную бесплатную диагностику этой сферы в вашем бизнесе.
                         </p>
                     </div>
                     <a href="<?php echo esc_url( home_url( '/contacts' ) ); ?>" class="relative z-10 bg-white text-navy px-10 py-5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-colors shrink-0">
-                        ÐžÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð·Ð°ÑÐ²ÐºÑƒ
+                        Оставить заявку
                     </a>
                 </div>
             </div>
@@ -62,7 +62,7 @@ get_header();
             <aside class="lg:col-span-4 flex flex-col gap-12 sticky top-40 h-fit">
                 <!-- Related Services -->
                 <div class="bg-white p-12 border border-slate-100 rounded-sm space-y-10 group">
-                    <h4 class="text-[10px] font-black uppercase tracking-widest text-navy border-b border-navy/10 pb-6">Ð”Ñ€ÑƒÐ³Ð¸Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ Ð´Ð»Ñ Ð’Ð°Ñ</h4>
+                    <h4 class="text-[10px] font-black uppercase tracking-widest text-navy border-b border-navy/10 pb-6">Другие решения для Вас</h4>
                     <div class="flex flex-col gap-8">
                         <?php
                         $other_services = new WP_Query( array(
@@ -76,7 +76,7 @@ get_header();
                         ?>
                             <a href="<?php the_permalink(); ?>" class="flex flex-col gap-3 group/item">
                                 <h5 class="text-lg font-black text-navy leading-tight group-hover/item:text-accent-blue transition-colors"><?php the_title(); ?></h5>
-                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 group-hover/item:text-navy transition-colors">Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ð´ÐµÑ‚Ð°Ð»Ð¸</p>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 group-hover/item:text-navy transition-colors">Смотреть детали</p>
                             </a>
                         <?php
                             endwhile;
@@ -89,7 +89,7 @@ get_header();
                 <!-- Info Box -->
                 <div class="bg-slate-50 p-12 border border-slate-200 rounded-sm italic">
                     <p class="text-slate-500 font-medium leading-relaxed">
-                        ÐœÑ‹ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÐ¼ Ñ ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸ÑÐ¼Ð¸ Ð»ÑŽÐ±Ð¾Ð³Ð¾ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±Ð°: Ð¾Ñ‚ Ð¿ÐµÑ€ÑÐ¿ÐµÐºÑ‚Ð¸Ð²Ð½Ñ‹Ñ… ÑÑ‚Ð°Ñ€Ñ‚Ð°Ð¿Ð¾Ð² Ð´Ð¾ ÐºÑ€ÑƒÐ¿Ð½Ñ‹Ñ… Ð¿Ñ€Ð¾Ð¼Ñ‹ÑˆÐ»ÐµÐ½Ð½Ñ‹Ñ… Ð³Ñ€ÑƒÐ¿Ð¿ Ð² Ð¢Ð°Ð´Ð¶Ð¸ÐºÐ¸ÑÑ‚Ð°Ð½Ðµ Ð¸ Ð¡ÐÐ“.
+                        Мы работаем с компаниями любого масштаба: от перспективных стартапов до крупных промышленных групп в Таджикистане и СНГ.
                     </p>
                 </div>
             </aside>

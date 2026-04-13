@@ -16,11 +16,7 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">
-                    Автоматикунонии<br>
-                    <span class="text-gradient">рақамии</span><br>
-                    <span style="color: var(--nk-blue);">тиҷорати шумо</span>
-                </h1>
+                <h1 class="hero__title">Автоматикунонии<br><em>тиҷорат</em></h1>
                 <p class="hero__desc">
                     Ҷорӣ намудани қарорҳои муосири IT (1С, CRM, абзорҳои AI) барои бартараф кардани корҳои муқаррарӣ ва баланд бардоштани дақиқии идоракунӣ.
                 </p>

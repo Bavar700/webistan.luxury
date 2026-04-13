@@ -399,11 +399,7 @@ get_header();
         <div class="container hero__container">
             <div class="hero__content" style="max-width: 850px;">
                 <div class="hero__badge">Кор дар Neksoz</div>
-                <h1 class="hero__title">
-                    Нуқтаи рушди<br>
-                    <span class="text-gradient">касбии</span><br>
-                    <span style="color: var(--nk-blue);">шумо</span>
-                </h1>
+                <h1 class="hero__title">Кор<br><em>дар Neksoz</em></h1>
                 <p class="hero__desc" style="max-width: 550px; font-size: 1rem; opacity: 0.9;">
                     Мо истеъдодҳоро барои эҷоди ҳалли зеҳнӣ дар соҳаи аудит, молия ва ҳуқуқ муттаҳид месозем. Қисме аз дастае шавед, ки стандартҳои сифатро дар Тоҷикистон муайян мекунад.
                 </p>
@@ -529,7 +525,7 @@ get_header();
                 <div class="simple-card fade-up" style="background: var(--nk-gray-50); border: 1px dashed var(--nk-gray-200); margin-top: 40px; text-align: center;">
                     <h4 style="font-family: var(--font-display); margin-bottom: 15px;">Ҷойи кории мувофиқро наёфтед?</h4>
                     <p style="color: var(--nk-gray-600); max-width: 600px; margin: 0 auto 24px;">Мо ҳамеша ба аудиторон, ҳуқуқшиносон ва мушовирони пуртаҷриба таваҷҷӯҳ дорем. Агар шумо мутахассиси кори худ бошед — резюме фиристед ва мо бо шумо тамос хоҳем гирифт.</p>
-                    <a href="mailto:info@neksoz.tj" style="font-weight: 800; color: var(--nk-blue); text-decoration: underline;">info@neksoz.tj</a>
+                    <a href="mailto:info@Neksoz.tj" style="font-weight: 800; color: var(--nk-blue); text-decoration: underline;">info@Neksoz.tj</a>
                 </div>
             </div>
 

@@ -16,11 +16,7 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
-                <h1 class="hero__title">
-                    Баҳисобгирии шаффофи<br>
-                    <span class="text-gradient">идоракунии</span><br>
-                    <span style="color: var(--nk-blue);">тиҷорат</span>
-                </h1>
+                <h1 class="hero__title">Менеҷменти<br><em>молиявӣ</em></h1>
                 <p class="hero__desc">
                     Шаффофияти пурраи молиявӣ ва маълумоти дақиқ барои қабули қарорҳое, ки ба афзоиши фоида нигаронида шудаанд.
                 </p>

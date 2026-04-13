@@ -20,7 +20,7 @@ get_header();
         <header class="mb-16">
             <div class="flex items-center gap-4 mb-8">
                 <div class="h-px w-8 bg-navy opacity-30"></div>
-                <span class="text-xs font-black uppercase tracking-[0.3em] text-accent-blue">Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ñ€Ð°Ð·Ð´ÐµÐ»</span>
+                <span class="text-xs font-black uppercase tracking-[0.3em] text-accent-blue">Информационный раздел</span>
             </div>
             <h1 class="text-5xl md:text-7xl font-black text-navy leading-[1.1] tracking-tight">
                 <?php the_title(); ?>
