@@ -1,0 +1,10 @@
+services:
+  webstudio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:3000"
+    restart: always
+    environment:
+      - NODE_ENV=production
