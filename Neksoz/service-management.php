@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент управления</div>
                 <h1 class="hero__title">
-                    Прозрачный управленческий <span class="text-gradient">учет для бизнеса</span>
+                    <span style="white-space: nowrap;">Прозрачный управленческий</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">учет для бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Полная финансовая прозрачность и точные данные для принятия решений, направленных на увеличение прибыли.

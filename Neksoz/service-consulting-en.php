@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Consulting</div>
                 <h1 class="hero__title">
-                    Financial and management <span class="text-gradient">business consulting</span>
+                    <span style="white-space: nowrap;">Financial and management</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">business consulting</span>
                 </h1>
                 <p class="hero__desc">
                     Strategic planning, cash flow optimization, and implementation of effective management systems for business scaling.

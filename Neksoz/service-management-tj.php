@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти идоракунӣ</div>
                 <h1 class="hero__title">
-                    Баҳисобгирии шаффофи <span class="text-gradient">идоракунии тиҷорат</span>
+                    <span style="white-space: nowrap;">Баҳисобгирии шаффофи</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">идоракунии тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Шаффофияти пурраи молиявӣ ва маълумоти дақиқ барои қабули қарорҳое, ки ба афзоиши фоида равона шудаанд.

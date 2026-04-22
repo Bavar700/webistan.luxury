@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Accounting Department</div>
                 <h1 class="hero__title">
-                    Financial and <span class="text-gradient">HR accounting for business</span>
+                    <span style="white-space: nowrap;">Financial and HR</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">accounting management</span>
                 </h1>
                 <p class="hero__desc">
                     Complete handover of accounting and HR administration to experts to minimize risks and reduce costs.

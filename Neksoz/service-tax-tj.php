@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти андоз</div>
                 <h1 class="hero__title">
-                    Машваратҳои коршиносони <span class="text-gradient">андоз барои тиҷорат</span>
+                    <span style="white-space: nowrap;">Машваратҳои коршиносони</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">андоз барои тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Беҳсозии қонунии сарбории андоз ва ба ҳадди ақал расонидани хатарҳо пеш аз ташрифи мақомоти назоратӣ.

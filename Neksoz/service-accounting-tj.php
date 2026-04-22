@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти муҳосибот</div>
                 <h1 class="hero__title">
-                    Пешбурди баҳисобгирии <span class="text-gradient">молиявӣ ва кадрии тиҷорат</span>
+                    <span style="white-space: nowrap;">Пешбурди баҳисобгирии</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">молиявӣ ва кадрии тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Вогузории пурраи муҳосибот ва маъмурикунонии кадрӣ ба коршиносон ҷиҳати ба ҳадди ақал расонидани хатарҳо ва коҳиши хароҷот.

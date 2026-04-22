@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Машварат</div>
                 <h1 class="hero__title">
-                    Машварати молиявию <span class="text-gradient">идоракунии тиҷорат</span>
+                    <span style="white-space: nowrap;">Машварати молиявию</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">идоракунии тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Банақшагирии роҳбурдӣ, беҳсозии гардиши маблағҳои пуллӣ ва ҷорӣ намудани низомҳои самараноки идоракунӣ барои густариши тиҷорат.

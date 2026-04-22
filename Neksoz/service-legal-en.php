@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Legal Department</div>
                 <h1 class="hero__title">
-                    Comprehensive legal <span class="text-gradient">solutions for business</span>
+                    <span style="white-space: nowrap;">Comprehensive legal</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">solutions for business</span>
                 </h1>
                 <p class="hero__desc">
                     Reliable legal protection of your interests, transaction support, and minimization of legal risks.

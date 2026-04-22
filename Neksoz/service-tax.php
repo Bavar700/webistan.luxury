@@ -18,7 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge"><?php echo get_field('hero_badge') ?: 'Департамент налогов'; ?></div>
                 <h1 class="hero__title">
-                    <?php echo get_field('hero_title') ?: 'Экспертные налоговые <span class="text-gradient">консультации бизнеса</span>'; ?>
+                    <?php echo get_field('hero_title') ?: '<span style="white-space: nowrap;">Экспертные налоговые</span><br><span class="text-gradient" style="white-space: nowrap;">консультации для бизнеса</span>'; ?>
                 </h1>
                 <p class="hero__desc">
                     <?php echo get_field('hero_desc') ?: 'Законная оптимизация налоговой нагрузки и минимизация рисков перед визитами контролирующих органов.'; ?>

@@ -18,7 +18,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Юридический департамент</div>
                 <h1 class="hero__title">
-                    Комплексные юридические <span class="text-gradient">решения для бизнеса</span>
+                    <span style="white-space: nowrap;">Комплексные юридические</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">решения для бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Надежная правовая защита ваших интересов, сопровождение сделок и минимизация юридических рисков.
