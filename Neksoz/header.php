@@ -1712,15 +1712,8 @@
             <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
         <?php
-        $current_lang = 'ru';
-        if (isset($_GET['lang'])) {
-            $current_lang = sanitize_text_field($_GET['lang']);
-        } elseif (is_page()) {
-            // Auto-detect lang from slug if it ends in -tj
-            $slug = get_post_field('post_name', get_the_ID());
-            if (strpos($slug, '-tj') !== false) $current_lang = 'tj';
-            elseif (strpos($slug, '-en') !== false) $current_lang = 'en';
-        }
+        // Use the centralized language detection from functions.php
+        $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
 
         $nav_texts = [
             'ru' => [__('Главная', 'neksoz'), __('Услуги', 'neksoz'), __('О компании', 'neksoz'), __('Новости', 'neksoz'), __('Вакансии', 'neksoz'), __('Контакты', 'neksoz')],
@@ -1728,8 +1721,6 @@
             'en' => [__('Home', 'neksoz'), __('Services', 'neksoz'), __('About us', 'neksoz'), __('News', 'neksoz'), __('Careers', 'neksoz'), __('Contacts', 'neksoz')]
         ];
         $texts = $nav_texts[$current_lang] ?? $nav_texts['ru'];
-
-
         ?>
         <nav class="header__nav">
             <?php 
@@ -1742,15 +1733,6 @@
                 )); 
             } else {
                 // FALLBACK: Show original hardcoded links if no WP menu is set
-                $current_lang = 'ru';
-                if (function_exists('pll_current_language')) $current_lang = pll_current_language();
-                
-                $nav_texts = [
-                    'ru' => [__('Главная', 'neksoz'), __('Услуги', 'neksoz'), __('О компании', 'neksoz'), __('Новости', 'neksoz'), __('Вакансии', 'neksoz'), __('Контакты', 'neksoz')],
-                    'tj' => [__('Асосӣ', 'neksoz'), __('Хидмат', 'neksoz'), __('Дар бораи мо', 'neksoz'), __('Ахбор', 'neksoz'), __('Ҷойҳои корӣ', 'neksoz'), __('Тамос', 'neksoz')],
-                    'en' => [__('Home', 'neksoz'), __('Services', 'neksoz'), __('About us', 'neksoz'), __('News', 'neksoz'), __('Careers', 'neksoz'), __('Contacts', 'neksoz')]
-                ];
-                $texts = $nav_texts[$current_lang] ?? $nav_texts['ru'];
                 ?>
                 <a href="<?php echo nk_link('/', $current_lang); ?>"><?php echo esc_html($texts[0]); ?></a>
                 <a href="<?php echo nk_link('/services', $current_lang); ?>"><?php echo esc_html($texts[1]); ?></a>
@@ -1769,20 +1751,8 @@
                 global $wp;
                 $current_slug = trim(parse_url(add_query_arg(array(), $wp->request), PHP_URL_PATH), '/');
 
-                // ── 3-tier language detection ──────────────────────────────
-                // 1. Polylang (if installed)
-                if (function_exists('pll_current_language') && pll_current_language()) {
-                    $current_lang = pll_current_language();
-                // 2. ?lang= URL parameter
-                } elseif (isset($_GET['lang']) && in_array($_GET['lang'], ['ru', 'tj', 'en'])) {
-                    $current_lang = sanitize_text_field($_GET['lang']);
-                // 3. Page slug suffix (-tj / -en)
-                } elseif (preg_match('/-(tj|en)$/', $current_slug, $m)) {
-                    $current_lang = $m[1];
-                // 4. Default
-                } else {
-                    $current_lang = 'ru';
-                }
+                // ── Centralized language detection ──────────────────────────────
+                $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
 
                 ?>
                 <a href="<?php echo nk_get_switcher_link('en', $current_slug); ?>" class="lang-switcher__item <?php echo $current_lang == 'en' ? 'is-active' : ''; ?>">EN</a>

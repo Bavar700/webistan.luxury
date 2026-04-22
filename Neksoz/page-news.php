@@ -60,7 +60,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         03 апреля 2024 • Юридический аудит
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Изменения в расчете налога на имущество и землю</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Изменения в расчете налога на имущество и землю</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Согласно ст. 175 и 402 Налогового кодекса, налоги напрямую зависят от кадастровой стоимости...
                     </p>
@@ -76,7 +76,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         28 марта 2024 • Разбор кейсов
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Процедуры банкротства и ликвидации предприятий</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Процедуры банкротства и ликвидации предприятий</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Команда NEKSOZ объединяет экспертов в области права...
                     </p>
@@ -92,7 +92,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         15 марта 2024 • Мероприятия
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Итоги экономического форума в Душанбе</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Итоги экономического форума в Душанбе</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Обсуждаем новые векторы развития инвестиционного климата...
                     </p>

@@ -33,38 +33,25 @@
         </div>
         <div class="services-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
             <!-- 1 -->
-            <div class="service-card fade-up" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">500<em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Мизоҷони қаноатманд</p>
+            <div class="service-card fade-up" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">500<em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Мизоҷони қаноатманд</p>
             </div>
             <!-- 2 -->
-            <div class="service-card fade-up fade-up-delay-1" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;"><?php echo (date('Y') - 2016); ?><em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Сол дар хидмат</p>
+            <div class="service-card fade-up fade-up-delay-1" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;"><?php echo (date('Y') - 2016); ?><em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Сол дар хидмат</p>
             </div>
             <!-- 3 -->
-            <div class="service-card fade-up fade-up-delay-2" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">50<em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Коршиносони лаёқатманд</p>
+            <div class="service-card fade-up fade-up-delay-2" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">50<em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Коршиносони лаёқатманд</p>
             </div>
             <!-- 4 -->
-            <div class="service-card fade-up fade-up-delay-3" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">1200<em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Лоиҳаҳои муваффақ</p>
+            <div class="service-card fade-up fade-up-delay-3" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">1200<em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Лоиҳаҳои муваффақ</p>
             </div>
-
         </div>
     </div>
 </section>
@@ -75,7 +62,7 @@
     <div class="container">
         <div class="section__header section__header--center">
             <div class="section__label">Самтҳо</div>
-            <h2 class="section__title section__title--huge"><span class="text-gradient">Роҳҳалҳои маҷмӯӣ</span><br>барои тиҷорати шумо</h2>
+            <h2 class="section__title section__title--huge"><span class="text-gradient">Роҳҳалҳои маҷмӯӣ</span><br>барои тиҷорати Шумо</h2>
             <p class="section__subtitle section__subtitle--free">Ҳар як хизматрасонӣ ба талаботи инфиродии мизоҷ мутобиқ карда мешавад <br> ва <strong>ҳифзи ҳадди аксари манфиатҳои Шуморо</strong> таъмин менамояд.</p>
         </div>
 
@@ -305,7 +292,7 @@
         <div class="ceo-editorial fade-up is-visible">
             <div class="section__label section__label--on-dark">Дар бораи ширкат</div>
             <h2 class="section__title section__title--huge section__title--on-dark">
-                <span class="text-gradient">Шарики боэътимоди шумо</span><br>дар тиҷорат
+                <span class="text-gradient">Шарики боэътимоди Шумо</span><br>дар тиҷорат
             </h2>
             <p class="ceo-editorial__intro">
                 ҶДММ «НЕКСОЗ-БИЗНЕС КОНСАЛТИНГ ГРУП» — соли 2016 таъсис ёфтааст. Дар ин муддат мо аз як ширкати дорои тахассуси маҳдуд ба <strong>як маркази тавонои машваратӣ</strong> таҳаввул ёфта, устуворӣ ва амнияти тиҷоратро дар ҳар марҳилаи рушд таъмин менамоем.
@@ -347,7 +334,7 @@
             <!-- Left Side: Soft Modern Persuasion -->
             <div class="cta-crystal__content fade-up is-visible">
                 <div class="section__label">Тамоси фаврӣ</div>
-                <h2 class="cta-crystal__title"><span class="text-gradient">Оё барои густариши</span><br>муваффақияти<br>худ омодаед?</h2>
+                <h2 class="cta-crystal__title"><span class="text-gradient">Оё барои густариши</span><br>муваффақияти<br>Худ омодаед?</h2>
                 <p class="cta-crystal__text">Ҳамин имрӯз дархост гузоред ва мо барои Шумо роҳбурди инфиродии рушд ва таъмини амнияти тиҷорататонро таҳия менамоем.</p>
                 <div class="cta-crystal__status">
                     <span class="cta-crystal__status-dot"></span>

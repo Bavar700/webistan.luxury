@@ -60,7 +60,7 @@ function nk_get_link_by_title_tj($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         03 апрели 2024 • Аудити ҳуқуқӣ
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Тағйирот дар ҳисоби андоз аз амвол ва замин</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Тағйирот дар ҳисоби андоз аз амвол ва замин</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Тибқи моддаҳои 175 ва 402-и Кодекси андоз, андозҳо мустақиман ба арзиши кадастрӣ вобастаанд...
                     </p>
@@ -76,7 +76,7 @@ function nk_get_link_by_title_tj($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         28 марти 2024 • Таҳлили қазияҳо
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Равандҳои муфлисшавӣ ва барҳамдиҳии корхонаҳо</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Равандҳои муфлисшавӣ ва барҳамдиҳии корхонаҳо</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Ҳайати кории NEKSOZ коршиносони соҳаи ҳуқуқро муттаҳид месозад...
                     </p>
@@ -92,7 +92,7 @@ function nk_get_link_by_title_tj($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         15 марти 2024 • Чорабиниҳо
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Натиҷаҳои ҳамоиши иқтисодӣ дар Душанбе</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Натиҷаҳои ҳамоиши иқтисодӣ дар Душанбе</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Самтҳои нави рушди фазои сармоягузориро баррасӣ мекунем...
                     </p>

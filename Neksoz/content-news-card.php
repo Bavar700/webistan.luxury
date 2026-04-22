@@ -11,8 +11,8 @@
         <?php echo get_the_date(); ?>
     </div>
     
-    <h3 class="bento-card__title" style="font-size: 1.25rem; margin-bottom: 16px;">
-        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+    <h3 class="bento-card__title" style="font-size: 1.5rem; margin-bottom: 16px; font-weight: 800; font-family: var(--font-display); color: var(--nk-gray-900);">
+        <a href="<?php the_permalink(); ?>" style="color: inherit; text-decoration: none;"><?php the_title(); ?></a>
     </h3>
 
     <div class="bento-card__desc" style="font-size: 0.95rem; margin-bottom: 24px; opacity: 0.8;">

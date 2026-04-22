@@ -43,36 +43,24 @@ get_header();
         </div>
         <div class="services-grid" style="grid-template-columns: repeat(4, 1fr); gap: 20px;">
             <!-- 1 -->
-            <div class="service-card fade-up" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">500<em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Довольных клиентов</p>
+            <div class="service-card fade-up" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">500<em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Довольных клиентов</p>
             </div>
             <!-- 2 -->
-            <div class="service-card fade-up fade-up-delay-1" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;"><?php echo (date('Y') - 2016); ?><em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Лет на рынке</p>
+            <div class="service-card fade-up fade-up-delay-1" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;"><?php echo (date('Y') - 2016); ?><em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Лет на рынке</p>
             </div>
             <!-- 3 -->
-            <div class="service-card fade-up fade-up-delay-2" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">50<em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Квалифицированных экспертов</p>
+            <div class="service-card fade-up fade-up-delay-2" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">50<em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Квалифицированных экспертов</p>
             </div>
             <!-- 4 -->
-            <div class="service-card fade-up fade-up-delay-3" style="padding-top: 110px !important; padding-bottom: 80px !important; min-height: auto !important; position: relative !important; overflow: hidden !important;">
-                <div class="service-card__icon stat-icon">
-                    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                </div>
-                <div class="service-card__title" style="font-size: 3.5rem !important; margin-bottom: 25px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">1200<em style="font-style: normal !important;">+</em></div>
-                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-size: 0.55rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; white-space: nowrap !important;">Успешных проектов</p>
+            <div class="service-card fade-up fade-up-delay-3" style="padding: 70px 30px !important; min-height: auto !important; position: relative !important; overflow: hidden !important; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
+                <div class="service-card__title" style="font-size: 4rem !important; margin-bottom: 15px !important; font-weight: 900 !important; line-height: 1 !important; letter-spacing: -0.02em !important;">1200<em style="font-style: normal !important;">+</em></div>
+                <p class="service-card__text" style="font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; font-size: 0.75rem !important; margin-bottom: 0 !important; color: var(--nk-gray-500) !important; line-height: 1.3 !important;">Успешных проектов</p>
             </div>
         </div>
     </div>
@@ -84,7 +72,7 @@ get_header();
     <div class="container">
         <div class="section__header section__header--center">
             <div class="section__label">Направления</div>
-            <h2 class="section__title section__title--huge"><span class="text-gradient">Комплексные решения</span><br>для вашего бизнеса</h2>
+            <h2 class="section__title section__title--huge"><span class="text-gradient">Комплексные решения</span><br>для Вашего бизнеса</h2>
             <p class="section__subtitle section__subtitle--free">Каждая услуга адаптируется под индивидуальные потребности клиента <br>и обеспечивает максимальную <strong>защиту Ваших интересов</strong>.</p>
         </div>
 
@@ -314,7 +302,7 @@ get_header();
     <div class="ceo-editorial fade-up is-visible">
             <div class="section__label section__label--on-dark">О компании</div>
             <h2 class="section__title section__title--huge section__title--on-dark">
-                <span class="text-gradient">Ваш стратегический партнер</span><br>в Вашем бизнесе
+                <span class="text-gradient">Надежный партнер</span><br>для Вашего бизнеса
             </h2>
             <p class="ceo-editorial__intro">
                 ООО «НЕКСОЗ-БИЗНЕС КОНСАЛТИНГ ГРУП» — основана в 2016 году. За это время мы эволюционировали из узкопрофильной фирмы в <strong>мощный консалтинговый хаб</strong>, обеспечивая устойчивость и безопасность бизнеса на каждом этапе роста.
@@ -356,8 +344,8 @@ get_header();
             <!-- Left Side: Soft Modern Persuasion -->
             <div class="cta-crystal__content fade-up is-visible">
                 <div class="section__label">Быстрая связь</div>
-                <h2 class="cta-crystal__title"><span class="text-gradient">Готовы масштабировать</span><br>свой успех?</h2>
-                <p class="cta-crystal__text">Оставьте заявку сегодня, и мы разработаем для вас персональную стратегию развития и обеспечения безопасности вашего бизнеса.</p>
+                <h2 class="cta-crystal__title"><span class="text-gradient">Готовы масштабировать</span><br>Свой успех?</h2>
+                <p class="cta-crystal__text">Оставьте заявку сегодня, и мы разработаем для Вас персональную стратегию развития и обеспечения безопасности Вашего бизнеса.</p>
                 <div class="cta-crystal__status">
                     <span class="cta-crystal__status-dot"></span>
                     Мы онлайн • Ответ в течение 15 минут

@@ -62,7 +62,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         April 03, 2024 • Legal Audit
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Changes in Property and Land Tax Calculation</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Changes in Property and Land Tax Calculation</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         According to Articles 175 and 402 of the Tax Code, taxes depend directly on cadastral value...
                     </p>
@@ -78,7 +78,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         March 28, 2024 • Case Analysis
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Bankruptcy and Corporate Liquidation Procedures</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Bankruptcy and Corporate Liquidation Procedures</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         The NEKSOZ team brings together legal experts. Our experience shows that professional document preparation...
                     </p>
@@ -94,7 +94,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         March 15, 2024 • Events
                     </div>
-                    <h3 class="text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3;">Outcomes of the Economic Forum in Dushanbe</h3>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Outcomes of the Economic Forum in Dushanbe</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Discussing new vectors of investment climate development. Our intellectual property activities...
                     </p>
