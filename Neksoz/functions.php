@@ -363,7 +363,7 @@ function neksoz_content_protection() {
     </script>
     <?php
 }
-add_action('wp_head', 'neksoz_content_protection', 99);
+// add_action('wp_head', 'neksoz_content_protection', 99);
 
 /**
  * DYNAMIC ENGINE - Polylang & Menu Registration

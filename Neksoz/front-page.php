@@ -19,9 +19,7 @@ get_header();
     <div class="container hero__container" style="position:relative;z-index:2;">
         <div class="hero__content">
             <div class="hero__badge">Бизнес-консалтинг</div>
-            <h1 class="hero__title">
-                Будем<br><em>решать!</em>
-            </h1>
+            <h1 class="hero__title" style="white-space: nowrap; min-height: 1.9em; display: flex; align-items: center;">Будем&nbsp;<em>решать!</em></h1>
             <p class="hero__desc">
                 Профессиональный аудит, налоговое планирование и юридическое сопровождение бизнеса. <strong>Надёжность и экспертность</strong> для Вашего успеха.
             </p>

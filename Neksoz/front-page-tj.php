@@ -9,9 +9,7 @@
     <div class="container hero__container" style="position:relative;z-index:2;">
         <div class="hero__content">
             <div class="hero__badge">Консалтинги тиҷоратӣ</div>
-            <h1 class="hero__title">
-                Ҳал<br><em>мекунем!</em>
-            </h1>
+            <h1 class="hero__title" style="white-space: nowrap; min-height: 1.9em; display: flex; align-items: center;">Ҳал&nbsp;<em>мекунем!</em></h1>
             <p class="hero__desc">
                 Аудити касбӣ, банақшагирии андоз ва мушоияти ҳуқуқии тиҷорат. <strong>Эътимоднокӣ ва коршиносӣ</strong> барои муваффақияти Шумо.
             </p>

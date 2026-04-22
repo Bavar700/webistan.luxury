@@ -15,9 +15,7 @@ get_header();
     <div class="container hero__container" style="position:relative;z-index:2;">
         <div class="hero__content">
             <div class="hero__badge">Business consulting</div>
-            <h1 class="hero__title">
-                We will<br><em>solve it!</em>
-            </h1>
+            <h1 class="hero__title" style="white-space: nowrap; min-height: 1.9em; display: flex; align-items: center;">We&nbsp;will&nbsp;<em>solve&nbsp;it!</em></h1>
             <p class="hero__desc">
                 Professional audit, tax planning, and legal business support. <strong>Reliability and expertise</strong> for your success.
             </p>
