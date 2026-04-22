@@ -1,4 +1,9 @@
-<?php wp_body_open(); ?>
+<?php 
+/**
+ * The Header for Neksoz Theme
+ */
+$current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1702,9 +1707,11 @@
             .header__nav { width: 100% !important; }
         }
     </style>
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header class="header">
@@ -1713,9 +1720,6 @@
             <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
         <?php
-        // Use the centralized language detection from functions.php
-        $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
-
         $nav_texts = [
             'ru' => [__('Главная', 'neksoz'), __('Услуги', 'neksoz'), __('О компании', 'neksoz'), __('Новости', 'neksoz'), __('Вакансии', 'neksoz'), __('Контакты', 'neksoz')],
             'tj' => [__('Асосӣ', 'neksoz'), __('Хидмат', 'neksoz'), __('Дар бораи мо', 'neksoz'), __('Ахбор', 'neksoz'), __('Ҷойҳои корӣ', 'neksoz'), __('Тамос', 'neksoz')],
@@ -1751,10 +1755,6 @@
                 <?php
                 global $wp;
                 $current_slug = trim(parse_url(add_query_arg(array(), $wp->request), PHP_URL_PATH), '/');
-
-                // ── Centralized language detection ──────────────────────────────
-                $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
-
                 ?>
                 <a href="<?php echo nk_get_switcher_link('en', $current_slug); ?>" class="lang-switcher__item <?php echo $current_lang == 'en' ? 'is-active' : ''; ?>">EN</a>
                 <a href="<?php echo nk_get_switcher_link('tj', $current_slug); ?>" class="lang-switcher__item <?php echo $current_lang == 'tj' ? 'is-active' : ''; ?>">TJ</a>

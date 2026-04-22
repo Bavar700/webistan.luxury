@@ -294,7 +294,7 @@ get_header();
     <div class="hero__accent-line"></div>
     <div class="hero__accent-line-2"></div>
     <div class="hero__grid-pattern"></div>
-    
+    <div class="container">
     <div class="ceo-editorial fade-up is-visible">
             <div class="section__label section__label--on-dark">About the Company</div>
             <h2 class="section__title section__title--huge section__title--on-dark">
