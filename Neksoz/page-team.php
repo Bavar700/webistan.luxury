@@ -2,6 +2,11 @@
 /**
  * Template Name: Команда V3
  */
+if (function_exists('nk_get_current_lang')) {
+    $lang = nk_get_current_lang();
+    if ($lang === 'tj') { get_template_part('page-team', 'tj'); return; }
+    if ($lang === 'en') { get_template_part('page-team', 'en'); return; }
+}
 get_header();
 ?>
 
@@ -234,7 +239,7 @@ get_header();
                 <!-- Expert 1 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-3.jpg" alt="Салимов Зоир Муминович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-3.jpg" alt="Салимов Зоир Муминович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Директор / Основатель</div>
@@ -247,7 +252,7 @@ get_header();
                 <!-- Expert 2 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-1.jpg" alt="Фатхуддинзода Диловар Каромат" class="expert-card__img expert-card__img--top">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-1.jpg" alt="Фатхуддинзода Диловар Каромат" class="expert-card__img expert-card__img--top">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Старший юрист</div>
@@ -260,7 +265,7 @@ get_header();
                 <!-- Expert 3 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ширинов Рустам Сухробович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-2.jpg" alt="Ширинов Рустам Сухробович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Ведущий бухгалтер-аудитор</div>
@@ -273,7 +278,7 @@ get_header();
                 <!-- Expert 4 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Курбонов Шохрух Камолуддинович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-5.jpg" alt="Курбонов Шохрух Камолуддинович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Ведущий бухгалтер-аудитор</div>
@@ -286,7 +291,7 @@ get_header();
                 <!-- Expert 5 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-4.jpg" alt="Ливенгуд Джастин Рег" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-4.jpg" alt="Ливенгуд Джастин Рег" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Менеджер по развитию бизнеса</div>
@@ -299,12 +304,25 @@ get_header();
                 <!-- Expert 6 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-6.jpg" alt="Шералиева Замира Шонкулиевна" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-6.jpg" alt="Шералиева Замира Шонкулиевна" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Менеджер по кадрам</div>
                         <h3 class="expert-card__name">Шералиева Замира Шонкулиевна</h3>
                         <p class="expert-card__spec">Управление человеческими ресурсами, подбор высококвалифицированных экспертов и развитие корпоративной культуры.</p>
+                        
+                    </div>
+                </div>
+
+                <!-- Expert 7 -->
+                <div class="expert-card fade-up" style="animation-delay: 0.3s;">
+                    <div class="expert-card__visual">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-nozanin-final.jpg" alt="Шамсова Нозанин Каюмджоновна" class="expert-card__img">
+                    </div>
+                    <div class="expert-card__body">
+                        <div class="expert-card__role">Главный бухгалтер, старший аудитор</div>
+                        <h3 class="expert-card__name">Шамсова Нозанин Каюмджоновна</h3>
+                        <p class="expert-card__spec">Ведение полного цикла бухгалтерского учета и проведение комплексного аудита для обеспечения финансовой прозрачности.</p>
                         
                     </div>
                 </div>
@@ -318,7 +336,7 @@ get_header();
                     <p class="hr-block__text">Мы всегда рады талантливым бухгалтерам, аудиторам и юристам, которые разделяют наши ценности и стремятся к профессиональному росту. Если вы готовы решать сложные задачи и создавать ценность для бизнеса — нам по пути.</p>
                 </div>
                 <div class="hr-block__actions">
-                    <a href="<?php echo home_url('/vacancies'); ?>" class="btn btn--primary" style="width: 100%;">
+                    <a href="<?php echo nk_link('/vacancies', $current_lang); ?>" class="btn btn--primary" style="width: 100%;">
                         <span>Отправить резюме</span>
                         <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
@@ -355,3 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php get_footer(); ?>
+
+
+
+

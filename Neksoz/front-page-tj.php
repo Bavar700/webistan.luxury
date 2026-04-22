@@ -86,7 +86,7 @@
                         <li>Тасдиқи саҳеҳии гузоришот ва аудити андоз</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-audit-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-audit-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 2. Восстановление финансового учета -->
@@ -107,7 +107,7 @@
                         <li>Муқоисаи ҳисобҳо бо шарикони тиҷоратӣ ва мақомоти андоз ҷиҳати пешгирии ҷаримаҳо</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-restore-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-restore-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 3. Юридические консультации -->
@@ -128,7 +128,7 @@
                         <li>Кумаки ҳуқуқӣ ва ташхиси қарордодҳои корпоративӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-legal-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-legal-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 4. Ведение финансового и кадрового учета -->
@@ -150,7 +150,7 @@
                         <li>Барасмиятдарории рухсатиҳо, сафарҳои корӣ ва дастурамалҳои мансабӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-accounting-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-accounting-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 5. Услуги секретариата -->
@@ -171,7 +171,7 @@
                         <li>Берунсипорӣ (аутсорсинг)-и хизматрасониҳои котибот ва тарҷумаи ҳуқуқӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-secretariat-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-secretariat-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 6. Бизнес-консультации -->
@@ -191,7 +191,7 @@
                         <li>Банақшагирии молиявӣ ва таҳияи моделҳои рушд</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-consulting-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-consulting-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 7. Налоговые консультации -->
@@ -211,7 +211,7 @@
                         <li>Намояндагӣ аз манфиатҳо дар баҳсҳои андозӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-tax-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-tax-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 8. Управленческий учет -->
@@ -232,7 +232,7 @@
                         <li>Аёниятсозии нишондиҳандаҳои молиявӣ барои моликон</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-management-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-management-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 9. Автоматизация бизнес-процессов -->
@@ -253,7 +253,7 @@
                         <li>Рақамикунонии бойгониҳо ва гардиши электронии санадҳо</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-automation-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-automation-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 10. Разработка бизнес-планов и ТЭО -->
@@ -275,7 +275,7 @@
                         <li>Мушоият ва ҳимояи нақшаи тиҷоратӣ дар гуфтушунидҳо бо сармоягузорон</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-business-plan-tj?lang=tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-business-plan-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
         </div>
     </div>
@@ -303,7 +303,7 @@
                 </blockquote>
                 <div class="ceo-editorial__author">
                     <div class="ceo-editorial__circle-frame">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg" alt="Зоир Салимов" class="ceo-editorial__avatar">
+                        <img src="<?php echo get_template_directory_uri(); ?>/ceo.jpg" alt="Зоир Салимов" class="ceo-editorial__avatar">
                     </div>
                     <div class="cea-editorial__author-info">
                         <div class="ceo-editorial__author-name">Зоир Салимов</div>
@@ -311,7 +311,7 @@
                     </div>
                     <div class="ceo-editorial__signature">Zoir Salimov</div>
                     <div class="ceo-editorial__footer">
-                        <a href="<?php echo home_url('/team'); ?>" class="ceo-editorial__team-link">
+                        <a href="<?php echo nk_link('/team', 'tj'); ?>" class="ceo-editorial__team-link">
                             Бо дастаи коршиносони мо шинос шавед
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
@@ -377,7 +377,7 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                        Бо пахш кардани тугма, шумо ба <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Сиёсати махфият</a> розӣ мешавед.
+                        Бо пахш кардани тугма, шумо ба <a href="<?php echo nk_link('/privacy-policy', 'tj'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Сиёсати махфият</a> розӣ мешавед.
                     </p>
                     <p class="cta-crystal__secure">🛡️ Пайвасти ҳифзшуда (SSL 256-bit)</p>
                     <div id="nk-form-status" style="margin-top: 15px; display: none;"></div>
@@ -421,3 +421,6 @@
 </section>
 </main>
 <?php get_footer(); ?>
+
+
+

@@ -235,7 +235,7 @@ get_header();
                         </button>
 
                         <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                            Бо пахш кардани тугма, шумо ба <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Сиёсати махфият</a> розӣ мешавед
+                            Бо пахш кардани тугма, шумо ба <a href="<?php echo nk_link('/privacy-policy', 'tj'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Сиёсати махфият</a> розӣ мешавед
                         </p>
                         <p class="cta-crystal__secure">🛡️ Пайвасти бехатар (SSL 256-bit)</p>
                     </form>
@@ -327,4 +327,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </style>
 
 <?php get_footer(); ?>
+
 

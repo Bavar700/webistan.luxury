@@ -57,14 +57,14 @@
             if (isset($wrap_map_en[$display_title])) $display_title = $wrap_map_en[$display_title];
             ?>
             <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="line-height: 1.2; margin-bottom: 30px; font-size: clamp(2rem, 4vw, 3rem);">
-                <span class="text-gradient"><?php echo mb_convert_case($display_title, MB_CASE_TITLE, "UTF-8"); ?></span>
+                <span class="text-gradient"><?php echo rtrim(mb_convert_case($display_title, MB_CASE_TITLE, "UTF-8"), '.'); ?></span>
             </h1>
             <div class="fade-up is-visible fade-up-delay-2" style="color: var(--nk-gray-400); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 20px;">
                 <span style="border-bottom: 2px solid var(--nk-red); padding-bottom: 4px; color: #a0a0a0;">
                     <?php echo rtrim(get_the_date('F d, Y'), '.'); ?>
                 </span>
                 <span></span> <!-- Removed Red Dot -->
-                <span><?php the_author(); ?></span>
+                <span></span>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
     <div class="container">
         <div style="display: grid; grid-template-columns: 1fr 340px; gap: 70px; align-items: start;">
             
-            <div class="fade-up is-visible">
+            <div>
                 <article class="service-card" style="padding: 60px; border-radius: 32px; border: 1px solid rgba(0,0,0,0.03); background: #ffffff;">
                     <?php if ( has_post_thumbnail() ) : ?>
                         <div style="margin-bottom: 50px; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,0.08);">
@@ -83,19 +83,22 @@
                         </div>
                     <?php endif; ?>
 
-                    <div class="post-content" style="line-height: 1.95; color: var(--nk-gray-700); font-size: 1.15rem; font-family: var(--font-body);">
+                    <div class="post-content" style="line-height: 1.95; color: var(--nk-gray-700); font-size: 1.15rem; font-family: var(--font-body); text-align: justify;">
+                        <style>
+                            .post-content p { text-indent: 40px !important; margin-bottom: 25px !important; }
+                        </style>
                         <?php 
-                        ob_start();
-                        the_content();
-                        $content = ob_get_clean();
-                        $disclaimer = 'Ин маводи хабарӣ ба таври худкор барои низоми сезабона сохта шудааст.';
-                        $replacement = 'We offer professional auditing and legal services for your business growth.';
-                        echo str_replace($disclaimer, $replacement, $content);
+                        $content = get_the_content();
+                        $is_outsourcing = (stripos(get_the_title(), 'outsourcing') !== false || stripos(get_the_title(), 'аутсорсинг') !== false || stripos(get_the_title(), 'Фаъолияти') !== false);
+                        if ($is_outsourcing && strlen(strip_tags($content)) < 300) {
+                            $content = 'OUTSOURCING ACTIVITY AS A TOOL FOR OPTIMIZING THE ECONOMIC OPERATIONS OF ENTERPRISES IN A MARKET ECONOMY<br><br>The modern model of economic activity and the transition to a more progressive evolutionary stage of development require the Republic of Tajikistan to take significant measures in implementing new strategically considered management tools for the economic activities of domestic enterprises. It must be acknowledged that representatives of domestic business structures today face phenomena beyond their control, the destructive influence of which negatively affects their pragmatic vector of development.<br><br>The lack of specialized knowledge among enterprise management forces them to maintain staff directly involved in support business processes. By this staff, we mean employees responsible for financial and economic accounting, as it is no secret that accounting requires specific expertise that business owners often do not possess. Referring to empirical experience, the core skills necessary for implementing business initiatives are knowledge of the production process itself and sales skills; without these, achieving entrepreneurial goals is difficult to realize.<br><br>Maintaining accounting is recognized as a burdensome component even when possessing these skills. This thesis is based on the inefficiency of time resource allocation, as the primary task of small and medium-sized enterprises (SMEs), especially during their initial formation, is to maintain rapid turnover and generate cash flow.<br><br>Thus, it should be emphasized that in developed economies, where a unit of time has a high value, enterprises actively utilize the advantages of "outsourcing" consulting. Outsourcing represents the use of external or hired resources, including human resources (staff). Today, the spectrum of outsourcing services as an element of business services is diverse, ranging from technical personnel to the marketing industry.<br><br>When using outsourcing, an organization, based on a bilateral agreement, transfers a specific type of service or function of production/entrepreneurial activity to another company. Compared to traditional services based on a one-time or episodic basis with a limited timeframe, outsourcing involves transferring professional support functions for the uninterrupted operation of individual departments under a long-term agreement.<br><br>A significant number of economists agree that using outsourcing for accounting is rational for small and medium enterprises that cannot afford a full staff in this field and whose priority is managing the business process itself rather than being immersed in reporting.<br><br>According to data from the "STATISTA" analytical resource, the global outsourcing market in 2019 amounted to 92.5 billion USD. In addition to rational time management, reducing certain costs—specifically taxes and overheads—is a primary reason why enterprises utilize this market tool.<br><br>Over the past three decades, outsourcing has become an integral part of business management. In 2020, it completely overtook some of the largest industries in the world. Research shows that 78% of companies worldwide feel positive about their outsourcing partners. 83% of financial companies and institutions outsource or plan to outsource a range of functions. About 24% of small businesses use outsourcing to improve overall operational efficiency. Nearly 54% of all companies globally use outsourcing services.<br><br>As for the Republic of Tajikistan, unfortunately, there is a lack of specific statistics regarding the local outsourcing market. However, 31.1% of companies provide tax and accounting outsourcing, which is a well-founded phenomenon.<br><br>The expediency of using outsourcing lies in its acceptability and practicality in the quest to reduce financial costs for maintaining staff. Using this tool significantly reduces additional costs for maintaining experienced employees. According to dissertation research results, the use of consulting and outsourcing yielded the following results: a 6.7% reduction in operating costs, a 3.0% reduction in administrative costs, a 6.7% reduction in report preparation time, and a 24.7% increase in productivity.<br><br>Operating in the Tajik market is "NEKSOZ Business Consulting Group" LLC—a dynamically developing company specializing in accounting and taxation. The company was founded in 2016 through the efforts of Zoir Salimov, who has extensive experience in the banking and tax systems, as well as in auditing.<br><br>The company relies on the expertise of its employees, teamwork, and mutual support. Thanks to a flexible approach, the company collaborates with enterprises across various industries. "NEKSOZ Business Consulting Group" LLC makes a significant contribution to the development of enterprises by handling financial reporting, conducting audits, and interacting with regulatory authorities.<br><br>If you are a business owner or an NGO leader and intend to optimize your economic operations, "NEKSOZ Business Consulting Group" LLC is ready to undertake and professionally fulfill these obligations. The company\'s mission is to assist in optimizing business processes and ensuring the success of our partners.';
+                        }
+                        echo wpautop($content);
                         ?>
                     </div>
 
                     <div style="margin-top: 70px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
-                        <a href="<?php echo home_url('/news-en?lang=en'); ?>" class="btn btn--primary btn-animated" style="padding: 14px 28px; font-size: 11px;">
+                        <a href="<?php echo nk_link('/news-en?lang=en', 'en'); ?>" class="btn btn--primary btn-animated" style="padding: 14px 28px; font-size: 11px;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px; transform: scaleX(-1);"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             Back to all news
                         </a>
@@ -180,7 +183,7 @@
                     <!-- GRADIENT LINE UNDER TEXT -->
                     <div style="height: 3px; width: 60px; background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.4) 100%); margin-bottom: 30px; border-radius: 2px;"></div>
                     
-                    <a href="<?php echo home_url('/contacts?lang=en'); ?>" class="btn btn--primary btn-animated" style="background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4) !important; padding: 16px 30px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; width: auto; font-size: 11px;">
+                    <a href="<?php echo nk_link('/contacts?lang=en', 'en'); ?>" class="btn btn--primary btn-animated" style="background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4) !important; padding: 16px 30px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; width: auto; font-size: 11px;">
                         Contact us
                         <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>

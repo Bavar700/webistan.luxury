@@ -54,7 +54,7 @@
             if (isset($wrap_map[$display_title])) $display_title = $wrap_map[$display_title];
             ?>
             <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="line-height: 1.2; margin-bottom: 30px; font-size: clamp(2rem, 4vw, 3rem);">
-                <span class="text-gradient"><?php echo mb_convert_case($display_title, MB_CASE_TITLE, "UTF-8"); ?></span>
+                <span class="text-gradient"><?php echo rtrim(mb_convert_case($display_title, MB_CASE_TITLE, "UTF-8"), '.'); ?></span>
             </h1>
             <div class="fade-up is-visible fade-up-delay-2" style="color: var(--nk-gray-400); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 20px;">
                 <span style="border-bottom: 2px solid var(--nk-red); padding-bottom: 4px; color: #a0a0a0;">
@@ -64,7 +64,7 @@
                     ?>
                 </span>
                 <span></span> <!-- Removed Red Dot -->
-                <span><?php the_author(); ?></span>
+                <span></span>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
     <div class="container">
         <div style="display: grid; grid-template-columns: 1fr 340px; gap: 70px; align-items: start;">
             
-            <div class="fade-up is-visible">
+            <div>
                 <article class="service-card" style="padding: 60px; border-radius: 32px; border: 1px solid rgba(0,0,0,0.03); background: #ffffff;">
                     <?php if ( has_post_thumbnail() ) : ?>
                         <div style="margin-bottom: 50px; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,0.08);">
@@ -83,19 +83,22 @@
                         </div>
                     <?php endif; ?>
 
-                    <div class="post-content" style="line-height: 1.95; color: var(--nk-gray-700); font-size: 1.15rem; font-family: var(--font-body);">
+                    <div class="post-content" style="line-height: 1.95; color: var(--nk-gray-700); font-size: 1.15rem; font-family: var(--font-body); text-align: justify;">
+                        <style>
+                            .post-content p { text-indent: 40px !important; margin-bottom: 25px !important; }
+                        </style>
                         <?php 
-                        ob_start();
-                        the_content();
-                        $content = ob_get_clean();
-                        $disclaimer = 'Ин маводи хабарӣ ба таври худкор барои низоми сезабона сохта шудааст.';
-                        $replacement = 'Мо хизматрасониҳои касбии аудиторӣ ва ҳуқуқиро барои рушди тиҷорати Шумо пешниҳод менамоем.';
-                        echo str_replace($disclaimer, $replacement, $content);
+                        $content = get_the_content();
+                        $is_outsourcing = (stripos(get_the_title(), 'аутсорсинг') !== false || stripos(get_the_title(), 'Outsourcing') !== false || stripos(get_the_title(), 'Фаъолияти') !== false);
+                        if ($is_outsourcing && strlen(strip_tags($content)) < 300) {
+                            $content = 'ФАЪОЛИЯТИ АУТСОРСИНГӢ ҲАМЧУН ВОСИТАИ БЕҲСОЗИИ ФАЪОЛИЯТИ ХОҶАГИДОРИИ КОРХОНАҲО ДАР ШАРОИТИ ИҚТИСОДИ БОЗОРӢ<br><br>Модели муосири фаъолияти иқтисодӣ ва гузариш ба зинаи пешрафтаи таҳаввулотии рушд аз Ҷумҳурии Тоҷикистон қабули чораҳои муҳимро дар заминаи татбиқи воситаҳои нави роҳбурдии идоракунии фаъолияти хоҷагидории корхонаҳои ватанӣ тақозо мекунад. Бояд эътироф кард, ки намояндагони сохторҳои тиҷоратии ватанӣ имрӯзҳо бо падидаҳое рӯбарӯ мешаванд, ки берун аз доираи назорати ин корхонаҳо қарор дошта, таъсири манфии онҳо ба самти рушди прагматикии онҳо халал мерасонад.<br><br>Набудани дониш дар баъзе соҳаҳо аз ҷониби менеҷменти корхонаҳо онҳоро маҷбур месозад, ки кормандонеро нигоҳ доранд, ки бевосита дар раванди тиҷорат иштирок мекунанд. Зери мафҳуми ин кормандон мо мутахассисони баҳисобгирии молиявӣ ва хоҷагидориро дар назар дорем, зеро пӯшида нест, ки пешбурди баҳисобгирӣ донишҳои махсусро талаб мекунад, ки дар аксар ҳолатҳо моликони тиҷорат дорои онҳо нестанд. Бо такя ба таҷрибаи эмпирикӣ дида мешавад, ки малакаҳои асосӣ барои татбиқи ташаббусҳои тиҷоратӣ — донистани худи раванди истеҳсолот ва малакаҳои фурӯш мебошанд, зеро бидуни ин донишҳо расидан ба ҳадафҳои соҳибкорӣ душвор аст.<br><br>Пешбурди баҳисобгирӣ ҳатто ҳангоми доштани ин малакаҳо ҷузъи гаронбор эътироф мешавад. Ин андеша ба беасос тақсим кардани захираҳои вақт такя мекунад, зеро вазифаи асосии корхонаҳои хурд ва миёна, махсусан дар оғози ташаккули онҳо, нигоҳ доштани суръати гардиши мол ва тавлиди маблағҳои пулӣ мебошад.<br><br>Ҳамин тариқ, мехоҳам таъкид намоям, ки дар кишварҳои дорои иқтисоди пешрафта, ки воҳиди вақт арзиши баланд дорад, корхонаҳо аз дастовардҳои воситае чун консалтинги «аутсорсинг» фаъолона истифода мебаранд. Аутсорсинг ҷузъи истифодаи захираҳои ҷалбшуда (кироя), аз ҷумла захираҳои инсонӣ (кормандон) мебошад. Имрӯзҳо доираи хизматрасониҳои аутсорсингӣ хеле васеъ буда, аз хизмати кормандони техникӣ то соҳаи маркетингро фаро мегирад.<br><br>Ҳангоми истифодаи аутсорсинг, ташкилот дар асоси созишномаи дуҷониба намуди муайяни хизматрасонӣ ё вазифаҳои фаъолияти истеҳсолию соҳибкориро ба ширкати дигар вогузор мекунад. Дар муқоиса бо намуди анъанавии хизматрасонӣ, ки хусусияти якдафъаина ё эпизодӣ дорад, дар аутсорсинг вазифаҳои дастгирии касбии фаъолияти бефосилаи воҳидҳои алоҳида дар доираи созишномаи дарозмуддат супорида мешаванд.<br><br>Қисми зиёди иқтисоддонҳо эътироф мекунанд, ки истифодаи аутсорсинг дар соҳаи баҳисобгирии муҳосибӣ барои корхонаҳои хурд ва миёна, ки наметавонанд штати пурраи кормандонро дар ин соҳа дошта бошанд, оқилона аст. Вазифаи афзалиятноки онҳо идоракунии худи раванди тиҷорат аст, на фурӯ рафтан дар раванди ҳисоботдиҳӣ.<br><br>Тибқи маълумоти манбаи таҳлилии «STATISTA», дар соли 2019 бозори ҷаҳонии аутсорсинг 92,5 млрд доллари ИМА-ро ташкил дод. Илова бар истифодаи оқилонаи вақт, коҳиш додани баъзе хароҷот, аз ҷумла андозҳо ва хароҷоти иловагӣ, сабаби асосии истифодаи ин восита аз ҷониби корхонаҳо мебошад.<br><br>Дар давоми се даҳсолаи охир аутсорсинг ҷузъи ҷудонашавандаи идоракунии тиҷорат гардид. Соли 2020 он аз баъзе соҳаҳои бузургтарини ҷаҳон пеш гузашт. Мувофиқи тадқиқотҳо, 78%-и ширкатҳо дар саросари ҷаҳон ба шарикони аутсорсингии худ назари мусбат доранд. 83%-и ширкатҳо ва муассисаҳои молиявӣ як қатор вазифаҳоро ба ширкатҳои дигар вогузор мекунанд ё нақшаи вогузор карданро доранд. Тақрибан 24%-и корхонаҳои хурд барои баланд бардоштани самаранокии кор аз аутсорсинг истифода мебаранд. Қариб 54%-и тамоми ширкатҳои ҷаҳон аз хизматрасониҳои аутсорсингӣ баҳра мебаранд.<br><br>Дар мавриди Ҷумҳурии Тоҷикистон, мутаассифона, ягон омори дақиқ дар бораи бозори аутсорсинг мавҷуд нест. Бо вуҷуди ин, 31,1%-и ширкатҳо дар соҳаи андоз ва баҳисобгирии муҳосибӣ хизматрасонии аутсорсингӣ пешниҳод мекунанд, ки ин падидаи комилан асоснок аст.<br><br>Мақсаднокии истифодаи воситаи «аутсорсинг» дар қобили қабул ва амалӣ будани он дар талош барои коҳиш додани хароҷоти молиявӣ ба нигоҳдории штат ифода меёбад. Истифодаи ин восита хароҷоти иловагиро барои нигоҳдории корманди ботаҷриба ба таври назаррас коҳиш медиҳад. Мувофиқи натиҷаҳои тадқиқоти диссертатсионӣ, истифодаи консалтинг ва аутсорсинг натиҷаҳои зеринро дод: коҳиши хароҷоти амалиётӣ ба 6,7%, маъмурӣ — ба 3,0%, коҳиши вақт барои омодасозии ҳисоботҳо ба 6,7% ва рушди маҳсулнокӣ ба 24,7%.<br><br>Дар бозори Тоҷикистон ширкати ҶДММ «НЕКСОЗ бизнес консалтинг групп» фаъолият мекунад — ширкати босуръат рушдёбанда, ки ба баҳисобгирии муҳосибӣ ва андозбандӣ тахассус дорад. Ширкат соли 2016 бо кӯшишҳои Салимов Зоир, ки дар системаҳои бонкию андозӣ ва соҳаи аудит таҷриба дорад, таъсис ёфтааст.<br><br>Ширкат ба таҷрибаи кормандони худ, кори дастаҷамъона ва кумаки мутақобила такя мекунад. Бо шарофати муносибати чандир дар кор, ширкат бо корхонаҳои соҳаҳои мухталиф ҳамкорӣ менамояд. ҶДММ «НЕКСОЗ бизнес консалтинг групп» бо пешбурди ҳисоботи молиявӣ, гузаронидани аудит ва кор бо мақомоти санҷишӣ дар рушди корхонаҳо саҳми арзанда мегузорад.<br><br>Агар Шумо молики тиҷорат ё роҳбари ТҶҒ бошед ва ният доред раванди фаъолияти хоҷагидориро беҳтар созед, ширкати ҶДММ «НЕКСОЗ бизнес консалтинг групп» омода аст уҳдадориҳои вогузоршударо дар сатҳи касбӣ иҷро намояд. Рисолати ширкат — мусоидат дар беҳсозии равандҳои тиҷоратӣ ва расидан ба муваффақиятҳои шарикони мо мебошад.';
+                        }
+                        echo wpautop($content);
                         ?>
                     </div>
 
                     <div style="margin-top: 70px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
-                        <a href="<?php echo home_url('/news-tj?lang=tj'); ?>" class="btn btn--primary btn-animated" style="padding: 14px 28px; font-size: 11px;">
+                        <a href="<?php echo nk_link('/news-tj?lang=tj', 'tj'); ?>" class="btn btn--primary btn-animated" style="padding: 14px 28px; font-size: 11px;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px; transform: scaleX(-1);"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             Ба тамоми хабарҳо
                         </a>
@@ -180,7 +183,7 @@
                     <!-- GRADIENT LINE UNDER TEXT -->
                     <div style="height: 3px; width: 60px; background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.4) 100%); margin-bottom: 30px; border-radius: 2px;"></div>
                     
-                    <a href="<?php echo home_url('/contacts?lang=tj'); ?>" class="btn btn--primary btn-animated" style="background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4) !important; padding: 16px 30px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; width: auto; font-size: 11px;">
+                    <a href="<?php echo nk_link('/contacts?lang=tj', 'tj'); ?>" class="btn btn--primary btn-animated" style="background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4) !important; padding: 16px 30px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; width: auto; font-size: 11px;">
                         Тамос бо мо
                         <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>

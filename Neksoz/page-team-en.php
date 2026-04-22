@@ -234,7 +234,7 @@ get_header();
                 <!-- Expert 1 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-3.jpg" alt="Salimov Zoir Muminovich" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-3.jpg" alt="Salimov Zoir Muminovich" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Director / Founder</div>
@@ -247,7 +247,7 @@ get_header();
                 <!-- Expert 2 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-1.jpg" alt="Fathuddinzoda Dilovar Karomat" class="expert-card__img expert-card__img--top">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-1.jpg" alt="Fathuddinzoda Dilovar Karomat" class="expert-card__img expert-card__img--top">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Senior Lawyer</div>
@@ -260,7 +260,7 @@ get_header();
                 <!-- Expert 3 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Shirinov Rustam Suhrobovich" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-2.jpg" alt="Shirinov Rustam Suhrobovich" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Senior Accountant-Auditor</div>
@@ -273,7 +273,7 @@ get_header();
                 <!-- Expert 4 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Kurbonov Shokhrukh Kamoluddinovich" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-5.jpg" alt="Kurbonov Shokhrukh Kamoluddinovich" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Senior Accountant-Auditor</div>
@@ -286,7 +286,7 @@ get_header();
                 <!-- Expert 5 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-4.jpg" alt="Livengood Justin Reg" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-4.jpg" alt="Livengood Justin Reg" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Business Development Manager</div>
@@ -299,12 +299,25 @@ get_header();
                 <!-- Expert 6 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-6.jpg" alt="Sheralieva Zamira Shonkulievna" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-6.jpg" alt="Sheralieva Zamira Shonkulievna" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">HR Manager</div>
                         <h3 class="expert-card__name">Sheralieva Zamira Shonqulievna</h3>
                         <p class="expert-card__spec">Human resource management, recruitment of highly qualified experts, and development of corporate culture.</p>
+                        
+                    </div>
+                </div>
+
+                <!-- Expert 7 -->
+                <div class="expert-card fade-up" style="animation-delay: 0.3s;">
+                    <div class="expert-card__visual">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-nozanin-final.jpg" alt="Shamsova Nozanin Qayumjonovna" class="expert-card__img">
+                    </div>
+                    <div class="expert-card__body">
+                        <div class="expert-card__role">Chief Accountant, Senior Auditor</div>
+                        <h3 class="expert-card__name">Shamsova Nozanin Qayumjonovna</h3>
+                        <p class="expert-card__spec">Maintaining the full cycle of accounting and conducting comprehensive audits to ensure financial transparency.</p>
                         
                     </div>
                 </div>
@@ -318,7 +331,7 @@ get_header();
                     <p class="hr-block__text">We are always happy to welcome talented accountants, auditors, and lawyers who share our values and strive for professional growth. If you are ready to solve complex tasks and create value for business — let's join paths.</p>
                 </div>
                 <div class="hr-block__actions">
-                    <a href="<?php echo home_url('/vacancies?lang=en'); ?>" class="btn btn--primary" style="width: 100%;">
+                    <a href="<?php echo nk_link('/vacancies?lang=en', 'en'); ?>" class="btn btn--primary" style="width: 100%;">
                         <span>Submit CV</span>
                         <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
@@ -355,3 +368,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php get_footer(); ?>
+
+
+

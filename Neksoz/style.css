@@ -1,3 +1,13 @@
+/*
+Theme Name: Neksoz Premium
+Theme URI: https://webistan.luxury
+Author: WEBISTAN.LUXURY
+Author URI: https://webistan.luxury
+Description: High-End Corporate Theme for Neksoz.
+Version: 3.1
+License: Proprietary
+Text Domain: neksoz
+*/
 
         /* ============================================================
            NEKSOZ.LUXURY — Premium Corporate Design System v2
@@ -90,7 +100,8 @@
             overflow-x: hidden;
         }
         img { max-width: 100%; height: auto; display: block; }
-        a { text-decoration: none; color: inherit; }
+        a { text-decoration: none; color: inherit; outline: none !important; -webkit-tap-highlight-color: transparent; }
+        a:focus, button:focus { outline: none !important; }
         ul { list-style: none; }
 
         /* ── Container ── */
@@ -186,7 +197,6 @@
 
         .header__nav a:hover {
             color: var(--nk-gray-900);
-            transform: translateY(-2px);
             background: transparent;
         }
 

@@ -186,7 +186,7 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="<?php echo home_url('/team'); ?>" class="btn btn--primary btn-animated" style="padding: 12px 28px; font-size: 11px;">
+                <a href="<?php echo nk_link('/team', 'tj'); ?>" class="btn btn--primary btn-animated" style="padding: 12px 28px; font-size: 11px;">
                     Гурӯҳи корӣ
                     <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -302,3 +302,4 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
+

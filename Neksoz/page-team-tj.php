@@ -234,7 +234,7 @@ get_header();
                 <!-- Expert 1 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-3.jpg" alt="Салимов Зоир Муминович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-3.jpg" alt="Салимов Зоир Муминович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Директор / Муассис</div>
@@ -247,7 +247,7 @@ get_header();
                 <!-- Expert 2 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-1.jpg" alt="Фатхуддинзода Диловар Каромат" class="expert-card__img expert-card__img--top">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-1.jpg" alt="Фатхуддинзода Диловар Каромат" class="expert-card__img expert-card__img--top">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Ҳуқуқшиноси калон</div>
@@ -260,7 +260,7 @@ get_header();
                 <!-- Expert 3 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ширинов Рустам Суҳробович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-2.jpg" alt="Ширинов Рустам Суҳробович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Муҳосиб-аудитори пешбар</div>
@@ -273,7 +273,7 @@ get_header();
                 <!-- Expert 4 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Қурбонов Шоҳрух Камолуддинович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-5.jpg" alt="Қурбонов Шоҳрух Камолуддинович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Муҳосиб-аудитори пешбар</div>
@@ -286,7 +286,7 @@ get_header();
                 <!-- Expert 5 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.1s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-4.jpg" alt="Ливенгуд Джастин Рег" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-4.jpg" alt="Ливенгуд Джастин Рег" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Менеҷер оид ба рушди тиҷорат</div>
@@ -299,12 +299,25 @@ get_header();
                 <!-- Expert 6 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-6.jpg" alt="Шералиева Замира Шонқулиевна" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-6.jpg" alt="Шералиева Замира Шонқулиевна" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Мудири кадрҳо</div>
+                        <div class="expert-card__role">Менеҷери кадрҳо</div>
                         <h3 class="expert-card__name">Шералиева Замира Шонқулиевна</h3>
                         <p class="expert-card__spec">Идоракунии захираҳои инсонӣ, интихоби коршиносони баландихтисос ва рушди фарҳанги корпоративӣ.</p>
+                        
+                    </div>
+                </div>
+
+                <!-- Expert 7 -->
+                <div class="expert-card fade-up" style="animation-delay: 0.3s;">
+                    <div class="expert-card__visual">
+                        <img src="<?php echo get_template_directory_uri(); ?>/team-nozanin-final.jpg" alt="Шамсова Нозанин Қаюмҷоновна" class="expert-card__img">
+                    </div>
+                    <div class="expert-card__body">
+                        <div class="expert-card__role">Сармуҳосиб, аудитори калон</div>
+                        <h3 class="expert-card__name">Шамсова Нозанин Қаюмҷоновна</h3>
+                        <p class="expert-card__spec">Пешбурди давраи пурраи ҳисоби муҳосибӣ ва гузаронидани аудити маҷмӯӣ барои таъмини шаффофияти молиявӣ.</p>
                         
                     </div>
                 </div>
@@ -318,7 +331,7 @@ get_header();
                     <p class="hr-block__text">Мо ҳамеша аз муҳосибон, аудиторон ва ҳуқуқшиносони боистеъдод, ки арзишҳои моро қабул доранд ва барои рушди касбӣ талош меварзанд, хушҳолем. Агар шумо барои ҳалли вазифаҳои мураккаб ва эҷоди арзиш барои тиҷорат омода бошед — мо ба шумо ниёз дорем.</p>
                 </div>
                 <div class="hr-block__actions">
-                    <a href="<?php echo home_url('/vacancies'); ?>" class="btn btn--primary" style="width: 100%;">
+                    <a href="<?php echo nk_link('/vacancies', 'tj'); ?>" class="btn btn--primary" style="width: 100%;">
                         <span>Резюме фиристед</span>
                         <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
@@ -355,4 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php get_footer(); ?>
+
+
+
 

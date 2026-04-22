@@ -1,10 +1,11 @@
 <?php
 /**
- * Template Name: Услуги
+ * Template Name: Услуги V3
  */
-if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj') {
-    get_template_part('page', 'services-tj');
-    return;
+if (function_exists('nk_get_current_lang')) {
+    $lang = nk_get_current_lang();
+    if ($lang === 'tj') { get_template_part('page-services', 'tj'); return; }
+    if ($lang === 'en') { get_template_part('page-services', 'en'); return; }
 }
 get_header();
 ?>
@@ -31,7 +32,7 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="<?php echo home_url('/contacts'); ?>" class="btn btn--primary">Консультация</a>
+                <a href="<?php echo nk_link('/contacts', $current_lang); ?>" class="btn btn--primary">Консультация</a>
             </div>
         </div>
     </section>
@@ -47,7 +48,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Аудит финансовой деятельности</h3></div>
                     <p class="service-card__text">Вы получаете независимую проверку отчетности, которая подтверждает прозрачность бизнеса и выявляет скрытые финансовые риски.</p>
-                    <a href="<?php echo home_url('/service-audit'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-audit', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 2. Восстановление -->
@@ -57,7 +58,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Восстановление финансового учета</h3></div>
                     <p class="service-card__text">Мы приведем вашу запущенную документацию в полный порядок, устранив ошибки и защитив вас от претензий госорганов.</p>
-                    <a href="<?php echo home_url('/service-restore'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-restore', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 3. Юридические -->
@@ -67,7 +68,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Юридические консультации</h3></div>
                     <p class="service-card__text">Вы обеспечиваете правовую безопасность своей компании и надежную защиту интересов в любых договорах и спорах.</p>
-                    <a href="<?php echo home_url('/service-legal'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-legal', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 4. Ведение учета -->
@@ -77,7 +78,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Ведение финансового и кадрового учета</h3></div>
                     <p class="service-card__text">Мы берем на себя всю рутину по бухгалтерии и кадрам, гарантируя вам отсутствие штрафов и стабильную работу штата.</p>
-                    <a href="<?php echo home_url('/service-accounting'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-accounting', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 5. Секретариат -->
@@ -87,7 +88,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Услуги секретариата</h3></div>
                     <p class="service-card__text">Вы делегируете администрирование документации и звонков профессионалам, освобождая свое время для решения стратегических задач.</p>
-                    <a href="<?php echo home_url('/service-secretariat'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-secretariat', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 6. Бизнес-консультации -->
@@ -97,7 +98,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Бизнес-консультации</h3></div>
                     <p class="service-card__text">Вы получаете экспертную поддержку в поиске новых точек роста и разработке эффективной модели развития вашего предприятия.</p>
-                    <a href="<?php echo home_url('/service-consulting'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-consulting', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 7. Налоговые -->
@@ -107,7 +108,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Налоговые консультации</h3></div>
                     <p class="service-card__text">Мы помогаем вам законно оптимизировать налоговую нагрузку и минимизировать риски перед визитами контролирующих органов.</p>
-                    <a href="<?php echo home_url('/service-tax'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-tax', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 8. Управленческий учет -->
@@ -117,7 +118,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Управленческий учет</h3></div>
                     <p class="service-card__text">Вы получаете полную финансовую прозрачность и точные данные для принятия решений, которые реально увеличивают вашу прибыль.</p>
-                    <a href="<?php echo home_url('/service-management'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-management', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 9. Автоматизация -->
@@ -127,7 +128,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Автоматизация бизнес-процессов</h3></div>
                     <p class="service-card__text">Вы освобождаете команду от рутины и исключаете ошибки, переводя управление в быструю и точную цифровую среду.</p>
-                    <a href="<?php echo home_url('/service-automation'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-automation', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
 
                 <!-- 10. Бизнес-планы -->
@@ -137,7 +138,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Разработка бизнес-планов и ТЭО</h3></div>
                     <p class="service-card__text">Вы получаете детальный финансовый документ, который доказывает окупаемость вашего проекта и помогает привлечь инвестиции.</p>
-                    <a href="<?php echo home_url('/service-business-plan'); ?>" class="service-card__link">Подробнее →</a>
+                    <a href="<?php echo nk_link('/service-business-plan', $current_lang); ?>" class="service-card__link">Подробнее →</a>
                 </div>
             </div>
         </div>
@@ -146,3 +147,5 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
+
+

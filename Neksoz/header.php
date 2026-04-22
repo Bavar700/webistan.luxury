@@ -1,7 +1,9 @@
 <?php 
 /**
  * The Header for Neksoz Theme
+ * Developed by WEBISTAN.LUXURY
  */
+// CRITICAL: Current language for link synchronization (nk_link)
 $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru';
 ?>
 <!DOCTYPE html>
@@ -1708,6 +1710,15 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
             .lang-switcher { display: none !important; } /* Hide on mobile if overlap */
             .header__nav { width: 100% !important; }
         }
+
+        /* Smooth Page Transition */
+        body {
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+        body.is-loaded {
+            opacity: 1;
+        }
     </style>
     <?php wp_head(); ?>
 </head>
@@ -1719,7 +1730,7 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
 <header class="header">
     <div class="container header__inner">
         <a href="<?php echo nk_link('/', $current_lang); ?>" class="header__logo-link">
-            <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="header__logo">
+            <img src='<?php echo get_template_directory_uri(); ?>/logo.png' alt="NEKSOZ" class="header__logo">
         </a>
         <?php
         $nav_texts = [
@@ -1756,11 +1767,14 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
             <div class="lang-switcher">
                 <?php
                 global $wp;
-                $current_slug = trim(parse_url(add_query_arg(array(), $wp->request), PHP_URL_PATH), '/');
+                // Get the current path without parameters
+                $current_path = trim(parse_url(add_query_arg(array(), $wp->request), PHP_URL_PATH), '/');
+                // If on homepage or empty, use 'front-page' or empty string
+                if (is_front_page()) $current_path = '';
                 ?>
-                <a href="<?php echo nk_get_switcher_link('en', $current_slug); ?>" class="lang-switcher__item <?php echo $current_lang == 'en' ? 'is-active' : ''; ?>">EN</a>
-                <a href="<?php echo nk_get_switcher_link('tj', $current_slug); ?>" class="lang-switcher__item <?php echo $current_lang == 'tj' ? 'is-active' : ''; ?>">TJ</a>
-                <a href="<?php echo nk_get_switcher_link('ru', $current_slug); ?>" class="lang-switcher__item <?php echo $current_lang == 'ru' ? 'is-active' : ''; ?>">RU</a>
+                <a href="<?php echo nk_get_switcher_link('en', $current_path); ?>" class="lang-switcher__item <?php echo $current_lang == 'en' ? 'is-active' : ''; ?>">EN</a>
+                <a href="<?php echo nk_get_switcher_link('tj', $current_path); ?>" class="lang-switcher__item <?php echo $current_lang == 'tj' ? 'is-active' : ''; ?>">TJ</a>
+                <a href="<?php echo nk_get_switcher_link('ru', $current_path); ?>" class="lang-switcher__item <?php echo $current_lang == 'ru' ? 'is-active' : ''; ?>">RU</a>
             </div>
             
             <!-- Mobile Toggle -->
@@ -1770,3 +1784,5 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
         </div>
     </div>
 </header>
+
+

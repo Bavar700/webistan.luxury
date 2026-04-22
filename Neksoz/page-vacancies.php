@@ -2,13 +2,10 @@
 /**
  * Template Name: Вакансии V3
  */
-if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj') {
-    get_template_part('page', 'vacancies-tj');
-    return;
-}
-if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'en') {
-    get_template_part('page', 'vacancies-en');
-    return;
+if (function_exists('nk_get_current_lang')) {
+    $lang = nk_get_current_lang();
+    if ($lang === 'tj') { get_template_part('page-vacancies', 'tj'); return; }
+    if ($lang === 'en') { get_template_part('page-vacancies', 'en'); return; }
 }
 get_header();
 ?>

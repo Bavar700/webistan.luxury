@@ -81,7 +81,7 @@ get_header(); ?>
                         <div class="legal-section">
                             <h3 style="font-size: 18px; margin-bottom: 16px; color: var(--nk-gray-900);">5. Privacy</h3>
                             <ul style="list-style: none; padding: 0; display: grid; gap: 12px;">
-                                <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">5.1.</strong> The procedure for processing and protecting personal data obtained through the Website is regulated by our <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>.</li>
+                                <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">5.1.</strong> The procedure for processing and protecting personal data obtained through the Website is regulated by our <a href="<?php echo nk_link('/privacy-policy', 'en'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>.</li>
                                 <li style="padding-left: 0; color: var(--nk-gray-600);"><strong style="color: var(--nk-gray-800);">5.2.</strong> By submitting a request for a consultation, you consent to the processing of your data for communication and the preparation of commercial offers.</li>
                             </ul>
                         </div>
@@ -114,3 +114,4 @@ get_header(); ?>
 </main>
 
 <?php get_footer(); ?>
+

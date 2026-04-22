@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Контакты
+ * Template Name: Контакты V3
  */
 if (function_exists('nk_get_current_lang')) {
     $lang = nk_get_current_lang();
@@ -134,7 +134,6 @@ get_header();
                             background: var(--nk-white);
                             border: 1px solid var(--nk-gray-50);
                             border-radius: 32px;
-                            border-radius: 32px;
                             padding: 50px;
                             box-shadow: 0 10px 30px rgba(0, 13, 51, 0.03);
                             transition: all 0.4s var(--ease);
@@ -245,7 +244,7 @@ get_header();
                         </button>
                         
                         <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                            Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
+                            Нажимая кнопку, вы соглашаетесь с <a href="<?php echo nk_link('/privacy-policy', $current_lang); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                         </p>
                         <p class="cta-crystal__secure">🛡️ Защищённое соединение (SSL 256-bit)</p>
                     </form>

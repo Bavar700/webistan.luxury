@@ -22,30 +22,50 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'en' && 
         <div class="footer-minimal">
             <!-- Part 1: Logo Centerpiece -->
             <div class="footer-minimal__logo fade-up">
-                <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="footer-minimal__logo-img">
+                <img src='<?php echo get_template_directory_uri(); ?>/logo.png' alt="NEKSOZ" class="footer-minimal__logo-img">
             </div>
 
             <!-- Part 2: Icon-Rich Main Nav Hub -->
             <nav class="footer-minimal__nav footer-nav--icons fade-up">
-                <a href="<?php echo home_url('/'); ?>">
+                <a href="<?php echo add_query_arg('lang', $current_lang, nk_link('/', $current_lang)); ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    <?php _e('Главная', 'neksoz'); ?>
+                    <?php 
+                    if ($current_lang === 'tj') echo 'Асосӣ';
+                    elseif ($current_lang === 'en') echo 'Home';
+                    else echo 'Главная';
+                    ?>
                 </a>
-                <a href="<?php echo nk_link('/services', 'ru'); ?>">
+                <a href="<?php echo nk_link('/services', $current_lang); ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 7-5 5-5-5"/><path d="m17 13-5 5-5-5"/></svg>
-                    <?php _e('Услуги', 'neksoz'); ?>
+                    <?php 
+                    if ($current_lang === 'tj') echo 'Хидматҳо';
+                    elseif ($current_lang === 'en') echo 'Services';
+                    else echo 'Услуги';
+                    ?>
                 </a>
-                <a href="<?php echo nk_link('/team', 'ru'); ?>">
+                <a href="<?php echo nk_link('/team', $current_lang); ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <?php _e('Команда', 'neksoz'); ?>
+                    <?php 
+                    if ($current_lang === 'tj') echo 'Дастаи мо';
+                    elseif ($current_lang === 'en') echo 'Our Team';
+                    else echo 'Команда';
+                    ?>
                 </a>
-                <a href="<?php echo nk_link('/news', 'ru'); ?>">
+                <a href="<?php echo nk_link('/news', $current_lang); ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-6 6v12a2 2 0 0 0 2 2z"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6v4h4"/></svg>
-                    <?php _e('Новости', 'neksoz'); ?>
+                    <?php 
+                    if ($current_lang === 'tj') echo 'Ахбор';
+                    elseif ($current_lang === 'en') echo 'News';
+                    else echo 'Новости';
+                    ?>
                 </a>
-                <a href="<?php echo nk_link('/contacts', 'ru'); ?>">
+                <a href="<?php echo nk_link('/contacts', $current_lang); ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"/><path d="m22 7-10 7L2 7"/></svg>
-                    <?php _e('Связь', 'neksoz'); ?>
+                    <?php 
+                    if ($current_lang === 'tj') echo 'Тамос';
+                    elseif ($current_lang === 'en') echo 'Contacts';
+                    else echo 'Связь';
+                    ?>
                 </a>
                 <a href="javascript:void(0)" id="openFooterMap">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -80,6 +100,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'en' && 
     <div class="container" style="position:relative; z-index:10;">
         <div class="footer-platinum__bottom">
             <p>&copy; <?php echo date('Y'); ?> NEKSOZ. <?php if(function_exists('pll_e')) pll_e('Все права защищены.'); else _e('Все права защищены.', 'neksoz'); ?></p>
+            <p style="opacity: 0.6; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-display);">Designed by <a href="https://webistan.luxury" target="_blank" style="color: var(--nk-red); font-weight: 800; text-decoration: none;">WEBISTAN<span style="color: inherit; font-weight: 400;">.LUXURY</span></a></p>
             <div class="footer-platinum__legal">
                 <?php 
                 if (has_nav_menu('legal')) {
@@ -183,7 +204,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'en' && 
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
                         <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 15px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                            Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
+                            Нажимая кнопку, вы соглашаетесь с <a href="<?php echo nk_link('/privacy-policy', $current_lang); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                         </p>
                     </form>
                 </div>
@@ -272,9 +293,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { rootMargin: '0px 0px -40px 0px', threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth Page Transition (Fade-in only)
+    setTimeout(() => { document.body.classList.add('is-loaded'); }, 50);
+    window.addEventListener('pageshow', function (event) {
+        document.body.classList.add('is-loaded');
+    });
 });
 </script>
 
 <?php wp_footer(); ?>
 </body>
 </html>
+
+
+
+

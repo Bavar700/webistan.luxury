@@ -92,7 +92,7 @@ get_header();
                         <li>Confirming the reliability of reports and conducting tax audits</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-audit-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-audit-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 2. Financial Accounting Restoration -->
@@ -113,7 +113,7 @@ get_header();
                         <li>Reconciliation with counterparties and the tax office to prevent fines</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-restore-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-restore-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 3. Legal Consultations -->
@@ -134,7 +134,7 @@ get_header();
                         <li>Legal assistance and expertise for corporate contracts</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-legal-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-legal-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 4. Financial and HR Accounting -->
@@ -156,7 +156,7 @@ get_header();
                         <li>Executing vacations, business trips, and job descriptions</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-accounting-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-accounting-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 5. Secretariat Services -->
@@ -177,7 +177,7 @@ get_header();
                         <li>Secretarial outsourcing and legal translation services</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-secretariat-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-secretariat-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 6. Business Consulting -->
@@ -197,7 +197,7 @@ get_header();
                         <li>Financial planning and the development of growth models</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-consulting-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-consulting-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 7. Tax Consultations -->
@@ -217,7 +217,7 @@ get_header();
                         <li>Representation of interests in tax disputes</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-tax-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-tax-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 8. Management Accounting -->
@@ -238,7 +238,7 @@ get_header();
                         <li>Visualization of financial indicators for owners</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-management-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-management-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 9. Business Process Automation -->
@@ -259,7 +259,7 @@ get_header();
                         <li>Digitization of archives and electronic document management</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-automation-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-automation-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 10. Business Plans and Feasibility Studies -->
@@ -281,7 +281,7 @@ get_header();
                         <li>Supporting and defending the business plan during investor negotiations</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-business-plan-en?lang=en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-business-plan-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
         </div>
     </div>
@@ -309,7 +309,7 @@ get_header();
                 </blockquote>
                 <div class="ceo-editorial__author">
                     <div class="ceo-editorial__circle-frame">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg" alt="Zoir Salimov" class="ceo-editorial__avatar">
+                        <img src="<?php echo get_template_directory_uri(); ?>/ceo.jpg" alt="Zoir Salimov" class="ceo-editorial__avatar">
                     </div>
                     <div class="cea-editorial__author-info">
                         <div class="ceo-editorial__author-name">Zoir Salimov</div>
@@ -384,7 +384,7 @@ get_header();
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                        By clicking the button, you agree with the <a href="<?php echo home_url('/privacy-policy?lang=en'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>
+                        By clicking the button, you agree with the <a href="<?php echo nk_link('/privacy-policy?lang=en', 'en'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>
                     </p>
                     <p class="cta-crystal__secure">🛡️ Secure Connection (SSL 256-bit)</p>
                     <div id="nk-form-status" style="margin-top: 15px; display: none;"></div>
@@ -428,3 +428,6 @@ get_header();
 </section>
 </main>
 <?php get_footer(); ?>
+
+
+

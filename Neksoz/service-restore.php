@@ -1,7 +1,12 @@
 <?php
 /**
- * Template Name: Service: Restore (RU)
+ * Template Name: service-restore
  */
+if (function_exists('nk_get_current_lang')) {
+    $lang = nk_get_current_lang();
+    if ($lang === 'tj') { get_template_part('service-restore', 'tj'); return; }
+    if ($lang === 'en') { get_template_part('service-restore', 'en'); return; }
+}
 get_header();
 ?>
 
@@ -145,7 +150,7 @@ get_header();
                     </div>
                     <button type="submit" class="cta-crystal__btn"><span>Оценить стоимость</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                        Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
+                        Нажимая кнопку, вы соглашаетесь с <a href="<?php echo nk_link('/privacy-policy', $current_lang); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                     </p>
                     <p class="cta-crystal__secure" style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--nk-gray-500); opacity: 0.8; width: 100%;">
                         🛡️ Защищённое соединение (SSL 256-bit)
@@ -158,3 +163,6 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
+
+
+

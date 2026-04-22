@@ -17,12 +17,12 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj' && 
         <div class="footer-minimal">
             <!-- Part 1: Logo Centerpiece -->
             <div class="footer-minimal__logo fade-up">
-                <img src='<?php echo get_template_directory_uri(); ?>/assets/images/logo.png' alt="NEKSOZ" class="footer-minimal__logo-img">
+                <img src='<?php echo get_template_directory_uri(); ?>/logo.png' alt="NEKSOZ" class="footer-minimal__logo-img">
             </div>
 
             <!-- Part 2: Icon-Rich Main Nav Hub -->
             <nav class="footer-minimal__nav footer-nav--icons fade-up">
-                <a href="<?php echo home_url('/?lang=en'); ?>">
+                <a href="<?php echo nk_link('/?lang=en', 'en'); ?>">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     <?php _e('Home', 'neksoz'); ?>
                 </a>
@@ -74,7 +74,8 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj' && 
     <!-- Final Compliance -->
     <div class="container" style="position:relative; z-index:10;">
         <div class="footer-platinum__bottom">
-            <p>&copy; <?php echo date('Y'); ?> NEKSOZ. <?php _e('All rights reserved.', 'neksoz'); ?></p>
+            <p>&copy; <?php echo date('Y'); ?> NEKSOZ. <?php if(function_exists('pll_e')) pll_e('All rights reserved.'); else _e('All rights reserved.', 'neksoz'); ?></p>
+            <p style="opacity: 0.6; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-display);">Designed by <a href="https://webistan.luxury" target="_blank" style="color: var(--nk-red); font-weight: 800; text-decoration: none;">WEBISTAN<span style="color: inherit; font-weight: 400;">.LUXURY</span></a></p>
             <div class="footer-platinum__legal">
                 <a href="<?php echo nk_link('/privacy-policy', 'en'); ?>"><?php _e('Privacy Policy', 'neksoz'); ?></a>
                 <a href="<?php echo nk_link('/terms', 'en'); ?>"><?php _e('Terms of Service', 'neksoz'); ?></a>
@@ -246,9 +247,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { rootMargin: '0px 0px -40px 0px', threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth Page Transition (Fade-in only)
+    setTimeout(() => { document.body.classList.add('is-loaded'); }, 50);
+    window.addEventListener('pageshow', function (event) {
+        document.body.classList.add('is-loaded');
+    });
 });
 </script>
 
 <?php wp_footer(); ?>
 </body>
 </html>
+
+
+

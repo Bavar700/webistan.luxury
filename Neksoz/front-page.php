@@ -96,7 +96,7 @@ get_header();
                         <li>Подтверждение достоверности отчетов и налоговый аудит</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-audit'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-audit', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 2. Восстановление финансового учета -->
@@ -117,7 +117,7 @@ get_header();
                         <li>Сверка с контрагентами и налоговой для исключения штрафов</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-restore'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-restore', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 3. Юридические консультации -->
@@ -138,7 +138,7 @@ get_header();
                         <li>Правовая помощь и экспертиза корпоративных договоров</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-legal'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-legal', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 4. Ведение финансового и кадрового учета -->
@@ -160,7 +160,7 @@ get_header();
                         <li>Оформление отпусков, командировок и должностных инструкций</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-accounting'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-accounting', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 5. Услуги секретариата -->
@@ -181,7 +181,7 @@ get_header();
                         <li>Аутсорсинг секретарских услуг и юридический перевод</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-secretariat'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-secretariat', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 6. Бизнес-консультации -->
@@ -201,7 +201,7 @@ get_header();
                         <li>Фин. планирование и разработка моделей развития</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-consulting'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-consulting', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 7. Налоговые консультации -->
@@ -221,7 +221,7 @@ get_header();
                         <li>Представительство интересов в налоговых спорах</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-tax'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-tax', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 8. Управленческий учет -->
@@ -242,7 +242,7 @@ get_header();
                         <li>Визуализация фин. показателей для собственников</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-management'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-management', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 9. Автоматизация бизнес-процессов -->
@@ -263,7 +263,7 @@ get_header();
                         <li>Цифровизация архивов и электронный документооборот</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-automation'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-automation', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
 
             <!-- 10. Разработка бизнес-планов и ТЭО -->
@@ -285,7 +285,7 @@ get_header();
                         <li>Сопровождение и защита бизнес-плана на переговорах с инвесторами</li>
                     </ul>
                 </div>
-                <a href="<?php echo home_url('/service-business-plan'); ?>" class="service-card__link">Подробнее →</a>
+                <a href="<?php echo nk_link('/service-business-plan', $current_lang); ?>" class="service-card__link">Подробнее →</a>
             </div>
         </div>
     </div>
@@ -313,7 +313,7 @@ get_header();
                 </blockquote>
                 <div class="ceo-editorial__author">
                     <div class="ceo-editorial__circle-frame">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ceo.jpg" alt="Зоир Салимов" class="ceo-editorial__avatar">
+                        <img src="<?php echo get_template_directory_uri(); ?>/ceo.jpg" alt="Зоир Салимов" class="ceo-editorial__avatar">
                     </div>
                     <div class="cea-editorial__author-info">
                         <div class="ceo-editorial__author-name">Зоир Салимов</div>
@@ -388,7 +388,7 @@ get_header();
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                        Нажимая кнопку, вы соглашаетесь с <a href="<?php echo home_url('/privacy-policy'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
+                        Нажимая кнопку, вы соглашаетесь с <a href="<?php echo nk_link('/privacy-policy', $current_lang); ?>" style="color: var(--nk-blue); text-decoration: underline;">Политикой конфиденциальности</a>
                     </p>
                     <p class="cta-crystal__secure">🛡️ Защищённое соединение (SSL 256-bit)</p>
                     <div id="nk-form-status" style="margin-top: 15px; display: none;"></div>
@@ -432,3 +432,7 @@ get_header();
 </section>
 </main>
 <?php get_footer(); ?>
+
+
+
+

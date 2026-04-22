@@ -1,7 +1,12 @@
 <?php
 /**
- * Template Name: Новости (RU)
+ * Template Name: Новости V3
  */
+if (function_exists('nk_get_current_lang')) {
+    $lang = nk_get_current_lang();
+    if ($lang === 'tj') { get_template_part('page-news', 'tj'); return; }
+    if ($lang === 'en') { get_template_part('page-news', 'en'); return; }
+}
 get_header();
 
 // Helper function to get link by post title (Russian Only)

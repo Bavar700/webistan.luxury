@@ -28,7 +28,7 @@ get_header();
         </div>
         
         <div class="hero__actions--right">
-            <a href="<?php echo home_url('/'); ?>" class="btn btn--primary">На главную</a>
+            <a href="<?php echo nk_link('/', $current_lang); ?>" class="btn btn--primary">На главную</a>
         </div>
     </div>
 </section>
@@ -47,3 +47,5 @@ get_header();
 </main>
 
 <?php get_footer(); ?>
+
+
