@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент консалтинга</div>
                 <h1 class="hero__title">
-                    Разработка бизнес-планов<br>
-                    <span class="text-gradient">и ТЭО проектов</span>
+                    Разработка бизнес-планов <span class="text-gradient">и ТЭО проектов</span>
                 </h1>
                 <p class="hero__desc">
                     Детальный финансовый документ, который доказывает окупаемость вашего проекта и помогает гарантированно привлечь инвестиции или банковские кредиты.

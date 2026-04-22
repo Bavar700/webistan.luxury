@@ -35,7 +35,7 @@ function nk_get_link_by_title_en($title) {
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content" style="max-width: 1200px;">
                 <div class="hero__badge">Press Center</div>
-                <h1 class="hero__title" style="max-width: none; line-height: 1.1; white-space: nowrap;">
+                <h1 class="hero__title" style="line-height: 1.1;">
                     Core News and Events
                 </h1>
                 <p class="hero__desc" style="max-width: 700px;">
@@ -50,7 +50,7 @@ function nk_get_link_by_title_en($title) {
         <div class="container">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
                 <div class="section__label">Publication Archive</div>
-                <h2 class="section__title">Growth Chronicle<br>and Expert Perspectives</h2>
+                <h2 class="section__title">Growth Chronicle and Expert Perspectives</h2>
             </div>
 
             <div class="videos-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 80px;">
@@ -92,7 +92,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         April 22, 2024 • Expert Insight
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">OUTSOURCING ACTIVITY</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Outsourcing Activity</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Outsourcing activity as a tool for optimizing the economic activities of enterprises in a market economy...
                     </p>
@@ -108,7 +108,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         April 03, 2024 • Legal Audit
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Changes in Property and Land Tax Calculation</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Changes in Property and Land Tax Calculation</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         According to Articles 175 and 402 of the Tax Code, taxes depend directly on cadastral value...
                     </p>
@@ -124,7 +124,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         March 28, 2024 • Case Analysis
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Bankruptcy and Corporate Liquidation Procedures</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Bankruptcy and Corporate Liquidation Procedures</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         The NEKSOZ team brings together legal experts. Our experience shows that professional document preparation...
                     </p>
@@ -140,7 +140,7 @@ function nk_get_link_by_title_en($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         March 15, 2024 • Events
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Outcomes of the Economic Forum in Dushanbe</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Outcomes of the Economic Forum in Dushanbe</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Discussing new vectors of investment climate development. Our intellectual property activities...
                     </p>

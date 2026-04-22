@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти ТИ ва автоматикунонӣ</div>
                 <h1 class="hero__title">
-                    Худкорсозии рақамии<br>
-                    <span class="text-gradient">тиҷорати Шумо</span>
+                    Худкорсозии рақамии <span class="text-gradient">тиҷорати Шумо</span>
                 </h1>
                 <p class="hero__desc">
                     Ҷорӣ намудани роҳҳалҳои муосири ТИ (1С, CRM, абзорҳои AI) барои аз байн бурдани корҳои якнавохт ва баланд бардоштани саҳеҳияти идоракунӣ.

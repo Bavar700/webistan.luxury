@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Management Department</div>
                 <h1 class="hero__title">
-                    Transparent management<br>
-                    <span class="text-gradient">business accounting</span>
+                    Transparent management <span class="text-gradient">business accounting</span>
                 </h1>
                 <p class="hero__desc">
                     Complete financial transparency and accurate data for decision-making aimed at increasing profits.

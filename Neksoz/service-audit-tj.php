@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти аудит</div>
                 <h1 class="hero__title">
-                    Аудити ҳолати<br>
-                    <span class="text-gradient">молиявии тиҷорат</span>
+                    Аудити ҳолати <span class="text-gradient">молиявии тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Санҷиши мустақили гузоришот барои тасдиқи шаффофияти тиҷорат ва ошкор намудани хатарҳои пинҳонии молиявӣ.

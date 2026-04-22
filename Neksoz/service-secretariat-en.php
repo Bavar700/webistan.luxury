@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Secretariat</div>
                 <h1 class="hero__title">
-                    Professional secretarial<br>
-                    <span class="text-gradient">services for business</span>
+                    Professional secretarial <span class="text-gradient">services for business</span>
                 </h1>
                 <p class="hero__desc">
                     Delegate document and call administration to experts, freeing up time for strategic development.

@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти ҳуқуқӣ</div>
                 <h1 class="hero__title">
-                    Роҳҳалҳои маҷмӯии<br>
-                    <span class="text-gradient">ҳуқуқӣ барои тиҷорат</span>
+                    Роҳҳалҳои маҷмӯии <span class="text-gradient">ҳуқуқӣ барои тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Ҳифзи боэътимоди ҳуқуқии манфиатҳои Шумо, мушоияти аҳдҳо ва ба ҳадди ақал расонидани хатарҳои ҳуқуқӣ.

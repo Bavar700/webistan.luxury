@@ -53,8 +53,8 @@
             ];
             if (isset($wrap_map[$display_title])) $display_title = $wrap_map[$display_title];
             ?>
-            <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="max-width: 1100px; line-height: 1.2; margin-bottom: 30px; font-size: clamp(2rem, 4vw, 3rem); font-family: var(--font-display); font-weight: 800; color: var(--nk-gray-900);">
-                <?php echo $display_title; ?>
+            <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="line-height: 1.2; margin-bottom: 30px; font-size: clamp(2rem, 4vw, 3rem);">
+                <span class="text-gradient"><?php echo mb_convert_case($display_title, MB_CASE_TITLE, "UTF-8"); ?></span>
             </h1>
             <div class="fade-up is-visible fade-up-delay-2" style="color: var(--nk-gray-400); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 20px;">
                 <span style="border-bottom: 2px solid var(--nk-red); padding-bottom: 4px; color: #a0a0a0;">

@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент бухгалтерии</div>
                 <h1 class="hero__title">
-                    Ведение финансового<br>
-                    <span class="text-gradient">и кадрового учета бизнеса</span>
+                    Ведение финансового <span class="text-gradient">и кадрового учета бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Полная передача бухгалтерии и кадрового администрирования экспертам для минимизации рисков и снижения затрат.

@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">IT & Automation Department</div>
                 <h1 class="hero__title">
-                    Digital automation<br>
-                    <span class="text-gradient">of your business</span>
+                    Digital automation <span class="text-gradient">of your business</span>
                 </h1>
                 <p class="hero__desc">
                     Implementation of modern IT solutions (1C, CRM, AI tools) to eliminate routine and improve management accuracy.

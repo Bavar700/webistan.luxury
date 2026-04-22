@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент аудита</div>
                 <h1 class="hero__title">
-                    Аудит финансового<br>
-                    <span class="text-gradient">состояния бизнеса</span>
+                    Аудит финансового <span class="text-gradient">состояния бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Независимая проверка отчетности для подтверждения прозрачности бизнеса и выявления скрытых финансовых рисков.

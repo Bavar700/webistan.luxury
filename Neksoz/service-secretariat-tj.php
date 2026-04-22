@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Котибот</div>
                 <h1 class="hero__title">
-                    Хизматрасониҳои касбии<br>
-                    <span class="text-gradient">котибот барои тиҷорат</span>
+                    Хизматрасониҳои касбии <span class="text-gradient">котибот барои тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Идораи санадҳо ва тамосҳои телефониро ба коршиносон вогузор намуда, вақтро барои рушди роҳбурдӣ озод намоед.

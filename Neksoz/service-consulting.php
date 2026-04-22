@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Консалтинг</div>
                 <h1 class="hero__title">
-                    Финансово-управленческий<br>
-                    <span class="text-gradient">консалтинг бизнеса</span>
+                    Финансово-управленческий <span class="text-gradient">консалтинг бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Стратегическое планирование, оптимизация денежных потоков и внедрение эффективных систем управления для масштабирования бизнеса.

@@ -417,6 +417,7 @@
             margin-bottom: 24px; /* Synchronized with Vacancies page distance */
             letter-spacing: -0.015em;
             text-transform: none;
+            max-width: 85%;
         }
 
         .hero__title em {

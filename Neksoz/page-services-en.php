@@ -22,8 +22,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Full Spectrum of Solutions</div>
                 <h1 class="hero__title">
-                    Comprehensive Services for<br>
-                    <span class="text-gradient">the Growth of Your Business</span>
+                    Comprehensive Services for <span class="text-gradient">the Growth of Your Business</span>
                 </h1>
                 <p class="hero__desc">
                     We offer expert support at every stage of the company's life cycle — from registration to scaling.

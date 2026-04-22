@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент IT & Автоматизации</div>
                 <h1 class="hero__title">
-                    Цифровая автоматизация<br>
-                    <span class="text-gradient">вашего бизнеса</span>
+                    Цифровая автоматизация <span class="text-gradient">вашего бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Внедрение современных IT-решений (1С, CRM, AI-инструменты) для исключения рутины и повышения точности управления.

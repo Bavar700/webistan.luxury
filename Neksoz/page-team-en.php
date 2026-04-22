@@ -199,7 +199,7 @@ get_header();
         <div class="container hero__container">
             <div class="hero__content" style="max-width: 900px;">
                 <div class="hero__badge">Neksoz Team</div>
-                <h1 class="hero__title" style="white-space: nowrap;">
+                <h1 class="hero__title">
                     Philosophy of expertise and <span class="text-gradient">intellect</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 750px; color: rgba(255,255,255,0.85); font-size: 1.1rem;">

@@ -355,8 +355,7 @@ get_header();
             <div class="hero__content" style="flex-shrink: 0;">
                 <div class="hero__badge">Карьера</div>
                 <h1 class="hero__title">
-                    Присоединяйтесь к команде<br>
-                    <span class="text-gradient">Neksoz Group</span>
+                    Присоединяйтесь к команде <span class="text-gradient">Neksoz Group</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 480px; opacity: 0.9;">
                     Мы объединяем таланты для создания интеллектуальных решений. Станьте частью команды, которая задает стандарты качества.

@@ -17,18 +17,16 @@ get_header();
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
                 <h1 class="hero__title">
-                    Стратегическое<br>
-                    <span class="text-gradient">бизнес-планирование</span><br>
-                    <span class="text-gradient">NEKSOZ</span>
+                    Strategic <span class="text-gradient">Business Planning</span> <span class="text-gradient">NEKSOZ</span>
                 </h1>
                 <p class="hero__desc">
-                    Разработка жизнеспособных стратегий и финансовых моделей для уверенного запуска и масштабирования Business.
+                    Development of viable strategies and financial models for confident business launch and scaling.
                 </p>
             </div>
             
             <div class="hero__actions--right">
                 <a href="#lead-form" class="btn btn--primary" style="padding: 16px 36px; font-size: 11px;">
-                    <span>Заказать план</span>
+                    <span>Order a Plan</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </a>
             </div>
@@ -39,77 +37,77 @@ get_header();
     <section class="section">
         <div class="container">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
-                <div class="section__label">Инвестиционный фундамент</div>
-                <h2 class="section__title">Ваша идея в цифрах и фактах</h2>
-                <p class="section__subtitle">Мы создаем документы, которые убеждают самых требовательных кредиторов и инвесторов.</p>
+                <div class="section__label">Investment Foundation</div>
+                <h2 class="section__title">Your Idea in Numbers and Facts</h2>
+                <p class="section__subtitle">We create documents that convince the most demanding lenders and investors.</p>
             </div>
 
             <div class="services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px;">
                 
-                <!-- CARD 1: В каких случаях вам нужна эта услуга? -->
+                <!-- CARD 1 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5 5-5-5"/><path d="m17 19-5-5-5 5"/></svg>
                     </div>
-                    <h3 class="service-card__title">Когда нужен <br>бизнес-план?</h3></div>
+                    <h3 class="service-card__title">When is a business plan needed?</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Привлечение инвестиций или кредита</li>
-                            <li>Оценка идеи перед запуском проекта</li>
-                            <li>Получение льгот или гос. грантов</li>
-                            <li>Защита стратегии перед акционерами</li>
-                            <li>Масштабирование текущего Business</li>
+                            <li>Attracting investments or a loan</li>
+                            <li>Evaluating an idea before project launch</li>
+                            <li>Obtaining benefits or state grants</li>
+                            <li>Defending a strategy before shareholders</li>
+                            <li>Scaling an existing business</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- CARD 2: Что входит в услугу -->
+                <!-- CARD 2 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
                     </div>
-                    <h3 class="service-card__title">What is Included <br>in the Service?</h3></div>
+                    <h3 class="service-card__title">What is included in the service?</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Анализ рынка, конкурентов и аудитории</li>
-                            <li>Разработка детальной финансовой модели</li>
-                            <li>Составление ТЭО по стандартам</li>
-                            <li>Подготовка Pitch Deck для инвесторов</li>
-                            <li>Защита плана перед фин. институтами</li>
+                            <li>Market, competitor, and audience analysis</li>
+                            <li>Development of a detailed financial model</li>
+                            <li>Preparation of FS according to standards</li>
+                            <li>Preparation of Pitch Deck for investors</li>
+                            <li>Defense of the plan before financial institutions</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- CARD 3: Как мы работаем -->
+                <!-- CARD 3 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
                     </div>
-                    <h3 class="service-card__title">How We <br>Work?</h3></div>
+                    <h3 class="service-card__title">How do we work?</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Сбор и систематизация вводных данных</li>
-                            <li>Математическое моделирование прибыли</li>
-                            <li>Написание описательной части по стандартам</li>
-                            <li>Корректировка под требования банков</li>
-                            <li>Финальное согласование и печать</li>
+                            <li>Collection and systematization of input data</li>
+                            <li>Mathematical profit modeling</li>
+                            <li>Writing the descriptive part according to standards</li>
+                            <li>Adjusting to bank requirements</li>
+                            <li>Final coordination and printing</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- CARD 4: Что вы получаете в итоге -->
+                <!-- CARD 4 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
-                    <h3 class="service-card__title">Результат для <br>вашего Business</h3></div>
+                    <h3 class="service-card__title">Result for your business</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
-                            <li>Документ, повышающий шансы на капитал</li>
-                            <li>Четкое понимание всех рисков и сроков</li>
-                            <li>Готовый план действий по запуску</li>
-                            <li>Профессиональная финансовая модель</li>
-                            <li>Обоснование окупаемости для партнеров</li>
+                            <li>A document that increases chances for capital</li>
+                            <li>Clear understanding of all risks and deadlines</li>
+                            <li>Ready-made action plan for launch</li>
+                            <li>Professional financial model</li>
+                            <li>Justification of payback for partners</li>
                         </ul>
                     </div>
                 </div>
@@ -122,9 +120,9 @@ get_header();
     <section id="lead-form" class="section section--gray" style="border-top: 1px solid var(--nk-gray-100); padding-top: 40px; padding-bottom: 80px;">
         <div class="container" style="max-width: 800px;">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
-                <div class="section__label">Инвест аудит</div>
-                <h2 class="section__title">Бесплатная экспресс-консультация</h2>
-                <p class="section__subtitle" style="margin-bottom: 0;">Оставьте заявку на предварительную оценку вашего проекта. Мы свяжемся с вами в течение 30 минут.</p>
+                <div class="section__label">Invest Audit</div>
+                <h2 class="section__title">Free Express Consultation</h2>
+                <p class="section__subtitle" style="margin-bottom: 0;">Leave a request for a preliminary assessment of your project. We will contact you within 30 minutes.</p>
             </div>
 
             <div class="cta-crystal__form-box" style="background: var(--nk-white); padding: 60px; border-radius: 32px; box-shadow: 0 40px 100px rgba(0, 13, 51, 0.08); border: 1px solid var(--nk-gray-50);">
@@ -143,7 +141,7 @@ get_header();
                         <input type="text" placeholder=" " id="pl-company">
                         <label for="pl-company">Company Name (Optional)</label>
                     </div>
-                    <button type="submit" class="cta-crystal__btn"><span>Получить план</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+                    <button type="submit" class="cta-crystal__btn"><span>Get Plan</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
                         By clicking the button, you agree to the <a href="<?php echo home_url('/privacy-policy?lang=en'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>
                     </p>

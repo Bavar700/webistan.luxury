@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Audit Department</div>
                 <h1 class="hero__title">
-                    Audit of financial<br>
-                    <span class="text-gradient">condition of business</span>
+                    Audit of financial <span class="text-gradient">condition of business</span>
                 </h1>
                 <p class="hero__desc">
                     Independent verification of financial reporting to confirm business transparency and identify hidden financial risks.

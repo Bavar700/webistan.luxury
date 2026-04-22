@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Consulting Department</div>
                 <h1 class="hero__title">
-                    Business plan and<br>
-                    <span class="text-gradient">feasibility study development</span>
+                    Business plan and <span class="text-gradient">feasibility study development</span>
                 </h1>
                 <p class="hero__desc">
                     A detailed financial document that proves the profitability of your project and helps reliably attract investments or bank loans.

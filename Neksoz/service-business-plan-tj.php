@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти машварат</div>
                 <h1 class="hero__title">
-                    Таҳияи нақшаҳои<br>
-                    <span class="text-gradient">тиҷоратӣ ва АТИ-и лоиҳаҳо</span>
+                    Таҳияи нақшаҳои <span class="text-gradient">тиҷоратӣ ва АТИ-и лоиҳаҳо</span>
                 </h1>
                 <p class="hero__desc">
                     Санади муфассали молиявӣ, ки баргардонидани хароҷоти лоиҳаи Шуморо исбот намуда, ба ҷалби кафолатноки сармоя ё қарзҳои бонкӣ кумак мерасонад.

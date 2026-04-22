@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департамент учета</div>
                 <h1 class="hero__title">
-                    Полное восстановление<br>
-                    <span class="text-gradient">учета бизнеса</span>
+                    Полное восстановление <span class="text-gradient">учета бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Приведение запущенной документации в порядок, устранение ошибок и защита от претензий контролирующих органов.

@@ -183,7 +183,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">About the Company</div>
                 <h1 class="hero__title">
-                    Your Success Is<br>Our Mission
+                    Your Success Is Our Mission
                 </h1>
                 <p class="hero__desc" style="max-width: 650px;">
                     A strategic partner and expert hub, transforming expertise in audit and law into real value for local and international business in Tajikistan.

@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Секретариат</div>
                 <h1 class="hero__title">
-                    Профессиональные услуги<br>
-                    <span class="text-gradient">секретариата для бизнеса</span>
+                    Профессиональные услуги <span class="text-gradient">секретариата для бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Делегируйте администрирование документации и звонков экспертам, освобождая время для стратегического развития.

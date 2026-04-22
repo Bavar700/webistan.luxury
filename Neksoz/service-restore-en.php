@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Accounting Department</div>
                 <h1 class="hero__title">
-                    Complete Restoration of<br>
-                    <span class="text-gradient">Business Accounting</span>
+                    Complete Restoration of <span class="text-gradient">Business Accounting</span>
                 </h1>
                 <p class="hero__desc">
                     Bringing neglected documentation into order, eliminating errors, and protecting from claims by regulatory bodies.

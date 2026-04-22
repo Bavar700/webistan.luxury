@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Tax Department</div>
                 <h1 class="hero__title">
-                    Expert tax<br>
-                    <span class="text-gradient">consultations for business</span>
+                    Expert tax <span class="text-gradient">consultations for business</span>
                 </h1>
                 <p class="hero__desc">
                     Legal optimization of the tax burden and risk minimization before visits from regulatory authorities.

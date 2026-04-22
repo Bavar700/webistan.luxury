@@ -19,8 +19,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Get in Touch</div>
                 <h1 class="hero__title">
-                    Connect with<br>
-                    Neksoz Experts
+                    Connect with Neksoz Experts
                 </h1>
                 <p class="hero__desc">
                     We are always available to discuss your business's strategic goals and offer effective financial and legal solutions.

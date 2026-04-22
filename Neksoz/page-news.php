@@ -34,7 +34,7 @@ function nk_get_link_by_title_ru($title) {
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content" style="max-width: 1200px;">
                 <div class="hero__badge">Пресс-центр</div>
-                <h1 class="hero__title" style="max-width: none; line-height: 1.1; white-space: nowrap;">
+                <h1 class="hero__title" style="line-height: 1.1;">
                     Новости и события компании
                 </h1>
                 <p class="hero__desc" style="max-width: 700px;">
@@ -48,7 +48,7 @@ function nk_get_link_by_title_ru($title) {
         <div class="container">
             <div class="section__header section__header--center" style="margin-bottom: 60px;">
                 <div class="section__label">Архив публикаций</div>
-                <h2 class="section__title">Лента событий<br>и аналитические материалы</h2>
+                <h2 class="section__title">Лента событий и аналитические материалы</h2>
             </div>
 
             <div class="videos-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 80px;">
@@ -90,7 +90,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         22 апреля 2024 • Экспертное мнение
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">АУТСОРСИНГОВАЯ ДЕЯТЕЛЬНОСТЬ</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Аутсорсинговая деятельность</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Аутсорсинговая деятельность как инструмент оптимизации хозяйственной деятельности предприятий в условиях рыночной экономики...
                     </p>
@@ -106,7 +106,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         03 апреля 2024 • Юридический аудит
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Изменения в расчете налога на имущество и землю</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Изменения в расчете налога на имущество и землю</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Согласно ст. 175 и 402 Налогового кодекса, налоги напрямую зависят от кадастровой стоимости...
                     </p>
@@ -122,7 +122,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         28 марта 2024 • Разбор кейсов
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Процедуры банкротства и ликвидации предприятий</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Процедуры банкротства и ликвидации предприятий</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Команда NEKSOZ объединяет экспертов в области права...
                     </p>
@@ -138,7 +138,7 @@ function nk_get_link_by_title_ru($title) {
                     <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
                         15 марта 2024 • Мероприятия
                     </div>
-                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">Итоги экономического форума в Душанбе</h3>
+                    <h3 class="news-card__title text-gradient" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display);">Итоги экономического форума в Душанбе</h3>
                     <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
                         Обсуждаем новые векторы развития инвестиционного климата...
                     </p>

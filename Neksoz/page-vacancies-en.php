@@ -338,8 +338,7 @@ get_header();
             <div class="hero__content" style="flex-shrink: 0;">
                 <div class="hero__badge">Career at Neksoz</div>
                 <h1 class="hero__title">
-                    Career with<br>
-                    <span class="text-gradient">Neksoz Group</span>
+                    Career with <span class="text-gradient">Neksoz Group</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 480px; opacity: 0.9;">
                     We bring together talents to create intellectual solutions. Become part of a team that sets quality

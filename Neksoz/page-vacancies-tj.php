@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Name: Ҷойҳои корӣ V3
  */
@@ -427,8 +427,7 @@ get_header();
             <div class="hero__content" style="flex-shrink: 0;">
                 <div class="hero__badge">Фаъолият</div>
                 <h1 class="hero__title">
-                    Ба гурӯҳи кории<br>
-                    <span class="text-gradient">Нексоз ҳамроҳ шавед</span>
+                    Ба гурӯҳи кории <span class="text-gradient">Нексоз ҳамроҳ шавед</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 480px; opacity: 0.9;">
                     Мо истеъдодҳоро барои эҷоди роҳҳалҳои зеҳнӣ муттаҳид месозем. Ба гурӯҳи кории мо, ки меъёрҳои

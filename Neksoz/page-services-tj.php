@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Маҷмӯи пурраи роҳҳалҳо</div>
                 <h1 class="hero__title">
-                    Хизматрасониҳои маҷмӯӣ барои<br>
-                    <span class="text-gradient">рушди тиҷорати Шумо</span>
+                    Хизматрасониҳои маҷмӯӣ барои <span class="text-gradient">рушди тиҷорати Шумо</span>
                 </h1>
                 <p class="hero__desc">
                     Мо дастгирии коршиносиро дар ҳар як марҳилаи давраи ҳаёти ширкат — аз бақайдгирӣ то густариш пешниҳод менамоем.

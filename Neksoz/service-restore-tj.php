@@ -18,8 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Департаменти баҳисобгирӣ</div>
                 <h1 class="hero__title">
-                    Барқарорсозии пурраи<br>
-                    <span class="text-gradient">баҳисобгирии тиҷорат</span>
+                    Барқарорсозии пурраи <span class="text-gradient">баҳисобгирии тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Ба тартиб даровардани санадҳои номураттаб, рафъи иштибоҳҳо ва ҳифз аз даъвоҳои мақомоти назоратӣ.
