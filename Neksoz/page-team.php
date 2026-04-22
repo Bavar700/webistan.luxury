@@ -200,7 +200,8 @@ get_header();
             <div class="hero__content" style="max-width: 900px;">
                 <div class="hero__badge">Команда Neksoz</div>
                 <h1 class="hero__title">
-                    Философия экспертности <span class="text-gradient">интеллекта</span>
+                    <span style="white-space: nowrap;">Философия экспертности</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">интеллекта</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 750px; color: rgba(255,255,255,0.85); font-size: 1.1rem;">
                     «За каждой цифрой в отчете и каждой строчкой в договоре стоит интеллект наших экспертов. Мы объединили профессионалов из разных отраслей — от банковского дела до налогового права — чтобы вы получали комплексную защиту вашего бизнеса со всех сторон».
@@ -238,19 +239,8 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Директор / Основатель</div>
                         <h3 class="expert-card__name">Салимов Зоир Муминович</h3>
-                        <div class="expert-card__regalia">ACCA, CAP/CIPA</div>
                         <p class="expert-card__spec">Стратегическое управление, аудит и налоговое планирование для международного бизнеса.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">15+ лет</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ТНУ, Экономика</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -262,19 +252,8 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Старший юрист</div>
                         <h3 class="expert-card__name">Фатхуддинзода Диловар Каромат</h3>
-                        <div class="expert-card__regalia">LLM, Юрист года</div>
                         <p class="expert-card__spec">Корпоративное право, арбитражная практика и правовое сопровождение инвестиционных проектов.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">14 лет</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ГЮУ, Магистр права</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -284,21 +263,10 @@ get_header();
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ширинов Рустам Сухробович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Ведущий бухгалтер</div>
+                        <div class="expert-card__role">Ведущий бухгалтер-аудитор</div>
                         <h3 class="expert-card__name">Ширинов Рустам Сухробович</h3>
-                        <div class="expert-card__regalia">CAP, Сертиф. Бухгалтер</div>
                         <p class="expert-card__spec">Ведение сложного бухгалтерского и налогового учета, подготовка финансовой отчетности и аудит.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">8 лет</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ТНУ, Бухгалтерский учет</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -308,21 +276,10 @@ get_header();
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Курбонов Шохрух Камолуддинович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Ведущий бухгалтер</div>
+                        <div class="expert-card__role">Ведущий бухгалтер-аудитор</div>
                         <h3 class="expert-card__name">Курбонов Шохрух Камолуддинович</h3>
-                        <div class="expert-card__regalia">CAP, Сертиф. Бухгалтер</div>
                         <p class="expert-card__spec">Комплексное бухгалтерское сопровождение, автоматизация учета в 1С и налоговое консультирование.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">10 лет</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">ДАТ, Финансы и кредит</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -334,19 +291,21 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Менеджер по развитию бизнеса</div>
                         <h3 class="expert-card__name">Ливенгуд Джастин Рег</h3>
-                        <div class="expert-card__regalia">MBA, Global Strategy</div>
                         <p class="expert-card__spec">Масштабирование бизнеса, поиск новых партнерств и вывод компании на международные рынки консалтинга.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Опыт:</span>
-                                <span class="expert-card__value">20+ лет</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Образование:</span>
-                                <span class="expert-card__value">State Univ, MBA</span>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert 6 -->
+                <div class="expert-card fade-up" style="animation-delay: 0.2s;">
+                    <div class="expert-card__visual">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-6.jpg" alt="Шералиева Замира Шонкулиевна" class="expert-card__img">
+                    </div>
+                    <div class="expert-card__body">
+                        <div class="expert-card__role">Менеджер по кадрам</div>
+                        <h3 class="expert-card__name">Шералиева Замира Шонкулиевна</h3>
+                        <p class="expert-card__spec">Управление человеческими ресурсами, подбор высококвалифицированных экспертов и развитие корпоративной культуры.</p>
+                        
                     </div>
                 </div>
 

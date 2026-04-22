@@ -10,6 +10,7 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
+    <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=Mr+Dafoe&display=swap" rel="stylesheet">
@@ -369,6 +370,7 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
             background-size: 80px 80px;
             pointer-events: none;
         }
+
 
         .hero__content { position: relative; z-index: 2; max-width: 100% !important; }
 

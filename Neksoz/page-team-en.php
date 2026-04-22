@@ -200,7 +200,8 @@ get_header();
             <div class="hero__content" style="max-width: 900px;">
                 <div class="hero__badge">Neksoz Team</div>
                 <h1 class="hero__title">
-                    Philosophy of expertise and <span class="text-gradient">intellect</span>
+                    <span style="white-space: nowrap;">Philosophy of expertise</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">and intellect</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 750px; color: rgba(255,255,255,0.85); font-size: 1.1rem;">
                     «Behind every figure in a report and every line in a contract lies the intellect of our experts. We have brought together professionals from various fields — from banking to tax law — so you receive comprehensive protection for your business from all sides».
@@ -238,19 +239,8 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Director / Founder</div>
                         <h3 class="expert-card__name">Salimov Zoir Muminovich</h3>
-                        <div class="expert-card__regalia">ACCA, CAP/CIPA</div>
                         <p class="expert-card__spec">Strategic management, audit, and tax planning for international business.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Experience:</span>
-                                <span class="expert-card__value">15+ years</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Education:</span>
-                                <span class="expert-card__value">TNU, Economics</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -261,44 +251,22 @@ get_header();
                     </div>
                     <div class="expert-card__body">
                         <div class="expert-card__role">Senior Lawyer</div>
-                        <h3 class="expert-card__name">Fathuddinzoda Dilovar Karomat</h3>
-                        <div class="expert-card__regalia">LLM, Lawyer of the Year</div>
+                        <h3 class="expert-card__name">Fatkhuddinzoda Dilovar Karomat</h3>
                         <p class="expert-card__spec">Corporate law, arbitration practice, and legal support for investment projects.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Experience:</span>
-                                <span class="expert-card__value">14 years</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Education:</span>
-                                <span class="expert-card__value">SIU, Master of Laws</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Expert 3 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Shirinov Rustam Sukhrobovich" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Shirinov Rustam Suhrobovich" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Senior Accountant</div>
-                        <h3 class="expert-card__name">Shirinov Rustam Sukhrobovich</h3>
-                        <div class="expert-card__regalia">CAP, Certified Accountant</div>
+                        <div class="expert-card__role">Senior Accountant-Auditor</div>
+                        <h3 class="expert-card__name">Shirinov Rustam Suhrobovich</h3>
                         <p class="expert-card__spec">Complex accounting and tax management, preparation of financial statements, and auditing.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Experience:</span>
-                                <span class="expert-card__value">8 years</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Education:</span>
-                                <span class="expert-card__value">TNU, Accounting</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -308,21 +276,10 @@ get_header();
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Kurbonov Shokhrukh Kamoluddinovich" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Senior Accountant</div>
-                        <h3 class="expert-card__name">Kurbonov Shokhrukh Kamoluddinovich</h3>
-                        <div class="expert-card__regalia">CAP, Certified Accountant</div>
+                        <div class="expert-card__role">Senior Accountant-Auditor</div>
+                        <h3 class="expert-card__name">Qurbonov Shohrukh Kamoluddinovich</h3>
                         <p class="expert-card__spec">Comprehensive accounting support, automation in 1C, and tax consulting.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Experience:</span>
-                                <span class="expert-card__value">10 years</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Education:</span>
-                                <span class="expert-card__value">TAA, Finance and Credit</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -334,19 +291,21 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Business Development Manager</div>
                         <h3 class="expert-card__name">Livengood Justin Reg</h3>
-                        <div class="expert-card__regalia">MBA, Global Strategy</div>
                         <p class="expert-card__spec">Business scaling, identifying new partnerships, and expanding the company into international consulting markets.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Experience:</span>
-                                <span class="expert-card__value">20+ years</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Education:</span>
-                                <span class="expert-card__value">State Univ, MBA</span>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert 6 -->
+                <div class="expert-card fade-up" style="animation-delay: 0.2s;">
+                    <div class="expert-card__visual">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-6.jpg" alt="Sheralieva Zamira Shonkulievna" class="expert-card__img">
+                    </div>
+                    <div class="expert-card__body">
+                        <div class="expert-card__role">HR Manager</div>
+                        <h3 class="expert-card__name">Sheralieva Zamira Shonqulievna</h3>
+                        <p class="expert-card__spec">Human resource management, recruitment of highly qualified experts, and development of corporate culture.</p>
+                        
                     </div>
                 </div>
 

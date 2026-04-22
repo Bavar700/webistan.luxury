@@ -200,7 +200,8 @@ get_header();
             <div class="hero__content" style="max-width: 900px;">
                 <div class="hero__badge">Дастаи Neksoz</div>
                 <h1 class="hero__title">
-                    Фалсафаи касбият ва <span class="text-gradient">зеҳн</span>
+                    <span style="white-space: nowrap;">Фалсафаи касбият</span><br>
+                    <span class="text-gradient" style="white-space: nowrap;">ва зеҳн</span>
                 </h1>
                 <p class="hero__desc" style="max-width: 750px; color: rgba(255,255,255,0.85); font-size: 1.1rem;">
                     «Дар паси ҳар як рақами ҳисобот ва ҳар як сатри шартнома зеҳни коршиносони мо пинҳон аст. Мо мутахассисонро аз соҳаҳои гуногун — аз кори бонкӣ то ҳуқуқи андоз — муттаҳид кардем, то шумо ҳимояи ҳамаҷонибаи тиҷорати худро аз ҳама ҷонибҳо ба даст оред».
@@ -238,19 +239,8 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Директор / Муассис</div>
                         <h3 class="expert-card__name">Салимов Зоир Муминович</h3>
-                        <div class="expert-card__regalia">ACCA, CAP/CIPA</div>
                         <p class="expert-card__spec">Идоракунии стратегӣ, аудит ва нақшагирии андоз барои тиҷорати байналмилалӣ.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Таҷриба:</span>
-                                <span class="expert-card__value">15+ сол</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Маълумот:</span>
-                                <span class="expert-card__value">ДМТ, Иқтисодиёт</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -262,67 +252,34 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Ҳуқуқшиноси калон</div>
                         <h3 class="expert-card__name">Фатхуддинзода Диловар Каромат</h3>
-                        <div class="expert-card__regalia">LLM, Ҳуқуқшиноси сол</div>
                         <p class="expert-card__spec">Ҳуқуқи корпоративӣ, амалияи арбитражӣ ва дастгирии ҳуқуқии лоиҳаҳои сармоягузорӣ.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Таҷриба:</span>
-                                <span class="expert-card__value">14 сол</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Маълумот:</span>
-                                <span class="expert-card__value">ДДҲ, Магистри ҳуқуқ</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Expert 3 -->
                 <div class="expert-card fade-up" style="animation-delay: 0.2s;">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ширинов Рустам Сухробович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-2.jpg" alt="Ширинов Рустам Суҳробович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Муҳосиби пешбар</div>
-                        <h3 class="expert-card__name">Ширинов Рустам Сухробович</h3>
-                        <div class="expert-card__regalia">CAP, Муҳосиби сертификатсияшуда</div>
+                        <div class="expert-card__role">Муҳосиб-аудитори пешбар</div>
+                        <h3 class="expert-card__name">Ширинов Рустам Суҳробович</h3>
                         <p class="expert-card__spec">Пешбурди баҳисобгирии мураккаби молиявӣ ва андозӣ, омодасозии ҳисоботи молиявӣ ва аудит.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Таҷриба:</span>
-                                <span class="expert-card__value">8 сол</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Маълумот:</span>
-                                <span class="expert-card__value">ДМТ, Баҳисобгирии муҳосибӣ</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Expert 4 -->
                 <div class="expert-card fade-up">
                     <div class="expert-card__visual">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Курбонов Шохрух Камолуддинович" class="expert-card__img">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-5.jpg" alt="Қурбонов Шоҳрух Камолуддинович" class="expert-card__img">
                     </div>
                     <div class="expert-card__body">
-                        <div class="expert-card__role">Муҳосиби пешбар</div>
-                        <h3 class="expert-card__name">Курбонов Шохрух Камолуддинович</h3>
-                        <div class="expert-card__regalia">CAP, Муҳосиби сертификатсияшуда</div>
+                        <div class="expert-card__role">Муҳосиб-аудитори пешбар</div>
+                        <h3 class="expert-card__name">Қурбонов Шоҳрух Камолуддинович</h3>
                         <p class="expert-card__spec">Дастгирии маҷмӯии молиявӣ, автоматикунонии баҳисобгирӣ дар 1С ва машварати андозӣ.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Таҷриба:</span>
-                                <span class="expert-card__value">10 сол</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Маълумот:</span>
-                                <span class="expert-card__value">ДАТ, Молия ва қарз</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -334,19 +291,21 @@ get_header();
                     <div class="expert-card__body">
                         <div class="expert-card__role">Менеҷер оид ба рушди тиҷорат</div>
                         <h3 class="expert-card__name">Ливенгуд Джастин Рег</h3>
-                        <div class="expert-card__regalia">MBA, Global Strategy</div>
                         <p class="expert-card__spec">Густариши тиҷорат, ҷустуҷӯи шарикии нав ва баровардани ширкат ба бозорҳои байналмилалии консалтинг.</p>
                         
-                        <div class="expert-card__meta">
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Таҷриба:</span>
-                                <span class="expert-card__value">20+ сол</span>
-                            </div>
-                            <div class="expert-card__info-row">
-                                <span class="expert-card__label">Маълумот:</span>
-                                <span class="expert-card__value">State Univ, MBA</span>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert 6 -->
+                <div class="expert-card fade-up" style="animation-delay: 0.2s;">
+                    <div class="expert-card__visual">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/team-6.jpg" alt="Шералиева Замира Шонқулиевна" class="expert-card__img">
+                    </div>
+                    <div class="expert-card__body">
+                        <div class="expert-card__role">Мудири кадрҳо</div>
+                        <h3 class="expert-card__name">Шералиева Замира Шонқулиевна</h3>
+                        <p class="expert-card__spec">Идоракунии захираҳои инсонӣ, интихоби коршиносони баландихтисос ва рушди фарҳанги корпоративӣ.</p>
+                        
                     </div>
                 </div>
 
