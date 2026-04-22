@@ -277,6 +277,11 @@ Text Domain: neksoz
             padding-top: 77px;
         }
 
+        /* 1.5cm (56px) vertical lift for hero content */
+        .hero .hero__container {
+            transform: translateY(-56px);
+        }
+
         /* Angular geometric shapes echoing logo */
         .hero__geo {
             position: absolute;
@@ -388,7 +393,7 @@ Text Domain: neksoz
 
         .hero--internal {
             min-height: auto !important;
-            padding: 180px 0 100px !important;
+            padding: 124px 0 100px !important; /* Reduced by 56px (1.5cm) from 180px */
         }
 
         .hero--internal .hero__container {
@@ -738,7 +743,7 @@ Text Domain: neksoz
            MANUSCRIPT — Editorial Layout System (Fix for Chaos)
            ============================================================ */
         .manuscript-hero {
-            padding: 180px 0 100px;
+            padding: 124px 0 100px; /* Reduced by 56px (1.5cm) from 180px */
             background: var(--nk-white);
             border-bottom: 1px solid var(--nk-gray-100);
             position: relative;
