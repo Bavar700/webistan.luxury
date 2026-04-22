@@ -53,8 +53,8 @@
             ];
             if (isset($wrap_map[$display_title])) $display_title = $wrap_map[$display_title];
             ?>
-            <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="max-width: 1100px; line-height: 1.1; margin-bottom: 30px; font-size: clamp(1.8rem, 4.2vw, 3.8rem); white-space: nowrap;">
-                <span class="text-gradient" style="white-space: normal; display: block;"><?php echo $display_title; ?></span>
+            <h1 class="hero__title fade-up is-visible fade-up-delay-1" style="max-width: 1100px; line-height: 1.2; margin-bottom: 30px; font-size: clamp(2rem, 4vw, 3rem); font-family: var(--font-display); font-weight: 800; color: var(--nk-gray-900);">
+                <?php echo $display_title; ?>
             </h1>
             <div class="fade-up is-visible fade-up-delay-2" style="color: var(--nk-gray-400); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 20px;">
                 <span style="border-bottom: 2px solid var(--nk-red); padding-bottom: 4px; color: #a0a0a0;">

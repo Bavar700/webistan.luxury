@@ -51,8 +51,54 @@ function nk_get_link_by_title_tj($title) {
                 <h2 class="section__title">Вақоеъномаи рушд<br>ва андешаҳои коршиносон</h2>
             </div>
 
+            <div class="videos-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 80px;">
+                <div class="featured-video-block fade-up is-visible" style="border-radius: 32px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.1); position: relative; background: #000;">
+                    <div style="padding-bottom: 56.25%; position: relative; height: 0;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/kO88cGrNZec" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div style="padding: 30px 40px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05);">
+                        <h3 class="news-card__title" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-display); color: var(--nk-gray-900); margin: 0;">Тиҷорат дар Тоҷикистон — NEKSOZ BCG</h3>
+                    </div>
+                </div>
+
+                <div class="featured-video-block fade-up is-visible" style="border-radius: 32px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.1); position: relative; background: #000;">
+                    <div style="padding-bottom: 56.25%; position: relative; height: 0;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/oRzE5kI2sLA" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div style="padding: 30px 40px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05);">
+                        <h3 class="news-card__title" style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-display); color: var(--nk-gray-900); margin: 0;">Тиҷорат дар Тоҷикистон 2 — NEKSOZ BCG</h3>
+                    </div>
+                </div>
+            </div>
+
             <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 50px;">
                 
+                <article class="service-card fade-up is-visible" style="padding: 40px; display: flex; flex-direction: column; height: 100%; border-radius: 24px; position: relative; overflow: hidden;">
+                    <div class="news-card__icon" style="position: absolute; top: 30px; right: 30px; opacity: 0.15; color: var(--nk-blue);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="news-meta" style="color: #000000; font-size: 11px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; font-family: var(--font-display);">
+                        22 апрели 2024 • Андешаи коршинос
+                    </div>
+                    <h3 class="news-card__title" style="font-size: 1.5rem; margin-top: 35px; margin-bottom: 20px; font-weight: 800; line-height: 1.3; font-family: var(--font-display); color: var(--nk-gray-900);">ФАЪОЛИЯТИ АУТСОРСИНГӢ</h3>
+                    <p style="color: var(--nk-gray-600); font-size: 1rem; line-height: 1.7; flex-grow: 1; margin-bottom: 30px;">
+                        Фаъолияти аутсорсингӣ ҳамчун воситаи оптимизатсияи фаъолияти хоҷагидории корхонаҳо дар шароити иқтисоди бозорӣ...
+                    </p>
+                    <div style="margin-top: auto; display: flex; justify-content: flex-end;">
+                        <a href="<?php echo nk_get_link_by_title_tj('ФАЪОЛИЯТИ АУТСОРСИНГӢ'); ?>" class="btn btn--primary btn--small" style="padding: 12px 24px; font-size: 12px;">Идомаи хониш</a>
+                    </div>
+                </article>
+
                 <article class="service-card fade-up is-visible" style="padding: 40px; display: flex; flex-direction: column; height: 100%; border-radius: 24px; position: relative; overflow: hidden;">
                     <div class="news-card__icon" style="position: absolute; top: 30px; right: 30px; opacity: 0.15; color: var(--nk-blue);">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
