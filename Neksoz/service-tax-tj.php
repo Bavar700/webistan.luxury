@@ -67,7 +67,7 @@ get_header();
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </div>
-                    <h3 class="service-card__title">Хизматрасонӣ чӣ чизҳоро дар бар мегирад?</h3></div>
+                    <h3 class="service-card__title">Хидмат чӣ чизҳоро дар бар мегирад?</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
                             <li>Машваратҳои андозӣ (барои шахсони ҳуқуқӣ ва воқеӣ)</li>

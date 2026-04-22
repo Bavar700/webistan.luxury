@@ -22,7 +22,8 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Полный спектр решений</div>
                 <h1 class="hero__title">
-                    Комплексные услуги для <span class="text-gradient">роста вашего бизнеса</span>
+                    Комплексные услуги для
+                    <span class="text-gradient">роста вашего бизнеса</span>
                 </h1>
                 <p class="hero__desc">
                     Мы предлагаем экспертную поддержку на каждом этапе жизненного цикла компании — от регистрации до масштабирования.

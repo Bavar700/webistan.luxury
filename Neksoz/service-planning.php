@@ -16,10 +16,9 @@ get_header();
 
         <div class="container hero__container" style="position:relative;z-index:2;">
             <div class="hero__content">
+                <div class="hero__badge">Инвестиционный департамент</div>
                 <h1 class="hero__title">
-                    Стратегическое<br>
-                    <span class="text-gradient">бизнес-планирование</span><br>
-                    <span class="text-gradient">NEKSOZ</span>
+                    Стратегическое <span class="text-gradient">бизнес-планирование NEKSOZ</span>
                 </h1>
                 <p class="hero__desc">
                     Разработка жизнеспособных стратегий и финансовых моделей для уверенного запуска и масштабирования бизнеса.
@@ -46,7 +45,7 @@ get_header();
 
             <div class="services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px;">
                 
-                <!-- CARD 1: В каких случаях вам нужна эта услуга? -->
+                <!-- CARD 1 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5 5-5-5"/><path d="m17 19-5-5-5 5"/></svg>
@@ -63,7 +62,7 @@ get_header();
                     </div>
                 </div>
 
-                <!-- CARD 2: Что входит в услугу -->
+                <!-- CARD 2 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
@@ -80,7 +79,7 @@ get_header();
                     </div>
                 </div>
 
-                <!-- CARD 3: Как мы работаем -->
+                <!-- CARD 3 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
@@ -97,7 +96,7 @@ get_header();
                     </div>
                 </div>
 
-                <!-- CARD 4: Что вы получаете в итоге -->
+                <!-- CARD 4 -->
                 <div class="service-card" style="height: 100%;">
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>

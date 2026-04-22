@@ -67,7 +67,7 @@ get_header();
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
                     </div>
-                    <h3 class="service-card__title">Хизматрасонӣ чӣ чизҳоро <br>дар бар мегирад?</h3></div>
+                    <h3 class="service-card__title">Хидмат чӣ чизҳоро <br>дар бар мегирад?</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
                             <li>Ҷорӣ ва танзим намудани 1С (Муҳосибот, Идоракунии корхона)</li>

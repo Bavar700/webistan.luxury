@@ -18,7 +18,7 @@ get_header();
             <div class="hero__content">
                 <div class="hero__badge">Котибот</div>
                 <h1 class="hero__title">
-                    Хизматрасониҳои касбии <span class="text-gradient">котибот барои тиҷорат</span>
+                    Хидматҳои касбии <span class="text-gradient">котибот барои тиҷорат</span>
                 </h1>
                 <p class="hero__desc">
                     Идораи санадҳо ва тамосҳои телефониро ба коршиносон вогузор намуда, вақтро барои рушди роҳбурдӣ озод намоед.
@@ -67,7 +67,7 @@ get_header();
                     <div class="service-card__header"><div class="service-card__icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     </div>
-                    <h3 class="service-card__title">Хизматрасонӣ чӣ чизҳоро <br>дар бар мегирад?</h3></div>
+                    <h3 class="service-card__title">Хидмат чӣ чизҳоро <br>дар бар мегирад?</h3></div>
                     <div class="service-card__tasks">
                         <ul class="service-card__list">
                             <li>Иҷозатномаҳо барои ҷалби шаҳрвандон</li>
