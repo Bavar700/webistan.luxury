@@ -294,14 +294,14 @@ $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() :
             align-items: flex-start !important;
             background: var(--nk-grad-hero);
             overflow: hidden;
-            padding-top: 160px !important;
-            padding-bottom: 80px !important;
+            padding-top: 130px !important;
+            padding-bottom: 110px !important;
         }
 
         .hero--internal {
             min-height: 60vh !important;
-            padding-top: 160px !important;
-            padding-bottom: 80px !important;
+            padding-top: 130px !important;
+            padding-bottom: 110px !important;
             align-items: flex-start !important;
         }
 

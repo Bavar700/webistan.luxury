@@ -86,7 +86,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 <main id="primary" class="site-main">
 
 <!-- ═══════════ CINEMATIC POST HERO ═══════════ -->
-<section class="hero hero--internal" style="min-height: 55vh; display: flex; align-items: center; padding: 100px 0;">
+<section class="hero hero--internal" style="min-height: 55vh; display: flex; align-items: center; padding: 70px 0 130px;">
     <div class="hero__geo"></div>
     <div class="hero__grid-pattern"></div>
     <div class="hero__accent-line"></div>
