@@ -46,17 +46,23 @@ export const ProjectCalculator = () => {
     const addons = useCalculatorStore(state => state.addons);
     const toggleAddon = useCalculatorStore(state => state.toggleAddon);
     const totalPrice = useCalculatorStore(state => state.totalPrice);
+    const originalPrice = useCalculatorStore(state => state.originalPrice);
+    const monthlyTotal = useCalculatorStore(state => state.monthlyTotal);
+    const isFounderRateActive = useCalculatorStore(state => state.isFounderRateActive);
+    const setFounderRateActive = useCalculatorStore(state => state.setFounderRateActive);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const types: { id: ProjectType; label: string; icon: any; badge?: string }[] = [
-        { id: 'Landing', label: t('types.landing'), icon: Layout },
-        { id: 'Corporate', label: t('types.corporate'), icon: Server },
-        { id: 'Ecommerce', label: t('types.ecommerce'), icon: ShoppingCart },
-        { id: 'Portal', label: t('types.portal'), icon: Globe },
-        { id: 'SaaS', label: t('types.saas'), icon: Layers },
-        { id: 'Immersive', label: t('types.immersive'), icon: Settings },
-        { id: 'Sovereign', label: t('types.sovereign'), icon: Lock, badge: 'WEB3' },
+        { id: 'landing', label: t('types.landing'), icon: Layout },
+        { id: 'promo', label: t('types.promo'), icon: Layers },
+        { id: 'corporate', label: t('types.corporate'), icon: Server },
+        { id: 'ecommerce', label: t('types.ecommerce'), icon: ShoppingCart },
+        { id: 'portal', label: t('types.portal'), icon: Globe },
+        { id: 'saas', label: t('types.saas'), icon: Settings },
+        { id: 'immersive', label: t('types.immersive'), icon: Settings },
+        { id: 'sovereign', label: t('types.sovereign'), icon: Lock, badge: 'WEB3' },
     ];
 
     const presetLangs = [
@@ -114,6 +120,7 @@ export const ProjectCalculator = () => {
     const finalGridItems = [...displayItems, ...fillingItems];
 
     return (
+        <>
         <section id="calculator" className="relative overflow-hidden">
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 {/* Elite Promo Banner */}
@@ -156,7 +163,7 @@ export const ProjectCalculator = () => {
                     </motion.div>
                 </div>
 
-                <div className="max-w-4xl mx-auto bg-white/[0.01] p-10 md:p-20 space-y-16 relative group/calc">
+                <div className="w-full bg-white/[0.01] p-4 sm:p-8 md:p-16 lg:p-20 space-y-16 relative group/calc">
                     {/* System 01: The Shell */}
                     <div className="space-y-12 mb-36">
                         <motion.div
@@ -239,7 +246,7 @@ export const ProjectCalculator = () => {
                             </div>
                         </motion.div>
 
-                        <div className="bg-background/20 p-8 relative overflow-hidden group/lang">
+                        <div className="bg-background/20 p-5 sm:p-8 relative overflow-hidden group/lang">
                             <div className="absolute top-0 left-0 w-4 h-4 border-t-[0.5px] border-l-[0.5px] border-accent/20" />
                             <div className="absolute top-0 right-0 w-4 h-4 border-t-[0.5px] border-r-[0.5px] border-accent/20" />
                             <div className="absolute bottom-0 left-0 w-4 h-4 border-b-[0.5px] border-l-[0.5px] border-accent/20" />
@@ -313,14 +320,14 @@ export const ProjectCalculator = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { id: 'Standard' as MomentumProtocol, label: t('momentum.standard'), icon: Clock, duration: t('duration.standard'), cost: 'BASE VALUE', desc: t('momentum_std_desc') },
-                                { id: 'Accelerated' as MomentumProtocol, label: t('momentum.fast'), icon: Zap, duration: t('duration.fast'), cost: '+20% INVEST', desc: t('momentum_fast_desc') },
-                                { id: 'Ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, duration: t('duration.ultra'), cost: '+50% INVEST', desc: t('momentum_ultra_desc') }
+                                { id: 'standard' as MomentumProtocol, label: t('momentum.standard'), icon: Clock, duration: t('duration.standard'), cost: 'BASE VALUE', desc: t('momentum_std_desc') },
+                                { id: 'fast' as MomentumProtocol, label: t('momentum.fast'), icon: Zap, duration: t('duration.fast'), cost: '+20% INVEST', desc: t('momentum_fast_desc') },
+                                { id: 'ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, duration: t('duration.ultra'), cost: '+50% INVEST', desc: t('momentum_ultra_desc') }
                             ].map((mode) => (
                                 <button
                                     key={mode.id}
                                     onClick={() => setMomentum(mode.id)}
-                                    className={`group relative p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                    className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
                                 >
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                                     {momentum === mode.id && (
@@ -372,7 +379,7 @@ export const ProjectCalculator = () => {
 
                         <div className="flex justify-center w-full">
                             <div className="flex gap-6">
-                                {(['Monthly', 'Yearly'] as BillingCycle[]).map((cycle) => (
+                                {(['monthly', 'yearly'] as BillingCycle[]).map((cycle) => (
                                     <button
                                         key={cycle}
                                         onClick={() => setBillingCycle(cycle)}
@@ -380,9 +387,9 @@ export const ProjectCalculator = () => {
                                     >
                                         <div className="relative z-10 flex flex-col items-center justify-center h-full">
                                             <span className={`text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black ${billingCycle === cycle ? 'text-accent' : 'text-foreground/40'}`}>
-                                                {cycle === 'Monthly' ? t('billing.monthly') : t('billing.yearly')}
+                                                {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')}
                                             </span>
-                                            {cycle === 'Yearly' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>}
+                                            {cycle === 'yearly' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>}
                                         </div>
                                         {billingCycle === cycle && (
                                             <div className="absolute inset-0">
@@ -401,14 +408,14 @@ export const ProjectCalculator = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { level: 'None' as SupportLevel, name: 'None', cost: '0', limit: 'ON-DEMAND', features: [t('support_features.on_demand_access'), t('support_features.basic_scan')] },
-                                { level: 'Standard' as SupportLevel, name: 'Standard', cost: billingCycle === 'Yearly' ? '700' : '1000', limit: '08H / MONTHLY', features: [t('support_features.maintenance_8h'), t('support_features.weekly_backups'), t('support_features.base_cyber_defense')] },
-                                { level: 'Elite' as SupportLevel, name: 'Elite', cost: billingCycle === 'Yearly' ? '2100' : '3000', limit: '24H / MONTHLY', features: [t('support_features.support_24h'), t('support_features.daily_backups'), t('support_features.neural_cyber_defense')] }
+                                { level: 'none' as SupportLevel, name: 'None', cost: '0', limit: 'ON-DEMAND', features: [t('support_features.on_demand_access'), t('support_features.basic_scan')] },
+                                { level: 'standard' as SupportLevel, name: 'Standard', cost: billingCycle === 'yearly' ? '210' : '300', limit: '08H / MONTHLY', features: [t('support_features.maintenance_8h'), t('support_features.weekly_backups'), t('support_features.base_cyber_defense')] },
+                                { level: 'elite' as SupportLevel, name: 'Elite', cost: billingCycle === 'yearly' ? '630' : '900', limit: '24H / MONTHLY', features: [t('support_features.support_24h'), t('support_features.daily_backups'), t('support_features.neural_cyber_defense')] }
                             ].map((item) => (
                                 <button
                                     key={item.level}
                                     onClick={() => setSupport(item.level)}
-                                    className={`group relative p-10 md:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                    className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
                                 >
                                     {support === item.level && (
                                         <div className="absolute inset-0">
@@ -459,26 +466,26 @@ export const ProjectCalculator = () => {
                             </div>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[
-                                { id: 'branding' as const, cost: '3,000 TJS' },
-                                { id: 'infrastructure' as const, cost: '1,000 TJS' },
-                                { id: 'seo' as const, cost: '2,000 TJS' },
-                                { id: 'ai' as const, cost: '3,750 TJS' },
-                                { id: 'ads' as const, cost: '3,000 TJS' },
-                                { id: 'smm' as const, cost: '2,500 TJS' },
-                                { id: 'adsense' as const, cost: '1,500 TJS' },
-                                { id: 'maps' as const, cost: '1,000 TJS' },
-                                { id: 'narrative' as const, cost: '2,500–4,000' },
-                                { id: 'kinetic' as const, cost: '2,500 TJS' },
-                                { id: 'linguistic' as const, cost: '+27% of dev' },
-                                { id: 'velocity' as const, cost: '1,500–2,000' },
+                                { id: 'branding' as const, cost: '800 TJS' },
+                                { id: 'infrastructure' as const, cost: '300 TJS' },
+                                { id: 'seo' as const, cost: '500 TJS' },
+                                { id: 'ai' as const, cost: '1,500 TJS' },
+                                { id: 'ads' as const, cost: '500 TJS' },
+                                { id: 'smm' as const, cost: '700 TJS' },
+                                { id: 'adsense' as const, cost: '500 TJS' },
+                                { id: 'maps' as const, cost: '300 TJS' },
+                                { id: 'narrative' as const, cost: '500 TJS' },
+                                { id: 'kinetic' as const, cost: '800 TJS' },
+                                { id: 'localpay' as const, cost: '1,200 TJS' },
+                                { id: 'velocity' as const, cost: '600 TJS' },
                             ].map((addon) => {
                                 return (
                                     <button
                                         key={addon.id}
                                         onClick={() => toggleAddon(addon.id)}
-                                        className={`group relative p-8 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                        className={`group relative p-5 md:p-6 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-background hover:bg-white/[0.01]'}`}
                                     >
                                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" />
                                         
@@ -494,21 +501,26 @@ export const ProjectCalculator = () => {
                                         )}
 
                                         <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
-                                            <div className="flex justify-between items-start gap-3">
-                                                <span className={`text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
-                                                    {ta(`${addon.id}.label`)}
+                                            <div className="flex justify-between items-start gap-3 w-full">
+                                                <span className={`text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
+                                                    <span className="break-words">{ta(`${addon.id}.label`)}</span>
                                                 </span>
-                                                <div className={`w-1.5 h-1.5 rounded-full transition-all duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)]' : 'bg-white/10'}`} />
+                                                <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-white/10'}`} />
                                             </div>
                                             
                                             <div className="space-y-4">
-                                                <p className="text-[9px] text-foreground/40 font-medium italic leading-relaxed line-clamp-2">{ta(`${addon.id}.desc`)}</p>
+                                                <p className="text-[10px] text-foreground/50 font-light leading-relaxed mt-1">{ta(`${addon.id}.desc`)}</p>
                                                 <span className={`block text-[9px] font-bold tracking-[0.1em] ${addons[addon.id] ? 'text-accent' : 'text-accent/30'}`}>{addon.cost}</span>
                                             </div>
                                         </div>
                                     </button>
                                 );
                             })}
+                        </div>
+                        <div className="flex justify-center mt-12">
+                            <button onClick={() => setIsDrawerOpen(true)} className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent/60 hover:text-accent border-b border-accent/20 hover:border-accent transition-colors pb-1">
+                                {t('details_drawer_trigger')}
+                            </button>
                         </div>
                     </div>
 
@@ -518,14 +530,39 @@ export const ProjectCalculator = () => {
                             <div className="flex flex-col items-center">
                                 <span className="text-[9px] md:text-[10px] uppercase tracking-[1em] text-accent/60 font-bold block mb-8 -mr-[1em]">{t('valuation_asset')}</span>
                                 <div className="text-5xl md:text-9xl font-display font-extralight text-accent tracking-tighter flex items-center justify-center gap-4">
-                                    {totalPrice.toLocaleString()} <span className="text-2xl md:text-6xl text-accent/30">TJS</span>
+                                    {originalPrice.toLocaleString()} <span className="text-2xl md:text-6xl text-accent/30">TJS</span>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-center gap-2">
-                                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-accent font-black animate-pulse -mr-[0.4em] mb-2">{t('access_rate')}</span>
-                                <span className="text-2xl md:text-5xl font-display text-accent tracking-[0.2em]">{Math.round(totalPrice * 0.7).toLocaleString()} TJS</span>
-                                <p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-foreground/40 italic mt-4 max-w-xs">{t('promo_disclaimer')}</p>
+                            <div className="flex flex-col items-center gap-6 mt-8">
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-accent font-black animate-pulse -mr-[0.4em] mb-2 text-center">{t('access_rate')}</span>
+                                    <span className="text-2xl md:text-4xl lg:text-5xl font-display text-accent tracking-[0.2em] flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center">
+                                        <span>{totalPrice.toLocaleString()} TJS</span>
+                                        {monthlyTotal > 0 && (
+                                            <span className="text-lg md:text-2xl lg:text-3xl text-accent/60 whitespace-nowrap">+ {monthlyTotal.toLocaleString()} {t('monthly_suffix')}</span>
+                                        )}
+                                    </span>
+                                    <p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-foreground/40 italic mt-4 max-w-xs text-center">{!isFounderRateActive || projectType === 'landing' ? t('landing_no_discount') : t('promo_disclaimer')}</p>
+                                </div>
+                                <button
+                                    onClick={() => {
+                                        if (projectType !== 'landing') {
+                                            setFounderRateActive(!isFounderRateActive);
+                                        }
+                                    }}
+                                    disabled={projectType === 'landing'}
+                                    className={`relative flex items-center gap-3 px-6 py-3 border-[0.5px] transition-all duration-500 ${projectType === 'landing' ? 'border-foreground/10 opacity-50 cursor-not-allowed' : isFounderRateActive ? 'border-accent/40 bg-accent/[0.05]' : 'border-foreground/20 hover:border-accent/40'}`}
+                                >
+                                    <div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-foreground/40'}`}>
+                                        {isFounderRateActive && projectType !== 'landing' && <Check size={8} className="text-background" strokeWidth={3} />}
+                                    </div>
+                                    <span className={`text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-foreground/60'}`}>Founder Rate (-30%)</span>
+                                </button>
                             </div>
+                        </div>
+
+                        <div className="w-full max-w-2xl mx-auto p-4 md:p-6 border-[0.5px] border-accent/20 bg-accent/[0.02] text-center">
+                            <p className="text-[9px] md:text-xs text-foreground/70 font-medium leading-relaxed uppercase tracking-wider">{t('disclaimer_note')}</p>
                         </div>
 
                         <LuxuryButton width="w-full sm:w-[500px]" onClick={handleProceed}>
@@ -537,5 +574,71 @@ export const ProjectCalculator = () => {
 
 
         </section>
+
+            <AnimatePresence>
+                {isDrawerOpen && (
+                    <div className="fixed inset-0 z-[100] flex justify-end">
+                        <motion.div 
+                            initial={{ opacity: 0 }} 
+                            animate={{ opacity: 1 }} 
+                            exit={{ opacity: 0 }} 
+                            className="absolute inset-0 bg-background/80 backdrop-blur-sm" 
+                            onClick={() => setIsDrawerOpen(false)} 
+                        />
+                        <motion.div 
+                            initial={{ x: '100%' }} 
+                            animate={{ x: 0 }} 
+                            exit={{ x: '100%' }} 
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="relative w-full max-w-md h-full bg-background border-l-[0.5px] border-accent/20 overflow-y-auto"
+                        >
+                            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
+                                <h3 className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-accent font-black truncate">{t('details_drawer_title')}</h3>
+                                <button onClick={() => setIsDrawerOpen(false)} className="flex-shrink-0 text-foreground/40 hover:text-accent transition-colors flex items-center gap-2">
+                                    <span className="text-[9px] uppercase tracking-widest">{t('details_drawer_close')}</span>
+                                    <X size={16} strokeWidth={1} />
+                                </button>
+                            </div>
+                            <div className="p-6 md:p-8 pb-24 space-y-10">
+                                {/* Header / Title */}
+                                <div className="space-y-4">
+                                    <h4 className="text-[14px] md:text-[16px] font-display text-foreground tracking-[0.1em] uppercase">{t('drawer_content.title')}</h4>
+                                    <p className="text-[11px] text-foreground/70 leading-relaxed font-light">{t('drawer_content.intro')}</p>
+                                </div>
+
+                                {/* Base Works */}
+                                <div className="space-y-4">
+                                    <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-accent border-b-[0.5px] border-accent/20 pb-2">{t('drawer_content.base_works_title')}</h5>
+                                    <ul className="space-y-3">
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.base_works.dev') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.base_works.lang') }} />
+                                    </ul>
+                                </div>
+
+                                {/* Modules */}
+                                <div className="space-y-4">
+                                    <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-accent border-b-[0.5px] border-accent/20 pb-2">{t('drawer_content.modules_title')}</h5>
+                                    <ul className="space-y-3">
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.localpay') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.ads') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.infrastructure') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.ai') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.seo') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.narrative') }} />
+                                        <li className="text-[11px] text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.modules.branding') }} />
+                                    </ul>
+                                </div>
+
+                                {/* Important Note */}
+                                <div className="mt-8 p-5 bg-accent/[0.03] border-[0.5px] border-accent/20">
+                                    <h5 className="text-[9px] font-black uppercase tracking-[0.2em] text-accent mb-2">{t('drawer_content.note_title')}</h5>
+                                    <p className="text-[10px] text-foreground/70 leading-relaxed italic">{t('drawer_content.note_text')}</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+        </>
     );
 };

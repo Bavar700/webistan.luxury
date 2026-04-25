@@ -41,7 +41,9 @@ export const ContactForm = () => {
             <div className="container mx-auto px-6 relative z-10 max-w-7xl">
 
 
-                <div className="mx-auto max-w-4xl space-y-12">
+                <div className="w-full space-y-12 mb-36">
+                    <div className="bg-white/[0.01] p-4 sm:p-8 md:p-16 lg:p-20 relative group/form overflow-hidden transition-all duration-1000">
+                        <div className="space-y-16">
                     <motion.div
                         initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -66,11 +68,11 @@ export const ContactForm = () => {
                         viewport={{ once: true }}
                         className="w-full"
                     >
-                        <div className="bg-white/[0.01] p-10 md:p-20 relative group/form overflow-hidden transition-all duration-1000">
+
                             <form onSubmit={handleSubmit} className="space-y-16">
 
                                 {/* Transmission_Protocol Panel */}
-                                <div className="p-10 bg-background border-[0.5px] border-white/5 mb-20 relative overflow-hidden group/plate transition-all duration-1000 hover:bg-white/[0.01]">
+                                <div className="p-6 sm:p-8 md:p-10 bg-background border-[0.5px] border-white/5 mb-20 relative overflow-hidden group/plate transition-all duration-1000 hover:bg-white/[0.01]">
                                     {/* Shimmer Effect */}
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
 
@@ -120,7 +122,7 @@ export const ContactForm = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="space-y-6 relative group/input p-8 bg-background border-[0.5px] border-white/5 transition-all duration-1000 hover:bg-white/[0.01] overflow-hidden">
+                                    <div className="space-y-6 relative group/input p-6 md:p-8 bg-background border-[0.5px] border-white/5 transition-all duration-1000 hover:bg-white/[0.01] overflow-hidden">
                                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                                         <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 italic block uppercase leading-none font-bold relative z-10">{t('name_label')}</span>
                                         <input
@@ -128,7 +130,7 @@ export const ContactForm = () => {
                                             className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/20 uppercase relative z-10"
                                         />
                                     </div>
-                                    <div className="space-y-6 relative group/input p-8 bg-background border-[0.5px] border-white/5 transition-all duration-1000 hover:bg-white/[0.01] overflow-hidden">
+                                    <div className="space-y-6 relative group/input p-6 md:p-8 bg-background border-[0.5px] border-white/5 transition-all duration-1000 hover:bg-white/[0.01] overflow-hidden">
                                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                                         <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 italic block uppercase leading-none font-bold relative z-10">{t('channel_label')}</span>
                                         <input
@@ -138,7 +140,7 @@ export const ContactForm = () => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-6 relative group/input p-8 bg-background border-[0.5px] border-white/5 transition-all duration-1000 hover:bg-white/[0.01] overflow-hidden">
+                                <div className="space-y-6 relative group/input p-6 md:p-8 bg-background border-[0.5px] border-white/5 transition-all duration-1000 hover:bg-white/[0.01] overflow-hidden">
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                                     <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 italic block uppercase leading-none font-bold relative z-10">{t('brief_label')}</span>
                                     <textarea
@@ -158,9 +160,10 @@ export const ContactForm = () => {
                                         </span>
                                     </LuxuryButton>
                                 </div>
-                            </form>
+                                </form>
+                            </motion.div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
 

@@ -90,7 +90,10 @@
     "valuation_asset": "EST. ASSET VALUE_",
     "access_rate": "FOUNDATIONAL_ACCESS_RATE:",
     "promo_disclaimer": "-30% applied for the first 10 residents of the new archive",
+    "landing_no_discount": "Minimum price is already applied to this tier",
     "algo_analysis": "PROPRIETARY ALGORITHMIC INVESTMENT ANALYSIS v8.8_ACTIVE",
+    "monthly_suffix": "TJS/mo",
+    "disclaimer_note": "📌 The estimate includes only development costs. Domain, hosting, and ad budgets are paid separately.",
     "billing": {
       "monthly": "Monthly",
       "yearly": "Yearly"
@@ -111,7 +114,7 @@
     },
     "system02": {
       "title": "LANGUAGE ARCHITECTURE",
-      "desc": "Expand your global Reach | +20% per additional localization unit."
+      "desc": "Expand your global Reach | +30% per additional localization unit."
     },
     "system03": {
       "title": "CHOOSE YOUR MOMENTUM",
@@ -123,10 +126,35 @@
     },
     "system05": {
       "title": "EXPANSION MODULES",
-      "desc": "Enhance your digital asset with specialized infrastructure and strategic identity protocols."
+      "desc": "Enhance your digital asset with specialized infrastructure."
+    },
+    "details_drawer_trigger": "What's included in the price?",
+    "details_drawer_title": "Service Breakdown",
+    "details_drawer_close": "Close",
+    "drawer_content": {
+      "title": "Детализация услуг студии Webistan",
+      "intro": "Мы ценим честность и прозрачность. В нашей смете мы разделяем стоимость интеллектуального труда наших разработчиков и внешние расходы на сторонние сервисы.",
+      "base_works_title": "Базовые работы:",
+      "base_works": {
+        "dev": "<span class='text-accent font-bold'>Разработка сайта:</span> Написание «чистого кода» (без конструкторов), адаптация под мобильные устройства, базовая настройка безопасности.",
+        "lang": "<span class='text-accent font-bold'>Мультиязычность (+30%):</span> Создание архитектуры перевода и техническая реализация переключения языков."
+      },
+      "modules_title": "Дополнительные модули (Что включено):",
+      "modules": {
+        "localpay": "<span class='text-accent font-bold'>LocalPay (1 200 TJS):</span> Интеграция с платежными системами Таджикистана (Alif, DC, Korti Milli). Мы настраиваем прием оплат. Комиссии банков за транзакции оплачиваются отдельно.",
+        "ads": "<span class='text-accent font-bold'>Настройка рекламы (500 TJS):</span> Профессиональный запуск кабинетов Google/Meta и подбор аудитории. Рекламный бюджет вы определяете и пополняете сами.",
+        "infrastructure": "<span class='text-accent font-bold'>Infrastructure Setup (300 TJS):</span> Техническая подготовка сервера, привязка домена и SSL-защита. Стоимость самого домена (.tj/.com) и хостинга оплачивается провайдеру.",
+        "ai": "<span class='text-accent font-bold'>AI (Нейро-протокол) (1 500 TJS):</span> Внедрение нейросетей в логику сайта. Расход токенов API оплачивается платформе-разработчику ИИ.",
+        "seo": "<span class='text-accent font-bold'>SEO-оптимизация (500 TJS):</span> Техническая подготовка сайта для того, чтобы Google и Яндекс «видели» вас.",
+        "narrative": "<span class='text-accent font-bold'>Narrative (500 TJS):</span> Создание продающей истории и текста для одного ключевого раздела. Каждая новая идея текста требует глубокой проработки.",
+        "branding": "<span class='text-accent font-bold'>Branding (800 TJS):</span> Разработка логотипа, палитры и уникального визуального стиля."
+      },
+      "note_title": "Важное примечание:",
+      "note_text": "Все сторонние платежи (домены, хостинг, бюджеты на клики) являются вашей собственностью. Мы помогаем их настроить, но доступ к кабинетам и владение остаются за вами."
     },
     "types": {
       "landing": "Landing Page",
+      "promo": "Promo Page",
       "corporate": "Corporate Platform",
       "ecommerce": "Digital Store",
       "portal": "Enterprise Portal",
@@ -141,9 +169,9 @@
     },
     "cta": "INITIALIZE PROTOCOL",
     "support_levels": {
-      "None": "None",
-      "Standard": "Standard",
-      "Elite": "Elite"
+      "none": "None",
+      "standard": "Standard",
+      "elite": "Elite"
     },
     "duration": {
       "standard": "21–30 DAYS",
@@ -197,8 +225,9 @@
       "desc": "Logo + Brand Guidelines"
     },
     "infrastructure": {
-      "label": "Digital Real Estate",
-      "desc": "Domain + 1Y Hosting"
+      "label": "Deployment Service (Setup)",
+      "desc": "Domain + 1Y Hosting",
+      "tooltip": "Labor cost only. Third-party fees not included"
     },
     "seo": {
       "label": "Search Architecture",
@@ -209,8 +238,9 @@
       "desc": "LLM / AI Integration"
     },
     "ads": {
-      "label": "Market Penetration",
-      "desc": "Ads Google/Yandex"
+      "label": "Ad Campaign Setup",
+      "desc": "Ads Google/Yandex",
+      "tooltip": "Labor cost only. Third-party fees not included"
     },
     "smm": {
       "label": "Social Audit",
@@ -225,16 +255,17 @@
       "desc": "Google Maps API"
     },
     "narrative": {
-      "label": "Narrative Architecture",
+      "label": "Copywriting (per section)",
       "desc": "Copywriting & Storytelling"
     },
     "kinetic": {
       "label": "Kinetic Elegance",
       "desc": "Premium Scroll Animations"
     },
-    "linguistic": {
-      "label": "Linguistic Expansion",
-      "desc": "3-Language Localization"
+    "localpay": {
+      "label": "Payment Integration (Alif, DC)",
+      "desc": "Acquiring Setup",
+      "tooltip": "Labor cost only. Third-party fees not included"
     },
     "velocity": {
       "label": "Performance Velocity",
