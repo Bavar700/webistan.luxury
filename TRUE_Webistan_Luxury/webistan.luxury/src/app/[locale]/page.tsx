@@ -11,7 +11,6 @@ import Link from 'next/link';
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'ru' }, { locale: 'tj' }];
 }
-
 export default async function Index({
   params
 }: {
@@ -19,9 +18,9 @@ export default async function Index({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const tTrust = await getTranslations('Trust');
-  const tNav = await getTranslations('Navigation');
-  const tCommon = await getTranslations('Common');
+const tTrust = await getTranslations('Trust');
+const tNav = await getTranslations('Navigation');
+const tCommon = await getTranslations('Common');
 
   return (
     <main className="relative flex flex-col bg-background selection:bg-accent/10 selection:text-foreground">

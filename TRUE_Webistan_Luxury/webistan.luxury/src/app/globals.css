@@ -7,6 +7,16 @@
   --color-accent: var(--accent);
   --color-accent-muted: var(--accent-muted);
   --color-separator: var(--border-color);
+  --color-header-bg: var(--header-bg);
+  --color-card-bg: var(--card-bg);
+  --color-card-text: var(--card-text);
+  --color-btn-bg: var(--btn-bg);
+  --color-btn-text: var(--btn-text);
+  --color-btn-hover-bg: var(--btn-hover-bg);
+  --color-btn-hover-text: var(--btn-hover-text);
+  --btn-border-width: var(--btn-border-width);
+  --btn-shadow: var(--btn-shadow);
+  --btn-blur: var(--btn-blur);
 
   --font-sans: var(--font-inter);
   --font-display: var(--font-syne), sans-serif;
@@ -28,14 +38,34 @@
   --accent-muted: #1A1A1C;
   --border-color: rgba(192, 160, 128, 0.08);
   --glass-bg: rgba(255, 255, 255, 0.02);
+  --header-bg: #0A0A0B;
+  --card-bg: var(--surface);
+  --card-text: var(--foreground);
+  --btn-bg: rgba(255, 255, 255, 0.01);
+  --btn-text: var(--foreground);
+  --btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --btn-hover-text: var(--accent);
+  --btn-border-width: 1px;
+  --btn-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --btn-blur: 12px;
 }
 
 [data-theme='light'] {
-  --background: #F8F8F8;
-  --foreground: #1A1A1A;
-  --surface: #FFFFFF;
-  --accent: #8B735B;
-  --border-color: rgba(0, 0, 0, 0.05);
+  --background: #E5E7EB; /* Light Silver */
+  --foreground: #050505; /* Almost black text */
+  --surface: #374151;    /* Dark Platinum */
+  --accent: #B8860B;     /* Gold */
+  --border-color: rgba(0, 0, 0, 0.1);
+  --header-bg: #1A1A1A;  /* Rich Dark Gray */
+  --card-bg: var(--surface); /* Dark Platinum */
+  --card-text: #FFFFFF;      /* White text on dark cards */
+  --btn-bg: #EBEDF2;                 /* 5 tones lighter than silver bg */
+  --btn-text: var(--foreground);      /* Dark text on light buttons */
+  --btn-hover-bg: var(--surface);     /* Dark Platinum on hover */
+  --btn-hover-text: #FFFFFF;          /* White text on hover */
+  --btn-border-width: 0px;            /* No side borders in light mode */
+  --btn-shadow: none;
+  --btn-blur: 0px;
 }
 
 @layer base {

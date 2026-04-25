@@ -3,14 +3,11 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter, Syne } from 'next/font/google';
 import { ThemeProvider } from '@/lib/ThemeProvider';
 import '../globals.css';
-
-
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
   display: 'swap',
 });
-
 const syne = Syne({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
@@ -21,7 +18,6 @@ const syne = Syne({
 export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'ru' }, { locale: 'tj' }];
 }
-
 export default async function LocaleLayout({
   children,
   params
@@ -33,8 +29,7 @@ export default async function LocaleLayout({
 
   // Enable static rendering
   setRequestLocale(locale);
-
-  const messages = await getMessages();
+const messages = await getMessages();
 
   return (
     <html lang={locale} className={`${inter.variable} ${syne.variable}`} suppressHydrationWarning>

@@ -30,16 +30,15 @@ interface CalculatorState {
     monthlyTotal: number;
     isFounderRateActive: boolean;
 
-    setProjectType: (type: ProjectType) => void;
-    setLanguages: (count: number) => void;
-    setSupport: (level: SupportLevel) => void;
-    setMomentum: (protocol: MomentumProtocol) => void;
-    setBillingCycle: (cycle: BillingCycle) => void;
-    setFounderRateActive: (active: boolean) => void;
-    toggleAddon: (addon: 'seo' | 'ai' | 'branding' | 'infrastructure' | 'ads' | 'smm' | 'adsense' | 'maps' | 'narrative' | 'kinetic' | 'localpay' | 'velocity') => void;
-    calculate: () => void;
+    setProjectType: (type: ProjectType) => void
+    setLanguages: (count: number) => void
+    setSupport: (level: SupportLevel) => void
+    setMomentum: (protocol: MomentumProtocol) => void
+    setBillingCycle: (cycle: BillingCycle) => void
+    setFounderRateActive: (active: boolean) => void
+    toggleAddon: (addon: 'seo' | 'ai' | 'branding' | 'infrastructure' | 'ads' | 'smm' | 'adsense' | 'maps' | 'narrative' | 'kinetic' | 'localpay' | 'velocity') => void
+    calculate: () => void
 }
-
 const BASE_PRICES: Record<ProjectType, number> = {
     landing: 999,
     promo: 2499,
@@ -49,8 +48,7 @@ const BASE_PRICES: Record<ProjectType, number> = {
     sovereign: 15000,
     portal: 19999,
     saas: 29999,
-};
-
+}
 const SUPPORT_PRICES: Record<SupportLevel, number> = {
     none: 0,
     standard: 300,
@@ -115,12 +113,10 @@ export const useCalculatorStore = create<CalculatorState>((set, get) => ({
 
     calculate: () => {
         const { projectType, languages, support, momentum, billingCycle, addons, isFounderRateActive } = get();
-
-        let base = BASE_PRICES[projectType];
-
-        let localeBase = base + (addons.narrative ? 500 : 0);
-        let extraLangs = Math.max(0, languages - 1);
-        let total = localeBase * (1 + (extraLangs * 0.3));
+let base = BASE_PRICES[projectType];
+let localeBase = base + (addons.narrative ? 500 : 0);
+let extraLangs = Math.max(0, languages - 1);
+let total = localeBase * (1 + (extraLangs * 0.3));
 
         if (addons.ads) total += 500;
         if (addons.infrastructure) total += 300;
@@ -136,8 +132,7 @@ export const useCalculatorStore = create<CalculatorState>((set, get) => ({
 
         if (momentum === 'fast') total *= 1.2;
         if (momentum === 'ultra') total *= 1.5;
-
-        let originalTotal = total;
+let originalTotal = total;
 
         if (isFounderRateActive && projectType !== 'landing') {
             total *= 0.7;
