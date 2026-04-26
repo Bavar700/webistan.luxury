@@ -45,12 +45,12 @@
   --header-bg: #0A0A0B;
   --card-bg: var(--surface);
   --card-text: var(--foreground);
-  --btn-bg: rgba(255, 255, 255, 0.01);
+  --btn-bg: #111113;
   --btn-text: var(--foreground);
   --btn-hover-bg: rgba(255, 255, 255, 0.05);
   --btn-hover-text: var(--accent);
   --btn-border-width: 1px;
-  --btn-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --btn-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   --btn-blur: 12px;
 }
 
@@ -67,12 +67,12 @@
   --header-bg: #1A1A1A;
   --card-bg: #FFFFFF;
   --card-text: #050505;
-  --btn-bg: #FFFFFF;
+  --btn-bg: #F0F4F8;
   --btn-text: #050505;
   --btn-hover-bg: #F3F4F6;
   --btn-hover-text: var(--accent);
   --btn-border-width: 1px;
-  --btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   --btn-blur: 10px;
 }
 
@@ -81,6 +81,8 @@
     background-color: var(--background);
     color: var(--foreground);
     overflow-x: hidden;
+    user-select: text !important;
+    -webkit-user-select: text !important;
   }
 }
 

@@ -50,7 +50,7 @@ return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700
 <WebistanSymbol className="w-[20px] h-[10px] md:w-[24px] md:h-[12px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
 <div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[14px] md:text-[16px] leading-none">
 <span>&nbsp;</span>
-<span className="hero-shimmer transition-all duration-700">WEBISTAN</span>
+<span className="text-white transition-all duration-700">WEBISTAN</span>
 <span className="hero-shimmer">.LUXURY</span>
 </div>
 </Link> {
@@ -90,7 +90,7 @@ className="text-accent" />
 }
 href={`/${lang.toLowerCase()}`
 }
-className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 ${locale === lang.toLowerCase() ? 'text-accent' : 'text-white/80 hover:text-accent' }`
+className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 ${locale === lang.toLowerCase() ? 'text-accent' : 'text-white/40 hover:text-accent' }`
 }
 > {lang
 }
