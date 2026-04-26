@@ -42,7 +42,7 @@ const navLinks = [ {
 name: tn('portfolio'), href: '#portfolio' }, {
 name: tn('calculator'), href: '#calculator' }, {
 name: tn('contact'), href: '#contact' }, ];
-return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 py-4 bg-header-bg/95 backdrop-blur-md shadow-lg border-b border-separator/10`}>
+return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 py-4 bg-header-bg backdrop-blur-md shadow-lg border-b border-separator/10`}>
 <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border"> {
 
 }
@@ -50,7 +50,7 @@ return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700
 <WebistanSymbol className="w-[30px] h-[15px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
 <div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[12px] md:text-[14px] leading-none">
 <span>&nbsp;</span>
-<span className="text-foreground transition-all duration-700">WEBISTAN</span>
+<span className="text-white transition-all duration-700">WEBISTAN</span>
 <span className="text-accent">.LUXURY</span>
 </div>
 </Link> {
@@ -60,7 +60,7 @@ return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700
 }
 href={link.href
 }
-className="px-5 py-2 text-[11px] font-medium uppercase tracking-[0.3em] text-foreground/90 hover:text-accent transition-all duration-500" > {link.name
+className="px-5 py-2 text-[11px] font-medium uppercase tracking-[0.3em] text-white/90 hover:text-accent transition-all duration-500" > {link.name
 }
 </a> ))
 }
@@ -90,7 +90,7 @@ className="text-accent" />
 }
 href={`/${lang.toLowerCase()}`
 }
-className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 ${locale === lang.toLowerCase() ? 'text-accent' : 'text-foreground/80 hover:text-accent' }`
+className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 ${locale === lang.toLowerCase() ? 'text-accent' : 'text-white/80 hover:text-accent' }`
 }
 > {lang
 }
