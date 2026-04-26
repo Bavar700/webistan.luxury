@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
 @theme {
+  /* 1. GLOBAL LOGIC (Shared variables) */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-syne), sans-serif;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* 2. SEMANTIC COLOR MAPPING */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
@@ -14,30 +24,45 @@
   --color-btn-text: var(--btn-text);
   --color-btn-hover-bg: var(--btn-hover-bg);
   --color-btn-hover-text: var(--btn-hover-text);
+  
   --btn-border-width: var(--btn-border-width);
   --btn-shadow: var(--btn-shadow);
   --btn-blur: var(--btn-blur);
-
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-syne), sans-serif;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 24px;
-  --radius-full: 9999px;
 }
 
+/* 3. LIGHT THEME (Base / Default) */
 :root {
+  --background: #EBF2FA; /* Soft Sky Silver */
+  --foreground: #050505; /* Deep Contrast Text */
+  --surface: #D1D5DB;    /* Platinum Surface */
+  --accent: #B8860B;     /* Classic Gold */
+  --accent-gold: #D4AF37; /* Lighter Metallic Gold */
+  --accent-champagne: #F7E7CE;
+  --accent-muted: #E2E8F0;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --header-bg: rgba(235, 242, 250, 0.85); /* Blurred sky bg */
+  --card-bg: #FFFFFF;
+  --card-text: #050505;
+  
+  --btn-bg: #FFFFFF;
+  --btn-text: #050505;
+  --btn-hover-bg: #F3F4F6;
+  --btn-hover-text: var(--accent);
+  --btn-border-width: 1px;
+  --btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --btn-blur: 10px;
+}
+
+/* 4. DARK THEME (Zero-Touch / Restricted) */
+[data-theme='dark'], .dark {
   --background: #0A0A0B;
   --foreground: #F1F1F3;
   --surface: #141416;
   --accent: #C0A080;
   --accent-gold: #FFD700;
   --accent-champagne: #E5D5B0;
-  /* Aged Bronze */
   --accent-muted: #1A1A1C;
   --border-color: rgba(192, 160, 128, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.02);
   --header-bg: #0A0A0B;
   --card-bg: var(--surface);
   --card-text: var(--foreground);
@@ -50,26 +75,7 @@
   --btn-blur: 12px;
 }
 
-[data-theme='light'] {
-  --background: #E5E7EB; /* Light Silver */
-  --foreground: #050505; /* Almost black text */
-  --surface: #374151;    /* Dark Platinum */
-  --accent: #B8860B;     /* Gold */
-  --border-color: rgba(0, 0, 0, 0.1);
-  --header-bg: #1A1A1A;  /* Rich Dark Gray */
-  --card-bg: var(--surface); /* Dark Platinum */
-  --card-text: #FFFFFF;      /* White text on dark cards */
-  --btn-bg: #EBEDF2;                 /* 5 tones lighter than silver bg */
-  --btn-text: var(--foreground);      /* Dark text on light buttons */
-  --btn-hover-bg: var(--surface);     /* Dark Platinum on hover */
-  --btn-hover-text: #FFFFFF;          /* White text on hover */
-  --btn-border-width: 0px;            /* No side borders in light mode */
-  --btn-shadow: none;
-  --btn-blur: 0px;
-}
-
 @layer base {
-
   html {
     scroll-behavior: smooth;
   }
@@ -86,7 +92,7 @@
     font-weight: 400;
   }
 
-  /* Cinematic Noise Overlay */
+  /* Cinematic Noise Overlay (Global) */
   body::before {
     content: "";
     position: fixed;
@@ -102,27 +108,14 @@
   }
 
   @keyframes noise-move {
-    0% {
-      transform: translate(0, 0);
-    }
-
-    10% {
-      transform: translate(-2%, -2%);
-    }
-
-    50% {
-      transform: translate(-5%, 2%);
-    }
-
-    100% {
-      transform: translate(2%, 0);
-    }
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -2%); }
+    50% { transform: translate(-5%, 2%); }
+    100% { transform: translate(2%, 0); }
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
+  /* GLOBAL TYPOGRAPHY LOGIC */
+  h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 300;
     color: var(--foreground);
@@ -130,13 +123,8 @@
     line-height: 1.1;
   }
 
-  h1 {
-    font-size: clamp(3rem, 10vw, 4.5rem);
-  }
-
-  h2 {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-  }
+  h1 { font-size: clamp(3rem, 10vw, 4.5rem); }
+  h2 { font-size: clamp(2.5rem, 8vw, 4rem); }
 }
 
 @layer utilities {
@@ -173,20 +161,9 @@
 }
 
 @keyframes shimmer-move {
-  to {
-    background-position: 200% center;
-  }
+  to { background-position: 200% center; }
 }
 
-::-webkit-scrollbar {
-  width: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  opacity: 0.2;
-}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--accent); opacity: 0.2; }
