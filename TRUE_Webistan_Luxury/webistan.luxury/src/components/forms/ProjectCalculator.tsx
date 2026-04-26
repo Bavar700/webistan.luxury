@@ -140,7 +140,7 @@ className="relative group/promo" > {
 <span className="text-[10px] md:text-[12px] uppercase tracking-[0.5em] md:tracking-[0.8em] text-accent font-display font-medium block"> {t('foundational_partner_protocol')
 }
 </span>
-<h3 className="text-[12px] md:text-[16px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-foreground/80 font-light leading-loose max-w-4xl mx-auto drop-shadow-md text-balance"> {t.rich('discount_text', {
+<h3 className="text-[12px] md:text-[16px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/80 font-light leading-loose max-w-4xl mx-auto drop-shadow-md text-balance"> {t.rich('discount_text', {
 discount: (chunks) => ( <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap"> {chunks
 }
 </span> ) })
@@ -172,7 +172,7 @@ className="flex items-center gap-6" >
 <div className="absolute inset-0 bg-white/20 animate-pulse" /> 01 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-foreground/90 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
+<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
 </div>
 </motion.div>
 <div className="relative">
@@ -211,7 +211,7 @@ setIsDropdownOpen(false);
 className="w-full text-left p-6 hover:bg-white/20 transition-colors flex items-center justify-between group" >
 <div className="flex items-center gap-3">
 <span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase ${projectType ===
-type.id ? 'text-accent' : 'text-foreground/40'}`}>{type.label}</span> {type.badge && ( <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">{type.badge}</span> )
+type.id ? 'text-accent' : 'text-white/40'}`}>{type.label}</span> {type.badge && ( <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">{type.badge}</span> )
 }
 </div> {projectType ===
 type.id && <div className="w-1.5 h-1.5 bg-accent" />
@@ -243,7 +243,7 @@ className="flex items-center gap-6" >
 <div className="absolute inset-0 bg-white/20 animate-pulse" /> 02 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-foreground/90 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
+<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
 </div>
 </motion.div>
 <div className="bg-btn-bg p-5 sm:p-8 relative overflow-hidden group/lang">
@@ -278,7 +278,7 @@ strokeWidth={1.5
 className={item.active ? 'opacity-100' : 'opacity-40'
 }
 />
-<span className={`text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold ${item.active ? 'text-accent' : 'text-foreground/60'}`}>{item.label}</span>
+<span className={`text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold ${item.active ? 'text-accent' : 'text-white/60'}`}>{item.label}</span>
 </button> ))
 }
 </div>
@@ -324,7 +324,7 @@ className="flex items-center gap-6" >
 <div className="absolute inset-0 bg-white/20 animate-pulse" /> 03 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-foreground/90 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
+<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
 </div>
 </motion.div>
 <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {[ {
@@ -453,7 +453,7 @@ className="flex items-start gap-3">
 <div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-btn-bg'}`
 }
 />
-<span className={`text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium ${support === item.level ? 'text-foreground' : 'text-foreground/60'}`}>{f}</span>
+<span className={`text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium ${support === item.level ? 'text-white' : 'text-white/60'}`}>{f}</span>
 </div> ))
 }
 </div>
@@ -482,7 +482,7 @@ className="flex items-center gap-6" >
 <div className="absolute inset-0 bg-white/20 animate-pulse" /> 05 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-foreground/90 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
+<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
 </div>
 </motion.div>
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {[ {
@@ -517,7 +517,7 @@ className={`group relative p-5 md:p-6 text-left transition-all duration-1000 ove
 }
 <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
 <div className="flex justify-between items-start gap-3 w-full">
-<span className={`text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
+<span className={`text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] ${addons[addon.id] ? 'text-accent' : 'text-white/80'}`}>
 <span className="break-words">{ta(`${addon.id}.label`)}</span>
 </span>
 <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-btn-bg'}`
@@ -525,7 +525,7 @@ className={`group relative p-5 md:p-6 text-left transition-all duration-1000 ove
 />
 </div>
 <div className="space-y-4">
-<p className="text-[10px] text-foreground/50 font-light leading-relaxed mt-1">{ta(`${addon.id}.desc`)}</p>
+<p className="text-[10px] text-white/50 font-light leading-relaxed mt-1">{ta(`${addon.id}.desc`)}</p>
 <span className={`block text-[9px] font-bold tracking-[0.1em] ${addons[addon.id] ? 'text-accent' : 'text-accent/30'}`}>{addon.cost}</span>
 </div>
 </div>

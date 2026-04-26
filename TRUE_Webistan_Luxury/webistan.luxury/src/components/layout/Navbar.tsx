@@ -42,16 +42,16 @@ const navLinks = [ {
 name: tn('portfolio'), href: '#portfolio' }, {
 name: tn('calculator'), href: '#calculator' }, {
 name: tn('contact'), href: '#contact' }, ];
-return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 py-4 bg-header-bg backdrop-blur-md shadow-lg border-b border-separator/10`}>
+return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 py-4 bg-header-bg/95 backdrop-blur-md shadow-lg border-b border-white/5`}>
 <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border"> {
 
 }
-<Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-foreground">
-<WebistanSymbol className="w-[30px] h-[15px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
-<div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[12px] md:text-[14px] leading-none">
+<Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-white">
+<WebistanSymbol className="w-[20px] h-[10px] md:w-[24px] md:h-[12px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
+<div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[14px] md:text-[16px] leading-none">
 <span>&nbsp;</span>
-<span className="text-white transition-all duration-700">WEBISTAN</span>
-<span className="text-accent">.LUXURY</span>
+<span className="hero-shimmer transition-all duration-700">WEBISTAN</span>
+<span className="hero-shimmer">.LUXURY</span>
 </div>
 </Link> {
 
@@ -64,7 +64,7 @@ className="px-5 py-2 text-[11px] font-medium uppercase tracking-[0.3em] text-whi
 }
 </a> ))
 }
-<div className="w-[0.5px] h-4 bg-accent/20 mx-4" />
+<div className="w-[0.5px] h-4 bg-accent mx-4" />
 <button onClick={toggleTheme
 }
 className="p-2 text-accent hover:scale-110 transition-all duration-500" > {theme === 'dark' ? <Sun size={18

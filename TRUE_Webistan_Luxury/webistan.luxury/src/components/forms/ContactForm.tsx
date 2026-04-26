@@ -70,7 +70,7 @@ className="flex items-center gap-6" >
 <div className="absolute inset-0 bg-white/20 animate-pulse" /> 06 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('initiation_title')}</h3>
-<p className="text-[11px] md:text-[13px] text-foreground/90 mt-1 tracking-wider uppercase font-medium">{t('initiation_desc')}</p>
+<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('initiation_desc')}</p>
 </div>
 </motion.div>
 <motion.div variants={itemVariants
@@ -84,7 +84,7 @@ className="w-full" >
 className="space-y-16"> {
 
 }
-<div className="p-6 sm:p-8 md:p-10 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-separator/10"> {
+<div className="p-6 sm:p-8 md:p-10 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10"> {
 
 }
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
@@ -100,7 +100,7 @@ label: t('momentum'), value: tcalc(`momentum.${momentum.toLowerCase() === 'fast'
 }
 className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
 <span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{item.label}</span>
-<span className="text-[11px] font-display uppercase tracking-[0.3em] text-foreground/60">{item.value}</span>
+<span className="text-[11px] font-display uppercase tracking-[0.3em] text-white/60">{item.value}</span>
 </div> ))
 }
 </div> {
@@ -136,7 +136,7 @@ TJS</span>
 </div>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-separator/10 overflow-hidden">
+<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('name_label')}</span>
 <input
@@ -144,7 +144,7 @@ type="text" required placeholder={t('name_placeholder')
 }
 className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-white/40 uppercase relative z-10" />
 </div>
-<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-separator/10 overflow-hidden">
+<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('channel_label')}</span>
 <input
@@ -153,7 +153,7 @@ type="email" required placeholder={t('channel_placeholder')
 className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-white/40 uppercase relative z-10" />
 </div>
 </div>
-<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-separator/10 overflow-hidden">
+<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('brief_label')}</span>
 <textarea rows={5

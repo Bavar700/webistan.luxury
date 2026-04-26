@@ -68,15 +68,15 @@ className="flex flex-col items-center text-center mb-16 select-none w-full" > {
 
 }
 <div className="flex items-center justify-center w-full mb-[30px]">
-<span className="text-2xl md:text-6xl uppercase tracking-[0.2em] text-accent/70 font-medium leading-none -mr-[0.2em]"> {t('middle')
+<span className="text-2xl md:text-6xl uppercase tracking-[0.2em] font-medium leading-none -mr-[0.2em] hero-shimmer"> {t('middle')
 }
 </span>
 </div> {
 
 }
-<div className="flex flex-col items-center">
+<div className="flex flex-col items-center mt-[5px]">
 <h1 className="relative text-4xl md:text-7xl font-display font-bold tracking-[0.05em] leading-none uppercase -mr-[0.05em]">
-<span className="relative z-10 bg-gradient-to-r from-accent via-[#FFF5E6] via-accent-gold via-[#FFF5E6] to-accent bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer inline-block"> {t('base')
+<span className="relative z-10 hero-shimmer"> {t('base')
 }
 </span>
 </h1> {
