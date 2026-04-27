@@ -14,15 +14,17 @@ type?: 'button' | 'submit';
 className?: string;
 width?: string;
 height?: string;
+style?: React.CSSProperties;
 }
 export const LuxuryButton = ({
 children, onClick,
-type = 'button', className = "", width = "w-full", height = "h-[64px]" }: LuxuryButtonProps) => {
+type = 'button', className = "", width = "w-full", height = "h-[64px]", style }: LuxuryButtonProps) => {
 return ( <button
 type={type
 }
 onClick={onClick
 }
+style={style}
 className={`group relative ${width
 }
 ${height

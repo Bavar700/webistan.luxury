@@ -105,56 +105,98 @@ type: 'preset' as const, active: false }));
 const finalGridItems = [...displayItems, ...fillingItems];
 return ( <>
 <section id="calculator" className="relative overflow-hidden">
-<div className="container mx-auto px-6 max-w-7xl relative z-10"> {
+<div className="group/promo w-screen relative left-1/2 -translate-x-1/2 text-center py-[120px] overflow-hidden" style={{backgroundColor: '#0C1618'}}>
+  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/promo:translate-x-full transition-transform duration-[2000ms] ease-in-out" />
+  
+  {/* Architectural Ribbon Anchor - Centered to Content Edge */}
+  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-0 z-50 pointer-events-none">
+    <div className="absolute top-0 right-0 w-[200px] h-[200px] overflow-hidden">
+      <div
+        className="absolute top-[45px] right-[-55px] w-[280px] py-[12px] text-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #8B6B23 0%, #D4AF37 50%, #8B6B23 100%)',
+          color: '#000000',
+          transform: 'rotate(45deg)',
+          borderTop: '1px solid rgba(255,255,255,0.4)',
+          borderBottom: '1px solid rgba(0,0,0,0.2)',
+        }}
+      >
+        {/* Luxury Shimmer Sweep Animation */}
+        <motion.div
+          initial={{ x: '-100%' }}
+          animate={{ x: '100%' }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity, 
+            ease: "linear",
+            repeatDelay: 0.5
+          }}
+          className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] z-10"
+        />
+        
+        <span className="font-black text-[13px] tracking-[0.4em] uppercase block relative z-20" style={{ color: '#000000' }}>
+          {t('ribbon_label')}
+        </span>
+      </div>
+    </div>
+  </div>
 
-}
-<div className="max-w-7xl mx-auto mb-24 text-center px-6">
-<motion.div initial={{
-opacity: 0, scale: 0.98 }
-}
-whileInView={{
-opacity: 1, scale: 1 }
-}
-viewport={{
-once: true }
-}
-transition={{
-duration: 1.5, ease: [0.16, 1, 0.3, 1] }
-}
-className="relative group/promo" > {
+  <motion.div
+    initial={{ opacity: 0, scale: 0.98 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+    className="relative z-10 flex flex-col items-center gap-6 md:gap-8 px-6 max-w-6xl mx-auto"
+  >
+    {/* Promo Block Accent Corners */}
+    <div className="absolute top-[-40px] left-[-20px] w-12 h-12 border-t-[0.5px] border-l-[0.5px] border-accent/40 z-30 pointer-events-none" />
+    <div className="absolute top-[-40px] right-[-20px] w-12 h-12 border-t-[0.5px] border-r-[0.5px] border-accent/40 z-30 pointer-events-none" />
+    <div className="absolute bottom-[-40px] left-[-20px] w-12 h-12 border-b-[0.5px] border-l-[0.5px] border-accent/40 z-30 pointer-events-none" />
+    <div className="absolute bottom-[-40px] right-[-20px] w-12 h-12 border-b-[0.5px] border-r-[0.5px] border-accent/40 z-30 pointer-events-none" />
 
-}
-<div className="group relative bg-white/5 backdrop-blur-sm border-[length:var(--btn-border-width)] border-white/5 p-20 md:p-32 transition-all duration-1000 hover:bg-btn-bg backdrop-blur-sm overflow-hidden"> {
-
-}
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" />
-<div className="relative z-10 flex flex-col items-center gap-6 md:gap-8">
-<div className="flex items-center gap-6">
-<div className="w-16 h-[0.5px] bg-gradient-to-r from-transparent to-accent/50" />
-<Sparkles className="w-4 h-4 md:w-5 md:h-5 text-accent animate-pulse" strokeWidth={1.5
-}
-/>
-<div className="w-16 h-[0.5px] bg-gradient-to-l from-transparent to-accent/50" />
+    <div className="flex items-center gap-6">
+      <div className="w-16 h-[0.5px] bg-gradient-to-r from-transparent to-accent/50" />
+      <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-accent animate-pulse" strokeWidth={1.5} />
+      <div className="w-16 h-[0.5px] bg-gradient-to-l from-transparent to-accent/50" />
+    </div>
+    <div className="space-y-4 md:space-y-6">
+      <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent font-display font-medium block">
+        {t('foundational_partner_protocol')}
+      </span>
+      <h3 className="text-[11px] md:text-[16px] uppercase tracking-normal md:tracking-wider text-white/80 font-light leading-snug mx-auto drop-shadow-md max-w-5xl">
+        {t.rich('discount_text', {
+          accent: (chunks) => (
+            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap drop-shadow-[0_0_8px_rgba(184,134,11,0.5)]">
+              {chunks}
+            </span>
+          )
+        })}
+        <br />
+        {t.rich('discount_text_2', {
+          accent: (chunks) => (
+            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap drop-shadow-[0_0_8px_rgba(184,134,11,0.5)]">
+              {chunks}
+            </span>
+          )
+        })}
+      </h3>
+    </div>
+  </motion.div>
 </div>
-<div className="space-y-4 md:space-y-6">
-<span className="text-[10px] md:text-[12px] uppercase tracking-[0.5em] md:tracking-[0.8em] text-accent font-display font-medium block"> {t('foundational_partner_protocol')
-}
-</span>
-<h3 className="text-[12px] md:text-[16px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/80 font-light leading-loose max-w-4xl mx-auto drop-shadow-md text-balance"> {t.rich('discount_text', {
-discount: (chunks) => ( <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap"> {chunks
-}
-</span> ) })
-}
-</h3>
+<div className="w-full flex justify-center mb-[120px] relative z-20">
+  <div className="w-full max-w-4xl h-[0.5px] bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 </div>
-</div>
-</div>
-</motion.div>
-</div>
-<div className="w-full bg-card-bg text-card-text p-4 sm:p-8 md:p-16 lg:p-20 space-y-16 relative group/calc shadow-2xl rounded-xl"> {
-
-}
-<div className="space-y-12 mb-36">
+<div className="relative group/block max-w-[1600px] mx-auto w-full">
+  <div className="absolute top-0 left-0 w-8 h-8 border-t-[0.5px] border-l-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
+  <div className="absolute top-0 right-0 w-8 h-8 border-t-[0.5px] border-r-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
+  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-[0.5px] border-l-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
+  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-[0.5px] border-r-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
+  
+  <div style={{ backgroundColor: 'var(--calc-section-bg)' }}>
+    <div className="container mx-auto px-6 max-w-7xl relative z-10 py-20 mb-32">
+<div className="w-full relative group/calc shadow-2xl rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--calc-card-bg)' }}>
+<div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-24">
+<div className="space-y-12">
 <motion.div initial={{
 opacity: 0, y: 30, filter: 'blur(8px)' }
 }
@@ -168,18 +210,18 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-12 h-12 flex-shrink-0 rounded-full border border-accent/20 flex items-center justify-center text-accent/60 font-display text-sm relative overflow-hidden group">
-<div className="absolute inset-0 bg-white/20 animate-pulse" /> 01 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
+<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
 <div>
-<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
+<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
+<p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
 </div>
 </motion.div>
 <div className="relative">
 <LuxuryButton onClick={() => setIsDropdownOpen(!isDropdownOpen)
 }
-height="h-[80px]" className="group/drop" >
-<div className="flex items-center justify-between w-full px-8">
+height="h-[90px]" width="w-full" className="group/drop" style={{ color: 'var(--calc-title-color)' }}>
+<div className="flex items-center justify-between w-full px-10">
 <span className="text-base md:text-lg font-display font-light tracking-[0.2em] uppercase -mr-[0.2em] truncate pr-4"> {types.find(t => t.id === projectType)?.label
 }
 </span>
@@ -201,17 +243,17 @@ opacity: 1, y: 0 }
 exit={{
 opacity: 0, y: 10 }
 }
-className="absolute top-full left-0 w-full mt-2 bg-white/5 backdrop-blur-sm border-[0.5px] border-accent/20 overflow-hidden shadow-2xl z-[60]" > {types.map((type) => ( <button key={type.id
+className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-2xl z-[60]" style={{ backgroundColor: 'var(--calc-card-bg)' }}> {types.map((type) => ( <button key={type.id
 }
 onClick={() => {
 setProjectType(type.id);
 setIsDropdownOpen(false);
 }
 }
-className="w-full text-left p-6 hover:bg-white/20 transition-colors flex items-center justify-between group" >
+className="w-full text-left p-6 hover:bg-black/5 transition-colors flex items-center justify-between group" >
 <div className="flex items-center gap-3">
-<span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase ${projectType ===
-type.id ? 'text-accent' : 'text-white/40'}`}>{type.label}</span> {type.badge && ( <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">{type.badge}</span> )
+<span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-accent ${projectType ===
+type.id ? 'text-accent font-bold' : ''}`} style={{ color: projectType === type.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{type.label}</span> {type.badge && ( <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">{type.badge}</span> )
 }
 </div> {projectType ===
 type.id && <div className="w-1.5 h-1.5 bg-accent" />
@@ -222,9 +264,7 @@ type.id && <div className="w-1.5 h-1.5 bg-accent" />
 }
 </AnimatePresence>
 </div>
-</div> {
-
-}
+</div>
 <div className="space-y-12 mb-36">
 <motion.div initial={{
 opacity: 0, y: 30, filter: 'blur(8px)' }
@@ -239,14 +279,14 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-12 h-12 flex-shrink-0 rounded-full border border-accent/20 flex items-center justify-center text-accent/60 font-display text-sm relative overflow-hidden group">
-<div className="absolute inset-0 bg-white/20 animate-pulse" /> 02 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
+<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
 <div>
-<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
+<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
+<p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
 </div>
 </motion.div>
-<div className="bg-btn-bg p-5 sm:p-8 relative overflow-hidden group/lang">
+<div className="p-5 sm:p-8 relative overflow-hidden group/lang">
 <div className="absolute top-0 left-0 w-4 h-4 border-t-[0.5px] border-l-[0.5px] border-accent/20" />
 <div className="absolute top-0 right-0 w-4 h-4 border-t-[0.5px] border-r-[0.5px] border-accent/20" />
 <div className="absolute bottom-0 left-0 w-4 h-4 border-b-[0.5px] border-l-[0.5px] border-accent/20" />
@@ -262,8 +302,8 @@ setLanguages(selectedPresets.length + newList.length);
 }
 }
 }
-className={`p-4 transition-all duration-500 flex flex-col items-center gap-3 relative group/lang-item ${item.active ? 'bg-accent/[0.05] text-accent' : 'text-white/20 hover:bg-btn-bg backdrop-blur-sm'}`
-}
+className={`p-4 transition-all duration-500 flex flex-col items-center gap-3 relative group/lang-item ${item.active ? 'bg-accent/[0.05] text-accent' : 'bg-btn-bg backdrop-blur-sm hover:bg-btn-hover-bg'}`}
+style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}
 > {item.active && ( <>
 <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent/60" />
 <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent/60" />
@@ -275,10 +315,10 @@ className={`p-4 transition-all duration-500 flex flex-col items-center gap-3 rel
 }
 strokeWidth={1.5
 }
-className={item.active ? 'opacity-100' : 'opacity-40'
-}
+className={item.active ? 'opacity-100' : 'opacity-60'}
+style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}
 />
-<span className={`text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold ${item.active ? 'text-accent' : 'text-white/60'}`}>{item.label}</span>
+<span className="text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
 </button> ))
 }
 </div>
@@ -293,7 +333,7 @@ onKeyDown={(e) => e.key === 'Enter' && addCustomLang()
 }
 placeholder={t('input_custom_norm')
 }
-className="w-full bg-btn-bg px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-accent focus:outline-none placeholder:text-white/40 transition-all font-light" />
+className="w-full bg-btn-bg backdrop-blur-sm px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-accent focus:outline-none placeholder:text-black/30 transition-all font-light" />
 <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-accent/10 group-focus-within/input:bg-accent/40 transition-colors duration-700" />
 </div>
 <LuxuryButton onClick={addCustomLang
@@ -303,9 +343,7 @@ width="px-12" height="h-[56px]">
 </LuxuryButton>
 </div>
 </div>
-</div> {
-
-}
+</div>
 <div className="space-y-12 mb-36">
 <motion.div initial={{
 opacity: 0, y: 30, filter: 'blur(8px)' }
@@ -320,11 +358,11 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-12 h-12 flex-shrink-0 rounded-full border border-accent/20 flex items-center justify-center text-accent/60 font-display text-sm relative overflow-hidden group">
-<div className="absolute inset-0 bg-white/20 animate-pulse" /> 03 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
+<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
 <div>
-<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
+<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
+<p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
 </div>
 </motion.div>
 <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {[ {
@@ -336,7 +374,7 @@ id: 'ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, durat
 }
 onClick={() => setMomentum(mode.id)
 }
-className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700'}`
+className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`
 }
 >
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" /> {momentum === mode.id && ( <div className="absolute inset-0"> {
@@ -351,27 +389,25 @@ className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-
 }
 <div className="relative z-10 flex flex-col gap-6 h-full">
 <div className="flex items-center justify-between">
-<div className={`p-3 ${momentum === mode.id ? 'bg-btn-bg0 text-accent' : 'bg-white/5 text-white/20'}`}>
+<div className={`p-3 ${momentum === mode.id ? 'bg-btn-bg0 text-accent' : 'bg-white/5'}`} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>
 <mode.icon size={16
 }
 strokeWidth={1
 }
 />
 </div>
-<span className={`text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold ${momentum === mode.id ? 'text-accent' : 'text-white/20'}`}>{mode.cost}</span>
+<span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.4 }}>{mode.cost}</span>
 </div>
 <div className="space-y-2">
-<span className={`block text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-medium leading-tight ${momentum === mode.id ? 'text-accent' : 'text-white/60'}`}>{mode.label}</span>
+<span className="block text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-medium leading-tight" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)' }}>{mode.label}</span>
 <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-accent font-display">{mode.duration}</span>
 </div>
-<p className="text-[9px] text-white/60 font-medium mt-auto leading-relaxed">{mode.desc}</p>
+<p className="text-[9px] font-medium mt-auto leading-relaxed" style={{ color: 'var(--calc-desc-color)', opacity: 0.7 }}>{mode.desc}</p>
 </div>
 </button> ))
 }
 </div>
-</div> {
-
-}
+</div>
 <div className="space-y-12 mb-36">
 <motion.div initial={{
 opacity: 0, y: 30, filter: 'blur(8px)' }
@@ -386,11 +422,11 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-12 h-12 flex-shrink-0 rounded-full border border-accent/20 flex items-center justify-center text-accent/60 font-display text-sm relative overflow-hidden group">
-<div className="absolute inset-0 bg-white/20 animate-pulse" /> 04 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
+<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
 <div>
-<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system04.desc')}</p>
+<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
+<p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
 </div>
 </motion.div>
 <div className="flex justify-center w-full">
@@ -402,7 +438,7 @@ className={`group relative w-40 md:w-48 h-[54px] md:h-[60px] transition-all dura
 }
 >
 <div className="relative z-10 flex flex-col items-center justify-center h-full">
-<span className={`text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black ${billingCycle === cycle ? 'text-accent' : 'text-white/40'}`}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')
+<span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: billingCycle === cycle ? 1 : 0.6 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')
 }
 </span> {cycle === 'yearly' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>
 }
@@ -429,7 +465,7 @@ level: 'elite' as SupportLevel, name: 'Elite', cost: billingCycle === 'yearly' ?
 }
 onClick={() => setSupport(item.level)
 }
-className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700'}`
+className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`
 }
 > {support === item.level && ( <div className="absolute inset-0"> {
 
@@ -442,18 +478,18 @@ className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all d
 </div> )
 }
 <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
-<span className={`text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black ${support === item.level ? 'text-accent' : 'text-white/20'}`}>{t(`support_levels.${item.level}`)}</span>
+<span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
 <div className="flex items-baseline gap-1">
 <span className="text-3xl md:text-4xl font-display text-accent">{item.cost}</span>
 <span className="text-[9px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
 </div>
-<div className="space-y-4 pt-6 border-t border-white/5"> {item.features.map((f, i) => ( <div key={i
+<div className="space-y-4 pt-6 border-t border-black/5"> {item.features.map((f, i) => ( <div key={i
 }
 className="flex items-start gap-3">
-<div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-btn-bg'}`
+<div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-black/10'}`
 }
 />
-<span className={`text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium ${support === item.level ? 'text-white' : 'text-white/60'}`}>{f}</span>
+<span className="text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium" style={{ color: support === item.level ? 'var(--calc-title-color)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.7 }}>{f}</span>
 </div> ))
 }
 </div>
@@ -461,9 +497,7 @@ className="flex items-start gap-3">
 </button> ))
 }
 </div>
-</div> {
-
-}
+</div>
 <div className="space-y-12 mb-36">
 <motion.div initial={{
 opacity: 0, y: 30, filter: 'blur(8px)' }
@@ -478,11 +512,11 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-12 h-12 flex-shrink-0 rounded-full border border-accent/20 flex items-center justify-center text-accent/60 font-display text-sm relative overflow-hidden group">
-<div className="absolute inset-0 bg-white/20 animate-pulse" /> 05 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
+<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
 <div>
-<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
-<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
+<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
+<p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
 </div>
 </motion.div>
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {[ {
@@ -502,7 +536,7 @@ return ( <button key={addon.id
 }
 onClick={() => toggleAddon(addon.id)
 }
-className={`group relative p-5 md:p-6 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700'}`
+className={`group relative p-5 md:p-6 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`
 }
 >
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" /> {addons[addon.id] && ( <div className="absolute inset-0"> {
@@ -517,16 +551,16 @@ className={`group relative p-5 md:p-6 text-left transition-all duration-1000 ove
 }
 <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
 <div className="flex justify-between items-start gap-3 w-full">
-<span className={`text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] ${addons[addon.id] ? 'text-accent' : 'text-white/80'}`}>
+<span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%]" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)' }}>
 <span className="break-words">{ta(`${addon.id}.label`)}</span>
 </span>
-<div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-btn-bg'}`
+<div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`
 }
 />
 </div>
 <div className="space-y-4">
-<p className="text-[10px] text-white/50 font-light leading-relaxed mt-1">{ta(`${addon.id}.desc`)}</p>
-<span className={`block text-[9px] font-bold tracking-[0.1em] ${addons[addon.id] ? 'text-accent' : 'text-accent/30'}`}>{addon.cost}</span>
+<p className="text-[10px] font-light leading-relaxed mt-1" style={{ color: 'var(--calc-desc-color)', opacity: 0.6 }}>{ta(`${addon.id}.desc`)}</p>
+<span className="block text-[9px] font-bold tracking-[0.1em]" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.3 }}>{addon.cost}</span>
 </div>
 </div>
 </button> );
@@ -540,9 +574,6 @@ className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent/60 h
 }
 </button>
 </div>
-</div> {
-
-}
 <div className="pt-24 border-t-[0.5px] border-accent/10 flex flex-col items-center gap-20">
 <div className="text-center space-y-8">
 <div className="flex flex-col items-center">
@@ -587,12 +618,18 @@ className="text-background" strokeWidth={3
 </button>
 </div>
 </div>
+<div className="w-full">
 <div className="w-full max-w-2xl mx-auto p-4 md:p-6 border-[0.5px] border-accent/20 bg-accent/[0.02] text-center">
 <p className="text-[9px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider">{t('disclaimer_note')}</p>
 </div>
 <LuxuryButton width="w-full sm:w-[500px]" onClick={handleProceed}>
 <span className="text-[12px] md:text-base">{t('cta')}</span>
 </LuxuryButton>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -636,15 +673,10 @@ strokeWidth={1
 />
 </button>
 </div>
-<div className="p-6 md:p-8 pb-24 space-y-10"> {
-
-}
 <div className="space-y-4">
 <h4 className="text-[14px] md:text-[16px] font-display text-white tracking-[0.1em] uppercase">{t('drawer_content.title')}</h4>
 <p className="text-[11px] text-white/90 leading-relaxed font-light">{t('drawer_content.intro')}</p>
-</div> {
-
-}
+</div>
 <div className="space-y-4">
 <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-accent border-b-[0.5px] border-accent/20 pb-2">{t('drawer_content.base_works_title')}</h5>
 <ul className="space-y-3">
@@ -657,9 +689,7 @@ __html: t.raw('drawer_content.base_works.lang') }
 }
 />
 </ul>
-</div> {
-
-}
+</div>
 <div className="space-y-4">
 <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-accent border-b-[0.5px] border-accent/20 pb-2">{t('drawer_content.modules_title')}</h5>
 <ul className="space-y-3">
@@ -692,13 +722,10 @@ __html: t.raw('drawer_content.modules.branding') }
 }
 />
 </ul>
-</div> {
-
-}
+</div>
 <div className="mt-8 p-5 bg-accent/[0.03] border-[0.5px] border-accent/20">
 <h5 className="text-[9px] font-black uppercase tracking-[0.2em] text-accent mb-2">{t('drawer_content.note_title')}</h5>
 <p className="text-[10px] text-white/90 leading-relaxed ">{t('drawer_content.note_text')}</p>
-</div>
 </div>
 </motion.div>
 </div> )

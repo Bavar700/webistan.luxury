@@ -30,6 +30,9 @@
   --btn-border-width: var(--btn-border-width);
   --btn-shadow: var(--btn-shadow);
   --btn-blur: var(--btn-blur);
+  
+  --section-spacing-desktop: 120px;
+  --section-spacing-mobile: 60px;
 }
 
 /* 3. DARK THEME */
@@ -52,12 +55,18 @@
   --btn-border-width: 1px;
   --btn-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   --btn-blur: 12px;
+  --calc-section-bg: transparent;
+  --calc-card-bg: var(--surface);
+  --calc-title-color: var(--foreground);
+  --calc-desc-color: rgba(255, 255, 255, 0.6);
+  --calc-step-num-color: var(--accent);
+  --calc-step-border-color: rgba(184, 134, 11, 0.4);
 }
 
 /* 4. LIGHT THEME */
 [data-theme='light'] {
-  --background: #EBF2FA;
-  --foreground: #050505;
+  --background: #FFFFFF;
+  --foreground: #000000;
   --surface: #D1D5DB;
   --accent: #B8860B;
   --accent-gold: #B8860B;
@@ -74,6 +83,12 @@
   --btn-border-width: 1px;
   --btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   --btn-blur: 10px;
+  --calc-section-bg: #EDF2F4;
+  --calc-card-bg: var(--background);
+  --calc-title-color: #000000;
+  --calc-desc-color: #000000;
+  --calc-step-num-color: var(--accent);
+  --calc-step-border-color: var(--accent);
 }
 
 @layer base {
@@ -121,3 +136,15 @@
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--background); }
 ::-webkit-scrollbar-thumb { background: var(--accent); opacity: 0.2; }
+
+section {
+  padding-top: var(--section-spacing-desktop);
+  padding-bottom: var(--section-spacing-desktop);
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-top: var(--section-spacing-mobile);
+    padding-bottom: var(--section-spacing-mobile);
+  }
+}

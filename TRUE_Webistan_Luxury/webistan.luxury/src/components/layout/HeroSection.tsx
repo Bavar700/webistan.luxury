@@ -41,14 +41,14 @@ export const HeroSection = () => {
     <section 
       id="home" 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative flex items-center justify-center overflow-hidden bg-background pt-[160px] pb-[120px]"
     >
-      {/* Decorative Background Blur */}
+      {/* Decorative Background Blur Removed for Perfect White */}
       <motion.div 
         style={{ y: y1, opacity: opacityHero }}
         className="absolute inset-0 pointer-events-none"
       >
-        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[70%] h-[50%] bg-accent/3 blur-[160px] rounded-full" />
+        {/* No gradient or blur here to maintain pure white */}
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10 max-w-7xl flex flex-col items-center">
@@ -86,7 +86,7 @@ export const HeroSection = () => {
             {/* DESCRIPTION */}
             <motion.p 
               variants={itemVariants}
-              className="text-lg md:text-xl font-sans text-foreground/30 max-w-2xl mx-auto mb-12 leading-relaxed font-light text-center"
+              className="text-[15px] md:text-[17px] font-sans text-foreground/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light text-center"
             >
               {t('description')}
             </motion.p>
