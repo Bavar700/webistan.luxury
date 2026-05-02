@@ -382,7 +382,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`flex justify-between items-end border-b pb-4 ${projectType === 'landing' ? 'border-accent/20' : 'border-white/5'}`}>
                         <div className="space-y-1">
                           <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.4em] block ${projectType === 'landing' ? 'text-accent font-black' : 'text-white/40'}`}>
-                            {t('work_label')} ({momentum === 'standard' ? 'STANDARD' : momentum === 'fast' ? 'ACCELERATED' : 'ULTRA-FAST'})
+                            {t('work_label')} ({t(`momentum_labels.${momentum}`)})
                           </span>
                         </div>
                         <div className={`font-display tracking-widest ${projectType === 'landing' ? 'text-4xl md:text-6xl text-white hero-shimmer' : 'text-xl md:text-2xl text-white/40'}`}>
@@ -394,7 +394,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       {isFounderRateActive && projectType !== 'landing' && (
                         <div className="flex justify-between items-end border-b border-accent/20 pb-4">
                           <div className="space-y-1">
-                            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent font-black block">{t('work_label')} (FOUNDER RATE)</span>
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent font-black block">{t('work_label')} ({t('founder_rate_label')})</span>
                           </div>
                           <div className="text-3xl md:text-5xl font-display text-white tracking-widest hero-shimmer">
                             {totalPrice.toLocaleString()} <span className="text-xl text-white/40 ml-2">TJS</span>
@@ -408,16 +408,16 @@ const finalGridItems = [...displayItems, ...fillingItems];
                           <div className="flex justify-between items-end border-b border-white/10 pb-2">
                             <div className="space-y-1">
                               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent/60 font-bold block">
-                                {billingCycle === 'yearly' ? 'ANNUAL SUPPORT' : 'MONTHLY SUPPORT'}
+                                {billingCycle === 'yearly' ? t('support_annual') : t('support_monthly')}
                               </span>
                               <p className="text-[9px] uppercase tracking-[0.2em] text-white/20">
-                                {billingCycle === 'yearly' ? 'YEARLY SUBSCRIPTION' : 'MONTHLY SUBSCRIPTION'}
+                                {billingCycle === 'yearly' ? t('billing_cycle_yearly') : t('billing_cycle_monthly')}
                               </p>
                             </div>
                             <div className="text-2xl md:text-3xl font-display text-white tracking-widest">
                               {billingCycle === 'yearly' ? (monthlyTotal * 12).toLocaleString() : monthlyTotal.toLocaleString()} 
                               <span className="text-sm text-white/40 ml-2 uppercase">
-                                {billingCycle === 'yearly' ? 'tjs / yr' : 'tjs / mo'}
+                                {billingCycle === 'yearly' ? t('tjs_yr') : t('tjs_mo')}
                               </span>
                             </div>
                           </div>

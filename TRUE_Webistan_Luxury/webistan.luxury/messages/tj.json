@@ -120,7 +120,7 @@
     },
     "system03": {
       "title": "МӮҲЛАТИ ОМОДАШАВӢ",
-      "desc": "Мӯҳлати оддӣ — аз 21 то 30 рӯзи корӣ. Агар сайт тезтар лозим бошад, реҷаи суръатбахшро интихоб кунед."
+      "desc": "Мӯҳлати оддӣ — аз 21 то 30 рӯзи корӣ. Агар сайт зудтар лозим бошад, реҷаи суръатбахшро интихоб кунед."
     },
     "system04": {
       "title": "ДАСТГИРИИ ТЕХНИКӢ",
@@ -166,8 +166,8 @@
     },
     "momentum": {
       "standard": "Оддӣ",
-      "fast": "Тез",
-      "ultra": "Хеле тез"
+      "fast": "Зуд",
+      "ultra": "Хеле зуд"
     },
     "cta": "ФАРМОИШ ДОДАН",
     "support_levels": {
@@ -175,8 +175,20 @@
       "standard": "Асосӣ",
       "elite": "Дастгирии VIP"
     },
-    "work_label": "Коркарди лоиҳа:",
-    "support_label": "Дастгирии техникӣ:",
+    "work_label": "Арзиши коркард",
+    "support_label": "Дастгирии техникӣ",
+    "founder_rate_label": "ТАРИФИ МУАССИС",
+    "billing_cycle_monthly": "ОБУНАИ МОҲОНА",
+    "billing_cycle_yearly": "ОБУНАИ СОЛОНА",
+    "support_annual": "ДАСТГИРИИ СОЛОНА",
+    "support_monthly": "ДАСТГИРИИ МОҲОНА",
+    "tjs_yr": "tjs / сол",
+    "tjs_mo": "tjs / моҳ",
+    "momentum_labels": {
+      "standard": "СТАНДАРТӢ",
+      "fast": "ТЕЗОНИДАШУДА",
+      "ultra": "ХЕЛЕ ЗУД"
+    },
     "initial_investment_label": "ПАРДОХТИ АВВАЛИЯ:",
     "one_time_payment": "САРМОЯГУЗОРИИ ЯКДАФАИНА БА КОРКАРД",
     "monthly_subscription_label": "ОБУНАИ МОҲОНА (SUPPORT):",

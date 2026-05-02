@@ -175,11 +175,20 @@
       "standard": "Standard",
       "elite": "Elite"
     },
-    "work_label": "Development Cost:",
-    "support_label": "Monthly Support:",
-    "initial_investment_label": "INITIAL INVESTMENT:",
-    "one_time_payment": "ONE-TIME DEVELOPMENT FEE",
-    "monthly_subscription_label": "MONTHLY SUBSCRIPTION (SUPPORT):",
+    "work_label": "Development Cost",
+    "support_label": "Technical Support",
+    "founder_rate_label": "FOUNDER RATE",
+    "billing_cycle_monthly": "MONTHLY SUBSCRIPTION",
+    "billing_cycle_yearly": "YEARLY SUBSCRIPTION",
+    "support_annual": "ANNUAL SUPPORT",
+    "support_monthly": "MONTHLY SUPPORT",
+    "tjs_yr": "tjs / yr",
+    "tjs_mo": "tjs / mo",
+    "momentum_labels": {
+      "standard": "STANDARD",
+      "fast": "ACCELERATED",
+      "ultra": "ULTRA-FAST"
+    },
     "support_disclaimer": "The first month of technical supervision (Hypercare) is provided complimentary. Regular billing begins 30 days after project launch.",
     "duration": {
       "standard": "21–30 DAYS",

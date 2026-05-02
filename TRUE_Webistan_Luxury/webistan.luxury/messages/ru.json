@@ -178,8 +178,20 @@
       "standard": "Базовая",
       "elite": "VIP-поддержка"
     },
-    "work_label": "Development Cost:",
-    "support_label": "Monthly Support:",
+    "work_label": "Стоимость разработки",
+    "support_label": "Техподдержка",
+    "founder_rate_label": "ТАРИФ ОСНОВАТЕЛЯ",
+    "billing_cycle_monthly": "МЕСЯЧНАЯ ПОДПИСКА",
+    "billing_cycle_yearly": "ГОДОВАЯ ПОДПИСКА",
+    "support_annual": "ГОДОВАЯ ПОДДЕРЖКА",
+    "support_monthly": "МЕСЯЧНАЯ ПОДДЕРЖКА",
+    "tjs_yr": "tjs / год",
+    "tjs_mo": "tjs / мес",
+    "momentum_labels": {
+      "standard": "СТАНДАРТ",
+      "fast": "УСКОРЕННЫЙ",
+      "ultra": "СВЕРХБЫСТРЫЙ"
+    },
     "initial_investment_label": "К ОПЛАТЕ СЕЙЧАС:",
     "one_time_payment": "РАЗОВАЯ ИНВЕСТИЦИЯ В РАЗРАБОТКУ",
     "monthly_subscription_label": "ЕЖЕМЕСЯЧНАЯ ПОДПИСКА (SUPPORT):",
