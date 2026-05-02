@@ -106,8 +106,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
   return (
     <>
       <section id="calculator" className="relative overflow-hidden">
-        <div className="group/promo w-screen relative left-1/2 -translate-x-1/2 py-[120px] overflow-hidden" style={{backgroundColor: '#000000'}}>
-          <div className="max-w-6xl mx-auto relative border-[0.5px] border-accent/20 hover:border-accent/80 transition-colors duration-700 bg-black/40 backdrop-blur-sm px-6 py-32 md:px-12 text-center flex flex-col items-center justify-center">
+        <div className="group/promo w-screen relative left-1/2 -translate-x-1/2 py-[120px] overflow-hidden" style={{backgroundColor: 'var(--promo-bg)'}}>
+          <div className="max-w-6xl mx-auto relative border-[0.5px] border-accent/20 hover:border-accent/80 transition-colors duration-700 backdrop-blur-sm px-6 py-32 md:px-12 text-center flex flex-col items-center justify-center" style={{backgroundColor: 'var(--promo-inner-bg)'}}>
             
             {/* Architectural Ribbon Anchor */}
             <div className="absolute top-0 right-0 w-[200px] h-[200px] overflow-hidden z-50 pointer-events-none">
@@ -150,7 +150,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                 <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent font-display font-medium block">
                   {t('foundational_partner_protocol')}
                 </span>
-                <h3 className="text-[11px] md:text-[16px] uppercase tracking-normal md:tracking-wider text-white/80 font-light leading-snug mx-auto drop-shadow-md max-w-5xl">
+                <h3 className="text-[11px] md:text-[16px] uppercase tracking-normal md:tracking-wider font-light leading-snug mx-auto drop-shadow-md max-w-5xl" style={{color: 'var(--promo-text)'}}>
                   {t.rich('discount_text', {
                     accent: (chunks) => (
                       <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap drop-shadow-[0_0_8px_rgba(184,134,11,0.5)]">
@@ -184,7 +184,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
           
           <div className="bg-background">
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
-              <div className="w-full relative group/calc shadow-2xl rounded-xl overflow-hidden bg-background">
+              <div className="w-full relative group/calc shadow-[var(--block-shadow)] rounded-xl overflow-hidden bg-background">
                 <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20">
                   {/* STEP 01 */}
                   <div className="space-y-12">
@@ -207,7 +207,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </LuxuryButton>
                       <AnimatePresence> 
                         {isDropdownOpen && ( 
-                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-2xl z-[60] bg-[#111111]" > 
+                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60] bg-[#111111]" > 
                             {types.map((type) => ( 
                               <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-white/[0.03] transition-all duration-500 flex items-center justify-between group/item" >
                                 <div className="flex items-center gap-3 transition-all duration-500 group-hover/item:translate-x-2">

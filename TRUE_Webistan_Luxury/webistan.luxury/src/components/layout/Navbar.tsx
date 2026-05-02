@@ -42,15 +42,15 @@ const navLinks = [ {
 name: tn('portfolio'), href: '#portfolio' }, {
 name: tn('calculator'), href: '#calculator' }, {
 name: tn('contact'), href: '#contact' }, ];
-return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 py-4 bg-header-bg/95 backdrop-blur-md shadow-lg border-b border-white/5`}>
+return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 py-4 bg-[#000000] backdrop-blur-md shadow-lg border-b border-white/5`}>
 <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border"> {
 
 }
-<Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-white">
+<Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-[#F1F1F3]">
 <WebistanSymbol className="w-[20px] h-[10px] md:w-[24px] md:h-[12px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
 <div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[14px] md:text-[16px] leading-none">
 <span>&nbsp;</span>
-<span className="text-white transition-all duration-700">WEBISTAN</span>
+<span className="text-[#F1F1F3] transition-all duration-700">WEBISTAN</span>
 <span className="hero-shimmer">.LUXURY</span>
 </div>
 </Link> {
@@ -60,7 +60,7 @@ return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700
 }
 href={link.href
 }
-className="px-5 py-2 text-[11px] font-medium uppercase tracking-[0.3em] text-white/90 hover:text-accent transition-all duration-500" > {link.name
+className="px-5 py-2 text-[11px] font-medium uppercase tracking-[0.3em] text-[#F1F1F3]/90 hover:text-accent transition-all duration-500" > {link.name
 }
 </a> ))
 }
@@ -80,15 +80,15 @@ className="text-accent" />
 </button> {
 
 }
-<div className="flex items-center gap-6 ml-8 px-6 py-2 relative group/lang bg-btn-bg">
-<div className="absolute top-0 left-0 w-2 h-2 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
-<div className="absolute top-0 right-0 w-2 h-2 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-2 h-2 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-2 h-2 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
+<div className="flex items-center gap-6 ml-8 px-6 py-2 relative group/lang bg-[#000000]">
+<div className="absolute top-0 left-0 w-2 h-2 border-t-[0.5px] border-l-[0.5px] border-accent/30 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
+<div className="absolute top-0 right-0 w-2 h-2 border-t-[0.5px] border-r-[0.5px] border-accent/30 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-2 h-2 border-b-[0.5px] border-l-[0.5px] border-accent/30 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-2 h-2 border-b-[0.5px] border-r-[0.5px] border-accent/30 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
 }
 href={`/${lang.toLowerCase()}`
 }
-className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 ${locale === lang.toLowerCase() ? 'text-accent' : 'text-white/40 hover:text-accent' }`
+className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all duration-700 ${locale === lang.toLowerCase() ? 'text-accent' : 'text-[#F1F1F3]/40 hover:text-accent' }`
 }
 > {lang
 }
@@ -100,7 +100,7 @@ className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all dura
 }
 <button onClick={() => setIsOpen(!isOpen)
 }
-className="lg:hidden p-2 text-foreground/60" > {isOpen ? <X size={20
+className="lg:hidden p-2 text-[#F1F1F3]/60" > {isOpen ? <X size={20
 }
 /> : <Menu size={20
 }
@@ -119,7 +119,7 @@ opacity: 1, y: 0 }
 exit={{
 opacity: 0, y: -20 }
 }
-className="fixed inset-0 bg-background z-[105] flex flex-col items-center justify-center lg:hidden" >
+className="fixed inset-0 bg-[#000000] z-[105] flex flex-col items-center justify-center lg:hidden" >
 <div className="flex flex-col items-end gap-10 pr-12 w-full"> {navLinks.map((link, i) => ( <motion.a key={link.name
 }
 href={link.href
@@ -135,24 +135,24 @@ opacity: 1, x: 0 }
 transition={{
 delay: i * 0.1 }
 }
-className="text-2xl font-display font-light text-foreground/40 hover:text-accent tracking-[0.4em] uppercase" > {link.name
+className="text-2xl font-display font-light text-[#F1F1F3]/40 hover:text-accent tracking-[0.4em] uppercase" > {link.name
 }
 </motion.a> ))
 }
 {
 
 }
-<div className="flex items-center gap-8 mt-12 px-10 py-5 bg-btn-bg relative group/mobile-lang">
-<div className="absolute top-0 left-0 w-4 h-4 border-t-[1px] border-l-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" />
-<div className="absolute top-0 right-0 w-4 h-4 border-t-[1px] border-r-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-4 h-4 border-b-[1px] border-l-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-4 h-4 border-b-[1px] border-r-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
+<div className="flex items-center gap-8 mt-12 px-10 py-5 bg-[#000000] relative group/mobile-lang">
+<div className="absolute top-0 left-0 w-4 h-4 border-t-[1px] border-l-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+<div className="absolute top-0 right-0 w-4 h-4 border-t-[1px] border-r-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-4 h-4 border-b-[1px] border-l-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-4 h-4 border-b-[1px] border-r-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
 }
 href={`/${lang.toLowerCase()}`
 }
 onClick={() => setIsOpen(false)
 }
-className={`text-[11px] font-light uppercase tracking-[0.3em] transition-all duration-500 ${locale === lang.toLowerCase() ? 'text-accent font-medium' : 'text-foreground/40 hover:text-accent' }`
+className={`text-[11px] font-light uppercase tracking-[0.3em] transition-all duration-500 ${locale === lang.toLowerCase() ? 'text-accent font-medium' : 'text-[#F1F1F3]/40 hover:text-accent' }`
 }
 > {lang
 }

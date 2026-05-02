@@ -33,7 +33,7 @@ export const LuxuryButton = ({
       type={type}
       onClick={onClick}
       style={style}
-      className={`group relative ${width} ${height} transition-all duration-700 hover:scale-[1.02] bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] border-[length:var(--btn-border-width)] border-white/10 [box-shadow:var(--btn-shadow)] text-btn-text hover:bg-btn-hover-bg hover:text-btn-hover-text overflow-hidden ${className}`}
+      className={`group relative ${width} ${height} transition-all duration-700 hover:scale-[1.02] bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] border-[length:var(--btn-border-width)] border-[var(--border-color)] [box-shadow:var(--btn-shadow)] text-btn-text hover:bg-btn-hover-bg hover:text-btn-hover-text overflow-hidden ${className}`}
     >
       <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.07] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
       

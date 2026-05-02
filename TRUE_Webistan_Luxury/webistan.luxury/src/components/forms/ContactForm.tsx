@@ -50,7 +50,7 @@ duration: 1.8, ease: [0.16, 1, 0.3, 1] as const
 return ( <div id="contact" className="relative overflow-hidden">
 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/[0.02] blur-[150px] rounded-full pointer-events-none" />
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="w-full relative group/calc shadow-2xl rounded-xl overflow-hidden bg-background">
+        <div className="w-full relative group/calc shadow-[var(--block-shadow)] rounded-xl overflow-hidden bg-background">
         <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20">
           <div className="space-y-12">
             <motion.div initial={{

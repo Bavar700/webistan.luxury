@@ -23,7 +23,7 @@ const tNav = await getTranslations('Navigation');
 const tCommon = await getTranslations('Common');
 
   return (
-    <main className="relative flex flex-col bg-background selection:bg-accent/10 selection:text-foreground">
+    <main className="relative flex flex-col bg-background selection:bg-accent/10 selection:text-[#F1F1F3]">
       <Navbar />
 
       <HeroSection id="home" />
@@ -54,13 +54,13 @@ const tCommon = await getTranslations('Common');
         <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
           <Link href="/" className="flex items-center gap-2 group">
             <WebistanSymbol className="w-4 h-2 opacity-80 group-hover:opacity-100 transition-opacity" />
-            <div className="text-[10px] md:text-[11px] tracking-[0.2em] font-display font-medium uppercase text-foreground/80 group-hover:text-foreground transition-colors">
+            <div className="text-[10px] md:text-[11px] tracking-[0.2em] font-display font-medium uppercase text-white/80 group-hover:text-[#F1F1F3] transition-colors">
               WEBISTAN<span className="text-accent">.LUXURY</span>
             </div>
           </Link>
 
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-8">
-            <span className="text-[11px] font-display uppercase tracking-[0.15em] text-foreground/50">
+            <span className="text-[11px] font-display uppercase tracking-[0.15em] text-white/50">
               © 2026 <a href="https://webistan.luxury" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors lowercase">webistan.luxury</a>
             </span>
           </div>

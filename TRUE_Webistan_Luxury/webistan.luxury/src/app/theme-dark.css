@@ -29,4 +29,8 @@
   --calc-desc-color: rgba(255, 255, 255, 0.6);
   --calc-step-num-color: var(--accent);
   --calc-step-border-color: rgba(184, 134, 11, 0.4);
+  --block-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --promo-bg: #000000;
+  --promo-inner-bg: rgba(0, 0, 0, 0.4);
+  --promo-text: rgba(255, 255, 255, 0.8);
 }

@@ -14,10 +14,10 @@
   --accent-champagne: #F7E7CE;
   --accent-muted: rgba(184, 134, 11, 0.05);
   --border-color: rgba(184, 134, 11, 0.1);
-  --header-bg: #0A0A0B; /* Header stays dark — brand constant */
+  --header-bg: #000000; /* Header stays dark — brand constant */
   --card-bg: #F2F4F7;
   --card-text: #0A0A0B;
-  --btn-bg: #F2F4F7;
+  --btn-bg: #F5F7F9;
   --btn-text: #0A0A0B;
   --btn-hover-bg: #E5E7EB;
   --btn-hover-text: #000000;
@@ -30,4 +30,8 @@
   --calc-desc-color: rgba(10, 10, 11, 0.6);
   --calc-step-num-color: var(--accent);
   --calc-step-border-color: rgba(184, 134, 11, 0.2);
+  --block-shadow: none;
+  --promo-bg: #F2F4F7;
+  --promo-inner-bg: transparent;
+  --promo-text: rgba(26, 26, 26, 0.8);
 }
