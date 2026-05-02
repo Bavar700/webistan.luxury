@@ -548,17 +548,19 @@ className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent/60 h
 <span className="text-2xl md:text-6xl text-accent/30">TJS</span>
 </div>
 </div>
-<div className="flex flex-col items-center gap-6 mt-8">
+<div className="flex flex-col items-center gap-10 mt-16">
 <div className="flex flex-col items-center gap-2">
 <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-accent font-black animate-pulse -mr-[0.4em] mb-2 text-center">{t('access_rate')}</span>
-<span className="text-2xl md:text-4xl lg:text-5xl font-display text-accent tracking-[0.2em] flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center">
-<span>{totalPrice.toLocaleString()
-}
-TJS</span> {monthlyTotal > 0 && ( <span className="text-lg md:text-2xl lg:text-3xl text-accent/60 whitespace-nowrap">+ {monthlyTotal.toLocaleString()
-}
-{t('monthly_suffix')}</span> )
-}
-</span>
+            <span className="text-2xl md:text-4xl lg:text-5xl font-display tracking-[0.2em] flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center">
+              <span className="hero-shimmer">
+                {totalPrice.toLocaleString()} TJS
+              </span> 
+              {monthlyTotal > 0 && ( 
+                <span className="text-lg md:text-2xl lg:text-3xl text-accent/60 whitespace-nowrap">
+                  + {monthlyTotal.toLocaleString()} {t('monthly_suffix')}
+                </span> 
+              )}
+            </span>
 <p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-white/40 mt-4 max-w-xs text-center">{!isFounderRateActive || projectType === 'landing' ? t('landing_no_discount') : t('promo_disclaimer')}</p>
 </div>
 <button onClick={() => {
@@ -567,11 +569,7 @@ TJS</span> {monthlyTotal > 0 && ( <span className="text-lg md:text-2xl lg:text-3
   }
 }}
 disabled={projectType === 'landing'}
-className={`group/founder relative flex items-center gap-3 px-6 py-3 transition-all duration-500 bg-btn-bg overflow-hidden ${projectType === 'landing' ? 'opacity-50 cursor-not-allowed' : isFounderRateActive ? 'bg-accent/[0.05]' : 'hover:bg-btn-hover-bg'}`}>
-<div className={`absolute top-0 left-0 w-2 h-2 border-t-[0.5px] border-l-[0.5px] transition-all duration-700 ${isFounderRateActive ? 'border-accent/80' : 'border-accent/20 group-hover/founder:border-accent/80'}`} />
-<div className={`absolute top-0 right-0 w-2 h-2 border-t-[0.5px] border-r-[0.5px] transition-all duration-700 ${isFounderRateActive ? 'border-accent/80' : 'border-accent/20 group-hover/founder:border-accent/80'}`} />
-<div className={`absolute bottom-0 left-0 w-2 h-2 border-b-[0.5px] border-l-[0.5px] transition-all duration-700 ${isFounderRateActive ? 'border-accent/80' : 'border-accent/20 group-hover/founder:border-accent/80'}`} />
-<div className={`absolute bottom-0 right-0 w-2 h-2 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${isFounderRateActive ? 'border-accent/80' : 'border-accent/20 group-hover/founder:border-accent/80'}`} />
+className={`group/founder relative flex items-center gap-3 px-6 py-3 transition-all duration-500 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] border-[length:var(--btn-border-width)] border-white/10 [box-shadow:var(--btn-shadow)] overflow-hidden ${projectType === 'landing' ? 'opacity-50 cursor-not-allowed' : isFounderRateActive ? 'bg-accent/[0.05]' : 'hover:bg-btn-hover-bg'}`}>
 <div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-white/20'}`}> 
   {isFounderRateActive && projectType !== 'landing' && <Check size={8} className="text-background" strokeWidth={3} />}
 </div>
@@ -579,13 +577,9 @@ className={`group/founder relative flex items-center gap-3 px-6 py-3 transition-
 </button>
 </div>
 </div>
-<div className="w-full flex flex-col items-center gap-12">
+<div className="w-full flex flex-col items-center gap-16">
 <div className="group/disc w-full max-w-2xl mx-auto p-8 relative overflow-hidden bg-btn-bg/30">
-<div className="absolute top-0 left-0 w-4 h-4 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/disc:border-accent/60 transition-all duration-1000" />
-<div className="absolute top-0 right-0 w-4 h-4 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/disc:border-accent/60 transition-all duration-1000" />
-<div className="absolute bottom-0 left-0 w-4 h-4 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/disc:border-accent/60 transition-all duration-1000" />
-<div className="absolute bottom-0 right-0 w-4 h-4 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/disc:border-accent/60 transition-all duration-1000" />
-<p className="text-[9px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider relative z-10">{t('disclaimer_note')}</p>
+<p className="text-[9px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider relative z-10 text-center">{t('disclaimer_note')}</p>
 </div>
 <LuxuryButton width="w-full sm:w-[500px]" onClick={handleProceed}>
 <span className="text-[12px] md:text-base">{t('cta')}</span>
