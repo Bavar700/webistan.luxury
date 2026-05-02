@@ -200,7 +200,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     <div className="relative">
                       <LuxuryButton onClick={() => setIsDropdownOpen(!isDropdownOpen)} showCorners={false} height="h-[90px]" width="w-full" className="group/drop" style={{ color: 'var(--calc-title-color)' }}>
                         <div className="flex items-center justify-between w-full px-10">
-                          <span className="text-base md:text-lg font-display font-light tracking-[0.2em] uppercase -mr-[0.2em] truncate pr-4" style={{ color: projectType === 'landing' ? '#808080' : 'var(--calc-title-color)' }}> 
+                          <span className="text-base md:text-lg font-display font-medium tracking-[0.2em] uppercase -mr-[0.2em] truncate pr-4" style={{ color: 'var(--accent)' }}> 
                             {types.find(t => t.id === projectType)?.label}
                           </span>
                           <ChevronDown className={`transition-transform duration-700 flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} size={16} strokeWidth={1} />
@@ -212,7 +212,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                             {types.map((type) => ( 
                               <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-accent/5 transition-all duration-500 flex items-center justify-between group/item" >
                                 <div className="flex items-center gap-3 transition-all duration-500 group-hover/item:translate-x-2">
-                                  <span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase transition-all duration-500`} style={{ color: type.id === 'landing' ? '#808080' : projectType === type.id ? 'var(--accent)' : 'var(--calc-dropdown-text)', opacity: projectType === type.id ? 1 : 0.6 }}>
+                                  <span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase transition-all duration-500`} style={{ color: projectType === type.id ? 'var(--accent)' : type.id === 'landing' ? '#808080' : 'var(--calc-dropdown-text)', opacity: projectType === type.id ? 1 : 0.8 }}>
                                     {type.label}
                                   </span> 
                                   {type.badge && ( 
