@@ -376,7 +376,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   </div>
 
                   {/* FINAL PRICING SECTION */}
-                  <div className="flex flex-col items-center gap-12 w-full max-w-2xl mx-auto pt-24 border-t-[0.5px] border-accent/10 mt-12">
+                  <div className="flex flex-col items-center gap-12 w-full max-w-3xl mx-auto pt-24 border-t-[0.5px] border-accent/10 mt-12">
                     <div className="w-full space-y-8">
                       {/* 1. PRICE DISPLAY (BASE FOR NON-LANDING, ACCENT FOR LANDING) */}
                       <div className={`flex justify-between items-end border-b pb-4 ${projectType === 'landing' ? 'border-accent/20' : 'border-white/5'}`}>
