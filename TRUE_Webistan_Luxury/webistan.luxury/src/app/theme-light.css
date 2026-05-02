@@ -27,7 +27,7 @@
   --calc-section-bg: #F2F4F7;
   --calc-card-bg: #F2F4F7;
   --calc-title-color: #0A0A0B;
-  --calc-desc-color: rgba(10, 10, 11, 0.6);
+  --calc-desc-color: #808080;
   --calc-step-num-color: var(--accent);
   --calc-step-border-color: rgba(184, 134, 11, 0.2);
   --block-shadow: none;

@@ -252,7 +252,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </div>
                       <div className="mt-12 flex flex-col sm:flex-row items-stretch gap-6">
                         <div className="flex-1 relative group/input">
-                          <input type="text" value={otherInput} onChange={(e) => setOtherInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addCustomLang()} placeholder={t('input_custom_norm')} className="w-full px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white/50 focus:outline-none placeholder:text-white/30 transition-all font-light bg-btn-bg" />
+                          <input type="text" value={otherInput} onChange={(e) => setOtherInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addCustomLang()} placeholder={t('input_custom_norm')} className="w-full px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-foreground/50 focus:outline-none placeholder:text-foreground/30 transition-all font-light bg-btn-bg" />
                           <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-accent/10 group-focus-within/input:bg-accent/40 transition-colors duration-700" />
                         </div>
                         <LuxuryButton onClick={addCustomLang} width="px-12" height="h-[56px]" style={{ backgroundColor: 'var(--calc-section-bg)', color: 'var(--calc-title-color)' }}>
