@@ -137,7 +137,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 0.65, scale: 1 }}
+              whileInView={{ opacity: 0.8, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-10 flex flex-col items-center gap-6 md:gap-8 w-full"
@@ -189,7 +189,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                 <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20">
                   {/* STEP 01 */}
                   <div className="space-y-12">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
                       <div>
@@ -208,7 +208,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </LuxuryButton>
                       <AnimatePresence> 
                         {isDropdownOpen && ( 
-                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 0.65, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
+                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 0.8, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
                             {types.map((type) => ( 
                               <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-accent/5 transition-all duration-500 flex items-center justify-between group/item" >
                                 <div className="flex items-center gap-3 transition-all duration-500 group-hover/item:translate-x-2">
@@ -232,7 +232,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 02 */}
                   <div className="space-y-12 mb-36">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
                       <div>
@@ -264,7 +264,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 03 */}
                   <div className="space-y-12 mb-36">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
                       <div>
@@ -296,7 +296,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 04 */}
                   <div className="space-y-12 mb-36">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
                       <div>
@@ -343,7 +343,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 05 */}
                   <div className="space-y-12">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
                       <div>
@@ -358,14 +358,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${addons[addon.id] ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                         <div className="flex justify-between items-start gap-3 w-full">
-                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.65 }}>
+                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.8 }}>
                             <span className="break-words">{ta(`${addon.id}.label`)}</span>
                           </span>
                           <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`} />
                         </div>
                         <div className="space-y-4">
-                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.65 }}>{ta(`${addon.id}.desc`)}</p>
-                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.65 }}>{addon.cost}</span>
+                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.8 }}>{ta(`${addon.id}.desc`)}</p>
+                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.8 }}>{addon.cost}</span>
                         </div>
                       </div>
                     </button> ); })}
@@ -465,7 +465,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
       <AnimatePresence>
         {isDrawerOpen && (
           <div className="fixed inset-0 z-[100] flex justify-end">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.65 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setIsDrawerOpen(false)} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setIsDrawerOpen(false)} />
             <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} className="relative w-full max-w-md h-full bg-background backdrop-blur-sm border-l-[0.5px] border-accent/20 overflow-y-auto" >
               <div className="sticky top-0 bg-background backdrop-blur-md z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
                 <h3 className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-accent font-black truncate">{t('details_drawer_title')}</h3>

@@ -70,7 +70,7 @@ return ( <div id="contact" className="relative overflow-hidden">
                 <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 06 </div>
               <div>
                 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('initiation_title')}</h3>
-                <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('initiation_desc')}</p>
+                <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('initiation_desc')}</p>
               </div>
             </motion.div>
 <motion.div variants={itemVariants
@@ -90,7 +90,7 @@ label: t('support_proto'), value: tcalc(`support_levels.${support}`) }, {
 label: t('momentum'), value: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any) }, ].map((item, id) => ( <div key={id
 }
 className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
-<span className="text-[11px] font-display uppercase tracking-[0.2em] opacity-60 block">{item.label}</span>
+<span className="text-[11px] font-display uppercase tracking-[0.2em] opacity-80 block">{item.label}</span>
 <span className="text-[11px] font-display uppercase tracking-[0.3em] text-foreground/60">{item.value}</span>
 </div> ))
 }
