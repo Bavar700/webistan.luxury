@@ -54,8 +54,8 @@ const tCommon = await getTranslations('Common');
         <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
           <Link href="/" className="flex items-center gap-2 group">
             <WebistanSymbol className="w-4 h-2 opacity-80 group-hover:opacity-100 transition-opacity" />
-            <div className="text-[10px] md:text-[11px] tracking-[0.2em] font-display font-medium uppercase text-white/80 group-hover:text-[#F1F1F3] transition-colors">
-              WEBISTAN<span className="text-accent">.LUXURY</span>
+            <div className="text-[10px] md:text-[11px] tracking-[0.2em] font-display font-medium uppercase text-foreground/80 group-hover:text-foreground transition-colors">
+              <span className="hero-shimmer">WEBISTAN<span className="text-accent">.LUXURY</span></span>
             </div>
           </Link>
 

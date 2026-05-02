@@ -328,7 +328,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
                         <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.45 }}>{t(`support_levels.${item.level}`)}</span>
                         <div className="flex items-baseline gap-1">
-                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-foreground/85'}`}>{item.cost}</span>
+                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'hero-shimmer' : 'text-foreground/85'}`}>{item.cost}</span>
                           <span className="text-[11px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
                         </div>
                         <div className="space-y-4 pt-6 border-t border-black/5"> {item.features.map((f, i) => ( <div key={i} className="flex items-start gap-3">
