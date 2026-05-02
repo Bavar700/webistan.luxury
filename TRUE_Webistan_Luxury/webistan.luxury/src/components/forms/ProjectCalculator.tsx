@@ -208,7 +208,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </LuxuryButton>
                       <AnimatePresence> 
                         {isDropdownOpen && ( 
-                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 0.8, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
+                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
                             {types.map((type) => ( 
                               <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-accent/5 transition-all duration-500 flex items-center justify-between group/item" >
                                 <div className="flex items-center gap-3 transition-all duration-500 group-hover/item:translate-x-2">
