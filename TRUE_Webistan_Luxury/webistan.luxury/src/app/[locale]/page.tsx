@@ -58,7 +58,7 @@ const tCommon = await getTranslations('Common');
     <main className="relative flex flex-col bg-background selection:bg-accent/10 selection:text-[#F1F1F3]">
       <Navbar />
 
-      <HeroSection id="home" />
+      <HeroSection />
       
       {/* 120px gap is maintained by Hero's pb-[120px] */}
       <div className="flex flex-col px-6 md:px-12 lg:px-20 mb-[120px] gap-[120px]">

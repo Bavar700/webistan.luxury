@@ -23,7 +23,7 @@ export const WebistanSymbol = ({ className = "w-9 h-10" }: { className?: string 
             <stop offset="75%" stopColor="#FFFFFF" />
             <stop offset="100%" stopColor="var(--accent)" />
             
-            <motion.animateTransform 
+            <animateTransform 
               attributeName="gradientTransform"
               type="translate"
               from="0 0"

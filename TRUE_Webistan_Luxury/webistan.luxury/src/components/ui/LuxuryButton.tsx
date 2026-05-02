@@ -16,6 +16,7 @@ interface LuxuryButtonProps {
   height?: string;
   style?: React.CSSProperties;
   showCorners?: boolean;
+  disabled?: boolean;
 }
 
 export const LuxuryButton = ({
@@ -26,14 +27,16 @@ export const LuxuryButton = ({
   width = "w-full",
   height = "h-[64px]",
   style,
-  showCorners = true
+  showCorners = true,
+  disabled = false
 }: LuxuryButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       style={style}
-      className={`group relative ${width} ${height} transition-all duration-700 hover:scale-[1.02] bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] border-[length:var(--btn-border-width)] border-[var(--border-color)] [box-shadow:var(--btn-shadow)] text-btn-text hover:bg-btn-hover-bg hover:text-btn-hover-text ${className}`}
+      className={`group relative ${width} ${height} transition-all duration-700 ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.02]'} bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] border-[length:var(--btn-border-width)] border-[var(--border-color)] [box-shadow:var(--btn-shadow)] text-btn-text hover:bg-btn-hover-bg hover:text-btn-hover-text ${className}`}
     >
       {/* Shimmer Layer - Isolated Overflow */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
