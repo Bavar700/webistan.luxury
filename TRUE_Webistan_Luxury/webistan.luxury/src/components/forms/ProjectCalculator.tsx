@@ -280,15 +280,15 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="relative z-10 flex flex-col gap-6 h-full">
                         <div className="flex items-center gap-6">
                           <div className="transition-all duration-500">
-                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.3 }} />
+                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 1 }} />
                           </div>
-                          <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.2 }}>{mode.cost}</span>
+                          <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 1 }}>{mode.cost}</span>
                         </div>
                         <div className="space-y-2">
-                          <span className="block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: momentum === mode.id ? 1 : 0.3 }}>{mode.label}</span>
-                          <span className="text-[13px] md:text-[12px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: momentum === mode.id ? 1 : 0.15 }}>{mode.duration}</span>
+                          <span className="block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 1 }}>{mode.label}</span>
+                          <span className="text-[13px] md:text-[12px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: 1 }}>{mode.duration}</span>
                         </div>
-                        <p className="text-[12px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: momentum === mode.id ? 0.7 : 0.2 }}>{mode.desc}</p>
+                        <p className="text-[12px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 1 }}>{mode.desc}</p>
                       </div>
                     </button> ))}
                     </div>
@@ -328,7 +328,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
                         <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
                         <div className="flex items-baseline gap-1">
-                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-foreground/20'}`}>{item.cost}</span>
+                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-foreground/85'}`}>{item.cost}</span>
                           <span className="text-[11px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
                         </div>
                         <div className="space-y-4 pt-6 border-t border-black/5"> {item.features.map((f, i) => ( <div key={i} className="flex items-start gap-3">
@@ -411,7 +411,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent/60 font-bold block">
                                 {billingCycle === 'yearly' ? t('support_annual') : t('support_monthly')}
                               </span>
-                              <p className="text-[11px] uppercase tracking-[0.2em] text-foreground/20">
+                              <p className="text-[11px] uppercase tracking-[0.2em] text-foreground/85">
                                 {billingCycle === 'yearly' ? t('billing_cycle_yearly') : t('billing_cycle_monthly')}
                               </p>
                             </div>
@@ -442,7 +442,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-white/20'}`}> 
                           {isFounderRateActive && projectType !== 'landing' && <Check size={8} className="text-background" strokeWidth={3} />}
                         </div>
-                        <span className={`text-[11px] md:text-[10px] uppercase tracking-[0.2em] font-bold relative z-10 ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-foreground/60'}`}>Founder Rate (-30%)</span>
+                        <span className={`text-[11px] md:text-[10px] uppercase tracking-[0.2em] font-bold relative z-10 ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-foreground/90'}`}>Founder Rate (-30%)</span>
                       </button>
                     </div>
 
