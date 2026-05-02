@@ -90,8 +90,8 @@
 ::-webkit-scrollbar-thumb { background: var(--accent); opacity: 0.2; }
 
 section {
-  padding-top: var(--section-spacing-desktop);
-  padding-bottom: var(--section-spacing-desktop);
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 @media (max-width: 768px) {

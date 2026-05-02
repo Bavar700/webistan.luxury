@@ -38,10 +38,10 @@ export const HeroSection = () => {
   };
 
   return (
-    <section 
+    <div 
       id="home" 
       ref={containerRef}
-      className="relative flex items-center justify-center overflow-hidden bg-background pt-[160px] pb-[120px]"
+      className="relative flex items-center justify-center overflow-hidden bg-background !pt-[180px] !pb-[160px]"
     >
       {/* Decorative Background Blur Removed for Perfect White */}
       <motion.div 
@@ -56,7 +56,7 @@ export const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-4xl w-full mx-auto text-center flex flex-col items-center translate-y-[60px]"
+          className="max-w-4xl w-full mx-auto text-center flex flex-col items-center"
         >
           {/* Main Title Group with Equal Spacing */}
           <motion.div variants={itemVariants} className="flex flex-col items-center text-center w-full">
@@ -86,7 +86,7 @@ export const HeroSection = () => {
             {/* DESCRIPTION */}
             <motion.p 
               variants={itemVariants}
-              className="text-[15px] md:text-[17px] font-sans text-foreground/60 max-w-2xl mx-auto mb-12 leading-relaxed font-light text-center"
+              className="text-[15px] md:text-[17px] font-sans text-foreground/60 max-w-2xl mx-auto mb-20 leading-relaxed font-light text-center"
             >
               {t('description')}
             </motion.p>
@@ -113,6 +113,6 @@ export const HeroSection = () => {
         </motion.div>
       </div>
 
-    </section>
+    </div>
   );
 };

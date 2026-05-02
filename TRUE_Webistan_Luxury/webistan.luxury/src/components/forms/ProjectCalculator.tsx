@@ -189,7 +189,7 @@ return ( <>
   <div className="absolute bottom-0 right-0 w-8 h-8 border-b-[0.5px] border-r-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
   
   <div className="bg-background">
-    <div className="container mx-auto px-6 max-w-7xl relative z-10 py-10">
+    <div className="container mx-auto px-6 max-w-7xl relative z-10">
 <div className="w-full relative group/calc shadow-2xl rounded-xl overflow-hidden bg-background">
 <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20">
 <div className="space-y-12">
