@@ -50,7 +50,7 @@ const tCommon = await getTranslations('Common');
       </div>
 
       {/* Ultra Minimal, Compact Footer */}
-      <footer className="py-6 border-t-[0.5px] border-accent/20 bg-[#020202]/50 backdrop-blur-md">
+      <footer className="py-6 border-t-[0.5px] border-accent/20 bg-[#000000] backdrop-blur-md">
         <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4">
           <Link href="/" className="flex items-center gap-2 group">
             <WebistanSymbol className="w-4 h-2 opacity-80 group-hover:opacity-100 transition-opacity" />
