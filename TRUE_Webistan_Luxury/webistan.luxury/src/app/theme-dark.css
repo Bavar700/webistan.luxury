@@ -38,4 +38,7 @@
   --promo-accent-bg: linear-gradient(to right, #B8860B, #FFF5E6, #B8860B);
   --promo-accent-shadow: 0 0 8px rgba(184, 134, 11, 0.5);
   --promo-line-opacity: 0.5;
+  --calc-dropdown-bg: #111111;
+  --calc-dropdown-text: rgba(255, 255, 255, 0.4);
+  --calc-dropdown-text-hover: #FFFFFF;
 }

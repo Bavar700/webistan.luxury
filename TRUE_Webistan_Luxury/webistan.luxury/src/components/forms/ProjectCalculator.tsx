@@ -200,7 +200,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     <div className="relative">
                       <LuxuryButton onClick={() => setIsDropdownOpen(!isDropdownOpen)} showCorners={false} height="h-[90px]" width="w-full" className="group/drop" style={{ color: 'var(--calc-title-color)' }}>
                         <div className="flex items-center justify-between w-full px-10">
-                          <span className="text-base md:text-lg font-display font-light tracking-[0.2em] uppercase -mr-[0.2em] truncate pr-4 text-white/50"> 
+                          <span className="text-base md:text-lg font-display font-light tracking-[0.2em] uppercase -mr-[0.2em] truncate pr-4" style={{ color: projectType === 'landing' ? '#808080' : 'var(--calc-title-color)' }}> 
                             {types.find(t => t.id === projectType)?.label}
                           </span>
                           <ChevronDown className={`transition-transform duration-700 flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} size={16} strokeWidth={1} />
@@ -208,11 +208,11 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </LuxuryButton>
                       <AnimatePresence> 
                         {isDropdownOpen && ( 
-                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60] bg-[#111111]" > 
+                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
                             {types.map((type) => ( 
-                              <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-white/[0.03] transition-all duration-500 flex items-center justify-between group/item" >
+                              <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-accent/5 transition-all duration-500 flex items-center justify-between group/item" >
                                 <div className="flex items-center gap-3 transition-all duration-500 group-hover/item:translate-x-2">
-                                  <span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase transition-all duration-500 ${projectType === type.id ? 'text-accent font-bold opacity-100' : 'text-white/30 group-hover/item:text-accent group-hover/item:opacity-100'}`}>
+                                  <span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase transition-all duration-500`} style={{ color: type.id === 'landing' ? '#808080' : projectType === type.id ? 'var(--accent)' : 'var(--calc-dropdown-text)', opacity: projectType === type.id ? 1 : 0.6 }}>
                                     {type.label}
                                   </span> 
                                   {type.badge && ( 
