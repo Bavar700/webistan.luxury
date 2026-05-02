@@ -143,9 +143,9 @@ const finalGridItems = [...displayItems, ...fillingItems];
               className="relative z-10 flex flex-col items-center gap-6 md:gap-8 w-full"
             >
               <div className="flex items-center gap-6">
-                <div className="w-16 h-[0.5px] bg-gradient-to-r from-transparent to-accent/50" />
+                <div className="w-16 h-[0.5px] bg-gradient-to-r from-transparent to-accent" style={{ opacity: 'var(--promo-line-opacity)' }} />
                 <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-accent animate-pulse" strokeWidth={1.5} />
-                <div className="w-16 h-[0.5px] bg-gradient-to-l from-transparent to-accent/50" />
+                <div className="w-16 h-[0.5px] bg-gradient-to-l from-transparent to-accent" style={{ opacity: 'var(--promo-line-opacity)' }} />
               </div>
               <div className="space-y-4 md:space-y-6">
                 <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent font-display font-medium block">
@@ -174,7 +174,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
         </div>
 
         <div className="w-full flex justify-center mb-[120px] relative z-20">
-          <div className="w-full max-w-4xl h-[0.5px] bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+          <div className="w-full max-w-4xl h-[0.5px] bg-gradient-to-r from-transparent via-accent to-transparent" style={{ opacity: 'var(--promo-line-opacity)' }} />
         </div>
 
         <div className="relative group/block max-w-[1600px] mx-auto w-full">

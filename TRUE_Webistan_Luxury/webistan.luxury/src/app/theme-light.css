@@ -34,8 +34,9 @@
   --promo-bg: #F2F4F7;
   --promo-inner-bg: transparent;
   --promo-text: rgba(26, 26, 26, 0.8);
-  --promo-ribbon-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  --promo-accent-color: #000000;
+  --promo-ribbon-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  --promo-accent-color: #B8860B;
   --promo-accent-bg: none;
   --promo-accent-shadow: none;
+  --promo-line-opacity: 0.9;
 }
