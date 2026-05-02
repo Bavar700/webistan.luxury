@@ -277,7 +277,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] transition-all duration-700 ${momentum === mode.id ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${momentum === mode.id ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 flex flex-col gap-6 h-full">
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-6">
                           <div className={`p-3 ${momentum === mode.id ? 'bg-btn-bg0 text-accent' : 'bg-card-bg'}`} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>
                             <mode.icon size={16} strokeWidth={1} />
                           </div>
