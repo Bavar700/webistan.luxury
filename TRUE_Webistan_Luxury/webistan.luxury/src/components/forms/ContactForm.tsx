@@ -23,10 +23,7 @@ export const ContactForm = () => {
     // Simulate high-end transmission delay
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    console.log("Transmission initialized to webistan.tech@gmail.com", {
-      projectType, totalPrice, addons, languages, support, momentum 
-    });
-    
+    // Transmission initialized to webistan.tech@gmail.com
     setStatus('success');
   };
 

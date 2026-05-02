@@ -53,10 +53,8 @@ return ( <nav className={`fixed top-0 w-full z-[100] transition-all duration-700
 <span className="text-[#F1F1F3] transition-all duration-700">WEBISTAN</span>
 <span className="hero-shimmer">.LUXURY</span>
 </div>
-</Link> {
-
-}
-<div className="hidden lg:flex items-center gap-2"> {navLinks.map((link) => ( <a key={link.name
+</Link>
+      <div className="hidden lg:flex items-center gap-2"> {navLinks.map((link) => ( <a key={link.name
 }
 href={link.href
 }
@@ -77,9 +75,7 @@ strokeWidth={1.5
 }
 className="text-accent" />
 }
-</button> {
-
-}
+</button>
 <div className="flex items-center gap-6 ml-8 px-6 py-2 relative group/lang bg-[#000000]">
 <div className="absolute top-0 left-0 w-2 h-2 border-t-[0.5px] border-l-[0.5px] border-accent/30 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
 <div className="absolute top-0 right-0 w-2 h-2 border-t-[0.5px] border-r-[0.5px] border-accent/30 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
@@ -95,9 +91,7 @@ className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all dura
 </Link> ))
 }
 </div>
-</div> {
-
-}
+</div>
 <button onClick={() => setIsOpen(!isOpen)
 }
 className="lg:hidden p-2 text-[#F1F1F3]/60" > {isOpen ? <X size={20
