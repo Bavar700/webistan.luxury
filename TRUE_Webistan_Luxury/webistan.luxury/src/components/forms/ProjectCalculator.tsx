@@ -137,7 +137,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 0.65, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-10 flex flex-col items-center gap-6 md:gap-8 w-full"
@@ -189,12 +189,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
                 <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20">
                   {/* STEP 01 */}
                   <div className="space-y-12">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="relative">
@@ -208,7 +208,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </LuxuryButton>
                       <AnimatePresence> 
                         {isDropdownOpen && ( 
-                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
+                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 0.65, y: 0 }} exit={{ opacity: 0, y: 10 }} className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-[var(--block-shadow)] z-[60]" style={{ backgroundColor: 'var(--calc-dropdown-bg)' }} > 
                             {types.map((type) => ( 
                               <button key={type.id} onClick={() => { setProjectType(type.id); setIsDropdownOpen(false); }} className="w-full text-left p-3 hover:bg-accent/5 transition-all duration-500 flex items-center justify-between group/item" >
                                 <div className="flex items-center gap-3 transition-all duration-500 group-hover/item:translate-x-2">
@@ -232,12 +232,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 02 */}
                   <div className="space-y-12 mb-36">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="relative group/lang">
@@ -246,7 +246,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
-                        <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-100' : 'opacity-100'} style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }} />
+                        <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-80' : 'opacity-80'} style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }} />
                         <span className="text-[10.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
                       </button> ))}
                       </div>
@@ -264,12 +264,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 03 */}
                   <div className="space-y-12 mb-36">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {[ { id: 'standard' as MomentumProtocol, label: t('momentum.standard'), icon: Clock, duration: t('duration.standard'), cost: 'BASE VALUE', desc: t('momentum_std_desc') }, { id: 'fast' as MomentumProtocol, label: t('momentum.fast'), icon: Zap, duration: t('duration.fast'), cost: '+20% INVEST', desc: t('momentum_fast_desc') }, { id: 'ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, duration: t('duration.ultra'), cost: '+50% INVEST', desc: t('momentum_ultra_desc') } ].map((mode) => ( <button key={mode.id} onClick={() => setMomentum(mode.id)} className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
@@ -296,12 +296,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 04 */}
                   <div className="space-y-12 mb-36">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="flex justify-center w-full">
@@ -318,7 +318,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {[ { level: 'none' as SupportLevel, name: 'None', cost: '0', limit: 'ON-DEMAND', features: [t('support_features.on_demand_access'), t('support_features.basic_scan')] }, { level: 'standard' as SupportLevel, name: 'Standard', cost: billingCycle === 'yearly' ? '210' : '300', limit: '08H / MONTHLY', features: [t('support_features.maintenance_8h'), t('support_features.weekly_backups'), t('support_features.base_cyber_defense')] }, { level: 'elite' as SupportLevel, name: 'Elite', cost: billingCycle === 'yearly' ? '630' : '900', limit: '24H / MONTHLY', features: [t('support_features.support_24h'), t('support_features.daily_backups'), t('support_features.neural_cyber_defense')] } ].map((item) => ( <button key={item.level} onClick={() => setSupport(item.level)} className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
-                      <div className={`absolute inset-0 transition-opacity duration-700 ${support === item.level ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                      <div className={`absolute inset-0 transition-opacity duration-700 ${support === item.level ? 'opacity-80' : 'opacity-0 group-hover:opacity-80'}`}>
                         <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
                         <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
                         <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
@@ -343,12 +343,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
 
                   {/* STEP 05 */}
                   <div className="space-y-12">
-                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
+                    <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.65, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {[ { id: 'branding' as const, cost: '800 TJS' }, { id: 'infrastructure' as const, cost: '300 TJS' }, { id: 'seo' as const, cost: '500 TJS' }, { id: 'ai' as const, cost: '1,500 TJS' }, { id: 'ads' as const, cost: '500 TJS' }, { id: 'smm' as const, cost: '700 TJS' }, { id: 'adsense' as const, cost: '500 TJS' }, { id: 'maps' as const, cost: '300 TJS' }, { id: 'narrative' as const, cost: '500 TJS' }, { id: 'kinetic' as const, cost: '800 TJS' }, { id: 'localpay' as const, cost: '1,200 TJS' }, { id: 'velocity' as const, cost: '600 TJS' } ].map((addon) => { return ( <button key={addon.id} onClick={() => toggleAddon(addon.id)} className={`group relative p-5 md:p-6 text-left transition-all duration-1000 min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
@@ -358,14 +358,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${addons[addon.id] ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                         <div className="flex justify-between items-start gap-3 w-full">
-                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 1 }}>
+                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.65 }}>
                             <span className="break-words">{ta(`${addon.id}.label`)}</span>
                           </span>
                           <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`} />
                         </div>
                         <div className="space-y-4">
-                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 1 }}>{ta(`${addon.id}.desc`)}</p>
-                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 1 }}>{addon.cost}</span>
+                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.65 }}>{ta(`${addon.id}.desc`)}</p>
+                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.65 }}>{addon.cost}</span>
                         </div>
                       </div>
                     </button> ); })}
@@ -465,7 +465,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
       <AnimatePresence>
         {isDrawerOpen && (
           <div className="fixed inset-0 z-[100] flex justify-end">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setIsDrawerOpen(false)} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.65 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setIsDrawerOpen(false)} />
             <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} className="relative w-full max-w-md h-full bg-background backdrop-blur-sm border-l-[0.5px] border-accent/20 overflow-y-auto" >
               <div className="sticky top-0 bg-background backdrop-blur-md z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
                 <h3 className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-accent font-black truncate">{t('details_drawer_title')}</h3>

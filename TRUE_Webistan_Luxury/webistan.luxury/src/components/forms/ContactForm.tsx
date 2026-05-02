@@ -90,7 +90,7 @@ label: t('support_proto'), value: tcalc(`support_levels.${support}`) }, {
 label: t('momentum'), value: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any) }, ].map((item, id) => ( <div key={id
 }
 className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
-<span className="text-[11px] font-display uppercase tracking-[0.2em] opacity-70 block">{item.label}</span>
+<span className="text-[11px] font-display uppercase tracking-[0.2em] opacity-60 block">{item.label}</span>
 <span className="text-[11px] font-display uppercase tracking-[0.3em] text-foreground/60">{item.value}</span>
 </div> ))
 }
@@ -109,7 +109,7 @@ className="text-[11px] uppercase tracking-[0.2em] text-accent/70 border-[0.5px] 
 
         <div className="pt-10 flex flex-col md:flex-row items-end justify-between gap-6 border-t border-accent/10 mt-12">
           <div className="space-y-1">
-            <span className="text-[10px] md:text-[11px] font-display uppercase tracking-[0.4em] text-accent/80 block leading-none">
+            <span className="text-[10px] md:text-[11px] font-display uppercase tracking-[0.4em] text-accent/70 block leading-none">
               {tcalc('initial_investment_label')}
             </span>
           </div>
@@ -126,14 +126,14 @@ className="text-[11px] uppercase tracking-[0.2em] text-accent/70 border-[0.5px] 
 <input
 type="text" required placeholder={t('name_placeholder')
 }
-className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/80 uppercase relative z-10" />
+className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/60 uppercase relative z-10" />
 </div>
 <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <input
 type="email" required placeholder={t('channel_placeholder')
 }
-className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/80 uppercase relative z-10" />
+className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/60 uppercase relative z-10" />
 </div>
 </div>
 <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
@@ -142,7 +142,7 @@ className="w-full bg-transparent py-2 outline-none transition-all duration-1000 
 }
 required placeholder={t('brief_placeholder')
 }
-className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/80 resize-none uppercase relative z-10" />
+className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/60 resize-none uppercase relative z-10" />
 </div>
 <div className="pt-8">
 <LuxuryButton
