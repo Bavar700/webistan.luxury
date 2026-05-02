@@ -40,7 +40,7 @@ const tCommon = await getTranslations('Common');
           <div className="absolute bottom-0 left-0 w-8 h-8 border-b-[0.5px] border-l-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
           <div className="absolute bottom-0 right-0 w-8 h-8 border-b-[0.5px] border-r-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
           
-          <div style={{ backgroundColor: 'var(--calc-section-bg)' }} className="py-[120px]">
+          <div className="pt-[60px] pb-[120px]">
             <PortfolioSection />
           </div>
         </div>

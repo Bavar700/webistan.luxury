@@ -56,16 +56,14 @@ once: true }
 transition={{
 duration: 1.5, delay: i * 0.2 }
 }
-className="group relative bg-card-bg text-card-text p-16 hover:bg-surface/80 transition-all duration-1000 overflow-hidden shadow-xl rounded-lg border border-white/5" > {
-
-}
-<div className="absolute inset-0 w-full h-full bg-gradient-to-br from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" /> {
-
-}
-<div className="absolute top-0 left-0 w-6 h-6 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover:border-accent/80 group-hover:w-8 group-hover:h-8 transition-all duration-1000" />
-<div className="absolute top-0 right-0 w-6 h-6 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover:border-accent/80 group-hover:w-8 group-hover:h-8 transition-all duration-1000" />
-<div className="absolute bottom-0 left-0 w-6 h-6 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover:border-accent/80 group-hover:w-8 group-hover:h-8 transition-all duration-1000" />
-<div className="absolute bottom-0 right-0 w-6 h-6 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover:border-accent/80 group-hover:w-8 group-hover:h-8 transition-all duration-1000" />
+className="group relative bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] text-card-text p-16 hover:bg-btn-hover-bg transition-all duration-1000 overflow-hidden rounded-none border border-white/5" >
+    <div className="absolute inset-0 transition-opacity duration-700 opacity-0 group-hover:opacity-100">
+      <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
+      <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
+      <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
+      <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent" />
+      <div className="absolute inset-0 border border-accent/10" />
+    </div>
 <div className="relative z-10 text-center flex flex-col items-center">
 <div className="space-y-4 w-full">
 <span className="text-[9px] md:text-[10px] font-display uppercase tracking-[0.6em] text-white/40 block -mr-[0.6em] font-medium">Portfolio_Ref 0{i + 1}</span>
