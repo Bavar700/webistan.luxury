@@ -113,7 +113,7 @@ strokeWidth={1
 </div>
 <div className="relative z-10 text-center flex flex-col items-center">
 <div className="space-y-4 w-full">
-<span className="text-[9px] md:text-[10px] font-display uppercase tracking-[0.6em] text-accent/80 block -mr-[0.6em] font-bold animate-pulse">{t('layer_label')
+<span className="text-[11px] md:text-[10px] font-display uppercase tracking-[0.6em] text-accent/80 block -mr-[0.6em] font-bold animate-pulse">{t('layer_label')
 }
 0{i + 1}</span>
 <h3 className="text-xl md:text-2xl font-display font-light group-hover:text-accent transition-all duration-1000 tracking-[0.1em] uppercase leading-tight pb-2"> {t(`items.${s.key}.title`)

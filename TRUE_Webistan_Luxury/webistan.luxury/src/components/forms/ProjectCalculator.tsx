@@ -193,7 +193,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
-                        <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="relative">
@@ -215,7 +215,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                                     {type.label}
                                   </span> 
                                   {type.badge && ( 
-                                    <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">
+                                    <span className="text-[10px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">
                                       {type.badge}
                                     </span> 
                                   )}
@@ -236,7 +236,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
-                        <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="relative overflow-hidden group/lang">
@@ -246,7 +246,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-100' : 'opacity-60'} style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }} />
-                        <span className="text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
+                        <span className="text-[10.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
                       </button> ))}
                       </div>
                       <div className="mt-12 flex flex-col sm:flex-row items-stretch gap-6">
@@ -268,7 +268,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
-                        <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {[ { id: 'standard' as MomentumProtocol, label: t('momentum.standard'), icon: Clock, duration: t('duration.standard'), cost: 'BASE VALUE', desc: t('momentum_std_desc') }, { id: 'fast' as MomentumProtocol, label: t('momentum.fast'), icon: Zap, duration: t('duration.fast'), cost: '+20% INVEST', desc: t('momentum_fast_desc') }, { id: 'ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, duration: t('duration.ultra'), cost: '+50% INVEST', desc: t('momentum_ultra_desc') } ].map((mode) => ( <button key={mode.id} onClick={() => setMomentum(mode.id)} className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
@@ -281,13 +281,13 @@ const finalGridItems = [...displayItems, ...fillingItems];
                           <div className={`p-3 ${momentum === mode.id ? 'bg-btn-bg0 text-accent' : 'bg-card-bg'}`} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>
                             <mode.icon size={16} strokeWidth={1} />
                           </div>
-                          <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.2 }}>{mode.cost}</span>
+                          <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.2 }}>{mode.cost}</span>
                         </div>
                         <div className="space-y-2">
                           <span className="block text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: momentum === mode.id ? 1 : 0.3 }}>{mode.label}</span>
-                          <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: momentum === mode.id ? 1 : 0.15 }}>{mode.duration}</span>
+                          <span className="text-[11px] md:text-[10px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: momentum === mode.id ? 1 : 0.15 }}>{mode.duration}</span>
                         </div>
-                        <p className="text-[9px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: momentum === mode.id ? 0.7 : 0.2 }}>{mode.desc}</p>
+                        <p className="text-[11px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: momentum === mode.id ? 0.7 : 0.2 }}>{mode.desc}</p>
                       </div>
                     </button> ))}
                     </div>
@@ -300,14 +300,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
-                        <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="flex justify-center w-full">
                       <div className="flex gap-6"> {(['monthly', 'yearly'] as BillingCycle[]).map((cycle) => ( <button key={cycle} onClick={() => setBillingCycle(cycle)} className={`group relative w-40 md:w-48 h-[54px] md:h-[60px] transition-all duration-700 ${billingCycle === cycle ? 'bg-accent/[0.05]' : 'bg-btn-bg backdrop-blur-sm'}`} >
                         <div className="relative z-10 flex flex-col items-center justify-center h-full">
                           <span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: billingCycle === cycle ? 1 : 0.6 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')}
-                          </span> {cycle === 'yearly' && <span className={`text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold mt-1 transition-all duration-500 ${billingCycle === cycle ? 'text-accent' : 'text-accent/30'}`}>{t('save_30')}</span>}
+                          </span> {cycle === 'yearly' && <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold mt-1 transition-all duration-500 ${billingCycle === cycle ? 'text-accent' : 'text-accent/30'}`}>{t('save_30')}</span>}
                         </div> 
                         <div className={`absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] transition-all duration-700 ${billingCycle === cycle ? 'border-accent/80' : 'border-accent/0 group-hover:border-accent/80'}`} />
                         <div className={`absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] transition-all duration-700 ${billingCycle === cycle ? 'border-accent/80' : 'border-accent/0 group-hover:border-accent/80'}`} />
@@ -328,11 +328,11 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
                         <div className="flex items-baseline gap-1">
                           <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-white/20'}`}>{item.cost}</span>
-                          <span className="text-[9px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
+                          <span className="text-[11px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
                         </div>
                         <div className="space-y-4 pt-6 border-t border-black/5"> {item.features.map((f, i) => ( <div key={i} className="flex items-start gap-3">
                           <div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-black/10'}`} />
-                          <span className="text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium" style={{ color: support === item.level ? 'var(--calc-title-color)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.7 }}>{f}</span>
+                          <span className="text-[10.5px] md:text-[11px] uppercase tracking-wide leading-relaxed font-medium" style={{ color: support === item.level ? 'var(--calc-title-color)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.7 }}>{f}</span>
                         </div> ))}
                         </div>
                       </div>
@@ -347,7 +347,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
-                        <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {[ { id: 'branding' as const, cost: '800 TJS' }, { id: 'infrastructure' as const, cost: '300 TJS' }, { id: 'seo' as const, cost: '500 TJS' }, { id: 'ai' as const, cost: '1,500 TJS' }, { id: 'ads' as const, cost: '500 TJS' }, { id: 'smm' as const, cost: '700 TJS' }, { id: 'adsense' as const, cost: '500 TJS' }, { id: 'maps' as const, cost: '300 TJS' }, { id: 'narrative' as const, cost: '500 TJS' }, { id: 'kinetic' as const, cost: '800 TJS' }, { id: 'localpay' as const, cost: '1,200 TJS' }, { id: 'velocity' as const, cost: '600 TJS' } ].map((addon) => { return ( <button key={addon.id} onClick={() => toggleAddon(addon.id)} className={`group relative p-5 md:p-6 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
@@ -357,14 +357,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${addons[addon.id] ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                         <div className="flex justify-between items-start gap-3 w-full">
-                          <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: addons[addon.id] ? 1 : 0.3 }}>
+                          <span className="text-[11.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: addons[addon.id] ? 1 : 0.3 }}>
                             <span className="break-words">{ta(`${addon.id}.label`)}</span>
                           </span>
                           <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`} />
                         </div>
                         <div className="space-y-4">
                           <p className="text-[10px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: addons[addon.id] ? 0.6 : 0.15 }}>{ta(`${addon.id}.desc`)}</p>
-                          <span className="block text-[9px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.15 }}>{addon.cost}</span>
+                          <span className="block text-[11px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.15 }}>{addon.cost}</span>
                         </div>
                       </div>
                     </button> ); })}
@@ -410,7 +410,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent/60 font-bold block">
                                 {billingCycle === 'yearly' ? t('support_annual') : t('support_monthly')}
                               </span>
-                              <p className="text-[9px] uppercase tracking-[0.2em] text-white/20">
+                              <p className="text-[11px] uppercase tracking-[0.2em] text-white/20">
                                 {billingCycle === 'yearly' ? t('billing_cycle_yearly') : t('billing_cycle_monthly')}
                               </p>
                             </div>
@@ -421,7 +421,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                               </span>
                             </div>
                           </div>
-                          <p className="text-[8px] md:text-[9px] text-white/30 uppercase tracking-[0.2em] leading-relaxed italic">
+                          <p className="text-[10px] md:text-[11px] text-white/30 uppercase tracking-[0.2em] leading-relaxed italic">
                             {t('support_disclaimer')}
                           </p>
                         </div>
@@ -429,7 +429,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     </div>
 
                     <div className="flex flex-col items-center gap-8 w-full">
-                      <p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-white/40 max-w-xs text-center">
+                      <p className="text-[11px] md:text-[10px] uppercase tracking-[0.15em] text-white/40 max-w-xs text-center">
                         {!isFounderRateActive || projectType === 'landing' ? t('landing_no_discount') : t('promo_disclaimer')}
                       </p>
 
@@ -441,13 +441,13 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-white/20'}`}> 
                           {isFounderRateActive && projectType !== 'landing' && <Check size={8} className="text-background" strokeWidth={3} />}
                         </div>
-                        <span className={`text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold relative z-10 ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-white/60'}`}>Founder Rate (-30%)</span>
+                        <span className={`text-[11px] md:text-[10px] uppercase tracking-[0.2em] font-bold relative z-10 ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-white/60'}`}>Founder Rate (-30%)</span>
                       </button>
                     </div>
 
                     <div className="w-full flex flex-col items-center gap-16 mt-8">
                       <div className="group/disc w-full max-w-2xl mx-auto p-8 relative overflow-hidden bg-btn-bg/30">
-                        <p className="text-[9px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider relative z-10 text-center">{t('disclaimer_note')}</p>
+                        <p className="text-[11px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider relative z-10 text-center">{t('disclaimer_note')}</p>
                       </div>
                       <LuxuryButton width="w-full sm:w-[500px]" onClick={handleProceed}>
                         <span className="text-[12px] md:text-base">{t('cta')}</span>
@@ -469,7 +469,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
               <div className="sticky top-0 bg-background backdrop-blur-md z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
                 <h3 className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-accent font-black truncate">{t('details_drawer_title')}</h3>
                 <button onClick={() => setIsDrawerOpen(false)} className="flex-shrink-0 text-white/40 hover:text-accent transition-colors flex items-center gap-2">
-                  <span className="text-[9px] uppercase tracking-widest">{t('details_drawer_close')}</span>
+                  <span className="text-[11px] uppercase tracking-widest">{t('details_drawer_close')}</span>
                   <X size={16} strokeWidth={1} />
                 </button>
               </div>

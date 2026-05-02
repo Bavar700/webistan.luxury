@@ -60,7 +60,7 @@ const tCommon = await getTranslations('Common');
           </Link>
 
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-8">
-            <span className="text-[9px] font-display uppercase tracking-[0.15em] text-foreground/50">
+            <span className="text-[11px] font-display uppercase tracking-[0.15em] text-foreground/50">
               © 2026 <a href="https://webistan.luxury" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors lowercase">webistan.luxury</a>
             </span>
           </div>
