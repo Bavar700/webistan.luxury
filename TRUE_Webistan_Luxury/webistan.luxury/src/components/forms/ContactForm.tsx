@@ -138,17 +138,45 @@ export const ContactForm = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
                           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
-                          <input type="text" required placeholder={t('name_placeholder')} className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/50 uppercase relative z-10" />
+                          <input 
+                            type="text" 
+                            required 
+                            placeholder={t('name_placeholder')} 
+                            onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity(t('field_required'))}
+                            onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                            className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/50 uppercase relative z-10" 
+                          />
                         </div>
                         <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
                           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
-                          <input type="email" required placeholder={t('channel_placeholder')} className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/50 uppercase relative z-10" />
+                          <input 
+                            type="email" 
+                            required 
+                            placeholder={t('channel_placeholder')} 
+                            onInvalid={(e) => {
+                              const target = e.target as HTMLInputElement;
+                              if (target.validity.valueMissing) {
+                                target.setCustomValidity(t('field_required'));
+                              } else {
+                                target.setCustomValidity(t('email_invalid'));
+                              }
+                            }}
+                            onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                            className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/50 uppercase relative z-10" 
+                          />
                         </div>
                       </div>
 
                       <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
-                        <textarea rows={5} required placeholder={t('brief_placeholder')} className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/50 resize-none uppercase relative z-10" />
+                        <textarea 
+                          rows={5} 
+                          required 
+                          placeholder={t('brief_placeholder')} 
+                          onInvalid={(e) => (e.target as HTMLTextAreaElement).setCustomValidity(t('field_required'))}
+                          onInput={(e) => (e.target as HTMLTextAreaElement).setCustomValidity('')}
+                          className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-foreground/50 resize-none uppercase relative z-10" 
+                        />
                       </div>
 
                       <div className="pt-8">

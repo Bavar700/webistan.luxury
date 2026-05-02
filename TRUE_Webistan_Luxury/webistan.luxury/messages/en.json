@@ -238,7 +238,9 @@
     "transmission_complete": "Transmission_Complete",
     "success_message": "Your request has been successfully encrypted and transmitted to Webistan Luxury HQ. <br/> We will contact you within 24 hours.",
     "back_to_form": "Return to form",
-    "initializing_transmission": "INITIALIZING_TRANSMISSION"
+    "initializing_transmission": "INITIALIZING_TRANSMISSION",
+    "field_required": "Please fill out this field",
+    "email_invalid": "Please enter a valid email address"
   },
   "Addons": {
     "branding": {

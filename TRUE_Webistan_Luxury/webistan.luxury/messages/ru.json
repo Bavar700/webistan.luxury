@@ -244,7 +244,9 @@
     "transmission_complete": "Передача_завершена",
     "success_message": "Ваш запрос успешно зашифрован и передан в штаб-квартиру Webistan Luxury. <br/> Мы свяжемся с вами в течение 24 часов.",
     "back_to_form": "Вернуться к форме",
-    "initializing_transmission": "ИНИЦИАЛИЗАЦИЯ_ПЕРЕДАЧИ"
+    "initializing_transmission": "ИНИЦИАЛИЗАЦИЯ_ПЕРЕДАЧИ",
+    "field_required": "Пожалуйста, заполните это поле",
+    "email_invalid": "Введите корректный адрес электронной почты"
   },
   "Addons": {
     "branding": {
