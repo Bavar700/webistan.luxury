@@ -73,7 +73,7 @@ const togglePreset = (id: string) => {
 const newPresets = selectedPresets.includes(id) ? selectedPresets.filter(p => p !== id) : [...selectedPresets, id];
 if (newPresets.length === 0 && customLangs.length === 0) return;
 setSelectedPresets(newPresets);
-setLanguages(newPresets.length + customLangs.length);
+setLanguages(selectedPresets.length + customLangs.length);
 }
 const addCustomLang = () => {
 if (otherInput.trim() && !customLangs.includes(otherInput.trim())) {
@@ -104,7 +104,7 @@ const fillingItems = inactivePresets.slice(0, slotsNeeded).map(p => ({
 type: 'preset' as const, active: false }));
 const finalGridItems = [...displayItems, ...fillingItems];
 return ( <>
-<section id="calculator" className="relative overflow-hidden">
+<section id="calculator" className="relative overflow-hidden bg-background">
 <div className="group/promo w-screen relative left-1/2 -translate-x-1/2 text-center py-[120px] overflow-hidden" style={{backgroundColor: '#0C1618'}}>
   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/promo:translate-x-full transition-transform duration-[2000ms] ease-in-out" />
   
@@ -192,9 +192,9 @@ return ( <>
   <div className="absolute bottom-0 left-0 w-8 h-8 border-b-[0.5px] border-l-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
   <div className="absolute bottom-0 right-0 w-8 h-8 border-b-[0.5px] border-r-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
   
-  <div style={{ backgroundColor: 'var(--calc-section-bg)' }}>
+  <div className="bg-background">
     <div className="container mx-auto px-6 max-w-7xl relative z-10 py-20 mb-32">
-<div className="w-full relative group/calc shadow-2xl rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--calc-card-bg)' }}>
+<div className="w-full relative group/calc overflow-hidden bg-background">
 <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-24">
 <div className="space-y-12">
 <motion.div initial={{
@@ -210,8 +210,8 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
-<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group border-accent/40 text-accent">
+<div className="absolute inset-0 bg-accent/5 animate-pulse" /> 01 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
 <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
@@ -220,7 +220,7 @@ className="flex items-center gap-6" >
 <div className="relative">
 <LuxuryButton onClick={() => setIsDropdownOpen(!isDropdownOpen)
 }
-height="h-[90px]" width="w-full" className="group/drop" style={{ color: 'var(--calc-title-color)' }}>
+height="h-[90px]" width="w-full" className="group/drop" style={{ backgroundColor: 'var(--calc-section-bg)', color: 'var(--calc-title-color)' }}>
 <div className="flex items-center justify-between w-full px-10">
 <span className="text-base md:text-lg font-display font-light tracking-[0.2em] uppercase -mr-[0.2em] truncate pr-4"> {types.find(t => t.id === projectType)?.label
 }
@@ -243,17 +243,17 @@ opacity: 1, y: 0 }
 exit={{
 opacity: 0, y: 10 }
 }
-className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-2xl z-[60]" style={{ backgroundColor: 'var(--calc-card-bg)' }}> {types.map((type) => ( <button key={type.id
+className="absolute top-full left-0 w-full mt-2 border-none overflow-hidden shadow-2xl z-[60] bg-background"> {types.map((type) => ( <button key={type.id
 }
 onClick={() => {
 setProjectType(type.id);
 setIsDropdownOpen(false);
 }
 }
-className="w-full text-left p-6 hover:bg-black/5 transition-colors flex items-center justify-between group" >
+className={`w-full text-left p-6 hover:bg-black/5 transition-colors flex items-center justify-between group`}>
 <div className="flex items-center gap-3">
 <span className={`text-xs md:text-sm font-display tracking-[0.2em] uppercase transition-colors duration-300 group-hover:text-accent ${projectType ===
-type.id ? 'text-accent font-bold' : ''}`} style={{ color: projectType === type.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{type.label}</span> {type.badge && ( <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">{type.badge}</span> )
+type.id ? 'text-accent font-bold' : ''}`} style={{ color: projectType === type.id ? 'var(--accent)' : 'var(--calc-title-color)' }}>{type.label}</span> {type.badge && ( <span className="text-[8px] uppercase tracking-[0.3em] font-black text-accent/80 border-[0.5px] border-accent/40 px-1.5 py-0.5 animate-pulse">{type.badge}</span> )
 }
 </div> {projectType ===
 type.id && <div className="w-1.5 h-1.5 bg-accent" />
@@ -279,8 +279,8 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
-<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group border-accent/40 text-accent">
+<div className="absolute inset-0 bg-accent/5 animate-pulse" /> 02 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
 <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
@@ -302,23 +302,29 @@ setLanguages(selectedPresets.length + newList.length);
 }
 }
 }
-className={`p-4 transition-all duration-500 flex flex-col items-center gap-3 relative group/lang-item ${item.active ? 'bg-accent/[0.05] text-accent' : 'bg-btn-bg backdrop-blur-sm hover:bg-btn-hover-bg'}`}
-style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}
-> {item.active && ( <>
-<div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent/60" />
-<div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent/60" />
-<div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent/60" />
-<div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent/60" />
-</> )
+className={`group p-4 transition-all duration-700 hover:scale-[1.02] flex flex-col items-center gap-3 relative overflow-hidden ${item.active ? 'bg-accent/[0.05] text-accent' : 'hover:opacity-80'}`}
+style={{ backgroundColor: item.active ? 'rgba(184, 134, 11, 0.05)' : 'var(--calc-section-bg)', color: item.active ? 'var(--accent)' : 'var(--calc-title-color)' }}
+>
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+<div className={`absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${item.active ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${item.active ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${item.active ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${item.active ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+{item.active && ( <div className="absolute inset-0 pointer-events-none">
+<div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
+<div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
+<div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
+<div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent" />
+<div className="absolute inset-0 border border-accent/20" />
+</div> )
 }
 <Globe size={14
 }
 strokeWidth={1.5
 }
 className={item.active ? 'opacity-100' : 'opacity-60'}
-style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}
 />
-<span className="text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
+<span className="text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold">{item.label}</span>
 </button> ))
 }
 </div>
@@ -333,12 +339,12 @@ onKeyDown={(e) => e.key === 'Enter' && addCustomLang()
 }
 placeholder={t('input_custom_norm')
 }
-className="w-full bg-btn-bg backdrop-blur-sm px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-accent focus:outline-none placeholder:text-black/30 transition-all font-light" />
+className="w-full px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-accent focus:outline-none placeholder:text-black/30 transition-all font-light bg-background" style={{ color: 'var(--calc-title-color)' }} />
 <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-accent/10 group-focus-within/input:bg-accent/40 transition-colors duration-700" />
 </div>
 <LuxuryButton onClick={addCustomLang
 }
-width="px-12" height="h-[56px]">
+width="px-12" height="h-[56px]" style={{ backgroundColor: 'var(--calc-section-bg)', color: 'var(--calc-title-color)' }}>
 <span className="text-[10px] md:text-sm">{t('append_unit')}</span>
 </LuxuryButton>
 </div>
@@ -358,8 +364,8 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
-<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group border-accent/40 text-accent">
+<div className="absolute inset-0 bg-accent/5 animate-pulse" /> 03 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
 <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
@@ -374,35 +380,38 @@ id: 'ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, durat
 }
 onClick={() => setMomentum(mode.id)
 }
-className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`
-}
+className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-700 hover:scale-[1.02] overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05] text-accent' : ''}`}
+style={{ backgroundColor: momentum === mode.id ? 'rgba(184, 134, 11, 0.05)' : 'var(--calc-section-bg)', color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)' }}
 >
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" /> {momentum === mode.id && ( <div className="absolute inset-0"> {
-
-}
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+<div className={`absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${momentum === mode.id ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${momentum === mode.id ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${momentum === mode.id ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${momentum === mode.id ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+{momentum === mode.id && ( <div className="absolute inset-0 pointer-events-none">
 <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
 <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent" />
-<div className="absolute inset-0 border border-accent/10" />
+<div className="absolute inset-0 border border-accent/20" />
 </div> )
 }
 <div className="relative z-10 flex flex-col gap-6 h-full">
 <div className="flex items-center justify-between">
-<div className={`p-3 ${momentum === mode.id ? 'bg-btn-bg0 text-accent' : 'bg-white/5'}`} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>
+<div className={`p-3 ${momentum === mode.id ? 'bg-accent/10 text-accent' : 'bg-white/5'}`}>
 <mode.icon size={16
 }
 strokeWidth={1
 }
 />
 </div>
-<span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.4 }}>{mode.cost}</span>
+<span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ opacity: momentum === mode.id ? 1 : 0.4 }}>{mode.cost}</span>
 </div>
 <div className="space-y-2">
-<span className="block text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-medium leading-tight" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)' }}>{mode.label}</span>
+<span className="block text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-medium leading-tight">{mode.label}</span>
 <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-accent font-display">{mode.duration}</span>
 </div>
-<p className="text-[9px] font-medium mt-auto leading-relaxed" style={{ color: 'var(--calc-desc-color)', opacity: 0.7 }}>{mode.desc}</p>
+<p className="text-[9px] font-medium mt-auto leading-relaxed opacity-70">{mode.desc}</p>
 </div>
 </button> ))
 }
@@ -422,8 +431,8 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
-<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group border-accent/40 text-accent">
+<div className="absolute inset-0 bg-accent/5 animate-pulse" /> 04 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
 <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
@@ -434,22 +443,25 @@ className="flex items-center gap-6" >
 }
 onClick={() => setBillingCycle(cycle)
 }
-className={`group relative w-40 md:w-48 h-[54px] md:h-[60px] transition-all duration-700 ${billingCycle === cycle ? 'bg-accent/[0.12]' : 'bg-btn-bg backdrop-blur-sm'}`
-}
+className={`group relative w-40 md:w-48 h-[54px] md:h-[60px] transition-all duration-700 hover:scale-[1.02] ${billingCycle === cycle ? 'bg-accent/[0.12] text-accent' : ''}`}
+style={{ backgroundColor: billingCycle === cycle ? 'rgba(184, 134, 11, 0.12)' : 'var(--calc-section-bg)', color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-title-color)' }}
 >
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+<div className={`absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${billingCycle === cycle ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${billingCycle === cycle ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${billingCycle === cycle ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${billingCycle === cycle ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
 <div className="relative z-10 flex flex-col items-center justify-center h-full">
-<span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: billingCycle === cycle ? 1 : 0.6 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')
+<span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ opacity: billingCycle === cycle ? 1 : 0.6 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')
 }
 </span> {cycle === 'yearly' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>
 }
-</div> {billingCycle === cycle && ( <div className="absolute inset-0"> {
-
-}
+</div> {billingCycle === cycle && ( <div className="absolute inset-0 pointer-events-none">
 <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
 <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent" />
-<div className="absolute inset-0 border border-accent/10" />
+<div className="absolute inset-0 border border-accent/20" />
 </div> )
 }
 </button> ))
@@ -465,20 +477,24 @@ level: 'elite' as SupportLevel, name: 'Elite', cost: billingCycle === 'yearly' ?
 }
 onClick={() => setSupport(item.level)
 }
-className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`
-}
-> {support === item.level && ( <div className="absolute inset-0"> {
-
-}
+className={`group relative p-6 sm:p-8 md:p-10 lg:p-12 text-left transition-all duration-700 hover:scale-[1.02] flex flex-col gap-8 md:gap-12 overflow-hidden ${support === item.level ? 'bg-accent/[0.05] text-accent' : ''}`}
+style={{ backgroundColor: support === item.level ? 'rgba(184, 134, 11, 0.05)' : 'var(--calc-section-bg)', color: support === item.level ? 'var(--accent)' : 'var(--calc-title-color)' }}
+>
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+<div className={`absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${support === item.level ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${support === item.level ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${support === item.level ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${support === item.level ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+{support === item.level && ( <div className="absolute inset-0 pointer-events-none">
 <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
 <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent" />
-<div className="absolute inset-0 border border-accent/10" />
+<div className="absolute inset-0 border border-accent/20" />
 </div> )
 }
 <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
-<span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
+<span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
 <div className="flex items-baseline gap-1">
 <span className="text-3xl md:text-4xl font-display text-accent">{item.cost}</span>
 <span className="text-[9px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
@@ -489,7 +505,7 @@ className="flex items-start gap-3">
 <div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-black/10'}`
 }
 />
-<span className="text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium" style={{ color: support === item.level ? 'var(--calc-title-color)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.7 }}>{f}</span>
+<span className="text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium" style={{ opacity: support === item.level ? 1 : 0.7 }}>{f}</span>
 </div> ))
 }
 </div>
@@ -512,8 +528,8 @@ transition={{
 duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
-<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
-<div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
+<div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group border-accent/40 text-accent">
+<div className="absolute inset-0 bg-accent/5 animate-pulse" /> 05 </div>
 <div>
 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
 <p className="text-[8px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
@@ -536,22 +552,25 @@ return ( <button key={addon.id
 }
 onClick={() => toggleAddon(addon.id)
 }
-className={`group relative p-5 md:p-6 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`
-}
+className={`group relative p-5 md:p-6 text-left transition-all duration-700 hover:scale-[1.02] overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08] text-accent' : ''}`}
+style={{ backgroundColor: addons[addon.id] ? 'rgba(184, 134, 11, 0.08)' : 'var(--calc-section-bg)', color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)' }}
 >
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" /> {addons[addon.id] && ( <div className="absolute inset-0"> {
-
-}
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+<div className={`absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${addons[addon.id] ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${addons[addon.id] ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent transition-all duration-700 ${addons[addon.id] ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+<div className={`absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent transition-all duration-700 ${addons[addon.id] ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`} />
+{addons[addon.id] && ( <div className="absolute inset-0 pointer-events-none">
 <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />
 <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] border-accent" />
 <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] border-accent" />
-<div className="absolute inset-0 border border-accent/10" />
+<div className="absolute inset-0 border border-accent/20" />
 </div> )
 }
 <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
 <div className="flex justify-between items-start gap-3 w-full">
-<span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%]" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)' }}>
+<span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%]">
 <span className="break-words">{ta(`${addon.id}.label`)}</span>
 </span>
 <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`
@@ -559,8 +578,8 @@ className={`group relative p-5 md:p-6 text-left transition-all duration-1000 ove
 />
 </div>
 <div className="space-y-4">
-<p className="text-[10px] font-light leading-relaxed mt-1" style={{ color: 'var(--calc-desc-color)', opacity: 0.6 }}>{ta(`${addon.id}.desc`)}</p>
-<span className="block text-[9px] font-bold tracking-[0.1em]" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.3 }}>{addon.cost}</span>
+<p className="text-[10px] font-light leading-relaxed mt-1 opacity-60">{ta(`${addon.id}.desc`)}</p>
+<span className="block text-[9px] font-bold tracking-[0.1em]" style={{ opacity: addons[addon.id] ? 1 : 0.3 }}>{addon.cost}</span>
 </div>
 </div>
 </button> );
@@ -594,7 +613,7 @@ TJS</span> {monthlyTotal > 0 && ( <span className="text-lg md:text-2xl lg:text-3
 {t('monthly_suffix')}</span> )
 }
 </span>
-<p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-white/40 mt-4 max-w-xs text-center">{!isFounderRateActive || projectType === 'landing' ? t('landing_no_discount') : t('promo_disclaimer')}</p>
+<p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-accent/40 mt-4 max-w-xs text-center" style={{ color: 'var(--calc-desc-color)' }}>{!isFounderRateActive || projectType === 'landing' ? t('landing_no_discount') : t('promo_disclaimer')}</p>
 </div>
 <button onClick={() => {
 if (projectType !== 'landing') {
@@ -604,23 +623,22 @@ setFounderRateActive(!isFounderRateActive);
 }
 disabled={projectType === 'landing'
 }
-className={`relative flex items-center gap-3 px-6 py-3 border-[0.5px] transition-all duration-500 ${projectType === 'landing' ? 'border-foreground/10 opacity-50 cursor-not-allowed' : isFounderRateActive ? 'border-accent/40 bg-accent/[0.05]' : 'border-foreground/20 hover:border-accent/40'}`
-}
+className={`relative flex items-center gap-3 px-6 py-3 border-[0.5px] transition-all duration-500 hover:scale-[1.02] ${projectType === 'landing' ? 'border-accent/10 opacity-50 cursor-not-allowed' : isFounderRateActive ? 'border-accent/40 bg-accent/[0.05]' : 'border-accent/20 hover:border-accent/40'}`}
 >
-<div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-foreground/40'}`}> {isFounderRateActive && projectType !== 'landing' && <Check size={8
+<div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-accent/40'}`}> {isFounderRateActive && projectType !== 'landing' && <Check size={8
 }
-className="text-background" strokeWidth={3
+className="text-white" strokeWidth={3
 }
 />
 }
 </div>
-<span className={`text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-white/60'}`}>Founder Rate (-30%)</span>
+<span className={`text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-bold ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'opacity-60'}`} style={{ color: isFounderRateActive && projectType !== 'landing' ? 'var(--accent)' : 'var(--calc-title-color)' }}>Founder Rate (-30%)</span>
 </button>
 </div>
 </div>
 <div className="w-full">
 <div className="w-full max-w-2xl mx-auto p-4 md:p-6 border-[0.5px] border-accent/20 bg-accent/[0.02] text-center">
-<p className="text-[9px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider">{t('disclaimer_note')}</p>
+<p className="text-[9px] md:text-xs font-medium leading-relaxed uppercase tracking-wider opacity-90" style={{ color: 'var(--calc-title-color)' }}>{t('disclaimer_note')}</p>
 </div>
 <LuxuryButton width="w-full sm:w-[500px]" onClick={handleProceed}>
 <span className="text-[12px] md:text-base">{t('cta')}</span>
@@ -644,7 +662,7 @@ opacity: 1 }
 exit={{
 opacity: 0 }
 }
-className="absolute inset-0 bg-white/5 backdrop-blur-sm/80 backdrop-blur-sm" onClick={() => setIsDrawerOpen(false)
+className="absolute inset-0 bg-black/5 backdrop-blur-sm/80 backdrop-blur-sm" onClick={() => setIsDrawerOpen(false)
 }
 />
 <motion.div initial={{
@@ -659,12 +677,12 @@ x: '100%' }
 transition={{
 type: 'spring', damping: 25, stiffness: 200 }
 }
-className="relative w-full max-w-md h-full bg-white/5 backdrop-blur-sm border-l-[0.5px] border-accent/20 overflow-y-auto" >
-<div className="sticky top-0 bg-white/5 backdrop-blur-sm/95 backdrop-blur z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
+className="relative w-full max-w-md h-full border-l-[0.5px] border-accent/20 overflow-y-auto shadow-2xl bg-background" >
+<div className="sticky top-0 bg-background/95 backdrop-blur z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
 <h3 className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-accent font-black truncate">{t('details_drawer_title')}</h3>
 <button onClick={() => setIsDrawerOpen(false)
 }
-className="flex-shrink-0 text-white/40 hover:text-accent transition-colors flex items-center gap-2">
+className="flex-shrink-0 opacity-40 hover:text-accent transition-colors flex items-center gap-2" style={{ color: 'var(--calc-title-color)' }}>
 <span className="text-[9px] uppercase tracking-widest">{t('details_drawer_close')}</span>
 <X size={16
 }
@@ -673,18 +691,19 @@ strokeWidth={1
 />
 </button>
 </div>
+<div className="p-8 space-y-12">
 <div className="space-y-4">
-<h4 className="text-[14px] md:text-[16px] font-display text-white tracking-[0.1em] uppercase">{t('drawer_content.title')}</h4>
-<p className="text-[11px] text-white/90 leading-relaxed font-light">{t('drawer_content.intro')}</p>
+<h4 className="text-[14px] md:text-[16px] font-display tracking-[0.1em] uppercase" style={{ color: 'var(--calc-title-color)' }}>{t('drawer_content.title')}</h4>
+<p className="text-[11px] leading-relaxed font-light opacity-90" style={{ color: 'var(--calc-title-color)' }}>{t('drawer_content.intro')}</p>
 </div>
 <div className="space-y-4">
 <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-accent border-b-[0.5px] border-accent/20 pb-2">{t('drawer_content.base_works_title')}</h5>
 <ul className="space-y-3">
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.base_works.dev') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.base_works.lang') }
 }
 />
@@ -693,31 +712,31 @@ __html: t.raw('drawer_content.base_works.lang') }
 <div className="space-y-4">
 <h5 className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] text-accent border-b-[0.5px] border-accent/20 pb-2">{t('drawer_content.modules_title')}</h5>
 <ul className="space-y-3">
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.localpay') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.ads') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.infrastructure') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.ai') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.seo') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.narrative') }
 }
 />
-<li className="text-[11px] text-white/80 leading-relaxed" dangerouslySetInnerHTML={{
+<li className="text-[11px] leading-relaxed opacity-80" style={{ color: 'var(--calc-title-color)' }} dangerouslySetInnerHTML={{
 __html: t.raw('drawer_content.modules.branding') }
 }
 />
@@ -725,7 +744,8 @@ __html: t.raw('drawer_content.modules.branding') }
 </div>
 <div className="mt-8 p-5 bg-accent/[0.03] border-[0.5px] border-accent/20">
 <h5 className="text-[9px] font-black uppercase tracking-[0.2em] text-accent mb-2">{t('drawer_content.note_title')}</h5>
-<p className="text-[10px] text-white/90 leading-relaxed ">{t('drawer_content.note_text')}</p>
+<p className="text-[10px] leading-relaxed opacity-90" style={{ color: 'var(--calc-title-color)' }}>{t('drawer_content.note_text')}</p>
+</div>
 </div>
 </motion.div>
 </div> )
