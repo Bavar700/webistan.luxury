@@ -33,6 +33,24 @@ const messages = await getMessages();
 
   return (
     <html lang={locale} className={`${inter.variable} ${syne.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var savedTheme = localStorage.getItem('theme');
+                  if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased font-sans">
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ThemeProvider>

@@ -142,23 +142,36 @@ className="text-2xl font-display font-light text-[#F1F1F3]/40 hover:text-accent 
 {
 
 }
-<div className="flex items-center gap-8 mt-12 px-10 py-5 bg-[#000000] relative group/mobile-lang">
-<div className="absolute top-0 left-0 w-4 h-4 border-t-[1px] border-l-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
-<div className="absolute top-0 right-0 w-4 h-4 border-t-[1px] border-r-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-4 h-4 border-b-[1px] border-l-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-4 h-4 border-b-[1px] border-r-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
-}
-href={`/${lang.toLowerCase()}`
-}
-onClick={() => setIsOpen(false)
-}
-className={`text-[11px] font-light uppercase tracking-[0.3em] transition-all duration-500 ${locale === lang.toLowerCase() ? 'text-accent font-medium' : 'text-[#F1F1F3]/40 hover:text-accent' }`
-}
-> {lang
-}
-</Link> ))
-}
-</div>
+              <div className="flex items-center gap-8 mt-12 px-10 py-5 bg-[#000000] relative group/mobile-lang">
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-[1px] border-l-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+                <div className="absolute top-0 right-0 w-4 h-4 border-t-[1px] border-r-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-[1px] border-l-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-[1px] border-r-[1px] border-accent/30 group-hover/mobile-lang:border-accent transition-all duration-700" />
+                {['EN', 'RU', 'TJ'].map((lang) => (
+                  <Link
+                    key={lang}
+                    href={`/${lang.toLowerCase()}`}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-[11px] font-light uppercase tracking-[0.3em] transition-all duration-500 ${
+                      locale === lang.toLowerCase() ? 'text-accent font-medium' : 'text-[#F1F1F3]/40 hover:text-accent'
+                    }`}
+                  >
+                    {lang}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Theme Toggle for Mobile */}
+              <button 
+                onClick={() => {
+                  toggleTheme();
+                  setIsOpen(false);
+                }}
+                className="mt-8 flex items-center gap-4 px-6 py-3 border border-accent/20 text-accent uppercase text-[10px] tracking-[0.3em] font-medium hover:bg-accent/5 transition-all duration-500"
+              >
+                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+              </button>
 </div>
 </motion.div> )
 }
