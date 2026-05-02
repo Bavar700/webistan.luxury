@@ -385,8 +385,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                             {t('work_label')} ({t(`momentum_labels.${momentum}`)})
                           </span>
                         </div>
-                        <div className={`font-display tracking-widest ${projectType === 'landing' ? 'text-4xl md:text-6xl text-white hero-shimmer' : 'text-xl md:text-2xl text-white/40'}`}>
-                          {originalPrice.toLocaleString()} <span className={projectType === 'landing' ? 'text-xl text-white/40 ml-2' : ''}>TJS</span>
+                        <div className={`font-display tracking-widest whitespace-nowrap ${projectType === 'landing' ? 'text-4xl md:text-6xl text-white hero-shimmer' : 'text-xl md:text-2xl text-white/40'}`}>
+                          {originalPrice.toLocaleString()} <span className={`inline-block ${projectType === 'landing' ? 'text-xl text-white/40 ml-2' : ''}`}>TJS</span>
                         </div>
                       </div>
 
@@ -396,8 +396,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                           <div className="space-y-1">
                             <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent font-black block">{t('work_label')} ({t('founder_rate_label')})</span>
                           </div>
-                          <div className="text-3xl md:text-5xl font-display text-white tracking-widest hero-shimmer">
-                            {totalPrice.toLocaleString()} <span className="text-xl text-white/40 ml-2">TJS</span>
+                          <div className="text-3xl md:text-5xl font-display text-white tracking-widest hero-shimmer whitespace-nowrap">
+                            {totalPrice.toLocaleString()} <span className="text-xl text-white/40 ml-2 inline-block">TJS</span>
                           </div>
                         </div>
                       )}
@@ -414,9 +414,9 @@ const finalGridItems = [...displayItems, ...fillingItems];
                                 {billingCycle === 'yearly' ? t('billing_cycle_yearly') : t('billing_cycle_monthly')}
                               </p>
                             </div>
-                            <div className="text-2xl md:text-3xl font-display text-white tracking-widest">
+                            <div className="text-2xl md:text-3xl font-display text-white tracking-widest whitespace-nowrap">
                               {billingCycle === 'yearly' ? (monthlyTotal * 12).toLocaleString() : monthlyTotal.toLocaleString()} 
-                              <span className="text-sm text-white/40 ml-2 uppercase">
+                              <span className="text-sm text-white/40 ml-2 uppercase inline-block">
                                 {billingCycle === 'yearly' ? t('tjs_yr') : t('tjs_mo')}
                               </span>
                             </div>

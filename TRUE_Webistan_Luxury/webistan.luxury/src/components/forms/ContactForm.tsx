@@ -114,8 +114,8 @@ className="text-[9px] uppercase tracking-[0.2em] text-accent/70 border-[0.5px] b
             </span>
           </div>
           <div className="space-y-1 text-right">
-            <span className="text-3xl md:text-5xl font-display uppercase tracking-[0.1em] text-white hero-shimmer leading-none">
-              {totalPrice.toLocaleString()} TJS
+            <span className="text-3xl md:text-5xl font-display uppercase tracking-[0.1em] text-white hero-shimmer leading-none whitespace-nowrap">
+              {totalPrice.toLocaleString()} <span className="inline-block">TJS</span>
             </span>
           </div>
         </div>
