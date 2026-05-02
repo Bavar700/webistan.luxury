@@ -80,13 +80,11 @@ className="text-accent" />
 </button> {
 
 }
-<div className="flex items-center gap-6 ml-8 px-6 py-2 relative group/lang"> {
-
-}
-<div className="absolute top-0 left-0 w-2 h-2 border-t-[1px] border-l-[1px] border-accent transition-colors duration-500" />
-<div className="absolute top-0 right-0 w-2 h-2 border-t-[1px] border-r-[1px] border-accent transition-colors duration-500" />
-<div className="absolute bottom-0 left-0 w-2 h-2 border-b-[1px] border-l-[1px] border-accent transition-colors duration-500" />
-<div className="absolute bottom-0 right-0 w-2 h-2 border-b-[1px] border-r-[1px] border-accent transition-colors duration-500" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
+<div className="flex items-center gap-6 ml-8 px-6 py-2 relative group/lang bg-btn-bg">
+<div className="absolute top-0 left-0 w-2 h-2 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
+<div className="absolute top-0 right-0 w-2 h-2 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-2 h-2 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-2 h-2 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/lang:border-accent group-hover/lang:w-3 group-hover/lang:h-3 transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
 }
 href={`/${lang.toLowerCase()}`
 }
@@ -144,7 +142,11 @@ className="text-2xl font-display font-light text-foreground/40 hover:text-accent
 {
 
 }
-<div className="flex items-center gap-8 mt-12 px-8 py-3 bg-accent/5 border border-accent/10 rounded-full backdrop-blur-sm"> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
+<div className="flex items-center gap-8 mt-12 px-10 py-5 bg-btn-bg relative group/mobile-lang">
+<div className="absolute top-0 left-0 w-4 h-4 border-t-[1px] border-l-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" />
+<div className="absolute top-0 right-0 w-4 h-4 border-t-[1px] border-r-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-4 h-4 border-b-[1px] border-l-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-4 h-4 border-b-[1px] border-r-[1px] border-accent/20 group-hover/mobile-lang:border-accent transition-all duration-700" /> {['EN', 'RU', 'TJ'].map((lang) => ( <Link key={lang
 }
 href={`/${lang.toLowerCase()}`
 }

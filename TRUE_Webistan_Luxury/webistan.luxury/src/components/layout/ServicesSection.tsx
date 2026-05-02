@@ -36,7 +36,7 @@ duration: 1.5, ease: [0.16, 1, 0.3, 1] as const
 }
 }
 };
-return ( <section id="services" className="py-[125px] bg-white/5 backdrop-blur-sm relative overflow-hidden scroll-mt-32">
+return ( <section id="services" className="py-[125px] bg-background relative overflow-hidden scroll-mt-32">
 <div className="container mx-auto px-6 relative z-10 max-w-7xl">
 <div className="max-w-4xl mx-auto text-center mb-24 flex flex-col items-center"> {
 
@@ -91,10 +91,10 @@ className="group relative bg-card-bg text-card-text p-12 hover:bg-surface/80 tra
 <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" /> {
 
 }
-<div className="absolute top-0 left-0 w-6 h-6 border-t-[0.5px] border-l-[0.5px] border-accent/10 group-hover:border-accent/80 transition-all duration-1000" />
-<div className="absolute top-0 right-0 w-6 h-6 border-t-[0.5px] border-r-[0.5px] border-accent/10 group-hover:border-accent/80 transition-all duration-1000" />
-<div className="absolute bottom-0 left-0 w-6 h-6 border-b-[0.5px] border-l-[0.5px] border-accent/10 group-hover:border-accent/80 transition-all duration-1000" />
-<div className="absolute bottom-0 right-0 w-6 h-6 border-b-[0.5px] border-r-[0.5px] border-accent/10 group-hover:border-accent/80 transition-all duration-1000" />
+<div className="absolute top-0 left-0 w-6 h-6 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover:border-accent/80 transition-all duration-1000" />
+<div className="absolute top-0 right-0 w-6 h-6 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover:border-accent/80 transition-all duration-1000" />
+<div className="absolute bottom-0 left-0 w-6 h-6 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover:border-accent/80 transition-all duration-1000" />
+<div className="absolute bottom-0 right-0 w-6 h-6 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover:border-accent/80 transition-all duration-1000" />
 <div className="relative z-10 flex justify-between items-start mb-24">
 <div className="p-4 relative bg-btn-bg backdrop-blur-sm">
 <s.icon size={22

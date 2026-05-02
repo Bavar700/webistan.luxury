@@ -1,0 +1,32 @@
+/* ============================================================
+   WEBISTAN LUXURY — DARK THEME (DEFAULT / BRAND BASELINE)
+   ⚠️  DO NOT MODIFY when working on light theme.
+   ⚠️  All dark theme changes go here — in :root only.
+   ============================================================ */
+
+:root {
+  --background: #000000;
+  --foreground: #F1F1F3;
+  --surface: #000000;
+  --accent: #B8860B;
+  --accent-gold: #B8860B;
+  --accent-champagne: #F7E7CE;
+  --accent-muted: rgba(184, 134, 11, 0.1);
+  --border-color: transparent;
+  --header-bg: #000000;
+  --card-bg: #0A0A0A;
+  --card-text: var(--foreground);
+  --btn-bg: #0A0A0A;
+  --btn-text: var(--foreground);
+  --btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --btn-hover-text: var(--accent);
+  --btn-border-width: 0px;
+  --btn-shadow: none;
+  --btn-blur: 12px;
+  --calc-section-bg: #0A0A0A;
+  --calc-card-bg: #000000;
+  --calc-title-color: var(--foreground);
+  --calc-desc-color: rgba(255, 255, 255, 0.6);
+  --calc-step-num-color: var(--accent);
+  --calc-step-border-color: rgba(184, 134, 11, 0.4);
+}

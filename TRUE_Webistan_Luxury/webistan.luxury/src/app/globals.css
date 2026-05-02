@@ -1,16 +1,24 @@
 @import "tailwindcss";
 
+/* ============================================================
+   THEME FILES — Edit themes ONLY in their respective files:
+   - Dark theme  → theme-dark.css
+   - Light theme → theme-light.css
+   ============================================================ */
+@import "./theme-dark.css";
+@import "./theme-light.css";
+
 @theme {
-  /* 1. GLOBAL LOGIC (Shared variables) */
+  /* 1. TYPOGRAPHY */
   --font-sans: var(--font-inter);
   --font-display: var(--font-syne), sans-serif;
-  
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 24px;
   --radius-full: 9999px;
 
-  /* 2. SEMANTIC COLOR MAPPING */
+  /* 2. SEMANTIC COLOR MAPPING (bridges CSS vars → Tailwind utilities) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
@@ -26,79 +34,13 @@
   --color-btn-text: var(--btn-text);
   --color-btn-hover-bg: var(--btn-hover-bg);
   --color-btn-hover-text: var(--btn-hover-text);
-  
+
   --btn-border-width: var(--btn-border-width);
   --btn-shadow: var(--btn-shadow);
   --btn-blur: var(--btn-blur);
-  
-  --section-spacing-desktop: 120px;
+
+  --section-spacing-desktop: 100px;
   --section-spacing-mobile: 60px;
-}
-
-/* 3. DARK THEME (DEFAULT) */
-:root {
-  --background: #0A0A0B;
-  --foreground: #F1F1F3;
-  --surface: #141416;
-  --accent: #B8860B;
-  --accent-gold: #B8860B;
-  --accent-champagne: #F7E7CE;
-  --accent-muted: rgba(184, 134, 11, 0.1);
-  --border-color: rgba(184, 134, 11, 0.1);
-  --header-bg: #0A0A0B;
-  --card-bg: var(--surface);
-  --card-text: var(--foreground);
-  --btn-bg: #111113;
-  --btn-text: var(--foreground);
-  --btn-hover-bg: rgba(255, 255, 255, 0.05);
-  --btn-hover-text: var(--accent);
-  --btn-border-width: 1px;
-  --btn-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  --btn-blur: 12px;
-  --calc-section-bg: transparent;
-  --calc-card-bg: var(--surface);
-  --calc-title-color: var(--foreground);
-  --calc-desc-color: rgba(255, 255, 255, 0.6);
-  --calc-step-num-color: var(--accent);
-  --calc-step-border-color: rgba(184, 134, 11, 0.4);
-}
-
-/* 4. LIGHT THEME (STRICTLY SEPARATED) */
-[data-theme='light'] {
-  --background: #F2F4F7;
-  --foreground: #0A0A0B;
-  --surface: #FFFFFF;
-  --accent: #B8860B;
-  --accent-gold: #B8860B;
-  --accent-champagne: #F7E7CE;
-  --accent-muted: rgba(184, 134, 11, 0.05);
-  --border-color: rgba(184, 134, 11, 0.1);
-  --header-bg: #0A0A0B; /* Keeping Header Dark as requested */
-  --card-bg: #F2F4F7;
-  --card-text: #0A0A0B;
-  --btn-bg: #F2F4F7;
-  --btn-text: #0A0A0B;
-  --btn-hover-bg: #E5E7EB;
-  --btn-hover-text: #000000;
-  --btn-border-width: 0.5px;
-  --btn-shadow: none; /* Removed shadows for light theme as requested */
-  --btn-blur: 0px;
-  --calc-section-bg: #F2F4F7;
-  --calc-card-bg: #F2F4F7;
-  --calc-title-color: #0A0A0B;
-  --calc-desc-color: rgba(10, 10, 11, 0.6);
-  --calc-step-num-color: var(--accent);
-  --calc-step-border-color: rgba(184, 134, 11, 0.2);
-}
-
-@layer components {
-  .luxury-interaction {
-    @apply transition-all duration-700 hover:scale-[1.02] relative overflow-hidden;
-  }
-  
-  .luxury-shimmer {
-    @apply absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out;
-  }
 }
 
 @layer base {
@@ -114,11 +56,11 @@
 @layer utilities {
   .hero-shimmer {
     background: linear-gradient(
-      90deg, 
-      var(--accent) 0%, 
-      #FFFFFF 25%, 
-      var(--accent) 50%, 
-      #FFFFFF 75%, 
+      90deg,
+      var(--accent) 0%,
+      #FFFFFF 25%,
+      var(--accent) 50%,
+      #FFFFFF 75%,
       var(--accent) 100%
     );
     background-size: 200% 100%;
@@ -141,15 +83,6 @@
 @keyframes shimmer-move {
   from { background-position: 200% center; }
   to { background-position: 0% center; }
-}
-
-/* HIGH PRIORITY OVERRIDE FOR HERO BUTTONS */
-.hero-btn-override, .hero-btn-override button {
-  --btn-bg: #F2F4F7 !important;
-  --btn-text: #0A0A0B !important;
-  --btn-hover-bg: #E5E7EB !important;
-  --btn-hover-text: #000000 !important;
-  --btn-shadow: none !important;
 }
 
 ::-webkit-scrollbar { width: 3px; }

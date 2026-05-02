@@ -1,0 +1,33 @@
+/* ============================================================
+   WEBISTAN LUXURY — LIGHT THEME (OVERRIDES ONLY)
+   ⚠️  DO NOT MODIFY when working on dark theme.
+   ⚠️  Only override variables here — no new rules, no components.
+   ⚠️  All light theme changes go here — in [data-theme='light'] only.
+   ============================================================ */
+
+[data-theme='light'] {
+  --background: #F2F4F7;
+  --foreground: #0A0A0B;
+  --surface: #FFFFFF;
+  --accent: #B8860B;
+  --accent-gold: #B8860B;
+  --accent-champagne: #F7E7CE;
+  --accent-muted: rgba(184, 134, 11, 0.05);
+  --border-color: rgba(184, 134, 11, 0.1);
+  --header-bg: #0A0A0B; /* Header stays dark — brand constant */
+  --card-bg: #F2F4F7;
+  --card-text: #0A0A0B;
+  --btn-bg: #F2F4F7;
+  --btn-text: #0A0A0B;
+  --btn-hover-bg: #E5E7EB;
+  --btn-hover-text: #000000;
+  --btn-border-width: 0.5px;
+  --btn-shadow: none; /* No shadows in light theme */
+  --btn-blur: 0px;
+  --calc-section-bg: #F2F4F7;
+  --calc-card-bg: #F2F4F7;
+  --calc-title-color: #0A0A0B;
+  --calc-desc-color: rgba(10, 10, 11, 0.6);
+  --calc-step-num-color: var(--accent);
+  --calc-step-border-color: rgba(184, 134, 11, 0.2);
+}

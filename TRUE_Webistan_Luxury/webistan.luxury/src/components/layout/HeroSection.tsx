@@ -41,7 +41,7 @@ export const HeroSection = () => {
     <section 
       id="home" 
       ref={containerRef}
-      className="relative flex items-center justify-center overflow-hidden bg-[#0A0A0B] pt-[160px] pb-[120px] text-white"
+      className="relative flex items-center justify-center overflow-hidden bg-background pt-[160px] pb-[120px]"
     >
       {/* Decorative Background Blur Removed for Perfect White */}
       <motion.div 

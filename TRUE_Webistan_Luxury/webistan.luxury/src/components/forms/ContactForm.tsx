@@ -47,11 +47,15 @@ duration: 1.8, ease: [0.16, 1, 0.3, 1] as const
 }
 }
 };
-return ( <section id="contact" className="relative overflow-hidden bg-background">
+return ( <section id="contact" className="relative overflow-hidden">
 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/[0.02] blur-[150px] rounded-full pointer-events-none" />
 <div className="container mx-auto px-6 relative z-10 max-w-7xl">
 <div className="w-full space-y-12 mb-36">
-<div className="p-4 sm:p-8 md:p-16 lg:p-20 relative group/form overflow-hidden transition-all duration-700 rounded-xl border border-accent/10 bg-background">
+<div className="bg-card-bg text-card-text p-4 sm:p-8 md:p-16 lg:p-20 relative group/form overflow-hidden transition-all duration-1000 shadow-2xl rounded-xl">
+<div className="absolute top-0 left-0 w-8 h-8 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/form:border-accent/80 transition-all duration-1000" />
+<div className="absolute top-0 right-0 w-8 h-8 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/form:border-accent/80 transition-all duration-1000" />
+<div className="absolute bottom-0 left-0 w-8 h-8 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/form:border-accent/80 transition-all duration-1000" />
+<div className="absolute bottom-0 right-0 w-8 h-8 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/form:border-accent/80 transition-all duration-1000" />
 <div className="space-y-16">
 <motion.div initial={{
 opacity: 0, y: 30, filter: 'blur(8px)' }
@@ -67,10 +71,10 @@ duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 }
 className="flex items-center gap-6" >
 <div className="w-12 h-12 flex-shrink-0 rounded-full border border-accent/20 flex items-center justify-center text-accent/60 font-display text-sm relative overflow-hidden group">
-<div className="absolute inset-0 bg-accent/5 animate-pulse" /> 06 </div>
+<div className="absolute inset-0 bg-white/20 animate-pulse" /> 06 </div>
 <div>
-<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('initiation_title')}</h3>
-<p className="text-[11px] md:text-[13px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-title-color)' }}>{t('initiation_desc')}</p>
+<h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('initiation_title')}</h3>
+<p className="text-[11px] md:text-[13px] text-white/90 mt-1 tracking-wider uppercase font-medium">{t('initiation_desc')}</p>
 </div>
 </motion.div>
 <motion.div variants={itemVariants
@@ -84,25 +88,23 @@ className="w-full" >
 className="space-y-16"> {
 
 }
-<div className="group relative p-6 sm:p-8 md:p-10 border border-accent/10 transition-all duration-700 hover:scale-[1.01] overflow-hidden bg-background" style={{ color: 'var(--calc-title-color)' }}>
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.08] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<h4 className="text-accent/60 font-display text-[13px] uppercase tracking-[0.5em] mb-10">{t('transmission')}:</h4> {
+<div className="p-6 sm:p-8 md:p-10 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10"> {
 
 }
-<div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-accent/10"> {[ {
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
+<h4 className="text-accent/40 font-display text-[13px] uppercase tracking-[0.5em] mb-10">{t('transmission')}:</h4> {
+
+}
+<div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-accent/5"> {[ {
 label: t('arch_form'), value: tcalc(`types.${projectType.toLowerCase()}` as any) }, {
 label: t('lang_units'), value: t('locales', {
 count: languages }) }, {
 label: t('support_proto'), value: tcalc(`support_levels.${support}`) }, {
 label: t('momentum'), value: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any) }, ].map((item, id) => ( <div key={id
 }
-className="space-y-2 border-l-[0.5px] border-accent/10 pl-4">
+className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
 <span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{item.label}</span>
-<span className="text-[11px] font-display uppercase tracking-[0.3em] opacity-80" style={{ color: 'var(--calc-title-color)' }}>{item.value}</span>
+<span className="text-[11px] font-display uppercase tracking-[0.3em] text-white/60">{item.value}</span>
 </div> ))
 }
 </div> {
@@ -119,7 +121,10 @@ className="text-[9px] uppercase tracking-[0.2em] text-accent/70 border-[0.5px] b
 </div>
 </div> )
 }
-<div className="pt-8 flex items-end justify-between gap-4 flex-wrap border-t border-accent/10 mt-8">
+{
+
+}
+<div className="pt-8 flex items-end justify-between gap-4 flex-wrap border-t border-accent/5 mt-8">
 <div className="space-y-1">
 <span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{t('standard_val')}</span>
 <span className="text-[13px] font-display uppercase tracking-[0.3em] text-accent/50">{totalPrice.toLocaleString()
@@ -135,43 +140,43 @@ TJS</span>
 </div>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div className="group relative space-y-6 p-6 md:p-8 border border-accent/10 transition-all duration-700 hover:scale-[1.02] overflow-hidden bg-background" style={{ color: 'var(--calc-title-color)' }}>
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
+<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
+<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('name_label')}</span>
 <input
 type="text" required placeholder={t('name_placeholder')
 }
-className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-accent/20 uppercase relative z-10" style={{ color: 'var(--calc-title-color)' }} />
+className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-white/40 uppercase relative z-10" />
 </div>
-<div className="group relative space-y-6 p-6 md:p-8 border border-accent/10 transition-all duration-700 hover:scale-[1.02] overflow-hidden bg-background" style={{ color: 'var(--calc-title-color)' }}>
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
+<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
+<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('channel_label')}</span>
 <input
 type="email" required placeholder={t('channel_placeholder')
 }
-className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-accent/20 uppercase relative z-10" style={{ color: 'var(--calc-title-color)' }} />
+className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-white/40 uppercase relative z-10" />
 </div>
 </div>
-<div className="group relative space-y-6 p-6 md:p-8 border border-accent/10 transition-all duration-700 hover:scale-[1.02] overflow-hidden bg-background" style={{ color: 'var(--calc-title-color)' }}>
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent opacity-0 group-hover:opacity-100 transition-all duration-700" />
+<div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
+<div className="absolute top-0 left-0 w-3 h-3 border-t-[0.5px] border-l-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute top-0 right-0 w-3 h-3 border-t-[0.5px] border-r-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute bottom-0 left-0 w-3 h-3 border-b-[0.5px] border-l-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute bottom-0 right-0 w-3 h-3 border-b-[0.5px] border-r-[0.5px] border-accent/20 group-hover/input:border-accent group-hover/input:w-4 group-hover/input:h-4 transition-all duration-700" />
+<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
 <span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('brief_label')}</span>
 <textarea rows={5
 }
 required placeholder={t('brief_placeholder')
 }
-className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-accent/20 resize-none uppercase relative z-10" style={{ color: 'var(--calc-title-color)' }} />
+className="w-full bg-transparent py-2 outline-none transition-all duration-1000 font-display text-[10px] tracking-[0.2em] font-light placeholder:text-white/40 resize-none uppercase relative z-10" />
 </div>
 <div className="pt-8">
 <LuxuryButton
