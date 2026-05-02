@@ -235,7 +235,7 @@
     "channel_label": "Канал связи_",
     "channel_placeholder": "ПОЧТАИ ЭЛЕКТРОНӢ",
     "brief_label": "Дар бораи лоиҳа:",
-    "brief_placeholder": "ДАР БОРАИ ЛОИҲА ГӮЕД",
+    "brief_placeholder": "ДАР БОРАИ ЛОИҲА:",
     "footer_tag": "ПРОТОКОЛИ ИНТИҚОЛИ ҲИМОЯШУДА_v1.0_РАМЗГУЗОРӢ",
     "locales": "{count, plural, =1 {# Забон} other {# Забонҳо}}",
     "transmission_complete": "Интиқол_анҷом_ёфт",
