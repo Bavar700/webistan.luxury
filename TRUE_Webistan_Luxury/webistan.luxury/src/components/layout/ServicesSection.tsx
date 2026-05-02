@@ -54,7 +54,7 @@ transition={{
 duration: 1.5 }
 }
 className="flex flex-col items-center gap-8" >
-<span className="text-sm md:text-lg font-display font-medium tracking-[1.05em] text-foreground/90 uppercase block leading-none -mr-[1.05em]"> {t('subheading')
+<span className="text-sm md:text-lg font-display font-medium tracking-[1.05em] text-foreground uppercase block leading-none -mr-[1.05em]"> {t('subheading')
 }
 </span>
 <span className="text-3xl md:text-6xl uppercase tracking-[0.4em] text-accent/70 font-light leading-none -mr-[0.4em]"> {t('heading_digital')
@@ -103,7 +103,7 @@ strokeWidth={1
 }
 className="text-accent/60 group-hover:text-accent transition-colors duration-700" />
 </div>
-<div className="w-10 h-10 relative flex items-center justify-center text-foreground/20 group-hover:text-accent group-hover:bg-accent/[0.03] transition-all duration-1000">
+<div className="w-10 h-10 relative flex items-center justify-center text-foreground/70 group-hover:text-accent group-hover:bg-accent/[0.03] transition-all duration-1000">
 <ArrowUpRight size={14
 }
 strokeWidth={1
@@ -120,7 +120,7 @@ strokeWidth={1
 }
 </h3>
 </div>
-<p className="font-sans text-base text-foreground/30 leading-relaxed font-light mt-8 max-w-sm "> {t(`items.${s.key}.desc`)
+<p className="font-sans text-base text-foreground/80 leading-relaxed font-light mt-8 max-w-sm "> {t(`items.${s.key}.desc`)
 }
 </p>
 </div>
@@ -128,7 +128,7 @@ strokeWidth={1
 }
 </motion.div>
 </div>
-<div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-60 pointer-events-none w-full text-center">
+<div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-90 pointer-events-none w-full text-center">
 <span className="text-[10px] uppercase tracking-[1.25em] text-accent/80 font-bold -mr-[1.25em]">{t('bottom_label')}</span>
 </div>
 </section> );
