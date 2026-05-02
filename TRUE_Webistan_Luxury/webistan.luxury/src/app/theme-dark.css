@@ -33,4 +33,8 @@
   --promo-bg: #000000;
   --promo-inner-bg: rgba(0, 0, 0, 0.4);
   --promo-text: rgba(255, 255, 255, 0.8);
+  --promo-ribbon-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --promo-accent-color: transparent;
+  --promo-accent-bg: linear-gradient(to right, #B8860B, #FFF5E6, #B8860B);
+  --promo-accent-shadow: 0 0 8px rgba(184, 134, 11, 0.5);
 }

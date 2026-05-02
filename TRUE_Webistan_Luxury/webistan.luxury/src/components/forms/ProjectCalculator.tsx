@@ -112,14 +112,15 @@ const finalGridItems = [...displayItems, ...fillingItems];
             {/* Architectural Ribbon Anchor */}
             <div className="absolute top-0 right-0 w-[200px] h-[200px] overflow-hidden z-50 pointer-events-none">
               <div
-                className="absolute top-[45px] right-[-55px] w-[280px] py-[12px] text-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden"
+                className="absolute top-[45px] right-[-55px] w-[280px] py-[12px] text-center overflow-hidden"
                 style={{
                   background: 'linear-gradient(135deg, #8B6B23 0%, #D4AF37 50%, #8B6B23 100%)',
                   color: '#000000',
                   transform: 'rotate(45deg)',
                   borderTop: '1px solid rgba(255,255,255,0.4)',
                   borderBottom: '1px solid rgba(0,0,0,0.2)',
-                  pointerEvents: 'auto'
+                  pointerEvents: 'auto',
+                  boxShadow: 'var(--promo-ribbon-shadow)'
                 }}
               >
                 <motion.div
@@ -153,7 +154,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                 <h3 className="text-[11px] md:text-[16px] uppercase tracking-normal md:tracking-wider font-light leading-snug mx-auto drop-shadow-md max-w-5xl" style={{color: 'var(--promo-text)'}}>
                   {t.rich('discount_text', {
                     accent: (chunks) => (
-                      <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap drop-shadow-[0_0_8px_rgba(184,134,11,0.5)]">
+                      <span className="font-bold animate-shimmer whitespace-nowrap" style={{ color: 'var(--promo-accent-color)', backgroundImage: 'var(--promo-accent-bg)', WebkitBackgroundClip: 'text', backgroundClip: 'text', filter: 'drop-shadow(var(--promo-accent-shadow))' }}>
                         {chunks}
                       </span>
                     )
@@ -161,7 +162,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   <br />
                   {t.rich('discount_text_2', {
                     accent: (chunks) => (
-                      <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-[#FFF5E6] to-accent animate-shimmer whitespace-nowrap drop-shadow-[0_0_8px_rgba(184,134,11,0.5)]">
+                      <span className="font-bold animate-shimmer whitespace-nowrap" style={{ color: 'var(--promo-accent-color)', backgroundImage: 'var(--promo-accent-bg)', WebkitBackgroundClip: 'text', backgroundClip: 'text', filter: 'drop-shadow(var(--promo-accent-shadow))' }}>
                         {chunks}
                       </span>
                     )
