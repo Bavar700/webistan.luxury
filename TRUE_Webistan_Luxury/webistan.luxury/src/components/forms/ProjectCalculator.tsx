@@ -280,15 +280,15 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="relative z-10 flex flex-col gap-6 h-full">
                         <div className="flex items-center gap-6">
                           <div className="transition-all duration-500">
-                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.6 }} />
+                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.45 }} />
                           </div>
-                          <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.6 }}>{mode.cost}</span>
+                          <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.45 }}>{mode.cost}</span>
                         </div>
                         <div className="space-y-2">
-                          <span className="block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.6 }}>{mode.label}</span>
-                          <span className="text-[13px] md:text-[12px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: 0.6 }}>{mode.duration}</span>
+                          <span className="block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: momentum === mode.id ? 1 : 0.45 }}>{mode.label}</span>
+                          <span className="text-[13px] md:text-[12px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: momentum === mode.id ? 1 : 0.45 }}>{mode.duration}</span>
                         </div>
-                        <p className="text-[12px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.6 }}>{mode.desc}</p>
+                        <p className="text-[12px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.45 }}>{mode.desc}</p>
                       </div>
                     </button> ))}
                     </div>
@@ -307,7 +307,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     <div className="flex justify-center w-full">
                       <div className="flex gap-6"> {(['monthly', 'yearly'] as BillingCycle[]).map((cycle) => ( <button key={cycle} onClick={() => setBillingCycle(cycle)} className={`group relative w-40 md:w-48 h-[54px] md:h-[60px] transition-all duration-700 ${billingCycle === cycle ? 'bg-accent/[0.05]' : 'bg-btn-bg backdrop-blur-sm'}`} >
                         <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                          <span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: billingCycle === cycle ? 1 : 0.6 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')}
+                          <span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: billingCycle === cycle ? 1 : 0.45 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')}
                           </span> {cycle === 'yearly' && <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold mt-1 transition-all duration-500 ${billingCycle === cycle ? 'text-accent' : 'text-accent/30'}`}>{t('save_30')}</span>}
                         </div> 
                         <div className={`absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] transition-all duration-700 ${billingCycle === cycle ? 'border-accent/80' : 'border-accent/0 group-hover:border-accent/80'}`} />
@@ -326,7 +326,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 border border-accent/10" />
                       </div>
                       <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
-                        <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
+                        <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.45 }}>{t(`support_levels.${item.level}`)}</span>
                         <div className="flex items-baseline gap-1">
                           <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-foreground/85'}`}>{item.cost}</span>
                           <span className="text-[11px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
@@ -358,14 +358,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${addons[addon.id] ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                         <div className="flex justify-between items-start gap-3 w-full">
-                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.8 }}>
+                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: addons[addon.id] ? 1 : 0.45 }}>
                             <span className="break-words">{ta(`${addon.id}.label`)}</span>
                           </span>
                           <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`} />
                         </div>
                         <div className="space-y-4">
-                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.8 }}>{ta(`${addon.id}.desc`)}</p>
-                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.8 }}>{addon.cost}</span>
+                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.45 }}>{ta(`${addon.id}.desc`)}</p>
+                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.45 }}>{addon.cost}</span>
                         </div>
                       </div>
                     </button> ); })}

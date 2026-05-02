@@ -27,7 +27,7 @@ transition={{
 duration: 1.5 }
 }
 className="flex flex-col items-center" >
-<span className="text-[11px] md:text-[13px] font-display font-medium tracking-[1em] text-foreground/65 uppercase block mb-6 -mr-[1em]"> {t('subheading')
+<span className="text-[11px] md:text-[13px] font-display font-medium tracking-[1em] text-foreground/55 uppercase block mb-6 -mr-[1em]"> {t('subheading')
 }
 </span>
 <div className="flex flex-col items-center">
@@ -73,7 +73,7 @@ className="group relative bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box
 }
 </h3>
 </div>
-<p className="font-sans text-base text-foreground/65 leading-relaxed font-light mt-8 max-w-sm "> {s.desc
+<p className="font-sans text-base text-foreground/55 leading-relaxed font-light mt-8 max-w-sm "> {s.desc
 }
 </p>
 </div>

@@ -103,7 +103,7 @@ strokeWidth={1
 }
 className="text-accent/60 group-hover:text-accent transition-colors duration-700" />
 </div>
-<div className="w-10 h-10 relative flex items-center justify-center text-foreground/60 group-hover:text-accent group-hover:bg-accent/[0.03] transition-all duration-1000">
+<div className="w-10 h-10 relative flex items-center justify-center text-foreground/50 group-hover:text-accent group-hover:bg-accent/[0.03] transition-all duration-1000">
 <ArrowUpRight size={14
 }
 strokeWidth={1
@@ -120,7 +120,7 @@ strokeWidth={1
 }
 </h3>
 </div>
-<p className="font-sans text-base text-foreground/65 leading-relaxed font-light mt-8 max-w-sm "> {t(`items.${s.key}.desc`)
+<p className="font-sans text-base text-foreground/55 leading-relaxed font-light mt-8 max-w-sm "> {t(`items.${s.key}.desc`)
 }
 </p>
 </div>
