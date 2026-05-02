@@ -278,8 +278,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${momentum === mode.id ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 flex flex-col gap-6 h-full">
                         <div className="flex items-center gap-6">
-                          <div className={`p-3 ${momentum === mode.id ? 'bg-btn-bg0 text-accent' : 'bg-card-bg'}`} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)' }}>
-                            <mode.icon size={16} strokeWidth={1} />
+                          <div className="transition-all duration-500">
+                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.3 }} />
                           </div>
                           <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: momentum === mode.id ? 1 : 0.2 }}>{mode.cost}</span>
                         </div>
