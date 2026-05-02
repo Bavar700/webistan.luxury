@@ -194,7 +194,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="relative">
@@ -237,7 +237,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="relative group/lang">
@@ -246,7 +246,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
-                        <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-100' : 'opacity-60'} style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }} />
+                        <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-100' : 'opacity-100'} style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }} />
                         <span className="text-[10.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
                       </button> ))}
                       </div>
@@ -269,7 +269,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> {[ { id: 'standard' as MomentumProtocol, label: t('momentum.standard'), icon: Clock, duration: t('duration.standard'), cost: 'BASE VALUE', desc: t('momentum_std_desc') }, { id: 'fast' as MomentumProtocol, label: t('momentum.fast'), icon: Zap, duration: t('duration.fast'), cost: '+20% INVEST', desc: t('momentum_fast_desc') }, { id: 'ultra' as MomentumProtocol, label: t('momentum.ultra'), icon: Rocket, duration: t('duration.ultra'), cost: '+50% INVEST', desc: t('momentum_ultra_desc') } ].map((mode) => ( <button key={mode.id} onClick={() => setMomentum(mode.id)} className={`group relative p-6 sm:p-8 md:p-10 text-left transition-all duration-1000 min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
@@ -301,7 +301,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="flex justify-center w-full">
@@ -348,7 +348,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
                       <div>
                         <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
-                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-60" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
+                        <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-100" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> {[ { id: 'branding' as const, cost: '800 TJS' }, { id: 'infrastructure' as const, cost: '300 TJS' }, { id: 'seo' as const, cost: '500 TJS' }, { id: 'ai' as const, cost: '1,500 TJS' }, { id: 'ads' as const, cost: '500 TJS' }, { id: 'smm' as const, cost: '700 TJS' }, { id: 'adsense' as const, cost: '500 TJS' }, { id: 'maps' as const, cost: '300 TJS' }, { id: 'narrative' as const, cost: '500 TJS' }, { id: 'kinetic' as const, cost: '800 TJS' }, { id: 'localpay' as const, cost: '1,200 TJS' }, { id: 'velocity' as const, cost: '600 TJS' } ].map((addon) => { return ( <button key={addon.id} onClick={() => toggleAddon(addon.id)} className={`group relative p-5 md:p-6 text-left transition-all duration-1000 min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg text-black'}`} >
@@ -358,14 +358,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${addons[addon.id] ? 'border-accent/80 w-2 h-2' : 'border-accent/0 group-hover:border-accent/80 group-hover:w-2 group-hover:h-2'}`} />
                       <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                         <div className="flex justify-between items-start gap-3 w-full">
-                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: addons[addon.id] ? 1 : 0.3 }}>
+                          <span className="text-[12.5px] md:text-[11.5px] uppercase tracking-[0.2em] font-black leading-tight flex items-start gap-2 max-w-[90%] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 1 }}>
                             <span className="break-words">{ta(`${addon.id}.label`)}</span>
                           </span>
                           <div className={`w-1.5 h-1.5 rounded-full transition-all flex-shrink-0 duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)] animate-pulse' : 'bg-black/10'}`} />
                         </div>
                         <div className="space-y-4">
-                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: addons[addon.id] ? 0.6 : 0.15 }}>{ta(`${addon.id}.desc`)}</p>
-                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: addons[addon.id] ? 1 : 0.15 }}>{addon.cost}</span>
+                          <p className="text-[11px] font-light leading-relaxed mt-1 transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 1 }}>{ta(`${addon.id}.desc`)}</p>
+                          <span className="block text-[12px] font-bold tracking-[0.1em] transition-all duration-500" style={{ color: addons[addon.id] ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 1 }}>{addon.cost}</span>
                         </div>
                       </div>
                     </button> ); })}
