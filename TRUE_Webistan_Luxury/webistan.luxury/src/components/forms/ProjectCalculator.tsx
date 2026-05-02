@@ -371,7 +371,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     </button> ); })}
                     </div>
                     <div className="flex justify-center mt-12">
-                      <button onClick={() => setIsDrawerOpen(true)} className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent/60 hover:text-accent border-b border-accent/20 hover:border-accent transition-colors pb-1"> {t('details_drawer_trigger')}
+                      <button onClick={() => setIsDrawerOpen(true)} className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent hover:text-accent border-b border-accent/50 hover:border-accent transition-colors pb-1"> {t('details_drawer_trigger')}
                       </button>
                     </div>
                   </div>
