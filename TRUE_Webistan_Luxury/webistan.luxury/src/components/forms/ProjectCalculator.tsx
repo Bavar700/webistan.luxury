@@ -255,7 +255,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                           <input type="text" value={otherInput} onChange={(e) => setOtherInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addCustomLang()} placeholder={t('input_custom_norm')} className="w-full px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-foreground/50 focus:outline-none placeholder:text-foreground/30 transition-all font-light bg-btn-bg" />
                           <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-accent/10 group-focus-within/input:bg-accent/40 transition-colors duration-700" />
                         </div>
-                        <LuxuryButton onClick={addCustomLang} width="w-auto px-12" height="h-[56px]" style={{ backgroundColor: 'var(--calc-section-bg)', color: 'var(--calc-title-color)' }}>
+                        <LuxuryButton onClick={addCustomLang} width="w-auto px-12" height="h-[56px]" style={{ backgroundColor: 'var(--btn-bg)', color: 'var(--calc-title-color)' }}>
                           <span className="text-[10px] md:text-sm">{t('append_unit')}</span>
                         </LuxuryButton>
                       </div>
@@ -328,7 +328,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
                         <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.4 }}>{t(`support_levels.${item.level}`)}</span>
                         <div className="flex items-baseline gap-1">
-                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-white/20'}`}>{item.cost}</span>
+                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'text-accent' : 'text-foreground/20'}`}>{item.cost}</span>
                           <span className="text-[11px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
                         </div>
                         <div className="space-y-4 pt-6 border-t border-black/5"> {item.features.map((f, i) => ( <div key={i} className="flex items-start gap-3">
@@ -382,12 +382,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       {/* 1. PRICE DISPLAY (BASE FOR NON-LANDING, ACCENT FOR LANDING) */}
                       <div className={`flex justify-between items-end border-b pb-4 ${projectType === 'landing' ? 'border-accent/20' : 'border-white/5'}`}>
                         <div className="space-y-1">
-                          <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.4em] block ${projectType === 'landing' ? 'text-accent font-black' : 'text-white/40'}`}>
+                          <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.4em] block ${projectType === 'landing' ? 'text-accent font-black' : 'text-foreground/40'}`}>
                             {t('work_label')} ({t(`momentum_labels.${momentum}`)})
                           </span>
                         </div>
-                        <div className={`font-display tracking-widest whitespace-nowrap ${projectType === 'landing' ? 'text-4xl md:text-6xl text-white hero-shimmer' : 'text-xl md:text-2xl text-white/40'}`}>
-                          {originalPrice.toLocaleString()} <span className={`inline-block ${projectType === 'landing' ? 'text-xl text-white/40 ml-2' : ''}`}>TJS</span>
+                        <div className={`font-display tracking-widest whitespace-nowrap ${projectType === 'landing' ? 'text-4xl md:text-6xl text-foreground hero-shimmer' : 'text-xl md:text-2xl text-foreground/40'}`}>
+                          {originalPrice.toLocaleString()} <span className={`inline-block ${projectType === 'landing' ? 'text-xl text-foreground/40 ml-2' : ''}`}>TJS</span>
                         </div>
                       </div>
 
@@ -397,8 +397,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                           <div className="space-y-1">
                             <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent font-black block">{t('work_label')} ({t('founder_rate_label')})</span>
                           </div>
-                          <div className="text-3xl md:text-5xl font-display text-white tracking-widest hero-shimmer whitespace-nowrap">
-                            {totalPrice.toLocaleString()} <span className="text-xl text-white/40 ml-2 inline-block">TJS</span>
+                          <div className="text-3xl md:text-5xl font-display text-foreground tracking-widest hero-shimmer whitespace-nowrap">
+                            {totalPrice.toLocaleString()} <span className="text-xl text-foreground/40 ml-2 inline-block">TJS</span>
                           </div>
                         </div>
                       )}
@@ -411,18 +411,18 @@ const finalGridItems = [...displayItems, ...fillingItems];
                               <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent/60 font-bold block">
                                 {billingCycle === 'yearly' ? t('support_annual') : t('support_monthly')}
                               </span>
-                              <p className="text-[11px] uppercase tracking-[0.2em] text-white/20">
+                              <p className="text-[11px] uppercase tracking-[0.2em] text-foreground/20">
                                 {billingCycle === 'yearly' ? t('billing_cycle_yearly') : t('billing_cycle_monthly')}
                               </p>
                             </div>
-                            <div className="text-2xl md:text-3xl font-display text-white tracking-widest whitespace-nowrap">
+                            <div className="text-2xl md:text-3xl font-display text-foreground tracking-widest whitespace-nowrap">
                               {billingCycle === 'yearly' ? (monthlyTotal * 12).toLocaleString() : monthlyTotal.toLocaleString()} 
-                              <span className="text-sm text-white/40 ml-2 uppercase inline-block">
+                              <span className="text-sm text-foreground/40 ml-2 uppercase inline-block">
                                 {billingCycle === 'yearly' ? t('tjs_yr') : t('tjs_mo')}
                               </span>
                             </div>
                           </div>
-                          <p className="text-[10px] md:text-[11px] text-white/30 uppercase tracking-[0.2em] leading-relaxed italic">
+                          <p className="text-[10px] md:text-[11px] text-foreground/30 uppercase tracking-[0.2em] leading-relaxed italic">
                             {t('support_disclaimer')}
                           </p>
                         </div>
@@ -430,7 +430,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     </div>
 
                     <div className="flex flex-col items-center gap-8 w-full">
-                      <p className="text-[11px] md:text-[10px] uppercase tracking-[0.15em] text-white/40 max-w-xs text-center">
+                      <p className="text-[11px] md:text-[10px] uppercase tracking-[0.15em] text-foreground/40 max-w-xs text-center">
                         {!isFounderRateActive || projectType === 'landing' ? t('landing_no_discount') : t('promo_disclaimer')}
                       </p>
 
@@ -442,13 +442,13 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`w-3 h-3 border-[0.5px] flex items-center justify-center ${isFounderRateActive && projectType !== 'landing' ? 'border-accent bg-accent' : 'border-white/20'}`}> 
                           {isFounderRateActive && projectType !== 'landing' && <Check size={8} className="text-background" strokeWidth={3} />}
                         </div>
-                        <span className={`text-[11px] md:text-[10px] uppercase tracking-[0.2em] font-bold relative z-10 ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-white/60'}`}>Founder Rate (-30%)</span>
+                        <span className={`text-[11px] md:text-[10px] uppercase tracking-[0.2em] font-bold relative z-10 ${isFounderRateActive && projectType !== 'landing' ? 'text-accent' : 'text-foreground/60'}`}>Founder Rate (-30%)</span>
                       </button>
                     </div>
 
                     <div className="w-full flex flex-col items-center gap-16 mt-8">
                       <div className="group/disc w-full max-w-2xl mx-auto p-8 relative overflow-hidden bg-btn-bg/30">
-                        <p className="text-[11px] md:text-xs text-white/90 font-medium leading-relaxed uppercase tracking-wider relative z-10 text-center">{t('disclaimer_note')}</p>
+                        <p className="text-[11px] md:text-xs text-foreground/90 font-medium leading-relaxed uppercase tracking-wider relative z-10 text-center">{t('disclaimer_note')}</p>
                       </div>
                       <LuxuryButton width="w-full sm:w-[500px]" onClick={handleProceed}>
                         <span className="text-[12px] md:text-base">{t('cta')}</span>
@@ -469,14 +469,14 @@ const finalGridItems = [...displayItems, ...fillingItems];
             <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} className="relative w-full max-w-md h-full bg-background backdrop-blur-sm border-l-[0.5px] border-accent/20 overflow-y-auto" >
               <div className="sticky top-0 bg-background backdrop-blur-md z-10 px-6 md:px-8 py-5 md:py-6 border-b-[0.5px] border-accent/10 flex items-center justify-between gap-4">
                 <h3 className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-accent font-black truncate">{t('details_drawer_title')}</h3>
-                <button onClick={() => setIsDrawerOpen(false)} className="flex-shrink-0 text-white/40 hover:text-accent transition-colors flex items-center gap-2">
+                <button onClick={() => setIsDrawerOpen(false)} className="flex-shrink-0 text-foreground/40 hover:text-accent transition-colors flex items-center gap-2">
                   <span className="text-[11px] uppercase tracking-widest">{t('details_drawer_close')}</span>
                   <X size={16} strokeWidth={1} />
                 </button>
               </div>
               <div className="p-6 md:p-8 space-y-10">
                 <div className="space-y-4">
-                  <h4 className="text-[14px] md:text-[18px] font-display text-white tracking-[0.1em] uppercase border-l-2 border-accent pl-4">{t('drawer_content.title')}</h4>
+                  <h4 className="text-[14px] md:text-[18px] font-display text-foreground tracking-[0.1em] uppercase border-l-2 border-accent pl-4">{t('drawer_content.title')}</h4>
                   <p className="text-[12px] text-white/70 leading-relaxed font-light">{t('drawer_content.intro')}</p>
                 </div>
                 <div className="space-y-6">
@@ -485,8 +485,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     {t('drawer_content.base_works_title')}
                   </h5>
                   <ul className="space-y-4">
-                    <li className="text-[12px] text-white/80 leading-relaxed pl-4 border-l border-white/5" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.base_works.dev') }} />
-                    <li className="text-[12px] text-white/80 leading-relaxed pl-4 border-l border-white/5" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.base_works.lang') }} />
+                    <li className="text-[12px] text-foreground/80 leading-relaxed pl-4 border-l border-white/5" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.base_works.dev') }} />
+                    <li className="text-[12px] text-foreground/80 leading-relaxed pl-4 border-l border-white/5" dangerouslySetInnerHTML={{ __html: t.raw('drawer_content.base_works.lang') }} />
                   </ul>
                 </div>
                 <div className="space-y-6">
@@ -496,7 +496,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   </h5>
                   <ul className="space-y-5">
                     {['localpay', 'ads', 'infrastructure', 'ai', 'seo', 'narrative', 'branding'].map((module) => (
-                      <li key={module} className="text-[12px] text-white/80 leading-relaxed pl-4 border-l border-white/5 hover:border-accent/30 transition-colors" dangerouslySetInnerHTML={{ __html: t.raw(`drawer_content.modules.${module}`) }} />
+                      <li key={module} className="text-[12px] text-foreground/80 leading-relaxed pl-4 border-l border-white/5 hover:border-accent/30 transition-colors" dangerouslySetInnerHTML={{ __html: t.raw(`drawer_content.modules.${module}`) }} />
                     ))}
                   </ul>
                 </div>
