@@ -11,6 +11,38 @@ import Link from 'next/link';
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'ru' }, { locale: 'tj' }];
 }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Index' });
+ 
+  return {
+    title: t('title'),
+    description: t('hero.description'),
+    metadataBase: new URL('https://webistan.luxury'),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        'en-US': '/en',
+        'ru-RU': '/ru',
+        'tg-TJ': '/tj',
+      },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('hero.description'),
+      url: `https://webistan.luxury/${locale}`,
+      siteName: 'Webistan Luxury',
+      locale: locale === 'ru' ? 'ru_RU' : locale === 'tj' ? 'tg_TJ' : 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('hero.description'),
+    },
+  };
+}
 export default async function Index({
   params
 }: {
