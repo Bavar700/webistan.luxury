@@ -54,7 +54,7 @@ transition={{
 duration: 1.5 }
 }
 className="flex flex-col items-center gap-8" >
-<span className="text-sm md:text-lg font-display font-medium tracking-[1.05em] text-white/90 uppercase block leading-none -mr-[1.05em]"> {t('subheading')
+<span className="text-sm md:text-lg font-display font-medium tracking-[1.05em] text-foreground/90 uppercase block leading-none -mr-[1.05em]"> {t('subheading')
 }
 </span>
 <span className="text-3xl md:text-6xl uppercase tracking-[0.4em] text-accent/70 font-light leading-none -mr-[0.4em]"> {t('heading_digital')
@@ -62,7 +62,7 @@ className="flex flex-col items-center gap-8" >
 </span>
 <div className="flex flex-col items-center">
 <h2 className="text-5xl md:text-8xl font-display font-bold tracking-[0.1em] leading-none uppercase -mr-[0.1em]">
-<span className="bg-gradient-to-r from-accent via-[#FFF5E6] via-accent-gold via-[#FFF5E6] to-accent bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer inline-block pb-4"> {t('heading_solutions')
+<span className="bg-gradient-to-r from-accent via-[var(--hero-shimmer-via)] via-accent-gold via-[var(--hero-shimmer-via)] to-accent bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer inline-block pb-4"> {t('heading_solutions')
 }
 </span>
 </h2>
@@ -103,7 +103,7 @@ strokeWidth={1
 }
 className="text-accent/60 group-hover:text-accent transition-colors duration-700" />
 </div>
-<div className="w-10 h-10 relative flex items-center justify-center text-white/20 group-hover:text-accent group-hover:bg-accent/[0.03] transition-all duration-1000">
+<div className="w-10 h-10 relative flex items-center justify-center text-foreground/20 group-hover:text-accent group-hover:bg-accent/[0.03] transition-all duration-1000">
 <ArrowUpRight size={14
 }
 strokeWidth={1
@@ -120,7 +120,7 @@ strokeWidth={1
 }
 </h3>
 </div>
-<p className="font-sans text-base text-white/30 leading-relaxed font-light mt-8 max-w-sm "> {t(`items.${s.key}.desc`)
+<p className="font-sans text-base text-foreground/30 leading-relaxed font-light mt-8 max-w-sm "> {t(`items.${s.key}.desc`)
 }
 </p>
 </div>

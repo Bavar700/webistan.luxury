@@ -477,7 +477,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
               <div className="p-6 md:p-8 space-y-10">
                 <div className="space-y-4">
                   <h4 className="text-[14px] md:text-[18px] font-display text-foreground tracking-[0.1em] uppercase border-l-2 border-accent pl-4">{t('drawer_content.title')}</h4>
-                  <p className="text-[12px] text-white/70 leading-relaxed font-light">{t('drawer_content.intro')}</p>
+                  <p className="text-[12px] text-foreground/70 leading-relaxed font-light">{t('drawer_content.intro')}</p>
                 </div>
                 <div className="space-y-6">
                   <h5 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.2em] text-accent flex items-center gap-3">
@@ -505,7 +505,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                     <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
                     {t('drawer_content.note_title')}
                   </h5>
-                  <p className="text-[11px] text-white/70 leading-relaxed font-light italic">{t('drawer_content.note_text')}</p>
+                  <p className="text-[11px] text-foreground/70 leading-relaxed font-light italic">{t('drawer_content.note_text')}</p>
                 </div>
               </div>
             </motion.div>

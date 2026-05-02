@@ -58,9 +58,9 @@
     background: linear-gradient(
       90deg,
       var(--accent) 0%,
-      #FFFFFF 25%,
+      var(--hero-shimmer-via) 25%,
       var(--accent) 50%,
-      #FFFFFF 75%,
+      var(--hero-shimmer-via) 75%,
       var(--accent) 100%
     );
     background-size: 200% 100%;
