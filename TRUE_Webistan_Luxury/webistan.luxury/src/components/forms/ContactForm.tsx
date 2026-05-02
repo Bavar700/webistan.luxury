@@ -28,7 +28,7 @@ const t = useTranslations('Contact');
 const ta = useTranslations('Addons');
 const tcalc = useTranslations('Calculator');
 const {
-projectType, totalPrice, addons, languages 
+projectType, totalPrice, addons, languages, monthlyTotal 
 }
 = useCalculatorStore();
 const support = useCalculatorStore(state => state.support);
@@ -79,18 +79,9 @@ initial="hidden" whileInView="visible" viewport={{
 once: true }
 }
 className="w-full" >
-<form onSubmit={handleSubmit
-}
-className="space-y-16"> {
-
-}
-<div className="p-6 sm:p-8 md:p-10 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10"> {
-
-}
-<div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
-<h4 className="text-accent/40 font-display text-[13px] uppercase tracking-[0.5em] mb-10">{t('transmission')}:</h4> {
-
-}
+        <form onSubmit={handleSubmit} className="space-y-16">
+          <div className="p-6 sm:p-8 md:p-10 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 border-[length:var(--btn-border-width)] border-white/10">
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-accent/5"> {[ {
 label: t('arch_form'), value: tcalc(`types.${projectType.toLowerCase()}` as any) }, {
 label: t('lang_units'), value: t('locales', {
@@ -103,42 +94,35 @@ className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
 <span className="text-[11px] font-display uppercase tracking-[0.3em] text-white/60">{item.value}</span>
 </div> ))
 }
-</div> {
-
-}
-{activeAddons.length > 0 && ( <div className="pt-8 space-y-4">
-<span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{t('expansion')}</span>
+            </div>
+            {activeAddons.length > 0 && (
+              <div className="pt-8 space-y-4">
 <div className="flex flex-wrap gap-3"> {activeAddons.map((label) => ( <span key={label
 }
 className="text-[9px] uppercase tracking-[0.2em] text-accent/70 border-[0.5px] border-accent/20 px-3 py-1.5 font-bold"> {label
 }
-</span> ))
-}
-</div>
-</div> )
-}
-{
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
-}
-<div className="pt-8 flex items-end justify-between gap-4 flex-wrap border-t border-accent/5 mt-8">
-<div className="space-y-1">
-<span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{t('standard_val')}</span>
-<span className="text-[13px] font-display uppercase tracking-[0.3em] text-accent/50">{totalPrice.toLocaleString()
-}
-TJS</span>
-</div>
-<div className="space-y-1 text-right">
-<span className="text-[9px] font-display uppercase tracking-[0.2em] text-accent/50 block animate-pulse">{t('partner_rate')}</span>
-<span className="text-[15px] font-display uppercase tracking-[0.3em] text-accent">{Math.round(totalPrice * 0.7).toLocaleString()
-}
-TJS</span>
-</div>
-</div>
+        <div className="pt-10 flex flex-col md:flex-row items-end justify-between gap-6 border-t border-accent/10 mt-12">
+          <div className="space-y-1">
+            <span className="text-[10px] md:text-[11px] font-display uppercase tracking-[0.4em] text-accent/40 block leading-none">
+              {tcalc('initial_investment_label')}
+            </span>
+          </div>
+          <div className="space-y-1 text-right">
+            <span className="text-3xl md:text-5xl font-display uppercase tracking-[0.1em] text-white hero-shimmer leading-none">
+              {totalPrice.toLocaleString()} TJS
+            </span>
+          </div>
+        </div>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
-<span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('name_label')}</span>
 <input
 type="text" required placeholder={t('name_placeholder')
 }
@@ -146,7 +130,6 @@ className="w-full bg-transparent py-2 outline-none transition-all duration-1000 
 </div>
 <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
-<span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('channel_label')}</span>
 <input
 type="email" required placeholder={t('channel_placeholder')
 }
@@ -155,7 +138,6 @@ className="w-full bg-transparent py-2 outline-none transition-all duration-1000 
 </div>
 <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text group-hover:text-btn-hover-text transition-colors duration-700 overflow-hidden">
 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
-<span className="text-[11px] font-display uppercase tracking-[0.5em] text-accent/60 block uppercase leading-none font-bold relative z-10">{t('brief_label')}</span>
 <textarea rows={5
 }
 required placeholder={t('brief_placeholder')

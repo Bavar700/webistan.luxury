@@ -34,7 +34,7 @@ const tCommon = await getTranslations('Common');
         <ProjectCalculator />
         
         {/* Portfolio Block with Accent Corners */}
-        <div className="relative group/block max-w-[1600px] mx-auto w-full">
+        <div className="relative group/block max-w-[1600px] mx-auto w-full py-[60px]">
           <PortfolioSection />
         </div>
 
@@ -60,7 +60,6 @@ const tCommon = await getTranslations('Common');
           </Link>
 
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-8">
-            <a href="mailto:info@webistan.luxury" className="text-[9px] font-display uppercase tracking-[0.15em] text-foreground/50 hover:text-accent transition-colors">info@webistan.luxury</a>
             <span className="text-[9px] font-display uppercase tracking-[0.15em] text-foreground/50">
               © 2026 <a href="https://webistan.luxury" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors lowercase">webistan.luxury</a>
             </span>

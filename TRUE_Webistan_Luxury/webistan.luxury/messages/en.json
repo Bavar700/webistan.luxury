@@ -134,25 +134,25 @@
     "details_drawer_title": "Service Breakdown",
     "details_drawer_close": "Close",
     "drawer_content": {
-      "title": "Детализация услуг студии Webistan",
-      "intro": "Мы ценим честность и прозрачность. В нашей смете мы разделяем стоимость интеллектуального труда наших разработчиков и внешние расходы на сторонние сервисы.",
-      "base_works_title": "Базовые работы:",
+      "title": "Webistan Studio Service Breakdown",
+      "intro": "We value honesty and transparency. In our estimate, we separate the cost of our developers' intellectual labor from external expenses for third-party services.",
+      "base_works_title": "Base Works:",
       "base_works": {
-        "dev": "<span class='text-accent font-bold'>Разработка сайта:</span> Написание «чистого кода» (без конструкторов), адаптация под мобильные устройства, базовая настройка безопасности.",
-        "lang": "<span class='text-accent font-bold'>Мультиязычность (+30%):</span> Создание архитектуры перевода и техническая реализация переключения языков."
+        "dev": "<span class='text-accent font-bold'>Website Development:</span> Writing 'clean code' (no site builders), mobile adaptation, basic security configuration.",
+        "lang": "<span class='text-accent font-bold'>Multi-language (+30%):</span> Translation architecture creation and technical implementation of language switching."
       },
-      "modules_title": "Дополнительные модули (Что включено):",
+      "modules_title": "Additional Modules (What's Included):",
       "modules": {
-        "localpay": "<span class='text-accent font-bold'>LocalPay (1 200 TJS):</span> Интеграция с платежными системами Таджикистана (Alif, DC, Korti Milli). Мы настраиваем прием оплат. Комиссии банков за транзакции оплачиваются отдельно.",
-        "ads": "<span class='text-accent font-bold'>Настройка рекламы (500 TJS):</span> Профессиональный запуск кабинетов Google/Meta и подбор аудитории. Рекламный бюджет вы определяете и пополняете сами.",
-        "infrastructure": "<span class='text-accent font-bold'>Infrastructure Setup (300 TJS):</span> Техническая подготовка сервера, привязка домена и SSL-защита. Стоимость самого домена (.tj/.com) и хостинга оплачивается провайдеру.",
-        "ai": "<span class='text-accent font-bold'>AI (Нейро-протокол) (1 500 TJS):</span> Внедрение нейросетей в логику сайта. Расход токенов API оплачивается платформе-разработчику ИИ.",
-        "seo": "<span class='text-accent font-bold'>SEO-оптимизация (500 TJS):</span> Техническая подготовка сайта для того, чтобы Google и Яндекс «видели» вас.",
-        "narrative": "<span class='text-accent font-bold'>Narrative (500 TJS):</span> Создание продающей истории и текста для одного ключевого раздела. Каждая новая идея текста требует глубокой проработки.",
-        "branding": "<span class='text-accent font-bold'>Branding (800 TJS):</span> Разработка логотипа, палитры и уникального визуального стиля."
+        "localpay": "<span class='text-accent font-bold'>LocalPay (1,200 TJS):</span> Integration with Tajikistan's payment systems (Alif, DC, Korti Milli). We configure payment acceptance. Bank transaction fees are paid separately.",
+        "ads": "<span class='text-accent font-bold'>Ad Campaign Setup (500 TJS):</span> Professional launch of Google/Meta accounts and audience targeting. You determine and top up the ad budget yourself.",
+        "infrastructure": "<span class='text-accent font-bold'>Infrastructure Setup (300 TJS):</span> Technical server preparation, domain linking, and SSL protection. The cost of the domain itself (.tj/.com) and hosting is paid to the provider.",
+        "ai": "<span class='text-accent font-bold'>AI (Neuro-Protocol) (1,500 TJS):</span> Implementation of neural networks into site logic. API token consumption is paid to the AI developer platform.",
+        "seo": "<span class='text-accent font-bold'>SEO Optimization (500 TJS):</span> Technical preparation of the site so that Google and Yandex can 'see' you.",
+        "narrative": "<span class='text-accent font-bold'>Narrative (500 TJS):</span> Creation of a selling story and text for one key section. Each new text idea requires deep processing.",
+        "branding": "<span class='text-accent font-bold'>Branding (800 TJS):</span> Development of a logo, palette, and unique visual style."
       },
-      "note_title": "Важное примечание:",
-      "note_text": "Все сторонние платежи (домены, хостинг, бюджеты на клики) являются вашей собственностью. Мы помогаем их настроить, но доступ к кабинетам и владение остаются за вами."
+      "note_title": "Important Note:",
+      "note_text": "All third-party payments (domains, hosting, ad budgets) are your property. We help set them up, but access to accounts and ownership remain with you."
     },
     "types": {
       "landing": "Landing Page",
@@ -175,6 +175,12 @@
       "standard": "Standard",
       "elite": "Elite"
     },
+    "work_label": "Development Cost:",
+    "support_label": "Monthly Support:",
+    "initial_investment_label": "INITIAL INVESTMENT:",
+    "one_time_payment": "ONE-TIME DEVELOPMENT FEE",
+    "monthly_subscription_label": "MONTHLY SUBSCRIPTION (SUPPORT):",
+    "support_disclaimer": "The first month of technical supervision (Hypercare) is provided complimentary. Regular billing begins 30 days after project launch.",
     "duration": {
       "standard": "21–30 DAYS",
       "fast": "10–14 DAYS",
