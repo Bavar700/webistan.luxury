@@ -240,7 +240,11 @@
     "brief_label": "Краткое видение_",
     "brief_placeholder": "ОПИШИТЕ ВАШУ ЗАДАЧУ",
     "footer_tag": "ПРОТОКОЛ ЗАЩИЩЕННОЙ ПЕРЕДАЧИ_v1.0_ЗАШИФРОВАНО",
-    "locales": "{count, plural, =1 {# Язык} other {# Языка}}"
+    "locales": "{count, plural, =1 {# Язык} =2 {# Языка} =3 {# Языка} =4 {# Языка} other {# Языков}}",
+    "transmission_complete": "Передача_завершена",
+    "success_message": "Ваш запрос успешно зашифрован и передан в штаб-квартиру Webistan Luxury. <br/> Мы свяжемся с вами в течение 24 часов.",
+    "back_to_form": "Вернуться к форме",
+    "initializing_transmission": "ИНИЦИАЛИЗАЦИЯ_ПЕРЕДАЧИ"
   },
   "Addons": {
     "branding": {

@@ -23,7 +23,11 @@ export const ContactForm = () => {
     // Simulate high-end transmission delay
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    // Transmission initialized to webistan.tech@gmail.com
+    // Log for verification in local development
+    console.log("Transmission initialized to webistan.tech@gmail.com", {
+      projectType, totalPrice, addons, languages, support, momentum 
+    });
+    
     setStatus('success');
   };
 
@@ -55,16 +59,20 @@ export const ContactForm = () => {
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-3xl md:text-5xl font-display uppercase tracking-[0.2em] text-accent">Transmission_Complete</h3>
+                  <h3 className="text-3xl md:text-5xl font-display uppercase tracking-[0.2em] text-accent">
+                    {t('transmission_complete')}
+                  </h3>
                   <p className="text-foreground/60 uppercase tracking-widest text-[11px] max-w-md mx-auto leading-relaxed">
-                    Ваш запрос успешно зашифрован и передан в штаб-квартиру Webistan Luxury. <br/> Мы свяжемся с вами в течение 24 часов.
+                    {t.rich('success_message', {
+                      br: () => <br />
+                    })}
                   </p>
                 </div>
                 <button 
                   onClick={() => setStatus('idle')}
                   className="text-[10px] uppercase tracking-[0.4em] text-accent/50 hover:text-accent transition-colors border-b border-accent/10 hover:border-accent pb-1"
                 >
-                  Вернуться к форме
+                  {t('back_to_form')}
                 </button>
               </motion.div>
             ) : (
@@ -148,7 +156,7 @@ export const ContactForm = () => {
                           <span className="flex items-center gap-6 uppercase tracking-[0.3em]">
                             {status === 'sending' ? (
                               <>
-                                <span>INITIALIZING_TRANSMISSION</span>
+                                <span>{t('initializing_transmission')}</span>
                                 <Loader2 size={14} className="animate-spin text-accent" />
                               </>
                             ) : (

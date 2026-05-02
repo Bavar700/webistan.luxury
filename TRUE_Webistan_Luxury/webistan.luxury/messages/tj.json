@@ -236,8 +236,12 @@
     "channel_placeholder": "ПОЧТАИ ЭЛЕКТРОНӢ",
     "brief_label": "Дар бораи лоиҳа гӯед",
     "brief_placeholder": "ДАР БОРАИ ЛОИҲА ГӮЕД",
-    "footer_tag": "ПРОТОКОЛИ ИРСОЛИ БЕХАТАР_v1.0_РАМЗГУЗОРӢ",
-    "locales": "{count, plural, =1 {# Забон} other {# Забон}}"
+    "footer_tag": "ПРОТОКОЛИ ИНТИҚОЛИ ҲИМОЯШУДА_v1.0_РАМЗГУЗОРӢ",
+    "locales": "{count, plural, =1 {# Забон} other {# Забонҳо}}",
+    "transmission_complete": "Интиқол_анҷом_ёфт",
+    "success_message": "Дархости шумо бомуваффақият рамзгузорӣ ва ба қароргоҳи Webistan Luxury фиристода шуд. <br/> Мо дар давоми 24 соат бо шумо тамос хоҳем гирифт.",
+    "back_to_form": "Бозгашт ба форма",
+    "initializing_transmission": "ОҒОЗИ_ИНТИҚОЛ"
   },
   "Addons": {
     "branding": {
