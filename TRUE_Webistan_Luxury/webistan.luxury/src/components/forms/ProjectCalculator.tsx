@@ -280,15 +280,15 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="relative z-10 flex flex-col gap-6 h-full">
                         <div className="flex items-center gap-6">
                           <div className="transition-all duration-500">
-                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.75 }} />
+                            <mode.icon size={20} strokeWidth={1.5} style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.6 }} />
                           </div>
-                          <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.75 }}>{mode.cost}</span>
+                          <span className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: 0.6 }}>{mode.cost}</span>
                         </div>
                         <div className="space-y-2">
-                          <span className="block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.75 }}>{mode.label}</span>
-                          <span className="text-[13px] md:text-[12px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: 0.75 }}>{mode.duration}</span>
+                          <span className="block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight transition-all duration-500" style={{ color: momentum === mode.id ? 'var(--accent)' : 'var(--calc-title-color)', opacity: 0.6 }}>{mode.label}</span>
+                          <span className="text-[13px] md:text-[12px] uppercase tracking-widest text-accent font-display transition-all duration-500" style={{ opacity: 0.6 }}>{mode.duration}</span>
                         </div>
-                        <p className="text-[12px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.75 }}>{mode.desc}</p>
+                        <p className="text-[12px] font-medium mt-auto leading-relaxed transition-all duration-500" style={{ color: 'var(--calc-desc-color)', opacity: 0.6 }}>{mode.desc}</p>
                       </div>
                     </button> ))}
                     </div>
