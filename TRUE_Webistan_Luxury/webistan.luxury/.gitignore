@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+temp_restore/
+temp_check_logo/
+temp_check_logo_2/
+temp_may3_navbar.txt
+
+.backups/
+.backup_design_v1/

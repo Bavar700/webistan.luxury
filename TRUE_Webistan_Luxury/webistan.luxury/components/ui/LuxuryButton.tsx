@@ -40,7 +40,7 @@ export const LuxuryButton = ({
     >
       {/* Shimmer Layer - Isolated Overflow */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.07] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
       </div>
       
       {/* Corner Accents - Outside Overflow */}
@@ -53,7 +53,7 @@ export const LuxuryButton = ({
         </>
       )}
       
-      <div className="relative z-10 flex items-center justify-center text-[10px] md:text-[11px] font-display uppercase tracking-[0.6em] text-btn-text/90 group-hover:text-btn-hover-text transition-all duration-700 -mr-[0.6em]">
+      <div className="relative z-10 flex items-center justify-center text-[8.5px] md:text-[11px] font-display uppercase tracking-[0.6em] text-btn-text/90 group-hover:text-btn-hover-text transition-all duration-700 -mr-[0.6em] px-2">
         {children}
       </div>
     </button>

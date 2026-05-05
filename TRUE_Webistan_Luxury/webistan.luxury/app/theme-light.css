@@ -6,7 +6,7 @@
    ============================================================ */
 
 [data-theme='light'] {
-  --background: #F2F4F7;
+  --background: #FFFFFF;
   --foreground: #0A0A0B;
   --surface: #FFFFFF;
   --accent: #B8860B;
@@ -15,32 +15,32 @@
   --accent-muted: rgba(184, 134, 11, 0.05);
   --border-color: rgba(184, 134, 11, 0.1);
   --header-bg: #000000; /* Header stays dark — brand constant */
-  --card-bg: #F2F4F7;
+  --card-bg: #FFFFFF;
   --card-text: #0A0A0B;
-  --btn-bg: #F5F7F9;
+  --btn-bg: #FFFFFF;
   --btn-text: #0A0A0B;
-  --btn-hover-bg: #E5E7EB;
-  --btn-hover-text: #000000;
+  --btn-hover-bg: #F2F4F7;
+  --btn-hover-text: var(--accent);
   --btn-border-width: 0.5px;
-  --btn-shadow: none; /* No shadows in light theme */
+  --btn-shadow: 0 4px 15px rgba(184, 134, 11, 0.08); /* Accent glow */
   --btn-blur: 0px;
-  --calc-section-bg: #F2F4F7;
-  --calc-card-bg: #F2F4F7;
+  --calc-section-bg: #FFFFFF;
+  --calc-card-bg: #FFFFFF;
   --calc-title-color: #0A0A0B;
-  --calc-desc-color: #333333;
+  --calc-desc-color: #000000;
   --calc-step-num-color: var(--accent);
   --calc-step-border-color: rgba(184, 134, 11, 0.2);
   --block-shadow: none;
-  --promo-bg: #F2F4F7;
+  --promo-bg: #FFFFFF;
   --promo-inner-bg: transparent;
-  --promo-text: rgba(26, 26, 26, 0.8);
+  --promo-text: #000000;
   --promo-ribbon-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   --promo-accent-color: #B8860B;
   --promo-accent-bg: none;
   --promo-accent-shadow: none;
   --promo-line-opacity: 0.9;
   --calc-dropdown-bg: #FFFFFF;
-  --calc-dropdown-text: rgba(0, 0, 0, 0.7);
-  --calc-dropdown-text-hover: #000000;
+  --calc-dropdown-text: #000000;
+  --calc-dropdown-text-hover: var(--accent);
   --hero-shimmer-via: #FFFFFF;
 }

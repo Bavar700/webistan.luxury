@@ -41,7 +41,7 @@ export const HeroSection = () => {
     <div 
       id="home" 
       ref={containerRef}
-      className="relative flex items-center justify-center overflow-hidden bg-background !pt-[180px] !pb-[160px]"
+      className="relative flex items-center justify-center overflow-hidden bg-background !pt-[120px] md:!pt-[180px] !pb-[100px] md:!pb-[160px]"
     >
       {/* Decorative Background Blur Removed for Perfect White */}
       <motion.div 
@@ -62,19 +62,19 @@ export const HeroSection = () => {
           <motion.div variants={itemVariants} className="flex flex-col items-center text-center w-full">
             
             {/* 1. UPPER TEXT */}
-            <span className="text-sm md:text-lg font-display font-extralight tracking-[1.05em] text-foreground/80 uppercase block leading-none -mr-[1.05em] mb-[30px]">
+            <span className="text-xs md:text-lg font-display font-extralight tracking-[1.05em] text-foreground/80 uppercase block leading-none -mr-[1.05em] mb-[30px]">
               {t('upper')}
             </span>
 
             {/* 2. MIDDLE TEXT */}
             <div className="flex items-center justify-center w-full mb-[30px]">
-              <span className="text-2xl md:text-6xl uppercase tracking-[0.2em] font-medium leading-none -mr-[0.2em] hero-shimmer">
+              <span className="text-lg md:text-6xl uppercase tracking-[0.2em] font-medium leading-none -mr-[0.2em] hero-shimmer">
                 {t('middle')}
               </span>
             </div>
 
             {/* 3. BASE TITLE */}
-            <h1 className="relative text-4xl md:text-7xl font-display font-bold tracking-[0.05em] leading-none uppercase -mr-[0.05em] mb-[30px]">
+            <h1 className="relative text-2xl sm:text-3xl md:text-7xl font-display font-bold tracking-[0.05em] leading-none uppercase -mr-[0.05em] mb-[30px]">
               <span className="relative z-10 hero-shimmer">
                 {t('base')}
               </span>
@@ -86,7 +86,7 @@ export const HeroSection = () => {
             {/* DESCRIPTION */}
             <motion.p 
               variants={itemVariants}
-              className="text-[15px] md:text-[17px] font-sans text-foreground/60 max-w-2xl mx-auto mb-20 leading-relaxed font-light text-center"
+              className="text-[13px] md:text-[17px] font-sans text-foreground/60 max-w-2xl mx-auto mb-20 leading-relaxed font-light text-center px-4"
             >
               {t('description')}
             </motion.p>
@@ -94,7 +94,7 @@ export const HeroSection = () => {
             {/* BUTTONS */}
             <motion.div 
               variants={itemVariants}
-              className="flex flex-col sm:flex-row items-center justify-center gap-8 w-full"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full"
             >
               <LuxuryButton 
                 width="w-full sm:w-[450px]" 

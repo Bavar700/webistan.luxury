@@ -106,17 +106,16 @@ const finalGridItems = [...displayItems, ...fillingItems];
   return (
     <>
       <section id="calculator" className="relative overflow-hidden">
-        <div className="group/promo w-screen relative left-1/2 -translate-x-1/2 py-[120px] overflow-hidden" style={{backgroundColor: 'var(--promo-bg)'}}>
-          <div className="max-w-6xl mx-auto relative border-[0.5px] border-accent/20 hover:border-accent/80 transition-colors duration-700 backdrop-blur-sm px-6 py-32 md:px-12 text-center flex flex-col items-center justify-center" style={{backgroundColor: 'var(--promo-inner-bg)'}}>
+        <div className="group/promo w-screen relative left-1/2 -translate-x-1/2 py-[40px] md:py-[60px] overflow-hidden" style={{backgroundColor: 'var(--promo-bg)'}}>
+          <div className="max-w-6xl mx-auto relative border-[0.5px] border-accent/20 hover:border-accent/80 transition-colors duration-700 backdrop-blur-sm px-6 py-8 md:py-12 md:px-12 text-center flex flex-col items-center justify-center" style={{backgroundColor: 'var(--promo-inner-bg)'}}>
             
             {/* Architectural Ribbon Anchor */}
-            <div className="absolute top-0 right-0 w-[200px] h-[200px] overflow-hidden z-50 pointer-events-none">
+            <div className="absolute top-0 right-0 w-[160px] h-[160px] md:w-[200px] md:h-[200px] overflow-hidden z-50 pointer-events-none">
               <div
-                className="absolute top-[45px] right-[-55px] w-[280px] py-[12px] text-center overflow-hidden"
+                className="absolute top-[25px] -right-[65px] md:top-[45px] md:-right-[55px] w-[220px] md:w-[280px] h-[32px] md:h-[44px] flex items-center justify-center text-center overflow-hidden rotate-45"
                 style={{
                   background: 'linear-gradient(135deg, #8B6B23 0%, #D4AF37 50%, #8B6B23 100%)',
                   color: '#000000',
-                  transform: 'rotate(45deg)',
                   borderTop: '1px solid rgba(255,255,255,0.4)',
                   borderBottom: '1px solid rgba(0,0,0,0.2)',
                   pointerEvents: 'auto',
@@ -129,7 +128,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 0.5 }}
                   className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] z-10"
                 />
-                <span className="font-black text-[13px] tracking-[0.4em] uppercase block relative z-20" style={{ color: '#000000' }}>
+                <span className="font-black text-[9px] md:text-[13px] tracking-[0.3em] md:tracking-[0.4em] uppercase block relative z-20 mt-[2px] -translate-x-3 md:-translate-x-2 leading-none" style={{ color: '#000000' }}>
                   {t('ribbon_label')}
                 </span>
               </div>
@@ -147,11 +146,11 @@ const finalGridItems = [...displayItems, ...fillingItems];
                 <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-accent animate-pulse" strokeWidth={1.5} />
                 <div className="w-16 h-[0.5px] bg-gradient-to-l from-transparent to-accent" style={{ opacity: 'var(--promo-line-opacity)' }} />
               </div>
-              <div className="space-y-4 md:space-y-6">
-                <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent font-display font-medium block">
+              <div className="space-y-4 md:space-y-6 px-2 md:px-0">
+                <span className="text-[9px] md:text-[12px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent font-display font-medium block">
                   {t('foundational_partner_protocol')}
                 </span>
-                <h3 className="text-[11px] md:text-[16px] uppercase tracking-normal md:tracking-wider font-light leading-snug mx-auto drop-shadow-md max-w-5xl" style={{color: 'var(--promo-text)'}}>
+                <h3 className="text-[9.5px] md:text-[16px] uppercase tracking-normal md:tracking-wider font-light leading-loose md:leading-relaxed mx-auto drop-shadow-md w-[95%] md:w-full max-w-5xl text-balance" style={{color: 'var(--promo-text)'}}>
                   {t.rich('discount_text', {
                     accent: (chunks) => (
                       <span className="font-bold animate-shimmer whitespace-nowrap" style={{ color: 'var(--promo-accent-color)', backgroundImage: 'var(--promo-accent-bg)', WebkitBackgroundClip: 'text', backgroundClip: 'text', filter: 'drop-shadow(var(--promo-accent-shadow))' }}>
@@ -159,7 +158,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       </span>
                     )
                   })}
-                  <br />
+                  <br className="hidden md:block" />
                   {t.rich('discount_text_2', {
                     accent: (chunks) => (
                       <span className="font-bold animate-shimmer whitespace-nowrap" style={{ color: 'var(--promo-accent-color)', backgroundImage: 'var(--promo-accent-bg)', WebkitBackgroundClip: 'text', backgroundClip: 'text', filter: 'drop-shadow(var(--promo-accent-shadow))' }}>
@@ -173,7 +172,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
           </div>
         </div>
 
-        <div className="w-full flex justify-center mb-[120px] relative z-20">
+        <div className="w-full flex justify-center mb-[60px] md:mb-[120px] relative z-20">
           <div className="w-full max-w-4xl h-[0.5px] bg-gradient-to-r from-transparent via-accent to-transparent" style={{ opacity: 'var(--promo-line-opacity)' }} />
         </div>
 
@@ -183,17 +182,17 @@ const finalGridItems = [...displayItems, ...fillingItems];
           <div className="absolute bottom-0 left-0 w-8 h-8 border-b-[0.5px] border-l-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
           <div className="absolute bottom-0 right-0 w-8 h-8 border-b-[0.5px] border-r-[0.5px] border-accent/30 group-hover/block:border-accent group-hover/block:w-12 group-hover/block:h-12 transition-all duration-700" />
           
-          <div className="bg-background">
+          <div className="bg-transparent">
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
-              <div className="w-full relative group/calc shadow-[var(--block-shadow)] rounded-xl overflow-hidden bg-background">
-                <div className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20">
+              <div className="w-full relative group/calc rounded-xl overflow-hidden bg-transparent">
+                <div className="p-4 sm:p-8 md:p-16 lg:p-20 space-y-16 md:space-y-20">
                   {/* STEP 01 */}
                   <div className="space-y-12">
                     <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 01 </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
+                        <h3 className="text-sm md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system01.title')}</h3>
                         <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system01.desc')}</p>
                       </div>
                     </motion.div>
@@ -231,12 +230,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   </div>
 
                   {/* STEP 02 */}
-                  <div className="space-y-12 mb-36">
+                  <div className="space-y-12 mb-20 md:mb-36">
                     <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 02 </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
+                        <h3 className="text-sm md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system02.title')}</h3>
                         <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system02.desc')}</p>
                       </div>
                     </motion.div>
@@ -246,8 +245,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                         <div className={`absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 left-0 w-1.5 h-1.5 border-b-[0.5px] border-l-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
                         <div className={`absolute bottom-0 right-0 w-1.5 h-1.5 border-b-[0.5px] border-r-[0.5px] transition-all duration-700 ${item.active ? 'border-accent/80' : 'border-accent/0 group-hover/lang-item:border-accent/80'}`} />
-                        <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-80' : 'opacity-80'} style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }} />
-                        <span className="text-[10.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)' }}>{item.label}</span>
+                        <Globe size={14} strokeWidth={1.5} className="transition-opacity duration-500" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: item.active ? 0.8 : 0.45 }} />
+                        <span className="text-[10.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold transition-opacity duration-500" style={{ color: item.active ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: item.active ? 1 : 0.45 }}>{item.label}</span>
                       </button> ))}
                       </div>
                       <div className="mt-12 flex flex-col sm:flex-row items-stretch gap-6">
@@ -263,12 +262,12 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   </div>
 
                   {/* STEP 03 */}
-                  <div className="space-y-12 mb-36">
+                  <div className="space-y-12 mb-20 md:mb-36">
                     <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 03 </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
+                        <h3 className="text-sm md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system03.title')}</h3>
                         <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system03.desc')}</p>
                       </div>
                     </motion.div>
@@ -295,17 +294,17 @@ const finalGridItems = [...displayItems, ...fillingItems];
                   </div>
 
                   {/* STEP 04 */}
-                  <div className="space-y-12 mb-36">
+                  <div className="space-y-12 mb-20 md:mb-36">
                     <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 0.8, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 04 </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
+                        <h3 className="text-sm md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system04.title')}</h3>
                         <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system04.desc')}</p>
                       </div>
                     </motion.div>
                     <div className="flex justify-center w-full">
-                      <div className="flex gap-6"> {(['monthly', 'yearly'] as BillingCycle[]).map((cycle) => ( <button key={cycle} onClick={() => setBillingCycle(cycle)} className={`group relative w-40 md:w-48 h-[54px] md:h-[60px] transition-all duration-700 ${billingCycle === cycle ? 'bg-accent/[0.05]' : 'bg-btn-bg backdrop-blur-sm'}`} >
+                      <div className="flex gap-2 md:gap-6"> {(['monthly', 'yearly'] as BillingCycle[]).map((cycle) => ( <button key={cycle} onClick={() => setBillingCycle(cycle)} className={`group relative w-36 sm:w-40 md:w-48 h-[54px] md:h-[60px] transition-all duration-700 ${billingCycle === cycle ? 'bg-accent/[0.05]' : 'bg-btn-bg backdrop-blur-sm'}`} >
                         <div className="relative z-10 flex flex-col items-center justify-center h-full">
                           <span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black" style={{ color: billingCycle === cycle ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: billingCycle === cycle ? 1 : 0.45 }}> {cycle === 'monthly' ? t('billing.monthly') : t('billing.yearly')}
                           </span> {cycle === 'yearly' && <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold mt-1 transition-all duration-500 ${billingCycle === cycle ? 'text-accent' : 'text-accent/30'}`}>{t('save_30')}</span>}
@@ -328,8 +327,8 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
                         <span className="text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black" style={{ color: support === item.level ? 'var(--accent)' : 'var(--calc-desc-color)', opacity: support === item.level ? 1 : 0.45 }}>{t(`support_levels.${item.level}`)}</span>
                         <div className="flex items-baseline gap-1">
-                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'hero-shimmer' : 'text-foreground/85'}`}>{item.cost}</span>
-                          <span className="text-[11px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
+                          <span className={`text-3xl md:text-4xl font-display transition-all duration-500 ${support === item.level ? 'hero-shimmer' : 'text-foreground/30'}`}>{item.cost}</span>
+                          <span className={`text-[13px] md:text-[12px] text-accent/40 uppercase tracking-widest leading-none font-bold transition-all duration-500 ${support === item.level ? 'opacity-100' : 'opacity-60'}`}>{t('tjs_mo')}</span>
                         </div>
                         <div className="space-y-4 pt-6 border-t border-black/5"> {item.features.map((f, i) => ( <div key={i} className="flex items-start gap-3">
                           <div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-black/10'}`} />
@@ -347,7 +346,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                       <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                         <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 05 </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
+                        <h3 className="text-sm md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('system05.title')}</h3>
                         <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('system05.desc')}</p>
                       </div>
                     </motion.div>
@@ -386,8 +385,13 @@ const finalGridItems = [...displayItems, ...fillingItems];
                             {t('work_label')} ({t(`momentum_labels.${momentum}`)})
                           </span>
                         </div>
-                        <div className={`font-display tracking-widest whitespace-nowrap ${projectType === 'landing' ? 'text-4xl md:text-6xl text-foreground hero-shimmer' : 'text-xl md:text-2xl text-foreground/40'}`}>
-                          {originalPrice.toLocaleString()} <span className={`inline-block ${projectType === 'landing' ? 'text-xl text-foreground/40 ml-2' : ''}`}>TJS</span>
+                        <div className="flex items-baseline gap-2">
+                          <span className={`font-display tracking-widest whitespace-nowrap ${projectType === 'landing' ? 'text-4xl md:text-6xl text-foreground hero-shimmer' : 'text-xl md:text-2xl text-foreground/40'}`}>
+                            {originalPrice.toLocaleString()}
+                          </span>
+                          <span className={`font-display font-bold text-accent ${projectType === 'landing' ? 'text-2xl' : 'text-lg opacity-40'}`}>
+                            TJS
+                          </span>
                         </div>
                       </div>
 
@@ -397,8 +401,13 @@ const finalGridItems = [...displayItems, ...fillingItems];
                           <div className="space-y-1">
                             <span className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-accent font-black block">{t('work_label')} ({t('founder_rate_label')})</span>
                           </div>
-                          <div className="text-3xl md:text-5xl font-display text-foreground tracking-widest hero-shimmer whitespace-nowrap">
-                            {totalPrice.toLocaleString()} <span className="text-xl text-foreground/40 ml-2 inline-block">TJS</span>
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-3xl md:text-5xl font-display text-foreground tracking-widest hero-shimmer whitespace-nowrap">
+                              {totalPrice.toLocaleString()}
+                            </span>
+                            <span className="text-2xl md:text-3xl font-display text-accent font-bold">
+                              TJS
+                            </span>
                           </div>
                         </div>
                       )}
@@ -417,7 +426,7 @@ const finalGridItems = [...displayItems, ...fillingItems];
                             </div>
                             <div className="text-2xl md:text-3xl font-display text-foreground tracking-widest whitespace-nowrap">
                               {billingCycle === 'yearly' ? (monthlyTotal * 12).toLocaleString() : monthlyTotal.toLocaleString()} 
-                              <span className="text-sm text-foreground/40 ml-2 uppercase inline-block">
+                              <span className="text-sm text-foreground/70 ml-2 uppercase inline-block">
                                 {billingCycle === 'yearly' ? t('tjs_yr') : t('tjs_mo')}
                               </span>
                             </div>

@@ -31,7 +31,7 @@ className="flex flex-col items-center" >
 }
 </span>
 <div className="flex flex-col items-center">
-<h2 className="text-4xl md:text-7xl font-display font-light tracking-[0.25em] leading-none uppercase -mr-[0.25em] text-foreground"> {t('legacies')
+<h2 className="text-3xl md:text-7xl font-display font-light tracking-[0.25em] leading-none uppercase -mr-[0.25em] text-foreground"> {t('legacies')
 }
 </h2>
 <div className="w-24 h-[0.5px] bg-accent/30 mt-10" />
@@ -56,7 +56,7 @@ once: true }
 transition={{
 duration: 1.5, delay: i * 0.2 }
 }
-className="group relative bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] text-card-text p-16 hover:bg-btn-hover-bg transition-all duration-1000 overflow-hidden rounded-none border border-white/5" >
+className="group relative bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] text-card-text p-8 md:p-16 hover:bg-btn-hover-bg transition-all duration-1000 overflow-hidden rounded-none border border-white/5" >
     <div className="absolute inset-0 transition-opacity duration-700 opacity-0 group-hover:opacity-100">
       <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t-[0.5px] border-l-[0.5px] border-accent" />
       <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t-[0.5px] border-r-[0.5px] border-accent" />

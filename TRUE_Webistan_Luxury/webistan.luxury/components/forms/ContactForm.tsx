@@ -44,7 +44,7 @@ export const ContactForm = () => {
     <div id="contact" className="relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/[0.02] blur-[150px] rounded-full pointer-events-none" />
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="w-full relative group/calc shadow-[var(--block-shadow)] rounded-xl overflow-hidden bg-background min-h-[600px] flex flex-col justify-center">
+        <div className="w-full relative group/calc rounded-xl overflow-hidden bg-transparent min-h-[600px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {status === 'success' ? (
               <motion.div 
@@ -80,14 +80,14 @@ export const ContactForm = () => {
                 key="form"
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="p-6 sm:p-8 md:p-16 lg:p-20 space-y-20"
+                className="p-4 sm:p-8 md:p-16 lg:p-20 space-y-12 md:space-y-20"
               >
                 <div className="space-y-12">
                   <motion.div initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="flex items-center gap-6" >
                     <div className="w-14 h-14 flex-shrink-0 rounded-full border-2 flex items-center justify-center font-display text-base relative overflow-hidden group" style={{ borderColor: 'var(--calc-step-border-color)', color: 'var(--calc-step-num-color)' }}>
                       <div className="absolute inset-0 bg-accent/10 animate-pulse" /> 06 </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('initiation_title')}</h3>
+                      <h3 className="text-sm md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700" style={{ color: 'var(--calc-title-color)' }}>{t('initiation_title')}</h3>
                       <p className="text-[10px] md:text-[10px] mt-1 tracking-wider uppercase font-medium opacity-80" style={{ color: 'var(--calc-desc-color)' }}>{t('initiation_desc')}</p>
                     </div>
                   </motion.div>
@@ -96,14 +96,14 @@ export const ContactForm = () => {
                     <form onSubmit={handleSubmit} className="space-y-16">
                       <div className="p-6 sm:p-8 md:p-10 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text border-[length:var(--btn-border-width)] border-white/10 relative overflow-hidden">
                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-accent/5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 pb-8 border-b border-accent/5">
                           {[
                             { label: t('arch_form'), value: tcalc(`types.${projectType.toLowerCase()}` as any) },
                             { label: t('lang_units'), value: t('locales', { count: languages }) },
                             { label: t('support_proto'), value: tcalc(`support_levels.${support}`) },
                             { label: t('momentum'), value: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any) },
                           ].map((item, id) => (
-                            <div key={id} className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
+                            <div key={id} className="space-y-2 border-b sm:border-b-0 border-l-[0.5px] border-accent/5 pl-4 pb-4 sm:pb-0">
                               <span className="text-[11px] font-display uppercase tracking-[0.2em] opacity-80 block">{item.label}</span>
                               <span className="text-[11px] font-display uppercase tracking-[0.3em] text-foreground/50">{item.value}</span>
                             </div>
@@ -123,21 +123,26 @@ export const ContactForm = () => {
 
                         <div className="pt-10 flex flex-col md:flex-row items-end justify-between gap-6 border-t border-accent/10 mt-12">
                           <div className="space-y-1">
-                            <span className="text-[10px] md:text-[11px] font-display uppercase tracking-[0.4em] text-accent/70 block leading-none">
+                            <span className="text-[10px] md:text-[11px] font-display uppercase tracking-[0.4em] text-accent font-bold block leading-none">
                               {tcalc('initial_investment_label')}
                             </span>
                           </div>
                           <div className="space-y-1 text-right">
-                            <span className="text-3xl md:text-5xl font-display uppercase tracking-[0.1em] text-foreground hero-shimmer leading-none whitespace-nowrap">
-                              {totalPrice.toLocaleString()} <span className="inline-block text-2xl ml-2 opacity-50">TJS</span>
-                            </span>
+                            <div className="flex items-baseline justify-end gap-2">
+                              <span className="text-3xl md:text-5xl font-display uppercase tracking-[0.1em] text-foreground hero-shimmer leading-none whitespace-nowrap">
+                                {totalPrice.toLocaleString()}
+                              </span>
+                              <span className="text-2xl md:text-3xl font-display text-accent font-bold opacity-100">
+                                TJS
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
-                          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
+                          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                           <input 
                             type="text" 
                             required 
@@ -148,7 +153,7 @@ export const ContactForm = () => {
                           />
                         </div>
                         <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
-                          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
+                          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                           <input 
                             type="email" 
                             required 
@@ -168,7 +173,7 @@ export const ContactForm = () => {
                       </div>
 
                       <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
-                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.03] to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
+                        <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                         <textarea 
                           rows={5} 
                           required 
