@@ -237,7 +237,7 @@
     "footer_tag": "SECURE TRANSMISSION PROTOCOL_v1.0_ENCRYPTED",
     "locales": "{count, plural, =1 {# Locale} other {# Locales}}",
     "transmission_complete": "Transmission_Complete",
-    "success_message": "Your request has been successfully encrypted and transmitted to Webistan Luxury HQ. <br/> We will contact you within 24 hours.",
+    "success_message": "Your request has been successfully encrypted and transmitted to Webistan Luxury HQ. <br></br> We will contact you within 24 hours.",
     "back_to_form": "Return to form",
     "initializing_transmission": "INITIALIZING_TRANSMISSION",
     "field_required": "Please fill out this field",

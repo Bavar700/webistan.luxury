@@ -19,11 +19,12 @@ import {
 useTheme 
 }
 from '@/lib/ThemeProvider';
-import {
+import { 
 WebistanSymbol 
 }
 from '@/components/ui/WebistanSymbol';
 import Link from 'next/link';
+import { BrandLogo } from './BrandLogo';
 export const Navbar = () => {
 const tn = useTranslations('Navigation');
 const locale = useLocale();
@@ -46,13 +47,8 @@ return ( <> <nav className={`fixed top-0 w-full z-[100] transition-all duration-
 <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border"> {
 
 }
-<Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-[#F1F1F3]">
-<WebistanSymbol className="w-[24px] h-[12px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
-<div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[16px] leading-none">
-<span>&nbsp;</span>
-<span className="text-[#F1F1F3] transition-all duration-700">WEBISTAN</span>
-<span className="hero-shimmer">.LUXURY</span>
-</div>
+<Link href="/" className="relative z-[110] group">
+  <BrandLogo />
 </Link>
       <div className="hidden lg:flex items-center gap-2"> {navLinks.map((link) => ( <a key={link.name
 }
@@ -116,7 +112,7 @@ opacity: 1, y: 0 }
 exit={{
 opacity: 0, y: -20 }
 }
-className="fixed top-[72px] right-0 bottom-0 left-0 bg-background z-[95] flex flex-col items-center justify-start pt-16 lg:hidden shadow-2xl border-t border-accent/10" >
+className="fixed top-0 right-0 bottom-0 left-0 bg-[#000000] z-[95] flex flex-col items-center justify-start pt-16 lg:hidden shadow-2xl border-t border-accent/10" >
 <div className="flex flex-col items-center gap-8 w-full px-6"> {navLinks.map((link, i) => ( <motion.a key={link.name
 }
 href={link.href
@@ -170,3 +166,4 @@ className="text-2xl font-display font-medium text-foreground/70 hover:text-accen
 </AnimatePresence> 
 </> );
 };
+

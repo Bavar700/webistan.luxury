@@ -16,19 +16,48 @@ export const ContactForm = () => {
   const support = useCalculatorStore(state => state.support);
   const momentum = useCalculatorStore(state => state.momentum);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
     
-    // Simulate high-end transmission delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Log for verification in local development
-    console.log("Transmission initialized to webistan.tech@gmail.com", {
-      projectType, totalPrice, addons, languages, support, momentum 
-    });
-    
-    setStatus('success');
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const brief = formData.get('brief') as string;
+
+    const activeAddonsLabels = Object.entries(addons)
+      .filter(([, v]) => v)
+      .map(([k]) => ta(`${k}.label` as any));
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          brief,
+          calculatorData: {
+            projectType: tcalc(`types.${projectType.toLowerCase()}` as any),
+            totalPrice,
+            languages,
+            support: tcalc(`support_levels.${support}`),
+            momentum: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any),
+            activeAddons: activeAddonsLabels
+          }
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('Transmission failed. Please try again or contact us directly.');
+      setStatus('idle');
+    }
   };
 
   const activeAddons = Object.entries(addons)
@@ -64,7 +93,7 @@ export const ContactForm = () => {
                   </h3>
                   <p className="text-foreground/60 uppercase tracking-widest text-[11px] max-w-md mx-auto leading-relaxed">
                     {t.rich('success_message', {
-                      br: () => <br />
+                      br: () => <br className="block mb-2" />
                     })}
                   </p>
                 </div>
@@ -144,6 +173,7 @@ export const ContactForm = () => {
                         <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
                           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                           <input 
+                            name="name"
                             type="text" 
                             required 
                             placeholder={t('name_placeholder')} 
@@ -155,6 +185,7 @@ export const ContactForm = () => {
                         <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
                           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                           <input 
+                            name="email"
                             type="email" 
                             required 
                             placeholder={t('channel_placeholder')} 
@@ -175,6 +206,7 @@ export const ContactForm = () => {
                       <div className="space-y-6 relative group/input p-6 md:p-8 bg-btn-bg [backdrop-filter:blur(var(--btn-blur))] [box-shadow:var(--btn-shadow)] hover:bg-btn-hover-bg transition-all duration-700 text-btn-text overflow-hidden">
                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent-champagne/40 to-transparent -translate-x-full group-hover/input:translate-x-full transition-transform duration-1500 ease-in-out" />
                         <textarea 
+                          name="brief"
                           rows={5} 
                           required 
                           placeholder={t('brief_placeholder')} 

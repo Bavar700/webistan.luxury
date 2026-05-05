@@ -30,6 +30,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", ".backups", ".backup_design_v1", "temp_restore", "restore_may3_final", "may3_restore_temp", "may5_restore_temp", "may5_temp2"]
+  "exclude": ["node_modules", ".backups", ".backup_design_v1", "temp_restore", "restore_hybrid_final"]
 }
 
