@@ -20,42 +20,60 @@ export const ContactForm = () => {
     e.preventDefault();
     setStatus('sending');
     
-    const formData = new FormData(e.currentTarget);
+    // Capture form data immediately to avoid issues with currentTarget in async scope
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const brief = formData.get('brief') as string;
 
+    // Safety checks for store values
+    const safeProjectType = projectType || 'landing';
+    const safeSupport = support || 'none';
+    const safeMomentum = (momentum || 'standard').toLowerCase();
+    const safeLanguages = languages || 1;
+
     const activeAddonsLabels = Object.entries(addons)
       .filter(([, v]) => v)
-      .map(([k]) => ta(`${k}.label` as any));
+      .map(([k]) => {
+        try {
+          return ta(`${k}.label` as any);
+        } catch (e) {
+          return k;
+        }
+      });
 
     try {
+      const payload = {
+        name,
+        email,
+        brief,
+        calculatorData: {
+          projectType: tcalc(`types.${safeProjectType.toLowerCase()}` as any),
+          totalPrice,
+          languages: safeLanguages,
+          support: tcalc(`support_levels.${safeSupport}`),
+          momentum: tcalc(`momentum.${safeMomentum === 'fast' ? 'fast' : safeMomentum}` as any),
+          activeAddons: activeAddonsLabels
+        }
+      };
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          brief,
-          calculatorData: {
-            projectType: tcalc(`types.${projectType.toLowerCase()}` as any),
-            totalPrice,
-            languages,
-            support: tcalc(`support_levels.${support}`),
-            momentum: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any),
-            activeAddons: activeAddonsLabels
-          }
-        })
+        body: JSON.stringify(payload)
       });
 
       if (response.ok) {
         setStatus('success');
       } else {
-        throw new Error('Failed to send');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to send');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Submission error:', error);
-      alert('Transmission failed. Please try again or contact us directly.');
+      const errorMessage = error.message || 'Unknown error';
+      alert(`Submission Error: ${errorMessage}`);
       setStatus('idle');
     }
   };
