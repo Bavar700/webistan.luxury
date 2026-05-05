@@ -68,13 +68,13 @@ export const HeroSection = () => {
 
             {/* 2. MIDDLE TEXT */}
             <div className="flex items-center justify-center w-full mb-[30px]">
-              <span className="text-lg md:text-6xl uppercase tracking-[0.2em] font-medium leading-none -mr-[0.2em] hero-shimmer">
+              <span className="text-5xl md:text-6xl uppercase tracking-[0.2em] font-medium leading-none -mr-[0.2em] hero-shimmer">
                 {t('middle')}
               </span>
             </div>
 
             {/* 3. BASE TITLE */}
-            <h1 className="relative text-2xl sm:text-3xl md:text-7xl font-display font-bold tracking-[0.05em] leading-none uppercase -mr-[0.05em] mb-[30px]">
+            <h1 className="relative text-6xl sm:text-7xl md:text-8xl font-display font-bold tracking-[0.05em] leading-none uppercase -mr-[0.05em] mb-[30px]">
               <span className="relative z-10 hero-shimmer">
                 {t('base')}
               </span>

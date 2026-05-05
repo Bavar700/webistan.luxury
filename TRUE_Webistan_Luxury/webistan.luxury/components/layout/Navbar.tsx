@@ -19,12 +19,11 @@ import {
 useTheme 
 }
 from '@/lib/ThemeProvider';
-import { 
+import {
 WebistanSymbol 
 }
 from '@/components/ui/WebistanSymbol';
 import Link from 'next/link';
-import { BrandLogo } from './BrandLogo';
 export const Navbar = () => {
 const tn = useTranslations('Navigation');
 const locale = useLocale();
@@ -47,8 +46,13 @@ return ( <> <nav className={`fixed top-0 w-full z-[100] transition-all duration-
 <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border"> {
 
 }
-<Link href="/" className="relative z-[110] group">
-  <BrandLogo />
+<Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-[#F1F1F3]">
+<WebistanSymbol className="w-[24px] h-[12px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
+<div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[16px] leading-none">
+<span>&nbsp;</span>
+<span className="text-[#F1F1F3] transition-all duration-700">WEBISTAN</span>
+<span className="hero-shimmer">.LUXURY</span>
+</div>
 </Link>
       <div className="hidden lg:flex items-center gap-2"> {navLinks.map((link) => ( <a key={link.name
 }
@@ -128,19 +132,19 @@ opacity: 1, y: 0 }
 transition={{
 delay: i * 0.1 }
 }
-className="text-2xl font-display font-medium text-foreground/70 hover:text-accent tracking-[0.4em] uppercase text-center" > {link.name
+className="text-2xl font-display font-medium text-white/70 hover:text-accent tracking-[0.4em] uppercase text-center" > {link.name
 }
 </motion.a> ))
 }
               <div className="flex flex-col items-center gap-6 mt-8">
-                <div className="flex items-center gap-4 px-6 py-3 bg-btn-bg border border-accent/20 rounded-sm">
+                <div className="flex items-center gap-4 px-6 py-3 bg-white/5 border border-accent/20 rounded-sm">
                   {['EN', 'RU', 'TJ'].map((lang) => (
                     <Link
                       key={lang}
                       href={`/${lang.toLowerCase()}`}
                       onClick={() => setIsOpen(false)}
                       className={`text-[11px] font-bold uppercase tracking-[0.3em] transition-all duration-500 ${
-                        locale === lang.toLowerCase() ? 'text-accent' : 'text-foreground/50 hover:text-accent'
+                        locale === lang.toLowerCase() ? 'text-accent' : 'text-white/50 hover:text-accent'
                       }`}
                     >
                       {lang}
@@ -157,7 +161,7 @@ className="text-2xl font-display font-medium text-foreground/70 hover:text-accen
                   className="flex items-center justify-center gap-3 px-8 py-3 border border-accent/20 text-accent hover:bg-accent/5 transition-all duration-500 rounded-sm"
                 >
                   {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-medium">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] font-medium text-white/70">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
                 </button>
               </div>
 </div>
