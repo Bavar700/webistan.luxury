@@ -2,25 +2,30 @@
 import { motion } from 'framer-motion';
 
 export const WebistanSymbol = ({ className = "w-9 h-10" }: { className?: string }) => {
-    // Definitive infinity path
     const pathD = "M9 1C13.4183 1 17 4.58172 17 9C17 13.4183 20.5817 17 25 17C29.4183 17 33 13.4183 33 9C33 4.58172 29.4183 1 25 1C20.5817 1 17 4.58172 17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1Z";
-
-    // Path length of this specific geometry is ~104
     const pathLength = 104;
     const duration = 6;
 
     return (
         <div className={`flex-shrink-0 flex items-center justify-center ${className}`}>
             <svg
-                viewBox="0 0 36 18"
+                viewBox="-3 -3 42 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="overflow-visible w-full h-full"
             >
-                {/* 
-                    Layer 1: The "Eternal" Liquid Line
-                    Continuous, never disappears.
-                */}
+                {/* Faint glow base */}
+                <motion.path
+                    d={pathD}
+                    stroke="#C0A080"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    strokeOpacity={0.12}
+                    animate={{ strokeOpacity: [0.07, 0.18, 0.07] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+                {/* Eternal liquid line */}
                 <motion.path
                     d={pathD}
                     stroke="#C0A080"
@@ -28,44 +33,28 @@ export const WebistanSymbol = ({ className = "w-9 h-10" }: { className?: string 
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeDasharray={`${pathLength * 0.85} ${pathLength * 0.15}`}
-                    animate={{
-                        strokeDashoffset: [0, -pathLength]
-                    }}
-                    transition={{
-                        duration: duration,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
+                    animate={{ strokeDashoffset: [0, -pathLength] }}
+                    transition={{ duration, repeat: Infinity, ease: "linear" }}
                     style={{ filter: "drop-shadow(0 0 5px rgba(192, 160, 128, 0.4))" }}
                 />
 
-                {/* 
-                    Layer 2: The High-Frequency Flickering Core
-                    Strictly locked to line thickness.
-                */}
+                {/* White spark */}
                 <motion.path
                     d={pathD}
-                    stroke="#FFF"
+                    stroke="#FFF8EE"
                     strokeWidth="2.5"
                     strokeLinecap="round"
-                    strokeDasharray="1 103"
+                    strokeDasharray="2 102"
                     initial={{ strokeDashoffset: pathLength }}
-                    animate={{
-                        strokeDashoffset: [pathLength, 0],
-                    }}
-                    transition={{
-                        strokeDashoffset: { duration: duration, repeat: Infinity, ease: "linear" }
-                    }}
+                    animate={{ strokeDashoffset: [pathLength, 0] }}
+                    transition={{ duration, repeat: Infinity, ease: "linear" }}
                     style={{ filter: "drop-shadow(0 0 8px #FFF)" }}
                 />
 
-                {/* 
-                    Layer 3: Separate Pulsating Flare (The Flicker)
-                    To ensure the flickering doesn't stop the movement.
-                */}
+                {/* Flickering flare */}
                 <motion.path
                     d={pathD}
-                    stroke="#FFF"
+                    stroke="#FFFFFF"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeDasharray="1 103"
@@ -75,7 +64,7 @@ export const WebistanSymbol = ({ className = "w-9 h-10" }: { className?: string 
                         opacity: [1, 0, 1, 0.2, 1, 0.1, 1]
                     }}
                     transition={{
-                        strokeDashoffset: { duration: duration, repeat: Infinity, ease: "linear" },
+                        strokeDashoffset: { duration, repeat: Infinity, ease: "linear" },
                         opacity: { duration: 0.15, repeat: Infinity, ease: "linear" }
                     }}
                 />
