@@ -89,6 +89,7 @@ h4 {
     font-family: var(--font-primary);
     font-weight: 400; /* Элегантный, чистый, тонкий, медицинский */
     letter-spacing: -0.015em;
+    text-wrap: balance;
 }
 
 .logo-title {
@@ -803,6 +804,10 @@ h4 {
     border-radius: 12px;
 }
 
+.promo-badge-container {
+    margin-bottom: 54px;
+}
+
 .promo-badge {
     display: inline-flex;
     align-items: center;
@@ -815,7 +820,6 @@ h4 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 24px;
     animation: badgePulse 1.8s infinite ease-in-out;
 }
 
@@ -863,7 +867,7 @@ h4 {
 }
 
 .offer-blink {
-    color: #ef4444 !important;
+    color: #10b981 !important;
     display: inline-block;
     animation: offerBlink 1.2s infinite ease-in-out;
 }
