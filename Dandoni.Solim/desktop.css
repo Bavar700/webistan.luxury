@@ -350,27 +350,24 @@ h4 {
     margin: 0 auto;
     padding: 0 24px;
     width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 60px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    grid-template-rows: auto auto;
+    column-gap: 60px;
+    row-gap: 30px;
     min-height: calc(85vh - 110px);
 }
 
 .hero-content {
-    flex: 1 1 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 72px;
+    display: contents;
 }
 
 .hero-text-group {
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 0;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .hero-badge {
@@ -387,6 +384,7 @@ h4 {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     align-self: flex-start;
+    margin-bottom: 80px;
 }
 
 .hero-badge i, .section-subtitle i {
@@ -404,6 +402,7 @@ h4 {
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: -0.02em;
+    margin-bottom: 44px;
 }
 
 .hero-desc {
@@ -417,6 +416,9 @@ h4 {
     display: flex;
     align-items: center;
     gap: 20px;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
 }
 
 .primary-btn {
@@ -471,9 +473,12 @@ h4 {
     align-items: center;
     justify-content: center;
     gap: 40px;
-    margin-top: 8px;
+    margin-top: 0;
     width: 100%;
     max-width: 480px;
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
 }
 
 .stat-item {
@@ -503,19 +508,15 @@ h4 {
 
 /* CSS Tooth Visual and Crisp Medical Card */
 .hero-visual {
-    flex: 0 0 380px;
-    width: 380px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 30px;
+    display: contents;
 }
 
 .luxury-card-wrapper {
     position: relative;
     width: 100%;
     flex-shrink: 0;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 .tooth-card {
