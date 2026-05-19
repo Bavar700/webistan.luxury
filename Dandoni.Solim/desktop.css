@@ -862,6 +862,23 @@ h4 {
     color: var(--cyan);
 }
 
+.offer-blink {
+    color: #ef4444 !important;
+    display: inline-block;
+    animation: offerBlink 1.2s infinite ease-in-out;
+}
+
+@keyframes offerBlink {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
 .promo-desc {
     color: var(--text-muted);
     font-size: 16px;
