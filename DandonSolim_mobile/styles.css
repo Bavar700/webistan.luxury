@@ -861,6 +861,23 @@ h4 {
     color: var(--cyan);
 }
 
+.offer-blink {
+    color: #ef4444 !important;
+    display: inline-block;
+    animation: offerBlink 1.2s infinite ease-in-out;
+}
+
+@keyframes offerBlink {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
 .promo-desc {
     color: var(--text-muted);
     font-size: 16px;
@@ -1868,11 +1885,18 @@ h4 {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
         background: var(--cyan-glow);
-        font-size: 18px;
+        color: var(--cyan);
+        font-size: 24px;
+        border: 1px solid rgba(0, 180, 216, 0.2);
+        transition: all 0.2s ease-in-out;
+    }
+    .mobile-menu-btn:active {
+        transform: scale(0.92);
+        background: rgba(0, 180, 216, 0.2);
     }
 
     .hero-container {
@@ -2145,36 +2169,50 @@ h4 {
         padding: 48px 0;
     }
     .booking-wrapper {
-        padding: 28px 20px;
+        padding: 40px 30px;
         border-radius: 20px;
     }
     .booking-section-header {
-        margin-bottom: 32px;
+        margin-bottom: 40px;
+    }
+    .booking-step {
+        gap: 30px;
+    }
+    .booking-step.mt-40 {
+        margin-top: 56px;
+    }
+    .booking-submit-area.mt-40 {
+        margin-top: 56px;
     }
     .doctors-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 16px;
     }
     .doctor-card {
-        padding: 16px;
+        padding: 20px;
     }
     .datetime-grid {
         flex-direction: column;
-        gap: 16px;
+        gap: 26px;
     }
     .time-slots-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
     }
     .personal-info-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 26px;
     }
     .booking-submit-btn {
         width: 100%;
         justify-content: center;
+        padding: 20px;
     }
     .receipt-card {
-        padding: 20px;
+        padding: 24px;
+    }
+    .form-group {
+        gap: 10px;
     }
 
     /* Contacts */
@@ -2218,7 +2256,7 @@ h4 {
 
     /* Modal */
     .booking-modal {
-        padding: 28px 20px;
+        padding: 40px 30px;
         margin: 16px;
         max-width: calc(100vw - 32px);
         border-radius: 20px;
@@ -2228,6 +2266,9 @@ h4 {
     }
     .form-group label {
         font-size: 13px;
+    }
+    .booking-form {
+        gap: 26px;
     }
 
     /* WhatsApp Float */
@@ -2331,22 +2372,27 @@ h4 {
 
     /* Booking */
     .booking-wrapper {
-        padding: 22px 14px;
+        padding: 30px 20px;
     }
     .step-title {
         font-size: 14px;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+    }
+    .booking-step {
+        gap: 28px;
     }
     .time-slots-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        gap: 10px;
     }
     .time-slot {
-        padding: 10px 6px;
+        padding: 12px 6px;
         font-size: 12px;
     }
     .booking-submit-btn {
         font-size: 13px;
-        padding: 14px 20px;
+        padding: 16px 20px;
     }
 
     /* Contacts */
@@ -2385,16 +2431,19 @@ h4 {
 
     /* Modal */
     .booking-modal {
-        padding: 22px 14px;
-        margin: 10px;
-        max-width: calc(100vw - 20px);
+        padding: 30px 20px;
+        margin: 16px;
+        max-width: calc(100vw - 32px);
     }
     .modal-title {
         font-size: 18px;
     }
     .submit-btn {
         font-size: 13px;
-        padding: 14px 20px;
+        padding: 16px 20px;
+    }
+    .booking-form {
+        gap: 24px;
     }
 
     /* Misc */
