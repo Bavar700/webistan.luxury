@@ -89,6 +89,7 @@ h4 {
     font-family: var(--font-primary);
     font-weight: 400; /* Элегантный, чистый, тонкий, медицинский */
     letter-spacing: -0.015em;
+    text-wrap: balance;
 }
 
 .logo-title {
@@ -468,6 +469,7 @@ h4 {
 .hero-stats {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 40px;
     margin-top: 8px;
     width: 100%;
@@ -802,6 +804,10 @@ h4 {
     border-radius: 12px;
 }
 
+.promo-badge-container {
+    margin-bottom: 54px;
+}
+
 .promo-badge {
     display: inline-flex;
     align-items: center;
@@ -814,7 +820,6 @@ h4 {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 24px;
     animation: badgePulse 1.8s infinite ease-in-out;
 }
 
@@ -862,7 +867,7 @@ h4 {
 }
 
 .offer-blink {
-    color: #ef4444 !important;
+    color: #10b981 !important;
     display: inline-block;
     animation: offerBlink 1.2s infinite ease-in-out;
 }
@@ -1875,28 +1880,8 @@ h4 {
         display: none;
     }
 
-    .header-overlay-row .nav-links {
-        display: none;
-    }
-    .header-actions {
-        display: none;
-    }
     .mobile-menu-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        background: var(--cyan-glow);
-        color: var(--cyan);
-        font-size: 24px;
-        border: 1px solid rgba(0, 180, 216, 0.2);
-        transition: all 0.2s ease-in-out;
-    }
-    .mobile-menu-btn:active {
-        transform: scale(0.92);
-        background: rgba(0, 180, 216, 0.2);
+        display: block;
     }
 
     .hero-container {
@@ -2013,17 +1998,6 @@ h4 {
     .header-inner {
         padding: 0 16px;
     }
-    .header-overlay-row {
-        height: 70px;
-        padding: 0 16px;
-    }
-    .header-brand-logo {
-        flex: 0 0 auto;
-    }
-    .header-actions {
-        flex: 0 0 auto;
-        gap: 8px;
-    }
     .logo-img {
         height: 52px;
     }
@@ -2042,24 +2016,13 @@ h4 {
         min-height: unset;
     }
     .hero-container {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 36px;
         text-align: center;
         padding: 0 16px;
-        min-height: auto;
-    }
-    .hero-visual {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 320px;
-        margin: 0 auto;
     }
     .hero-content {
         align-items: center;
-        gap: 28px;
-    }
-    .hero-text-group {
-        gap: 20px;
     }
     .hero-title {
         font-size: clamp(30px, 8vw, 48px);
@@ -2093,45 +2056,30 @@ h4 {
         flex-wrap: wrap;
         justify-content: center;
         gap: 24px;
-        padding-top: 20px;
-        margin-top: 0;
+        padding-top: 24px;
     }
 
     /* Section Padding */
     .section-container {
-        padding: 48px 16px;
+        padding: 60px 16px;
     }
     .section-title {
         font-size: clamp(26px, 6vw, 40px);
     }
 
     /* About */
-    .about-section {
-        padding: 40px 0;
-    }
     .about-grid {
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: 40px;
     }
     .about-images-wrapper {
-        height: 260px;
-        overflow: visible;
-    }
-    .about-badge-card {
-        bottom: -16px;
-        right: 0;
+        height: 280px;
     }
     .features-list {
         grid-template-columns: 1fr;
     }
 
     /* Services */
-    .services-section {
-        padding: 48px 0;
-    }
-    .services-header {
-        margin-bottom: 36px;
-    }
     .services-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -2141,9 +2089,6 @@ h4 {
     }
 
     /* Promo */
-    .promo-section {
-        padding: 48px 0;
-    }
     .promo-box {
         grid-template-columns: 1fr;
         padding: 32px 24px;
@@ -2165,60 +2110,40 @@ h4 {
     }
 
     /* Booking */
-    .booking-section {
-        padding: 48px 0;
-    }
     .booking-wrapper {
-        padding: 40px 30px;
+        padding: 28px 20px;
         border-radius: 20px;
     }
     .booking-section-header {
-        margin-bottom: 40px;
-    }
-    .booking-step {
-        gap: 30px;
-    }
-    .booking-step.mt-40 {
-        margin-top: 56px;
-    }
-    .booking-submit-area.mt-40 {
-        margin-top: 56px;
+        margin-bottom: 32px;
     }
     .doctors-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
     }
     .doctor-card {
-        padding: 20px;
+        padding: 16px;
     }
     .datetime-grid {
         flex-direction: column;
-        gap: 26px;
+        gap: 16px;
     }
     .time-slots-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
     }
     .personal-info-grid {
         grid-template-columns: 1fr;
-        gap: 26px;
+        gap: 16px;
     }
     .booking-submit-btn {
         width: 100%;
         justify-content: center;
-        padding: 20px;
     }
     .receipt-card {
-        padding: 24px;
-    }
-    .form-group {
-        gap: 10px;
+        padding: 20px;
     }
 
     /* Contacts */
-    .contacts-section {
-        padding: 48px 0;
-    }
     .contacts-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -2256,7 +2181,7 @@ h4 {
 
     /* Modal */
     .booking-modal {
-        padding: 40px 30px;
+        padding: 28px 20px;
         margin: 16px;
         max-width: calc(100vw - 32px);
         border-radius: 20px;
@@ -2266,9 +2191,6 @@ h4 {
     }
     .form-group label {
         font-size: 13px;
-    }
-    .booking-form {
-        gap: 26px;
     }
 
     /* WhatsApp Float */
@@ -2290,10 +2212,6 @@ h4 {
     .header-inner {
         padding: 0 12px;
         height: 64px;
-    }
-    .header-overlay-row {
-        height: 64px;
-        padding: 0 12px;
     }
     .logo-img {
         height: 44px;
@@ -2372,27 +2290,22 @@ h4 {
 
     /* Booking */
     .booking-wrapper {
-        padding: 30px 20px;
+        padding: 22px 14px;
     }
     .step-title {
         font-size: 14px;
-        margin-bottom: 14px;
-        padding-bottom: 12px;
-    }
-    .booking-step {
-        gap: 28px;
     }
     .time-slots-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 8px;
     }
     .time-slot {
-        padding: 12px 6px;
+        padding: 10px 6px;
         font-size: 12px;
     }
     .booking-submit-btn {
         font-size: 13px;
-        padding: 16px 20px;
+        padding: 14px 20px;
     }
 
     /* Contacts */
@@ -2431,19 +2344,16 @@ h4 {
 
     /* Modal */
     .booking-modal {
-        padding: 30px 20px;
-        margin: 16px;
-        max-width: calc(100vw - 32px);
+        padding: 22px 14px;
+        margin: 10px;
+        max-width: calc(100vw - 20px);
     }
     .modal-title {
         font-size: 18px;
     }
     .submit-btn {
         font-size: 13px;
-        padding: 16px 20px;
-    }
-    .booking-form {
-        gap: 24px;
+        padding: 14px 20px;
     }
 
     /* Misc */

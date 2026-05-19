@@ -21,8 +21,9 @@
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles_v162.css">
+    <!-- Custom CSS split for ironclad device styling -->
+    <link rel="stylesheet" href="desktop.css?v=164" media="screen and (min-width: 1024px)">
+    <link rel="stylesheet" href="mobile.css?v=164" media="screen and (max-width: 1023px)">
 </head>
 
 <body>
@@ -107,11 +108,6 @@
                 </a>
             </nav>
             <div class="mobile-nav-actions">
-                <div class="language-selector" id="langSelectorMobile" style="margin-bottom: 20px; justify-content: center;">
-                    <button class="lang-btn active" data-lang="ru">RU</button>
-                    <button class="lang-btn" data-lang="tj">TJ</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                </div>
                 <a href="tel:+992206443444" class="mobile-cta-btn"><i class="fas fa-phone"></i> +992 20 644 3444</a>
             </div>
         </div>
@@ -158,6 +154,7 @@
                         <span class="lang-en" style="display:none;">Our Services</span>
                     </a>
                 </div>
+
             </div>
 
             <!-- Styled Facebook-Matching Tooth Visual -->
@@ -167,6 +164,7 @@
                         <img src="logo.jpg" alt="Dandoni Solim" class="hero-card-logo-img" />
                     </div>
                 </div>
+                
                 <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number">100%</span>
@@ -209,9 +207,9 @@
                         <span class="lang-en" style="display:none;">ABOUT THE CLINIC</span>
                     </h2>
                     <h3 class="section-title">
-                        <span class="lang-ru">Забота о <span class="cyan-text">Вашем здоровье</span> — наша обязанность!</span>
-                        <span class="lang-tj" style="display:none;">Ғамхорӣ ба <span class="cyan-text">саломатии Шумо</span> — вазифаи мост!</span>
-                        <span class="lang-en" style="display:none;">Caring for <span class="cyan-text">Your Health</span> is Our Duty!</span>
+                        <span class="lang-ru">Забота о <span class="cyan-text">Вашем здоровье</span> — наша&nbsp;обязанность!</span>
+                        <span class="lang-tj" style="display:none;">Ғамхорӣ ба <span class="cyan-text">саломатии Шумо</span> — вазифаи&nbsp;мост!</span>
+                        <span class="lang-en" style="display:none;">Caring for <span class="cyan-text">Your Health</span> is our&nbsp;duty!</span>
                     </h3>
                     <p class="about-description">
                         <span class="lang-ru">Стоматологическая клиника "Dandoni Solim" предлагает надежное и
@@ -262,9 +260,9 @@
                     <span class="lang-en" style="display:none;">OUR SERVICES</span>
                 </h2>
                 <h3 class="section-title">
-                    <span class="lang-ru">Широкий спектр стоматологических <span class="cyan-text">услуг</span></span>
-                    <span class="lang-tj" style="display:none;">Маҷмӯи васеи <span class="cyan-text">хидматҳои</span> дандонпизишкӣ</span>
-                    <span class="lang-en" style="display:none;">A Wide Range of Dental <span class="cyan-text">Services</span></span>
+                    <span class="lang-ru">Широкий спектр <span class="cyan-text">стоматологических&nbsp;услуг</span></span>
+                    <span class="lang-tj" style="display:none;">Маҷмӯи васеи <span class="cyan-text">хидматҳои&nbsp;дандонпизишкӣ</span></span>
+                    <span class="lang-en" style="display:none;">A Wide Range of <span class="cyan-text">Dental&nbsp;Services</span></span>
                 </h3>
             </div>
 
@@ -419,14 +417,16 @@
         <div class="section-container">
             <div class="promo-box glass-panel">
                 <div class="promo-content">
-                    <span class="promo-badge lang-ru"><i class="fas fa-fire"></i> Горячее предложение</span>
-                    <span class="promo-badge lang-tj" style="display:none;"><i class="fas fa-fire"></i> Пешниҳоди махсус</span>
-                    <span class="promo-badge lang-en" style="display:none;"><i class="fas fa-fire"></i> Hot Offer</span>
+                    <div class="promo-badge-container">
+                        <span class="promo-badge lang-ru"><i class="fas fa-fire"></i> Горячее предложение</span>
+                        <span class="promo-badge lang-tj" style="display:none;"><i class="fas fa-fire"></i> Пешниҳоди махсус</span>
+                        <span class="promo-badge lang-en" style="display:none;"><i class="fas fa-fire"></i> Hot Offer</span>
+                    </div>
 
                     <h2 class="promo-title">
-                        <span class="lang-ru"><span class="cyan-text">Акция</span> на брекеты в Душанбе!</span>
-                        <span class="lang-tj" style="display:none;"><span class="cyan-text">Тахфифи</span> брекетҳо дар Душанбе!</span>
-                        <span class="lang-en" style="display:none;"><span class="cyan-text">Special Offer</span> on Braces in Dushanbe!</span>
+                        <span class="lang-ru"><span class="cyan-text">Акция на&nbsp;брекеты</span> в&nbsp;Душанбе!</span>
+                        <span class="lang-tj" style="display:none;"><span class="cyan-text">Тахфифи&nbsp;брекетҳо</span> дар&nbsp;Душанбе!</span>
+                        <span class="lang-en" style="display:none;"><span class="cyan-text">Special&nbsp;Offer</span> on Braces in&nbsp;Dushanbe!</span>
                     </h2>
                     <h3 class="promo-price">
                         <span class="old-price">5000 TJS</span>
@@ -472,9 +472,9 @@
                         <span class="lang-en" style="display:none;">ONLINE BOOKING</span>
                     </h2>
                     <h3 class="section-title">
-                        <span class="lang-ru"><span class="cyan-text">Запишитесь</span> на удобное время</span>
+                        <span class="lang-ru"><span class="cyan-text">Запишитесь на&nbsp;приём</span> на удобное&nbsp;время</span>
                         <span class="lang-tj" style="display:none;">Барои вақти қулай <br><span style="white-space: nowrap;"><span class="cyan-text">сабти ном кунед</span></span></span>
-                        <span class="lang-en" style="display:none;"><span class="cyan-text">Book</span> a Convenient Time</span>
+                        <span class="lang-en" style="display:none;"><span class="cyan-text">Book an&nbsp;Appointment</span> at a convenient&nbsp;time</span>
                     </h3>
                     <div class="booking-divider"></div>
                 </div>
@@ -694,9 +694,9 @@
                         <span class="lang-en" style="display:none;">CONTACTS</span>
                     </h2>
                     <h3 class="section-title">
-                        <span class="lang-ru">Ждем <span class="cyan-text">Вас</span> в нашей клинике</span>
-                        <span class="lang-tj" style="display:none;">Мо <span class="cyan-text">Шуморо</span> дар дармонгоҳамон интизорем</span>
-                        <span class="lang-en" style="display:none;">We Welcome <span class="cyan-text">You</span> to Our Clinic</span>
+                        <span class="lang-ru"><span class="cyan-text">Ждем Вас</span> в нашей&nbsp;клинике</span>
+                        <span class="lang-tj" style="display:none;">Мо Шуморо дар <span class="cyan-text">Дармонгоҳ интизорем</span></span>
+                        <span class="lang-en" style="display:none;"><span class="cyan-text">We Welcome You</span> to Our&nbsp;Clinic</span>
                     </h3>
 
                     <div class="contact-methods">
