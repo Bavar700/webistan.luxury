@@ -464,3 +464,127 @@ h1, h2, h3, h4, h5, h6 {
     height: 30px;
     background-color: var(--border-color);
 }
+
+/* 6. About Section */
+.about-section {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.about-images-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+}
+
+.about-main-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.clinic-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-badge-card {
+    position: absolute;
+    bottom: -12px;
+    right: 12px;
+    padding: 10px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(6, 18, 44, 0.05);
+}
+
+.badge-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--cyan);
+}
+
+.badge-desc {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.section-subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--cyan-glow);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+.about-description {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.feature-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--cyan-glow);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan);
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.feature-text h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.feature-text p {
+    font-size: 11px;
+    color: var(--text-muted);
+}
