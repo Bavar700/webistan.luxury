@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-brand-logo {
-    height: 60px;
+    height: 56px;
     display: flex;
     align-items: center;
 }
@@ -139,11 +139,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-actions {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-left: auto;
-    margin-right: 12px;
+    justify-content: center;
+    z-index: 101;
 }
 
 .language-selector {
@@ -158,8 +162,8 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     background: transparent;
     color: var(--text-muted);
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 8px 14px;
+    font-size: 12px;
     font-weight: 700;
     border-radius: 30px;
     cursor: pointer;
@@ -346,11 +350,12 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    margin-bottom: 8px;
 }
 
 .hero-title {
     font-size: 28px;
-    line-height: 1.25;
+    line-height: 1.45;
     letter-spacing: -0.01em;
 }
 
@@ -533,7 +538,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 800;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .section-title {
@@ -665,7 +670,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 8px;
     margin-top: auto;
-    align-self: flex-end;
+    align-self: center;
     transition: var(--transition-fast);
 }
 
@@ -685,48 +690,50 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 8. Promo Section (Braces Action) */
 .promo-section {
+    padding: 80px 0;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
 }
 
 .promo-box {
     width: 100%;
-    padding: 24px 16px;
-    border-radius: 20px;
-    background: var(--bg-secondary);
+    padding: 48px 24px;
+    border-radius: 24px;
+    background: var(--bg-primary);
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 30px rgba(6, 18, 44, 0.03);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 36px;
 }
 
 .promo-badge-container {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .promo-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: #ffe5ec;
-    border: 1px solid #ffb3c6;
-    color: #ff4d6d;
+    gap: 8px;
+    background: #ef4444;
+    color: #ffffff;
     padding: 6px 14px;
-    border-radius: 30px;
+    border-radius: 4px;
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
+    animation: badgePulse 1.8s infinite ease-in-out;
 }
 
 .promo-title {
-    font-size: 22px;
-    line-height: 1.3;
+    font-size: 28px;
+    line-height: 1.35;
     font-weight: 700;
 }
 
@@ -735,64 +742,76 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin: 8px 0;
+    margin: 24px 0;
 }
 
 .old-price {
-    font-size: 16px;
+    font-size: 18px;
     text-decoration: line-through;
     color: var(--text-muted);
 }
 
 .new-price {
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 800;
     color: var(--cyan);
+}
+
+.offer-blink {
+    color: #10b981 !important;
+    display: inline-block;
+    animation: offerBlink 1.2s infinite ease-in-out;
 }
 
 .promo-desc {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.5;
+    margin-bottom: 20px;
 }
 
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
+.promo-actions {
     width: 100%;
-    max-width: 280px;
-    margin: 8px 0;
-}
-
-.countdown-item {
-    flex: 1;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 10px 6px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 12px;
 }
 
-.countdown-value {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--cyan);
-}
-
-.countdown-label {
-    font-size: 8px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 2px;
-}
-
-.promo-cta-btn {
+.promo-actions .primary-btn {
     width: 100%;
-    margin-top: 8px;
+}
+
+.promo-visual {
+    display: none; /* Hide QR code container on mobile */
+}
+
+@keyframes badgePulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    50% {
+        opacity: 0.85;
+        transform: scale(1.04);
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+@keyframes offerBlink {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
 }
 
 /* 9. Booking & Contacts Section */
@@ -1221,10 +1240,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Contacts Info & Map */
+.contacts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
 .contact-methods {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 24px;
 }
 
 .contact-card {
@@ -1268,12 +1294,67 @@ h1, h2, h3, h4, h5, h6 {
 
 .map-container {
     width: 100%;
-    height: 250px;
+    height: auto;
+    min-height: 320px;
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--border-color);
     box-shadow: 0 6px 20px rgba(6, 18, 44, 0.03);
     margin-top: 12px;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    text-align: center !important;
+    padding: 24px !important;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.map-hospital-icon {
+    font-size: 40px;
+    color: var(--cyan);
+    margin-bottom: 16px;
+}
+
+.map-placeholder h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.map-placeholder p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+.map-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--cyan);
+    color: #ffffff;
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 12px var(--cyan-glow);
+}
+
+.map-btn:active {
+    background: var(--cyan-hover);
 }
 
 .map-container iframe {
@@ -1284,55 +1365,91 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 10. Footer */
 .main-footer {
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
     padding: 40px 0 24px 0;
+    background: #f1f5f9;
+    border-top: 1px solid var(--border-color);
 }
 
-.footer-grid {
+.footer-container {
+    padding: 0 16px;
+}
+
+.footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tooth-svg-mini {
+    width: 28px;
+    height: 28px;
+}
+
+.footer-title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+}
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-socials a {
+    color: var(--cyan);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: var(--bg-secondary);
+    font-size: 16px;
+    transition: var(--transition-fast);
+}
+
+.footer-socials a:active {
+    background: var(--cyan);
+    color: #ffffff;
+    border-color: var(--cyan);
+}
+
+.footer-bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 24px;
+    gap: 12px;
+    padding-top: 24px;
+    font-size: 11px;
+    color: var(--text-muted);
 }
 
-.footer-logo {
-    height: 50px;
-    border-radius: 50%;
-}
-
-.footer-links {
+.developer-info {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
+    align-items: center;
+    gap: 6px;
 }
 
-.footer-links a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: var(--transition-fast);
-}
-
-.footer-links a:active {
+.developer-link {
     color: var(--cyan);
-}
-
-.footer-bottom {
-    margin-top: 32px;
-    padding-top: 16px;
-    border-top: 1px solid #f1f5f9;
-    width: 100%;
-    text-align: center;
-}
-
-.footer-bottom p {
-    font-size: 10px;
-    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
 }
 
 /* Back to Top Button */
@@ -1363,4 +1480,183 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
     pointer-events: all;
     transform: translateY(0);
+}
+
+/* 11. Consultation Modal (booking-modal) */
+.booking-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-fast);
+    padding: 16px;
+}
+
+.booking-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.booking-modal {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px 24px;
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transform: translateY(20px);
+    transition: var(--transition-smooth);
+    box-shadow: 0 20px 40px rgba(6, 18, 44, 0.15);
+}
+
+.booking-modal-overlay.active .booking-modal {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.close-modal:active {
+    color: var(--text-primary);
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.modal-desc {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--cyan);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition-fast);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.input-wrapper select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 14px;
+    padding-right: 40px;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+    border-color: var(--cyan);
+    background: var(--bg-secondary);
+}
+
+.booking-form .submit-btn {
+    border: none;
+    background: var(--cyan);
+    color: #ffffff;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 12px var(--cyan-glow);
+    margin-top: 8px;
+}
+
+.booking-form .submit-btn:active {
+    background: var(--cyan-hover);
+}
+
+/* Success Message inside modal */
+.success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 0 10px 0;
+}
+
+.success-icon {
+    font-size: 56px;
+    color: var(--cyan);
+    margin-bottom: 20px;
+}
+
+.success-message h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.success-message p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
 }
