@@ -1,0 +1,6 @@
+/* ==========================================================================
+   DANDONI SOLIM - CACHE REDIRECT FALLBACK FOR CACHED INDEX.HTML
+   ========================================================================== */
+
+@import url("desktop_v155.css") screen and (min-width: 1024px);
+@import url("mobile_v155.css") screen and (max-width: 1023px);
