@@ -354,7 +354,7 @@ h4 {
     grid-template-columns: 1fr 380px;
     grid-template-rows: auto auto;
     column-gap: 60px;
-    row-gap: 50px;
+    row-gap: 30px;
     min-height: calc(85vh - 110px);
 }
 
