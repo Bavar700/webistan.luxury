@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "services": "Services",
+    "about": "About Us",
+    "reviews": "Reviews",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Dental Clinic",
+    "title": "Premium care as\na lifestyle",
+    "slogan": "Your comfort is our primary goal, the quality of work is our responsibility,\nand your radiant smile is our inspiration.",
+    "cta": "Book Online"
+  },
+  "booking": {
+    "title": "Book an Appointment",
+    "subtitle": "Leave your details and we will contact you within 5 minutes.",
+    "name": "Your Name",
+    "phone": "Phone Number",
+    "service": "Select Service",
+    "submit": "Send Request",
+    "successTitle": "Request Sent!",
+    "successDesc": "Our administrator will contact you shortly to confirm the time."
+  },
+  "services": {
+    "title": "Our Services",
+    "s1": {
+      "title": "Ceramic Restorations",
+      "desc": "Veneers and refractors for flawless aesthetics of your smile."
+    },
+    "s2": {
+      "title": "Implantation",
+      "desc": "Reliable restoration of lost teeth with a lifetime warranty."
+    },
+    "s3": {
+      "title": "Root Canal Treatment",
+      "desc": "Modern endodontic treatment using a microscope."
+    },
+    "s4": {
+      "title": "Zirconia Crowns",
+      "desc": "Durable and aesthetic crowns made of zirconium dioxide."
+    },
+    "s5": {
+      "title": "Whitening",
+      "desc": "Safe professional lightening of tooth enamel."
+    },
+    "s6": {
+      "title": "Professional Cleaning",
+      "desc": "Comprehensive oral hygiene and tartar removal."
+    },
+    "s7": {
+      "title": "Restorations",
+      "desc": "Artistic restoration of the shape and color of teeth."
+    },
+    "s8": {
+      "title": "Orthodontic Treatment",
+      "desc": "Bite correction (aligners and brace systems)."
+    },
+    "s9": {
+      "title": "Tooth Extraction",
+      "desc": "Painless and careful extraction of any complexity."
+    }
+  },
+  "gallery": {
+    "title": "Clinic Interior"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": {
+      "q": "Is it painful to get an implant?",
+      "a": "The implantation procedure is absolutely painless. We use modern safe anesthetics, thanks to which you will feel nothing."
+    },
+    "q2": {
+      "q": "How long do veneers last?",
+      "a": "With proper care, ceramic veneers last 15-20 years or more. They do not change color and retain their original shine."
+    },
+    "q3": {
+      "q": "Is there a warranty for services?",
+      "a": "Yes, we provide an official warranty for all types of work."
+    },
+    "q4": {
+      "q": "How often should I get my teeth cleaned?",
+      "a": "We recommend professional oral hygiene every 6 months."
+    }
+  },
+  "promo": {
+    "title": "The Holy Month of Ramazan is coming!",
+    "subtitle": "Special offers and updated working hours",
+    "button": "Watch Video"
+  },
+  "testimonials": {
+    "title": "Patient Reviews",
+    "t1": {
+      "name": "nastenakikot",
+      "text": "Thank you so much for your work! It's been about half a year since my tooth restoration and everything holds perfectly, looks very aesthetic and no discomfort."
+    },
+    "t2": {
+      "name": "Happy Patient",
+      "text": "I've been visiting this dentistry for almost a year. I am satisfied with the quality of services and the attitude of the staff."
+    }
+  },
+  "about": {
+    "title": "Why Yormand?",
+    "desc": "Yormand Dental Clinic — over 9,500 satisfied patients. We provide a full range of dental services using modern equipment and sterile conditions so that your smile always remains flawless."
+  },
+  "contact": {
+    "title": "Contacts",
+    "address": "Pulodi St. 4, Dushanbe",
+    "phone": "+992 887 87 60 06",
+    "social": "Social Media"
+  }
+}
