@@ -494,18 +494,15 @@
         <div class="modal-overlay hidden" id="task-modal">
             <div class="modal">
                 <div class="modal-header">
-                    <h3 id="task-modal-title">
-                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
-                        Вазифаи нав
-                    </h3>
+                    <h3 id="task-modal-title" class="hidden">Супориши нав</h3>
                     <button class="modal-close" id="task-modal-close">
                         <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="task-name">Номи вазифа</label>
-                        <input type="text" id="task-name" placeholder="Номи вазифаро ворид кунед">
+                        <label for="task-name">Номи супориш</label>
+                        <input type="text" id="task-name" placeholder="Номи супоришро ворид кунед">
                     </div>
                     <div class="form-group">
                         <label for="task-duration">Вақт (дақиқа)</label>
@@ -523,12 +520,12 @@
                         <input type="date" id="task-deadline">
                     </div>
                     <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="task-is-bonus"> <span id="task-is-bonus-label">
-                                <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-gift"/></svg>
-                                Вазифаи бонусӣ
-                            </span>
-                        </label>
+                        <label for="task-type" id="task-type-label">Намуди супориш</label>
+                        <select id="task-type">
+                            <option value="daily" id="task-type-option-daily">Ҳаррӯза</option>
+                            <option value="one-time" id="task-type-option-one-time">Якдафъаина</option>
+                            <option value="bonus" id="task-type-option-bonus">Бо подош (бонус)</option>
+                        </select>
                     </div>
                     <div class="form-group hidden" id="bonus-price-group">
                         <label for="bonus-price" id="bonus-price-label">Нарх (сомонӣ)</label>
@@ -760,8 +757,8 @@
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 
-    <script src="js/translations.js?v=19"></script>
-    <script src="js/data.js?v=19"></script>
-    <script src="js/app.js?v=19"></script>
+    <script src="js/translations.js?v=21"></script>
+    <script src="js/data.js?v=21"></script>
+    <script src="js/app.js?v=21"></script>
 </body>
 </html>

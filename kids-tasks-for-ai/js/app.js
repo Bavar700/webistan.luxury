@@ -563,6 +563,11 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         }
     } else {
         durationText = `<span class="task-duration">⏱ ${task.duration} ${__('task.minutes')}</span>`;
+        if (task.type === 'one-time') {
+            durationText += ` <span class="task-duration" style="background: rgba(147, 51, 234, 0.1); color: rgb(147, 51, 234); border: 1px solid rgba(147, 51, 234, 0.2); font-weight: 500;">📅 ${__('task_form.type_one_time')}</span>`;
+        } else {
+            durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">🔄 ${__('task_form.type_daily')}</span>`;
+        }
     }
 
     // Deadline info
@@ -1318,30 +1323,36 @@ function renderSettings() {
 // ===== TASK MODAL =====
 let editingTaskId = null;
 let editingIsBonus = false;
-
 function showTaskModal(task = null, forceBonus = false) {
     const modal = document.getElementById('task-modal');
     const title = document.getElementById('task-modal-title');
 
     if (task && task.id) {
-        title.innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-edit"/></svg> ${__('task_form.title_edit')}`;
+        title.textContent = __('task_form.title_edit');
         document.getElementById('task-name').value = task.name;
         document.getElementById('task-duration').value = task.duration || 10;
         document.getElementById('task-emoji').value = task.emoji || '📋';
         document.getElementById('task-deadline').value = task.deadline || '';
-        document.getElementById('task-is-bonus').checked = task.isBonus || forceBonus;
+        
+        let typeVal = 'daily';
+        if (task.isBonus) {
+            typeVal = 'bonus';
+        } else if (task.type === 'one-time') {
+            typeVal = 'one-time';
+        }
+        document.getElementById('task-type').value = typeVal;
         document.getElementById('bonus-price').value = task.bonusPrice || 3;
         editingTaskId = task.id;
         editingIsBonus = task.isBonus || forceBonus;
     } else {
-        title.innerHTML = forceBonus
-            ? `<svg class="icon-svg" aria-hidden="true"><use href="#icon-gift"/></svg> ${__('task_form.title_new_bonus')}`
-            : `<svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg> ${__('task_form.title_new')}`;
+        title.textContent = forceBonus
+            ? __('task_form.title_new_bonus')
+            : __('task_form.title_new');
         document.getElementById('task-name').value = '';
         document.getElementById('task-duration').value = 10;
         document.getElementById('task-emoji').value = '📋';
         document.getElementById('task-deadline').value = '';
-        document.getElementById('task-is-bonus').checked = forceBonus;
+        document.getElementById('task-type').value = forceBonus ? 'bonus' : 'daily';
         document.getElementById('bonus-price').value = 3;
         editingTaskId = null;
         editingIsBonus = forceBonus;
@@ -1356,8 +1367,29 @@ function updateTaskFormLabels() {
     const child = getCurrentChild();
     const rt = child ? child.rewardType || 'money' : 'money';
 
+    // Translate labels
+    const nameLabel = document.querySelector('label[for="task-name"]');
+    if (nameLabel) nameLabel.textContent = __('task_form.name');
+    const nameInput = document.getElementById('task-name');
+    if (nameInput) nameInput.placeholder = __('task_form.name_placeholder');
+
+    const durationLabel = document.querySelector('label[for="task-duration"]');
+    if (durationLabel) durationLabel.textContent = __('task_form.duration');
+
+    const emojiLabel = document.querySelector('label[for="task-emoji"]');
+    if (emojiLabel) emojiLabel.textContent = __('task_form.emoji');
+
     document.getElementById('task-deadline-label').textContent = `📅 ${__('task_form.deadline')}`;
-    document.getElementById('task-is-bonus-label').textContent = __('task_form.is_bonus');
+    
+    // Translate task type options
+    const typeLabel = document.getElementById('task-type-label');
+    if (typeLabel) typeLabel.textContent = __('task_form.type');
+    const optDaily = document.getElementById('task-type-option-daily');
+    if (optDaily) optDaily.textContent = __('task_form.type_daily');
+    const optOneTime = document.getElementById('task-type-option-one-time');
+    if (optOneTime) optOneTime.textContent = __('task_form.type_one_time');
+    const optBonus = document.getElementById('task-type-option-bonus');
+    if (optBonus) optBonus.textContent = __('task_form.type_bonus');
 
     if (rt === 'stars') {
         document.getElementById('bonus-price-label').textContent = __('task_form.bonus_price_stars');
@@ -1373,8 +1405,8 @@ function updateTaskFormLabels() {
 }
 
 function updateBonusPriceVisibility() {
-    const isBonus = document.getElementById('task-is-bonus').checked;
-    document.getElementById('bonus-price-group').classList.toggle('hidden', !isBonus);
+    const typeVal = document.getElementById('task-type').value;
+    document.getElementById('bonus-price-group').classList.toggle('hidden', typeVal !== 'bonus');
 }
 
 function saveTask() {
@@ -1383,7 +1415,8 @@ function saveTask() {
     const duration = parseInt(document.getElementById('task-duration').value) || 10;
     const emoji = document.getElementById('task-emoji').value.trim() || '📋';
     const deadline = document.getElementById('task-deadline').value || '';
-    const isBonus = document.getElementById('task-is-bonus').checked;
+    const typeVal = document.getElementById('task-type').value;
+    const isBonus = (typeVal === 'bonus');
     const bonusPrice = isBonus ? parseInt(document.getElementById('bonus-price').value) || 3 : 0;
 
     if (!name) {
@@ -1393,14 +1426,28 @@ function saveTask() {
 
     if (editingTaskId) {
         const targetList = editingIsBonus ? child.bonusTasks : child.tasks;
-        const task = targetList.find(t => t.id === editingTaskId);
-        if (task) {
+        const taskIndex = targetList.findIndex(t => t.id === editingTaskId);
+        if (taskIndex !== -1) {
+            const task = targetList[taskIndex];
             task.name = name;
             task.duration = duration;
             task.emoji = emoji;
             task.deadline = deadline;
-            task.isBonus = editingIsBonus;
-            if (editingIsBonus) task.bonusPrice = bonusPrice;
+            task.isBonus = isBonus;
+            task.type = typeVal;
+            if (isBonus) {
+                task.bonusPrice = bonusPrice;
+            } else {
+                task.bonusPrice = 0;
+            }
+            if (editingIsBonus !== isBonus) {
+                targetList.splice(taskIndex, 1);
+                if (isBonus) {
+                    child.bonusTasks.push(task);
+                } else {
+                    child.tasks.push(task);
+                }
+            }
         }
     } else {
         const newTask = {
@@ -1411,7 +1458,8 @@ function saveTask() {
             deadline,
             order: child.tasks.length + 1,
             isBonus,
-            bonusPrice
+            bonusPrice,
+            type: typeVal
         };
         if (isBonus) {
             child.bonusTasks.push(newTask);
@@ -1579,7 +1627,8 @@ function renderParentDashboard() {
         selectedChild.tasks.sort(function(a, b) { return a.order - b.order; }).forEach(function(task) {
             html += "<li>";
             html += "<span class='item-emoji'>" + (task.emoji || '📋') + "</span>";
-            html += "<span class='item-text'>" + task.name + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
+            var typeBadge = (task.type === 'one-time') ? " <span style='font-size:10px;background:rgba(147, 51, 234, 0.1);color:rgb(147, 51, 234);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_one_time') + "</span>" : " <span style='font-size:10px;background:rgba(59, 130, 246, 0.1);color:rgb(59, 130, 246);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_daily') + "</span>";
+            html += "<span class='item-text'>" + task.name + typeBadge + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>✏️</button>";
             html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('delete') + "'>🗑️</button>";
@@ -2199,7 +2248,7 @@ function setupEventListeners() {
 
     // Task modal
     document.getElementById('task-save-btn').addEventListener('click', saveTask);
-    document.getElementById('task-is-bonus').addEventListener('change', updateBonusPriceVisibility);
+    document.getElementById('task-type').addEventListener('change', updateBonusPriceVisibility);
     document.getElementById('task-modal-close').addEventListener('click', () => {
         document.getElementById('task-modal').classList.add('hidden');
     });

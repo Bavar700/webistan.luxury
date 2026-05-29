@@ -233,6 +233,25 @@ function getOrCreateDailyLog(childId) {
     const child = getChild(childId);
     const today = getToday();
     if (!child.dailyLogs[today]) {
+        // Clean up completed one-time tasks from active list
+        const completedOneTimeIds = [];
+        child.tasks.forEach(t => {
+            if (t.type === 'one-time') {
+                for (const dateStr in child.dailyLogs) {
+                    const log = child.dailyLogs[dateStr];
+                    if (log.tasks && log.tasks[t.id]) {
+                        if (log.tasks[t.id].status === 'completed' && log.tasks[t.id].confirmed) {
+                            completedOneTimeIds.push(t.id);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        if (completedOneTimeIds.length > 0) {
+            child.tasks = child.tasks.filter(t => !completedOneTimeIds.includes(t.id));
+        }
+
         child.dailyLogs[today] = {
             tasks: {},
             allCompleted: false,
