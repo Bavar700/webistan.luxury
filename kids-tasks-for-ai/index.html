@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Офарин — Вазифаҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=16">
+    <link rel="stylesheet" href="css/style.css?v=19">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -675,8 +675,7 @@
         <div class="modal-overlay hidden" id="child-modal">
             <div class="modal">
                 <div class="modal-header">
-                    <h3>
-                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-user"/></svg>
+                    <h3 id="child-modal-title">
                         Илова/тағйири кӯдак
                     </h3>
                     <button class="modal-close" id="child-close">
@@ -690,7 +689,10 @@
                     </div>
                     <div class="form-group">
                         <label for="child-emoji">Эмодзи</label>
-                        <input type="text" id="child-emoji" value="👦" maxlength="2">
+                        <input type="text" id="child-emoji" value="👦" maxlength="2" style="text-align: center; font-size: 1.5rem;">
+                        <div class="emoji-suggestion-grid" id="child-emoji-suggestions">
+                            <span>👦</span><span>👧</span><span>👶</span><span>🐱</span><span>🐶</span><span>🦁</span><span>🐰</span><span>🦊</span><span>🐼</span><span>🐨</span><span>🦄</span><span>🦖</span><span>👾</span><span>🤖</span><span>⭐</span><span>🚀</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="child-color">Ранг</label>
@@ -758,8 +760,8 @@
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 
-    <script src="js/translations.js?v=16"></script>
-    <script src="js/data.js?v=16"></script>
-    <script src="js/app.js?v=16"></script>
+    <script src="js/translations.js?v=19"></script>
+    <script src="js/data.js?v=19"></script>
+    <script src="js/app.js?v=19"></script>
 </body>
 </html>

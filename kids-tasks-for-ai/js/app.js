@@ -187,7 +187,7 @@ function renderChildTabs() {
         if (rt === 'stars') {
             balanceEl.textContent = `⭐ ${child.stars || 0}`;
         } else if (rt === 'both') {
-            balanceEl.textContent = `💰 ${child.balance} ${__('balance.currency.sm')} | ⭐ ${child.stars || 0}`;
+            balanceEl.textContent = `💰 ${child.balance} ${__('balance.currency.sm')}   ⭐ ${child.stars || 0}`;
         } else {
             balanceEl.textContent = `💰 ${child.balance} ${__('balance.currency.sm')}`;
         }
@@ -212,7 +212,7 @@ function renderChildPicker() {
         const rt = c.rewardType || 'money';
         let balanceText;
         if (rt === 'stars') balanceText = `⭐ ${c.stars || 0}`;
-        else if (rt === 'both') balanceText = `💰 ${c.balance} | ⭐ ${c.stars || 0}`;
+        else if (rt === 'both') balanceText = `💰 ${c.balance}   ⭐ ${c.stars || 0}`;
         else balanceText = `💰 ${c.balance} ${__('balance.currency.sm')}`;
 
         item.innerHTML = `
@@ -1439,7 +1439,7 @@ function showChildModal(childId = null) {
 
     if (childId) {
         const child = getChild(childId);
-        title.innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-edit"/></svg> ${__('child_form.title_edit')}`;
+        title.textContent = __('child_form.title_edit');
         document.getElementById('child-name').value = child.name;
         document.getElementById('child-emoji').value = child.emoji;
         document.getElementById('child-color').value = child.color;
@@ -1447,7 +1447,7 @@ function showChildModal(childId = null) {
         editingChildId = childId;
         document.getElementById('child-delete-btn').classList.remove('hidden');
     } else {
-        title.innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-user"/></svg> ${__('child_form.title_new')}`;
+        title.textContent = __('child_form.title_new');
         document.getElementById('child-name').value = '';
         document.getElementById('child-emoji').value = '👦';
         document.getElementById('child-color').value = '#6C63FF';
@@ -1578,7 +1578,7 @@ function renderParentDashboard() {
         html += "<ul class='item-list'>";
         selectedChild.tasks.sort(function(a, b) { return a.order - b.order; }).forEach(function(task) {
             html += "<li>";
-            html += "<span class='item-emoji'>" + task.emoji + "</span>";
+            html += "<span class='item-emoji'>" + (task.emoji || '📋') + "</span>";
             html += "<span class='item-text'>" + task.name + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>✏️</button>";
@@ -1598,7 +1598,7 @@ function renderParentDashboard() {
         selectedChild.bonusTasks.forEach(function(task) {
             var priceStr = (selectedChild.rewardType === 'stars') ? task.bonusPrice + " ⭐" : task.bonusPrice + " " + __('balance.currency.sm');
             html += "<li>";
-            html += "<span class='item-emoji'>" + task.emoji + "</span>";
+            html += "<span class='item-emoji'>" + (task.emoji || '📋') + "</span>";
             html += "<span class='item-text'>" + task.name + " <span class='item-meta'>🎁 +" + priceStr + "</span></span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>✏️</button>";
@@ -2209,6 +2209,13 @@ function setupEventListeners() {
     document.getElementById('child-delete-btn').addEventListener('click', deleteChild);
     document.getElementById('child-close').addEventListener('click', () => {
         document.getElementById('child-modal').classList.add('hidden');
+    });
+
+    // Emoji suggestion grids logic
+    document.querySelectorAll('#child-emoji-suggestions span').forEach(span => {
+        span.addEventListener('click', () => {
+            document.getElementById('child-emoji').value = span.textContent;
+        });
     });
 
     // Settings PIN
