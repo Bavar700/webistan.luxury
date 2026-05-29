@@ -575,7 +575,7 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
     }
 
     card.innerHTML = `
-        <div class="task-emoji">${task.emoji}</div>
+        <div class="task-emoji">${task.emoji || '📋'}</div>
         <div class="task-info">
             <div class="task-name">${task.name}</div>
             <div class="task-meta">${durationText}</div>
