@@ -2566,10 +2566,63 @@ input.flatpickr-input[readonly]:focus {
     -webkit-text-fill-color: rgba(120, 120, 150, 0.5) !important;
     font-weight: 400 !important;
 }
+/* Ранги сарлавҳаи тақвим (Calendar header color matching the app accent) */
+.flatpickr-months {
+    background: linear-gradient(135deg, #7C3AED 0%, #9D5CF5 100%) !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+.flatpickr-months .flatpickr-month {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+.flatpickr-current-month,
+.flatpickr-current-month .cur-month,
+.flatpickr-current-month input.cur-year {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: #ffffff !important;
+}
 
+/* Намудор ва калон кардани тирчаҳо (Making year and time arrows larger and visible) */
+.numInputWrapper {
+    width: 22px !important;
+}
+.numInputWrapper span {
+    width: 22px !important;
+    border: none !important;
+    opacity: 0.9 !important;
+    background: rgba(124, 58, 237, 0.05) !important;
+}
+.numInputWrapper span:hover {
+    background: rgba(124, 58, 237, 0.15) !important;
+}
+/* Намуди тирчаи боло (Up arrow) */
+.numInputWrapper span.arrowUp:after {
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-bottom: 7px solid #7C3AED !important;
+    top: 30% !important;
+}
+/* Намуди тирчаи поён (Down arrow) */
+.numInputWrapper span.arrowDown:after {
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-top: 7px solid #7C3AED !important;
+    top: 40% !important;
+}
 
-
-
+/* Интихоби вақт */
+.flatpickr-time input {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+}
+.flatpickr-time .flatpickr-time-separator {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+}
 /* ===== PENALTY GROUP ===== */
 #task-penalty-group {
     animation: fadeIn 0.25s ease;
