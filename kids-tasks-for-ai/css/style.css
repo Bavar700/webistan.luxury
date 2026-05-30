@@ -2593,7 +2593,7 @@ input.flatpickr-input[readonly]:focus {
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 20px !important; /* Масоҳати бештар байни моҳ ва сол */
+    gap: 16px !important;
     position: static !important;
     width: auto !important;
 }
@@ -2603,24 +2603,43 @@ input.flatpickr-input[readonly]:focus {
     display: inline-block !important;
     margin: 0 !important;
 }
+/* Рӯйхати моҳҳо ҳамчун тугмаи калони мудаввар (Touch pill style) */
 .flatpickr-current-month .flatpickr-monthDropdown-months {
-    background: transparent !important;
-    color: var(--text) !important;
-    font-weight: 600 !important;
+    background: #F3F0FF !important; /* Ранги бунафши хеле мулоим */
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border-radius: 20px !important;
+    padding: 6px 14px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    transition: background 0.2s ease !important;
+    outline: none !important;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months:hover,
 .flatpickr-current-month .flatpickr-monthDropdown-months:focus {
-    background: transparent !important;
-    color: var(--text) !important;
+    background: #EDE9FE !important; /* Ягон хел торикшавӣ нест */
+    color: var(--primary) !important;
 }
+/* Қуттии интихоби сол ҳамчун тугмаи калони мудаввар (Touch pill style) */
 .flatpickr-current-month .numInputWrapper {
     display: inline-flex !important;
     align-items: center !important;
-    width: 65px !important;
+    width: 80px !important;
+    background: #F3F0FF !important;
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border-radius: 20px !important;
+    padding: 0 6px !important;
+    height: 32px !important;
+    transition: background 0.2s ease !important;
+}
+.flatpickr-current-month .numInputWrapper:hover {
+    background: #EDE9FE !important;
 }
 .flatpickr-current-month input.cur-year {
-    color: var(--text) !important;
-    font-weight: 600 !important;
+    color: var(--primary) !important;
+    -webkit-text-fill-color: var(--primary) !important;
+    font-weight: 700 !important;
     display: inline-block !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -2629,11 +2648,13 @@ input.flatpickr-input[readonly]:focus {
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
+    font-size: 14px !important;
 }
 .flatpickr-current-month input.cur-year:hover,
 .flatpickr-current-month input.cur-year:focus {
     background: transparent !important;
-    color: var(--text) !important;
+    color: var(--primary) !important;
+    -webkit-text-fill-color: var(--primary) !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
