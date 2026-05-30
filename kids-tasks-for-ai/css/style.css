@@ -2585,88 +2585,127 @@ input.flatpickr-time:focus,
 .flatpickr-calendar,
 .flatpickr-calendar.dark {
     background: #ffffff !important;
-    border: 1.5px solid rgba(124, 58, 237, 0.15) !important;
+    border: 1.5px solid rgba(124, 58, 237, 0.2) !important;
     border-radius: 16px !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0,0,0,0.06) !important;
-    width: 300px !important;
-    padding: 0 0 12px 0 !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0,0,0,0.07) !important;
+    width: 330px !important;
+    padding: 0 !important;
     font-family: var(--font-main) !important;
     overflow: hidden;
 }
 
-/* ── Шапка (месяц/год/стрелки) ── */
-.flatpickr-months,
-.flatpickr-calendar.dark .flatpickr-months .flatpickr-month,
-.flatpickr-months .flatpickr-month {
+/* Ширина сетки дней */
+.flatpickr-days, .dayContainer {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* ── Шапка: вся строка месяц/год/стрелки ── */
+.flatpickr-months {
     background: linear-gradient(135deg, #7C3AED 0%, #9D5CF5 100%) !important;
     border-radius: 14px 14px 0 0 !important;
     height: 52px !important;
-    display: flex !important;
     align-items: center !important;
+    padding: 0 4px !important;
 }
 
-.flatpickr-current-month,
-.flatpickr-current-month .cur-month,
+/* Убираем тёмный фон у вложенных элементов Flatpickr */
+.flatpickr-months .flatpickr-month,
+.flatpickr-calendar.dark .flatpickr-months .flatpickr-month {
+    background: transparent !important;
+    height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1;
+}
+
+.flatpickr-current-month {
+    color: #ffffff !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    padding: 0 !important;
+    position: static !important;
+    width: auto !important;
+    left: auto !important;
+}
+.flatpickr-current-month .cur-month {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-weight: 700 !important;
+}
 .flatpickr-current-month input.cur-year {
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
-    font-size: 16px !important;
     font-weight: 700 !important;
+    font-size: 16px !important;
 }
 
 .flatpickr-prev-month,
 .flatpickr-next-month {
-    padding: 8px !important;
+    background: transparent !important;
+    padding: 10px !important;
     color: #fff !important;
     fill: #fff !important;
+    top: 0 !important;
+    height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
-    fill: #ffffff !important;
+    fill: rgba(255,255,255,0.85) !important;
 }
 .flatpickr-prev-month:hover,
 .flatpickr-next-month:hover {
-    background: rgba(255,255,255,0.2) !important;
+    background: rgba(255,255,255,0.18) !important;
     border-radius: 8px !important;
-    color: #fff !important;
 }
 .flatpickr-prev-month:hover svg,
 .flatpickr-next-month:hover svg {
     fill: #ffffff !important;
 }
 
-/* ── Дни недели ── */
+/* ── Строка дней недели ── */
 .flatpickr-weekdays,
 .flatpickr-calendar.dark .flatpickr-weekdays {
     background: #f5f3ff !important;
-    border-bottom: 1px solid rgba(124,58,237,0.08) !important;
-    padding: 6px 0 !important;
+    border-bottom: 1px solid rgba(124,58,237,0.1) !important;
+    padding: 7px 0 !important;
+    width: 100% !important;
 }
-
+.flatpickr-weekdaycontainer {
+    width: 100% !important;
+}
 .flatpickr-weekday {
+    background: transparent !important;
     color: #7C3AED !important;
     font-weight: 700 !important;
     font-size: 11px !important;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    flex: 1 !important;
 }
 
 /* ── Дни месяца ── */
 .flatpickr-days {
     border: none !important;
-    padding: 6px 8px !important;
+    padding: 4px 6px 8px !important;
+    width: 100% !important;
 }
 
 .flatpickr-day {
     color: #374151 !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     font-weight: 500 !important;
     font-size: 13px !important;
     border: 1.5px solid transparent !important;
-    margin: 1px !important;
-    max-width: 36px !important;
+    margin: 2px 1px !important;
+    flex: 1 !important;
+    max-width: calc(100% / 7 - 2px) !important;
     height: 36px !important;
-    line-height: 33px !important;
+    line-height: 36px !important;
 }
 
 .flatpickr-day.prevMonthDay,
@@ -2711,10 +2750,16 @@ input.flatpickr-time:focus,
 
 /* ── Выбор времени ── */
 .flatpickr-time {
-    background: #f9f7ff !important;
+    background: #ffffff !important;
     border-top: 1.5px solid rgba(124, 58, 237, 0.1) !important;
     border-radius: 0 0 14px 14px !important;
     height: 56px !important;
+    overflow: hidden !important;
+}
+/* Убираем лишний фон у внутренних обёрток */
+.flatpickr-time .flatpickr-time-wrapper,
+.flatpickr-time .numInputWrapper {
+    background: transparent !important;
 }
 
 .flatpickr-time input,
