@@ -2615,11 +2615,12 @@ input.flatpickr-input[readonly]:focus {
     background: #F3F0FF !important; /* Ранги бунафши хеле мулоим */
     color: var(--primary) !important;
     font-weight: 700 !important;
-    border: none !important; /* Тоза кардани хати гирди тугма */
-    outline: none !important;
+    border: none !important; /* Тоза кардани хати марзӣ */
+    outline: none !important; /* Тоза кардани хати сиёҳи фокус */
     box-shadow: none !important;
+    border-color: transparent !important;
     border-radius: 20px !important;
-    padding: 6px 14px !important;
+    padding: 6px 28px 6px 14px !important; /* Масоҳати бештар дар тарафи рост барои тирча */
     cursor: pointer !important;
     font-size: 14px !important;
     transition: background 0.2s ease !important;
@@ -2628,12 +2629,14 @@ input.flatpickr-input[readonly]:focus {
     appearance: none;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months:hover,
-.flatpickr-current-month .flatpickr-monthDropdown-months:focus {
+.flatpickr-current-month .flatpickr-monthDropdown-months:focus,
+.flatpickr-current-month .flatpickr-monthDropdown-months:active {
     background: #EDE9FE !important;
     color: var(--primary) !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
+    border-color: transparent !important;
 }
 /* Қуттии интихоби сол ҳамчун тугмаи калони мудаввар (Touch pill style) */
 .flatpickr-current-month .numInputWrapper {
