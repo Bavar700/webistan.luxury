@@ -2139,3 +2139,86 @@ input[type="number"] { -moz-appearance: textfield; }
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.6; transform: scale(1.2); }
 }
+
+/* ===== EMOJI SUGGESTION GRID ===== */
+.emoji-suggestion-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    justify-content: center;
+}
+.emoji-suggestion-grid span {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: transform 0.1s ease, background 0.1s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.emoji-suggestion-grid span:hover, .emoji-suggestion-grid span:active {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.15);
+}
+
+/* ===== PREMIUM TASK INSTRUCTIONS ===== */
+.timer-inst-container {
+    margin: 16px 0;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    animation: fadeIn 0.3s ease;
+}
+
+.timer-inst-title {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.5px;
+}
+
+.timer-inst-text {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text);
+    white-space: pre-wrap;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.timer-inst-img-container {
+    margin-top: 12px;
+    border-radius: var(--radius-xs);
+    overflow: hidden;
+    border: 2px solid var(--border);
+    max-height: 160px;
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.timer-inst-img-container:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+.timer-inst-img {
+    max-width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    cursor: zoom-in;
+}
+

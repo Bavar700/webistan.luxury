@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Офарин — Вазифаҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=19">
+    <link rel="stylesheet" href="css/style.css?v=23">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -443,14 +443,14 @@
                         </svg>
                     </div>
                     <!-- Task Instructions (if available) -->
-                    <div id="timer-task-instructions-container" class="hidden" style="margin: 15px 0; padding: 12px; border-radius: 8px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.1); width: 100%; text-align: left; box-sizing: border-box;">
-                        <h4 style="margin: 0 0 6px 0; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+                    <div id="timer-task-instructions-container" class="hidden timer-inst-container">
+                        <h4 class="timer-inst-title">
                             <svg class="icon-svg" style="width: 14px; height: 14px; color: var(--primary);" aria-hidden="true"><use href="#icon-book"/></svg>
-                            Дастури иҷро:
+                            Дастур:
                         </h4>
-                        <p id="timer-task-instructions-text" style="margin: 0; font-size: 14px; color: var(--text-main); white-space: pre-wrap; line-height: 1.4;"></p>
-                        <div id="timer-task-instructions-image-container" class="hidden" style="margin-top: 10px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-color); max-height: 150px; text-align: center;">
-                            <img id="timer-task-instructions-img" style="max-width: 100%; max-height: 150px; object-fit: contain; cursor: pointer;" alt="Дастури акс" onclick="window.open(this.src, '_blank')">
+                        <p id="timer-task-instructions-text" class="timer-inst-text"></p>
+                        <div id="timer-task-instructions-image-container" class="hidden timer-inst-img-container">
+                            <img id="timer-task-instructions-img" class="timer-inst-img" alt="Дастури акс" onclick="window.open(this.src, '_blank')">
                         </div>
                     </div>
 
@@ -517,6 +517,21 @@
                         <input type="text" id="task-name" placeholder="Номи супоришро ворид кунед">
                     </div>
                     <div class="form-group">
+                        <label for="task-instructions" id="task-instructions-label">Дастур</label>
+                        <textarea id="task-instructions" rows="2" placeholder="Қадам ба қадам нависед, ки чӣ тавр супоришро бояд иҷро кард..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="task-inst-image-label">Акси дастур (ихтиёрӣ)</label>
+                        <div class="proof-photo-area" id="inst-image-area">
+                            <input type="file" accept="image/*" id="task-inst-image-input" class="hidden">
+                            <button class="btn btn-outline btn-small" id="task-inst-image-btn">📸 Иловаи акс</button>
+                            <div class="proof-photo-preview hidden" id="task-inst-image-preview">
+                                <img id="task-inst-image-img" alt="Акс">
+                                <button class="proof-photo-remove" id="task-inst-image-remove">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="task-duration">Вақт (дақиқа)</label>
                         <input type="number" id="task-duration" min="1" max="120" value="10">
                     </div>
@@ -546,21 +561,6 @@
                             <option value="5">5 сомонӣ</option>
                             <option value="10">10 сомонӣ</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="task-instructions" id="task-instructions-label">Дастури иҷро (чӣ тавр бояд иҷро кард)</label>
-                        <textarea id="task-instructions" rows="2" placeholder="Қадам ба қадам нависед, ки чӣ тавр супоришро бояд иҷро кард..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label id="task-inst-image-label">Акси дастур (ихтиёрӣ)</label>
-                        <div class="proof-photo-area" id="inst-image-area">
-                            <input type="file" accept="image/*" id="task-inst-image-input" class="hidden">
-                            <button class="btn btn-outline btn-small" id="task-inst-image-btn">📸 Иловаи акс</button>
-                            <div class="proof-photo-preview hidden" id="task-inst-image-preview">
-                                <img id="task-inst-image-img" alt="Акс">
-                                <button class="proof-photo-remove" id="task-inst-image-remove">✕</button>
-                            </div>
-                        </div>
                     </div>
                     <button class="btn btn-primary btn-full" id="task-save-btn">
                         <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
@@ -784,8 +784,8 @@
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 
-    <script src="js/translations.js?v=22"></script>
-    <script src="js/data.js?v=22"></script>
-    <script src="js/app.js?v=22"></script>
+    <script src="js/translations.js?v=23"></script>
+    <script src="js/data.js?v=23"></script>
+    <script src="js/app.js?v=23"></script>
 </body>
 </html>
