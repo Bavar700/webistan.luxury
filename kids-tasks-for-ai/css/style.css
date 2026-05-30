@@ -2566,63 +2566,161 @@ input.flatpickr-input[readonly]:focus {
     -webkit-text-fill-color: rgba(120, 120, 150, 0.5) !important;
     font-weight: 400 !important;
 }
-/* Ранги сарлавҳаи тақвим (Calendar header color matching the app accent) */
+/* Ранги сарлавҳаи тақвим (Calendar header matching app style) */
+.flatpickr-calendar {
+    background: #ffffff !important;
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--shadow-lg) !important;
+    width: 320px !important;
+    padding: 6px !important;
+    font-family: var(--font-main), 'Rubik', sans-serif !important;
+}
 .flatpickr-months {
-    background: linear-gradient(135deg, #7C3AED 0%, #9D5CF5 100%) !important;
-    border-radius: 8px 8px 0 0 !important;
+    background: transparent !important;
+    height: 48px !important;
 }
 .flatpickr-months .flatpickr-month {
-    color: #ffffff !important;
-    fill: #ffffff !important;
+    color: var(--text) !important;
+    fill: var(--text) !important;
 }
-.flatpickr-current-month,
-.flatpickr-current-month .cur-month,
+.flatpickr-current-month {
+    color: var(--text) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+.flatpickr-current-month .cur-month {
+    color: var(--text) !important;
+    font-weight: 600 !important;
+}
 .flatpickr-current-month input.cur-year {
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
+    color: var(--text) !important;
+    font-weight: 600 !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
-    fill: #ffffff !important;
+    fill: var(--text) !important;
+}
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    background: var(--bg) !important;
+    border-radius: 50% !important;
 }
 
-/* Намудор ва калон кардани тирчаҳо (Making year and time arrows larger and visible) */
+/* Рӯзҳои ҳафта */
+.flatpickr-weekdays {
+    background: transparent !important;
+    height: 30px !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.06) !important;
+}
+.flatpickr-weekday {
+    color: var(--text-light) !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+}
+
+/* Дни месяца по стилю родного календаря (.calendar-day) */
+.flatpickr-days {
+    width: 100% !important;
+    padding: 6px 0 0 0 !important;
+}
+.dayContainer {
+    gap: 2px !important;
+}
+.flatpickr-day {
+    color: var(--text) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 50% !important; /* Даврашакл */
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    width: 38px !important;
+    max-width: 38px !important;
+    margin: 2px auto !important;
+    transition: var(--transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Гузоштани курсор ба рӯи ададҳо (Hover effect with circle and scale) */
+.flatpickr-day:hover:not(.selected):not(.today) {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+}
+
+/* Рӯзи ҷорӣ (Today: outlined circle like .calendar-day.today) */
+.flatpickr-day.today {
+    box-shadow: 0 0 0 2px var(--primary) !important;
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+}
+.flatpickr-day.today:hover {
+    background: var(--bg) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Рӯзи интихобшуда (Selected) */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay {
+    background: var(--primary) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border-radius: 50% !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 10px rgba(124, 58, 237, 0.25) !important;
+    border: none !important;
+}
+
+/* Рӯзҳои моҳҳои дигар */
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color: var(--text-light) !important;
+    opacity: 0.4 !important;
+}
+
+/* Намудор кардани тирчаҳои сол ва вақт */
 .numInputWrapper {
     width: 22px !important;
 }
 .numInputWrapper span {
     width: 22px !important;
     border: none !important;
-    opacity: 0.9 !important;
-    background: rgba(124, 58, 237, 0.05) !important;
+    opacity: 0.8 !important;
 }
-.numInputWrapper span:hover {
-    background: rgba(124, 58, 237, 0.15) !important;
-}
-/* Намуди тирчаи боло (Up arrow) */
 .numInputWrapper span.arrowUp:after {
-    border-left: 5px solid transparent !important;
-    border-right: 5px solid transparent !important;
-    border-bottom: 7px solid #7C3AED !important;
-    top: 30% !important;
+    border-left: 4px solid transparent !important;
+    border-right: 4px solid transparent !important;
+    border-bottom: 6px solid var(--primary) !important;
 }
-/* Намуди тирчаи поён (Down arrow) */
 .numInputWrapper span.arrowDown:after {
-    border-left: 5px solid transparent !important;
-    border-right: 5px solid transparent !important;
-    border-top: 7px solid #7C3AED !important;
-    top: 40% !important;
+    border-left: 4px solid transparent !important;
+    border-right: 4px solid transparent !important;
+    border-top: 6px solid var(--primary) !important;
 }
 
 /* Интихоби вақт */
+.flatpickr-time {
+    border-top: 1px solid rgba(124, 58, 237, 0.08) !important;
+    height: 50px !important;
+}
 .flatpickr-time input {
-    font-size: 24px !important;
-    font-weight: 700 !important;
+    font-size: 20px !important;
+    color: var(--text) !important;
 }
 .flatpickr-time .flatpickr-time-separator {
-    font-size: 24px !important;
-    font-weight: 700 !important;
+    color: var(--text) !important;
 }
+
 /* ===== PENALTY GROUP ===== */
 #task-penalty-group {
     animation: fadeIn 0.25s ease;
