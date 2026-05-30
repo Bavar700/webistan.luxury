@@ -616,15 +616,8 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
                     showToast('⏱️', __('timer.finish_hint'));
                     return;
                 }
-                tl.status = 'awaiting-confirm';
-                tl.timeSpent = task.duration;
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    closeTimer();
-                }
-                saveState();
-                renderTasks();
+                showTimer(currentChildId, task);
+                completeTimer();
             } else if (action === 'skip') {
                 showSkipModal(task);
             }
@@ -656,6 +649,31 @@ function showTimer(childId, task) {
 
     document.getElementById('timer-task-name').innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-clock"/></svg> ${task.name}`;
     document.getElementById('timer-emoji').textContent = task.emoji;
+
+    // Instructions rendering
+    const instContainer = document.getElementById('timer-task-instructions-container');
+    const instText = document.getElementById('timer-task-instructions-text');
+    const instImgContainer = document.getElementById('timer-task-instructions-image-container');
+    const instImg = document.getElementById('timer-task-instructions-img');
+
+    if (task.instructions || task.instructionImage) {
+        instContainer.classList.remove('hidden');
+        if (task.instructions) {
+            instText.textContent = task.instructions;
+            instText.classList.remove('hidden');
+        } else {
+            instText.classList.add('hidden');
+        }
+
+        if (task.instructionImage) {
+            instImg.src = task.instructionImage;
+            instImgContainer.classList.remove('hidden');
+        } else {
+            instImgContainer.classList.add('hidden');
+        }
+    } else {
+        instContainer.classList.add('hidden');
+    }
 
     const durationSeconds = task.duration * 60;
     timerRemaining = durationSeconds;
@@ -814,6 +832,41 @@ function handlePhotoUpload(event) {
             document.getElementById('proof-photo-img').src = compressed;
             document.getElementById('proof-photo-preview').classList.remove('hidden');
             document.getElementById('proof-photo-btn').classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function handleInstructionPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.7);
+            document.getElementById('task-inst-image-img').src = compressed;
+            document.getElementById('task-inst-image-preview').classList.remove('hidden');
+            document.getElementById('task-inst-image-btn').classList.add('hidden');
         };
         img.src = e.target.result;
     };
@@ -1333,6 +1386,20 @@ function showTaskModal(task = null, forceBonus = false) {
         document.getElementById('task-duration').value = task.duration || 10;
         document.getElementById('task-emoji').value = task.emoji || '📋';
         document.getElementById('task-deadline').value = task.deadline || '';
+        document.getElementById('task-instructions').value = task.instructions || '';
+        
+        const preview = document.getElementById('task-inst-image-preview');
+        const img = document.getElementById('task-inst-image-img');
+        const btn = document.getElementById('task-inst-image-btn');
+        if (task.instructionImage) {
+            img.src = task.instructionImage;
+            preview.classList.remove('hidden');
+            btn.classList.add('hidden');
+        } else {
+            img.src = '';
+            preview.classList.add('hidden');
+            btn.classList.remove('hidden');
+        }
         
         let typeVal = 'daily';
         if (task.isBonus) {
@@ -1352,6 +1419,15 @@ function showTaskModal(task = null, forceBonus = false) {
         document.getElementById('task-duration').value = 10;
         document.getElementById('task-emoji').value = '📋';
         document.getElementById('task-deadline').value = '';
+        document.getElementById('task-instructions').value = '';
+        
+        const preview = document.getElementById('task-inst-image-preview');
+        const img = document.getElementById('task-inst-image-img');
+        const btn = document.getElementById('task-inst-image-btn');
+        img.src = '';
+        preview.classList.add('hidden');
+        btn.classList.remove('hidden');
+        
         document.getElementById('task-type').value = forceBonus ? 'bonus' : 'daily';
         document.getElementById('bonus-price').value = 3;
         editingTaskId = null;
@@ -1381,6 +1457,16 @@ function updateTaskFormLabels() {
 
     document.getElementById('task-deadline-label').textContent = `📅 ${__('task_form.deadline')}`;
     
+    // Translate instructions labels
+    const instLabel = document.getElementById('task-instructions-label');
+    if (instLabel) instLabel.textContent = __('task_form.instructions');
+    const instTextarea = document.getElementById('task-instructions');
+    if (instTextarea) instTextarea.placeholder = __('task_form.instructions_placeholder');
+    const instImageLabel = document.getElementById('task-inst-image-label');
+    if (instImageLabel) instImageLabel.textContent = __('task_form.inst_image');
+    const instImageBtn = document.getElementById('task-inst-image-btn');
+    if (instImageBtn) instImageBtn.innerHTML = `📸 ${__('task_form.add_photo')}`;
+
     // Translate task type options
     const typeLabel = document.getElementById('task-type-label');
     if (typeLabel) typeLabel.textContent = __('task_form.type');
@@ -1418,6 +1504,10 @@ function saveTask() {
     const typeVal = document.getElementById('task-type').value;
     const isBonus = (typeVal === 'bonus');
     const bonusPrice = isBonus ? parseInt(document.getElementById('bonus-price').value) || 3 : 0;
+    
+    const instructions = document.getElementById('task-instructions').value.trim();
+    const instImg = document.getElementById('task-inst-image-img');
+    const instructionImage = (instImg.src && instImg.src.startsWith('data:')) ? instImg.src : '';
 
     if (!name) {
         showToast('❌', __('task_form.error_name'));
@@ -1435,6 +1525,8 @@ function saveTask() {
             task.deadline = deadline;
             task.isBonus = isBonus;
             task.type = typeVal;
+            task.instructions = instructions;
+            task.instructionImage = instructionImage;
             if (isBonus) {
                 task.bonusPrice = bonusPrice;
             } else {
@@ -1459,7 +1551,9 @@ function saveTask() {
             order: child.tasks.length + 1,
             isBonus,
             bonusPrice,
-            type: typeVal
+            type: typeVal,
+            instructions,
+            instructionImage
         };
         if (isBonus) {
             child.bonusTasks.push(newTask);
@@ -2130,6 +2224,18 @@ function setupEventListeners() {
         document.getElementById('proof-photo-img').src = '';
         document.getElementById('proof-photo-input').value = '';
         document.getElementById('proof-photo-btn').classList.remove('hidden');
+    });
+
+    // Instructions photo upload
+    document.getElementById('task-inst-image-btn').addEventListener('click', () => {
+        document.getElementById('task-inst-image-input').click();
+    });
+    document.getElementById('task-inst-image-input').addEventListener('change', handleInstructionPhotoUpload);
+    document.getElementById('task-inst-image-remove').addEventListener('click', () => {
+        document.getElementById('task-inst-image-preview').classList.add('hidden');
+        document.getElementById('task-inst-image-img').src = '';
+        document.getElementById('task-inst-image-input').value = '';
+        document.getElementById('task-inst-image-btn').classList.remove('hidden');
     });
     document.getElementById('proof-submit-btn').addEventListener('click', submitProof);
 

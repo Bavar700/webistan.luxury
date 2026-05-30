@@ -442,6 +442,18 @@
                             <circle cx="60" cy="60" r="54" class="timer-progress-circle" id="timer-circle"/>
                         </svg>
                     </div>
+                    <!-- Task Instructions (if available) -->
+                    <div id="timer-task-instructions-container" class="hidden" style="margin: 15px 0; padding: 12px; border-radius: 8px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.1); width: 100%; text-align: left; box-sizing: border-box;">
+                        <h4 style="margin: 0 0 6px 0; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+                            <svg class="icon-svg" style="width: 14px; height: 14px; color: var(--primary);" aria-hidden="true"><use href="#icon-book"/></svg>
+                            Дастури иҷро:
+                        </h4>
+                        <p id="timer-task-instructions-text" style="margin: 0; font-size: 14px; color: var(--text-main); white-space: pre-wrap; line-height: 1.4;"></p>
+                        <div id="timer-task-instructions-image-container" class="hidden" style="margin-top: 10px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-color); max-height: 150px; text-align: center;">
+                            <img id="timer-task-instructions-img" style="max-width: 100%; max-height: 150px; object-fit: contain; cursor: pointer;" alt="Дастури акс" onclick="window.open(this.src, '_blank')">
+                        </div>
+                    </div>
+
                     <p class="timer-status" id="timer-status">Ба кор шурӯъ кунед...</p>
                     <div class="timer-buttons">
                         <button class="btn btn-primary btn-large" id="timer-start-btn">
@@ -534,6 +546,21 @@
                             <option value="5">5 сомонӣ</option>
                             <option value="10">10 сомонӣ</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-instructions" id="task-instructions-label">Дастури иҷро (чӣ тавр бояд иҷро кард)</label>
+                        <textarea id="task-instructions" rows="2" placeholder="Қадам ба қадам нависед, ки чӣ тавр супоришро бояд иҷро кард..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="task-inst-image-label">Акси дастур (ихтиёрӣ)</label>
+                        <div class="proof-photo-area" id="inst-image-area">
+                            <input type="file" accept="image/*" id="task-inst-image-input" class="hidden">
+                            <button class="btn btn-outline btn-small" id="task-inst-image-btn">📸 Иловаи акс</button>
+                            <div class="proof-photo-preview hidden" id="task-inst-image-preview">
+                                <img id="task-inst-image-img" alt="Акс">
+                                <button class="proof-photo-remove" id="task-inst-image-remove">✕</button>
+                            </div>
+                        </div>
                     </div>
                     <button class="btn btn-primary btn-full" id="task-save-btn">
                         <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
@@ -757,8 +784,8 @@
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 
-    <script src="js/translations.js?v=21"></script>
-    <script src="js/data.js?v=21"></script>
-    <script src="js/app.js?v=21"></script>
+    <script src="js/translations.js?v=22"></script>
+    <script src="js/data.js?v=22"></script>
+    <script src="js/app.js?v=22"></script>
 </body>
 </html>

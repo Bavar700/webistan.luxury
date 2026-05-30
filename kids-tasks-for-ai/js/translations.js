@@ -212,6 +212,10 @@ const TRANSLATIONS = {
         'task_form.deadline_none': 'Мӯҳлат надорад',
         'task_form.error_name': 'Номи супоришро ворид кунед!',
         'task_form.bonus_price_stars': 'Нарх (ситорача)',
+        'task_form.instructions': 'Дастури иҷро (чӣ тавр бояд иҷро кард)',
+        'task_form.instructions_placeholder': 'Қадам ба қадам нависед, ки чӣ тавр супоришро бояд иҷро кард...',
+        'task_form.inst_image': 'Акси дастур (ихтиёрӣ)',
+        'task_form.add_photo': 'Иловаи акс',
 
         // Child Form
         'child_form.title_new': '👶 Иловаи кӯдаки нав',
@@ -502,6 +506,10 @@ const TRANSLATIONS = {
         'task_form.deadline_none': 'Без срока',
         'task_form.error_name': 'Введите название задания!',
         'task_form.bonus_price_stars': 'Цена (звёзды)',
+        'task_form.instructions': 'Инструкция по выполнению (как выполнять)',
+        'task_form.instructions_placeholder': 'Опишите пошагово, как выполнять задание...',
+        'task_form.inst_image': 'Фото инструкции (необязательно)',
+        'task_form.add_photo': 'Добавить фото',
 
         // Child Form
         'child_form.title_new': '👶 Добавить ребёнка',
