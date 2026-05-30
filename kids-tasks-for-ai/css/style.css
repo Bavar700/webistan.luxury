@@ -2474,7 +2474,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .premium-upload-card svg, .premium-upload-card i {
     width: 20px;
     height: 20px;
-    color: var(--text-secondary);
+    color: rgba(120, 120, 150, 0.55);
     transition: color 0.2s ease;
 }
 
@@ -2483,9 +2483,9 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .premium-upload-card span {
-    font-size: 12px;
-    color: var(--text-secondary);
-    font-weight: 500;
+    font-size: 14px;
+    color: rgba(120, 120, 150, 0.55);
+    font-weight: 400;
 }
 
 .premium-photo-preview-container {
