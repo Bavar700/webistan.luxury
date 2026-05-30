@@ -2572,7 +2572,7 @@ input.flatpickr-input[readonly]:focus {
     border: 1px solid rgba(124, 58, 237, 0.12) !important;
     border-radius: 16px !important;
     box-shadow: var(--shadow-lg) !important;
-    width: 320px !important;
+    width: 350px !important;
     padding: 6px !important;
     font-family: var(--font-main), 'Rubik', sans-serif !important;
 }
@@ -2588,10 +2588,14 @@ input.flatpickr-input[readonly]:focus {
     color: var(--text) !important;
     font-size: 15px !important;
     font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 .flatpickr-current-month .cur-month {
     color: var(--text) !important;
     font-weight: 600 !important;
+    margin-right: 14px !important; /* Масофаи байни моҳ ва сол */
 }
 .flatpickr-current-month input.cur-year {
     color: var(--text) !important;
