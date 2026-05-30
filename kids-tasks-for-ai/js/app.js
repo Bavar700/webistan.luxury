@@ -243,8 +243,8 @@ function renderChildTabs() {
         const rt = child.rewardType || 'money';
         let txt = '';
         if (rt === 'stars') txt = `⭐ ${child.stars || 0}`;
-        else if (rt === 'both') txt = `⭐ ${child.stars || 0}   💰 ${child.balance} ${__('balance.currency.sm')}`;
-        else txt = `💰 ${child.balance} ${__('balance.currency.sm')}`;
+        else if (rt === 'both') txt = `⭐ ${child.stars || 0}   🪙 ${child.balance}`;
+        else txt = `🪙 ${child.balance}`;
         txt += `   🏅 ${child.medals || 0}`;
         balanceEl.textContent = txt;
     }
