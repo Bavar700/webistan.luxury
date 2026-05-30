@@ -180,6 +180,9 @@ function getChild(id) {
 }
 
 function getCurrentChild() {
+    if (!currentChildId && state && state.children && state.children.length > 0) {
+        currentChildId = state.children[0].id;
+    }
     return getChild(currentChildId);
 }
 

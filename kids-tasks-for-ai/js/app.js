@@ -1574,6 +1574,7 @@ function setFlatpickrValue(id, value) {
 }
 
 function showTaskModal(task = null, forceBonus = false) {
+    console.trace("showTaskModal called with task:", task, "forceBonus:", forceBonus);
     const modal = document.getElementById('task-modal');
     const title = document.getElementById('task-modal-title');
 
@@ -1918,6 +1919,7 @@ function saveTask() {
 let editingChildId = null;
 
 function showChildModal(childId = null) {
+    console.trace("showChildModal called with childId:", childId);
     const modal = document.getElementById('child-modal');
     const title = modal.querySelector('.modal-header h3');
 
@@ -2546,9 +2548,15 @@ function setupEventListeners() {
         toggleChildPicker();
     });
     
-    document.getElementById('header-edit-child-btn').addEventListener('click', () => {
-        if (currentChildId) {
-            showChildModal(currentChildId);
+    document.getElementById('header-edit-child-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const activeChild = getCurrentChild();
+        console.log("header-edit-child-btn clicked! Active child:", activeChild);
+        if (activeChild) {
+            showChildModal(activeChild.id);
+        } else {
+            console.error("No active child found when clicking edit child button!");
         }
     });
 
