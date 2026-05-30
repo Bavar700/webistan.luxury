@@ -1573,7 +1573,16 @@ function setFlatpickrValue(id, value) {
     }
 }
 
+function hideAllModals() {
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        if (overlay.id !== 'timer-modal' || timerInterval === null) {
+            overlay.classList.add('hidden');
+        }
+    });
+}
+
 function showTaskModal(task = null, forceBonus = false) {
+    hideAllModals();
     console.trace("showTaskModal called with task:", task, "forceBonus:", forceBonus);
     const modal = document.getElementById('task-modal');
     const title = document.getElementById('task-modal-title');
@@ -1919,6 +1928,7 @@ function saveTask() {
 let editingChildId = null;
 
 function showChildModal(childId = null) {
+    hideAllModals();
     console.trace("showChildModal called with childId:", childId);
     const modal = document.getElementById('child-modal');
     const title = modal.querySelector('.modal-header h3');
@@ -1950,7 +1960,15 @@ function showChildModal(childId = null) {
     rtSelect.options[1].textContent = __('reward.stars');
     rtSelect.options[2].textContent = __('reward.both');
 
+    // Force DOM reposition to fix Safari/Mobile glitches
+    document.body.appendChild(modal);
+    
+    // Force styles
     modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+    modal.style.zIndex = '999999';
+    modal.style.opacity = '1';
+    modal.style.visibility = 'visible';
 }
 
 function saveChild() {
@@ -2552,8 +2570,8 @@ function setupEventListeners() {
         e.stopPropagation();
         e.preventDefault();
         const activeChild = getCurrentChild();
-        console.log("header-edit-child-btn clicked! Active child:", activeChild);
         if (activeChild) {
+            hideAllModals(); // force hide anything else
             showChildModal(activeChild.id);
         } else {
             console.error("No active child found when clicking edit child button!");
@@ -2749,7 +2767,9 @@ function setupEventListeners() {
     document.getElementById('child-save-btn').addEventListener('click', saveChild);
     document.getElementById('child-delete-btn').addEventListener('click', deleteChild);
     document.getElementById('child-close').addEventListener('click', () => {
-        document.getElementById('child-modal').classList.add('hidden');
+        const childModal = document.getElementById('child-modal');
+        childModal.classList.add('hidden');
+        childModal.style.display = ''; // Clear any inline styles
     });
 
     // Emoji suggestion grids logic
