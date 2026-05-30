@@ -386,6 +386,21 @@
                         </div>
                     </div>
                     <form onsubmit="return false;">
+                    <div id="confirm-exam-score-group" class="form-group hidden" style="margin-bottom: 12px;">
+                        <label for="confirm-exam-score" style="font-weight: 600; margin-bottom: 4px; display: block;" id="confirm-exam-score-label">Хол / Баҳо (1-10):</label>
+                        <select id="confirm-exam-score" class="form-control" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border);">
+                            <option value="10">10 (Аъло)</option>
+                            <option value="9">9 (Хеле хуб)</option>
+                            <option value="8">8 (Хуб)</option>
+                            <option value="7">7 (Қаноатбахш)</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
                     <div class="pin-input-group">
                         <input type="password" id="confirm-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
                         <button class="btn btn-primary" id="confirm-submit">Ҳа, тасдиқ мекунам</button>
@@ -516,12 +531,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="task-name">Номи супориш</label>
-                        <input type="text" id="task-name" placeholder="Номи супоришро ворид кунед">
+                        <input type="text" id="task-name" placeholder="Номи супориш">
                     </div>
                     <div class="form-group">
-                        <label for="task-instructions" id="task-instructions-label">Дастур</label>
-                        <textarea id="task-instructions" rows="2" placeholder="Қадам ба қадам нависед, ки чӣ тавр супоришро бояд иҷро кард..."></textarea>
+                        <textarea id="task-instructions" rows="2" placeholder="Дастур (чӣ тавр бояд иҷро кард)"></textarea>
                     </div>
                     <div class="form-group">
                         <label id="task-inst-image-label">Акси дастур (ихтиёрӣ)</label>
@@ -552,8 +565,7 @@
                             <input type="time" id="task-start-time" value="12:00">
                         </div>
                         <div style="flex: 1; min-width: 100px;">
-                            <label for="task-duration" id="task-duration-label">Давомнокӣ (дақ)</label>
-                            <input type="number" id="task-duration" min="1" max="120" value="10">
+                            <input type="number" id="task-duration" min="1" max="120" placeholder="Давомнокӣ (дақиқа)">
                         </div>
                     </div>
                     <div class="form-group" id="task-days-group">
@@ -582,12 +594,10 @@
                     </div>
                     <div class="form-group" style="display: flex; gap: 12px;">
                         <div style="flex: 1;">
-                            <label for="task-reward-gold" id="task-reward-gold-label">Подош (Тилло)</label>
-                            <input type="number" id="task-reward-gold" min="0" value="0">
+                            <input type="number" id="task-reward-gold" min="0" placeholder="Подош (Тилло)">
                         </div>
                         <div style="flex: 1;">
-                            <label for="task-reward-stars" id="task-reward-stars-label">Подош (Ситорача)</label>
-                            <input type="number" id="task-reward-stars" min="0" value="0">
+                            <input type="number" id="task-reward-stars" min="0" placeholder="Подош (Ситорача)">
                         </div>
                     </div>
                     <button class="btn btn-primary btn-full" id="task-save-btn">

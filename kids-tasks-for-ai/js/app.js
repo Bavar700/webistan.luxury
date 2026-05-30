@@ -577,6 +577,10 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
     const stars = task.rewardStars || 0;
     durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">🪙 ${gold} ⭐ ${stars}</span>`;
 
+    if (task.type === 'exam' && tl.status === 'completed' && tl.score !== undefined) {
+        durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">💯 Баҳо: ${tl.score}/10</span>`;
+    }
+
     // Deadline info
     const deadlineInfo = getDeadlineInfo(task);
     let deadlineHtml = '';
@@ -945,6 +949,13 @@ function showConfirmModal(task) {
     document.getElementById('confirm-pin').value = '';
     document.getElementById('confirm-error').classList.add('hidden');
 
+    const scoreGroup = document.getElementById('confirm-exam-score-group');
+    if (scoreGroup) {
+        const scoreLabel = document.getElementById('confirm-exam-score-label');
+        if (scoreLabel) scoreLabel.textContent = __('confirm.exam_score') || 'Баҳо (1-10):';
+        scoreGroup.classList.toggle('hidden', task.type !== 'exam');
+    }
+
     // Show child's photo and explanation if available
     const child = getCurrentChild();
     const today = getToday();
@@ -998,6 +1009,12 @@ function submitConfirm() {
     if (tl) {
         tl.status = 'completed';
         tl.confirmed = true;
+        
+        const task = child.tasks.find(t => t.id === confirmTaskId) || child.bonusTasks.find(t => t.id === confirmTaskId);
+        if (task && task.type === 'exam') {
+            tl.score = parseInt(document.getElementById('confirm-exam-score').value) || 10;
+        }
+
         saveState();
 
         const unlocked = checkAchievements(currentChildId);
@@ -1486,22 +1503,24 @@ function showTaskModal(task = null, forceBonus = false) {
 }
 
 function updateTaskFormLabels() {
-    // Translate labels
-    const nameLabel = document.querySelector('label[for="task-name"]');
-    if (nameLabel) nameLabel.textContent = __('task_form.name');
     const nameInput = document.getElementById('task-name');
-    if (nameInput) nameInput.placeholder = __('task_form.name_placeholder');
+    if (nameInput) nameInput.placeholder = __('task_form.name');
 
-    const durationLabel = document.querySelector('label[for="task-duration"]');
-    if (durationLabel) durationLabel.textContent = __('task_form.duration');
+    const durationInput = document.getElementById('task-duration');
+    if (durationInput) durationInput.placeholder = __('task_form.duration');
+
+    const instTextarea = document.getElementById('task-instructions');
+    if (instTextarea) instTextarea.placeholder = __('task_form.instructions_placeholder');
+
+    const goldInput = document.getElementById('task-reward-gold');
+    if (goldInput) goldInput.placeholder = __('task_form.reward_gold');
+
+    const starsInput = document.getElementById('task-reward-stars');
+    if (starsInput) starsInput.placeholder = __('task_form.reward_stars');
 
     document.getElementById('task-deadline-label').textContent = `📅 ${__('task_form.deadline')}`;
     
     // Translate instructions labels
-    const instLabel = document.getElementById('task-instructions-label');
-    if (instLabel) instLabel.textContent = __('task_form.instructions');
-    const instTextarea = document.getElementById('task-instructions');
-    if (instTextarea) instTextarea.placeholder = __('task_form.instructions_placeholder');
     const instImageLabel = document.getElementById('task-inst-image-label');
     if (instImageLabel) instImageLabel.textContent = __('task_form.inst_image');
     const instImageBtn = document.getElementById('task-inst-image-btn');
@@ -1519,7 +1538,7 @@ function updateTaskFormLabels() {
     const optBonus = document.getElementById('task-type-option-bonus');
     if (optBonus) optBonus.textContent = __('task_form.type_bonus');
 
-    // Translate scheduler and rewards labels
+    // Translate scheduler labels
     const startTimeLabel = document.getElementById('task-start-time-label');
     if (startTimeLabel) startTimeLabel.textContent = __('task_form.start_time');
     const daysLabel = document.getElementById('task-days-label');

@@ -105,6 +105,7 @@ const TRANSLATIONS = {
         'confirm.pin_placeholder': '****',
         'confirm.pin_error': 'Рамзи PIN нодуруст аст!',
         'confirm.success': 'Вазифа тасдиқ шуд!',
+        'confirm.exam_score': 'Баҳодиҳии имтиҳон (1-10):',
 
         // Excuse Day
         'excuse.title': '🙏 Рӯзи узрнок',
@@ -403,6 +404,7 @@ const TRANSLATIONS = {
         'confirm.pin_placeholder': '****',
         'confirm.pin_error': 'Неверный PIN-код!',
         'confirm.success': 'Задание подтверждено!',
+        'confirm.exam_score': 'Оценка за экзамен (1-10):',
 
         // Excuse Day
         'excuse.title': '🙏 Уважительная причина',
