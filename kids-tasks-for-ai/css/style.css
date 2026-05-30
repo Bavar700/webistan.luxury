@@ -2586,20 +2586,35 @@ input.flatpickr-input[readonly]:focus {
 }
 .flatpickr-current-month {
     color: var(--text) !important;
-    font-size: 15px !important;
+    font-size: 16px !important;
     font-weight: 600 !important;
-    display: flex !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: center !important;
+    gap: 8px !important;
+    position: static !important;
+    width: auto !important;
 }
 .flatpickr-current-month .cur-month {
     color: var(--text) !important;
     font-weight: 600 !important;
-    margin-right: 14px !important; /* Масофаи байни моҳ ва сол */
+    display: inline-block !important;
+    margin: 0 !important;
+}
+.flatpickr-current-month .numInputWrapper {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: 65px !important;
 }
 .flatpickr-current-month input.cur-year {
     color: var(--text) !important;
     font-weight: 600 !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
