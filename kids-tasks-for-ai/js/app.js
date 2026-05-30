@@ -448,15 +448,20 @@ function renderTasks() {
     const today = getToday();
     const log = getOrCreateDailyLog(currentChildId);
 
-    // Update progress
-    const allTasks = [...child.tasks, ...child.bonusTasks];
+    // Update progress based on tasks active today
+    const todayDay = new Date().getDay();
+    const activeTasks = [
+        ...child.tasks.filter(t => t.type !== 'daily' || !t.days || t.days.includes(todayDay)),
+        ...child.bonusTasks
+    ];
+    
     let confirmedCount = 0;
-    allTasks.forEach(t => {
+    activeTasks.forEach(t => {
         const tl = log.tasks[t.id];
         if (tl && tl.status === 'completed' && tl.confirmed) confirmedCount++;
     });
 
-    const totalTasks = child.tasks.length + child.bonusTasks.length;
+    const totalTasks = activeTasks.length;
     document.getElementById('progress-text').textContent = `${confirmedCount}/${totalTasks}`;
     const pct = totalTasks > 0 ? (confirmedCount / totalTasks) * 100 : 0;
     document.getElementById('progress-fill').style.width = `${Math.min(pct, 100)}%`;
@@ -472,7 +477,7 @@ function renderTasks() {
         return;
     }
 
-    const regularTasks = child.tasks.filter(t => !t.isBonus);
+    const regularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
     const allRegularDone = regularTasks.every(t => {
         const tl = log.tasks[t.id];
         return tl && tl.status === 'completed' && tl.confirmed;
@@ -484,7 +489,7 @@ function renderTasks() {
     });
 
     let activeTaskId = null;
-    allTasks.forEach(t => {
+    activeTasks.forEach(t => {
         const tl = log.tasks[t.id];
         if (tl && tl.status === 'in-progress') {
             activeTaskId = t.id;
@@ -497,6 +502,7 @@ function renderTasks() {
     child.tasks.sort((a, b) => a.order - b.order).forEach(task => {
         const tl = log.tasks[task.id];
         if (!tl) return;
+        if (task.type === 'daily' && task.days && !task.days.includes(todayDay)) return;
         container.appendChild(createTaskCard(task, tl, log, child, false));
     });
 
@@ -507,7 +513,7 @@ function renderTasks() {
         container.appendChild(createTaskCard(task, tl, log, child, true));
     });
 
-    if (allRegularDone) {
+    if (allRegularDone && totalTasks > 0) {
         const doneDiv = document.createElement('div');
         doneDiv.className = 'task-card all-done-card';
         doneDiv.innerHTML = `
@@ -523,7 +529,7 @@ function renderTasks() {
         if (test) {
             setTimeout(() => showTestModal(test), 800);
         }
-    } else if (allResolved && !log.rewardApplied) {
+    } else if (allResolved && !log.rewardApplied && totalTasks > 0) {
         applyDailyReward(currentChildId, today);
     }
 
@@ -531,7 +537,7 @@ function renderTasks() {
         const timerModal = document.getElementById('timer-modal');
         // Only auto-show timer if the modal isn't already open
         if (timerModal.classList.contains('hidden')) {
-            const activeTask = allTasks.find(t => t.id === activeTaskId);
+            const activeTask = activeTasks.find(t => t.id === activeTaskId);
             if (activeTask) {
                 showTimer(currentChildId, activeTask);
             }
@@ -552,23 +558,24 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         'skipped': __('status.skipped')
     };
 
-    // Duration or bonus text
-    let durationText;
-    if (isBonus) {
-        const rt = child.rewardType || 'money';
-        if (rt === 'stars') {
-            durationText = `<span class="task-bonus-badge">🎁 +${task.bonusPrice} ⭐</span>`;
-        } else {
-            durationText = `<span class="task-bonus-badge">🎁 +${task.bonusPrice} ${__('balance.currency.sm')}</span>`;
-        }
+    let durationText = `<span class="task-duration">⏱ ${task.duration} ${__('task.minutes')}</span>`;
+    if (task.type === 'one-time') {
+        durationText += ` <span class="task-duration" style="background: rgba(147, 51, 234, 0.1); color: rgb(147, 51, 234); border: 1px solid rgba(147, 51, 234, 0.2); font-weight: 500;">📅 ${__('task_form.type_one_time')}</span>`;
+    } else if (task.type === 'exam') {
+        durationText += ` <span class="task-duration" style="background: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 500;">🎓 ${__('task_form.type_exam')}</span>`;
+    } else if (task.type === 'bonus') {
+        durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">🎁 ${__('task_form.type_bonus')}</span>`;
     } else {
-        durationText = `<span class="task-duration">⏱ ${task.duration} ${__('task.minutes')}</span>`;
-        if (task.type === 'one-time') {
-            durationText += ` <span class="task-duration" style="background: rgba(147, 51, 234, 0.1); color: rgb(147, 51, 234); border: 1px solid rgba(147, 51, 234, 0.2); font-weight: 500;">📅 ${__('task_form.type_one_time')}</span>`;
-        } else {
-            durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">🔄 ${__('task_form.type_daily')}</span>`;
-        }
+        durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">🔄 ${__('task_form.type_daily')}</span>`;
     }
+
+    if (task.startTime) {
+        durationText += ` <span class="task-duration" style="background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2); font-weight: 500;">🕒 ${task.startTime}</span>`;
+    }
+
+    const gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
+    const stars = task.rewardStars || 0;
+    durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">🪙 ${gold} ⭐ ${stars}</span>`;
 
     // Deadline info
     const deadlineInfo = getDeadlineInfo(task);
@@ -579,8 +586,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         deadlineHtml = `<div class="task-deadline ${urgentClass} ${pastClass}">📅 ${deadlineInfo.text}</div>`;
     }
 
+    let iconName = 'icon-clock';
+    if (task.type === 'one-time') iconName = 'icon-calendar';
+    else if (task.type === 'exam') iconName = 'icon-book';
+    else if (task.type === 'bonus') iconName = 'icon-gift';
+
     card.innerHTML = `
-        <div class="task-emoji">${task.emoji || '📋'}</div>
+        <div class="task-emoji" style="color: var(--primary); background: var(--primary-light);">
+            <svg class="icon-svg" style="width: 20px; height: 20px;" aria-hidden="true"><use href="#${iconName}"/></svg>
+        </div>
         <div class="task-info">
             <div class="task-name">${task.name}</div>
             <div class="task-meta">${durationText}</div>
@@ -648,7 +662,7 @@ function showTimer(childId, task) {
     saveState();
 
     document.getElementById('timer-task-name').innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-clock"/></svg> ${task.name}`;
-    document.getElementById('timer-emoji').textContent = task.emoji;
+    document.getElementById('timer-emoji').textContent = '⏳';
 
     // Instructions rendering
     const instContainer = document.getElementById('timer-task-instructions-container');
@@ -693,10 +707,25 @@ function showTimer(childId, task) {
     document.getElementById('timer-cancel-error').classList.add('hidden');
     document.getElementById('timer-cancel-pin').value = '';
 
+    const countdownContainer = document.getElementById('timer-countdown-container');
+    if (countdownContainer) {
+        if (task.useTimer === false) {
+            countdownContainer.classList.add('hidden');
+            document.getElementById('timer-start-btn').classList.add('hidden');
+            document.getElementById('timer-pause-btn').classList.add('hidden');
+        } else {
+            countdownContainer.classList.remove('hidden');
+        }
+    }
+
     modal.classList.remove('hidden');
 
     // Re-render tasks to show updated status (safe: no recursion due to guards)
     renderTasks();
+
+    if (task.useTimer === false) {
+        completeTimer();
+    }
 }
 
 function startTimer() {
@@ -756,9 +785,9 @@ function completeTimer() {
 
     if (tl) {
         tl.status = 'awaiting-confirm';
-        tl.timeSpent = child.tasks.find(t => t.id === timerTaskId)
-            ? child.tasks.find(t => t.id === timerTaskId).duration
-            : child.bonusTasks.find(t => t.id === timerTaskId).duration;
+        const task = child.tasks.find(t => t.id === timerTaskId)
+            || child.bonusTasks.find(t => t.id === timerTaskId);
+        tl.timeSpent = task ? task.duration : 0;
         saveState();
     }
 
@@ -1376,6 +1405,7 @@ function renderSettings() {
 // ===== TASK MODAL =====
 let editingTaskId = null;
 let editingIsBonus = false;
+
 function showTaskModal(task = null, forceBonus = false) {
     const modal = document.getElementById('task-modal');
     const title = document.getElementById('task-modal-title');
@@ -1384,7 +1414,6 @@ function showTaskModal(task = null, forceBonus = false) {
         title.textContent = __('task_form.title_edit');
         document.getElementById('task-name').value = task.name;
         document.getElementById('task-duration').value = task.duration || 10;
-        document.getElementById('task-emoji').value = task.emoji || '📋';
         document.getElementById('task-deadline').value = task.deadline || '';
         document.getElementById('task-instructions').value = task.instructions || '';
         
@@ -1401,23 +1430,29 @@ function showTaskModal(task = null, forceBonus = false) {
             btn.classList.remove('hidden');
         }
         
-        let typeVal = 'daily';
-        if (task.isBonus) {
-            typeVal = 'bonus';
-        } else if (task.type === 'one-time') {
-            typeVal = 'one-time';
-        }
+        let typeVal = task.type || (task.isBonus ? 'bonus' : 'daily');
         document.getElementById('task-type').value = typeVal;
-        document.getElementById('bonus-price').value = task.bonusPrice || 3;
+        
+        document.getElementById('task-start-time').value = task.startTime || '12:00';
+        document.getElementById('task-use-timer').checked = (task.useTimer !== false);
+        
+        const days = task.days || [1, 2, 3, 4, 5, 6, 0];
+        const checkboxes = document.querySelectorAll('input[name="task-days"]');
+        checkboxes.forEach(cb => {
+            cb.checked = days.includes(parseInt(cb.value));
+        });
+
+        document.getElementById('task-reward-gold').value = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
+        document.getElementById('task-reward-stars').value = task.rewardStars || 0;
+
         editingTaskId = task.id;
-        editingIsBonus = task.isBonus || forceBonus;
+        editingIsBonus = (typeVal === 'bonus');
     } else {
         title.textContent = forceBonus
             ? __('task_form.title_new_bonus')
             : __('task_form.title_new');
         document.getElementById('task-name').value = '';
         document.getElementById('task-duration').value = 10;
-        document.getElementById('task-emoji').value = '📋';
         document.getElementById('task-deadline').value = '';
         document.getElementById('task-instructions').value = '';
         
@@ -1428,21 +1463,29 @@ function showTaskModal(task = null, forceBonus = false) {
         preview.classList.add('hidden');
         btn.classList.remove('hidden');
         
-        document.getElementById('task-type').value = forceBonus ? 'bonus' : 'daily';
-        document.getElementById('bonus-price').value = 3;
+        const typeVal = forceBonus ? 'bonus' : 'daily';
+        document.getElementById('task-type').value = typeVal;
+        document.getElementById('task-start-time').value = '12:00';
+        document.getElementById('task-use-timer').checked = true;
+
+        const checkboxes = document.querySelectorAll('input[name="task-days"]');
+        checkboxes.forEach(cb => {
+            cb.checked = true;
+        });
+
+        document.getElementById('task-reward-gold').value = forceBonus ? 3 : 1;
+        document.getElementById('task-reward-stars').value = 1;
+
         editingTaskId = null;
         editingIsBonus = forceBonus;
     }
 
-    updateBonusPriceVisibility();
+    updateTaskFieldsVisibility();
     updateTaskFormLabels();
     modal.classList.remove('hidden');
 }
 
 function updateTaskFormLabels() {
-    const child = getCurrentChild();
-    const rt = child ? child.rewardType || 'money' : 'money';
-
     // Translate labels
     const nameLabel = document.querySelector('label[for="task-name"]');
     if (nameLabel) nameLabel.textContent = __('task_form.name');
@@ -1451,9 +1494,6 @@ function updateTaskFormLabels() {
 
     const durationLabel = document.querySelector('label[for="task-duration"]');
     if (durationLabel) durationLabel.textContent = __('task_form.duration');
-
-    const emojiLabel = document.querySelector('label[for="task-emoji"]');
-    if (emojiLabel) emojiLabel.textContent = __('task_form.emoji');
 
     document.getElementById('task-deadline-label').textContent = `📅 ${__('task_form.deadline')}`;
     
@@ -1474,36 +1514,44 @@ function updateTaskFormLabels() {
     if (optDaily) optDaily.textContent = __('task_form.type_daily');
     const optOneTime = document.getElementById('task-type-option-one-time');
     if (optOneTime) optOneTime.textContent = __('task_form.type_one_time');
+    const optExam = document.getElementById('task-type-option-exam');
+    if (optExam) optExam.textContent = __('task_form.type_exam');
     const optBonus = document.getElementById('task-type-option-bonus');
     if (optBonus) optBonus.textContent = __('task_form.type_bonus');
 
-    if (rt === 'stars') {
-        document.getElementById('bonus-price-label').textContent = __('task_form.bonus_price_stars');
-        document.querySelectorAll('#bonus-price option').forEach(o => {
-            o.textContent = `${o.value} ⭐`;
-        });
-    } else {
-        document.getElementById('bonus-price-label').textContent = __('task_form.bonus_price');
-        document.querySelectorAll('#bonus-price option').forEach(o => {
-            o.textContent = `${o.value} ${__('balance.currency.sm')}`;
-        });
-    }
+    // Translate scheduler and rewards labels
+    const startTimeLabel = document.getElementById('task-start-time-label');
+    if (startTimeLabel) startTimeLabel.textContent = __('task_form.start_time');
+    const daysLabel = document.getElementById('task-days-label');
+    if (daysLabel) daysLabel.textContent = __('task_form.days');
+    const useTimerLabel = document.getElementById('task-use-timer-label');
+    if (useTimerLabel) useTimerLabel.textContent = __('task_form.use_timer');
 }
 
-function updateBonusPriceVisibility() {
+function updateTaskFieldsVisibility() {
     const typeVal = document.getElementById('task-type').value;
-    document.getElementById('bonus-price-group').classList.toggle('hidden', typeVal !== 'bonus');
+    const daysGroup = document.getElementById('task-days-group');
+    if (daysGroup) {
+        daysGroup.classList.toggle('hidden', typeVal !== 'daily');
+    }
 }
 
 function saveTask() {
     const child = getCurrentChild();
     const name = document.getElementById('task-name').value.trim();
     const duration = parseInt(document.getElementById('task-duration').value) || 10;
-    const emoji = document.getElementById('task-emoji').value.trim() || '📋';
     const deadline = document.getElementById('task-deadline').value || '';
     const typeVal = document.getElementById('task-type').value;
     const isBonus = (typeVal === 'bonus');
-    const bonusPrice = isBonus ? parseInt(document.getElementById('bonus-price').value) || 3 : 0;
+    
+    const startTime = document.getElementById('task-start-time').value || '12:00';
+    const useTimer = document.getElementById('task-use-timer').checked;
+    
+    const checkboxes = document.querySelectorAll('input[name="task-days"]');
+    const days = Array.from(checkboxes).filter(cb => cb.checked).map(cb => parseInt(cb.value));
+
+    const rewardGold = parseInt(document.getElementById('task-reward-gold').value) || 0;
+    const rewardStars = parseInt(document.getElementById('task-reward-stars').value) || 0;
     
     const instructions = document.getElementById('task-instructions').value.trim();
     const instImg = document.getElementById('task-inst-image-img');
@@ -1514,24 +1562,29 @@ function saveTask() {
         return;
     }
 
+    const taskData = {
+        name,
+        duration,
+        deadline,
+        isBonus,
+        type: typeVal,
+        startTime,
+        useTimer,
+        days,
+        rewardGold,
+        rewardStars,
+        instructions,
+        instructionImage
+    };
+
     if (editingTaskId) {
         const targetList = editingIsBonus ? child.bonusTasks : child.tasks;
         const taskIndex = targetList.findIndex(t => t.id === editingTaskId);
         if (taskIndex !== -1) {
             const task = targetList[taskIndex];
-            task.name = name;
-            task.duration = duration;
-            task.emoji = emoji;
-            task.deadline = deadline;
-            task.isBonus = isBonus;
-            task.type = typeVal;
-            task.instructions = instructions;
-            task.instructionImage = instructionImage;
-            if (isBonus) {
-                task.bonusPrice = bonusPrice;
-            } else {
-                task.bonusPrice = 0;
-            }
+            Object.assign(task, taskData);
+            
+            // Move between lists if type changed to/from bonus
             if (editingIsBonus !== isBonus) {
                 targetList.splice(taskIndex, 1);
                 if (isBonus) {
@@ -1542,19 +1595,10 @@ function saveTask() {
             }
         }
     } else {
-        const newTask = {
+        const newTask = Object.assign({
             id: generateId(),
-            name,
-            duration,
-            emoji,
-            deadline,
-            order: child.tasks.length + 1,
-            isBonus,
-            bonusPrice,
-            type: typeVal,
-            instructions,
-            instructionImage
-        };
+            order: child.tasks.length + 1
+        }, taskData);
         if (isBonus) {
             child.bonusTasks.push(newTask);
         } else {
@@ -1719,10 +1763,27 @@ function renderParentDashboard() {
     } else {
         html += "<ul class='item-list'>";
         selectedChild.tasks.sort(function(a, b) { return a.order - b.order; }).forEach(function(task) {
+            var iconName = 'icon-clock';
+            if (task.type === 'one-time') iconName = 'icon-calendar';
+            else if (task.type === 'exam') iconName = 'icon-book';
+            else if (task.type === 'bonus') iconName = 'icon-gift';
+
+            var typeBadge = "";
+            if (task.type === 'one-time') {
+                typeBadge = " <span style='font-size:10px;background:rgba(147, 51, 234, 0.1);color:rgb(147, 51, 234);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_one_time') + "</span>";
+            } else if (task.type === 'exam') {
+                typeBadge = " <span style='font-size:10px;background:rgba(239, 68, 68, 0.1);color:rgb(239, 68, 68);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_exam') + "</span>";
+            } else {
+                typeBadge = " <span style='font-size:10px;background:rgba(59, 130, 246, 0.1);color:rgb(59, 130, 246);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_daily') + "</span>";
+            }
+
+            var gold = task.rewardGold !== undefined ? task.rewardGold : 0;
+            var stars = task.rewardStars || 0;
+            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars + "</span>";
+
             html += "<li>";
-            html += "<span class='item-emoji'>" + (task.emoji || '📋') + "</span>";
-            var typeBadge = (task.type === 'one-time') ? " <span style='font-size:10px;background:rgba(147, 51, 234, 0.1);color:rgb(147, 51, 234);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_one_time') + "</span>" : " <span style='font-size:10px;background:rgba(59, 130, 246, 0.1);color:rgb(59, 130, 246);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_daily') + "</span>";
-            html += "<span class='item-text'>" + task.name + typeBadge + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
+            html += "<span class='item-emoji' style='color:var(--primary);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
+            html += "<span class='item-text'>" + task.name + typeBadge + rewardsBadge + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>✏️</button>";
             html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('delete') + "'>🗑️</button>";
@@ -1739,10 +1800,14 @@ function renderParentDashboard() {
     } else {
         html += "<ul class='item-list'>";
         selectedChild.bonusTasks.forEach(function(task) {
-            var priceStr = (selectedChild.rewardType === 'stars') ? task.bonusPrice + " ⭐" : task.bonusPrice + " " + __('balance.currency.sm');
+            var iconName = 'icon-gift';
+            var gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
+            var stars = task.rewardStars || 0;
+            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars + "</span>";
+
             html += "<li>";
-            html += "<span class='item-emoji'>" + (task.emoji || '📋') + "</span>";
-            html += "<span class='item-text'>" + task.name + " <span class='item-meta'>🎁 +" + priceStr + "</span></span>";
+            html += "<span class='item-emoji' style='color:var(--primary);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
+            html += "<span class='item-text'>" + task.name + rewardsBadge + "</span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>✏️</button>";
             html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('delete') + "'>🗑️</button>";
@@ -2354,7 +2419,7 @@ function setupEventListeners() {
 
     // Task modal
     document.getElementById('task-save-btn').addEventListener('click', saveTask);
-    document.getElementById('task-type').addEventListener('change', updateBonusPriceVisibility);
+    document.getElementById('task-type').addEventListener('change', updateTaskFieldsVisibility);
     document.getElementById('task-modal-close').addEventListener('click', () => {
         document.getElementById('task-modal').classList.add('hidden');
     });

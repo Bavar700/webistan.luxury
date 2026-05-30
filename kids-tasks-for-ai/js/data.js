@@ -7,13 +7,13 @@ const STORAGE_KEY = 'kids_tasks_app';
 const DEFAULT_PIN = '0000';
 
 const DEFAULT_TASKS = [
-    { id: 'wash', name: 'Шустушӯи дасту рӯй', duration: 10, emoji: '🧼', order: 1, isBonus: false, bonusPrice: 0, deadline: '' },
-    { id: 'exercise', name: 'Машқи ҷисмонӣ', duration: 10, emoji: '🏃', order: 2, isBonus: false, bonusPrice: 0, deadline: '' },
-    { id: 'bible', name: 'Хондани Китоби Муқаддас ва дуо', duration: 20, emoji: '📖', order: 3, isBonus: false, bonusPrice: 0, deadline: '' },
-    { id: 'solfeggio', name: 'Сольфеджио (нотаҳо)', duration: 20, emoji: '🎵', order: 4, isBonus: false, bonusPrice: 0, deadline: '' },
-    { id: 'piano', name: 'Машқи фортопиано', duration: 20, emoji: '🎹', order: 5, isBonus: false, bonusPrice: 0, deadline: '' },
-    { id: 'calligraphy', name: 'Машқи ҳусни хат', duration: 20, emoji: '✍️', order: 6, isBonus: false, bonusPrice: 0, deadline: '' },
-    { id: 'mult', name: 'Ҷадвали зарб', duration: 20, emoji: '✖️', order: 7, isBonus: false, bonusPrice: 0, deadline: '' }
+    { id: 'wash', name: 'Шустушӯи дасту рӯй', duration: 10, order: 1, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' },
+    { id: 'exercise', name: 'Машқи ҷисмонӣ', duration: 10, order: 2, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' },
+    { id: 'bible', name: 'Хондани Китоби Муқаддас ва дуо', duration: 20, order: 3, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' },
+    { id: 'solfeggio', name: 'Сольфеджио (нотаҳо)', duration: 20, order: 4, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' },
+    { id: 'piano', name: 'Машқи фортопиано', duration: 20, order: 5, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' },
+    { id: 'calligraphy', name: 'Машқи ҳусни хат', duration: 20, order: 6, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' },
+    { id: 'mult', name: 'Ҷадвали зарб', duration: 20, order: 7, isBonus: false, deadline: '', type: 'daily', rewardGold: 1, rewardStars: 1, useTimer: true, days: [1, 2, 3, 4, 5, 6, 0], startTime: '12:00' }
 ];
 
 const ACHIEVEMENTS = [
@@ -117,12 +117,19 @@ function loadState() {
                 if (child.stars === undefined) child.stars = 0;
                 if (child.totalStars === undefined) child.totalStars = 0;
                 if (child.achievements === undefined) child.achievements = [];
-                child.tasks.forEach(t => {
+                
+                const migrateTask = (t, isBonusDefault) => {
                     if (t.deadline === undefined) t.deadline = '';
-                });
-                child.bonusTasks.forEach(t => {
-                    if (t.deadline === undefined) t.deadline = '';
-                });
+                    if (t.type === undefined) t.type = t.isBonus ? 'bonus' : 'daily';
+                    if (t.rewardGold === undefined) t.rewardGold = t.bonusPrice || (isBonusDefault ? 3 : 1);
+                    if (t.rewardStars === undefined) t.rewardStars = isBonusDefault ? 0 : 1;
+                    if (t.useTimer === undefined) t.useTimer = true;
+                    if (t.days === undefined) t.days = [1, 2, 3, 4, 5, 6, 0];
+                    if (t.startTime === undefined) t.startTime = '12:00';
+                };
+
+                child.tasks.forEach(t => migrateTask(t, false));
+                child.bonusTasks.forEach(t => migrateTask(t, true));
             });
             return;
         }
@@ -310,40 +317,47 @@ function calculateDailyReward(childId, date) {
     if (log.excused) return { reward: 0, reason: 'excused', starReward: 0 };
     if (log.rewardApplied) return { reward: 0, reason: 'already_applied', starReward: 0 };
 
-    const regularTasks = child.tasks.filter(t => !t.isBonus);
+    const todayDay = new Date(date + 'T12:00:00').getDay();
+    const regularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
     let completedCount = 0;
     let totalCount = regularTasks.length;
+
+    let regularGold = 0;
+    let regularStars = 0;
 
     regularTasks.forEach(t => {
         const taskLog = log.tasks[t.id];
         if (taskLog && taskLog.status === 'completed' && taskLog.confirmed) {
             completedCount++;
+            regularGold += parseInt(t.rewardGold !== undefined ? t.rewardGold : 1) || 0;
+            regularStars += parseInt(t.rewardStars !== undefined ? t.rewardStars : 1) || 0;
         }
     });
 
     // Count bonus tasks separately
-    let bonusMoney = 0;
+    let bonusGold = 0;
     let bonusStars = 0;
     child.bonusTasks.forEach(t => {
         const taskLog = log.tasks[t.id];
         if (taskLog && taskLog.status === 'completed' && taskLog.confirmed) {
-            if (t.bonusPrice) {
-                const rt = child.rewardType || 'money';
-                if (rt === 'stars' || rt === 'both') bonusStars += t.bonusPrice;
-                if (rt === 'money' || rt === 'both') bonusMoney += t.bonusPrice;
-            }
+            bonusGold += parseInt(t.rewardGold !== undefined ? t.rewardGold : (t.bonusPrice || 0)) || 0;
+            bonusStars += parseInt(t.rewardStars !== undefined ? t.rewardStars : 0) || 0;
         }
     });
 
-    if (completedCount === 0) {
-        return { reward: -1, reason: 'none_done', starReward: -1 };
+    if (completedCount === 0 && bonusGold === 0 && bonusStars === 0) {
+        return { reward: 0, reason: 'none_done', starReward: 0 };
     } else if (completedCount < totalCount) {
-        return { reward: -1, reason: 'partial', starReward: -1 };
+        return {
+            reward: regularGold + bonusGold,
+            reason: 'partial',
+            starReward: regularStars + bonusStars
+        };
     } else {
         return {
-            reward: 1 + bonusMoney,
+            reward: regularGold + bonusGold,
             reason: 'all_done',
-            starReward: 1 + bonusStars
+            starReward: regularStars + bonusStars
         };
     }
 }
@@ -354,21 +368,20 @@ function applyDailyReward(childId, date) {
     if (!log || log.rewardApplied) return;
 
     const result = calculateDailyReward(childId, date);
-    const rt = child.rewardType || 'money';
 
-    if (result.reward !== 0) {
-        if (rt === 'money' || rt === 'both') {
-            child.balance += result.reward;
-            if (result.reward > 0) child.totalEarned += result.reward;
-            else child.totalDeducted += Math.abs(result.reward);
-        }
-        if (rt === 'stars' || rt === 'both') {
-            if (!child.stars) child.stars = 0;
-            child.stars += result.starReward;
-            if (result.starReward > 0 && !child.totalStars) child.totalStars = 0;
-            if (result.starReward > 0) child.totalStars = (child.totalStars || 0) + result.starReward;
-        }
+    if (result.reward > 0) {
+        child.balance += result.reward;
+        child.totalEarned += result.reward;
+    } else if (result.reward < 0) {
+        child.totalDeducted += Math.abs(result.reward);
     }
+    
+    if (result.starReward > 0) {
+        if (!child.stars) child.stars = 0;
+        child.stars += result.starReward;
+        child.totalStars = (child.totalStars || 0) + result.starReward;
+    }
+    
     log.rewardApplied = true;
     saveState();
 }

@@ -434,13 +434,15 @@
                     </button>
                 </div>
                 <div class="modal-body timer-body">
-                    <div class="timer-emoji" id="timer-emoji">⏰</div>
-                    <div class="timer-display" id="timer-display">00:00</div>
-                    <div class="timer-progress-ring">
-                        <svg viewBox="0 0 120 120" class="timer-svg">
-                            <circle cx="60" cy="60" r="54" class="timer-bg-circle"/>
-                            <circle cx="60" cy="60" r="54" class="timer-progress-circle" id="timer-circle"/>
-                        </svg>
+                    <div id="timer-countdown-container">
+                        <div class="timer-emoji" id="timer-emoji">⏰</div>
+                        <div class="timer-display" id="timer-display">00:00</div>
+                        <div class="timer-progress-ring">
+                            <svg viewBox="0 0 120 120" class="timer-svg">
+                                <circle cx="60" cy="60" r="54" class="timer-bg-circle"/>
+                                <circle cx="60" cy="60" r="54" class="timer-progress-circle" id="timer-circle"/>
+                            </svg>
+                        </div>
                     </div>
                     <!-- Task Instructions (if available) -->
                     <div id="timer-task-instructions-container" class="hidden timer-inst-container">
@@ -536,12 +538,35 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="task-duration">Вақт (дақиқа)</label>
-                        <input type="number" id="task-duration" min="1" max="120" value="10">
+                        <label for="task-type" id="task-type-label">Намуди супориш</label>
+                        <select id="task-type">
+                            <option value="daily" id="task-type-option-daily">Ҳаррӯза</option>
+                            <option value="one-time" id="task-type-option-one-time">Якдафъаина</option>
+                            <option value="exam" id="task-type-option-exam">Санҷиш / Имтиҳон</option>
+                            <option value="bonus" id="task-type-option-bonus">Бо подош (бонус)</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="task-emoji">Эмодзи</label>
-                        <input type="text" id="task-emoji" placeholder="🎯" maxlength="2">
+                    <div class="form-group" id="task-schedule-group" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 100px;">
+                            <label for="task-start-time" id="task-start-time-label">Вақти оғоз</label>
+                            <input type="time" id="task-start-time" value="12:00">
+                        </div>
+                        <div style="flex: 1; min-width: 100px;">
+                            <label for="task-duration" id="task-duration-label">Давомнокӣ (дақ)</label>
+                            <input type="number" id="task-duration" min="1" max="120" value="10">
+                        </div>
+                    </div>
+                    <div class="form-group" id="task-days-group">
+                        <label id="task-days-label">Рӯзҳои ҳафта</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;">
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="1" checked> Дш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="2" checked> Сш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="3" checked> Чш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="4" checked> Пш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="5" checked> Ҷм</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="6" checked> Шн</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="0" checked> Як</label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label id="task-deadline-label">
@@ -550,21 +575,20 @@
                         </label>
                         <input type="date" id="task-deadline">
                     </div>
-                    <div class="form-group">
-                        <label for="task-type" id="task-type-label">Намуди супориш</label>
-                        <select id="task-type">
-                            <option value="daily" id="task-type-option-daily">Ҳаррӯза</option>
-                            <option value="one-time" id="task-type-option-one-time">Якдафъаина</option>
-                            <option value="bonus" id="task-type-option-bonus">Бо подош (бонус)</option>
-                        </select>
+                    <div class="form-group" style="margin: 10px 0;">
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer;">
+                            <input type="checkbox" id="task-use-timer" checked> <span id="task-use-timer-label">Истифодаи таймер</span>
+                        </label>
                     </div>
-                    <div class="form-group hidden" id="bonus-price-group">
-                        <label for="bonus-price" id="bonus-price-label">Нарх (сомонӣ)</label>
-                        <select id="bonus-price">
-                            <option value="3">3 сомонӣ</option>
-                            <option value="5">5 сомонӣ</option>
-                            <option value="10">10 сомонӣ</option>
-                        </select>
+                    <div class="form-group" style="display: flex; gap: 12px;">
+                        <div style="flex: 1;">
+                            <label for="task-reward-gold" id="task-reward-gold-label">Подош (Тилло)</label>
+                            <input type="number" id="task-reward-gold" min="0" value="0">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="task-reward-stars" id="task-reward-stars-label">Подош (Ситорача)</label>
+                            <input type="number" id="task-reward-stars" min="0" value="0">
+                        </div>
                     </div>
                     <button class="btn btn-primary btn-full" id="task-save-btn">
                         <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
