@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Офарин — Вазифаҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=23">
+    <link rel="stylesheet" href="css/style.css?v=24">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -470,14 +470,15 @@
                     <div class="hidden timer-proof-section" id="timer-proof-section">
                         <div class="proof-divider"></div>
                         <p class="proof-label" id="proof-label">📸 Ба кор андешидани акс ва тавсиф:</p>
-                        <div class="proof-photo-area" id="proof-photo-area">
+                        <div id="proof-photo-area">
                             <input type="file" accept="image/*" capture="environment" id="proof-photo-input" class="hidden">
-                            <button class="btn btn-outline btn-small" id="proof-photo-btn">
-                                <svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg>
-                            </button>
-                            <div class="proof-photo-preview hidden" id="proof-photo-preview">
+                            <div class="premium-upload-card" id="proof-photo-btn">
+                                <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                                <span>Акс гирифтан</span>
+                            </div>
+                            <div class="premium-photo-preview-container hidden" id="proof-photo-preview">
                                 <img id="proof-photo-img" alt="">
-                                <button class="proof-photo-remove" id="proof-photo-remove">✕</button>
+                                <button class="premium-photo-delete-btn" id="proof-photo-remove">✕ Нест кардан</button>
                             </div>
                         </div>
                         <textarea class="proof-textarea" id="proof-explanation" rows="2" placeholder="Напишите, что сделано..."></textarea>
@@ -507,7 +508,7 @@
             <div class="modal">
                 <div class="modal-header">
                     <h3 id="task-modal-title" class="hidden">Супориши нав</h3>
-                    <button class="modal-close" id="task-modal-close">
+                    <button class="modal-close" id="task-modal-close" style="margin-left: auto;">
                         <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
                     </button>
                 </div>
@@ -522,12 +523,15 @@
                     </div>
                     <div class="form-group">
                         <label id="task-inst-image-label">Акси дастур (ихтиёрӣ)</label>
-                        <div class="proof-photo-area" id="inst-image-area">
+                        <div id="inst-image-area">
                             <input type="file" accept="image/*" id="task-inst-image-input" class="hidden">
-                            <button class="btn btn-outline btn-small" id="task-inst-image-btn">📸 Иловаи акс</button>
-                            <div class="proof-photo-preview hidden" id="task-inst-image-preview">
-                                <img id="task-inst-image-img" alt="Акс">
-                                <button class="proof-photo-remove" id="task-inst-image-remove">✕</button>
+                            <div class="premium-upload-card" id="task-inst-image-btn">
+                                <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                                <span>Иловаи акси дастур</span>
+                            </div>
+                            <div class="premium-photo-preview-container hidden" id="task-inst-image-preview">
+                                <img id="task-inst-image-img" alt="">
+                                <button class="premium-photo-delete-btn" id="task-inst-image-remove">✕ Нест кардан</button>
                             </div>
                         </div>
                     </div>
@@ -784,8 +788,8 @@
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 
-    <script src="js/translations.js?v=23"></script>
-    <script src="js/data.js?v=23"></script>
-    <script src="js/app.js?v=23"></script>
+    <script src="js/translations.js?v=24"></script>
+    <script src="js/data.js?v=24"></script>
+    <script src="js/app.js?v=24"></script>
 </body>
 </html>
