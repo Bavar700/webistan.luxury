@@ -2664,6 +2664,11 @@ input.flatpickr-input[readonly]:focus {
     appearance: none;
     pointer-events: none !important;
 }
+/* Пинҳон кардани тирчаи ба поён ишоракунанда (Hide dropdown arrow) */
+.flatpickr-current-month .flatpickr-monthDropdown-down-arrow,
+.flatpickr-current-month::after {
+    display: none !important;
+}
 .flatpickr-current-month .numInputWrapper {
     display: inline-flex !important;
     align-items: center !important;
@@ -2804,17 +2809,59 @@ input.flatpickr-input[readonly]:focus {
     border-top: 6px solid var(--primary) !important;
 }
 
-/* Интихоби вақт */
+/* Интихоби вақт — Интихобкунакҳои соату дақиқа дар шакли тугмаҳои калони мудаввар (Pill touch style) */
 .flatpickr-time {
     border-top: 1px solid rgba(124, 58, 237, 0.08) !important;
-    height: 50px !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    padding: 0 16px !important;
+}
+.flatpickr-time .numInputWrapper {
+    background: #F3F0FF !important; /* Ранги заминаи мудаввар */
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border-radius: 20px !important;
+    width: 65px !important;
+    height: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 8px 0 0 !important;
+    transition: background 0.2s ease !important;
+}
+.flatpickr-time .numInputWrapper:hover {
+    background: #EDE9FE !important;
+}
+.flatpickr-time .numInputWrapper span {
+    width: 16px !important;
+    opacity: 0.8 !important;
 }
 .flatpickr-time input {
-    font-size: 20px !important;
-    color: var(--text) !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    -webkit-text-fill-color: var(--primary) !important;
+    background: transparent !important;
+    height: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    text-align: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+.flatpickr-time input:hover,
+.flatpickr-time input:focus {
+    background: transparent !important;
+    color: var(--primary) !important;
 }
 .flatpickr-time .flatpickr-time-separator {
-    color: var(--text) !important;
+    color: var(--primary) !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    margin: 0 8px !important;
 }
 
 /* ===== PENALTY GROUP ===== */
