@@ -2581,11 +2581,13 @@ input.flatpickr-input[readonly]:focus {
 }
 .flatpickr-months {
     background: transparent !important;
-    height: 56px !important; /* Баландии бештар барои ҷойгиршавӣ */
+    height: auto !important; /* Автоматӣ ва бе маҳдудияти баландӣ */
+    padding: 8px 0 !important;
 }
 .flatpickr-months .flatpickr-month {
     color: var(--text) !important;
     fill: var(--text) !important;
+    height: auto !important;
 }
 .flatpickr-current-month {
     color: var(--text) !important;
@@ -2599,7 +2601,8 @@ input.flatpickr-input[readonly]:focus {
     gap: 16px !important;
     position: static !important;
     width: auto !important;
-    margin-bottom: 12px !important; /* Масофа дар поёни тугмаҳо (ҳаво додан) */
+    margin-bottom: 8px !important; /* Масоҳати муносиб барои ҳаво дар поён */
+    height: auto !important;
 }
 .flatpickr-current-month .cur-month {
     color: var(--text) !important;
