@@ -534,9 +534,9 @@
                         <input type="text" id="task-name" placeholder="Номи супориш">
                     </div>
                     <div class="form-group">
-                        <textarea id="task-instructions" rows="2" placeholder="Дастур (чӣ тавр бояд иҷро кард)"></textarea>
+                        <textarea id="task-instructions" rows="2" placeholder="Дастур"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display: none;">
                         <label id="task-inst-image-label">Акси дастур (ихтиёрӣ)</label>
                         <div id="inst-image-area">
                             <input type="file" accept="image/*" id="task-inst-image-input" class="hidden">
@@ -551,7 +551,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="task-type" id="task-type-label">Намуди супориш</label>
                         <select id="task-type">
                             <option value="daily" id="task-type-option-daily">Ҳаррӯза</option>
                             <option value="one-time" id="task-type-option-one-time">Якдафъаина</option>
@@ -569,15 +568,14 @@
                         </div>
                     </div>
                     <div class="form-group" id="task-days-group">
-                        <label id="task-days-label">Рӯзҳои ҳафта</label>
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;">
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="1" checked> Дш</label>
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="2" checked> Сш</label>
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="3" checked> Чш</label>
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="4" checked> Пш</label>
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="5" checked> Ҷм</label>
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="6" checked> Шн</label>
-                            <label style="font-weight: normal; display: flex; align-items: center; gap: 4px; margin-bottom: 0;"><input type="checkbox" name="task-days" value="0" checked> Як</label>
+                        <div style="display: flex; justify-content: space-between; gap: 4px; margin-top: 4px; flex-wrap: nowrap; overflow-x: auto;">
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="1" checked> Дш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="2" checked> Сш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="3" checked> Чш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="4" checked> Пш</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="5" checked> Ҷм</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="6" checked> Шн</label>
+                            <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="0" checked> Як</label>
                         </div>
                     </div>
                     <div class="form-group">
