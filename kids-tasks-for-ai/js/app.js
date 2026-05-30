@@ -42,8 +42,65 @@ function updateLanguageUI() {
     document.getElementById('app-title').textContent = __('app.name');
     // Apply static translations
     applyStaticTranslations();
+    // Initialize or re-initialize Flatpickr with correct language
+    initFlatpickr();
     // Re-render current page
     updateUI();
+}
+
+let fpDatePickers = [];
+let fpTimePickers = [];
+
+function initFlatpickr() {
+    if (!window.flatpickr) return;
+
+    // Define Tajik locale if not defined
+    if (!window.flatpickr.l10ns.tg) {
+        window.flatpickr.l10ns.tg = {
+            weekdays: {
+                shorthand: ["Як", "Дш", "Сш", "Чш", "Пш", "Ҷм", "Шн"],
+                longhand: ["Якшанбе", "Душанбе", "Сешанбе", "Чоршанбе", "Панҷшанбе", "Ҷумъа", "Шанбе"]
+            },
+            months: {
+                shorthand: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                longhand: ["Январ", "Феврал", "Март", "Апрел", "Май", "Июн", "Июл", "Август", "Сентябр", "Октябр", "Ноябр", "Декабр"]
+            },
+            firstDayOfWeek: 1,
+            rangeSeparator: " то ",
+            time_24hr: true
+        };
+    }
+
+    // Destroy existing instances
+    fpDatePickers.forEach(p => p.destroy());
+    fpTimePickers.forEach(p => p.destroy());
+    fpDatePickers = [];
+    fpTimePickers = [];
+
+    const lang = currentLang === 'ru' ? 'ru' : 'tg';
+
+    // Date pickers
+    document.querySelectorAll('.flatpickr-date').forEach(el => {
+        fpDatePickers.push(flatpickr(el, {
+            locale: lang,
+            disableMobile: true, // Force custom UI to keep language
+            dateFormat: "Y-m-d", // value format
+            altInput: true,
+            altFormat: "d.m.Y"   // display format
+        }));
+    });
+
+    // Time pickers
+    document.querySelectorAll('.flatpickr-time').forEach(el => {
+        fpTimePickers.push(flatpickr(el, {
+            locale: lang,
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            disableMobile: true // Force custom UI
+        }));
+    });
 }
 
 /**
@@ -422,6 +479,26 @@ function showDailyQuote() {
 
 // ===== DEADLINE HELPERS =====
 function getDeadlineInfo(task) {
+    if (task.hasDeadline) {
+        if (!task.deadlineDate || !task.deadlineTime) return null;
+        const now = new Date();
+        const deadlineDateStr = task.deadlineDate;
+        const deadlineTimeStr = task.deadlineTime;
+        const deadlineDate = new Date(`${deadlineDateStr}T${deadlineTimeStr}:00`);
+        
+        const diffMs = deadlineDate.getTime() - now.getTime();
+        const diffMins = Math.floor(diffMs / 60000);
+        
+        if (diffMins < 0) {
+            return { text: `Мӯҳлат гузашт: ${deadlineTimeStr}`, urgent: true, past: true, type: 'strict' };
+        } else if (diffMins <= 60) {
+            return { text: `Мӯҳлат ба наздикӣ: ${deadlineTimeStr} (${diffMins} дақиқа монд)`, urgent: true, past: false, type: 'strict' };
+        } else {
+            return { text: `То ${deadlineDateStr} ${deadlineTimeStr}`, urgent: false, past: false, type: 'strict' };
+        }
+    }
+
+    // Fallback to old deadline logic if needed
     if (!task.deadline) return null;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -569,8 +646,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">🔄 ${__('task_form.type_daily')}</span>`;
     }
 
-    if (task.startTime) {
-        durationText += ` <span class="task-duration" style="background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2); font-weight: 500;">🕒 ${task.startTime}</span>`;
+    if (task.startTime || task.startDate) {
+        let displayStart = '';
+        if (task.startDate) {
+            displayStart += task.startDate + ' ';
+        }
+        if (task.startTime) {
+            displayStart += task.startTime;
+        }
+        durationText += ` <span class="task-duration" style="background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2); font-weight: 500;">🕒 ${displayStart.trim()}</span>`;
     }
 
     const gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
@@ -579,6 +663,12 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
 
     if (task.hasTest && tl.status === 'completed' && tl.score !== undefined) {
         durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">💯 Баҳо: ${tl.score}/10</span>`;
+    }
+
+    if (task.isStreak) {
+        const current = task.currentStreak || 0;
+        const target = task.streakTarget || 5;
+        durationText += ` <span class="task-duration" style="background: rgba(236, 72, 153, 0.1); color: rgb(236, 72, 153); border: 1px solid rgba(236, 72, 153, 0.2); font-weight: 500;">🔥 Марафон: Рӯзи ${current} аз ${target}</span>`;
     }
 
     // Deadline info
@@ -661,6 +751,19 @@ function showTimer(childId, task) {
     const today = getToday();
     const log = child.dailyLogs[today];
     const tl = log.tasks[task.id];
+
+    // Mixed Scenario Validation: Deadline + Timer
+    if (task.hasDeadline && task.useTimer !== false) {
+        if (task.deadlineDate && task.deadlineTime) {
+            const now = new Date();
+            const deadlineDate = new Date(`${task.deadlineDate}T${task.deadlineTime}:00`);
+            const remainingMins = Math.floor((deadlineDate.getTime() - now.getTime()) / 60000);
+            if (remainingMins < task.duration) {
+                showToast('⚠️', `Вақти кофӣ барои анҷом додани таймер (${task.duration} дақ) то мӯҳлат (${task.deadlineTime}) намондааст!`);
+                return; // Block start
+            }
+        }
+    }
 
     tl.status = 'in-progress';
     saveState();
@@ -1019,8 +1122,16 @@ function submitConfirm() {
         tl.confirmed = true;
         
         const task = child.tasks.find(t => t.id === confirmTaskId) || child.bonusTasks.find(t => t.id === confirmTaskId);
-        if (task && task.hasTest) {
-            tl.score = parseInt(document.getElementById('confirm-exam-score').value) || 10;
+        if (task) {
+            if (task.hasTest) {
+                tl.score = parseInt(document.getElementById('confirm-exam-score').value) || 10;
+            }
+            if (task.isStreak) {
+                task.currentStreak = (task.currentStreak || 0) + 1;
+                if (task.currentStreak > task.streakTarget) {
+                    task.currentStreak = task.streakTarget; // cap it
+                }
+            }
         }
 
         saveState();
@@ -1431,6 +1542,16 @@ function renderSettings() {
 let editingTaskId = null;
 let editingIsBonus = false;
 
+function setFlatpickrValue(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el._flatpickr) {
+        el._flatpickr.setDate(value);
+    } else {
+        el.value = value;
+    }
+}
+
 function showTaskModal(task = null, forceBonus = false) {
     const modal = document.getElementById('task-modal');
     const title = document.getElementById('task-modal-title');
@@ -1438,8 +1559,9 @@ function showTaskModal(task = null, forceBonus = false) {
     if (task && task.id) {
         title.textContent = __('task_form.title_edit');
         document.getElementById('task-name').value = task.name;
-        document.getElementById('task-duration').value = task.duration || 10;
-        document.getElementById('task-deadline').value = task.deadline || '';
+        const duration = task.duration || 20;
+        document.getElementById('task-duration-hours').value = Math.floor(duration / 60);
+        document.getElementById('task-duration-minutes').value = duration % 60;
         document.getElementById('task-instructions').value = task.instructions || '';
         
         const preview = document.getElementById('task-inst-image-preview');
@@ -1458,10 +1580,23 @@ function showTaskModal(task = null, forceBonus = false) {
         let typeVal = task.type || (task.isBonus ? 'bonus' : 'daily');
         document.getElementById('task-type').value = typeVal;
         
-        document.getElementById('task-start-time').value = task.startTime || '12:00';
+        setFlatpickrValue('task-start-date', task.startDate || '');
+        setFlatpickrValue('task-start-time', task.startTime || '12:00');
         document.getElementById('task-use-timer').checked = (task.useTimer !== false);
         document.getElementById('task-has-test').checked = (task.hasTest === true);
+        setFlatpickrValue('task-test-date', task.testDate || '');
+        setFlatpickrValue('task-test-time', task.testTime || '');
         document.getElementById('task-photo-required').checked = (task.photoRequired === true);
+        document.getElementById('task-has-deadline').checked = (task.hasDeadline === true);
+        setFlatpickrValue('task-deadline-date', task.deadlineDate || '');
+        setFlatpickrValue('task-deadline-time', task.deadlineTime || '18:00');
+        
+        document.getElementById('task-has-strict-deadline').checked = (task.hasStrictDeadline === true);
+        setFlatpickrValue('task-strict-deadline-date', task.strictDeadlineDate || '');
+        setFlatpickrValue('task-strict-deadline-time', task.strictDeadlineTime || '18:00');
+        
+        document.getElementById('task-is-streak').checked = (task.isStreak === true);
+        document.getElementById('task-streak-target').value = task.streakTarget || 5;
         
         const days = task.days || [1, 2, 3, 4, 5, 6, 0];
         const checkboxes = document.querySelectorAll('input[name="task-days"]');
@@ -1479,8 +1614,13 @@ function showTaskModal(task = null, forceBonus = false) {
             ? __('task_form.title_new_bonus')
             : __('task_form.title_new');
         document.getElementById('task-name').value = '';
-        document.getElementById('task-duration').value = 10;
-        document.getElementById('task-deadline').value = '';
+        document.getElementById('task-duration-hours').value = 0;
+        document.getElementById('task-duration-minutes').value = 20;
+        setFlatpickrValue('task-deadline-date', '');
+        setFlatpickrValue('task-deadline-time', '18:00');
+        
+        setFlatpickrValue('task-strict-deadline-date', '');
+        setFlatpickrValue('task-strict-deadline-time', '18:00');
         document.getElementById('task-instructions').value = '';
         
         const preview = document.getElementById('task-inst-image-preview');
@@ -1490,12 +1630,20 @@ function showTaskModal(task = null, forceBonus = false) {
         preview.classList.add('hidden');
         btn.classList.remove('hidden');
         
-        const typeVal = forceBonus ? 'bonus' : 'daily';
+        const typeVal = forceBonus ? 'bonus' : 'one-time';
         document.getElementById('task-type').value = typeVal;
-        document.getElementById('task-start-time').value = '12:00';
-        document.getElementById('task-use-timer').checked = true;
+        setFlatpickrValue('task-start-date', '');
+        setFlatpickrValue('task-start-time', '12:00');
+        document.getElementById('task-use-timer').checked = false;
         document.getElementById('task-has-test').checked = false;
+        setFlatpickrValue('task-test-date', '');
+        setFlatpickrValue('task-test-time', '');
         document.getElementById('task-photo-required').checked = false;
+        
+        document.getElementById('task-has-deadline').checked = false;
+        document.getElementById('task-has-strict-deadline').checked = false;
+        document.getElementById('task-is-streak').checked = false;
+        document.getElementById('task-streak-target').value = 5;
 
         const checkboxes = document.querySelectorAll('input[name="task-days"]');
         checkboxes.forEach(cb => {
@@ -1536,7 +1684,8 @@ function updateTaskFormLabels() {
     const starsLabel = document.getElementById('task-reward-stars-label');
     if (starsLabel) starsLabel.innerHTML = `⭐ ${__('task_form.reward_stars')}`;
 
-    document.getElementById('task-deadline-label').textContent = `📅 ${__('task_form.deadline')}`;
+    const deadlineLabel = document.getElementById('task-deadline-label');
+    if (deadlineLabel) deadlineLabel.textContent = `📅 ${__('task_form.deadline')}`;
     
     // Translate instructions labels
     const instImageLabel = document.getElementById('task-inst-image-label');
@@ -1572,22 +1721,53 @@ function updateTaskFormLabels() {
 function updateTaskFieldsVisibility() {
     const typeVal = document.getElementById('task-type').value;
     const daysGroup = document.getElementById('task-days-group');
+    const startDateContainer = document.getElementById('task-start-date-container');
+    
     if (daysGroup) {
         daysGroup.classList.toggle('hidden', typeVal !== 'daily');
     }
+    if (startDateContainer) {
+        startDateContainer.classList.toggle('hidden', typeVal === 'daily');
+    }
+    // Progressive Disclosure Toggles
+    const hasDeadline = document.getElementById('task-has-deadline')?.checked;
+    const deadlineGroup = document.getElementById('task-deadline-group');
+    if (deadlineGroup) deadlineGroup.classList.toggle('hidden', !hasDeadline);
+    
+    const hasStrictDeadline = document.getElementById('task-has-strict-deadline')?.checked;
+    const strictDeadlineGroup = document.getElementById('task-strict-deadline-group');
+    if (strictDeadlineGroup) strictDeadlineGroup.classList.toggle('hidden', !hasStrictDeadline);
+    
+    const useTimer = document.getElementById('task-use-timer')?.checked;
+    const timerGroup = document.getElementById('task-timer-group');
+    if (timerGroup) timerGroup.classList.toggle('hidden', !useTimer);
+    
+    const isStreak = document.getElementById('task-is-streak')?.checked;
+    const streakGroup = document.getElementById('task-streak-group');
+    if (streakGroup) streakGroup.classList.toggle('hidden', !isStreak);
+    
+    const hasTest = document.getElementById('task-has-test')?.checked;
+    const testGroup = document.getElementById('task-test-group');
+    if (testGroup) testGroup.classList.toggle('hidden', !hasTest);
 }
 
 function saveTask() {
     const child = getCurrentChild();
     const name = document.getElementById('task-name').value.trim();
-    const duration = parseInt(document.getElementById('task-duration').value) || 10;
-    const deadline = document.getElementById('task-deadline').value || '';
+    const durationHours = parseInt(document.getElementById('task-duration-hours').value) || 0;
+    const durationMinutes = parseInt(document.getElementById('task-duration-minutes').value) || 0;
+    let duration = (durationHours * 60) + durationMinutes;
+    if (duration === 0) duration = 20; // fallback default
+    
     const typeVal = document.getElementById('task-type').value;
     const isBonus = (typeVal === 'bonus');
     
+    const startDate = document.getElementById('task-start-date').value || '';
     const startTime = document.getElementById('task-start-time').value || '12:00';
     const useTimer = document.getElementById('task-use-timer').checked;
     const hasTest = document.getElementById('task-has-test').checked;
+    const testDate = document.getElementById('task-test-date')?.value || '';
+    const testTime = document.getElementById('task-test-time')?.value || '';
     const photoRequired = document.getElementById('task-photo-required').checked;
     
     const checkboxes = document.querySelectorAll('input[name="task-days"]');
@@ -1605,16 +1785,38 @@ function saveTask() {
         return;
     }
 
+    const hasDeadline = document.getElementById('task-has-deadline')?.checked || false;
+    const deadlineDate = document.getElementById('task-deadline-date')?.value || '';
+    const deadlineTime = document.getElementById('task-deadline-time')?.value || '18:00';
+    
+    const hasStrictDeadline = document.getElementById('task-has-strict-deadline')?.checked || false;
+    const strictDeadlineDate = document.getElementById('task-strict-deadline-date')?.value || '';
+    const strictDeadlineTime = document.getElementById('task-strict-deadline-time')?.value || '18:00';
+    
+    const isStreak = document.getElementById('task-is-streak')?.checked || false;
+    const streakTarget = parseInt(document.getElementById('task-streak-target')?.value) || 5;
+
     const taskData = {
         name,
         duration,
-        deadline,
+        hasDeadline,
+        deadlineDate,
+        deadlineTime,
+        hasStrictDeadline,
+        strictDeadlineDate,
+        strictDeadlineTime,
         isBonus,
         type: typeVal,
+        startDate,
         startTime,
         useTimer,
         hasTest,
+        testDate,
+        testTime,
         photoRequired,
+        isStreak,
+        streakTarget,
+        currentStreak: 0,
         days,
         rewardGold,
         rewardStars,
@@ -2465,6 +2667,11 @@ function setupEventListeners() {
     // Task modal
     document.getElementById('task-save-btn').addEventListener('click', saveTask);
     document.getElementById('task-type').addEventListener('change', updateTaskFieldsVisibility);
+    document.getElementById('task-has-deadline')?.addEventListener('change', updateTaskFieldsVisibility);
+    document.getElementById('task-has-strict-deadline')?.addEventListener('change', updateTaskFieldsVisibility);
+    document.getElementById('task-use-timer')?.addEventListener('change', updateTaskFieldsVisibility);
+    document.getElementById('task-is-streak')?.addEventListener('change', updateTaskFieldsVisibility);
+    document.getElementById('task-has-test')?.addEventListener('change', updateTaskFieldsVisibility);
     const modalCancelBtn = document.getElementById('task-modal-cancel');
     if (modalCancelBtn) {
         modalCancelBtn.addEventListener('click', () => {

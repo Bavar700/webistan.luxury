@@ -7,6 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
     <link rel="stylesheet" href="css/style.css?v=24">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
 <body>
     <!-- SVG Icon Sprite -->
@@ -549,22 +550,13 @@
                     </div>
                     <div class="form-group">
                         <select id="task-type">
+                            <option value="one-time" id="task-type-option-one-time" selected>Якдафъаина</option>
                             <option value="daily" id="task-type-option-daily">Ҳаррӯза</option>
-                            <option value="one-time" id="task-type-option-one-time">Якдафъаина</option>
                             <option value="bonus" id="task-type-option-bonus">Бо подош (бонус)</option>
                         </select>
                     </div>
-                    <div class="form-group" id="task-schedule-group" style="display: flex; gap: 12px; flex-wrap: wrap;">
-                        <div style="flex: 1; min-width: 100px;">
-                            <label for="task-start-time" id="task-start-time-label">Вақти оғоз</label>
-                            <input type="time" id="task-start-time" value="12:00">
-                        </div>
-                        <div style="flex: 1; min-width: 100px;">
-                            <input type="number" id="task-duration" min="1" max="120" placeholder="Давомнокӣ (дақиқа)">
-                        </div>
-                    </div>
-                    <div class="form-group" id="task-days-group">
-                        <div style="display: flex; justify-content: space-between; gap: 4px; margin-top: 4px; flex-wrap: nowrap; overflow-x: auto;">
+                    <div class="form-group" id="task-days-group" style="margin-top: 8px;">
+                        <div style="display: flex; justify-content: space-between; gap: 4px; flex-wrap: nowrap; overflow-x: auto;">
                             <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="1" checked> Дш</label>
                             <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="2" checked> Сш</label>
                             <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="3" checked> Чш</label>
@@ -574,20 +566,95 @@
                             <label style="font-weight: normal; display: flex; align-items: center; gap: 2px; margin-bottom: 0; white-space: nowrap; font-size: 13px;"><input type="checkbox" name="task-days" value="0" checked> Як</label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label id="task-deadline-label">
-                            <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-calendar"/></svg>
-                            Мӯҳлат (ихтиёрӣ)
+                    <!-- Availability Window (Мӯҳлат) -->
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; color: var(--text);">
+                            <input type="checkbox" id="task-has-deadline"> 
+                            <span id="task-has-deadline-label">Муҳлат (аз кай то кай)</span>
                         </label>
-                        <input type="date" id="task-deadline">
+                        <div id="task-deadline-group" class="hidden" style="margin-top: 12px;">
+                            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding: 12px; background: rgba(0,0,0,0.03); border-radius: 8px;">
+                                <span style="font-size: 13px; color: var(--text-secondary); text-align: center; font-weight: 600;">Аз:</span>
+                                <div id="task-start-date-container" style="width: 100%;">
+                                    <input type="text" id="task-start-date" class="flatpickr-date" placeholder="Рӯзро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                                </div>
+                                <div style="width: 100%;">
+                                    <input type="text" id="task-start-time" class="flatpickr-time" placeholder="Соатро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; background: rgba(0,0,0,0.03); border-radius: 8px;">
+                                <span style="font-size: 13px; color: var(--text-secondary); text-align: center; font-weight: 600;">То:</span>
+                                <div id="task-deadline-date-container" style="width: 100%;">
+                                    <input type="text" id="task-deadline-date" class="flatpickr-date" placeholder="Рӯзро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                                </div>
+                                <div style="width: 100%;">
+                                    <input type="text" id="task-deadline-time" class="flatpickr-time" placeholder="Соатро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group" style="margin: 10px 0; display: flex; flex-direction: column; gap: 8px;">
-                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
-                            <input type="checkbox" id="task-use-timer" checked> <span id="task-use-timer-label">Истифодаи таймер</span>
+
+                    <!-- Strict Deadline for Penalties -->
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; color: var(--text);">
+                            <input type="checkbox" id="task-has-strict-deadline"> 
+                            <span id="task-has-strict-deadline-label">Мӯҳлати қатъӣ (то кай бояд иҷро шавад)</span>
                         </label>
-                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
-                            <input type="checkbox" id="task-has-test"> <span id="task-has-test-label">Санҷиш дорад</span>
+                        <div id="task-strict-deadline-group" class="hidden" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.03); border-radius: 8px;">
+                            <div id="task-strict-deadline-date-container" style="width: 100%;">
+                                <input type="text" id="task-strict-deadline-date" class="flatpickr-date" placeholder="Рӯзро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" id="task-strict-deadline-time" class="flatpickr-time" placeholder="Соатро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- 3. Streak / Marathon Toggle -->
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; color: var(--text);">
+                            <input type="checkbox" id="task-is-streak"> 
+                            <span id="task-is-streak-label">Силсила / Марафон (чандрӯза)</span>
                         </label>
+                        <div id="task-streak-group" class="hidden" style="margin-top: 8px;">
+                            <input type="number" id="task-streak-target" min="2" max="30" placeholder="Ҳадафи рӯзҳо (масалан: 5)" value="5">
+                        </div>
+                    </div>
+
+                    <!-- 4. Focus Timer Toggle -->
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; color: var(--text);">
+                            <input type="checkbox" id="task-use-timer"> 
+                            <span id="task-use-timer-label">Бо таймер</span>
+                        </label>
+                        <div id="task-timer-group" style="display: flex; gap: 12px; margin-top: 8px;">
+                            <div style="flex: 1;">
+                                <label style="font-size: 11px; margin-bottom: 2px; color: var(--text-secondary);">Соат</label>
+                                <input type="number" id="task-duration-hours" min="0" max="23" placeholder="0" value="0">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 11px; margin-bottom: 2px; color: var(--text-secondary);">Дақиқа</label>
+                                <input type="number" id="task-duration-minutes" min="0" max="59" placeholder="20" value="20">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checkboxes -->
+                    <div class="form-group" style="margin: 16px 0; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
+                            <input type="checkbox" id="task-has-test"> <span id="task-has-test-label">Санҷиш</span>
+                        </label>
+                        <div id="task-test-group" class="hidden" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px; margin-bottom: 8px; padding: 12px; background: rgba(0,0,0,0.03); border-radius: 8px;">
+                            <div style="width: 100%;">
+                                <input type="text" id="task-test-date" class="flatpickr-date" placeholder="Рӯзро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" id="task-test-time" class="flatpickr-time" placeholder="Соатро интихоб кунед..." style="text-align: center; height: 44px; font-size: 15px;">
+                            </div>
+                        </div>
                         <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
                             <input type="checkbox" id="task-photo-required"> <span id="task-photo-required-label">Акс дар ҷавоб ҳатмӣ аст</span>
                         </label>
@@ -826,6 +893,10 @@
 
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
 
     <script src="js/translations.js?v=24"></script>
     <script src="js/data.js?v=24"></script>

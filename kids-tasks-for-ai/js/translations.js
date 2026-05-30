@@ -218,10 +218,10 @@ const TRANSLATIONS = {
         'task_form.add_photo': 'Иловаи акс',
         'task_form.start_time': 'Вақти оғоз',
         'task_form.days': 'Рӯзҳои ҳафта',
-        'task_form.use_timer': 'Истифодаи таймер',
+        'task_form.use_timer': 'Бо таймер',
         'task_form.reward_gold': 'Тилло',
         'task_form.reward_stars': 'Ситора',
-        'task_form.has_test': 'Санҷиш дорад',
+        'task_form.has_test': 'Санҷиш',
         'task_form.photo_required': 'Акс дар ҷавоб ҳатмӣ аст',
 
         // Child Form
