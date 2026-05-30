@@ -2533,10 +2533,22 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 /* ======================================
-   FLATPICKR — равшан, тоза, мувофиқи modal
+   FLATPICKR — PREMIUM WEBISTAN LUXURY DESIGN
    ====================================== */
 
-/* Поляи воридот (Input field) */
+/* Анимацияи пайдошавии тақвим (Calendar entry animation) */
+@keyframes fpFadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Поляи воридот (Input fields) */
 .flatpickr-input,
 input.flatpickr-input[readonly] {
     background: var(--bg-card) !important;
@@ -2545,102 +2557,119 @@ input.flatpickr-input[readonly] {
     -webkit-text-fill-color: var(--text) !important;
     font-weight: 600 !important;
     font-size: 14px !important;
-    font-family: var(--font-main) !important;
+    font-family: var(--font-main), 'Rubik', sans-serif !important;
     width: 100% !important;
-    height: 44px !important;
-    padding: 10px 14px !important;
-    border-radius: 10px !important;
+    height: 46px !important;
+    padding: 10px 16px !important;
+    border-radius: 12px !important;
     text-align: center !important;
     cursor: pointer !important;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-sizing: border-box;
 }
-.flatpickr-input:focus {
+.flatpickr-input:focus,
+input.flatpickr-input[readonly]:focus {
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12) !important;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15) !important;
+    background: #fff !important;
     outline: none !important;
 }
 .flatpickr-input::placeholder {
-    color: rgba(120, 120, 150, 0.55) !important;
-    -webkit-text-fill-color: rgba(120, 120, 150, 0.55) !important;
+    color: rgba(120, 120, 150, 0.5) !important;
+    -webkit-text-fill-color: rgba(120, 120, 150, 0.5) !important;
     font-weight: 400 !important;
 }
 
-/* Попап тақвим (Calendar Popup) */
+/* Контейнери асосии тақвим (Main calendar popup wrapper) */
 .flatpickr-calendar {
-    background: #fff !important;
-    border: 1.5px solid rgba(124, 58, 237, 0.18) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 16px 48px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06) !important;
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
     width: 330px !important;
     padding: 0 !important;
-    font-family: var(--font-main) !important;
+    font-family: var(--font-main), 'Rubik', sans-serif !important;
     overflow: hidden !important;
+    animation: fpFadeInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Сарлавҳа (Моҳ ва сол) */
+/* Сарлавҳаи тақвим (Header: Month & Year selection) */
 .flatpickr-months {
     background: linear-gradient(135deg, #7C3AED 0%, #9D5CF5 100%) !important;
-    height: 52px !important;
+    height: 56px !important;
     align-items: center !important;
-    padding: 0 6px !important;
+    padding: 0 8px !important;
     border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 .flatpickr-months .flatpickr-month {
     background: transparent !important;
-    color: #fff !important;
-    fill: #fff !important;
-    height: 52px !important;
-    line-height: 52px !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    height: 56px !important;
+    line-height: 56px !important;
 }
 .flatpickr-current-month {
-    font-size: 15px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
-    color: #fff !important;
+    color: #ffffff !important;
     padding-top: 0 !important;
-    height: 52px !important;
-    line-height: 52px !important;
+    height: 56px !important;
+    line-height: 56px !important;
 }
-.flatpickr-current-month .cur-month,
-.flatpickr-current-month input.cur-year {
-    color: #fff !important;
-    -webkit-text-fill-color: #fff !important;
+.flatpickr-current-month .cur-month {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     font-weight: 700 !important;
+}
+.flatpickr-current-month input.cur-year {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    border-radius: 6px !important;
+    padding: 2px 4px !important;
+    transition: background 0.2s;
 }
 .flatpickr-current-month input.cur-year:hover,
 .flatpickr-current-month input.cur-year:focus {
-    background: rgba(255,255,255,0.15) !important;
+    background: rgba(255, 255, 255, 0.18) !important;
 }
 
-/* Тирҳои навигатсия */
+/* Тирҳои гузариш (Navigation arrows) */
 .flatpickr-prev-month,
 .flatpickr-next-month {
     background: transparent !important;
-    padding: 0 10px !important;
-    height: 52px !important;
+    padding: 0 12px !important;
+    height: 56px !important;
     display: flex !important;
     align-items: center !important;
     top: 0 !important;
-}
-.flatpickr-prev-month svg,
-.flatpickr-next-month svg {
-    fill: rgba(255,255,255,0.85) !important;
+    transition: background 0.2s, transform 0.2s !important;
 }
 .flatpickr-prev-month:hover,
 .flatpickr-next-month:hover {
-    background: rgba(255,255,255,0.15) !important;
-    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 10px !important;
 }
-.flatpickr-prev-month:hover svg,
-.flatpickr-next-month:hover svg {
-    fill: #fff !important;
+.flatpickr-prev-month:active,
+.flatpickr-next-month:active {
+    transform: scale(0.9) !important;
+}
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: #ffffff !important;
+    width: 14px !important;
+    height: 14px !important;
 }
 
-/* Рӯзҳои ҳафта */
+/* Рӯзҳои ҳафта (Weekdays bar) */
 .flatpickr-weekdays {
-    background: #f5f3ff !important;
-    height: 34px !important;
-    border-bottom: 1px solid rgba(124,58,237,0.1) !important;
+    background: #fcfbfe !important;
+    height: 38px !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.08) !important;
+    display: flex !important;
+    align-items: center !important;
 }
 .flatpickr-weekdaycontainer {
     display: flex !important;
@@ -2648,100 +2677,133 @@ input.flatpickr-input[readonly] {
 }
 .flatpickr-weekday {
     background: transparent !important;
-    color: #7C3AED !important;
+    color: #9D5CF5 !important;
     font-weight: 700 !important;
     font-size: 11px !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.05em !important;
     flex: 1 !important;
-    line-height: 34px !important;
+    line-height: 38px !important;
 }
 
-/* Рӯзҳои моҳ */
+/* Рӯзҳо (Days container & styles) */
 .flatpickr-days {
     width: 100% !important;
     border: none !important;
-    padding: 4px 6px 8px !important;
+    padding: 8px 8px 10px !important;
+    background: #ffffff !important;
 }
 .dayContainer {
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 4px !important;
 }
 .flatpickr-day {
-    color: #374151 !important;
+    color: #4B5563 !important;
     background: transparent !important;
     border: none !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     font-size: 13px !important;
-    font-weight: 500 !important;
-    height: 36px !important;
-    line-height: 36px !important;
-    flex: 1 !important;
-    max-width: calc(100% / 7) !important;
-    margin: 2px 0 !important;
+    font-weight: 600 !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    transition: all 0.2s ease;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 .flatpickr-day.prevMonthDay,
 .flatpickr-day.nextMonthDay {
-    color: rgba(100, 100, 130, 0.35) !important;
+    color: #D1D5DB !important;
+    font-weight: 400 !important;
 }
-.flatpickr-day:hover {
-    background: #ede9fe !important;
-    color: #7C3AED !important;
-    border: none !important;
-}
+
+/* Рӯзи ҷорӣ (Today style) */
 .flatpickr-day.today {
     border: 2px solid #7C3AED !important;
     color: #7C3AED !important;
+    background: rgba(124, 58, 237, 0.04) !important;
     font-weight: 700 !important;
-    background: transparent !important;
 }
 .flatpickr-day.today:hover {
-    background: #ede9fe !important;
+    background: rgba(124, 58, 237, 0.08) !important;
 }
+
+/* Рӯзи интихобшуда (Selected day style) */
 .flatpickr-day.selected,
 .flatpickr-day.selected:hover,
 .flatpickr-day.selected.prevMonthDay,
 .flatpickr-day.selected.nextMonthDay {
-    background: #7C3AED !important;
-    color: #fff !important;
-    border: none !important;
+    background: linear-gradient(135deg, #7C3AED 0%, #9D5CF5 100%) !important;
+    color: #ffffff !important;
     font-weight: 700 !important;
-    box-shadow: 0 2px 8px rgba(124,58,237,0.35) !important;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+    transform: scale(1.05);
 }
 
-/* Интихоби соат */
-.flatpickr-time {
-    background: #fff !important;
-    border-top: 1px solid #e9e5f8 !important;
-    height: 56px !important;
-    border-radius: 0 !important;
-    overflow: hidden !important;
+/* Рӯзҳои оддӣ ҳангоми гузоштани кунсор (Hover state) */
+.flatpickr-day:hover:not(.selected):not(.today) {
+    background: #F3F4F6 !important;
+    color: #1F2937 !important;
+    transform: translateY(-1px);
 }
-.flatpickr-time input,
-.flatpickr-time .flatpickr-time-separator {
+
+/* Интихоби вақт (Time picker section) */
+.flatpickr-time {
+    background: #fdfdfd !important;
+    border-top: 1px solid rgba(124, 58, 237, 0.1) !important;
+    height: 60px !important;
+    border-radius: 0 0 20px 20px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 16px !important;
+}
+.flatpickr-time input {
     background: transparent !important;
-    color: #374151 !important;
-    -webkit-text-fill-color: #374151 !important;
+    color: #1F2937 !important;
+    -webkit-text-fill-color: #1F2937 !important;
     font-size: 22px !important;
     font-weight: 700 !important;
     border: none !important;
+    border-radius: 8px !important;
+    transition: all 0.2s;
+    height: 44px !important;
+}
+.flatpickr-time .flatpickr-time-separator {
+    color: #9CA3AF !important;
+    font-weight: 500 !important;
+    font-size: 22px !important;
 }
 .flatpickr-time input:hover,
 .flatpickr-time input:focus {
-    background: #ede9fe !important;
+    background: rgba(124, 58, 237, 0.08) !important;
     color: #7C3AED !important;
     -webkit-text-fill-color: #7C3AED !important;
-    border-radius: 8px !important;
-    box-shadow: none !important;
 }
+
+/* Тугмачаҳои боло/поён барои вақт (Time adjustment arrows) */
 .numInputWrapper {
     background: transparent !important;
+    border-radius: 8px !important;
 }
 .numInputWrapper:hover {
-    background: #ede9fe !important;
-    border-radius: 8px !important;
+    background: rgba(0, 0, 0, 0.02) !important;
+}
+.numInputWrapper span {
+    border: none !important;
+    opacity: 0.7 !important;
+}
+.numInputWrapper span:hover {
+    background: rgba(124, 58, 237, 0.1) !important;
+    opacity: 1 !important;
 }
 .numInputWrapper span.arrowUp:after {
     border-bottom-color: #7C3AED !important;
@@ -2749,8 +2811,10 @@ input.flatpickr-input[readonly] {
 .numInputWrapper span.arrowDown:after {
     border-top-color: #7C3AED !important;
 }
+
+/* Пайвасти вақт бо тақвим */
 .flatpickr-calendar.hasTime .flatpickr-time {
-    border-top: 1px solid #e9e5f8 !important;
+    border-top: 1px solid rgba(124, 58, 237, 0.1) !important;
 }
 
 
