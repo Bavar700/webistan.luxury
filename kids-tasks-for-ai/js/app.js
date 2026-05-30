@@ -577,7 +577,7 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
     const stars = task.rewardStars || 0;
     durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">🪙 ${gold} ⭐ ${stars}</span>`;
 
-    if (task.type === 'exam' && tl.status === 'completed' && tl.score !== undefined) {
+    if (task.hasTest && tl.status === 'completed' && tl.score !== undefined) {
         durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">💯 Баҳо: ${tl.score}/10</span>`;
     }
 
@@ -821,9 +821,17 @@ function submitProof() {
 
     if (!tl) return;
 
-    // Save photo (base64) and explanation
+    const task = child.tasks.find(t => t.id === timerTaskId) || child.bonusTasks.find(t => t.id === timerTaskId);
     const photoImg = document.getElementById('proof-photo-img');
-    if (photoImg.src && photoImg.src.startsWith('data:')) {
+    const photoAttached = photoImg.src && photoImg.src.startsWith('data:');
+    
+    if (task && task.photoRequired && !photoAttached) {
+        showToast('📸', __('proof.photo_required_error') || 'Акс дар ҷавоб ҳатмӣ аст!');
+        return;
+    }
+
+    // Save photo (base64) and explanation
+    if (photoAttached) {
         tl.photo = photoImg.src;
     }
     tl.explanation = document.getElementById('proof-explanation').value.trim();
@@ -953,7 +961,7 @@ function showConfirmModal(task) {
     if (scoreGroup) {
         const scoreLabel = document.getElementById('confirm-exam-score-label');
         if (scoreLabel) scoreLabel.textContent = __('confirm.exam_score') || 'Баҳо (1-10):';
-        scoreGroup.classList.toggle('hidden', task.type !== 'exam');
+        scoreGroup.classList.toggle('hidden', !task.hasTest);
     }
 
     // Show child's photo and explanation if available
@@ -1011,7 +1019,7 @@ function submitConfirm() {
         tl.confirmed = true;
         
         const task = child.tasks.find(t => t.id === confirmTaskId) || child.bonusTasks.find(t => t.id === confirmTaskId);
-        if (task && task.type === 'exam') {
+        if (task && task.hasTest) {
             tl.score = parseInt(document.getElementById('confirm-exam-score').value) || 10;
         }
 
@@ -1452,6 +1460,8 @@ function showTaskModal(task = null, forceBonus = false) {
         
         document.getElementById('task-start-time').value = task.startTime || '12:00';
         document.getElementById('task-use-timer').checked = (task.useTimer !== false);
+        document.getElementById('task-has-test').checked = (task.hasTest === true);
+        document.getElementById('task-photo-required').checked = (task.photoRequired === true);
         
         const days = task.days || [1, 2, 3, 4, 5, 6, 0];
         const checkboxes = document.querySelectorAll('input[name="task-days"]');
@@ -1484,14 +1494,16 @@ function showTaskModal(task = null, forceBonus = false) {
         document.getElementById('task-type').value = typeVal;
         document.getElementById('task-start-time').value = '12:00';
         document.getElementById('task-use-timer').checked = true;
+        document.getElementById('task-has-test').checked = false;
+        document.getElementById('task-photo-required').checked = false;
 
         const checkboxes = document.querySelectorAll('input[name="task-days"]');
         checkboxes.forEach(cb => {
             cb.checked = true;
         });
 
-        document.getElementById('task-reward-gold').value = forceBonus ? 3 : 1;
-        document.getElementById('task-reward-stars').value = 1;
+        document.getElementById('task-reward-gold').value = 0;
+        document.getElementById('task-reward-stars').value = 0;
 
         editingTaskId = null;
         editingIsBonus = forceBonus;
@@ -1513,10 +1525,16 @@ function updateTaskFormLabels() {
     if (instTextarea) instTextarea.placeholder = __('task_form.instructions_placeholder');
 
     const goldInput = document.getElementById('task-reward-gold');
-    if (goldInput) goldInput.placeholder = __('task_form.reward_gold');
+    if (goldInput) goldInput.placeholder = '0';
 
     const starsInput = document.getElementById('task-reward-stars');
-    if (starsInput) starsInput.placeholder = __('task_form.reward_stars');
+    if (starsInput) starsInput.placeholder = '0';
+
+    const goldLabel = document.getElementById('task-reward-gold-label');
+    if (goldLabel) goldLabel.innerHTML = `🪙 ${__('task_form.reward_gold')}`;
+
+    const starsLabel = document.getElementById('task-reward-stars-label');
+    if (starsLabel) starsLabel.innerHTML = `⭐ ${__('task_form.reward_stars')}`;
 
     document.getElementById('task-deadline-label').textContent = `📅 ${__('task_form.deadline')}`;
     
@@ -1545,6 +1563,10 @@ function updateTaskFormLabels() {
     if (daysLabel) daysLabel.textContent = __('task_form.days');
     const useTimerLabel = document.getElementById('task-use-timer-label');
     if (useTimerLabel) useTimerLabel.textContent = __('task_form.use_timer');
+    const hasTestLabel = document.getElementById('task-has-test-label');
+    if (hasTestLabel) hasTestLabel.textContent = __('task_form.has_test');
+    const photoRequiredLabel = document.getElementById('task-photo-required-label');
+    if (photoRequiredLabel) photoRequiredLabel.textContent = __('task_form.photo_required');
 }
 
 function updateTaskFieldsVisibility() {
@@ -1565,6 +1587,8 @@ function saveTask() {
     
     const startTime = document.getElementById('task-start-time').value || '12:00';
     const useTimer = document.getElementById('task-use-timer').checked;
+    const hasTest = document.getElementById('task-has-test').checked;
+    const photoRequired = document.getElementById('task-photo-required').checked;
     
     const checkboxes = document.querySelectorAll('input[name="task-days"]');
     const days = Array.from(checkboxes).filter(cb => cb.checked).map(cb => parseInt(cb.value));
@@ -1589,6 +1613,8 @@ function saveTask() {
         type: typeVal,
         startTime,
         useTimer,
+        hasTest,
+        photoRequired,
         days,
         rewardGold,
         rewardStars,
@@ -2439,9 +2465,12 @@ function setupEventListeners() {
     // Task modal
     document.getElementById('task-save-btn').addEventListener('click', saveTask);
     document.getElementById('task-type').addEventListener('change', updateTaskFieldsVisibility);
-    document.getElementById('task-modal-close').addEventListener('click', () => {
-        document.getElementById('task-modal').classList.add('hidden');
-    });
+    const modalCancelBtn = document.getElementById('task-modal-cancel');
+    if (modalCancelBtn) {
+        modalCancelBtn.addEventListener('click', () => {
+            document.getElementById('task-modal').classList.add('hidden');
+        });
+    }
 
     // Child modal
     document.getElementById('child-save-btn').addEventListener('click', saveChild);

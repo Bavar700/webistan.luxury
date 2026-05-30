@@ -219,8 +219,10 @@ const TRANSLATIONS = {
         'task_form.start_time': 'Вақти оғоз',
         'task_form.days': 'Рӯзҳои ҳафта',
         'task_form.use_timer': 'Истифодаи таймер',
-        'task_form.reward_gold': 'Подош (Тилло)',
-        'task_form.reward_stars': 'Подош (Ситорача)',
+        'task_form.reward_gold': 'Тилло',
+        'task_form.reward_stars': 'Ситора',
+        'task_form.has_test': 'Санҷиш дорад',
+        'task_form.photo_required': 'Акс дар ҷавоб ҳатмӣ аст',
 
         // Child Form
         'child_form.title_new': '👶 Иловаи кӯдаки нав',
@@ -298,6 +300,7 @@ const TRANSLATIONS = {
         'proof.explanation_placeholder': 'Нависед, ки чӣ кор карда шуд...',
         'proof.submit': 'Фиристодан барои тасдиқ',
         'proof.submitted': 'Акс ва тавсиф фиристода шуд! Волидайн тасдиқ мекунад.',
+        'proof.photo_required_error': 'Иловаи акс дар ҷавоб ҳатмӣ аст!',
 
         // Toast messages
         'toast.saved': '💾 Сабт шуд!',
@@ -518,8 +521,10 @@ const TRANSLATIONS = {
         'task_form.start_time': 'Время начала',
         'task_form.days': 'Дни недели',
         'task_form.use_timer': 'Использовать таймер',
-        'task_form.reward_gold': 'Награда (Золото)',
-        'task_form.reward_stars': 'Награда (Звёзды)',
+        'task_form.reward_gold': 'Золото',
+        'task_form.reward_stars': 'Звёзды',
+        'task_form.has_test': 'Есть тест/экзамен',
+        'task_form.photo_required': 'Фото в ответе обязательно',
 
         // Child Form
         'child_form.title_new': '👶 Добавить ребёнка',
@@ -597,6 +602,7 @@ const TRANSLATIONS = {
         'proof.explanation_placeholder': 'Напишите, что сделано...',
         'proof.submit': 'Отправить на подтверждение',
         'proof.submitted': 'Фото и описание отправлены! Родитель подтвердит.',
+        'proof.photo_required_error': 'Добавление фото в ответе обязательно!',
 
         // Toast messages
         'toast.saved': '💾 Сохранено!',

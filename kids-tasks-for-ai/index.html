@@ -388,7 +388,7 @@
                     <form onsubmit="return false;">
                     <div id="confirm-exam-score-group" class="form-group hidden" style="margin-bottom: 12px;">
                         <label for="confirm-exam-score" style="font-weight: 600; margin-bottom: 4px; display: block;" id="confirm-exam-score-label">Хол / Баҳо (1-10):</label>
-                        <select id="confirm-exam-score" class="form-control" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border);">
+                        <select id="confirm-exam-score">
                             <option value="10">10 (Аъло)</option>
                             <option value="9">9 (Хеле хуб)</option>
                             <option value="8">8 (Хуб)</option>
@@ -523,11 +523,8 @@
         <!-- Add/Edit Task Modal -->
         <div class="modal-overlay hidden" id="task-modal">
             <div class="modal">
-                <div class="modal-header">
+                <div class="modal-header" style="display: none;">
                     <h3 id="task-modal-title" class="hidden">Супориши нав</h3>
-                    <button class="modal-close" id="task-modal-close" style="margin-left: auto;">
-                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -554,7 +551,6 @@
                         <select id="task-type">
                             <option value="daily" id="task-type-option-daily">Ҳаррӯза</option>
                             <option value="one-time" id="task-type-option-one-time">Якдафъаина</option>
-                            <option value="exam" id="task-type-option-exam">Санҷиш / Имтиҳон</option>
                             <option value="bonus" id="task-type-option-bonus">Бо подош (бонус)</option>
                         </select>
                     </div>
@@ -585,23 +581,34 @@
                         </label>
                         <input type="date" id="task-deadline">
                     </div>
-                    <div class="form-group" style="margin: 10px 0;">
-                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer;">
+                    <div class="form-group" style="margin: 10px 0; display: flex; flex-direction: column; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
                             <input type="checkbox" id="task-use-timer" checked> <span id="task-use-timer-label">Истифодаи таймер</span>
                         </label>
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
+                            <input type="checkbox" id="task-has-test"> <span id="task-has-test-label">Санҷиш дорад</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
+                            <input type="checkbox" id="task-photo-required"> <span id="task-photo-required-label">Акс дар ҷавоб ҳатмӣ аст</span>
+                        </label>
                     </div>
-                    <div class="form-group" style="display: flex; gap: 12px;">
+                    <div class="form-group" style="display: flex; gap: 12px; margin-top: 8px;">
                         <div style="flex: 1;">
-                            <input type="number" id="task-reward-gold" min="0" placeholder="Подош (Тилло)">
+                            <label id="task-reward-gold-label" style="font-weight: 600; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; color: var(--text);">🪙 Подош (Тилло)</label>
+                            <input type="number" id="task-reward-gold" min="0" placeholder="0">
                         </div>
                         <div style="flex: 1;">
-                            <input type="number" id="task-reward-stars" min="0" placeholder="Подош (Ситорача)">
+                            <label id="task-reward-stars-label" style="font-weight: 600; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; color: var(--text);">⭐ Подош (Ситорача)</label>
+                            <input type="number" id="task-reward-stars" min="0" placeholder="0">
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-full" id="task-save-btn">
-                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
-                        Сабт кардан
-                    </button>
+                    <div style="display: flex; gap: 12px; margin-top: 12px;">
+                        <button class="btn btn-secondary" id="task-modal-cancel" style="flex: 1;">Бекор кардан</button>
+                        <button class="btn btn-primary" id="task-save-btn" style="flex: 2;">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
+                            Сабт кардан
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
