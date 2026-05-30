@@ -324,6 +324,7 @@ function calculateDailyReward(childId, date) {
 
     let regularGold = 0;
     let regularStars = 0;
+    let regularMedals = 0;
 
     regularTasks.forEach(t => {
         const taskLog = log.tasks[t.id];
@@ -331,33 +332,38 @@ function calculateDailyReward(childId, date) {
             completedCount++;
             regularGold += parseInt(t.rewardGold !== undefined ? t.rewardGold : 1) || 0;
             regularStars += parseInt(t.rewardStars !== undefined ? t.rewardStars : 1) || 0;
+            regularMedals += parseInt(t.rewardMedals !== undefined ? t.rewardMedals : 0) || 0;
         }
     });
 
     // Count bonus tasks separately
     let bonusGold = 0;
     let bonusStars = 0;
+    let bonusMedals = 0;
     child.bonusTasks.forEach(t => {
         const taskLog = log.tasks[t.id];
         if (taskLog && taskLog.status === 'completed' && taskLog.confirmed) {
             bonusGold += parseInt(t.rewardGold !== undefined ? t.rewardGold : (t.bonusPrice || 0)) || 0;
             bonusStars += parseInt(t.rewardStars !== undefined ? t.rewardStars : 0) || 0;
+            bonusMedals += parseInt(t.rewardMedals !== undefined ? t.rewardMedals : 0) || 0;
         }
     });
 
-    if (completedCount === 0 && bonusGold === 0 && bonusStars === 0) {
-        return { reward: 0, reason: 'none_done', starReward: 0 };
+    if (completedCount === 0 && bonusGold === 0 && bonusStars === 0 && bonusMedals === 0) {
+        return { reward: 0, reason: 'none_done', starReward: 0, medalReward: 0 };
     } else if (completedCount < totalCount) {
         return {
             reward: regularGold + bonusGold,
             reason: 'partial',
-            starReward: regularStars + bonusStars
+            starReward: regularStars + bonusStars,
+            medalReward: regularMedals + bonusMedals
         };
     } else {
         return {
             reward: regularGold + bonusGold,
             reason: 'all_done',
-            starReward: regularStars + bonusStars
+            starReward: regularStars + bonusStars,
+            medalReward: regularMedals + bonusMedals
         };
     }
 }
@@ -380,6 +386,12 @@ function applyDailyReward(childId, date) {
         if (!child.stars) child.stars = 0;
         child.stars += result.starReward;
         child.totalStars = (child.totalStars || 0) + result.starReward;
+    }
+    
+    if (result.medalReward > 0) {
+        if (!child.medals) child.medals = 0;
+        child.medals += result.medalReward;
+        child.totalMedals = (child.totalMedals || 0) + result.medalReward;
     }
     
     log.rewardApplied = true;

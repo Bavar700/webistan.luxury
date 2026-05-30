@@ -241,13 +241,12 @@ function renderChildTabs() {
 
     if (balanceEl) {
         const rt = child.rewardType || 'money';
-        if (rt === 'stars') {
-            balanceEl.textContent = `⭐ ${child.stars || 0}`;
-        } else if (rt === 'both') {
-            balanceEl.textContent = `💰 ${child.balance} ${__('balance.currency.sm')}   ⭐ ${child.stars || 0}`;
-        } else {
-            balanceEl.textContent = `💰 ${child.balance} ${__('balance.currency.sm')}`;
-        }
+        let txt = '';
+        if (rt === 'stars') txt = `⭐ ${child.stars || 0}`;
+        else if (rt === 'both') txt = `⭐ ${child.stars || 0}   💰 ${child.balance} ${__('balance.currency.sm')}`;
+        else txt = `💰 ${child.balance} ${__('balance.currency.sm')}`;
+        txt += `   🏅 ${child.medals || 0}`;
+        balanceEl.textContent = txt;
     }
 
     // Build picker list
@@ -267,10 +266,11 @@ function renderChildPicker() {
         }
 
         const rt = c.rewardType || 'money';
-        let balanceText;
+        let balanceText = '';
         if (rt === 'stars') balanceText = `⭐ ${c.stars || 0}`;
-        else if (rt === 'both') balanceText = `💰 ${c.balance}   ⭐ ${c.stars || 0}`;
+        else if (rt === 'both') balanceText = `⭐ ${c.stars || 0}   💰 ${c.balance}`;
         else balanceText = `💰 ${c.balance} ${__('balance.currency.sm')}`;
+        balanceText += `   🏅 ${c.medals || 0}`;
 
         item.innerHTML = `
             <span class="cpi-emoji">${c.emoji}</span>
@@ -359,13 +359,12 @@ function updateUI() {
         headerBalance.classList.remove('hidden');
         
         const rt = child.rewardType || 'money';
-        if (rt === 'stars') {
-            balanceText.textContent = `⭐ ${child.stars || 0}`;
-        } else if (rt === 'both') {
-            balanceText.textContent = `💰 ${child.balance}   ⭐ ${child.stars || 0}`;
-        } else {
-            balanceText.textContent = `💰 ${child.balance} ${__('balance.currency.sm')}`;
-        }
+        let txt = '';
+        if (rt === 'stars') txt = `⭐ ${child.stars || 0}`;
+        else if (rt === 'both') txt = `⭐ ${child.stars || 0}   💰 ${child.balance}`;
+        else txt = `💰 ${child.balance} ${__('balance.currency.sm')}`;
+        txt += `   🏅 ${child.medals || 0}`;
+        balanceText.textContent = txt;
     }
 
     const now = new Date();
@@ -659,7 +658,10 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
 
     const gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
     const stars = task.rewardStars || 0;
-    durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">🪙 ${gold} ⭐ ${stars}</span>`;
+    const medals = task.rewardMedals || 0;
+    let rewardsText = `🪙 ${gold} ⭐ ${stars}`;
+    if (medals > 0) rewardsText += ` 🏅 ${medals}`;
+    durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">${rewardsText}</span>`;
 
     if (task.hasTest && tl.status === 'completed' && tl.score !== undefined) {
         durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">💯 Баҳо: ${tl.score}/10</span>`;
@@ -1606,6 +1608,7 @@ function showTaskModal(task = null, forceBonus = false) {
 
         document.getElementById('task-reward-gold').value = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
         document.getElementById('task-reward-stars').value = task.rewardStars || 0;
+        document.getElementById('task-reward-medals').value = task.rewardMedals || 0;
 
         editingTaskId = task.id;
         editingIsBonus = (typeVal === 'bonus');
@@ -1652,6 +1655,7 @@ function showTaskModal(task = null, forceBonus = false) {
 
         document.getElementById('task-reward-gold').value = 0;
         document.getElementById('task-reward-stars').value = 0;
+        document.getElementById('task-reward-medals').value = 0;
 
         editingTaskId = null;
         editingIsBonus = forceBonus;
@@ -1775,6 +1779,7 @@ function saveTask() {
 
     const rewardGold = parseInt(document.getElementById('task-reward-gold').value) || 0;
     const rewardStars = parseInt(document.getElementById('task-reward-stars').value) || 0;
+    const rewardMedals = parseInt(document.getElementById('task-reward-medals').value) || 0;
     
     const instructions = document.getElementById('task-instructions').value.trim();
     const instImg = document.getElementById('task-inst-image-img');
@@ -1820,6 +1825,7 @@ function saveTask() {
         days,
         rewardGold,
         rewardStars,
+        rewardMedals,
         instructions,
         instructionImage
     };
@@ -2026,7 +2032,10 @@ function renderParentDashboard() {
 
             var gold = task.rewardGold !== undefined ? task.rewardGold : 0;
             var stars = task.rewardStars || 0;
-            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars + "</span>";
+            var medals = task.rewardMedals || 0;
+            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars;
+            if (medals > 0) rewardsBadge += " 🏅 " + medals;
+            rewardsBadge += "</span>";
 
             html += "<li>";
             html += "<span class='item-emoji' style='color:var(--primary);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
@@ -2050,7 +2059,10 @@ function renderParentDashboard() {
             var iconName = 'icon-gift';
             var gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
             var stars = task.rewardStars || 0;
-            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars + "</span>";
+            var medals = task.rewardMedals || 0;
+            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars;
+            if (medals > 0) rewardsBadge += " 🏅 " + medals;
+            rewardsBadge += "</span>";
 
             html += "<li>";
             html += "<span class='item-emoji' style='color:var(--primary);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
