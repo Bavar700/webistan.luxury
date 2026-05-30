@@ -2841,6 +2841,12 @@ input.flatpickr-input[readonly]:focus {
     width: 16px !important;
     opacity: 0.8 !important;
     right: 5px !important; /* Ҷойгиршавӣ 5пкс ба тарафи чап */
+    background: transparent !important;
+}
+/* Пешгирии торикшавии тугмаҳои тирча ҳангоми гузоштани курсор */
+.flatpickr-time .numInputWrapper span:hover,
+.flatpickr-time .numInputWrapper span:active {
+    background: transparent !important;
 }
 .flatpickr-time .numInputWrapper span.arrowUp:after {
     border-left: 5px solid transparent !important;
@@ -2876,6 +2882,11 @@ input.flatpickr-input[readonly]:focus {
     font-size: 18px !important;
     font-weight: 700 !important;
     margin: 0 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    height: 36px !important;
+    line-height: 1 !important;
+    transform: translateY(-2px) !important; /* Марказсозии ду нуқта */
 }
 
 /* ===== PENALTY GROUP ===== */
