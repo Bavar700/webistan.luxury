@@ -1728,7 +1728,9 @@ function updateTaskFormLabels() {
     const instImageLabel = document.getElementById('task-inst-image-label');
     if (instImageLabel) instImageLabel.textContent = __('task_form.inst_image');
     const instImageBtn = document.getElementById('task-inst-image-btn');
-    if (instImageBtn) instImageBtn.innerHTML = `📸 ${__('task_form.add_photo')}`;
+    if (instImageBtn) {
+        instImageBtn.innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg><span>${__('task_form.add_photo')}</span>`;
+    }
 
     // Translate task type options
     const typeLabel = document.getElementById('task-type-label');
