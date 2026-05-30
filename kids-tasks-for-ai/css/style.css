@@ -2534,43 +2534,55 @@ input[type="number"] { -moz-appearance: textfield; }
 
 /* ===== FLATPICKR OVERRIDES ===== */
 /* ===== FLATPICKR INPUT FIELDS ===== */
+/* These fields sit inside the modal which has --bg-card (light) background.
+   So text must be dark (--text), not white. */
 input.flatpickr-date,
 input.flatpickr-time,
 .flatpickr-input,
 .flatpickr-input.active,
 input[class*="flatpickr"] {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
-    color: #e8e8f0 !important;
+    background: var(--bg-card) !important;
+    border: 2px solid var(--border) !important;
+    color: var(--text) !important;
     font-weight: 600 !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     transition: all 0.3s ease;
     width: 100% !important;
     height: 44px !important;
     text-align: center;
     border-radius: var(--radius-xs) !important;
-    -webkit-text-fill-color: #e8e8f0 !important;
+    -webkit-text-fill-color: var(--text) !important;
+    padding: 10px 12px !important;
+    font-family: var(--font-main) !important;
 }
 
-/* altInput — the visible field Flatpickr shows instead of the real input */
-.flatpickr-input.flatpickr-input ~ .flatpickr-input,
+/* altInput — the visible display field Flatpickr creates */
 input.flatpickr-input[readonly] {
-    color: #e8e8f0 !important;
-    -webkit-text-fill-color: #e8e8f0 !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+    background: var(--bg-card) !important;
+    border: 2px solid var(--border) !important;
     cursor: pointer;
 }
 
 input.flatpickr-date:focus,
 input.flatpickr-time:focus,
 .flatpickr-input:focus {
-    background: rgba(255, 255, 255, 0.13) !important;
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
-    color: #fff !important;
-    -webkit-text-fill-color: #fff !important;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1) !important;
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+    outline: none !important;
 }
+
+/* Placeholder color */
+input.flatpickr-date::placeholder,
+input.flatpickr-time::placeholder,
+.flatpickr-input::placeholder {
+    color: var(--text-muted, rgba(100,100,120,0.6)) !important;
+    -webkit-text-fill-color: var(--text-muted, rgba(100,100,120,0.6)) !important;
+}
+
 
 /* ===== FLATPICKR CALENDAR POPUP ===== */
 .flatpickr-calendar,
