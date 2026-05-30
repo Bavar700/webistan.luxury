@@ -3,7 +3,8 @@
     "services": "Services",
     "about": "About Us",
     "reviews": "Reviews",
-    "contact": "Contact"
+    "contact": "Contact",
+    "booking": "Booking"
   },
   "hero": {
     "subtitle": "Dental Clinic",
@@ -23,6 +24,7 @@
   },
   "services": {
     "title": "Our Services",
+    "subtitle": "What we offer",
     "s1": {
       "title": "Ceramic Restorations",
       "desc": "Veneers and refractors for flawless aesthetics of your smile."
@@ -89,6 +91,7 @@
   },
   "testimonials": {
     "title": "Patient Reviews",
+    "badge": "Success Stories",
     "t1": {
       "name": "nastenakikot",
       "text": "Thank you so much for your work! It's been about half a year since my tooth restoration and everything holds perfectly, looks very aesthetic and no discomfort."
@@ -107,5 +110,84 @@
     "address": "Pulodi St. 4, Dushanbe",
     "phone": "+992 887 87 60 06",
     "social": "Social Media"
+  },
+  "footer": {
+    "schedule": "Schedule",
+    "weekdays": "Mon - Sat: 08:00 - 20:00",
+    "weekend": "Sun: Closed",
+    "socials": "Socials & Contact",
+    "rights": "All rights reserved.",
+    "designedBy": "Designed by "
+  },
+  "about_features": {
+    "premium": "Premium interior and comfort",
+    "equipment": "Latest European equipment",
+    "sterile": "Absolute sterility"
+  },
+  "doctors_section": {
+    "team": "Our Team",
+    "title": "Our Doctors",
+    "d1": {
+      "name": "Dr. Yormand",
+      "specialty": "Chief Physician, Surgeon-Implantologist",
+      "experience": "15 years of experience"
+    },
+    "d2": {
+      "name": "Dr. Azizov",
+      "specialty": "Orthodontist",
+      "experience": "10 years of experience"
+    },
+    "d3": {
+      "name": "Dr. Saidova",
+      "specialty": "Therapist, Endodontist",
+      "experience": "8 years of experience"
+    }
+  },
+  "dikidi": {
+    "subtitle": "Online Booking",
+    "title1": "Book an appointment",
+    "title2": "in 1 minute",
+    "time": "Choose a convenient time, doctor, and service",
+    "fastTitle": "Fast and convenient booking",
+    "fastDesc": "Plan your visit to the dentist online. You can choose a specific specialist, the required procedure, and the most convenient time for you without having to call the clinic.",
+    "btn": "Go to booking"
+  },
+  "faq_contact": {
+    "title": "Didn't find the answer to your question?",
+    "desc": "Leave your contacts, and our doctor will contact you for a detailed consultation.",
+    "btn": "Ask a question",
+    "placeholder": "Your question"
+  },
+  "promo_details": {
+    "badge": "Special for Ramadan",
+    "p1": "During the holy month of Ramadan, our clinic opens its doors day and night 🌙",
+    "p2": "We will be working 24/7, and besides that, there will be special offers for you every week. Namely:",
+    "w1": "Week 1",
+    "w1_title": "Two implants for the price of one 🦷",
+    "w1_date": "From March 1 to March 8 inclusive",
+    "w2": "Week 2",
+    "w2_title": "Two zirconia crowns for the price of one 🦷",
+    "w2_date": "From March 9 to March 16 inclusive",
+    "w3": "Week 3",
+    "w3_title": "Extraction of two teeth for the price of one 🦷",
+    "w3_date": "From March 17 to March 24 inclusive",
+    "w4": "Week 4",
+    "w4_title": "50% discount on braces installation and orthodontic treatment 🦷",
+    "w4_date": "From March 25 to March 31 inclusive",
+    "rule1": "By paying the cost of treatment for one tooth from the three categories above, you get the treatment of another implant absolutely free 🎁",
+    "rule2": "It is important to remember that each promotion is valid for exactly one week and the number of places is limited ❗️",
+    "rule3": "But that's not all! By tradition, you can come to extract your children's milk teeth during the whole month absolutely FREE 🆓",
+    "rule4": "And if you do not have time to visit our clinic this month, you can pay at a special price now, and use the offer later 🙌"
+  },
+  "question_modal": {
+    "successTitle": "Thank you!",
+    "successDesc": "Your question has been successfully sent. Our specialist will contact you shortly.",
+    "subtitle": "Still have questions?",
+    "title": "Ask the doctor your question",
+    "name": "Your name",
+    "phone": "Phone number",
+    "question": "Your question...",
+    "submitting": "Sending...",
+    "submit": "Send question"
   }
 }

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;800');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800');
+      
+      .logo-text {
+        font-family: 'Manrope', 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 72px;
+        fill: #124873;
+        letter-spacing: 0px;
+      }
+      .slogan-text {
+        font-family: 'Manrope', 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        fill: #124873;
+        letter-spacing: 1px;
+      }
+      .smile-arc {
+        fill: none;
+        stroke: #00C2D1;
+        stroke-width: 6;
+        stroke-linecap: round;
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(0, 10)">
+    <!-- Main text -->
+    <text class="logo-text" x="100" y="100">Ёрм<tspan dy="20">а</tspan><tspan dy="-20">нд</tspan></text>
+
+    <!-- Smile arc: moved lower and perfectly centered under estimated 'a' position -->
+    <path class="smile-arc" d="M 253 130 A 18 12 0 0 0 289 130" />
+
+    <!-- Slogan: smaller font size to fit gracefully, pushed lower to clear the smile -->
+    <text class="slogan-text" x="100" y="140">Лабханди орзуҳои<tspan dx="86">Шумо</tspan></text>
+  </g>
+</svg>

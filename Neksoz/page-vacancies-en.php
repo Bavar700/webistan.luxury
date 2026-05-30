@@ -6,7 +6,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj') {
     get_template_part('page', 'vacancies-tj');
     return;
 }
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <style>

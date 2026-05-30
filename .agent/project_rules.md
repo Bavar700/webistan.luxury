@@ -26,3 +26,8 @@ Create a strictly academic, minimalist WordPress theme using a high-performance 
 ## Interaction Protocol
 1. **Plan of Action**: Provide a plan in Manager View before major edits.
 2. **Documentation**: Maintain `README.md` with hooks and filters.
+
+## Responsive Design Strict Separation (Dandoni Solim)
+- **NEVER** modify `mobile_v169.css` when the user requests changes to the desktop version.
+- **NEVER** modify `desktop_v169.css` when the user requests changes to the mobile version.
+- **Always** ensure these two environments are strictly separated.

@@ -1,0 +1,22 @@
+<svg width="112" height="29" viewBox="25.5 6.5 112 29" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;family=Abril+Fatface&amp;display=swap');</style>
+        <linearGradient id="allTj_Grad_Final_Sync" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+            <stop offset="0%" stop-color="#EFBF04" />
+            <stop offset="25%" stop-color="#FFFFFF" />
+            <stop offset="50%" stop-color="#EFBF04" />
+            <stop offset="75%" stop-color="#FFFFFF" />
+            <stop offset="100%" stop-color="#EFBF04" />
+            <animateTransform 
+                attributeName="gradientTransform" 
+                attributeType="XML"
+                type="translate" 
+                from="-1 0" 
+                to="0 0" 
+                dur="8s" 
+                repeatCount="indefinite" />
+        </linearGradient>
+    </defs>
+    <text x="81.5" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="url(#allTj_Grad_Final_Sync)" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+    <text x="81.5" y="33" font-family="'Abril Fatface', serif" font-weight="400" font-size="7" fill="#475569" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">Your Local Guide To Tajikistan</text>
+</svg>

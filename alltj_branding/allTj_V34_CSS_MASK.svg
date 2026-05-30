@@ -1,0 +1,40 @@
+<svg width="224" height="58" viewBox="25 6 112 29" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;family=Abril+Fatface&amp;display=swap');
+      
+      @keyframes shimmerSlide {
+        0% { transform: translateX(-50px); }
+        70% { transform: translateX(150px); }
+        100% { transform: translateX(150px); }
+      }
+      
+      .mover {
+        animation: shimmerSlide 6s infinite;
+      }
+    </style>
+    
+    <linearGradient id="mask-grad_v34" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="black" />
+      <stop offset="50%" stop-color="white" />
+      <stop offset="100%" stop-color="black" />
+    </linearGradient>
+
+    <mask id="shimmer-mask_v34">
+      <rect x="0" y="0" width="224" height="58" fill="black" />
+      <rect x="0" y="0" width="40" height="58" fill="url(#mask-grad_v34)" class="mover" />
+    </mask>
+  </defs>
+
+  <!-- Base Gold Text -->
+  <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19"
+        fill="#EFBF04" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+        
+  <!-- White Shimmer Text (Revealed by Mask) -->
+  <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19"
+        fill="#FFFFFF" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs" mask="url(#shimmer-mask_v34)">allTj.online</text>
+
+  <!-- Slogan -->
+  <text x="81" y="33" font-family="Abril Fatface, serif" font-weight="400" font-size="7"
+        fill="#475569" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">Your Local Guide To Tajikistan</text>
+</svg>

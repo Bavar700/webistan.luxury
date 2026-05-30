@@ -5,7 +5,7 @@
  * @package Nexoz
  */
 
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <main id="primary" class="site-main mt-40 mb-32">

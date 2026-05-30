@@ -7,7 +7,7 @@ if (function_exists('nk_get_current_lang')) {
     if ($lang === 'tj') { get_template_part('service-planning', 'tj'); return; }
     if ($lang === 'en') { get_template_part('service-planning', 'en'); return; }
 }
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <main class="site-main">

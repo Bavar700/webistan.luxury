@@ -1,0 +1,46 @@
+/* ============================================================
+   WEBISTAN LUXURY — LIGHT THEME (OVERRIDES ONLY)
+   ⚠️  DO NOT MODIFY when working on dark theme.
+   ⚠️  Only override variables here — no new rules, no components.
+   ⚠️  All light theme changes go here — in [data-theme='light'] only.
+   ============================================================ */
+
+[data-theme='light'] {
+  --background: #FFFFFF;
+  --foreground: #0A0A0B;
+  --surface: #FFFFFF;
+  --accent: #B8860B;
+  --accent-gold: #B8860B;
+  --accent-champagne: #F7E7CE;
+  --accent-muted: rgba(184, 134, 11, 0.05);
+  --border-color: rgba(184, 134, 11, 0.1);
+  --header-bg: #000000; /* Header stays dark — brand constant */
+  --card-bg: #F2F4F7;
+  --card-text: #0A0A0B;
+  --btn-bg: #F2F4F7;
+  --btn-text: #0A0A0B;
+  --btn-hover-bg: #EAECEF;
+  --btn-hover-text: var(--accent);
+  --btn-border-width: 0.5px;
+  --btn-shadow: 0 4px 15px rgba(184, 134, 11, 0.08); /* Accent glow */
+  --btn-blur: 0px;
+  --calc-section-bg: #FFFFFF;
+  --calc-card-bg: #F2F4F7;
+  --calc-title-color: #0A0A0B;
+  --calc-desc-color: #000000;
+  --calc-step-num-color: var(--accent);
+  --calc-step-border-color: rgba(184, 134, 11, 0.2);
+  --block-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+  --promo-bg: #F2F4F7;
+  --promo-inner-bg: transparent;
+  --promo-text: #000000;
+  --promo-ribbon-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  --promo-accent-color: #B8860B;
+  --promo-accent-bg: none;
+  --promo-accent-shadow: none;
+  --promo-line-opacity: 0.9;
+  --calc-dropdown-bg: #F2F4F7;
+  --calc-dropdown-text: #000000;
+  --calc-dropdown-text-hover: var(--accent);
+  --hero-shimmer-via: #FFFFFF;
+}

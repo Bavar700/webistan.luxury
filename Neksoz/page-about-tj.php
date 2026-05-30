@@ -2,7 +2,7 @@
 /**
  * Template Name: Дар бораи мо
  */
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <style>

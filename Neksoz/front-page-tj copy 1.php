@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header(); global $current_lang;  ?>
 <main id='primary' class='site-main'>
 <section class="hero">
     <div class="hero__geo"></div>
@@ -86,7 +86,7 @@
                         <li>Тасдиқи саҳеҳии гузоришот ва аудити андоз</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-audit-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-audit', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 2. Восстановление финансового учета -->
@@ -107,7 +107,7 @@
                         <li>Муқоисаи ҳисобҳо бо шарикони тиҷоратӣ ва мақомоти андоз ҷиҳати пешгирии ҷаримаҳо</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-restore-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-restore', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 3. Юридические консультации -->
@@ -128,7 +128,7 @@
                         <li>Кумаки ҳуқуқӣ ва ташхиси қарордодҳои корпоративӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-legal-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-legal', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 4. Ведение финансового и кадрового учета -->
@@ -150,7 +150,7 @@
                         <li>Барасмиятдарории рухсатиҳо, сафарҳои корӣ ва дастурамалҳои мансабӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-accounting-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-accounting', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 5. Услуги секретариата -->
@@ -171,7 +171,7 @@
                         <li>Берунсипорӣ (аутсорсинг)-и хизматрасониҳои котибот ва тарҷумаи ҳуқуқӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-secretariat-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-secretariat', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 6. Бизнес-консультации -->
@@ -191,7 +191,7 @@
                         <li>Банақшагирии молиявӣ ва таҳияи моделҳои рушд</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-consulting-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-consulting', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 7. Налоговые консультации -->
@@ -211,7 +211,7 @@
                         <li>Намояндагӣ аз манфиатҳо дар баҳсҳои андозӣ</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-tax-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-tax', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 8. Управленческий учет -->
@@ -232,7 +232,7 @@
                         <li>Аёниятсозии нишондиҳандаҳои молиявӣ барои моликон</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-management-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-management', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 9. Автоматизация бизнес-процессов -->
@@ -253,7 +253,7 @@
                         <li>Рақамикунонии бойгониҳо ва гардиши электронии санадҳо</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-automation-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-automation', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
 
             <!-- 10. Разработка бизнес-планов и ТЭО -->
@@ -275,7 +275,7 @@
                         <li>Мушоият ва ҳимояи нақшаи тиҷоратӣ дар гуфтушунидҳо бо сармоягузорон</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-business-plan-tj?lang=tj', 'tj'); ?>" class="service-card__link">Муфассал →</a>
+                <a href="<?php echo nk_link('/service-business-plan', 'tj'); ?>" class="service-card__link">Муфассал →</a>
             </div>
         </div>
     </div>

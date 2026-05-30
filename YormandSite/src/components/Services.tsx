@@ -12,7 +12,7 @@ const Services = () => {
         
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
           <div className="section-subtitle" style={{ justifyContent: 'center' }}>
-            {t('services.title')}
+            {t('services.subtitle')}
           </div>
           <h2>{t('services.title')}</h2>
         </div>
@@ -45,7 +45,7 @@ const Services = () => {
               }}
             >
               <div style={{
-                fontFamily: 'Onest',
+                fontFamily: 'Montserrat',
                 fontSize: '2.5rem',
                 color: 'var(--teal)',
                 opacity: 0.4,

@@ -2,7 +2,7 @@
 /**
  * Template Name: Privacy Policy (TJ)
  */
-get_header(); ?>
+get_header(); global $current_lang;  ?>
 
 <main class="legal-page">
     <!-- ═══════════ CINEMATIC HERO ═══════════ -->

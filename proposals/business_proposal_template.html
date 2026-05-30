@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Коммерческое предложение — {{CLIENT_NAME}} | Webistan.Luxury</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables & Theme Setup */
+    :root {
+      --navy: #06122c;
+      --navy-light: #0d1e3d;
+      --cyan: #00b4d8;
+      --cyan-hover: #0096c7;
+      --cyan-light: rgba(0, 180, 216, 0.07);
+      --gold: #C9A84C;
+      --gold-dark: #b08f35;
+      --gold-light: #faf6eb;
+      --text-primary: #06122c;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --bg-body: #f3f4f6;
+      --bg-page: #ffffff;
+      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      
+      /* A4 Dimensions */
+      --page-width: 210mm;
+      --page-height: 297mm;
+    }
+
+    /* CSS Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding-top: 20px; /* Space on screen when top navbar is removed */
+      transition: background-color 0.3s ease;
+    }
+
+    /* Hide standard nav-bar */
+    .nav-bar {
+      display: none !important;
+    }
+
+    /* -------------------------------------------------------------
+       NAVIGATION BAR (SCREEN ONLY)
+       ------------------------------------------------------------- */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(6, 18, 44, 0.08);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      font-weight: 800;
+      font-size: 18px;
+      border: 1px solid var(--cyan);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--navy);
+    }
+
+    .brand-title span {
+      color: var(--cyan);
+    }
+
+    .brand-subtitle {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      background: rgba(0, 180, 216, 0.05);
+      border: 1px solid rgba(0, 180, 216, 0.15);
+      border-radius: 30px;
+      padding: 3px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .lang-btn.active {
+      background: var(--cyan);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 180, 216, 0.3);
+    }
+
+    /* Action Buttons */
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(6, 18, 44, 0.15);
+    }
+
+    .btn-action:hover {
+      background: var(--cyan);
+      box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
+    }
+
+    /* -------------------------------------------------------------
+       A4 PROPOSAL PAGE CONTAINERS
+       ------------------------------------------------------------- */
+    .proposal-container {
+      max-width: var(--page-width);
+      margin: 20px auto 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .page {
+      background-color: var(--bg-page);
+      width: var(--page-width);
+      height: var(--page-height);
+      position: relative;
+      padding: 24mm 20mm 20mm; /* Added more internal breathing room */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    /* Language Show/Hide Settings */
+    body.lang-ru .lang-tj-only { display: none !important; }
+    body.lang-tj .lang-ru-only { display: none !important; }
+
+    /* -------------------------------------------------------------
+       HEADER & FOOTER (A4 PRINT PAGES STYLE)
+       ------------------------------------------------------------- */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 18px;
+      margin-bottom: 30px; /* Added breathing room */
+    }
+
+    .page-header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-header-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--navy);
+    }
+    .page-header-brand span { color: var(--cyan); }
+    .page-header-tagline {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .page-header-meta {
+      text-align: right;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .page-header-meta span {
+      color: var(--cyan);
+    }
+
+    .page-footer {
+      border-top: 1px solid rgba(6, 18, 44, 0.08);
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .page-footer-left {
+      letter-spacing: 0.5px;
+    }
+
+    .page-footer-right {
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 1px;
+    }
+
+    /* -------------------------------------------------------------
+       PAGE 1 CONTENT (TITLE & META & TECH SPEC)
+       ------------------------------------------------------------- */
+    .title-area {
+      text-align: center;
+      padding: 15px 0 35px; /* Added breathing room */
+      flex-grow: 0;
+    }
+
+    .badge-proposal {
+      display: inline-block;
+      background: var(--cyan-light);
+      border: 1px solid rgba(0, 180, 216, 0.2);
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 30px;
+      margin-bottom: 15px;
+    }
+
+    .proposal-main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 21pt;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    /* Meta Cards Grid */
+    .meta-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 35px; /* Added breathing room */
+    }
+
+    .meta-card {
+      background: var(--cyan-light);
+      border: 1px solid rgba(0, 180, 216, 0.15);
+      border-radius: 8px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .meta-card-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .meta-card-value {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.35;
+    }
+
+    /* Intro Alert Box */
+    .intro-alert {
+      background: linear-gradient(135deg, #f8fafc 0%, var(--cyan-light) 100%);
+      border-left: 4px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 35px; /* Added breathing room */
+    }
+
+    .intro-alert p {
+      font-size: 11.5px;
+      color: var(--text-primary);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .intro-alert .highlight-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      background: var(--navy);
+      color: var(--cyan);
+      padding: 5px 14px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+    }
+
+    /* Section Title Standard */
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px; /* Added breathing room */
+    }
+
+    .sec-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sec-title-text {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--navy);
+    }
+
+    .sec-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(6, 18, 44, 0.15), transparent);
+    }
+
+    /* Tech Spec Grid */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px; /* Added breathing room */
+      margin-bottom: 10px;
+    }
+
+    .tech-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition-smooth);
+    }
+
+    .tech-item:hover {
+      border-color: var(--cyan);
+      background: #ffffff;
+    }
+
+    .tech-icon {
+      font-size: 16px;
+      background: var(--cyan-light);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--cyan);
+    }
+
+    .tech-info {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.35;
+    }
+
+    /* -------------------------------------------------------------
+       PAGE 2 CONTENT (PRICING & TABLES)
+       ------------------------------------------------------------- */
+    .pricing-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 25px; /* Added breathing room */
+    }
+
+    /* Premium Table */
+    .table-container {
+      border: 1px solid rgba(6, 18, 44, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px; /* Added breathing room */
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .price-table th {
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 12px 14px; /* Added breathing room */
+    }
+
+    .price-table th:nth-child(1) { width: 28%; }
+    .price-table th:nth-child(2) { width: 52%; }
+    .price-table th:nth-child(3) { width: 20%; text-align: right; }
+
+    .price-table td {
+      padding: 12px 14px; /* Added breathing room */
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      vertical-align: top;
+      background: #ffffff;
+    }
+
+    .price-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price-table tr:hover td {
+      background: #fafbfd;
+    }
+
+    .prod-title {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .prod-desc {
+      color: var(--text-muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .price-cell {
+      text-align: right;
+      font-weight: 700;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .price-cell .old-price {
+      font-size: 10px;
+      color: #94a3b8;
+      text-decoration: line-through;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .price-cell .new-price {
+      color: var(--navy);
+      font-size: 12px;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .price-cell .badge-included {
+      background: var(--cyan-light);
+      color: var(--cyan);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    .price-cell .badge-free {
+      background: #d4edda;
+      color: #155724;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    /* Final Investment Box */
+    .final-box {
+      background: var(--gold-light);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: 8px;
+      padding: 16px 24px; /* Added breathing room */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .final-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .final-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-dark);
+      letter-spacing: 1px;
+    }
+
+    .final-subtext {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .final-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .final-old-price {
+      font-size: 12px;
+      color: #94a3b8;
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+
+    .final-new-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .final-new-price span {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-savings {
+      background: #d4edda;
+      color: #155724;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* -------------------------------------------------------------
+       PAGE 3 CONTENT (ROI & TIMELINE & NEXT STEPS)
+       ------------------------------------------------------------- */
+    .roi-desc {
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: 20px; /* Added breathing room */
+    }
+
+    /* ROI Cards */
+    .roi-box-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px; /* Added breathing room */
+      margin-bottom: 30px; /* Added breathing room */
+    }
+
+    .roi-box-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 15px 12px;
+      text-align: center;
+      background: #f8fafc;
+      transition: var(--transition-smooth);
+    }
+
+    .roi-box-card:hover {
+      border-color: var(--cyan);
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .roi-box-number {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+
+    .roi-box-desc {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ROI Dynamic Calculator (Screen only, beautifully styled) */
+    .roi-calculator {
+      background: var(--cyan-light);
+      border: 1px solid rgba(0, 180, 216, 0.15);
+      border-radius: 8px;
+      padding: 14px 18px; /* Added breathing room */
+      margin-bottom: 30px; /* Added breathing room */
+    }
+
+    .roi-calc-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .roi-slider-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .roi-slider {
+      flex: 1;
+      height: 4px;
+      background: #cbd5e1;
+      outline: none;
+      border-radius: 2px;
+      -webkit-appearance: none;
+    }
+
+    .roi-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cyan);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .roi-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .roi-calc-result {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .roi-calc-result span {
+      color: var(--cyan);
+    }
+
+    /* Timeline Horizontal (Now 2 Days, 2 Columns) */
+    .timeline-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      gap: 15px; /* Added breathing room */
+      margin-bottom: 30px; /* Added breathing room */
+    }
+
+    .tl-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      transition: var(--transition-smooth);
+    }
+
+    .tl-card:hover {
+      border-color: var(--cyan);
+      background: #ffffff;
+    }
+
+    .tl-card-header {
+      display: inline-block;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .tl-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .tl-card-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Next step text */
+    .next-step-box {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 25px; /* Added breathing room */
+      background: #fafafa;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #f0f0f0;
+    }
+
+    /* Bottom Contact block & Signature area */
+    .bottom-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 15px; /* Added breathing room */
+    }
+
+    .contacts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .contact-title {
+      font-size: 9px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 1px;
+    }
+
+    .contact-item {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    
+    .contact-item a {
+      color: var(--navy);
+      text-decoration: none;
+    }
+    
+    .contact-item a:hover {
+      color: var(--cyan);
+    }
+
+    .signature-grid {
+      display: flex;
+      gap: 30px;
+    }
+
+    .signature-line {
+      width: 140px;
+      text-align: center;
+    }
+
+    .sig-line-top {
+      border-bottom: 1px solid var(--text-muted);
+      height: 30px;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .sig-stamp {
+      position: absolute;
+      bottom: -2px;
+      right: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: rgba(0, 180, 216, 0.25);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .sig-label {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+
+
+    /* -------------------------------------------------------------
+       PRINT MEDIA QUERY (CRITICAL FOR PERFECT A4 PDF)
+       ------------------------------------------------------------- */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        padding-top: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .proposal-container {
+        margin: 0 !important;
+        gap: 0 !important;
+      }
+      .page {
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        break-after: page;
+        width: var(--page-width) !important;
+        height: var(--page-height) !important;
+        padding: 24mm 20mm 20mm !important;
+      }
+    }
+  </style>
+</head>
+<body class="lang-ru">
+
+
+
+  <!-- Sticky Navbar (Screen only) -->
+  <nav class="nav-bar no-print">
+    <a href="#" class="nav-brand">
+      <div class="brand-logo-circle">W</div>
+      <div class="brand-text">
+        <div class="brand-title">Webistan<span>.Luxury</span></div>
+        <div class="brand-subtitle">Digital Agency</div>
+      </div>
+    </a>
+
+    <div class="nav-controls">
+      <!-- Language Buttons -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('ru')">Русский</button>
+        <button class="lang-btn" onclick="setLanguage('tj')">Тоҷикӣ</button>
+      </div>
+
+      <!-- Print/Save PDF Button -->
+      <button class="btn-action" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span class="lang-ru-only">Сохранить PDF</span>
+        <span class="lang-tj-only">Захира ба PDF</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Proposal Pages Container -->
+  <div class="proposal-container">
+
+    <!-- =================================================================
+         RUSSIAN VERSION (PAGES 1, 2, 3)
+         ================================================================= -->
+    <div class="proposal-ru">
+      
+      <!-- PAGE 1 (RU) -->
+      <div class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="page-header-logo">
+            <div class="brand-logo-circle" style="width: 32px; height: 32px; font-size: 15px;">W</div>
+            <div>
+              <div class="page-header-brand">Webistan<span>.Luxury</span></div>
+              <div class="page-header-tagline">Web Studio</div>
+            </div>
+          </div>
+          <div class="page-header-meta">
+            <span>Коммерческое</span> предложение
+          </div>
+        </header>
+
+        <!-- Title block -->
+        <div class="title-area">
+          <div class="badge-proposal">Разработка цифровой инфраструктуры</div>
+          <h1 class="proposal-main-title">{{PROJECT_NAME_RU}} «{{CLIENT_NAME}}»</h1>
+        </div>
+
+        <!-- Meta info grid -->
+        <div class="meta-cards-grid">
+          <div class="meta-card">
+            <div class="meta-card-label">Для кого</div>
+            <div class="meta-card-value">Руководству компании «{{CLIENT_NAME}}»</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-card-label">От кого</div>
+            <div class="meta-card-value">Фахриддин Усмонов, Webistan.Luxury</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-card-label">Дата</div>
+            <div class="meta-card-value">{{PROPOSAL_DATE_RU}}</div>
+          </div>
+          <div class="meta-card" style="background: var(--gold-light); border-color: rgba(201, 168, 76, 0.3);">
+            <div class="meta-card-label" style="color: var(--gold-dark);">Срок действия</div>
+            <div class="meta-card-value">7 дней</div>
+          </div>
+        </div>
+
+        <!-- Intro Text -->
+        <div class="intro-alert">
+          <p>
+            Мы проанализировали присутствие вашей клиники в медиапространстве и обратили внимание на вашу рекламную кампанию в Facebook. Для конвертации этого трафика в постоянных пациентов нами уже спроектировано и реализовано готовое решение — рабочий сайт доступен по адресу и готов к переносу на постоянный домен.
+          </p>
+          <a href="https://{{DEMO_URL}}" target="_blank" class="highlight-link">{{DEMO_URL}}</a>
+        </div>
+
+        <!-- Tech Specs Section -->
+        <div>
+          <div class="sec-header">
+            <div class="sec-number">1</div>
+            <div class="sec-title-text">Техническая спецификация проекта</div>
+            <div class="sec-line"></div>
+          </div>
+
+          <div class="tech-grid">
+            <div class="tech-item">
+              <div class="tech-icon">🎯</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Тип архитектуры</strong><br>
+                Высококонверсионный Landing Page
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">🌍</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Локализация</strong><br>
+                Адаптация на 3 языка (RU, TJ, EN)
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">🛡️</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Безопасность</strong><br>
+                SSL-соединение, ежедневный бэкап
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">⚡</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Срок развертывания</strong><br>
+                1–2 рабочих дня «под ключ»
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">📍</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Интеграция карт</strong><br>
+                Google Maps интерактивный проезд
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">📱</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Адаптивность</strong><br>
+                Полная оптимизация (iOS, Android)
+              </div>
+            </div>
+            <div class="tech-item" style="grid-column: span 2;">
+              <div class="tech-icon">📅</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Онлайн-запись</strong><br>
+                Встроенная форма записи на приём с выбором врача и времени
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Footer -->
+        <footer class="page-footer">
+          <div class="page-footer-left">WEBISTAN.LUXURY · Архитектура цифровых решений</div>
+          <div class="page-footer-right">01 / 06</div>
+        </footer>
+      </div>
+
+      <!-- PAGE 2 (RU) -->
+      <div class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="page-header-logo">
+            <div class="brand-logo-circle" style="width: 32px; height: 32px; font-size: 15px;">W</div>
+            <div>
+              <div class="page-header-brand">Webistan<span>.Luxury</span></div>
+              <div class="page-header-tagline">Web Studio</div>
+            </div>
+          </div>
+          <div class="page-header-meta">
+            RU · 02 · <span>{{CLIENT_NAME}}</span>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div>
+          <div class="sec-header" style="margin-bottom: 8px;">
+            <div class="sec-number">2</div>
+            <div class="sec-title-text">Структура инвестиций</div>
+            <div class="sec-line"></div>
+          </div>
+          
+          <div class="pricing-desc">
+            <strong>Комплексный пакет «под ключ»</strong><br>
+            В рамках маркетинговой кампании Webistan.Luxury полная стоимость разработки (4 718 сомони) оптимизирована до специального фиксированного предложения. Все позиции ниже включены в итоговую сумму.
+          </div>
+
+          <!-- Table structure -->
+          <div class="table-container">
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Продукт</th>
+                  <th>Детали и долгосрочные условия</th>
+                  <th style="text-align: right;">Стоимость</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="prod-title">Разработка Landing Page и локализация</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Проектирование структуры, копирайтинг, программирование, интеграция фирменного QR-кода, покупка и регистрация официального домена {{DOMAIN_NAME}}</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="old-price">{{OLD_PRICE_RU}}</span>
+                    <span class="new-price">{{PRICE_RU}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Корпоративная почта (5 аккаунтов)</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Настройка бизнес-почты на вашем домене для врачей и администрации. Примеры: director@{{DOMAIN_NAME}}, info@{{DOMAIN_NAME}}</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-included">Включено</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Google Бизнес и Навигация</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Создание, верификация и полное оформление аккаунта Google Бизнес. Синхронизация с Google Картами и сбор отзывов через QR-код</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-included">Включено</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Интеграция в экосистему allTj.online</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Бесплатная годовая подписка на новой элитной бизнес-платформе для туристов. Привлечение платежеспособных экспатов и гостей столицы</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-free">Бесплатно</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Высокоскоростной хостинг и домен</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Размещение сайта на сервере. Со 2-го года пролонгация хостинга и домена — всего 500 сомони в год</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-free">Бесплатно</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">VIP-поддержка, безопасность, Social Proof</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">8 часов технических работ ежемесячно (доработки, правки, обновления). Отзывы пациентов оперативно оформляются и внедряются в интерактивный блок сайта. Со 2-го года поддержка — 1 000 сомони в год</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-free">Бесплатно</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Total Investment -->
+          <div class="final-box">
+            <div class="final-left">
+              <div class="final-label">Итоговый объем инвестиций</div>
+              <div class="final-subtext">Разработка · домен · почта · 12 месяцев VIP-обслуживания</div>
+            </div>
+            <div class="final-right">
+              <div class="final-old-price">{{OLD_PRICE_RU}}</div>
+              <div class="badge-savings">Скидка {{DISCOUNT_RU}}</div>
+              <div class="final-new-price">3&nbsp;000&nbsp;<span>сомони</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Footer -->
+        <footer class="page-footer">
+          <div class="page-footer-left">WEBISTAN.LUXURY · Архитектура цифровых решений</div>
+          <div class="page-footer-right">02 / 06</div>
+        </footer>
+      </div>
+
+      <!-- PAGE 3 (RU) -->
+      <div class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="page-header-logo">
+            <div class="brand-logo-circle" style="width: 32px; height: 32px; font-size: 15px;">W</div>
+            <div>
+              <div class="page-header-brand">Webistan<span>.Luxury</span></div>
+              <div class="page-header-tagline">Web Studio</div>
+            </div>
+          </div>
+          <div class="page-header-meta">
+            RU · 03 · <span>{{CLIENT_NAME}}</span>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div>
+          <!-- ROI Section -->
+          <div class="sec-header" style="margin-bottom: 8px;">
+            <div class="sec-number">3</div>
+            <div class="sec-title-text">Почему эти инвестиции окупаются</div>
+            <div class="sec-line"></div>
+          </div>
+
+          <div class="roi-desc">
+            Средний чек на {{ROI_SERVICE_RU}} в вашей клинике — <strong>{{AVERAGE_CHECK_RU}}</strong>. Это значит, что весь годовой пакет цифровой инфраструктуры окупается уже с первого нового пациента, пришедшего через сайт.
+          </div>
+
+          <!-- ROI Cards -->
+          <div class="roi-box-grid">
+            <div class="roi-box-card" style="border-left: 3px solid var(--cyan);">
+              <div class="roi-box-number">1</div>
+              <div class="roi-box-desc"><strong>пациент</strong> с {{ROI_PROMOTION_RU}} полностью покрывает стоимость сайта</div>
+            </div>
+            <div class="roi-box-card" style="border-left: 3px solid var(--navy);">
+              <div class="roi-box-number">24/7</div>
+              <div class="roi-box-desc"><strong>сайт работает</strong> как круглосуточный администратор и принимает заявки</div>
+            </div>
+            <div class="roi-box-card" style="border-left: 3px solid var(--gold);">
+              <div class="roi-box-number">3</div>
+              <div class="roi-box-desc"><strong>языковых аудитории</strong>: жители Душанбе, туристы и экспаты</div>
+            </div>
+          </div>
+
+          <!-- ROI Calculator (Interactive Widget) -->
+          <div class="roi-calculator no-print">
+            <div class="roi-calc-title">Калькулятор прибыли (Брекеты, средний чек 3500 сомони)</div>
+            <div class="roi-slider-container">
+              <span style="font-size:8px; font-weight:700; color:var(--navy);">1</span>
+              <input type="range" min="1" max="30" value="5" class="roi-slider" id="ru-roi-slider" oninput="calcROI('ru')">
+              <span style="font-size:8px; font-weight:700; color:var(--navy);">30</span>
+            </div>
+            <div class="roi-calc-result">
+              <div>Пациентов: <span id="ru-calc-patients">5</span></div>
+              <div>Прогноз дохода: <span id="ru-calc-revenue">17 500</span> сомони</div>
+              <div>Окупаемость: <span id="ru-calc-roi">583%</span></div>
+            </div>
+          </div>
+
+          <!-- Timeline Section -->
+          <div class="sec-header" style="margin-bottom: 8px;">
+            <div class="sec-number">4</div>
+            <div class="sec-title-text">Этапы запуска</div>
+            <div class="sec-line"></div>
+          </div>
+
+          <div class="timeline-container">
+            <div class="tl-card">
+              <div class="tl-card-header">День 1</div>
+              <div class="tl-card-title">Согласование и регистрация</div>
+              <div class="tl-card-desc">Подписание договора, покупка домена {{DOMAIN_NAME}}, настройка хостинга и почты</div>
+            </div>
+            <div class="tl-card">
+              <div class="tl-card-header">День 2</div>
+              <div class="tl-card-title">Развёртывание и запуск</div>
+              <div class="tl-card-desc">Перенос сайта, SSL-сертификат, Google Бизнес, настройка почт и передача доступов, старт поддержки</div>
+            </div>
+          </div>
+
+          <!-- Next Step -->
+          <div class="next-step-box">
+            Для запуска проекта свяжитесь с нами любым удобным способом. Зафиксированная стоимость {{PRICE_RU}} действительна до <strong>{{EXPIRY_DATE_RU}}</strong> После этой даты предложение пересчитывается по стандартному тарифу. Если необходимы иные конфигурации или масштабирование проекта, мы предоставим новый расчёт в течение 1 часа.
+          </div>
+        </div>
+
+        <!-- Bottom Contacts & Signatures -->
+        <div class="bottom-block">
+          <div class="contacts-list">
+            <div class="contact-title">Контакты</div>
+            <div class="contact-item">Сайт: <a href="https://webistan.luxury" target="_blank">webistan.luxury</a></div>
+            <div class="contact-item">Email: <a href="mailto:director@webistan.luxury">director@webistan.luxury</a></div>
+            <div class="contact-item">Telegram/WhatsApp: по запросу</div>
+          </div>
+
+          <div class="signature-grid">
+            <div class="signature-line">
+              <div class="sig-line-top">
+                <span class="sig-stamp">Усмонов Ф.</span>
+              </div>
+              <div class="sig-label">Исполнитель</div>
+              <div class="sig-label" style="font-size: 9.5px; font-weight: 500;">Ф. Усмонов / Webistan</div>
+            </div>
+            <div class="signature-line">
+              <div class="sig-line-top"></div>
+              <div class="sig-label">Заказчик</div>
+              <div class="sig-label" style="font-size: 9.5px; font-weight: 500;">Руководство {{CLIENT_NAME}}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Footer -->
+        <footer class="page-footer">
+          <div class="page-footer-left">WEBISTAN.LUXURY · Архитектура цифровых решений</div>
+          <div class="page-footer-right">03 / 06</div>
+        </footer>
+      </div>
+
+    </div>
+
+    <!-- =================================================================
+         TAJIK VERSION (PAGES 4, 5, 6)
+         ================================================================= -->
+    <div class="proposal-tj">
+      
+      <!-- PAGE 4 (TJ) -->
+      <div class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="page-header-logo">
+            <div class="brand-logo-circle" style="width: 32px; height: 32px; font-size: 15px;">W</div>
+            <div>
+              <div class="page-header-brand">Webistan<span>.Luxury</span></div>
+              <div class="page-header-tagline">Меъмории қарорҳои рақамӣ</div>
+            </div>
+          </div>
+          <div class="page-header-meta">
+            <span>Пешниҳоди</span> тиҷоратӣ
+          </div>
+        </header>
+
+        <!-- Title block -->
+        <div class="title-area">
+          <div class="badge-proposal">Таҳияи инфрасохтори рақамӣ</div>
+          <h1 class="proposal-main-title">{{PROJECT_NAME_TJ}} «{{CLIENT_NAME}}»</h1>
+        </div>
+
+        <!-- Meta info grid -->
+        <div class="meta-cards-grid">
+          <div class="meta-card">
+            <div class="meta-card-label">Барои кӣ</div>
+            <div class="meta-card-value">Роҳбарияти ширкати «{{CLIENT_NAME}}»</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-card-label">Аз кӣ</div>
+            <div class="meta-card-value">Фахриддин Усмонов, Webistan.Luxury</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-card-label">Сана</div>
+            <div class="meta-card-value">{{PROPOSAL_DATE_TJ}}</div>
+          </div>
+          <div class="meta-card" style="background: var(--gold-light); border-color: rgba(201, 168, 76, 0.3);">
+            <div class="meta-card-label" style="color: var(--gold-dark);">Эътибор</div>
+            <div class="meta-card-value">7 рӯз</div>
+          </div>
+        </div>
+
+        <!-- Intro Text -->
+        <div class="intro-alert">
+          <p>
+            Мо ҳузури клиникаи шуморо дар фазои рақамӣ таҳлил намуда, ба маъракаи таблиғотии шумо дар Facebook таваҷҷӯҳ зоҳир кардем. Барои табдил додани ин трафик ба мизоҷони доимӣ, мо сомонаи омодаи кориро лоиҳакашӣ ва амалӣ намудем — сомонаи кории шумо дар суроғаи дастрас ва барои интиқол ба домени доимӣ омода аст.
+          </p>
+          <a href="https://{{DEMO_URL}}" target="_blank" class="highlight-link">{{DEMO_URL}}</a>
+        </div>
+
+        <!-- Tech Specs Section -->
+        <div>
+          <div class="sec-header">
+            <div class="sec-number">1</div>
+            <div class="sec-title-text">Мушаххасоти техникии лоиҳа</div>
+            <div class="sec-line"></div>
+          </div>
+
+          <div class="tech-grid">
+            <div class="tech-item">
+              <div class="tech-icon">🎯</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Намуди сохтор</strong><br>
+                Саҳифаи фурӯши конверсияи баланд (Landing Page)
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">🌍</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Локализатсия</strong><br>
+                Мутобиқсозии пурра ба 3 забон (RU, TJ, EN)
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">🛡️</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Протоколи амният</strong><br>
+                Пайвасти бехатари SSL, нусхабардории ҳаррӯза
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">⚡</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Мӯҳлати роҳандозӣ</strong><br>
+                1–2 рӯзи корӣ «зери калид»
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">📍</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Ҳамгироии харитаҳо</strong><br>
+                Харитаи интерактивии ҳаракат бо Google Maps
+              </div>
+            </div>
+            <div class="tech-item">
+              <div class="tech-icon">📱</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Мутобиқшавӣ</strong><br>
+                Оптимизатсияи пурра ба дастгоҳҳои мобилӣ
+              </div>
+            </div>
+            <div class="tech-item" style="grid-column: span 2;">
+              <div class="tech-icon">📅</div>
+              <div class="tech-info">
+                <strong style="color: var(--navy)">Сабти онлайн</strong><br>
+                Формаи дарунсохти сабти ном ба қабул бо интихоби табиб ва вақт
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Footer -->
+        <footer class="page-footer">
+          <div class="page-footer-left">WEBISTAN.LUXURY · Меъмории қарорҳои рақамӣ</div>
+          <div class="page-footer-right">04 / 06</div>
+        </footer>
+      </div>
+
+      <!-- PAGE 5 (TJ) -->
+      <div class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="page-header-logo">
+            <div class="brand-logo-circle" style="width: 32px; height: 32px; font-size: 15px;">W</div>
+            <div>
+              <div class="page-header-brand">Webistan<span>.Luxury</span></div>
+              <div class="page-header-tagline">Web Studio</div>
+            </div>
+          </div>
+          <div class="page-header-meta">
+            TJ · 05 · <span>{{CLIENT_NAME}}</span>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div>
+          <div class="sec-header" style="margin-bottom: 8px;">
+            <div class="sec-number">2</div>
+            <div class="sec-title-text">Сохтори сармоягузорӣ</div>
+            <div class="sec-line"></div>
+          </div>
+          
+          <div class="pricing-desc">
+            <strong>Бастаи комплексӣ «зери калид»</strong><br>
+            Дар доираи маъракаи маркетингии Webistan.Luxury арзиши пурраи таҳия (4 718 сомонӣ) то пешниҳоди махсуси собит ороиш дода шуд. Ҳамаи мавқеъҳои зерин ба маблағи ниҳоӣ дохиланд.
+          </div>
+
+          <!-- Table structure -->
+          <div class="table-container">
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th>Маҳсулот</th>
+                  <th>Тафсилот ва шартҳои дарозмуддат</th>
+                  <th style="text-align: right;">Арзиш</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="prod-title">Таҳияи Landing Page ва локализатсия</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Лоиҳакашии сохтор, копирайтинг, барномасозӣ, ҳамгироии QR-коди фирмавӣ, харид ва бақайдгирии номи расмии домен {{DOMAIN_NAME}}</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="old-price">{{OLD_PRICE_TJ}}</span>
+                    <span class="new-price">{{PRICE_TJ}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Почтаи корпоративӣ (5 аккаунт)</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Танзими почтаи тиҷоратӣ дар домени шумо барои табибон ва маъмурият. Намунаҳо: director@{{DOMAIN_NAME}}, info@{{DOMAIN_NAME}}</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-included">Дохил шуд</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Google Бизнес ва Навигатсия</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Сохтан, верификатсия ва ороиши пурраи аккаунти Google Бизнес. Пайвастсозӣ бо Google Харитаҳо ва ҷамъоварии тавсияҳо тавассути QR-код</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-included">Дохил шуд</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Ҳамгироӣ ба экосистемаи allTj.online</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Обунаи ройгони яксола ба платформаи элитаи тиҷоратӣ барои сайёҳон. Ҷалби сегменти қобили пардохти сайёҳон ва меҳмонон</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-free">Ройгон</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">Хостинги босуръат ва домен</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">Ҷойгиркунии сомона дар сервер. Аз соли 2-юм тамдиди хостинг ва домен — ҳамагӣ 500 сомонӣ дар як сола</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-free">Ройгон</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="prod-title">VIP-дастгирӣ, амният, Social Proof</div>
+                  </td>
+                  <td>
+                    <div class="prod-desc">8 соат корҳои техникӣ дар як моҳ (тағйирот, ислоҳот, навсозӣ). Шарҳҳои беморон фавран ба блоки интерактивии сомона илова мешаванд. Аз соли 2-юм дастгирӣ — 1 000 сомонӣ дар як сол</div>
+                  </td>
+                  <td class="price-cell">
+                    <span class="badge-free">Ройгон</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Total Investment -->
+          <div class="final-box">
+            <div class="final-left">
+              <div class="final-label">Ҳаҷми ниҳоии сармоягузорӣ</div>
+              <div class="final-subtext">Таҳия · домен · почта · 12 моҳи хизматрасонии VIP</div>
+            </div>
+            <div class="final-right">
+              <div class="final-old-price">{{OLD_PRICE_TJ}}</div>
+              <div class="badge-savings">Танзил {{DISCOUNT_RU}}</div>
+              <div class="final-new-price">3&nbsp;000&nbsp;<span>сомонӣ</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Footer -->
+        <footer class="page-footer">
+          <div class="page-footer-left">WEBISTAN.LUXURY · Меъмории қарорҳои рақамӣ</div>
+          <div class="page-footer-right">05 / 06</div>
+        </footer>
+      </div>
+
+      <!-- PAGE 6 (TJ) -->
+      <div class="page">
+        <!-- Page Header -->
+        <header class="page-header">
+          <div class="page-header-logo">
+            <div class="brand-logo-circle" style="width: 32px; height: 32px; font-size: 15px;">W</div>
+            <div>
+              <div class="page-header-brand">Webistan<span>.Luxury</span></div>
+              <div class="page-header-tagline">Web Studio</div>
+            </div>
+          </div>
+          <div class="page-header-meta">
+            TJ · 06 · <span>{{CLIENT_NAME}}</span>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div>
+          <!-- ROI Section -->
+          <div class="sec-header" style="margin-bottom: 8px;">
+            <div class="sec-number">3</div>
+            <div class="sec-title-text">Чаро ин сармоягузории хуб аст?</div>
+            <div class="sec-line"></div>
+          </div>
+
+          <div class="roi-desc">
+            Чеки миёна барои {{ROI_SERVICE_TJ}} дар клиникаи шумо — <strong>{{AVERAGE_CHECK_TJ}}</strong>. Ин маънои онро дорад, ки бастаи яксолаи инфрасохтори рақамӣ аз ҳамон аввалин беморе, ки тавассути сомона меояд, пурра ҳосил мешавад.
+          </div>
+
+          <!-- ROI Cards -->
+          <div class="roi-box-grid">
+            <div class="roi-box-card" style="border-left: 3px solid var(--cyan);">
+              <div class="roi-box-number">1</div>
+              <div class="roi-box-desc"><strong>бемор</strong> бо {{ROI_PROMOTION_TJ}} арзиши сомонаро пурра мепӯшонад</div>
+            </div>
+            <div class="roi-box-card" style="border-left: 3px solid var(--navy);">
+              <div class="roi-box-number">24/7</div>
+              <div class="roi-box-desc"><strong>сомона ҳамчун</strong> маъмури шабонарӯзӣ кор карда, дархостҳоро қабул мекунад</div>
+            </div>
+            <div class="roi-box-card" style="border-left: 3px solid var(--gold);">
+              <div class="roi-box-number">3</div>
+              <div class="roi-box-desc"><strong>аудиторияи забонӣ</strong>: сокинони Душанбе, сайёҳон ва экспатҳо</div>
+            </div>
+          </div>
+
+          <!-- ROI Calculator (Interactive Widget) -->
+          <div class="roi-calculator no-print">
+            <div class="roi-calc-title">Ҳисобкунаки даромад (Брекетҳо, чеки миёна 3500 сомонӣ)</div>
+            <div class="roi-slider-container">
+              <span style="font-size:8px; font-weight:700; color:var(--navy);">1</span>
+              <input type="range" min="1" max="30" value="5" class="roi-slider" id="tj-roi-slider" oninput="calcROI('tj')">
+              <span style="font-size:8px; font-weight:700; color:var(--navy);">30</span>
+            </div>
+            <div class="roi-calc-result">
+              <div>Мизоҷон: <span id="tj-calc-patients">5</span></div>
+              <div>Пешгӯии даромад: <span id="tj-calc-revenue">17 500</span> сомонӣ</div>
+              <div>Муовизаи хароҷот: <span id="tj-calc-roi">583%</span></div>
+            </div>
+          </div>
+
+          <!-- Timeline Section -->
+          <div class="sec-header" style="margin-bottom: 8px;">
+            <div class="sec-number">4</div>
+            <div class="sec-title-text">Марҳилаҳои роҳандозӣ</div>
+            <div class="sec-line"></div>
+          </div>
+
+          <div class="timeline-container">
+            <div class="tl-card">
+              <div class="tl-card-header">Рӯзи 1</div>
+              <div class="tl-card-title">Мувофиқа ва бақайдгирӣ</div>
+              <div class="tl-card-desc">Имзои шартнома, хариди домени {{DOMAIN_NAME}}, танзими хостинг ва почта</div>
+            </div>
+            <div class="tl-card">
+              <div class="tl-card-header">Рӯзи 2</div>
+              <div class="tl-card-title">Роҳандозӣ ва оғози кор</div>
+              <div class="tl-card-desc">Интиқоли сомона, сертификати SSL, Google Бизнес, танзими почтаҳо, супоридани дастрасӣ ва оғози дастгирӣ</div>
+            </div>
+          </div>
+
+          <!-- Next Step -->
+          <div class="next-step-box">
+            Барои оғози лоиҳа бо мо бо тарзи муносиб дар тамос шавед. Арзиши собитшудаи {{PRICE_TJ}} то <strong>{{EXPIRY_DATE_TJ}}</strong> эътибор дорад. Пас аз ин сана пешниҳод аз рӯи тарифи стандартӣ аз нав ҳисоб мешавад. Агар конфигуратсияҳои дигар ё васеъкунии лоиҳа лозим бошанд, мо дар давоми 1 соат ҳисоботи навро пешниҳод мекунем.
+          </div>
+        </div>
+
+        <!-- Bottom Contacts & Signatures -->
+        <div class="bottom-block">
+          <div class="contacts-list">
+            <div class="contact-title">Тамосҳо</div>
+            <div class="contact-item">Сомона: <a href="https://webistan.luxury" target="_blank">webistan.luxury</a></div>
+            <div class="contact-item">Email: <a href="mailto:director@webistan.luxury">director@webistan.luxury</a></div>
+            <div class="contact-item">Telegram/WhatsApp: бо дархост</div>
+          </div>
+
+          <div class="signature-grid">
+            <div class="signature-line">
+              <div class="sig-line-top">
+                <span class="sig-stamp">Усмонов Ф.</span>
+              </div>
+              <div class="sig-label">Иҷрокунанда</div>
+              <div class="sig-label" style="font-size: 9.5px; font-weight: 500;">Ф. Усмонов / Webistan</div>
+            </div>
+            <div class="signature-line">
+              <div class="sig-line-top"></div>
+              <div class="sig-label">Фармоишгар</div>
+              <div class="sig-label" style="font-size: 9.5px; font-weight: 500;">Роҳбарияти {{CLIENT_NAME}}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Footer -->
+        <footer class="page-footer">
+          <div class="page-footer-left">WEBISTAN.LUXURY · Меъмории қарорҳои рақамӣ</div>
+          <div class="page-footer-right">06 / 06</div>
+        </footer>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Language control function
+    function setLanguage(lang) {
+      document.body.className = 'lang-' + lang;
+      
+      // Update buttons active class
+      const buttons = document.querySelectorAll('.lang-btn');
+      buttons.forEach(btn => {
+        if (btn.textContent.toLowerCase().includes(lang === 'ru' ? 'рус' : 'тоҷ')) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Dynamic ROI Calculator logic
+    function calcROI(lang) {
+      const slider = document.getElementById(lang + '-roi-slider');
+      const val = parseInt(slider.value);
+      
+      const pricePerPatient = 3500;
+      const projectCost = 3000;
+      const totalRevenue = val * pricePerPatient;
+      const roiPercent = Math.round((totalRevenue / projectCost) * 100);
+
+      // Format with spaces
+      const formattedRev = totalRevenue.toLocaleString('ru-RU');
+
+      // Update text in elements
+      document.getElementById(lang + '-calc-patients').textContent = val;
+      document.getElementById(lang + '-calc-revenue').textContent = formattedRev;
+      document.getElementById(lang + '-calc-roi').textContent = roiPercent + '%';
+    }
+
+    // Run initial calculations
+    calcROI('ru');
+    calcROI('tj');
+  </script>
+
+</body>
+</html>

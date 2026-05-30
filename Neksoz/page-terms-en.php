@@ -2,7 +2,7 @@
 /**
  * Template Name: Terms of Use (EN)
  */
-get_header(); ?>
+get_header(); global $current_lang;  ?>
 
 <main class="legal-page">
     <!-- ═══════════ CINEMATIC HERO ═══════════ -->

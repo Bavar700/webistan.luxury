@@ -1,0 +1,25 @@
+<svg width="112" height="29" viewBox="25 6 112 30" xmlns="http://www.w3.org/2000/svg">
+    <!-- allTj.online Official Logo - WordPress Optimized -->
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;family=Abril+Fatface&amp;display=swap');
+        </style>
+        <clipPath id="final_clip_wp">
+            <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+        </clipPath>
+        <linearGradient id="final_grad_wp" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(25)">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+            <stop offset="50%" stop-color="rgba(255,255,255,0.9)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Base Layer -->
+    <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="#EFBF04" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+    <text x="81" y="33" font-family="'Abril Fatface', serif" font-weight="400" font-size="7" fill="#475569" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">Your Local Guide To Tajikistan</text>
+    
+    <!-- Animation Layer: Using the most standard <animate> tag possible -->
+    <rect x="-112" y="0" width="112" height="40" fill="url(#final_grad_wp)" clip-path="url(#final_clip_wp)">
+        <animate attributeName="x" from="-112" to="112" dur="6s" repeatCount="indefinite" />
+    </rect>
+</svg>

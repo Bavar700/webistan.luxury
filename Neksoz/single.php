@@ -153,7 +153,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     </div>
 
                     <div style="margin-top: 70px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
-                        <a href="<?php echo home_url($d['news_base_url']); ?>" class="btn btn--primary btn-animated" style="padding: 14px 28px; font-size: 11px;">
+                        <a href="<?php echo nk_link($d['news_base_url'], $current_lang); ?>" class="btn btn--primary btn-animated" style="padding: 14px 28px; font-size: 11px;">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px; transform: scaleX(-1);"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             <?php echo $d['news_link_text']; ?>
                         </a>
@@ -215,7 +215,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <h4 style="font-size: 1.25rem; font-weight: 900; color: #ffffff; margin-bottom: 20px;"><?php echo $d['expert_help_title']; ?></h4>
                     <p style="font-size: 0.95rem; color: rgba(255,255,255,0.9); margin-bottom: 25px;"><?php echo $d['expert_help_text']; ?></p>
                     <div style="height: 3px; width: 60px; background: linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.4) 100%); margin-bottom: 30px; border-radius: 2px;"></div>
-                    <a href="<?php echo home_url($d['expert_help_url']); ?>" class="btn btn--primary btn-animated" style="background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4) !important; padding: 16px 30px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; width: auto; font-size: 11px;">
+                    <a href="<?php echo nk_link($d['expert_help_url'], $current_lang); ?>" class="btn btn--primary btn-animated" style="background: transparent !important; color: #ffffff !important; border: 1px solid rgba(255,255,255,0.4) !important; padding: 16px 30px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; width: auto; font-size: 11px;">
                         <?php echo $d['expert_help_btn']; ?>
                         <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>

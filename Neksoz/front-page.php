@@ -7,7 +7,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'en') {
     get_template_part('front-page', 'en');
     return;
 }
-get_header(); 
+get_header(); global $current_lang;  
 ?>
 <main id='primary' class='site-main'>
 <section class="hero">
@@ -321,7 +321,7 @@ get_header();
                     </div>
                     <div class="ceo-editorial__signature">Zoir Salimov</div>
                     <div class="ceo-editorial__footer">
-                        <a href="#" class="ceo-editorial__team-link">
+                        <a href="<?php echo nk_link('/team', 'ru'); ?>" class="ceo-editorial__team-link">
                             Познакомьтесь с нашей экспертной командой
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
@@ -330,6 +330,18 @@ get_header();
             </div>
         </div>
     </div> <!-- Closing container -->
+</section>
+
+<!-- Reviews Carousel Section -->
+<section id="reviews" class="section">
+    <div class="container">
+        <div class="section__header section__header--center">
+            <div class="section__label">Отзывы</div>
+            <h2 class="section__title section__title--huge">Что о нас говорят наши Клиенты</h2>
+            <p class="section__subtitle">Реальные кейсы и результаты сотрудничества с ведущими компаниями региона.</p>
+        </div>
+        <?php echo do_shortcode('[b2b_carousel]'); ?>
+    </div>
 </section>
 
 <!-- ═══════════ CTA — CRYSTAL ELEGANCE EDITION ═══════════ -->

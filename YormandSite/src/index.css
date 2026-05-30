@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Onest:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --navy: #0B1D32;
   --teal: #2BA5B5;
-  --gold: #C9A96E;
+  --navy: #0B1D32; /* Reverted to original dark background color */
+  --heading: #034577; /* Logo color for text/headings */
+  --gold: #C5A059;
   --white: #FFFFFF;
-  --ivory: #F8F9FB;
+  --ivory: #F8F9FA;
   --text-body: #4A5568;
-  --text-light: #8896A6;
-  --border: rgba(11, 29, 50, 0.06);
-  --shadow-sm: 0 4px 15px rgba(11, 29, 50, 0.03);
-  --shadow-md: 0 8px 30px rgba(11, 29, 50, 0.06);
-  --shadow-lg: 0 20px 60px rgba(11, 29, 50, 0.08);
+  --text-light: #718096;
+  --border: #E2E8F0;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -22,26 +23,41 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  font-family: 'Onest', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: var(--text-body);
   background-color: var(--white);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cormorant SC', serif;
-  color: var(--navy);
-  font-weight: 500;
-  line-height: 1.2;
+  color: var(--heading);
+  font-weight: 700;
+  line-height: 1.3;
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(3rem, 6vw, 5.5rem); }
-h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-family: 'Cormorant SC', serif;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem); /* Slightly smaller max size to prevent widows */
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: clamp(1.4rem, 3vw, 1.7rem); /* Slightly smaller max size */
+}
 
 p {
   font-size: 1.1rem;
@@ -54,7 +70,16 @@ p {
 }
 
 .section-padding {
-  padding: clamp(60px, 10vw, 120px) 0;
+  padding: 120px 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+  .section-subtitle {
+    justify-content: center;
+  }
 }
 
 .section-subtitle {
@@ -84,7 +109,7 @@ p {
   justify-content: center;
   padding: 15px 35px;
   border-radius: 60px;
-  font-family: 'Onest', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -94,6 +119,7 @@ p {
   transition: all 0.3s ease;
   border: 1px solid transparent;
   gap: 10px;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -141,7 +167,7 @@ p {
   color: var(--white);
   border: 1px solid var(--teal);
   border-radius: 50px;
-  font-family: 'Onest', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -149,6 +175,7 @@ p {
   text-decoration: none;
   transition: all 0.4s ease;
   animation: luxuryPulseTeal 2.5s infinite;
+  white-space: nowrap;
 }
 
 .btn-hero-primary:hover {
@@ -169,7 +196,7 @@ p {
   color: var(--teal);
   border: 1px solid var(--teal);
   border-radius: 50px;
-  font-family: 'Onest', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -188,20 +215,20 @@ p {
   box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(0, 0, 0, 0.1), 0 10px 25px rgba(43, 165, 181, 0.3);
 }
 
-.btn-gold {
+.btn-teal {
   background-color: transparent;
-  color: var(--gold);
-  border-color: var(--gold);
+  color: var(--teal);
+  border-color: var(--teal);
 }
 
-.btn-gold {
+.btn-teal {
   background-color: transparent;
-  color: var(--gold);
-  border-color: var(--gold);
+  color: var(--teal);
+  border-color: var(--teal);
 }
 
-.btn-gold:hover {
-  background-color: var(--gold);
+.btn-teal:hover {
+  background-color: var(--teal);
   color: var(--white);
 }
 
@@ -211,7 +238,7 @@ input, select, textarea {
   border: 1px solid var(--border);
   border-radius: 12px;
   background-color: var(--ivory);
-  font-family: 'Onest', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   color: var(--navy);
   margin-bottom: 20px;

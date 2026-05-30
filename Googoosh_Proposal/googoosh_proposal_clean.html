@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Коммерческое предложение — Googoosh Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --platinum: #1A1A1A;
+      --platinum-light: #2A2A2A;
+      --gold: #C5A059;
+      --gold-hover: #D4AF37;
+      --gold-light: rgba(197, 160, 89, 0.05);
+      --bg-body: #ffffff;
+      --text-main: #333333;
+      --text-muted: #777777;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      padding: 0;
+      margin: 0;
+    }
+
+    @page {
+      size: A4;
+      margin: 15mm 20mm; /* slightly tighter top/bottom margins to fix gaps */
+    }
+
+    .document {
+      width: 100%;
+      max-width: 210mm;
+      margin: 0 auto;
+      background: white;
+    }
+
+    /* Soft page break rules for natural flow */
+    .avoid-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+      margin-bottom: 8mm; /* natural spacing */
+    }
+
+    h1, h2, h3 { font-family: 'Cormorant', serif; color: var(--platinum); }
+    h1 { font-size: 26pt; line-height: 1.2; margin-bottom: 4mm; }
+    h2 { font-size: 16pt; margin-bottom: 4mm; border-bottom: 1px solid var(--gold); padding-bottom: 2mm; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .highlight { color: var(--gold); }
+    .muted { color: var(--text-muted); font-size: 9pt; text-transform: uppercase; letter-spacing: 2px;}
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--platinum);
+      padding-bottom: 4mm;
+      margin-bottom: 6mm;
+    }
+    .header-logo {
+      font-family: 'Cormorant', serif;
+      font-size: 22pt;
+      font-weight: 700;
+      color: var(--platinum);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .header-meta {
+      text-align: right;
+      font-size: 8.5pt;
+      color: var(--text-muted);
+    }
+
+    .intro-box {
+      background: var(--platinum);
+      color: white;
+      padding: 6mm 8mm;
+      border-radius: 8px;
+      margin-bottom: 6mm;
+      border-left: 6px solid var(--gold);
+    }
+    .intro-box p { font-size: 10.5pt; margin-bottom: 3mm; line-height: 1.5; }
+    .intro-box p:last-child { margin-bottom: 0; }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 6mm;
+    }
+    .feature-card {
+      border: 1px solid #EEEEEE;
+      border-radius: 8px;
+      padding: 4mm;
+      background: var(--gold-light);
+      display: flex;
+      align-items: flex-start;
+      gap: 4mm;
+    }
+    .feature-icon {
+      width: 22px;
+      height: 22px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .feature-text h4 { font-size: 10.5pt; color: var(--platinum); margin-bottom: 1mm; font-family: 'Manrope', sans-serif; font-weight: 700; }
+    .feature-text p { font-size: 9pt; color: var(--text-muted); line-height: 1.35; }
+
+    .pricing-desc-top {
+      font-size: 10.5pt;
+      color: var(--text-main);
+      margin-bottom: 5mm;
+      line-height: 1.5;
+      background: var(--gold-light);
+      padding: 4mm 5mm;
+      border-radius: 8px;
+      border-left: 4px solid var(--gold);
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 6mm;
+    }
+    .pricing-table th, .pricing-table td {
+      padding: 3.5mm 4mm;
+      border-bottom: 1px solid #EEEEEE;
+      text-align: left;
+    }
+    .pricing-table th {
+      background: var(--platinum);
+      color: white;
+      font-size: 9pt;
+      text-transform: uppercase;
+    }
+    .pricing-table td h4 { font-size: 10.5pt; color: var(--platinum); margin-bottom: 0.5mm; }
+    .pricing-table td p { font-size: 9pt; color: var(--text-muted); }
+    .pricing-table td.price-cell {
+      text-align: right;
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 10.5pt;
+      white-space: nowrap;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 6mm;
+    }
+    .timeline-card {
+      border: 1px solid #EEEEEE;
+      border-radius: 8px;
+      padding: 4mm;
+      background: #FAFAFA;
+      border-left: 4px solid var(--gold);
+    }
+    .timeline-card h4 { font-size: 9pt; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5mm; font-weight: 800; letter-spacing: 1px; }
+    .timeline-card h5 { font-size: 10.5pt; color: var(--platinum); margin-bottom: 1.5mm; }
+    .timeline-card p { font-size: 9pt; color: var(--text-muted); }
+
+    .pricing-box {
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 5mm;
+      text-align: center;
+      margin-bottom: 4mm;
+      background: #FAFAFA;
+    }
+    .pricing-title { font-size: 11pt; font-weight: 700; color: var(--platinum); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5mm; }
+    .old-price { font-size: 11pt; color: #999; text-decoration: line-through; margin-bottom: 1mm; }
+    .new-price { font-size: 26pt; font-weight: 800; color: var(--platinum); line-height: 1; margin-bottom: 1.5mm; }
+    .new-price span { font-size: 12pt; color: var(--gold); }
+    
+    .pricing-terms {
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .footer {
+      border-top: 1px solid #EEEEEE;
+      padding-top: 4mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5pt;
+      color: var(--text-muted);
+      margin-top: 4mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="document">
+    
+    <!-- HEADER -->
+    <div class="header avoid-break">
+      <div class="header-logo">WEBISTAN<span class="highlight">.LUXURY</span></div>
+      <div class="header-meta">
+        Коммерческое предложение<br>
+        Дата: 21 мая 2026 г.
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="avoid-break">
+      <h1>Запуск цифровой экосистемы<br>для <span class="highlight">Googoosh Studio</span></h1>
+      
+      <div class="intro-box">
+        <p>Уважаемая Гугуш,</p>
+        <p>Мы разработали для <strong>Googoosh Studio</strong> не просто веб-сайт, а эксклюзивный цифровой бутик. Это мощный маркетинговый инструмент, который с первых секунд транслирует роскошь, безупречный стиль и премиальный статус вашего салона.</p>
+        <p>Вся архитектура проекта — от эстетичных золотых оттенков до мгновенной скорости загрузки на европейских серверах — создана для того, чтобы привлекать платежеспособную аудиторию и автоматически превращать посетителей в ваших постоянных клиентов.</p>
+        <p style="margin-top: 5mm; padding-top: 4mm; border-top: 1px dashed rgba(197, 160, 89, 0.4); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 9pt;">
+          Ознакомиться с готовым проектом онлайн:<br>
+          <a href="https://googoosh.vercel.app/" style="color: var(--gold); text-decoration: none; font-size: 14pt; letter-spacing: 1.5px; font-weight: 800; display: inline-block; margin-top: 1mm;">HTTPS://GOOGOOSH.VERCEL.APP/</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="avoid-break">
+      <h2>Реализованные возможности</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+          <div class="feature-text">
+            <h4>Премиальный Домен</h4>
+            <p>Временный домен сайта: <strong>https://googoosh.vercel.app/</strong>. При покупке он будет заменен на премиум <strong>www.googoosh.tj</strong>.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+          <div class="feature-text">
+            <h4>CRM Dikidi Business</h4>
+            <p>Полноценная интеграция профессиональной системы записи Dikidi Business для управления салоном.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+          <div class="feature-text">
+            <h4>Мультиязычность</h4>
+            <p>Идеальная работа на русском, английском и таджикском языках без перезагрузки страниц.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          <div class="feature-text">
+            <h4>Mobile-First Дизайн</h4>
+            <p>Роскошный дизайн в цветах Matte Gold и Dark Platinum. Безупречная мобильная адаптация.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <div class="feature-text">
+            <h4>Соцсети и Карты</h4>
+            <p>Прямые ссылки на Instagram, Facebook, а также маршруты через 2GIS и Google Maps.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
+          <div class="feature-text">
+            <h4>Европейский хостинг</h4>
+            <p>Сайт загружается мгновенно благодаря передовым серверам высокой скорости.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE -->
+    <div class="avoid-break">
+      <h2>Комплексный пакет «под ключ»</h2>
+      
+      <div class="pricing-desc-top">
+        В рамках маркетинговой кампании Webistan.Luxury полная стоимость разработки (7 648 сомони) оптимизирована до специального фиксированного предложения. Все позиции ниже включены в итоговую сумму.
+      </div>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th style="width: 75%">Услуга / Модуль</th>
+            <th style="width: 25%; text-align: right;">Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <h4>Корпоративная почта (5 аккаунтов)</h4>
+              <p>Настройка бизнес-почты на вашем домене для мастеров и администрации. Примеры: director@googoosh.tj, info@googoosh.tj.</p>
+            </td>
+            <td class="price-cell">ВКЛЮЧЕНО</td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Интеграция в экосистему allTj.online</h4>
+              <p>Бесплатная годовая подписка на новой элитной бизнес-платформе для туристов. Привлечение платежеспособных экспатов и гостей столицы.</p>
+            </td>
+            <td class="price-cell">ВКЛЮЧЕНО</td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Высокоскоростной хостинг и домен</h4>
+              <p>Размещение сайта на сервере. Со 2-го года пролонгация хостинга и домена — всего 500 сомони в год.</p>
+            </td>
+            <td class="price-cell">ВКЛЮЧЕНО</td>
+          </tr>
+          <tr>
+            <td>
+              <h4>VIP-поддержка, безопасность, Social Proof</h4>
+              <p>8 часов технических работ ежемесячно (доработки, правки). Отзывы клиентов оперативно внедряются на сайт. Со 2-го года поддержка — 1 000 сомони в год.</p>
+            </td>
+            <td class="price-cell">ВКЛЮЧЕНО</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TIMELINE (MOVED BEFORE FINAL PRICING) -->
+    <div class="avoid-break">
+      <h2>Этапы запуска</h2>
+      <div class="timeline-grid">
+        <div class="timeline-card">
+          <h4>День 1</h4>
+          <h5>Согласование и регистрация</h5>
+          <p>Подписание договора, настройка хостинга и запуск корпоративной почты.</p>
+        </div>
+        <div class="timeline-card">
+          <h4>День 2</h4>
+          <h5>Развёртывание и запуск</h5>
+          <p>Перенос сайта, установка SSL-сертификата, полная настройка почт и передача доступов, старт поддержки.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL PRICING -->
+    <div class="avoid-break">
+      <h2>Итоговые инвестиции</h2>
+
+      <div class="pricing-box">
+        <div class="old-price">Полная стоимость разработки: 7 648 сомони</div>
+        <div class="new-price">5 000 <span>сомони</span></div>
+      </div>
+      
+      <div class="pricing-terms">
+        Для запуска проекта свяжитесь с нами любым удобным способом.<br> 
+        Зафиксированная стоимость <strong>5 000 сомони</strong> действительна до <strong>27 мая 2026 г.</strong><br> 
+        После этой даты предложение пересчитывается по стандартному тарифу.
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer avoid-break">
+      <div>С уважением, команда Webistan.Luxury</div>
+      <div>www.webistan.luxury | info@webistan.luxury</div>
+    </div>
+
+  </div>
+</body>
+</html>

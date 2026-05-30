@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Calendar, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import logoEn from '../assets/images/ermand-logo-en.svg';
 import logoRu from '../assets/images/ermand-logo-ru.svg';
 import logoTj from '../assets/images/ermand-logo-tj.svg';
 
-interface NavbarProps {
-  onOpenModal: () => void;
-}
-
-const Navbar = ({ onOpenModal }: NavbarProps) => {
+const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,6 +31,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
     { id: 'about', label: t('nav.about') },
     { id: 'reviews', label: t('nav.reviews') },
     { id: 'contact', label: t('nav.contact') },
+    { id: 'booking', label: t('nav.booking') },
   ];
 
   return (
@@ -65,7 +62,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
           </a>
 
           {/* Desktop Nav */}
-          <nav className="desktop-nav" style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
+          <nav className="desktop-nav" style={{ display: 'flex', gap: i18n.language === 'tj' ? '20px' : '35px', alignItems: 'center' }}>
             {navLinks.map(link => (
               <a key={link.id} href={`#${link.id}`} className="nav-link">
                 {link.label}
@@ -94,9 +91,9 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
           <button 
             className="mobile-toggle" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', zIndex: 1001, color: 'var(--navy)' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', zIndex: 1001, color: 'var(--navy)', marginRight: '10px' }}
           >
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
       </header>
@@ -112,7 +109,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
               position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
               backgroundColor: 'var(--white)', zIndex: 999,
               display: 'flex', flexDirection: 'column',
-              paddingTop: '100px', alignItems: 'center'
+              paddingTop: '150px', alignItems: 'center'
             }}
           >
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '30px', textAlign: 'center', marginBottom: '40px' }}>
@@ -120,7 +117,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
                 <a 
                   key={link.id} 
                   href={`#${link.id}`} 
-                  style={{ fontSize: '1.2rem', color: 'var(--navy)', textDecoration: 'none', fontFamily: 'Onest', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 600 }}
+                  style={{ fontSize: '1.2rem', color: 'var(--heading)', textDecoration: 'none', fontFamily: 'Montserrat', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 600 }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -134,9 +131,9 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
                   onClick={() => { changeLanguage(lng); setMobileMenuOpen(false); }}
                   style={{
                     padding: '10px 20px', borderRadius: '30px', border: '1px solid var(--border)',
-                    backgroundColor: i18n.language === lng ? 'var(--navy)' : 'transparent',
-                    color: i18n.language === lng ? 'var(--white)' : 'var(--navy)',
-                    fontFamily: 'Onest', fontWeight: 500
+                    backgroundColor: i18n.language === lng ? 'var(--heading)' : 'transparent',
+                    color: i18n.language === lng ? 'var(--white)' : 'var(--heading)',
+                    fontFamily: 'Montserrat', fontWeight: 500
                   }}
                 >
                   {lng.toUpperCase()}
@@ -153,7 +150,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
             color: var(--navy);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -181,7 +178,7 @@ const Navbar = ({ onOpenModal }: NavbarProps) => {
             padding: 8px 15px;
             border-radius: 25px;
             cursor: pointer;
-            font-family: 'Onest', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-light);

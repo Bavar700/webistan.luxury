@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MessageCircleQuestion } from 'lucide-react';
+import QuestionModal from './QuestionModal';
 
 const FAQ = () => {
   const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const questions = ['q1', 'q2', 'q3', 'q4'];
 
   return (
     <section className="section-padding" style={{ backgroundColor: 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '900px' }}>
         
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div className="section-title-wrapper" style={{ textAlign: 'center', marginBottom: '60px' }}>
           <div className="section-subtitle" style={{ justifyContent: 'center' }}>FAQ</div>
           <h2>{t('faq.title')}</h2>
         </div>
@@ -48,7 +50,7 @@ const FAQ = () => {
                   }}
                 >
                   <span style={{
-                    fontFamily: 'Onest',
+                    fontFamily: 'Montserrat',
                     fontSize: '1.3rem',
                     fontWeight: 600,
                     color: isOpen ? 'var(--teal)' : 'var(--navy)',
@@ -89,12 +91,37 @@ const FAQ = () => {
           })}
         </div>
 
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{ textAlign: 'center', marginTop: '60px', padding: '40px', backgroundColor: 'var(--ivory)', borderRadius: '24px' }}
+        >
+          <h3 style={{ marginBottom: '15px', fontSize: '1.8rem' }}>{t('faq_contact.title')}</h3>
+          <p style={{ marginBottom: '30px', color: 'var(--text-body)', fontSize: '0.95rem' }}>{t('faq_contact.desc')}</p>
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="btn btn-primary"
+            style={{ padding: '16px 45px', fontSize: '1.1rem', backgroundColor: 'var(--teal)', borderColor: 'var(--teal)' }}
+          >
+            <MessageCircleQuestion size={22} />
+            {t('faq_contact.btn')}
+          </button>
+        </motion.div>
+
+        <QuestionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       </div>
 
       <style>
         {`
           .faq-item:hover {
             border-color: rgba(43, 165, 181, 0.3) !important;
+          }
+          @media (max-width: 600px) {
+            .section-title-wrapper {
+              margin-bottom: 30px !important;
+            }
           }
         `}
       </style>

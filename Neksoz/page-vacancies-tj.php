@@ -2,7 +2,7 @@
 /**
  * Template Name: Ҷойҳои корӣ V3
  */
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <style>

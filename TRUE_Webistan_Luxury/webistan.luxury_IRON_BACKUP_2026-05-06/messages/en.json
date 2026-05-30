@@ -1,0 +1,326 @@
+{
+    "Index":  {
+                  "title":  "Webistan Luxury - Premium Web Solutions",
+                  "hero":  {
+                               "title":  "Excellence in Every Pixel",
+                               "subtitle":  "Global Standards \u0026 Silicon Valley Tech",
+                               "cta":  "Get Started",
+                               "upper":  "ARCHITECTING",
+                               "middle":  "DIGITAL",
+                               "base":  "DOMINANCE",
+                               "description":  "Engineering high-stakes assets for visionaries who demand precision over promises. Your legacy, rendered in code.",
+                               "cta1":  "REQUEST EXCLUSIVE BRIEFING",
+                               "cta2":  "THE ARCHIVE"
+                           }
+              },
+    "Navigation":  {
+                       "home":  "Home",
+                       "services":  "Services",
+                       "portfolio":  "Portfolio",
+                       "calculator":  "Pricing",
+                       "contact":  "Contact"
+                   },
+    "Common":  {
+                   "trust_bar":  "Swiss Reliability. Oriental Art. Global Tech.",
+                   "footer":  {
+                                  "tagline":  "SILENT POWER. REFINED LOGIC.",
+                                  "rights":  "ALL RIGHTS RESERVED",
+                                  "slogan":  "BESPOKE DIGITAL CRAFTSMANSHIP",
+                                  "correspondence":  "Correspondence",
+                                  "headquarters":  "Headquarters",
+                                  "global_node":  "Dushanbe, TJ / Global_Node"
+                              }
+               },
+    "Services":  {
+                     "title":  "Core Expertise",
+                     "subtitle":  "Engineering digital prestige across the modern web stack.",
+                     "subheading":  "THE EXPERTISE",
+                     "heading_digital":  "DIGITAL",
+                     "heading_solutions":  "SOLUTIONS",
+                     "layer_label":  "Layer",
+                     "items":  {
+                                   "web3":  {
+                                                "title":  "High-End Web3 Systems",
+                                                "desc":  "Architecting secure, decentralized infrastructures and luxury dApps with uncompromising precision."
+                                            },
+                                   "ai":  {
+                                              "title":  "AI-Driven Automation",
+                                              "desc":  "Integrating custom neural networks to orchestrate complex business flows and concierge-level user experiences."
+                                          },
+                                   "identity":  {
+                                                    "title":  "Digital Brand Identity",
+                                                    "desc":  "Crafting transcendent visual languages and pixel-perfect interfaces that define global prestige."
+                                                },
+                                   "perf":  {
+                                                "title":  "Extreme Performance",
+                                                "desc":  "Engineering ultra-fast, SEO-dominant architectures designed for high-stakes digital environments."
+                                            },
+                                   "nodes":  {
+                                                 "title":  "HIGH-CONVERSION NODES",
+                                                 "desc":  "Surgical design focused on singular objective completion."
+                                             },
+                                   "headquarters":  {
+                                                        "title":  "DIGITAL HEADQUARTERS",
+                                                        "desc":  "Fundamental infrastructure for global enterprise presence."
+                                                    },
+                                   "revenue":  {
+                                                   "title":  "REVENUE ENGINES",
+                                                   "desc":  "Complex transactional systems built for scale and speed."
+                                               },
+                                   "ecosystems":  {
+                                                      "title":  "ENTERPRISE ECOSYSTEMS",
+                                                      "desc":  "Unified digital environments for intensive operational flow."
+                                                  }
+                               },
+                     "bottom_label":  "STRATEGIC ARCHITECTURE LAYER_v4.2"
+                 },
+    "Calculator":  {
+                       "blueprint":  "BLUEPRINT",
+                       "investment":  "INVESTMENT",
+                       "calibration":  "PRECISION CALIBRATION",
+                       "foundational_partner_protocol":  "FOUNDATIONAL PARTNER PROTOCOL_",
+                       "ribbon_label":  "PROMO!",
+                       "discount_text":  "We offer a \u003caccent\u003e30%\u003c/accent\u003e discount on all development stages for the first 10 websites",
+                       "discount_text_2":  "featured in our portfolio. Don\u0027t miss this great opportunity!",
+                       "input_custom_norm":  "ANOTHER LANGUAGE...",
+                       "append_unit":  "APPEND UNIT",
+                       "momentum_std_desc":  "Standard architectural cycle.",
+                       "momentum_fast_desc":  "Priority resource allocation.",
+                       "momentum_ultra_desc":  "Absolute priority sprint.",
+                       "save_30":  "SAVE 30%_",
+                       "tjs_mo":  "tjs / mo",
+                       "valuation_asset":  "EST. ASSET VALUE_",
+                       "access_rate":  "FOUNDATIONAL_ACCESS_RATE:",
+                       "promo_disclaimer":  "-30% applied for the first 10 residents of the new archive",
+                       "landing_no_discount":  "Minimum price is already applied to this tier",
+                       "algo_analysis":  "PROPRIETARY ALGORITHMIC INVESTMENT ANALYSIS v8.8_ACTIVE",
+                       "monthly_suffix":  "TJS/mo",
+                       "disclaimer_note":  "📌 The estimate includes only development costs. Domain, hosting, and ad budgets are paid separately.",
+                       "billing":  {
+                                       "monthly":  "Monthly",
+                                       "yearly":  "Yearly"
+                                   },
+                       "support_features":  {
+                                                "on_demand_access":  "On-Demand Access Protocol",
+                                                "basic_scan":  "Basic Vulnerability Scan",
+                                                "maintenance_8h":  "8h Maintenance",
+                                                "weekly_backups":  "Weekly Backups",
+                                                "base_cyber_defense":  "Base Cyber-Defense",
+                                                "support_24h":  "24h Support",
+                                                "daily_backups":  "Daily Backups",
+                                                "neural_cyber_defense":  "Neural Cyber-Defense"
+                                            },
+                       "system01":  {
+                                        "title":  "CHOOSE ARCHITECTURAL FORM",
+                                        "desc":  "Select the foundational structure for your digital asset, from immersive experiences to enterprise-grade portals."
+                                    },
+                       "system02":  {
+                                        "title":  "LANGUAGE ARCHITECTURE",
+                                        "desc":  "Expand your global Reach | +30% per additional localization unit."
+                                    },
+                       "system03":  {
+                                        "title":  "CHOOSE YOUR MOMENTUM",
+                                        "desc":  "Standard architectural cycle is 21–30 business days. Select a high-velocity protocol to prioritize your market entry."
+                                    },
+                       "system04":  {
+                                        "title":  "SELECT SUPPORT PROTOCOL",
+                                        "desc":  "Strategic maintenance tiers for long-term digital stability. Essential for evolving architectural integrity."
+                                    },
+                       "system05":  {
+                                        "title":  "EXPANSION MODULES",
+                                        "desc":  "Enhance your digital asset with specialized infrastructure."
+                                    },
+                       "details_drawer_trigger":  "What\u0027s included in the price?",
+                       "details_drawer_title":  "Service Breakdown",
+                       "details_drawer_close":  "Close",
+                       "drawer_content":  {
+                                              "title":  "Webistan.Luxury Studio Service Breakdown",
+                                              "intro":  "We value honesty and transparency. In our estimate, we separate the cost of our developers\u0027 intellectual labor from external expenses for third-party services.",
+                                              "base_works_title":  "Base Works:",
+                                              "base_works":  {
+                                                                 "dev":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eWebsite Development:\u003c/span\u003e Writing \u0027clean code\u0027 (no site builders), mobile adaptation, basic security configuration.",
+                                                                 "lang":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eMulti-language (+30%):\u003c/span\u003e Translation architecture creation and technical implementation of language switching."
+                                                             },
+                                              "modules_title":  "Additional Modules (What\u0027s Included):",
+                                              "modules":  {
+                                                              "localpay":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eLocalPay (1,200 TJS):\u003c/span\u003e Integration with Tajikistan\u0027s payment systems (Alif, DC, Korti Milli). We configure payment acceptance. Bank transaction fees are paid separately.",
+                                                              "ads":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eAd Campaign Setup (500 TJS):\u003c/span\u003e Professional launch of Google/Meta accounts and audience targeting. You determine and top up the ad budget yourself.",
+                                                              "infrastructure":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eInfrastructure Setup (300 TJS):\u003c/span\u003e Technical server preparation, domain linking, and SSL protection. The cost of the domain itself (.tj/.com) and hosting is paid to the provider.",
+                                                              "ai":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eAI (Neuro-Protocol) (1,500 TJS):\u003c/span\u003e Implementation of neural networks into site logic. API token consumption is paid to the AI developer platform.",
+                                                              "seo":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eSEO Optimization (500 TJS):\u003c/span\u003e Technical preparation of the site so that Google and Yandex can \u0027see\u0027 you.",
+                                                              "narrative":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eNarrative (500 TJS):\u003c/span\u003e Creation of a selling story and text for one key section. Each new text idea requires deep processing.",
+                                                              "branding":  "\u003cspan class=\u0027text-accent font-bold\u0027\u003eBranding (800 TJS):\u003c/span\u003e Development of a logo, palette, and unique visual style."
+                                                          },
+                                              "note_title":  "Important Note:",
+                                              "note_text":  "All third-party payments (domains, hosting, ad budgets) are your property. We help set them up, but access to accounts and ownership remain with you."
+                                          },
+                       "types":  {
+                                     "landing":  "Landing Page",
+                                     "promo":  "Promo Page",
+                                     "corporate":  "Corporate Platform",
+                                     "ecommerce":  "Digital Store",
+                                     "portal":  "Enterprise Portal",
+                                     "saas":  "SaaS Architecture",
+                                     "immersive":  "Immersive Experience",
+                                     "sovereign":  "Sovereign Chain"
+                                 },
+                       "momentum":  {
+                                        "standard":  "Standard",
+                                        "fast":  "Accelerated",
+                                        "ultra":  "Ultra-Velocity"
+                                    },
+                       "cta":  "INITIALIZE PROTOCOL",
+                       "support_levels":  {
+                                              "none":  "None",
+                                              "standard":  "Standard",
+                                              "elite":  "Elite"
+                                          },
+                       "work_label":  "Development Cost",
+                       "support_label":  "Technical Support",
+                       "founder_rate_label":  "FOUNDER RATE",
+                       "billing_cycle_monthly":  "MONTHLY SUBSCRIPTION",
+                       "billing_cycle_yearly":  "YEARLY SUBSCRIPTION",
+                       "support_annual":  "ANNUAL SUPPORT",
+                       "support_monthly":  "MONTHLY SUPPORT",
+                       "tjs_yr":  "tjs / yr",
+                       "momentum_labels":  {
+                                               "standard":  "STANDARD",
+                                               "fast":  "ACCELERATED",
+                                               "ultra":  "ULTRA-FAST"
+                                           },
+                       "support_disclaimer":  "The first month of technical supervision (Hypercare) is provided complimentary. Regular billing begins 30 days after project launch.",
+                       "initial_investment_label":  "DUE FOR SETTLEMENT:",
+                       "duration":  {
+                                        "standard":  "21–30 DAYS",
+                                        "fast":  "10–14 DAYS",
+                                        "ultra":  "5–7 DAYS"
+                                    }
+                   },
+    "Portfolio":  {
+                      "subheading":  "SELECTED",
+                      "title":  "-",
+                      "legacies":  "PORTFOLIO",
+                      "protocol_label":  "Protocol",
+                      "genesis_protocol":  "GENESIS PRODUCTION PROTOCOL_TX-90",
+                      "slot1":  {
+                                    "title":  "RESERVED SLOT",
+                                    "desc":  "Accepting a limited number of foundation partners this quarter."
+                                },
+                      "slot2":  {
+                                    "title":  "RESERVED SLOT",
+                                    "desc":  "Accepting a limited number of foundation partners this quarter."
+                                }
+                  },
+    "Contact":  {
+                    "subheading":  "STRATEGIC ACCESS",
+                    "initiation_title":  "Initiation",
+                    "initiation_desc":  "Launch Protocol Execution",
+                    "title_part1":  "SECURE THE",
+                    "title_part2":  "FUTURE",
+                    "desc":  "Our production capacity is strictly limited to 3 bespoke projects per quarter to ensure absolute perfection.",
+                    "submit":  "SUBMIT FOR REVIEW",
+                    "transmission":  "Transmission_Protocol",
+                    "arch_form":  "Architectural Form",
+                    "lang_units":  "Language Units",
+                    "support_proto":  "Support Protocol",
+                    "momentum":  "Delivery Momentum",
+                    "expansion":  "Expansion Modules Active_",
+                    "standard_val":  "Standard Valuation_",
+                    "partner_rate":  "Foundational Partner Rate_",
+                    "name_label":  "Authorized Label_",
+                    "name_placeholder":  "NAME / ORGANIZATION",
+                    "channel_label":  "Secure Channel_",
+                    "channel_placeholder":  "DIRECT CONTACT EMAIL",
+                    "brief_label":  "Blueprint Briefing_",
+                    "brief_placeholder":  "TELL US ABOUT THE VISION",
+                    "footer_tag":  "SECURE TRANSMISSION PROTOCOL_v1.0_ENCRYPTED",
+                    "locales":  "{count, plural, =1 {# Locale} other {# Locales}}",
+                    "transmission_complete":  "Transmission_Complete",
+                    "success_message":  "Your request has been successfully encrypted and transmitted to Webistan Luxury HQ. \u003cbr\u003e\u003c/br\u003e We will contact you within 24 hours.",
+                    "back_to_form":  "Return to form",
+                    "initializing_transmission":  "INITIALIZING_TRANSMISSION",
+                    "field_required":  "Please fill out this field",
+                    "email_invalid":  "Please enter a valid email address",
+                    "transmission_failed":  "Transmission failed. Please try again."
+                },
+    "Addons":  {
+                   "branding":  {
+                                    "label":  "Visual Identity",
+                                    "desc":  "Logo + Brand Guidelines"
+                                },
+                   "infrastructure":  {
+                                          "label":  "Deployment Service (Setup)",
+                                          "desc":  "Domain + 1Y Hosting",
+                                          "tooltip":  "Labor cost only. Third-party fees not included"
+                                      },
+                   "seo":  {
+                               "label":  "Search Architecture",
+                               "desc":  "SEO Keyword Strategy"
+                           },
+                   "ai":  {
+                              "label":  "Neural Protocol",
+                              "desc":  "LLM / AI Integration"
+                          },
+                   "ads":  {
+                               "label":  "Ad Campaign Setup",
+                               "desc":  "Ads Google/Yandex",
+                               "tooltip":  "Labor cost only. Third-party fees not included"
+                           },
+                   "smm":  {
+                               "label":  "Social Audit",
+                               "desc":  "SMM Strategy"
+                           },
+                   "adsense":  {
+                                   "label":  "Monetization Engine",
+                                   "desc":  "AdSense Setup"
+                               },
+                   "maps":  {
+                                "label":  "Interactive Geolocation",
+                                "desc":  "Google Maps API"
+                            },
+                   "narrative":  {
+                                     "label":  "Copywriting (per section)",
+                                     "desc":  "Copywriting \u0026 Storytelling"
+                                 },
+                   "kinetic":  {
+                                   "label":  "Kinetic Elegance",
+                                   "desc":  "Premium Scroll Animations"
+                               },
+                   "localpay":  {
+                                    "label":  "Payment Integration (Alif, DC)",
+                                    "desc":  "Acquiring Setup",
+                                    "tooltip":  "Labor cost only. Third-party fees not included"
+                                },
+                   "velocity":  {
+                                    "label":  "Performance Velocity",
+                                    "desc":  "Lighthouse 90+ Tuning"
+                                }
+               },
+    "Trust":  {
+                  "prot":  "PROT",
+                  "status":  {
+                                 "active":  "ACTIVE",
+                                 "encrypted":  "ENCRYPTED",
+                                 "stable":  "STABLE",
+                                 "synced":  "SYNCED"
+                             },
+                  "s01":  {
+                              "label":  "SWISS ARCHITECTURE",
+                              "trait":  "Precision"
+                          },
+                  "s02":  {
+                              "label":  "GLOBAL INFRASTRUCTURE",
+                              "trait":  "Security"
+                          },
+                  "s03":  {
+                              "label":  "ENTERPRISE STACK",
+                              "trait":  "Performance"
+                          },
+                  "s04":  {
+                              "label":  "CULTURAL ALIGNMENT",
+                              "trait":  "Strategy"
+                          },
+                  "protocol_label_1":  "Trust.protocol_",
+                  "protocol_label_2":  "label_"
+              }
+}

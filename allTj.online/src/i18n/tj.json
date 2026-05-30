@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "home": "Asosī",
+    "services": "Xizmatho",
+    "about": "Dar borai mo",
+    "contact": "Tamos"
+  },
+  "hero": {
+    "title": "Digitallizatsiyai Tojikiston",
+    "subtitle": "Mo ba şumo dar eçodi mustaqilii raqamī va peşrafti biznes yorī medihem.",
+    "cta": "Oghoz kardan"
+  },
+  "services": {
+    "webDev": {
+      "title": "Ruşdi veb",
+      "desc": "Eçodi vebsaytho va barmoiaho dar sathī muosir."
+    },
+    "consulting": {
+      "title": "Konsulting",
+      "desc": "Yorī dar digitallizatsiyai biznes va strategiya."
+    },
+    "cloud": {
+      "title": "Xizmathoi abrī",
+      "desc": "Infastruktura baroi korī behaf va tezu tond."
+    }
+  }
+}

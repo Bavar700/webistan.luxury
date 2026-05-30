@@ -1,0 +1,26 @@
+<svg width="224" height="58" viewBox="25 6 112 29" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;family=Abril+Fatface&amp;display=swap');</style>
+    <!-- V33: Using only integer percentages to bypass SafeSVG value stripping -->
+    <linearGradient id="g_v33_int" x1="-50%" y1="0%" x2="150%" y2="0%">
+      <stop offset="0%" stop-color="#EFBF04" />
+      
+      <stop stop-color="#EFBF04">
+        <animate attributeName="offset" values="0%; 80%; 80%" keyTimes="0; 0.6; 1" dur="6s" repeatCount="indefinite" />
+      </stop>
+      <stop stop-color="#FFFFFF">
+        <animate attributeName="offset" values="10%; 90%; 90%" keyTimes="0; 0.6; 1" dur="6s" repeatCount="indefinite" />
+      </stop>
+      <stop stop-color="#EFBF04">
+        <animate attributeName="offset" values="20%; 100%; 100%" keyTimes="0; 0.6; 1" dur="6s" repeatCount="indefinite" />
+      </stop>
+
+      <stop offset="100%" stop-color="#EFBF04" />
+    </linearGradient>
+  </defs>
+
+  <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19"
+        fill="url(#g_v33_int)" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+  <text x="81" y="33" font-family="Abril Fatface, serif" font-weight="400" font-size="7"
+        fill="#475569" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">Your Local Guide To Tajikistan</text>
+</svg>

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import clinicImg from '../assets/images/clinic.jpg';
+import heroImg from '../assets/images/hero-bg.jpg';
 
 const About = () => {
   const { t } = useTranslation();
@@ -28,18 +28,8 @@ const About = () => {
             boxShadow: 'var(--shadow-lg)',
             position: 'relative'
           }}>
-            <img src={clinicImg} alt="Dental Clinic Yormand" style={{ width: '100%', height: 'auto', display: 'block' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            <img src={heroImg} alt="Dental Clinic Yormand" style={{ width: '100%', height: 'auto', display: 'block' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           </div>
-          {/* Gold Accent Line */}
-          <div style={{
-            position: 'absolute',
-            top: '40px',
-            bottom: '40px',
-            left: '-2px',
-            width: '4px',
-            backgroundColor: 'var(--gold)',
-            borderRadius: '4px'
-          }} />
         </motion.div>
 
         {/* Right Content */}
@@ -59,9 +49,9 @@ const About = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {[
-              { icon: '✨', text: 'Премиум интерьер и комфорт' },
-              { icon: '🔬', text: 'Новейшее европейское оборудование' },
-              { icon: '🛡️', text: 'Абсолютная стерильность' }
+              { icon: '✨', text: t('about_features.premium') },
+              { icon: '🔬', text: t('about_features.equipment') },
+              { icon: '🛡️', text: t('about_features.sterile') }
             ].map((feature, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <div style={{ 
@@ -74,7 +64,7 @@ const About = () => {
                 }}>
                   {feature.icon}
                 </div>
-                <span style={{ fontFamily: 'Onest', fontWeight: 500, color: 'var(--navy)' }}>
+                <span style={{ fontFamily: 'Montserrat', fontWeight: 500, color: 'var(--navy)' }}>
                   {feature.text}
                 </span>
               </div>

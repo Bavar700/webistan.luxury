@@ -1,0 +1,28 @@
+<svg width="112" height="21" viewBox="25 6 112 21" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+            @keyframes final-flow-cln {
+                0% { transform: translateX(-56px); }
+                100% { transform: translateX(0px); }
+            }
+            .sh-v26-cln {
+                animation: final-flow-cln 8s linear infinite;
+            }
+        </style>
+        <clipPath id="cp_v26_cln">
+            <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+        </clipPath>
+        <linearGradient id="gr_v26_cln" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+            <stop offset="0%" stop-color="#EFBF04" />
+            <stop offset="25%" stop-color="#FFFFFF" />
+            <stop offset="50%" stop-color="#EFBF04" />
+            <stop offset="75%" stop-color="#FFFFFF" />
+            <stop offset="100%" stop-color="#EFBF04" />
+        </linearGradient>
+    </defs>
+    <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="#EFBF04" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+    <rect class="sh-v26-cln" x="25" y="0" width="224" height="30" fill="url(#gr_v26_cln)" clip-path="url(#cp_v26_cln)">
+        <animateTransform attributeName="transform" type="translate" from="-56" to="0" dur="8s" repeatCount="indefinite" />
+    </rect>
+</svg>

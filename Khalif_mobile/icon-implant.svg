@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <!-- Crown (Top part of tooth) -->
+  <path d="M32,14 C25,11 17,15 17,25 C17,31 20,33 24,33 L40,33 C44,33 47,31 47,25 C47,15 39,11 32,14 Z" 
+        fill="none" stroke="#00A2D3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Abutment (Middle connector) -->
+  <rect x="28" y="33" width="8" height="5" 
+        fill="#176AA6" stroke="#176AA6" stroke-width="1" stroke-linejoin="round"/>
+  <!-- Implant screw / threads -->
+  <path d="M32,38 V52" fill="none" stroke="#176AA6" stroke-width="3" stroke-linecap="round"/>
+  <!-- Threads -->
+  <line x1="28" y1="41" x2="36" y2="43" stroke="#176AA6" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="28" y1="45" x2="36" y2="47" stroke="#176AA6" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="29" y1="49" x2="35" y2="51" stroke="#176AA6" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

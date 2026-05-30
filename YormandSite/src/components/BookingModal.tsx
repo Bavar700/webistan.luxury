@@ -64,18 +64,18 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
           </button>
 
           <h3 style={{ marginBottom: '10px', fontSize: '1.8rem' }}>{t('hero.cta')}</h3>
-          <p style={{ color: 'var(--text-light)', marginBottom: '30px' }}>Оставьте свои данные, и наш администратор свяжется с вами для подтверждения времени.</p>
+          <p style={{ color: 'var(--text-light)', marginBottom: '30px' }}>{t('booking.subtitle')}</p>
 
           <form onSubmit={(e) => { e.preventDefault(); alert('Отправлено! В реальности здесь был бы API запрос.'); onClose(); }}>
             <div style={{ marginBottom: '20px' }}>
-              <input type="text" placeholder="Ваше имя" required />
+              <input type="text" placeholder={t('booking.name')} required />
             </div>
             <div style={{ marginBottom: '20px' }}>
-              <input type="tel" placeholder="Номер телефона" required />
+              <input type="tel" placeholder={t('booking.phone')} required />
             </div>
             <div style={{ marginBottom: '30px' }}>
               <select required>
-                <option value="">Выберите услугу</option>
+                <option value="">{t('booking.service')}</option>
                 <option value="s1">{t('services.s1.title')}</option>
                 <option value="s2">{t('services.s2.title')}</option>
                 <option value="s3">{t('services.s3.title')}</option>
@@ -89,7 +89,7 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
             </div>
             
             <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-              Записаться
+              {t('booking.submit')}
             </button>
           </form>
 

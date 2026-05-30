@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Офарин — Вазифаҳои ман</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
+    <link rel="stylesheet" href="css/style.css?v=19">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- SVG Icon Sprite -->
+    <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <symbol id="icon-home" viewBox="0 0 24 24">
+                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                <path d="M9 21V12h6v9"/>
+            </symbol>
+            <symbol id="icon-calendar" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <path d="M16 2v4M8 2v4M3 10h18"/>
+                <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+            </symbol>
+            <symbol id="icon-wallet" viewBox="0 0 24 24">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <path d="M2 10h20"/>
+                <circle cx="18" cy="12" r="1" fill="currentColor" stroke="none"/>
+            </symbol>
+            <symbol id="icon-settings" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </symbol>
+            <symbol id="icon-star" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </symbol>
+            <symbol id="icon-check" viewBox="0 0 24 24">
+                <path d="M20 6L9 17l-5-5"/>
+            </symbol>
+            <symbol id="icon-clock" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+            </symbol>
+            <symbol id="icon-plus" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14"/>
+            </symbol>
+            <symbol id="icon-x" viewBox="0 0 24 24">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </symbol>
+            <symbol id="icon-edit" viewBox="0 0 24 24">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </symbol>
+            <symbol id="icon-trash" viewBox="0 0 24 24">
+                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                <path d="M10 11v6M14 11v6"/>
+            </symbol>
+            <symbol id="icon-gift" viewBox="0 0 24 24">
+                <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/>
+                <path d="M3 8h18v4H3z"/>
+                <path d="M12 8v14"/>
+                <path d="M12 8a4 4 0 0 0-4-4 3 3 0 0 0 0 6h4z"/>
+                <path d="M12 8a4 4 0 0 1 4-4 3 3 0 0 1 0 6h-4z"/>
+            </symbol>
+            <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6"/>
+            </symbol>
+            <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6"/>
+            </symbol>
+            <symbol id="icon-user" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </symbol>
+            <symbol id="icon-flag" viewBox="0 0 24 24">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                <path d="M4 22v-7"/>
+            </symbol>
+            <symbol id="icon-shield" viewBox="0 0 24 24">
+                <path d="M12 2l7 4v5c0 5.25-3.5 10-7 11-3.5-1-7-5.75-7-11V6l7-4z"/>
+            </symbol>
+            <symbol id="icon-trophy" viewBox="0 0 24 24">
+                <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/>
+                <path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/>
+                <path d="M6 3h12v10a6 6 0 0 1-12 0V3z"/>
+                <path d="M12 16v4M8 22h8"/>
+            </symbol>
+            <symbol id="icon-play" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+            </symbol>
+            <symbol id="icon-pause" viewBox="0 0 24 24">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+            </symbol>
+            <symbol id="icon-stop" viewBox="0 0 24 24">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+            </symbol>
+            <symbol id="icon-skip" viewBox="0 0 24 24">
+                <path d="M18 6v12M6 6l8 6-8 6"/>
+            </symbol>
+            <symbol id="icon-sparkle" viewBox="0 0 24 24">
+                <path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3z"/>
+                <path d="M18 14l1 2.5L21.5 18l-2.5 1-1 2.5-1-2.5L14.5 18l2.5-1 1-2.5z"/>
+            </symbol>
+            <symbol id="icon-music" viewBox="0 0 24 24">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+            </symbol>
+            <symbol id="icon-book" viewBox="0 0 24 24">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </symbol>
+            <symbol id="icon-heart" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </symbol>
+            <symbol id="icon-arrow-up" viewBox="0 0 24 24">
+                <path d="M12 19V5M5 12l7-7 7 7"/>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div id="app">
+        <!-- Header -->
+        <header id="main-header">
+            <div class="header-top" style="display: flex; flex-direction: column; align-items: center; width: 100%; padding-bottom: 12px; padding-top: 36px;">
+                <div class="logo" style="justify-content: center; margin-bottom: 6px;">
+                    <svg class="icon-svg icon-star-left" aria-hidden="true" style="width: 28px; height: 28px;"><use href="#icon-star"/></svg>
+                    <h1 id="app-title" style="font-size: 28px; line-height: 1.2; margin: 0 8px; text-align: center;">Офарин</h1>
+                    <svg class="icon-svg icon-star-right" id="logo-right-star" aria-hidden="true" style="width: 28px; height: 28px;"><use href="#icon-star"/></svg>
+                </div>
+                <div class="header-slogan" id="header-slogan" data-i18n="slogan" style="margin-top: 0; font-size: 17px; opacity: 0.9; text-align: center;">Ту метавонӣ!</div>
+                
+                <div id="header-child-balance" class="hidden" style="margin-top: 16px; text-align: center;">
+                    <div style="font-size: 16px; font-weight: 700; color: #FCD34D; padding: 6px 16px; display: inline-block;" id="greeting-balance-text">
+                        💰 0 смн   ⭐ 0
+                    </div>
+                </div>
+            </div>
+            <!-- Child Selector (for Parent/Settings) -->
+            <div class="child-selector-wrapper" id="header-child-selector" style="display: flex; gap: 8px; align-items: center;">
+                <button class="child-selector-btn" id="child-selector-btn" style="flex: 1; width: auto; min-width: 0;">
+                    <span class="cs-emoji" id="cs-emoji">👦</span>
+                    <span class="cs-name" id="cs-name">Кӯдак</span>
+                    <span class="cs-balance" id="cs-balance">💰 0</span>
+                    <svg class="icon-svg cs-chevron" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+                </button>
+                <button id="header-edit-child-btn" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 44px; height: 44px; flex-shrink: 0; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px);">
+                    <svg class="icon-svg" aria-hidden="true" style="width:18px;height:18px;"><use href="#icon-edit"/></svg>
+                </button>
+                <div class="child-picker-overlay hidden" id="child-picker">
+                    <div class="child-picker" id="child-picker-list"></div>
+                </div>
+            </div>
+
+
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Today's Date & Balance -->
+            <div class="today-bar">
+                <div class="today-date" id="today-date"></div>
+                <div class="balance-display" id="balance-display">
+                    <span class="balance-label">Тавозун:</span>
+                    <span class="balance-amount" id="balance-amount">0</span>
+                    <span class="balance-currency">смн</span>
+                </div>
+            </div>
+
+            <!-- Daily Progress -->
+            <div class="daily-progress" id="daily-progress">
+                <div class="progress-header">
+                    <span id="progress-title" data-i18n="progress.title">Пешрафти имрӯз</span>
+                    <span class="progress-text" id="progress-text">0/7</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Page: Dashboard (Today's Tasks) -->
+            <section class="page active" id="page-dashboard">
+                <div class="page-header">
+                    <h2>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-home"/></svg>
+                        <span>Вазифаҳои имрӯз</span>
+                    </h2>
+                    <span class="date-badge" id="date-badge"></span>
+                </div>
+                <div id="tasks-container" class="tasks-container">
+                    <!-- Tasks rendered by JS -->
+                </div>
+                <!-- Parent section hint -->
+                <div class="action-bar">
+                    <p class="empty-state" id="dashboard-add-hint">Вазифаҳоро волидайн илова мекунад</p>
+                </div>
+            </section>
+
+            <!-- Page: Calendar -->
+            <section class="page" id="page-calendar">
+                <div class="page-header">
+                    <h2>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-calendar"/></svg>
+                        <span>Тақвим</span>
+                    </h2>
+                    <div class="calendar-nav">
+                        <button class="icon-btn-sm" id="cal-prev">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-chevron-left"/></svg>
+                        </button>
+                        <span id="cal-month-year"></span>
+                        <button class="icon-btn-sm" id="cal-next">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="calendar-legend" id="calendar-legend">
+                    <span class="legend-item"><span class="legend-dot dot-green"></span> <span class="legend-text" data-i18n="calendar.legend_completed" data-key="completed">Иҷро шуда</span></span>
+                    <span class="legend-item"><span class="legend-dot dot-red"></span> <span class="legend-text" data-i18n="calendar.legend_incomplete" data-key="incomplete">Иҷро нашуда</span></span>
+                    <span class="legend-item"><span class="legend-dot dot-yellow"></span> <span class="legend-text" data-i18n="calendar.legend_excused" data-key="excused">Узрнок</span></span>
+                    <span class="legend-item"><span class="legend-dot dot-gray"></span> <span class="legend-text" data-i18n="calendar.legend_pending" data-key="pending">Интизорӣ</span></span>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar rendered by JS -->
+                </div>
+            </section>
+
+            <!-- Page: Balance & Withdrawal -->
+            <section class="page" id="page-balance">
+                <div class="page-header">
+                    <h2>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg>
+                        <span>Ҳисоб ва пул</span>
+                    </h2>
+                </div>
+                <div class="balance-card">
+                    <div class="balance-big">
+                        <span class="balance-icon">💰</span>
+                        <span class="balance-big-amount" id="balance-big">0</span>
+                        <span class="balance-big-currency">сомонӣ</span>
+                    </div>
+                    <div class="balance-stats">
+                        <div class="stat-item">
+                            <span class="stat-label" data-i18n="balance.income">Даромад</span>
+                            <span class="stat-value" id="stat-earned">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label" data-i18n="balance.deducted">Тарҳ</span>
+                            <span class="stat-value" id="stat-deducted">0</span>
+                        </div>
+                        <div class="stat-item" id="stat-stars">
+                            <span class="stat-label">⭐</span>
+                            <span class="stat-value" style="color:var(--accent-light);" id="stat-stars-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label" data-i18n="balance.withdrawn">Бароварда</span>
+                            <span class="stat-value" id="stat-withdrawn">0</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" id="btn-withdraw">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg>
+                        Баровардани пул
+                    </button>
+                </div>
+                <!-- Withdrawal history -->
+                <div class="section-card">
+                    <h3 data-i18n="withdraw.history">Таърихи баровардан</h3>
+                    <div id="withdrawal-history">
+                        <p class="empty-state">Ҳанӯз пул бароварда нашудааст</p>
+                    </div>
+                </div>
+                <!-- Test history -->
+                <div class="section-card">
+                    <h3 data-i18n="withdraw.test_history">
+                        <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-edit"/></svg>
+                        Санҷишҳои 10-рӯза
+                    </h3>
+                    <div id="test-history">
+                        <p class="empty-state">Ҳанӯз санҷише гузаронида нашудааст</p>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <h3 data-i18n="achievements.title">
+                        <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-trophy"/></svg>
+                        Муваффақиятҳо ва нишонҳо
+                    </h3>
+                    <div id="achievements-container" class="achievements-grid"></div>
+                </div>
+            </section>
+
+            <!-- Page: Parent Dashboard (PIN protected) -->
+            <section class="page" id="page-parent">
+                <!-- Header removed as requested -->
+                <div id="parent-content">
+                    <!-- Parent dashboard rendered by JS -->
+                </div>
+            </section>
+
+            <!-- Settings Page (PIN protected) -->
+            <section class="page" id="page-settings">
+                <div class="page-header">
+                    <h2>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-settings"/></svg>
+                        <span>Танзимот</span>
+                    </h2>
+                </div>
+                <div id="settings-content">
+                    <!-- Settings rendered by JS -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav id="bottom-nav">
+            <button class="nav-btn active" data-page="dashboard">
+                <svg class="icon-svg nav-icon" aria-hidden="true"><use href="#icon-home"/></svg>
+                <span class="nav-label">Имрӯз</span>
+            </button>
+            <button class="nav-btn" data-page="calendar">
+                <svg class="icon-svg nav-icon" aria-hidden="true"><use href="#icon-calendar"/></svg>
+                <span class="nav-label">Тақвим</span>
+            </button>
+            <button class="nav-btn" data-page="balance">
+                <svg class="icon-svg nav-icon" aria-hidden="true"><use href="#icon-wallet"/></svg>
+                <span class="nav-label">Ҳисоб</span>
+            </button>
+            <button class="nav-btn" data-page="settings">
+                <svg class="icon-svg nav-icon" aria-hidden="true"><use href="#icon-settings"/></svg>
+                <span class="nav-label">Танзимот</span>
+            </button>
+            <button class="nav-btn" data-page="parent">
+                <svg class="icon-svg nav-icon" aria-hidden="true"><use href="#icon-shield"/></svg>
+                <span class="nav-label">Волидайн</span>
+            </button>
+        </nav>
+
+        <!-- PIN Modal -->
+        <div class="modal-overlay hidden" id="pin-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-shield"/></svg>
+                        Тасдиқи волидайн
+                    </h3>
+                    <button class="modal-close" id="pin-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Барои тасдиқи амалиёт рамзи PIN-ро ворид кунед:</p>
+                    <form onsubmit="return false;">
+                    <div class="pin-input-group">
+                        <input type="password" id="pin-input" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
+                        <button class="btn btn-primary" id="pin-submit">Тасдиқ</button>
+                    </div>
+                    </form>
+                    <p class="pin-error hidden" id="pin-error">Рамзи PIN нодуруст аст!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Confirmation Modal -->
+        <div class="modal-overlay hidden" id="confirm-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true" style="color:var(--success);"><use href="#icon-check"/></svg>
+                        Тасдиқи вазифа
+                    </h3>
+                    <button class="modal-close" id="confirm-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirm-task-name">Оё вазифаи <strong></strong> иҷро шудааст?</p>
+                    <!-- Child's photo proof -->
+                    <div class="hidden confirm-proof" id="confirm-proof">
+                        <div class="confirm-proof-photo hidden" id="confirm-proof-photo">
+                            <img id="confirm-proof-img" alt="Фото">
+                        </div>
+                        <div class="hidden confirm-proof-explanation" id="confirm-proof-explanation">
+                            <p class="proof-explanation-label">💬 Тавсиф:</p>
+                            <p class="proof-explanation-text" id="confirm-proof-text"></p>
+                        </div>
+                    </div>
+                    <form onsubmit="return false;">
+                    <div class="pin-input-group">
+                        <input type="password" id="confirm-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
+                        <button class="btn btn-primary" id="confirm-submit">Ҳа, тасдиқ мекунам</button>
+                    </div>
+                    </form>
+                    <p class="pin-error hidden" id="confirm-error">Рамзи PIN нодуруст аст!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skip Task Modal -->
+        <div class="modal-overlay hidden" id="skip-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-skip"/></svg>
+                        <span id="skip-modal-title" data-i18n="skip.title">Сарфи назар кардан</span>
+                    </h3>
+                    <button class="modal-close" id="skip-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="skip-modal-text" data-i18n="skip.prompt">Сабаби сарфи назар кардани вазифаро нависед:</p>
+                    <div class="form-group">
+                        <textarea id="skip-reason" rows="3" placeholder="Сабабро нависед..."></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="skip-submit-btn" style="margin-top:10px;">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                        <span data-i18n="skip.submit">Тасдиқ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timer Modal (shows the countdown timer) -->
+        <div class="modal-overlay hidden" id="timer-modal">
+            <div class="modal modal-timer">
+                <div class="modal-header">
+                    <h3 id="timer-task-name">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-clock"/></svg>
+                        Вазифа
+                    </h3>
+                    <button class="modal-close" id="timer-cancel-btn" title="Боздоштан">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body timer-body">
+                    <div class="timer-emoji" id="timer-emoji">⏰</div>
+                    <div class="timer-display" id="timer-display">00:00</div>
+                    <div class="timer-progress-ring">
+                        <svg viewBox="0 0 120 120" class="timer-svg">
+                            <circle cx="60" cy="60" r="54" class="timer-bg-circle"/>
+                            <circle cx="60" cy="60" r="54" class="timer-progress-circle" id="timer-circle"/>
+                        </svg>
+                    </div>
+                    <p class="timer-status" id="timer-status">Ба кор шурӯъ кунед...</p>
+                    <div class="timer-buttons">
+                        <button class="btn btn-primary btn-large" id="timer-start-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-play"/></svg>
+                            Оғоз
+                        </button>
+                        <button class="btn btn-outline hidden" id="timer-pause-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-pause"/></svg>
+                            Таваққуф
+                        </button>
+                    </div>
+
+                    <!-- Proof section: shown after timer completes -->
+                    <div class="hidden timer-proof-section" id="timer-proof-section">
+                        <div class="proof-divider"></div>
+                        <p class="proof-label" id="proof-label">📸 Ба кор андешидани акс ва тавсиф:</p>
+                        <div class="proof-photo-area" id="proof-photo-area">
+                            <input type="file" accept="image/*" capture="environment" id="proof-photo-input" class="hidden">
+                            <button class="btn btn-outline btn-small" id="proof-photo-btn">
+                                <svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg>
+                            </button>
+                            <div class="proof-photo-preview hidden" id="proof-photo-preview">
+                                <img id="proof-photo-img" alt="">
+                                <button class="proof-photo-remove" id="proof-photo-remove">✕</button>
+                            </div>
+                        </div>
+                        <textarea class="proof-textarea" id="proof-explanation" rows="2" placeholder="Напишите, что сделано..."></textarea>
+                        <button class="btn btn-primary btn-small btn-full" id="proof-submit-btn" style="margin-top:8px;">
+                            <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                            Отправить на подтверждение
+                        </button>
+                    </div>
+
+                    <!-- Cancel timer (PIN protected) -->
+                    <div class="hidden timer-cancel-section" id="timer-cancel-pin-group">
+                        <p>Барои боздоштани таймер рамзи PIN-ро ворид кунед:</p>
+                        <div class="pin-input-group" style="justify-content:center;">
+                            <form onsubmit="return false;">
+                            <input type="password" id="timer-cancel-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" style="width:120px;font-size:18px;background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);" autocomplete="off">
+                            <button class="btn btn-primary btn-small" id="timer-cancel-submit">Тасдиқ</button>
+                            </form>
+                        </div>
+                        <p class="hidden pin-error" id="timer-cancel-error">Рамзи PIN нодуруст аст!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Task Modal -->
+        <div class="modal-overlay hidden" id="task-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 id="task-modal-title">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                        Вазифаи нав
+                    </h3>
+                    <button class="modal-close" id="task-modal-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="task-name">Номи вазифа</label>
+                        <input type="text" id="task-name" placeholder="Номи вазифаро ворид кунед">
+                    </div>
+                    <div class="form-group">
+                        <label for="task-duration">Вақт (дақиқа)</label>
+                        <input type="number" id="task-duration" min="1" max="120" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="task-emoji">Эмодзи</label>
+                        <input type="text" id="task-emoji" placeholder="🎯" maxlength="2">
+                    </div>
+                    <div class="form-group">
+                        <label id="task-deadline-label">
+                            <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-calendar"/></svg>
+                            Мӯҳлат (ихтиёрӣ)
+                        </label>
+                        <input type="date" id="task-deadline">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="task-is-bonus"> <span id="task-is-bonus-label">
+                                <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-gift"/></svg>
+                                Вазифаи бонусӣ
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-group hidden" id="bonus-price-group">
+                        <label for="bonus-price" id="bonus-price-label">Нарх (сомонӣ)</label>
+                        <select id="bonus-price">
+                            <option value="3">3 сомонӣ</option>
+                            <option value="5">5 сомонӣ</option>
+                            <option value="10">10 сомонӣ</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="task-save-btn">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
+                        Сабт кардан
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Screen (shown on first launch) -->
+        <div class="welcome-overlay hidden" id="welcome-screen">
+            <div class="welcome-container">
+                <div class="welcome-stars">
+                    <span>⭐</span><span>✨</span><span>⭐</span>
+                </div>
+                <div class="welcome-logo">
+                    <svg class="icon-svg welcome-logo-icon" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <h1 class="welcome-title" id="welcome-title">Офарин</h1>
+                    <svg class="icon-svg welcome-logo-icon" aria-hidden="true"><use href="#icon-star"/></svg>
+                </div>
+                <p class="welcome-greeting" id="welcome-greeting">Хуш омадед!</p>
+                <p class="welcome-subtitle" id="welcome-subtitle">Ба барномаи идоракунии вазифаҳои кӯдакон хуш омадед!</p>
+                <div class="welcome-lang-section">
+                    <p class="welcome-lang-label" id="welcome-lang-label">Забонро интихоб кунед:</p>
+                    <div class="welcome-lang-buttons">
+                        <button class="welcome-lang-btn" data-lang="tg" id="welcome-btn-tg">
+                            <span class="welcome-lang-flag">🇹🇯</span>
+                            <span class="welcome-lang-name" id="welcome-name-tg">Тоҷикӣ</span>
+                        </button>
+                        <button class="welcome-lang-btn" data-lang="ru" id="welcome-btn-ru">
+                            <span class="welcome-lang-flag">🇷🇺</span>
+                            <span class="welcome-lang-name" id="welcome-name-ru">Русский</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-large welcome-start-btn" id="welcome-start-btn">
+                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
+                    <span id="welcome-start-text">Оғоз</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Excuse Day Modal -->
+        <div class="modal-overlay hidden" id="excuse-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>🙏 Рӯзи узрнок</h3>
+                    <button class="modal-close" id="excuse-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Сабаби узрнокро интихоб кунед:</p>
+                    <div class="excuse-options">
+                        <button class="excuse-btn" data-reason="беморӣ">🤒 Беморӣ</button>
+                        <button class="excuse-btn" data-reason="меҳмонӣ">🎉 Меҳмонӣ</button>
+                        <button class="excuse-btn" data-reason="сафар">🚗 Сафар</button>
+                        <button class="excuse-btn" data-reason="дигар">📝 Дигар</button>
+                    </div>
+                    <div class="form-group hidden" id="custom-excuse-group">
+                        <label for="custom-excuse">Сабаби дигар:</label>
+                        <input type="text" id="custom-excuse" placeholder="Сабабро нависед...">
+                    </div>                        <form onsubmit="return false;">
+                        <div class="pin-input-group" style="margin-top:15px;">
+                            <input type="password" id="excuse-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
+                            <button class="btn btn-primary" id="excuse-submit">Тасдиқ</button>
+                        </div>
+                        </form>
+                    <p class="pin-error hidden" id="excuse-error">Рамзи PIN нодуруст аст!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdrawal Modal -->
+        <div class="modal-overlay hidden" id="withdraw-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg>
+                        Баровардани пул
+                    </h3>
+                    <button class="modal-close" id="withdraw-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Чанд сомонӣ мехоҳед бароред?</p>
+                    <p class="withdraw-info">Тавозуни ҷорӣ: <strong id="withdraw-balance">0</strong> сомонӣ</p>
+                    <div class="form-group">
+                        <input type="number" id="withdraw-amount" min="1" placeholder="Миқдор...">
+                    </div>
+                    <form onsubmit="return false;">
+                    <div class="pin-input-group">
+                        <input type="password" id="withdraw-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
+                        <button class="btn btn-primary" id="withdraw-submit">Баровардан</button>
+                    </div>
+                    </form>
+                    <p class="pin-error hidden" id="withdraw-error">Рамзи PIN нодуруст аст!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10-Day Test Modal -->
+        <div class="modal-overlay hidden" id="test-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-edit"/></svg>
+                        Санҷиши 10-рӯза
+                    </h3>
+                    <button class="modal-close" id="test-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Ба ҳар як вазифа хол диҳед (аз 0 то 1):</p>
+                    <div id="test-tasks-list"></div>
+                    <div class="test-total">
+                        <span>Ҳамагӣ:</span>
+                        <span class="test-score" id="test-score">0</span>
+                        <span>/ 10</span>
+                    </div>
+                    <p class="test-reward-info" id="test-reward-info">Мукофот: 0 сомонӣ</p>
+                    <form onsubmit="return false;">
+                    <div class="pin-input-group">
+                        <input type="password" id="test-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
+                        <button class="btn btn-primary" id="test-submit">Сабти натиҷа</button>
+                    </div>
+                    </form>
+                    <p class="pin-error hidden" id="test-error">Рамзи PIN нодуруст аст!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Child Modal -->
+        <div class="modal-overlay hidden" id="child-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 id="child-modal-title">
+                        Илова/тағйири кӯдак
+                    </h3>
+                    <button class="modal-close" id="child-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label id="child-name-label" for="child-name">Ном</label>
+                        <input type="text" id="child-name" placeholder="Номи кӯдак">
+                    </div>
+                    <div class="form-group">
+                        <label for="child-emoji">Эмодзи</label>
+                        <input type="text" id="child-emoji" value="👦" maxlength="2" style="text-align: center; font-size: 1.5rem;">
+                        <div class="emoji-suggestion-grid" id="child-emoji-suggestions">
+                            <span>👦</span><span>👧</span><span>👶</span><span>🐱</span><span>🐶</span><span>🦁</span><span>🐰</span><span>🦊</span><span>🐼</span><span>🐨</span><span>🦄</span><span>🦖</span><span>👾</span><span>🤖</span><span>⭐</span><span>🚀</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="child-color">Ранг</label>
+                        <input type="color" id="child-color" value="#7C3AED">
+                    </div>
+                    <div class="form-group">
+                        <label id="reward-type-label">
+                            <svg class="icon-svg icon-svg-sm" aria-hidden="true"><use href="#icon-star"/></svg>
+                            Намуди мукофот
+                        </label>
+                        <select id="child-reward-type">
+                            <option value="money">💰 Пул (сомонӣ)</option>
+                            <option value="stars">⭐ Ситорача</option>
+                            <option value="both">🌟 Ҳарду</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" id="child-save-btn" style="flex: 1;">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
+                            Сабт кардан
+                        </button>
+                        <button class="btn btn-danger hidden" id="child-delete-btn" style="flex: 0 0 auto; padding: 12px 16px;" title="Нест кардан">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-trash"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Notification Toast -->
+        <div class="toast hidden" id="toast">
+            <div class="toast-content">
+                <span id="toast-emoji">🎉</span>
+                <span id="toast-message">Табрик!</span>
+            </div>
+        </div>
+
+        <!-- Settings PIN Change Modal -->
+        <div class="modal-overlay hidden" id="settings-pin-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-shield"/></svg>
+                        Ворид шавед
+                    </h3>
+                    <button class="modal-close" id="settings-pin-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Барои ворид шудан ба танзимот рамзи PIN-ро ворид кунед:</p>
+                    <form onsubmit="return false;">
+                    <div class="pin-input-group">
+                        <input type="password" id="settings-pin-input" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
+                        <button class="btn btn-primary" id="settings-pin-submit">Ворид</button>
+                    </div>
+                    </form>
+                    <p class="pin-error hidden" id="settings-pin-error">Рамзи PIN нодуруст аст!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas" class="hidden"></canvas>
+
+    <script src="js/translations.js?v=19"></script>
+    <script src="js/data.js?v=19"></script>
+    <script src="js/app.js?v=19"></script>
+</body>
+</html>

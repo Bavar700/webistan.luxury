@@ -27,6 +27,28 @@ register_activation_hook(__FILE__, 'neksoz_b2b_flush_rules');
 function neksoz_b2b_flush_rules() {
     neksoz_b2b_register_cpt();
     flush_rewrite_rules();
+    
+    // Auto-seed initial reviews if the database is empty
+    $existing = get_posts(array('post_type' => 'b2b_reviews', 'numberposts' => 1, 'post_status' => 'publish'));
+    if (empty($existing)) {
+        $reviews = array(
+            array('title' => 'NAME_AMRIDINOVA', 'company' => 'DIRECTOR_AMERICAN', 'text' => 'TEXT_AMRIDINOVA', 'result' => 'RESULT_EFFICIENCY'),
+            array('title' => 'NAME_VEYN', 'company' => 'DIRECTOR_TOTAL', 'text' => 'TEXT_VEYN', 'result' => 'RESULT_RISKS'),
+            array('title' => 'NAME_USMONOV', 'company' => 'DIRECTOR_TICRO', 'text' => 'TEXT_USMONOV', 'result' => 'RESULT_STABILITY')
+        );
+        foreach ($reviews as $r) {
+            $post_id = wp_insert_post(array(
+                'post_title' => $r['title'],
+                'post_type' => 'b2b_reviews',
+                'post_status' => 'publish'
+            ));
+            if ($post_id) {
+                update_post_meta($post_id, '_b2b_company', $r['company']);
+                update_post_meta($post_id, '_b2b_text', $r['text']);
+                update_post_meta($post_id, '_b2b_result', $r['result']);
+            }
+        }
+    }
 }
 
 /**

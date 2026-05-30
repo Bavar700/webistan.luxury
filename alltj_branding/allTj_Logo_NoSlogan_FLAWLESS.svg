@@ -1,0 +1,13 @@
+<svg width="224" height="40" viewBox="22 6 118 21" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');</style>
+    <linearGradient id="grad_final_noslog" x1="-50%" y1="0%" x2="150%" y2="0%">
+      <stop offset="0%" stop-color="#EFBF04" />
+      <stop stop-color="#EFBF04"><animate attributeName="offset" values="0; 0.8; 0.8" keyTimes="0; 0.6; 1" dur="8s" repeatCount="indefinite" /></stop>
+      <stop stop-color="#FFFFFF"><animate attributeName="offset" values="0.1; 0.9; 0.9" keyTimes="0; 0.6; 1" dur="8s" repeatCount="indefinite" /></stop>
+      <stop stop-color="#EFBF04"><animate attributeName="offset" values="0.2; 1.0; 1.0" keyTimes="0; 0.6; 1" dur="8s" repeatCount="indefinite" /></stop>
+      <stop offset="100%" stop-color="#EFBF04" />
+    </linearGradient>
+  </defs>
+  <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="url(#grad_final_noslog)" text-anchor="middle" textLength="116" lengthAdjust="spacing">allTj.online</text>
+</svg>

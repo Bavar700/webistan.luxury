@@ -1,0 +1,42 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+        
+        .tj-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            fill: url(#goldGradient);
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .shimmer-rect {
+            animation: shimmer 3.5s infinite linear;
+        }
+    </style>
+
+    <defs>
+        <pattern id="goldGradient" x="0" y="0" width="100%" height="100%" patternUnits="userSpaceOnUse">
+            <rect width="100%" height="100%" fill="#EFBF04" />
+            <rect width="100%" height="100%" fill="url(#shimmerGradient)" class="shimmer-rect" />
+        </pattern>
+
+        <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+            <stop offset="50%" stop-color="rgba(255,255,255,0.7)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background (optional, keeping it transparent) -->
+    <rect width="32" height="32" fill="none" />
+
+    <!-- Tj Letters -->
+    <text x="16" y="16" class="tj-text">Tj</text>
+</svg>

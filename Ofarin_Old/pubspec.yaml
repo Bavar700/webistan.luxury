@@ -1,0 +1,58 @@
+name: ofarin
+description: "Офарин! Ту метавонӣ! - Gamified family app for task, time, and financial management."
+publish_to: 'none' # Prevent accidental publishing to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management & DI
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.3
+
+  # Routing
+  go_router: ^14.0.1
+
+  # Backend & Realtime Sync (Supabase Client SDK)
+  supabase_flutter: ^2.6.0
+
+  # Local Persistence & Storage
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.3
+
+  # Security & Hashing
+  crypto: ^3.0.3
+
+  # Modern Premium UI & Aesthetics
+  animations: ^2.0.11
+  image_picker: ^1.1.2
+  google_fonts: ^6.2.1
+  percent_indicator: ^4.2.3
+  confetti: ^0.7.0
+  uuid: ^4.3.3
+
+  # Localization helper
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.1
+
+  # Riverpod Code Generation & Build Tools
+  riverpod_generator: ^2.4.0
+  build_runner: ^2.4.9
+
+flutter:
+  uses-material-design: true
+
+  # Asset management for localization files
+  generate: true

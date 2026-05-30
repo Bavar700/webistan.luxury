@@ -3,7 +3,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj') {
     get_template_part('front-page', 'tj');
     return;
 }
-get_header(); 
+get_header(); global $current_lang;  
 ?>
 <main id='primary' class='site-main'>
 <section class="hero">
@@ -92,7 +92,7 @@ get_header();
                         <li>Confirming the reliability of reports and conducting tax audits</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-audit-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-audit', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 2. Financial Accounting Restoration -->
@@ -113,7 +113,7 @@ get_header();
                         <li>Reconciliation with counterparties and the tax office to prevent fines</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-restore-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-restore', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 3. Legal Consultations -->
@@ -134,7 +134,7 @@ get_header();
                         <li>Legal assistance and expertise for corporate contracts</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-legal-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-legal', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 4. Financial and HR Accounting -->
@@ -156,7 +156,7 @@ get_header();
                         <li>Executing vacations, business trips, and job descriptions</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-accounting-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-accounting', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 5. Secretariat Services -->
@@ -177,7 +177,7 @@ get_header();
                         <li>Secretarial outsourcing and legal translation services</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-secretariat-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-secretariat', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 6. Business Consulting -->
@@ -197,7 +197,7 @@ get_header();
                         <li>Financial planning and the development of growth models</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-consulting-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-consulting', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 7. Tax Consultations -->
@@ -217,7 +217,7 @@ get_header();
                         <li>Representation of interests in tax disputes</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-tax-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-tax', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 8. Management Accounting -->
@@ -238,7 +238,7 @@ get_header();
                         <li>Visualization of financial indicators for owners</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-management-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-management', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 9. Business Process Automation -->
@@ -259,7 +259,7 @@ get_header();
                         <li>Digitization of archives and electronic document management</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-automation-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-automation', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
 
             <!-- 10. Business Plans and Feasibility Studies -->
@@ -281,7 +281,7 @@ get_header();
                         <li>Supporting and defending the business plan during investor negotiations</li>
                     </ul>
                 </div>
-                <a href="<?php echo nk_link('/service-business-plan-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                <a href="<?php echo nk_link('/service-business-plan', 'en'); ?>" class="service-card__link">Read More →</a>
             </div>
         </div>
     </div>
@@ -317,7 +317,7 @@ get_header();
                     </div>
                     <div class="ceo-editorial__signature">Zoir Salimov</div>
                     <div class="ceo-editorial__footer">
-                        <a href="#" class="ceo-editorial__team-link">
+                        <a href="<?php echo nk_link('/team', 'en'); ?>" class="ceo-editorial__team-link">
                             Meet our team of experts
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
@@ -326,6 +326,18 @@ get_header();
             </div>
         </div>
     </div> <!-- Closing container -->
+</section>
+
+<!-- Reviews Carousel Section -->
+<section id="reviews" class="section">
+    <div class="container">
+        <div class="section__header section__header--center">
+            <div class="section__label">Reviews</div>
+            <h2 class="section__title section__title--huge">What our Clients say about us</h2>
+            <p class="section__subtitle">Real cases and results of cooperation with leading companies in the region.</p>
+        </div>
+        <?php echo do_shortcode('[b2b_carousel]'); ?>
+    </div>
 </section>
 
 <!-- ═══════════ CTA — CRYSTAL ELEGANCE EDITION ═══════════ -->
@@ -384,7 +396,7 @@ get_header();
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                     <p style="font-size: 11px; color: var(--nk-gray-500); text-align: center; margin-top: 20px; line-height: 1.4; opacity: 0.8; width: 100%;">
-                        By clicking the button, you agree with the <a href="<?php echo nk_link('/privacy-policy?lang=en', 'en'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>
+                        By clicking the button, you agree with the <a href="<?php echo nk_link('/privacy-policy', 'en'); ?>" style="color: var(--nk-blue); text-decoration: underline;">Privacy Policy</a>
                     </p>
                     <p class="cta-crystal__secure">🛡️ Secure Connection (SSL 256-bit)</p>
                     <div id="nk-form-status" style="margin-top: 15px; display: none;"></div>

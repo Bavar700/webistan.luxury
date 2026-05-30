@@ -6,7 +6,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj') {
     get_template_part('page', 'services-tj');
     return;
 }
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <main class="site-main">
@@ -31,7 +31,7 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="<?php echo nk_link('/contacts?lang=en', 'en'); ?>" class="btn btn--primary">Consultation</a>
+                <a href="<?php echo nk_link('/contacts', 'en'); ?>" class="btn btn--primary">Consultation</a>
             </div>
         </div>
     </section>
@@ -47,7 +47,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Financial Audit</h3></div>
                     <p class="service-card__text">You receive an independent review of reporting that confirms business transparency and identifies hidden financial risks.</p>
-                    <a href="<?php echo nk_link('/service-audit-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-audit', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 2. Restoration -->
@@ -57,7 +57,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Financial Accounting Restoration</h3></div>
                     <p class="service-card__text">We will bring your neglected documentation into full order, eliminating errors and protecting you from claims by state bodies.</p>
-                    <a href="<?php echo nk_link('/service-restore-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-restore', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 3. Legal -->
@@ -67,7 +67,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Legal Consultations</h3></div>
                     <p class="service-card__text">You ensure the legal security of your company and reliable protection of interests in any contracts and disputes.</p>
-                    <a href="<?php echo nk_link('/service-legal-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-legal', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 4. Accounting -->
@@ -77,7 +77,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Financial and HR Accounting</h3></div>
                     <p class="service-card__text">We take on all accounting and HR routines, guaranteeing the absence of fines and stable staff performance.</p>
-                    <a href="<?php echo nk_link('/service-accounting-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-accounting', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 5. Secretariat -->
@@ -87,7 +87,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Secretariat Services</h3></div>
                     <p class="service-card__text">You delegate documentation and call administration to professionals, freeing your time for strategic tasks.</p>
-                    <a href="<?php echo nk_link('/service-secretariat-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-secretariat', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 6. Consulting -->
@@ -97,7 +97,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Business Consulting</h3></div>
                     <p class="service-card__text">You receive expert support in finding new growth points and developing an effective growth model for your enterprise.</p>
-                    <a href="<?php echo nk_link('/service-consulting-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-consulting', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 7. Tax -->
@@ -107,7 +107,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Tax Consultations</h3></div>
                     <p class="service-card__text">We help legally optimize your tax burden and minimize risks ahead of regulatory audits.</p>
-                    <a href="<?php echo nk_link('/service-tax-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-tax', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 8. Management -->
@@ -117,7 +117,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Management Accounting</h3></div>
                     <p class="service-card__text">You gain full financial transparency and accurate data for decision-making that actually increases your profit.</p>
-                    <a href="<?php echo nk_link('/service-management-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-management', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 9. Automation -->
@@ -127,7 +127,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Business Process Automation</h3></div>
                     <p class="service-card__text">You free your team from routine tasks and eliminate human error by transitioning management into a fast and accurate digital environment.</p>
-                    <a href="<?php echo nk_link('/service-automation-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-automation', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
 
                 <!-- 10. Planning -->
@@ -137,7 +137,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Business Plans and Feasibility Studies</h3></div>
                     <p class="service-card__text">You receive a detailed financial document that proves the payback of your project and helps to confidently attract investments or bank loans.</p>
-                    <a href="<?php echo nk_link('/service-business-plan-en?lang=en', 'en'); ?>" class="service-card__link">Read More →</a>
+                    <a href="<?php echo nk_link('/service-business-plan', 'en'); ?>" class="service-card__link">Read More →</a>
                 </div>
             </div>
         </div>

@@ -223,6 +223,7 @@ const TRANSLATIONS = {
         'task_form.reward_stars': 'Ситора',
         'task_form.has_test': 'Санҷиш',
         'task_form.photo_required': 'Акс дар ҷавоб ҳатмӣ аст',
+        'task_form.has_penalty': '⚠️ Ҷарима дорад',
 
         // Child Form
         'child_form.title_new': '👶 Иловаи кӯдаки нав',
@@ -525,6 +526,7 @@ const TRANSLATIONS = {
         'task_form.reward_stars': 'Звёзды',
         'task_form.has_test': 'Есть тест/экзамен',
         'task_form.photo_required': 'Фото в ответе обязательно',
+        'task_form.has_penalty': '⚠️ Штраф предусмотрен',
 
         // Child Form
         'child_form.title_new': '👶 Добавить ребёнка',

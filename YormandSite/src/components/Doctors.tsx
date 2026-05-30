@@ -1,10 +1,8 @@
-import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-
-// You will replace these with real photos later
-import docPlaceholder1 from '../assets/images/photo1.jpg';
-import docPlaceholder2 from '../assets/images/photo3.jpg';
-import docPlaceholder3 from '../assets/images/photo4.jpg';
+import { useTranslation } from 'react-i18next';
+import docPlaceholder1 from '../assets/images/doc1.jpg';
+import docPlaceholder2 from '../assets/images/doc2.jpg';
+import docPlaceholder3 from '../assets/images/doc3.jpg';
 
 const Doctors = () => {
   const { t } = useTranslation();
@@ -12,36 +10,40 @@ const Doctors = () => {
   const doctors = [
     {
       id: 1,
-      name: 'Dr. Ёрманд',
-      specialty: 'Главный врач, Хирург-имплантолог',
-      experience: '15 лет опыта',
+      name: t('doctors_section.d1.name'),
+      specialty: t('doctors_section.d1.specialty'),
+      experience: t('doctors_section.d1.experience'),
       photo: docPlaceholder1,
+      objectPosition: 'center',
     },
     {
       id: 2,
-      name: 'Dr. Азизов',
-      specialty: 'Врач-ортодонт',
-      experience: '10 лет опыта',
+      name: t('doctors_section.d2.name'),
+      specialty: t('doctors_section.d2.specialty'),
+      experience: t('doctors_section.d2.experience'),
       photo: docPlaceholder2,
+      objectPosition: 'center',
     },
     {
       id: 3,
-      name: 'Dr. Саидова',
-      specialty: 'Терапевт, Эндодонтист',
-      experience: '8 лет опыта',
+      name: t('doctors_section.d3.name'),
+      specialty: t('doctors_section.d3.specialty'),
+      experience: t('doctors_section.d3.experience'),
       photo: docPlaceholder3,
-    },
+      objectPosition: 'center', 
+      transform: 'scale(1.35) translate(-6%, -10%)',
+    }
   ];
 
   return (
     <section id="doctors" className="section-padding" style={{ backgroundColor: 'var(--ivory)' }}>
       <div className="container">
         
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <div className="section-title-wrapper" style={{ textAlign: 'center', marginBottom: '80px' }}>
           <div className="section-subtitle" style={{ justifyContent: 'center' }}>
-            Команда
+            {t('doctors_section.team')}
           </div>
-          <h2>Наши Доктора</h2>
+          <h2>{t('doctors_section.title')}</h2>
         </div>
 
         <div className="doctors-grid" style={{
@@ -63,23 +65,32 @@ const Doctors = () => {
                 overflow: 'hidden',
                 boxShadow: 'var(--shadow-sm)',
                 transition: 'transform 0.4s ease, box-shadow 0.4s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%'
               }}
             >
               <div style={{ aspectRatio: '3/4', overflow: 'hidden' }}>
                 <img 
                   src={doc.photo} 
                   alt={doc.name} 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover', 
+                    objectPosition: doc.objectPosition || 'center',
+                    transform: doc.transform || 'none'
+                  }}
                   onError={(e) => { e.currentTarget.style.display = 'none'; }} 
                 />
               </div>
-              <div style={{ padding: '30px' }}>
+              <div style={{ padding: '30px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '5px' }}>{doc.name}</h3>
                 <div style={{ color: 'var(--teal)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '15px' }}>
                   {doc.specialty}
                 </div>
-                <div style={{ color: 'var(--text-light)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--gold)' }} />
+                <div style={{ color: 'var(--text-light)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px', marginTop: 'auto' }}>
+                  <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--teal)' }} />
                   {doc.experience}
                 </div>
               </div>
@@ -103,6 +114,9 @@ const Doctors = () => {
           @media (max-width: 600px) {
             .doctors-grid {
               grid-template-columns: 1fr !important;
+            }
+            .section-title-wrapper {
+              margin-bottom: 30px !important;
             }
           }
         `}

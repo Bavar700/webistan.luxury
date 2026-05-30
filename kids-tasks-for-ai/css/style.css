@@ -2589,3 +2589,24 @@ input.flatpickr-date:focus, input.flatpickr-time:focus {
 .flatpickr-time input {
     color: #fff !important;
 }
+
+/* ===== PENALTY GROUP ===== */
+#task-penalty-group {
+    animation: fadeIn 0.25s ease;
+}
+#task-penalty-group input[type="number"] {
+    border: 1.5px solid rgba(239, 68, 68, 0.45) !important;
+    background: rgba(239, 68, 68, 0.05) !important;
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 18px;
+}
+#task-penalty-group input[type="number"]:focus {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18) !important;
+    outline: none;
+}
+#task-has-penalty:checked + span {
+    color: #ef4444;
+    font-weight: 700;
+}

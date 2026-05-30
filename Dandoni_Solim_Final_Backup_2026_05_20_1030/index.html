@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dandoni Solim | Стоматологическая клиника в Душанбе</title>
+    <meta name="description"
+        content="Стоматологическая клиника Dandoni Solim в Душанбе (112 мкр). Профессиональное лечение зубов, брекеты по акции за 3500 сомони, циркониевые коронки, имплантация и отбеливание. Запишитесь на прием к врачу!">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Courgette&family=Damion&family=Dancing+Script:wght@400..700&family=Yellowtail&family=Alex+Brush&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Custom CSS split for ironclad device styling -->
+    <link rel="stylesheet" href="desktop_v169.css" media="screen and (min-width: 1024px)">
+    <link rel="stylesheet" href="mobile_v169.css" media="screen and (max-width: 1023px)">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-overlay-row">
+            <a href="#" class="header-brand-logo">
+                <img src="logo.jpg" alt="Dandoni Solim Logo">
+            </a>
+            <nav class="nav-links">
+                <a href="#about" id="navAboutLink">
+                    <span class="lang-ru">О нас</span>
+                    <span class="lang-tj" style="display:none;">Дар бораи мо</span>
+                    <span class="lang-en" style="display:none;">About</span>
+                </a>
+                <a href="#services" id="navServicesLink">
+                    <span class="lang-ru">Услуги</span>
+                    <span class="lang-tj" style="display:none;">Хидматҳо</span>
+                    <span class="lang-en" style="display:none;">Services</span>
+                </a>
+                <a href="#booking-section" id="navBookingLink">
+                    <span class="lang-ru">Запись</span>
+                    <span class="lang-tj" style="display:none;">Сабти ном</span>
+                    <span class="lang-en" style="display:none;">Booking</span>
+                </a>
+                <a href="#promo" id="navPromoLink">
+                    <span class="lang-ru">Акции</span>
+                    <span class="lang-tj" style="display:none;">Тахфифҳо</span>
+                    <span class="lang-en" style="display:none;">Offers</span>
+                </a>
+                <a href="#contacts" id="navContactsLink">
+                    <span class="lang-ru">Контакты</span>
+                    <span class="lang-tj" style="display:none;">Тамос</span>
+                    <span class="lang-en" style="display:none;">Contacts</span>
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-selector" id="langSelector">
+                    <button class="lang-btn active" data-lang="ru" id="btnLangRu">RU</button>
+                    <button class="lang-btn" data-lang="tj" id="btnLangTj">TJ</button>
+                    <button class="lang-btn" data-lang="en" id="btnLangEn">EN</button>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <div class="mobile-nav-container">
+            <button class="close-mobile-menu" id="closeMobileMenuBtn"><i class="fas fa-times"></i></button>
+            <nav class="mobile-nav-links">
+                <a href="#about" class="mob-link">
+                    <span class="lang-ru">О нас</span>
+                    <span class="lang-tj" style="display:none;">Дар бораи мо</span>
+                    <span class="lang-en" style="display:none;">About</span>
+                </a>
+                <a href="#services" class="mob-link">
+                    <span class="lang-ru">Услуги</span>
+                    <span class="lang-tj" style="display:none;">Хидматҳо</span>
+                    <span class="lang-en" style="display:none;">Services</span>
+                </a>
+                <a href="#booking-section" class="mob-link">
+                    <span class="lang-ru">Запись</span>
+                    <span class="lang-tj" style="display:none;">Сабти ном</span>
+                    <span class="lang-en" style="display:none;">Booking</span>
+                </a>
+                <a href="#promo" class="mob-link">
+                    <span class="lang-ru">Акции</span>
+                    <span class="lang-tj" style="display:none;">Тахфифҳо</span>
+                    <span class="lang-en" style="display:none;">Offers</span>
+                </a>
+                <a href="#contacts" class="mob-link">
+                    <span class="lang-ru">Контакты</span>
+                    <span class="lang-tj" style="display:none;">Тамос</span>
+                    <span class="lang-en" style="display:none;">Contacts</span>
+                </a>
+            </nav>
+            <div class="mobile-nav-actions">
+                <a href="tel:+992206443444" class="mobile-cta-btn"><i class="fas fa-phone"></i> +992 20 644 3444</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text-group">
+                    <span class="hero-badge">
+                        <i class="fas fa-certificate"></i>
+                        <span class="lang-ru">Премиум Стоматология в Душанбе</span>
+                        <span class="lang-tj" style="display:none;">Дандонпизишкии мумтоз дар Душанбе</span>
+                        <span class="lang-en" style="display:none;">Premium Dental Care in Dushanbe</span>
+                    </span>
+
+                    <h1 class="hero-title">
+                        <span class="lang-ru">Улыбка — красива с <br><span class="cyan-text">Dandoni Solim</span></span>
+                        <span class="lang-tj" style="display:none;">Табассум — бо <br><span class="cyan-text">Dandoni Solim</span> зебо аст</span>
+                        <span class="lang-en" style="display:none;">A Beautiful Smile<br>with <span class="cyan-text">Dandoni Solim</span></span>
+                    </h1>
+
+                    <p class="hero-desc">
+                        <span class="lang-ru">Профессиональное лечение, современное медицинское оборудование и
+                            безболезненный подход для вашей идеальной улыбки!</span>
+                        <span class="lang-tj" style="display:none;">Табобати касбӣ, таҷҳизоти муосири тиббӣ ва равиши бедард
+                            барои табассуми беназири Шумо!</span>
+                        <span class="lang-en" style="display:none;">Professional treatment, state-of-the-art medical equipment and a pain-free approach for your perfect smile!</span>
+                    </p>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#booking-section" class="primary-btn" id="heroCtaBtn">
+                        <span class="lang-ru">Записаться на приём</span>
+                        <span class="lang-tj" style="display:none;">Сабти ном ба қабул</span>
+                        <span class="lang-en" style="display:none;">Book an Appointment</span>
+                        <i class="fas fa-calendar-check"></i>
+                    </a>
+                    <a href="#services" class="secondary-btn" id="heroSecondaryBtn">
+                        <span class="lang-ru">Наши услуги</span>
+                        <span class="lang-tj" style="display:none;">Хидматҳои мо</span>
+                        <span class="lang-en" style="display:none;">Our Services</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Styled Facebook-Matching Tooth Visual -->
+            <div class="hero-visual">
+                <div class="luxury-card-wrapper">
+                    <div class="glass-card tooth-card">
+                        <img src="logo.jpg" alt="Dandoni Solim" class="hero-card-logo-img" />
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">
+                            <span class="lang-ru">Безболезненно</span>
+                            <span class="lang-tj" style="display:none;">Бедард</span>
+                            <span class="lang-en" style="display:none;">Pain-Free</span>
+                        </span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">5000+</span>
+                        <span class="stat-label">
+                            <span class="lang-ru">Счастливых улыбок</span>
+                            <span class="lang-tj" style="display:none;">Табассумҳои зебо</span>
+                            <span class="lang-en" style="display:none;">Happy Smiles</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-images-wrapper">
+                    <div class="about-main-image glass-panel">
+                        <img src="clinic-interior.png" alt="Dandoni Solim Dental Clinic Interior"
+                            class="clinic-photo" />
+                    </div>
+                </div>
+
+                <div class="about-info">
+                    <h2 class="section-subtitle">
+                        <i class="fas fa-certificate"></i>
+                        <span class="lang-ru">О КЛИНИКЕ</span>
+                        <span class="lang-tj" style="display:none;">ДАР БОРАИ КЛИНИКА</span>
+                        <span class="lang-en" style="display:none;">ABOUT THE CLINIC</span>
+                    </h2>
+                    <h3 class="section-title">
+                        <span class="lang-ru"><span class="title-left">Забота о <span class="cyan-text">Вашем здоровье</span> —</span><span class="title-right">наша&nbsp;обязанность!</span></span>
+                        <span class="lang-tj" style="display:none;"><span class="title-left">Ғамхорӣ ба <span class="cyan-text">саломатии Шумо</span> —</span><span class="title-right">вазифаи&nbsp;мост!</span></span>
+                        <span class="lang-en" style="display:none;"><span class="title-left">Caring for <span class="cyan-text">Your Health</span></span><span class="title-right">&nbsp;is our&nbsp;duty!</span></span>
+                    </h3>
+                    <p class="about-description">
+                        <span class="lang-ru">Стоматологическая клиника "Dandoni Solim" предлагает надежное и
+                            профессиональное лечение зубов с использованием передового оборудования и новейших
+                            медицинских технологий в г. Душанбе. Мы собрали команду высококлассных врачей, чтобы
+                            гарантировать максимальный комфорт и долговечность результатов!</span>
+                        <span class="lang-tj" style="display:none;">Клиникаи дандонпизишкии "Dandoni Solim" табобати боэътимод ва касбии дандонҳоро бо истифода аз таҷҳизоти муосир ва навтарин технологияҳои тиббӣ дар ш. Душанбе пешниҳод менамояд. Мо гурӯҳи табибони дараҷаи олиро ҷамъ овардаем, то роҳатии комил ва натиҷаи дарозмуддастро кафолат диҳем!</span>
+                        <span class="lang-en" style="display:none;">"Dandoni Solim" dental clinic offers reliable and professional dental care using cutting-edge equipment and the latest medical technologies in Dushanbe. We have assembled a team of top-tier doctors to guarantee maximum comfort and long-lasting results!</span>
+                    </p>
+
+                    <div class="features-list">
+                        <div class="feature-card glass-card">
+                            <div class="feature-icon"><i class="fas fa-microscope"></i></div>
+                            <div class="feature-text">
+                                <h4 class="lang-ru">Высокая точность</h4>
+                                <h4 class="lang-tj" style="display:none;">Дақиқии баланд</h4>
+                                <h4 class="lang-en" style="display:none;">High Precision</h4>
+                                <p class="lang-ru">Передовая диагностика</p>
+                                <p class="lang-tj" style="display:none;">Ташхиси муосир</p>
+                                <p class="lang-en" style="display:none;">Advanced Diagnostics</p>
+                            </div>
+                        </div>
+                        <div class="feature-card glass-card">
+                            <div class="feature-icon"><i class="fas fa-hand-holding-hand"></i></div>
+                            <div class="feature-text">
+                                <h4 class="lang-ru">Полный комфорт</h4>
+                                <h4 class="lang-tj" style="display:none;">Роҳатии комил</h4>
+                                <h4 class="lang-en" style="display:none;">Total Comfort</h4>
+                                <p class="lang-ru">Безболезненные процедуры</p>
+                                <p class="lang-tj" style="display:none;">Табобати бедард</p>
+                                <p class="lang-en" style="display:none;">Pain-Free Procedures</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-container">
+            <div class="services-header text-center">
+                <h2 class="section-subtitle">
+                    <i class="fas fa-certificate"></i>
+                    <span class="lang-ru">НАШИ УСЛУГИ</span>
+                    <span class="lang-tj" style="display:none;">ХИДМАТҲОИ МО</span>
+                    <span class="lang-en" style="display:none;">OUR SERVICES</span>
+                </h2>
+                <h3 class="section-title">
+                    <span class="lang-ru">Широкий спектр <span class="cyan-text">стоматологических&nbsp;услуг</span></span>
+                    <span class="lang-tj" style="display:none;">Маҷмӯи васеи <span class="cyan-text">хидматҳои&nbsp;дандонпизишкӣ</span></span>
+                    <span class="lang-en" style="display:none;">A Wide Range of <span class="cyan-text">Dental&nbsp;Services</span></span>
+                </h3>
+            </div>
+
+            <div class="services-grid">
+                <!-- Service Card 1: Брекет -->
+                <div class="service-card glass-card">
+                    <div class="service-glow"></div>
+                    <div class="service-icon"><img src="icon-braces.jpg" alt="Брекеты" class="service-img-icon crop-border" /></div>
+                    <h4 class="service-title">
+                        <span class="lang-ru">Брекеты (Ортодонтия)</span>
+                        <span class="lang-tj" style="display:none;">Брекетҳо (Ортодонтия)</span>
+                        <span class="lang-en" style="display:none;">Braces (Orthodontics)</span>
+                    </h4>
+                    <p class="service-desc">
+                        <span class="lang-ru">Исправление прикуса и выравнивание неровных зубов. Красивая и ровная
+                            улыбка с гарантией уверенности!</span>
+                        <span class="lang-tj" style="display:none;">Ислоҳи ҷуфтшавии дандонҳо ва рост кардани дандонҳои ноҳамвор. Табассуми зебо ва ҳамвор бо кафолати эътимод ба худ!</span>
+                        <span class="lang-en" style="display:none;">Bite correction and teeth alignment. A beautiful, even smile with guaranteed confidence!</span>
+                    </p>
+                    <a href="#promo" class="service-link">
+                        <span class="lang-ru">Смотреть акцию</span>
+                        <span class="lang-tj" style="display:none;">Дидани тахфифҳо</span>
+                        <span class="lang-en" style="display:none;">View Offer</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 2: Имплант -->
+                <div class="service-card glass-card">
+                    <div class="service-glow"></div>
+                    <div class="service-icon"><img src="icon-implant.jpg" alt="Имплантация" class="service-img-icon" />
+                    </div>
+                    <h4 class="service-title">
+                        <span class="lang-ru">Имплантация зубов</span>
+                        <span class="lang-tj" style="display:none;">Имплантатсияи дандон</span>
+                        <span class="lang-en" style="display:none;">Dental Implants</span>
+                    </h4>
+                    <p class="service-desc">
+                        <span class="lang-ru">Надежное восстановление отсутствующих зубов с использованием
+                            высококачественных имплантов (Имплант).</span>
+                        <span class="lang-tj" style="display:none;">Барқароркунии боэътимоди дандонҳои афтода бо истифода аз имплантҳои баландсифат.</span>
+                        <span class="lang-en" style="display:none;">Reliable restoration of missing teeth using high-quality dental implants.</span>
+                    </p>
+                    <a href="#booking-section" class="service-link">
+                        <span class="lang-ru">Записаться на прием</span>
+                        <span class="lang-tj" style="display:none;">Сабти ном ба қабул</span>
+                        <span class="lang-en" style="display:none;">Book an Appointment</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 3: Чистка -->
+                <div class="service-card glass-card">
+                    <div class="service-glow"></div>
+                    <div class="service-icon"><img src="icon-filling.jpg" alt="Чистка" class="service-img-icon" />
+                    </div>
+                    <h4 class="service-title">
+                        <span class="lang-ru">Профессиональная чистка</span>
+                        <span class="lang-tj" style="display:none;">Ҷирмгирӣ</span>
+                        <span class="lang-en" style="display:none;">Professional Cleaning</span>
+                    </h4>
+                    <p class="service-desc">
+                        <span class="lang-ru">Удаление зубного камня и налета ультразвуком для сохранения здоровья зубов
+                            и естественного сияния.</span>
+                        <span class="lang-tj" style="display:none;">Тоза кардани санг ва ҷирми дандон бо ултрасадо барои ҳифзи саломатӣ ва дурахши табиии онҳо.</span>
+                        <span class="lang-en" style="display:none;">Ultrasonic tartar and plaque removal to preserve dental health and natural shine.</span>
+                    </p>
+                    <a href="#booking-section" class="service-link">
+                        <span class="lang-ru">Записаться на прием</span>
+                        <span class="lang-tj" style="display:none;">Сабти ном ба қабул</span>
+                        <span class="lang-en" style="display:none;">Book an Appointment</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 4: Металокерамика -->
+                <div class="service-card glass-card">
+                    <div class="service-glow"></div>
+                    <div class="service-icon"><img src="icon-metalceramic.jpg" alt="Металлокерамика"
+                            class="service-img-icon crop-border" /></div>
+                    <h4 class="service-title">
+                        <span class="lang-ru">Металлокерамика</span>
+                        <span class="lang-tj" style="display:none;">Рӯйкашҳои филизӣ-сафолӣ</span>
+                        <span class="lang-en" style="display:none;">Metal-Ceramic Crowns</span>
+                    </h4>
+                    <p class="service-desc">
+                        <span class="lang-ru">Прочные и надежные коронки для безупречного восстановления жевательной
+                            функции и формы зуба.</span>
+                        <span class="lang-tj" style="display:none;">Рӯйкашҳои мустаҳкам ва боэътимод барои барқароркунии бенақси амалкарди хоидан ва шакли дандон.</span>
+                        <span class="lang-en" style="display:none;">Durable and reliable crowns for flawless restoration of chewing function and tooth shape.</span>
+                    </p>
+                    <a href="#booking-section" class="service-link">
+                        <span class="lang-ru">Записаться на прием</span>
+                        <span class="lang-tj" style="display:none;">Сабти ном ба қабул</span>
+                        <span class="lang-en" style="display:none;">Book an Appointment</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 5: Керамика -->
+                <div class="service-card glass-card">
+                    <div class="service-glow"></div>
+                    <div class="service-icon"><img src="icon-ceramic.jpg" alt="Керамика" class="service-img-icon" />
+                    </div>
+                    <h4 class="service-title">
+                        <span class="lang-ru">Безметалловая керамика</span>
+                        <span class="lang-tj" style="display:none;">Сафоли бефилиз</span>
+                        <span class="lang-en" style="display:none;">Metal-Free Ceramics</span>
+                    </h4>
+                    <p class="service-desc">
+                        <span class="lang-ru">Керамические коронки и виниры (Керамика). Идеальная эстетика и роскошная
+                            естественная белизна.</span>
+                        <span class="lang-tj" style="display:none;">Рӯйкашҳои сафолӣ ва винирҳо. Эстетикаи бенақс ва сафедии табиию боҳашамат.</span>
+                        <span class="lang-en" style="display:none;">Ceramic crowns and veneers. Flawless aesthetics and luxurious natural whiteness.</span>
+                    </p>
+                    <a href="#booking-section" class="service-link">
+                        <span class="lang-ru">Записаться на прием</span>
+                        <span class="lang-tj" style="display:none;">Сабти ном ба қабул</span>
+                        <span class="lang-en" style="display:none;">Book an Appointment</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 6: Пломба -->
+                <div class="service-card glass-card">
+                    <div class="service-glow"></div>
+                    <div class="service-icon"><img src="icon-cleaning.jpg" alt="Пломба" class="service-img-icon" /></div>
+                    <h4 class="service-title">
+                        <span class="lang-ru">Лечение кариеса (Пломба)</span>
+                        <span class="lang-tj" style="display:none;">Табобати кариес</span>
+                        <span class="lang-en" style="display:none;">Cavity Treatment (Filling)</span>
+                    </h4>
+                    <p class="service-desc">
+                        <span class="lang-ru">Безболезненное лечение кариеса любой сложности и установка
+                            высококачественных световых пломб.</span>
+                        <span class="lang-tj" style="display:none;">Табобати бедарди кариес дар ҳама гуна дараҷаи мураккабӣ ва гузоштани пломбаҳои нурии баландсифат.</span>
+                        <span class="lang-en" style="display:none;">Pain-free cavity treatment of any complexity and placement of high-quality light-cured fillings.</span>
+                    </p>
+                    <a href="#booking-section" class="service-link">
+                        <span class="lang-ru">Записаться на прием</span>
+                        <span class="lang-tj" style="display:none;">Сабти ном ба қабул</span>
+                        <span class="lang-en" style="display:none;">Book an Appointment</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promos & Offers Section -->
+    <section class="promo-section" id="promo">
+        <div class="section-container">
+            <div class="promo-box glass-panel">
+                <div class="promo-content">
+                    <div class="promo-badge-container">
+                        <span class="promo-badge lang-ru"><i class="fas fa-fire"></i> Горячее предложение</span>
+                        <span class="promo-badge lang-tj" style="display:none;"><i class="fas fa-fire"></i> Пешниҳоди махсус</span>
+                        <span class="promo-badge lang-en" style="display:none;"><i class="fas fa-fire"></i> Hot Offer</span>
+                    </div>
+
+                    <h2 class="promo-title">
+                        <span class="lang-ru"><span class="cyan-text">Акция на&nbsp;брекеты</span> в&nbsp;Душанбе!</span>
+                        <span class="lang-tj" style="display:none;"><span class="cyan-text">Тахфифи&nbsp;брекетҳо</span> дар&nbsp;Душанбе!</span>
+                        <span class="lang-en" style="display:none;"><span class="cyan-text">Special&nbsp;Offer</span> on Braces in&nbsp;Dushanbe!</span>
+                    </h2>
+                    <h3 class="promo-price">
+                        <span class="old-price">5000 TJS</span>
+                        <span class="new-price offer-blink">3500 TJS</span>
+                    </h3>
+                    <p class="promo-desc">
+                        <span class="lang-ru">Исправьте прикус и сделайте свои зубы ровными и красивыми со скидкой!
+                            Первичная консультация ортодонта предоставляется абсолютно бесплатно. Количество мест по
+                            акции ограничено!</span>
+                        <span class="lang-tj" style="display:none;">Дандонҳоятонро ислоҳ кунед ва онҳоро бо нархи беҳтарин ҳамвор созед! Машварати аввалини ортодонт ройгон аст. Шумораи ҷойҳо бо тахфиф маҳдуд аст!</span>
+                        <span class="lang-en" style="display:none;">Straighten your teeth and get a beautiful, even smile at a discount! Initial orthodontist consultation is absolutely free. Limited spots available!</span>
+                    </p>
+                    <div class="promo-actions">
+                        <a href="#booking-section" class="primary-btn" id="promoBookBtn">
+                            <span class="lang-ru">Записаться по акции</span>
+                            <span class="lang-tj" style="display:none;">Сабти ном бо тахфиф</span>
+                            <span class="lang-en" style="display:none;">Book at Discount</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="promo-visual">
+                    <div class="promo-icon-box">
+                        <img src="qr-code.svg" alt="QR Code" class="promo-qr-img" />
+                        <span class="promo-visual-label lang-ru">Бесплатная консультация</span>
+                        <span class="promo-visual-label lang-tj" style="display:none;">Машварати ройгон</span>
+                        <span class="promo-visual-label lang-en" style="display:none;">Free Consultation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: High-End Interactive Appointment Booking Section -->
+    <section class="booking-section" id="booking-section">
+        <div class="section-container">
+            <div class="booking-wrapper glass-panel">
+                <div class="booking-header text-center">
+                    <h2 class="section-subtitle">
+                        <i class="fas fa-certificate"></i>
+                        <span class="lang-ru">ОНЛАЙН ЗАПИСЬ</span>
+                        <span class="lang-tj" style="display:none;">САБТИ НОМИ ОНЛАЙН</span>
+                        <span class="lang-en" style="display:none;">ONLINE BOOKING</span>
+                    </h2>
+                    <h3 class="section-title">
+                        <span class="lang-ru"><span class="cyan-text">Запишитесь на&nbsp;приём</span> на удобное&nbsp;время</span>
+                        <span class="lang-tj" style="display:none;">Барои вақти қулай <br><span style="white-space: nowrap;"><span class="cyan-text">сабти ном кунед</span></span></span>
+                        <span class="lang-en" style="display:none;"><span class="cyan-text">Book an&nbsp;Appointment</span> at a convenient&nbsp;time</span>
+                    </h3>
+                    <div class="booking-divider"></div>
+                </div>
+
+                <form class="interactive-booking-form" id="mainBookingForm">
+                    <!-- Step 1: Select Doctor -->
+                    <div class="booking-step">
+                        <h4 class="step-title">
+                            <span class="lang-ru">1. Выберите специалиста</span>
+                            <span class="lang-tj" style="display:none;">1. Мутахассисро интихоб кунед</span>
+                            <span class="lang-en" style="display:none;">1. Choose a Specialist</span>
+                        </h4>
+                        <div class="doctors-grid">
+                            <div class="doctor-card active" data-doctor="dr-alisher">
+                                <div class="dr-icon"><i class="fas fa-user-doctor"></i></div>
+                                <div class="dr-info">
+                                    <h5 class="dr-name">
+                                        <span class="lang-ru">Д-р Алишер</span>
+                                        <span class="lang-tj" style="display:none;">Д-р Алишер</span>
+                                        <span class="lang-en" style="display:none;">Dr. Alisher</span>
+                                    </h5>
+                                    <p class="dr-spec lang-ru">Ортодонт (Брекеты)</p>
+                                    <p class="dr-spec lang-tj" style="display:none;">Ортодонт (барои брекетҳо)</p>
+                                    <p class="dr-spec lang-en" style="display:none;">Orthodontist (Braces)</p>
+                                </div>
+                                <div class="select-badge"><i class="fas fa-circle-check"></i></div>
+                            </div>
+                            <div class="doctor-card" data-doctor="dr-zarina">
+                                <div class="dr-icon"><i class="fas fa-user-doctor"></i></div>
+                                <div class="dr-info">
+                                    <h5 class="dr-name">
+                                        <span class="lang-ru">Д-р Зарина</span>
+                                        <span class="lang-tj" style="display:none;">Д-р Зарина</span>
+                                        <span class="lang-en" style="display:none;">Dr. Zarina</span>
+                                    </h5>
+                                    <p class="dr-spec lang-ru">Эстетическая стоматология</p>
+                                    <p class="dr-spec lang-tj" style="display:none;">Дандонпизишкии эстетикӣ</p>
+                                    <p class="dr-spec lang-en" style="display:none;">Aesthetic Dentistry</p>
+                                </div>
+                                <div class="select-badge"><i class="fas fa-circle-check"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Date & Time -->
+                    <div class="booking-step mt-40">
+                        <h4 class="step-title">
+                            <span class="lang-ru">2. Дата и время приёма</span>
+                            <span class="lang-tj" style="display:none;">2. Сана ва вақти қабул</span>
+                            <span class="lang-en" style="display:none;">2. Date & Time</span>
+                        </h4>
+
+                        <div class="datetime-grid">
+                            <!-- Date picker -->
+                            <div class="form-group flex-1">
+                                <label for="bookingDate">
+                                    <span class="lang-ru">Выберите дату</span>
+                                    <span class="lang-tj" style="display:none;">Санаро интихоб кунед</span>
+                                    <span class="lang-en" style="display:none;">Select a Date</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-calendar input-icon"></i>
+                                    <input type="text" id="bookingDate" placeholder="Выберите дату..." style="cursor: pointer;" required>
+                                </div>
+                            </div>
+
+                            <!-- Time slots -->
+                            <div class="form-group flex-1">
+                                <label>
+                                    <span class="lang-ru">Доступные слоты</span>
+                                    <span class="lang-tj" style="display:none;">Вақтҳои холӣ</span>
+                                    <span class="lang-en" style="display:none;">Available Slots</span>
+                                </label>
+                                <div class="time-slots-grid" id="timeSlotsContainer">
+                                    <button type="button" class="time-slot active" data-time="09:00">09:00</button>
+                                    <button type="button" class="time-slot" data-time="10:00">10:00</button>
+                                    <button type="button" class="time-slot" data-time="11:00">11:00</button>
+                                    <button type="button" class="time-slot" data-time="14:00">14:00</button>
+                                    <button type="button" class="time-slot" data-time="15:00">15:00</button>
+                                    <button type="button" class="time-slot" data-time="16:00">16:00</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Contact Info -->
+                    <div class="booking-step mt-40">
+                        <h4 class="step-title">
+                            <span class="lang-ru">3. Персональные данные</span>
+                            <span class="lang-tj" style="display:none;">3. Маълумоти шахсӣ</span>
+                            <span class="lang-en" style="display:none;">3. Personal Information</span>
+                        </h4>
+
+                        <div class="personal-info-grid">
+                            <div class="form-group">
+                                <label for="bookingName">
+                                    <span class="lang-ru">Ваше Имя</span>
+                                    <span class="lang-tj" style="display:none;">Номи Шумо</span>
+                                    <span class="lang-en" style="display:none;">Your Name</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" id="bookingName" placeholder="Алишер" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bookingPhone">
+                                    <span class="lang-ru">Номер телефона</span>
+                                    <span class="lang-tj" style="display:none;">Рақами телефон</span>
+                                    <span class="lang-en" style="display:none;">Phone Number</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-phone input-icon"></i>
+                                    <input type="tel" id="bookingPhone" placeholder="+992 XX XXX XXXX" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="booking-submit-area mt-40">
+                        <button type="submit" class="primary-btn booking-submit-btn" id="mainBookingSubmitBtn">
+                            <span class="lang-ru">Подтвердить запись на приём</span>
+                            <span class="lang-tj" style="display:none;">Тасдиқи сабти ном</span>
+                            <span class="lang-en" style="display:none;">Confirm Appointment</span>
+                            <i class="fas fa-check-double"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Success Screen -->
+                <div class="booking-success-message" id="mainBookingSuccess" style="display:none;">
+                    <div class="success-header">
+                        <i class="fas fa-circle-check success-check-icon"></i>
+                        <h4 class="lang-ru">Вы успешно записаны на приём!</h4>
+                        <h4 class="lang-tj" style="display:none;">Сабти ном бо муваффақият тасдиқ шуд!</h4>
+                        <h4 class="lang-en" style="display:none;">Your appointment has been confirmed!</h4>
+                        <p class="lang-ru">Чек вашей записи сформирован ниже:</p>
+                        <p class="lang-tj" style="display:none;">Расиди сабти номи Шумо дар поён омода аст:</p>
+                        <p class="lang-en" style="display:none;">Your booking receipt is provided below:</p>
+                    </div>
+                    <div class="receipt-card glass-card">
+                        <div class="receipt-row">
+                            <span class="receipt-label lang-ru">Клиника:</span>
+                            <span class="receipt-label lang-tj" style="display:none;">Клиника:</span>
+                            <span class="receipt-label lang-en" style="display:none;">Clinic:</span>
+                            <span class="receipt-val">Dandoni Solim</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label lang-ru">Специалист:</span>
+                            <span class="receipt-label lang-tj" style="display:none;">Мутахассис:</span>
+                            <span class="receipt-label lang-en" style="display:none;">Specialist:</span>
+                            <span class="receipt-val" id="receiptDoctor">
+                                <span class="lang-ru">Д-р Алишер</span>
+                                <span class="lang-tj" style="display:none;">Д-р Алишер</span>
+                                <span class="lang-en" style="display:none;">Dr. Alisher</span>
+                            </span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label lang-ru">Дата приёма:</span>
+                            <span class="receipt-label lang-tj" style="display:none;">Санаи қабул:</span>
+                            <span class="receipt-label lang-en" style="display:none;">Appointment Date:</span>
+                            <span class="receipt-val" id="receiptDate">18.05.2026</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label lang-ru">Время приёма:</span>
+                            <span class="receipt-label lang-tj" style="display:none;">Вақти қабул:</span>
+                            <span class="receipt-label lang-en" style="display:none;">Appointment Time:</span>
+                            <span class="receipt-val" id="receiptTime">09:00</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label lang-ru">Пациент:</span>
+                            <span class="receipt-label lang-tj" style="display:none;">Бемор:</span>
+                            <span class="receipt-label lang-en" style="display:none;">Patient:</span>
+                            <span class="receipt-val" id="receiptName">Алишер</span>
+                        </div>
+                    </div>
+
+                    <div class="receipt-info-block mt-16 text-left" style="background: rgba(0, 180, 216, 0.04); padding: 16px; border-radius: 8px; border-left: 3px solid var(--cyan);">
+                        <h5 class="receipt-info-title" style="margin: 0 0 8px 0; font-size: 14px; font-weight: 700; color: var(--text-primary);">
+                            <span class="lang-ru">Важная информация:</span>
+                            <span class="lang-tj" style="display:none;">Маълумоти муҳим:</span>
+                            <span class="lang-en" style="display:none;">Important Information:</span>
+                        </h5>
+                        <ul class="receipt-info-list" style="margin: 0; padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                            <li>
+                                <span class="lang-ru">Пожалуйста, приходите в клинику за 10 минут до назначенного времени.</span>
+                                <span class="lang-tj" style="display:none;">Лутфан, 10 дақиқа пеш аз вақти таъиншуда ба дармонгоҳ биёед.</span>
+                                <span class="lang-en" style="display:none;">Please arrive at the clinic 10 minutes before your scheduled time.</span>
+                            </li>
+                            <li>
+                                <span class="lang-ru">Если ваши планы изменятся, пожалуйста, предупредите нас по телефону минимум за 2 часа.</span>
+                                <span class="lang-tj" style="display:none;">Агар нақшаҳоятон тағйир ёбанд, ҳадди ақал 2 соат пеш тавассути телефон ба мо хабар диҳед.</span>
+                                <span class="lang-en" style="display:none;">If your plans change, please notify us by phone at least 2 hours in advance.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="secondary-btn mt-24" id="btnBookAgain">
+                        <span class="lang-ru">ОК</span>
+                        <span class="lang-tj" style="display:none;">Олӣ</span>
+                        <span class="lang-en" style="display:none;">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section class="contacts-section" id="contacts">
+        <div class="section-container">
+            <div class="contacts-grid">
+
+                <!-- Contact info -->
+                <div class="contacts-info">
+                    <h2 class="section-subtitle">
+                        <i class="fas fa-certificate"></i>
+                        <span class="lang-ru">КОНТАКТЫ</span>
+                        <span class="lang-tj" style="display:none;">ТАМОС</span>
+                        <span class="lang-en" style="display:none;">CONTACTS</span>
+                    </h2>
+                    <h3 class="section-title">
+                        <span class="lang-ru"><span class="cyan-text">Ждем Вас</span> в нашей&nbsp;клинике</span>
+                        <span class="lang-tj" style="display:none;">Мо Шуморо дар <span class="cyan-text">Дармонгоҳ интизорем</span></span>
+                        <span class="lang-en" style="display:none;"><span class="cyan-text">We Welcome You</span> to Our&nbsp;Clinic</span>
+                    </h3>
+
+                    <div class="contact-methods">
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon"><i class="fas fa-map-location-dot"></i></div>
+                            <div class="contact-text">
+                                <h4 class="lang-ru">Адрес</h4>
+                                <h4 class="lang-tj" style="display:none;">Суроға</h4>
+                                <h4 class="lang-en" style="display:none;">Address</h4>
+                                <p class="lang-ru">Таджикистан, г. Душанбе, 112-й микрорайон</p>
+                                <p class="lang-tj" style="display:none;">Тоҷикистон, ш. Душанбе, маҳаллаи 112</p>
+                                <p class="lang-en" style="display:none;">Tajikistan, Dushanbe, 112th Microdistrict</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
+                            <div class="contact-text">
+                                <h4 class="lang-ru">Телефон / WhatsApp</h4>
+                                <h4 class="lang-tj" style="display:none;">Телефон / WhatsApp</h4>
+                                <h4 class="lang-en" style="display:none;">Phone / WhatsApp</h4>
+                                <p><a href="tel:+992206443444" class="contact-link">+992 20 644 3444</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                            <div class="contact-text">
+                                <h4 class="lang-ru">Инстаграм</h4>
+                                <h4 class="lang-tj" style="display:none;">Инстаграм</h4>
+                                <h4 class="lang-en" style="display:none;">Instagram</h4>
+                                <p><a href="https://www.instagram.com/dandoni.Solim" target="_blank"
+                                        rel="noopener noreferrer" class="contact-link">@dandoni.Solim</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom visual Styled Map Area -->
+                <div class="map-container glass-panel">
+                    <div class="map-placeholder" style="align-items: flex-start; text-align: left; padding: 50px;">
+                        <div class="map-shine"></div>
+                        <i class="fas fa-hospital-user map-hospital-icon"></i>
+                        <h4 class="lang-ru">Dandoni Solim Dushanbe</h4>
+                        <h4 class="lang-tj" style="display:none;">Dandoni Solim Dushanbe</h4>
+                        <h4 class="lang-en" style="display:none;">Dandoni Solim Dushanbe</h4>
+                        <p class="lang-ru">г. Душанбе, 112 мкр, ориентир напротив главных дорог</p>
+                        <p class="lang-tj" style="display:none;">ш. Душанбе, маҳаллаи 112, дар канори роҳи асосӣ</p>
+                        <p class="lang-en" style="display:none;">Dushanbe, 112th district, near the main road</p>
+                        <a href="https://maps.google.com/?q=Dushanbe+112+microdistrict" target="_blank"
+                            rel="noopener noreferrer" class="map-btn">
+                            <span class="lang-ru">Открыть в Google Maps</span>
+                            <span class="lang-tj" style="display:none;">Дар Google Maps</span>
+                            <span class="lang-en" style="display:none;">Open in Google Maps</span>
+                            <i class="fas fa-location-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/dandoni.Solim" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://m.facebook.com/profile.php?id=61587327755178" target="_blank"
+                        rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                    <a href="tel:+992206443444"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dandoni Solim. All rights reserved.</p>
+                <div class="developer-info">
+                    <span class="lang-ru">Разработчик сайта:</span>
+                    <span class="lang-tj" style="display:none;">Таҳиягари вебсойт:</span>
+                    <span class="lang-en" style="display:none;">Website Developer:</span>
+                    <a href="https://webistan.luxury" target="_blank" rel="noopener noreferrer" class="developer-link">webistan.luxury</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button removed -->
+    <!-- Interactive Appointment Modal (Left as fallback for instant consultation requests) -->
+    <div class="booking-modal-overlay" id="bookingModal">
+        <div class="booking-modal glass-panel">
+            <button class="close-modal" id="closeModalBtn"><i class="fas fa-times"></i></button>
+
+            <h3 class="modal-title">
+                <span class="lang-ru">Запись на консультацию</span>
+                <span class="lang-tj" style="display:none;">Сабти ном барои машварат</span>
+                <span class="lang-en" style="display:none;">Book a Consultation</span>
+            </h3>
+
+            <p class="modal-desc">
+                <span class="lang-ru">Заполните форму ниже, и мы перезвоним Вам для подтверждения записи в течение 15
+                    минут!</span>
+                <span class="lang-tj" style="display:none;">Варақаи зеринро пур кунед ва мо дар давоми 15 дақиқа барои тасдиқи сабти ном ба Шумо занг мезанем!</span>
+                <span class="lang-en" style="display:none;">Fill out the form below and we will call you back to confirm your appointment within 15 minutes!</span>
+            </p>
+
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="clientName">
+                        <span class="lang-ru">Ваше Имя</span>
+                        <span class="lang-tj" style="display:none;">Номи Шумо</span>
+                        <span class="lang-en" style="display:none;">Your Name</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="clientName" placeholder="Алишер" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientPhone">
+                        <span class="lang-ru">Номер телефона</span>
+                        <span class="lang-tj" style="display:none;">Рақами телефон</span>
+                        <span class="lang-en" style="display:none;">Phone Number</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" id="clientPhone" placeholder="+992 XX XXX XXXX" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceType">
+                        <span class="lang-ru">Выберите услугу</span>
+                        <span class="lang-tj" style="display:none;">Хидматро интихоб кунед</span>
+                        <span class="lang-en" style="display:none;">Select a Service</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-stethoscope input-icon"></i>
+                        <select id="serviceType">
+                            <option value="braces" class="lang-ru">Брекеты по акции (3500 TJS)</option>
+                            <option value="braces" class="lang-tj" style="display:none;">Брекетҳо бо тахфиф (3500 сомонӣ)</option>
+                            <option value="braces" class="lang-en" style="display:none;">Braces (Special Offer — 3500 TJS)</option>
+
+                            <option value="zirconium" class="lang-ru">Циркониевые коронки</option>
+                            <option value="zirconium" class="lang-tj" style="display:none;">Рӯйкашҳои сирконий</option>
+                            <option value="zirconium" class="lang-en" style="display:none;">Zirconium Crowns</option>
+
+                            <option value="implant" class="lang-ru">Имплантация зубов</option>
+                            <option value="implant" class="lang-tj" style="display:none;">Имплантатсияи дандон</option>
+                            <option value="implant" class="lang-en" style="display:none;">Dental Implants</option>
+
+                            <option value="cleaning" class="lang-ru">Профессиональная чистка</option>
+                            <option value="cleaning" class="lang-tj" style="display:none;">Ҷирмгирӣ</option>
+                            <option value="cleaning" class="lang-en" style="display:none;">Professional Cleaning</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="modalSubmitBtn">
+                    <span class="lang-ru">Отправить заявку</span>
+                    <span class="lang-tj" style="display:none;">Ирсоли дархост</span>
+                    <span class="lang-en" style="display:none;">Submit Request</span>
+                </button>
+            </form>
+
+            <div class="success-message" id="successMsg" style="display:none;">
+                <i class="fas fa-circle-check success-icon"></i>
+                <h4 class="lang-ru">Заявка успешно отправлена!</h4>
+                <h4 class="lang-tj" style="display:none;">Дархост бомуваффақият фиристода шуд!</h4>
+                <h4 class="lang-en" style="display:none;">Request submitted successfully!</h4>
+                <p class="lang-ru">Мы свяжемся с Вами очень быстро.</p>
+                <p class="lang-tj" style="display:none;">Мо бо Шумо ба зудӣ тамос мегирем.</p>
+                <p class="lang-en" style="display:none;">We will contact you very shortly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+    <!-- Script JS -->
+    <!-- Script JS -->
+    <script src="script.js"></script>
+
+    <!-- Copy Protection -->
+    <script>
+        (function () {
+            // 1. Block right-click context menu
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 2. Block keyboard shortcuts
+            document.addEventListener('keydown', function (e) {
+                const blocked = [
+                    // Copy / Select all / Save / View source / Print
+                    (e.ctrlKey || e.metaKey) && ['c', 'a', 's', 'u', 'p'].includes(e.key.toLowerCase()),
+                    // DevTools
+                    (e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase()),
+                    e.key === 'F12',
+                    // PrintScreen
+                    e.key === 'PrintScreen',
+                ];
+                if (blocked.some(Boolean)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            });
+
+            // 3. Block PrintScreen via keyup (clears clipboard)
+            document.addEventListener('keyup', function (e) {
+                if (e.key === 'PrintScreen') {
+                    navigator.clipboard && navigator.clipboard.writeText('');
+                }
+            });
+
+            // 4. Block drag-and-drop of images/text
+            document.addEventListener('dragstart', function (e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 5. Block text selection via mouse
+            document.addEventListener('selectstart', function (e) {
+                // Allow selection inside input fields
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                e.preventDefault();
+                return false;
+            });
+
+            // 6. Block copy event directly
+            document.addEventListener('copy', function (e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 7. Block cut event
+            document.addEventListener('cut', function (e) {
+                e.preventDefault();
+                return false;
+            });
+        })();
+    </script>
+</body>
+
+</html>

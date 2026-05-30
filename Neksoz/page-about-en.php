@@ -6,7 +6,7 @@ if (function_exists('nk_get_current_lang') && nk_get_current_lang() === 'tj') {
     get_template_part('page', 'about-tj');
     return;
 }
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <style>
@@ -191,7 +191,7 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="<?php echo nk_link('/team?lang=en', 'en'); ?>" class="btn btn--primary btn-animated" style="padding: 12px 28px; font-size: 11px;">
+                <a href="<?php echo nk_link('/team', 'en'); ?>" class="btn btn--primary btn-animated" style="padding: 12px 28px; font-size: 11px;">
                     Our Team
                     <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>

@@ -1,0 +1,19 @@
+<svg width="112" height="21" viewBox="25 6 112 21" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+        </style>
+        <clipPath id="final_clip_wp_cln">
+            <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+        </clipPath>
+        <linearGradient id="final_grad_wp_cln" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(25)">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+            <stop offset="50%" stop-color="rgba(255,255,255,0.9)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </linearGradient>
+    </defs>
+    <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="#EFBF04" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+    <rect x="-112" y="0" width="112" height="40" fill="url(#final_grad_wp_cln)" clip-path="url(#final_clip_wp_cln)">
+        <animate attributeName="x" from="-112" to="112" dur="6s" repeatCount="indefinite" />
+    </rect>
+</svg>

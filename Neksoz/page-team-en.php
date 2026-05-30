@@ -2,7 +2,7 @@
 /**
  * Template Name: Team (EN)
  */
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <style>
@@ -331,7 +331,7 @@ get_header();
                     <p class="hr-block__text">We are always happy to welcome talented accountants, auditors, and lawyers who share our values and strive for professional growth. If you are ready to solve complex tasks and create value for business — let's join paths.</p>
                 </div>
                 <div class="hr-block__actions">
-                    <a href="<?php echo nk_link('/vacancies?lang=en', 'en'); ?>" class="btn btn--primary" style="width: 100%;">
+                    <a href="<?php echo nk_link('/vacancies', 'en'); ?>" class="btn btn--primary" style="width: 100%;">
                         <span>Submit CV</span>
                         <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>

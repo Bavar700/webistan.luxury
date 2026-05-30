@@ -5,7 +5,7 @@
  * @package Nexoz
  */
 
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <main id="primary" class="site-main mt-40 mb-32">
@@ -52,7 +52,7 @@ get_header();
                             Оставьте заявку, и наши эксперты проведут первичную бесплатную диагностику этой сферы в вашем бизнесе.
                         </p>
                     </div>
-                    <a href="<?php echo esc_url( home_url( '/contacts' ) ); ?>" class="relative z-10 bg-white text-navy px-10 py-5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-colors shrink-0">
+                    <a href="<?php echo nk_link('/contacts', $current_lang); ?>" class="relative z-10 bg-white text-navy px-10 py-5 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-colors shrink-0">
                         Оставить заявку
                     </a>
                 </div>

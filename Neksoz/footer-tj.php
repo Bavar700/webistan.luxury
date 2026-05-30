@@ -41,8 +41,29 @@
                 </a>
             </nav>
 
+            <!-- Part 4: Desktop-only QR Access -->
+            <?php 
+            $current_lang = 'tj';
+            $qr_labels = [
+                'ru' => ['label' => 'Мобильная версия', 'text' => 'Сканируйте для быстрого доступа'],
+                'tj' => ['label' => 'Нусхаи мобилӣ', 'text' => 'Барои дастрасии зуд сканер кунед'],
+                'en' => ['label' => 'Mobile Version', 'text' => 'Scan for quick access']
+            ];
+            $current_labels = $qr_labels[$current_lang];
+            ?>
+            <div class="nk-qr-hub fade-up">
+                <div class="nk-qr-hub__inner">
+                    <div class="nk-qr-hub__content">
+                        <span class="nk-qr-hub__label"><?php echo $current_labels['label']; ?></span>
+                    </div>
+                    <div class="nk-qr-hub__image-wrapper">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/qr-code.svg" alt="QR Code" class="nk-qr-hub__image" style="width:150px!important;height:150px!important;display:block;">
+                    </div>
+                </div>
+            </div>
+
             <!-- Part 3: Social Hub (Full Suite) -->
-            <div class="footer-platinum__social-hub fade-up" style="margin: 30px 0 0 0;">
+            <div class="footer-platinum__social-hub fade-up" style="margin: 40px 0 0 0;">
                 <div class="footer-platinum__socials">
                     <a href="https://t.me/neksoz" class="footer-platinum__social-btn" title="Telegram">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
@@ -245,6 +266,18 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => { document.body.classList.add('is-loaded'); }, 50);
     window.addEventListener('pageshow', function (event) {
         document.body.classList.add('is-loaded');
+    });
+
+    // 🔗 Orphan Fix for Hero Titles (Ensures at least 2 words on the last line)
+    document.querySelectorAll('.hero__title, .manuscript-hero__title, .section__title, main h1').forEach(el => {
+        if (el.classList.contains('no-orphan-fix')) return;
+        let html = el.innerHTML.trim();
+        if (html.split(/\s+/).length > 2) {
+            let parts = html.split(/\s+(?=[^\s]+$)/);
+            if (parts.length === 2) {
+                el.innerHTML = parts[0] + '&nbsp;' + parts[1];
+            }
+        }
     });
 });
 </script>

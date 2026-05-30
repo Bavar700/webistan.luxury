@@ -658,7 +658,22 @@
                         <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-bottom: 0;">
                             <input type="checkbox" id="task-photo-required"> <span id="task-photo-required-label">Акс дар ҷавоб ҳатмӣ аст</span>
                         </label>
-                    </div>
+                        <!-- Penalty checkbox -->
+                        <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer; margin-top: 10px; margin-bottom: 0;">
+                            <input type="checkbox" id="task-has-penalty">
+                            <span id="task-has-penalty-label">⚠️ Ҷарима дорад</span>
+                        </label>
+                        <!-- Penalty inputs (hidden by default) -->
+                        <div id="task-penalty-group" class="hidden" style="display: flex; gap: 12px; margin-top: 10px; padding: 12px 14px; background: rgba(239,68,68,0.08); border: 1.5px solid rgba(239,68,68,0.25); border-radius: 12px;">
+                            <div style="flex: 1; text-align: center;">
+                                <label id="task-penalty-stars-label" style="font-weight: 700; font-size: 20px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>
+                                <input type="number" id="task-penalty-stars" min="0" placeholder="0" style="text-align: center; border-color: rgba(239,68,68,0.4);">
+                            </div>
+                            <div style="flex: 1; text-align: center;">
+                                <label id="task-penalty-gold-label" style="font-weight: 700; font-size: 20px; margin-bottom: 6px; display: block; color: var(--text);">🪙</label>
+                                <input type="number" id="task-penalty-gold" min="0" placeholder="0" style="text-align: center; border-color: rgba(239,68,68,0.4);">
+                            </div>
+                        </div>
                     <div class="form-group" style="display: flex; gap: 12px; margin-top: 8px;">
                         <div style="flex: 1; text-align: center;">
                             <label id="task-reward-stars-label" style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>

@@ -2,7 +2,7 @@
 /**
  * Template Name: Хидматрасониҳо
  */
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <main class="site-main">
@@ -27,7 +27,7 @@ get_header();
             </div>
             
             <div class="hero__actions--right">
-                <a href="<?php echo nk_link('/contacts?lang=tj', 'tj'); ?>" class="btn btn--primary">Машварат</a>
+                <a href="<?php echo nk_link('/contacts', 'tj'); ?>" class="btn btn--primary">Машварат</a>
             </div>
         </div>
     </section>
@@ -43,7 +43,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Аудити молиявӣ</h3></div>
                     <p class="service-card__text">Шумо санҷиши мустақили гузоришотро ба даст меоред, ки шаффофияти тиҷоратро тасдиқ намуда, хатарҳои молиявии пинҳониро ошкор месозад.</p>
-                    <a href="<?php echo nk_link('/service-audit-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-audit', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 2. Барқарорсозӣ -->
@@ -53,7 +53,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Барқарорсозии баҳисобгирии молиявӣ</h3></div>
                     <p class="service-card__text">Мо санадҳои номураттаби Шуморо ба тартиби пурра дароварда, иштибоҳҳоро рафъ мекунем ва Шуморо аз даъвоҳои мақомоти давлатӣ ҳифз менамоем.</p>
-                    <a href="<?php echo nk_link('/service-restore-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-restore', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 3. Ҳуқуқ -->
@@ -63,7 +63,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Машваратҳои ҳуқуқӣ</h3></div>
                     <p class="service-card__text">Шумо амнияти ҳуқуқии ширкати худро таъмин намуда, манфиатҳоятонро дар ҳама гуна қарордодҳо ва баҳсҳо ба таври боэътимод ҳифз мекунед.</p>
-                    <a href="<?php echo nk_link('/service-legal-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-legal', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 4. Муҳосибот -->
@@ -73,7 +73,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Баҳисобгирии молиявӣ ва кадрӣ</h3></div>
                     <p class="service-card__text">Мо тамоми корҳои якнавохти муҳосибӣ ва кадриро ба дӯш гирифта, набудани ҷаримаҳо ва фаъолияти устувори ҳайати кормандонро кафолат медиҳем.</p>
-                    <a href="<?php echo nk_link('/service-accounting-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-accounting', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 5. Котибот -->
@@ -83,7 +83,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Хидматҳои котибот</h3></div>
                     <p class="service-card__text">Шумо идораи санадҳо ва тамосҳои телефониро ба мутахассисон вогузор намуда, вақти худро барои вазифаҳои роҳбурдӣ озод мекунед.</p>
-                    <a href="<?php echo nk_link('/service-secretariat-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-secretariat', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 6. Консалтинг -->
@@ -93,7 +93,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Машварати тиҷоратӣ</h3></div>
                     <p class="service-card__text">Шумо дар ёфтани нуқтаҳои нави рушд ва таҳияи модели самараноки рушди корхонаи худ дастгирии коршиносиро ба даст меоред.</p>
-                    <a href="<?php echo nk_link('/service-consulting-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-consulting', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 7. Андоз -->
@@ -103,7 +103,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Машваратҳои андозӣ</h3></div>
                     <p class="service-card__text">Мо барои ба таври қонунӣ беҳсозӣ намудани сарбории андоз ва ба ҳадди ақал расонидани хатарҳо пеш аз санҷишҳои мақомоти назоратӣ кумак мерасонем.</p>
-                    <a href="<?php echo nk_link('/service-tax-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-tax', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 8. Идоракунӣ -->
@@ -113,7 +113,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Баҳисобгирии идоракунӣ</h3></div>
                     <p class="service-card__text">Шумо шаффофияти пурраи молиявӣ ва маълумоти дақиқро барои қабули қарорҳое ба даст меоред, ки воқеан фоидаи Шуморо зиёд мекунанд.</p>
-                    <a href="<?php echo nk_link('/service-management-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-management', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 9. Худкорсозӣ -->
@@ -123,7 +123,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Худкорсозии равандҳои тиҷоратӣ</h3></div>
                     <p class="service-card__text">Шумо бо гузаронидани идоракунӣ ба муҳити рақамии зуд ва дақиқ, гурӯҳи кории худро аз корҳои якнавохт озод намуда, иштибоҳҳои омили инсониро аз байн мебаред.</p>
-                    <a href="<?php echo nk_link('/service-automation-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-automation', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
 
                 <!-- 10. Банақшагирӣ -->
@@ -133,7 +133,7 @@ get_header();
                     </div>
                     <h3 class="service-card__title">Нақшаҳои тиҷоратӣ ва АТИ</h3></div>
                     <p class="service-card__text">Шумо санади муфассали молиявиеро ба даст меоред, ки баргардонидани хароҷоти лоиҳаи Шуморо исбот намуда, барои боэътимод ҷалб кардани сармоя ё қарзҳои бонкӣ кумак мерасонад.</p>
-                    <a href="<?php echo nk_link('/service-business-plan-tj?lang=tj', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
+                    <a href="<?php echo nk_link('/service-business-plan', 'tj'); ?>" class="service-card__link">Идомаи хониш →</a>
                 </div>
             </div>
         </div>

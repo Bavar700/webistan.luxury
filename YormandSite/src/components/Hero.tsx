@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import bgImg from '../assets/images/hero-bg.jpg';
 
 const Hero = () => {
@@ -64,6 +63,7 @@ const Hero = () => {
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
+            className="hero-buttons"
             style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}
           >
             {/* Dikidi link */}
@@ -83,6 +83,20 @@ const Hero = () => {
         </div>
 
       </div>
+      
+      <style>
+        {`
+          @media (max-width: 600px) {
+            .hero-buttons {
+              flex-direction: column !important;
+              width: 100%;
+            }
+            .hero-buttons a {
+              width: 100% !important;
+            }
+          }
+        `}
+      </style>
 
     </section>
   );

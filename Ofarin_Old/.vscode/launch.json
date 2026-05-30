@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Ofarin (Web on Port 8095)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "-d",
+        "chrome",
+        "--web-port",
+        "8095"
+      ]
+    },
+    {
+      "name": "Ofarin (Mobile)",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}

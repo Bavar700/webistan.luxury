@@ -33,7 +33,7 @@ const WhatsAppWidget = () => {
         {`
           .whatsapp-widget {
             position: fixed;
-            bottom: 30px;
+            bottom: 90px;
             right: 30px;
             width: 60px;
             height: 60px;
@@ -77,6 +77,12 @@ const WhatsAppWidget = () => {
             100% {
               transform: translate(-50%, -50%) scale(2.2);
               opacity: 0;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .whatsapp-widget {
+              bottom: 160px !important;
             }
           }
         `}

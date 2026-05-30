@@ -1197,6 +1197,25 @@ function submitSkip() {
         tl.status = 'skipped';
         tl.confirmed = true;
         tl.skipReason = reason; // Save the reason
+
+        // Apply penalty if task has one
+        const allTasks = [...child.tasks, ...child.bonusTasks];
+        const skippedTask = allTasks.find(t => t.id === skipTaskId);
+        if (skippedTask && skippedTask.hasPenalty) {
+            const pStars = parseInt(skippedTask.penaltyStars) || 0;
+            const pGold  = parseInt(skippedTask.penaltyGold)  || 0;
+            if (pStars > 0) {
+                child.stars = Math.max(0, (child.stars || 0) - pStars);
+                child.totalDeducted = (child.totalDeducted || 0) + pStars;
+            }
+            if (pGold > 0) {
+                child.balance = Math.max(0, (child.balance || 0) - pGold);
+                child.totalDeducted = (child.totalDeducted || 0) + pGold;
+            }
+            // Record penalty in the log entry for audit
+            tl.penaltyApplied = { stars: pStars, gold: pGold };
+        }
+
         saveState();
         renderTasks();
         updateUI();
@@ -1589,6 +1608,9 @@ function showTaskModal(task = null, forceBonus = false) {
         setFlatpickrValue('task-test-date', task.testDate || '');
         setFlatpickrValue('task-test-time', task.testTime || '');
         document.getElementById('task-photo-required').checked = (task.photoRequired === true);
+        document.getElementById('task-has-penalty').checked = (task.hasPenalty === true);
+        document.getElementById('task-penalty-stars').value = task.penaltyStars || 0;
+        document.getElementById('task-penalty-gold').value = task.penaltyGold || 0;
         document.getElementById('task-has-deadline').checked = (task.hasDeadline === true);
         setFlatpickrValue('task-deadline-date', task.deadlineDate || '');
         setFlatpickrValue('task-deadline-time', task.deadlineTime || '18:00');
@@ -1642,6 +1664,9 @@ function showTaskModal(task = null, forceBonus = false) {
         setFlatpickrValue('task-test-date', '');
         setFlatpickrValue('task-test-time', '');
         document.getElementById('task-photo-required').checked = false;
+        document.getElementById('task-has-penalty').checked = false;
+        document.getElementById('task-penalty-stars').value = 0;
+        document.getElementById('task-penalty-gold').value = 0;
         
         document.getElementById('task-has-deadline').checked = false;
         document.getElementById('task-has-strict-deadline').checked = false;
@@ -1682,11 +1707,19 @@ function updateTaskFormLabels() {
     const starsInput = document.getElementById('task-reward-stars');
     if (starsInput) starsInput.placeholder = '0';
 
+    // Reward labels — emoji only, no text
     const goldLabel = document.getElementById('task-reward-gold-label');
-    if (goldLabel) goldLabel.innerHTML = `🪙 ${__('task_form.reward_gold')}`;
+    if (goldLabel) goldLabel.innerHTML = '🪙';
 
     const starsLabel = document.getElementById('task-reward-stars-label');
-    if (starsLabel) starsLabel.innerHTML = `⭐ ${__('task_form.reward_stars')}`;
+    if (starsLabel) starsLabel.innerHTML = '⭐';
+
+    const penaltyLabel = document.getElementById('task-has-penalty-label');
+    if (penaltyLabel) penaltyLabel.textContent = __('task_form.has_penalty');
+    const penaltyStarsLabel = document.getElementById('task-penalty-stars-label');
+    if (penaltyStarsLabel) penaltyStarsLabel.innerHTML = '⭐';
+    const penaltyGoldLabel = document.getElementById('task-penalty-gold-label');
+    if (penaltyGoldLabel) penaltyGoldLabel.innerHTML = '🪙';
 
     const deadlineLabel = document.getElementById('task-deadline-label');
     if (deadlineLabel) deadlineLabel.textContent = `📅 ${__('task_form.deadline')}`;
@@ -1753,6 +1786,10 @@ function updateTaskFieldsVisibility() {
     const hasTest = document.getElementById('task-has-test')?.checked;
     const testGroup = document.getElementById('task-test-group');
     if (testGroup) testGroup.classList.toggle('hidden', !hasTest);
+
+    const hasPenalty = document.getElementById('task-has-penalty')?.checked;
+    const penaltyGroup = document.getElementById('task-penalty-group');
+    if (penaltyGroup) penaltyGroup.classList.toggle('hidden', !hasPenalty);
 }
 
 function saveTask() {
@@ -1773,6 +1810,9 @@ function saveTask() {
     const testDate = document.getElementById('task-test-date')?.value || '';
     const testTime = document.getElementById('task-test-time')?.value || '';
     const photoRequired = document.getElementById('task-photo-required').checked;
+    const hasPenalty = document.getElementById('task-has-penalty').checked;
+    const penaltyStars = parseInt(document.getElementById('task-penalty-stars').value) || 0;
+    const penaltyGold = parseInt(document.getElementById('task-penalty-gold').value) || 0;
     
     const checkboxes = document.querySelectorAll('input[name="task-days"]');
     const days = Array.from(checkboxes).filter(cb => cb.checked).map(cb => parseInt(cb.value));
@@ -1819,6 +1859,9 @@ function saveTask() {
         testDate,
         testTime,
         photoRequired,
+        hasPenalty,
+        penaltyStars,
+        penaltyGold,
         isStreak,
         streakTarget,
         currentStreak: 0,
@@ -2684,6 +2727,7 @@ function setupEventListeners() {
     document.getElementById('task-use-timer')?.addEventListener('change', updateTaskFieldsVisibility);
     document.getElementById('task-is-streak')?.addEventListener('change', updateTaskFieldsVisibility);
     document.getElementById('task-has-test')?.addEventListener('change', updateTaskFieldsVisibility);
+    document.getElementById('task-has-penalty')?.addEventListener('change', updateTaskFieldsVisibility);
     const modalCancelBtn = document.getElementById('task-modal-cancel');
     if (modalCancelBtn) {
         modalCancelBtn.addEventListener('click', () => {

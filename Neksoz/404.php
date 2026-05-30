@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header(); global $current_lang;  ?>
 
 <main class="site-main">
     <section class="hero hero--internal" style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
@@ -16,8 +16,13 @@
                     Но мы всегда готовы помочь вам найти нужный путь.
                 </p>
                 <div class="hero__actions" style="justify-content: center;">
-                    <a href="<?php echo home_url(); ?>" class="btn btn--primary">
-                        <span>Вернуться на главную</span>
+                    <?php $current_lang = function_exists('nk_get_current_lang') ? nk_get_current_lang() : 'ru'; ?>
+                    <a href="<?php echo nk_link('/', $current_lang); ?>" class="btn btn--primary">
+                        <?php 
+                        if($current_lang === 'tj') echo 'Ба асосӣ';
+                        elseif($current_lang === 'en') echo 'Back Home';
+                        else echo 'На главную';
+                        ?>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
                 </div>

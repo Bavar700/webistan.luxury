@@ -1,0 +1,15 @@
+<svg width="112" height="21" viewBox="25 6 112 21" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;display=swap');
+        @keyframes shine-f8de-cln {
+            0% { transform: translateX(-150%) rotate(25deg); }
+            40%, 100% { transform: translateX(150%) rotate(25deg); }
+        }
+        .sh-f8de-cln {
+            animation: shine-f8de-cln 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            transform-origin: center;
+        }
+    </style>
+    <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="#EFBF04" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+    <rect class="sh-f8de-cln" x="25" y="0" width="30" height="30" fill="white" opacity="0.4" style="pointer-events: none;" />
+</svg>

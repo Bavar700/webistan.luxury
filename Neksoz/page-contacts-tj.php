@@ -2,7 +2,7 @@
 /**
  * Template Name: Тамос
  */
-get_header();
+get_header(); global $current_lang; 
 ?>
 
 <main class="site-main">
@@ -170,6 +170,35 @@ get_header();
                                 </div>
                             </li>
                         </ul>
+                        <!-- Desktop-only QR Code -->
+                        <?php 
+                        $current_lang = 'tj';
+                        $qr_labels = [
+                            'ru' => ['label' => 'КОНТАКТЫ / V-CARD', 'text' => 'Сканируйте, чтобы сохранить контакты в телефон'],
+                            'tj' => ['label' => 'ТАМОСҲО / V-CARD', 'text' => 'Сканер кунед, то тамосҳоро дар телефон захира кунед'],
+                            'en' => ['label' => 'CONTACTS / V-CARD', 'text' => 'Scan to save contacts to your phone']
+                        ];
+                        $current_labels = $qr_labels[$current_lang];
+                        ?>
+                        <div class="nk-qr-hub fade-up">
+                            <div class="nk-qr-hub__inner">
+                                <div class="nk-qr-hub__content">
+                                    <span class="nk-qr-hub__label"><?php echo $current_labels['label']; ?></span>
+                                    <span class="nk-qr-hub__text"><?php echo $current_labels['text']; ?></span>
+                                </div>
+                                <div class="nk-qr-hub__image-wrapper">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/qr-code.svg" alt="QR Code" class="nk-qr-hub__image">
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                            @media (min-width: 992px) {
+                                .nk-qr-hub { display: block !important; }
+                            }
+                            .nk-qr-hub__inner { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; text-align: left !important; gap: 30px !important; }
+                            img.nk-qr-hub__image { width: 150px !important; height: 150px !important; min-width: 150px !important; min-height: 150px !important; max-width: 150px !important; max-height: 150px !important; }
+                            .nk-qr-hub__image-wrapper { width: 150px !important; height: 150px !important; overflow: hidden; margin: 0 !important; }
+                        </style>
                     </div>
 
                     <!-- Card 2: Реҷаи корӣ -->

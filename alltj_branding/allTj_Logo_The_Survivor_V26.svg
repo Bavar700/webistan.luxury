@@ -1,0 +1,36 @@
+<svg width="112" height="29" viewBox="25 6 112 30" xmlns="http://www.w3.org/2000/svg">
+    <!-- allTj.online Official Logo - The Survivor (V26) -->
+    <!-- Dual-Engine Animation: Uses both SMIL and CSS simultaneously for max compatibility -->
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@900&amp;family=Abril+Fatface&amp;display=swap');
+            
+            /* CSS Engine (Backup) */
+            @keyframes final-flow {
+                0% { transform: translateX(-56px); }
+                100% { transform: translateX(0px); }
+            }
+            .sh-v26 {
+                animation: final-flow 8s linear infinite;
+            }
+        </style>
+        <clipPath id="cp_v26">
+            <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+        </clipPath>
+        <linearGradient id="gr_v26" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="repeat">
+            <stop offset="0%" stop-color="#EFBF04" />
+            <stop offset="25%" stop-color="#FFFFFF" />
+            <stop offset="50%" stop-color="#EFBF04" />
+            <stop offset="75%" stop-color="#FFFFFF" />
+            <stop offset="100%" stop-color="#EFBF04" />
+        </linearGradient>
+    </defs>
+    
+    <text x="81" y="22" font-family="Outfit, sans-serif" font-weight="900" font-size="19" fill="#EFBF04" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">allTj.online</text>
+    <text x="81" y="33" font-family="'Abril Fatface', serif" font-weight="400" font-size="7" fill="#475569" text-anchor="middle" textLength="110" lengthAdjust="spacingAndGlyphs">Your Local Guide To Tajikistan</text>
+    
+    <rect class="sh-v26" x="25" y="0" width="224" height="40" fill="url(#gr_v26)" clip-path="url(#cp_v26)">
+        <!-- SMIL Engine (Primary) -->
+        <animateTransform attributeName="transform" type="translate" from="-56" to="0" dur="8s" repeatCount="indefinite" />
+    </rect>
+</svg>

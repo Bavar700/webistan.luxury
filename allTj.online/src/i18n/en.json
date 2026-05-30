@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Digitalizing Tajikistan",
+    "subtitle": "Empowering your business with digital independence and cutting-edge solutions.",
+    "cta": "Get Started"
+  },
+  "services": {
+    "webDev": {
+      "title": "Web Development",
+      "desc": "Creating modern websites and applications at the highest standards."
+    },
+    "consulting": {
+      "title": "Consulting",
+      "desc": "Assistance in business digitalization and IT strategy development."
+    },
+    "cloud": {
+      "title": "Cloud Services",
+      "desc": "Infrastructure for secure and high-speed data operations."
+    }
+  }
+}

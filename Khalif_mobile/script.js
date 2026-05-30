@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Custom invalid message callback
                 el.oninvalid = function(e) {
-                    const currentLang = localStorage.getItem('dandoni_lang') || 'ru';
+                    const currentLang = localStorage.getItem('khalif_lang') || 'ru';
                     const msg = validationTranslations[currentLang][item.type];
                     e.target.setCustomValidity(msg);
                 };
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fp.redraw();
         }
 
-        localStorage.setItem('dandoni_lang', lang);
+        localStorage.setItem('khalif_lang', lang);
         
         // Update form validation messages for the new language
         updateValidationMessages();
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Restore saved language or default to Russian
-    const savedLang = localStorage.getItem('dandoni_lang') || 'ru';
+    const savedLang = localStorage.getItem('khalif_lang') || 'ru';
     setLanguage(savedLang);
 
     // Make body visible after init (CSS starts with opacity:0 for smooth load)
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Match the receipt doctor name instantly to the current language
-        const currentLang = localStorage.getItem('dandoni_lang') || 'ru';
+        const currentLang = localStorage.getItem('khalif_lang') || 'ru';
         receiptDoctorEl.querySelectorAll('.lang-ru, .lang-tj, .lang-en').forEach(el => {
             el.style.display = 'none';
         });
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('receiptName').innerText = patientName;
 
         // Handoff details logged to console
-        console.log(`[Dandoni Solim Appointment booked] Name: ${patientName}, Phone: ${patientPhone}, Doctor: ${doctorNameText}, Date: ${formattedDate}, Time: ${timeSlotValue}`);
+        console.log(`[Khalif Dental Appointment booked] Name: ${patientName}, Phone: ${patientPhone}, Doctor: ${doctorNameText}, Date: ${formattedDate}, Time: ${timeSlotValue}`);
 
         // Smooth transition to Success Screen
         mainBookingForm.style.opacity = '0';
