@@ -2575,10 +2575,13 @@ input.flatpickr-input[readonly]:focus {
     width: 350px !important;
     padding: 6px !important;
     font-family: var(--font-main), 'Rubik', sans-serif !important;
+    /* Марказсозии тақвим (Centering the calendar popup) */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 }
 .flatpickr-months {
     background: transparent !important;
-    height: 48px !important;
+    height: 56px !important; /* Баландии бештар барои ҷойгиршавӣ */
 }
 .flatpickr-months .flatpickr-month {
     color: var(--text) !important;
@@ -2596,6 +2599,7 @@ input.flatpickr-input[readonly]:focus {
     gap: 16px !important;
     position: static !important;
     width: auto !important;
+    margin-bottom: 12px !important; /* Масофа дар поёни тугмаҳо (ҳаво додан) */
 }
 .flatpickr-current-month .cur-month {
     color: var(--text) !important;
@@ -2608,18 +2612,25 @@ input.flatpickr-input[readonly]:focus {
     background: #F3F0FF !important; /* Ранги бунафши хеле мулоим */
     color: var(--primary) !important;
     font-weight: 700 !important;
-    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border: none !important; /* Тоза кардани хати гирди тугма */
+    outline: none !important;
+    box-shadow: none !important;
     border-radius: 20px !important;
     padding: 6px 14px !important;
     cursor: pointer !important;
     font-size: 14px !important;
     transition: background 0.2s ease !important;
-    outline: none !important;
+    -webkit-appearance: none; /* Пешгирии намуди стандартии браузер */
+    -moz-appearance: none;
+    appearance: none;
 }
 .flatpickr-current-month .flatpickr-monthDropdown-months:hover,
 .flatpickr-current-month .flatpickr-monthDropdown-months:focus {
-    background: #EDE9FE !important; /* Ягон хел торикшавӣ нест */
+    background: #EDE9FE !important;
     color: var(--primary) !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 /* Қуттии интихоби сол ҳамчун тугмаи калони мудаввар (Touch pill style) */
 .flatpickr-current-month .numInputWrapper {
@@ -2627,7 +2638,7 @@ input.flatpickr-input[readonly]:focus {
     align-items: center !important;
     width: 80px !important;
     background: #F3F0FF !important;
-    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border: none !important;
     border-radius: 20px !important;
     padding: 0 6px !important;
     height: 32px !important;
@@ -2655,11 +2666,15 @@ input.flatpickr-input[readonly]:focus {
     background: transparent !important;
     color: var(--primary) !important;
     -webkit-text-fill-color: var(--primary) !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
-    fill: var(--text) !important;
+    fill: var(--primary) !important; /* Тирчаҳо бо ранги бунафш */
 }
+
 .flatpickr-prev-month:hover,
 .flatpickr-next-month:hover {
     background: var(--bg) !important;
