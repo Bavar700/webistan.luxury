@@ -2593,7 +2593,7 @@ input.flatpickr-input[readonly]:focus {
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 20px !important; /* Масоҳати бештар байни моҳ ва сол */
     position: static !important;
     width: auto !important;
 }
@@ -2602,6 +2602,16 @@ input.flatpickr-input[readonly]:focus {
     font-weight: 600 !important;
     display: inline-block !important;
     margin: 0 !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    background: transparent !important;
+    color: var(--text) !important;
+    font-weight: 600 !important;
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover,
+.flatpickr-current-month .flatpickr-monthDropdown-months:focus {
+    background: transparent !important;
+    color: var(--text) !important;
 }
 .flatpickr-current-month .numInputWrapper {
     display: inline-flex !important;
@@ -2615,6 +2625,15 @@ input.flatpickr-input[readonly]:focus {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.flatpickr-current-month input.cur-year:hover,
+.flatpickr-current-month input.cur-year:focus {
+    background: transparent !important;
+    color: var(--text) !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
