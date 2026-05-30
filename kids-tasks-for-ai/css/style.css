@@ -2580,101 +2580,117 @@ input.flatpickr-input[readonly]:focus {
     transform: translateX(-50%) !important;
 }
 .flatpickr-months {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important; /* Новигатсия дар кунҷҳо ва матн дар марказ */
+    height: 48px !important;
+    padding: 6px 14px !important;
     background: transparent !important;
-    height: auto !important; /* Автоматӣ ва бе маҳдудияти баландӣ */
-    padding: 8px 0 !important;
+    position: relative !important;
 }
 .flatpickr-months .flatpickr-month {
     color: var(--text) !important;
     fill: var(--text) !important;
     height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
+
+/* Тугмаҳои гузариш (Prev/Next) маҳз мисли тақвими футер (.icon-btn-sm) */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    position: static !important; /* Бекор кардани абсолют */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #EDE9FE !important; /* Ранги замина мисли тугмаи футер */
+    border: none !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    background: var(--primary) !important;
+}
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+    fill: #ffffff !important;
+}
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: var(--primary) !important;
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* Моҳ ва сол дар марказ (танҳо матни оддӣ, бе кушода шудани клавиатура ва рӯйхат) */
 .flatpickr-current-month {
-    color: var(--text) !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
+    position: static !important;
     display: inline-flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 16px !important;
-    position: static !important;
+    gap: 8px !important;
     width: auto !important;
-    margin-bottom: 8px !important; /* Масоҳати муносиб барои ҳаво дар поён */
+    pointer-events: none !important; /* Пешгирии ҳама гуна клик ва клавиатура */
+    margin: 0 !important;
     height: auto !important;
 }
 .flatpickr-current-month .cur-month {
     color: var(--text) !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
     display: inline-block !important;
     margin: 0 !important;
 }
-/* Рӯйхати моҳҳо ҳамчун тугмаи калони мудаввар (Touch pill style) */
 .flatpickr-current-month .flatpickr-monthDropdown-months {
-    background: #F3F0FF !important; /* Ранги бунафши хеле мулоим */
-    color: var(--primary) !important;
+    background: transparent !important;
+    color: var(--text) !important;
     font-weight: 700 !important;
-    border: none !important; /* Тоза кардани хати марзӣ */
-    outline: none !important; /* Тоза кардани хати сиёҳи фокус */
-    box-shadow: none !important;
-    border-color: transparent !important;
-    border-radius: 20px !important;
-    padding: 6px 28px 6px 14px !important; /* Масоҳати бештар дар тарафи рост барои тирча */
-    cursor: pointer !important;
-    font-size: 14px !important;
-    transition: background 0.2s ease !important;
-    -webkit-appearance: none; /* Пешгирии намуди стандартии браузер */
-    -moz-appearance: none;
-    appearance: none;
-}
-.flatpickr-current-month .flatpickr-monthDropdown-months:hover,
-.flatpickr-current-month .flatpickr-monthDropdown-months:focus,
-.flatpickr-current-month .flatpickr-monthDropdown-months:active {
-    background: #EDE9FE !important;
-    color: var(--primary) !important;
+    font-size: 15px !important;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    border-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none !important;
 }
-/* Қуттии интихоби сол ҳамчун тугмаи калони мудаввар (Touch pill style) */
 .flatpickr-current-month .numInputWrapper {
     display: inline-flex !important;
     align-items: center !important;
-    width: 80px !important;
-    background: #F3F0FF !important;
+    width: auto !important;
+    background: transparent !important;
     border: none !important;
-    border-radius: 20px !important;
-    padding: 0 6px !important;
-    height: 32px !important;
-    transition: background 0.2s ease !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none !important;
 }
-.flatpickr-current-month .numInputWrapper:hover {
-    background: #EDE9FE !important;
+.flatpickr-current-month .numInputWrapper span {
+    display: none !important; /* Пинҳон кардани тирчаҳои сол */
 }
 .flatpickr-current-month input.cur-year {
-    color: var(--primary) !important;
-    -webkit-text-fill-color: var(--primary) !important;
+    background: transparent !important;
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
     font-weight: 700 !important;
-    display: inline-block !important;
-    margin: 0 !important;
+    font-size: 15px !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    width: 44px !important;
     padding: 0 !important;
-    width: 100% !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-    font-size: 14px !important;
-}
-.flatpickr-current-month input.cur-year:hover,
-.flatpickr-current-month input.cur-year:focus {
-    background: transparent !important;
-    color: var(--primary) !important;
-    -webkit-text-fill-color: var(--primary) !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+    text-align: center !important;
 }
 .flatpickr-prev-month svg,
 .flatpickr-next-month svg {
