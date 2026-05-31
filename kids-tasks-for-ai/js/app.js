@@ -663,6 +663,36 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
     if (medals > 0) rewardsText += ` 🏅 ${medals}`;
     durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">${rewardsText}</span>`;
 
+    // Days of the Week for Daily tasks
+    if (task.type === 'daily' && task.days && task.days.length > 0) {
+        let daysDisplay = '';
+        if (task.days.length === 7) {
+            daysDisplay = __('task_badge.every_day');
+        } else {
+            daysDisplay = task.days.map(d => __weekday(d)).join(', ');
+        }
+        durationText += ` <span class="task-duration" style="background: rgba(139, 92, 246, 0.1); color: rgb(139, 92, 246); border: 1px solid rgba(139, 92, 246, 0.2); font-weight: 500;">${__('task_badge.days')} ${daysDisplay}</span>`;
+    }
+
+    // Has Test badge
+    if (task.hasTest) {
+        durationText += ` <span class="task-duration" style="background: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 500;">${__('task_badge.has_test')}</span>`;
+    }
+
+    // Photo Required badge
+    if (task.photoRequired) {
+        durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">${__('task_badge.photo_required')}</span>`;
+    }
+
+    // Has Penalty badge
+    if (task.hasPenalty) {
+        let penaltyParts = [];
+        if (task.penaltyGold > 0) penaltyParts.push(`🪙 ${task.penaltyGold}`);
+        if (task.penaltyStars > 0) penaltyParts.push(`⭐ ${task.penaltyStars}`);
+        const penaltyText = penaltyParts.length > 0 ? ' ' + penaltyParts.join(' ') : '';
+        durationText += ` <span class="task-duration" style="background: rgba(220, 38, 38, 0.1); color: rgb(220, 38, 38); border: 1px solid rgba(220, 38, 38, 0.2); font-weight: 500;">${__('task_badge.penalty')}${penaltyText}</span>`;
+    }
+
     if (task.hasTest && tl.status === 'completed' && tl.score !== undefined) {
         durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">💯 Баҳо: ${tl.score}/10</span>`;
     }
@@ -675,11 +705,12 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
 
     // Deadline info
     const deadlineInfo = getDeadlineInfo(task);
-    let deadlineHtml = '';
     if (deadlineInfo) {
-        const urgentClass = deadlineInfo.urgent ? 'deadline-urgent' : '';
-        const pastClass = deadlineInfo.past ? 'deadline-past' : '';
-        deadlineHtml = `<div class="task-deadline ${urgentClass} ${pastClass}">📅 ${deadlineInfo.text}</div>`;
+        let deadlineColorStyle = 'background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2);';
+        if (deadlineInfo.urgent) {
+            deadlineColorStyle = 'background: rgba(220, 38, 38, 0.1); color: rgb(220, 38, 38); border: 1px solid rgba(220, 38, 38, 0.2);';
+        }
+        durationText += ` <span class="task-duration" style="${deadlineColorStyle} font-weight: 500;">📅 ${deadlineInfo.text}</span>`;
     }
 
     let iconName = 'icon-clock';
@@ -688,27 +719,29 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
     else if (task.type === 'bonus') iconName = 'icon-gift';
 
     card.innerHTML = `
-        <div class="task-emoji" style="color: var(--primary); background: var(--primary-light);">
-            <svg class="icon-svg" style="width: 20px; height: 20px;" aria-hidden="true"><use href="#${iconName}"/></svg>
-        </div>
         <div class="task-info">
             <div class="task-name">${task.name}</div>
             <div class="task-meta">${durationText}</div>
-            ${deadlineHtml}
         </div>
-        <div class="task-status-badge status-${tl.status}">${statusLabels[tl.status] || __('status.pending')}</div>
-        <div class="task-actions">
+        <div class="task-right-actions">
             ${tl.status === 'pending' ? `
+                
                 <button class="task-btn task-btn-start" data-action="start" title="${__('task.start')}"><svg class="icon-svg" aria-hidden="true"><use href="#icon-play"/></svg></button>
-            ` : ''}
-            ${tl.status === 'awaiting-confirm' ? `
-                <button class="task-btn task-btn-confirm" data-action="confirm" title="${__('task.confirm')}"><svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg></button>
+                <button class="task-btn task-btn-skip" data-action="skip" title="${__('task.skip')}"><svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg></button>
             ` : ''}
             ${tl.status === 'in-progress' ? `
+                <div class="task-status-badge status-in-progress">${statusLabels['in-progress']}</div>
                 <button class="task-btn task-btn-done" data-action="finish" title="${__('task.finish')}" style="animation:pulse 1.5s ease-in-out infinite;"><svg class="icon-svg" aria-hidden="true"><use href="#icon-stop"/></svg></button>
             ` : ''}
-            ${tl.status === 'pending' ? `
-                <button class="task-btn task-btn-skip" data-action="skip" title="${__('task.skip')}"><svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg></button>
+            ${tl.status === 'awaiting-confirm' ? `
+                <div class="task-status-badge status-awaiting-confirm">${statusLabels['awaiting-confirm']}</div>
+                <button class="task-btn task-btn-confirm" data-action="confirm" title="${__('task.confirm')}"><svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg></button>
+            ` : ''}
+            ${tl.status === 'completed' ? `
+                <div class="task-status-badge status-completed">${statusLabels.completed}</div>
+            ` : ''}
+            ${tl.status === 'skipped' ? `
+                <div class="task-status-badge status-skipped">${statusLabels.skipped}</div>
             ` : ''}
         </div>
     `;
@@ -2024,7 +2057,7 @@ function deleteChild() {
     if (!child) return;
     
     // Use confirm for safety, but since we don't have a custom confirm modal yet, use native confirm
-    if (confirm("Шумо мутмаин ҳастед, ки мехоҳед профили кӯдакро пурра нест кунед? Ҳамаи маълумот ва вазифаҳои ӯ тоза мешаванд.")) {
+    if (confirm("Шумо мутмаин ҳастед, ки мехоҳед профили кӯдакро пурра нест кунед? Ҳамаи маълумот ва супоришҳои ӯ тоза мешаванд.")) {
         state.children = state.children.filter(c => c.id !== editingChildId);
         if (currentChildId === editingChildId) {
             currentChildId = state.children.length > 0 ? state.children[0].id : null;

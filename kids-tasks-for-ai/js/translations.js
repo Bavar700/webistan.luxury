@@ -8,7 +8,7 @@ const TRANSLATIONS = {
         // App
         'app.name': 'Офарин',
         'app.name.ru': 'Офарин',
-        'app.title': 'Офарин — Вазифаҳои ман 🎯',
+        'app.title': 'Офарин — Супоришҳои ман 🎯',
 
         // Navigation
         'nav.today': 'Имрӯз',
@@ -80,12 +80,19 @@ const TRANSLATIONS = {
         'task.deadline_today': 'Имрӯз мӯҳлат!',
         'task.deadline_passed': 'Мӯҳлат гузашт!',
         'task.deadline_no': 'Мӯҳлат нест',
-        'task.all_done': '🎉 Табрик! Вазифаҳо иҷро шуданд!',
+        'task.all_done': '🎉 Табрик! Супоришҳо иҷро шуданд!',
         'task.all_done_msg': 'Хуб кор кардӣ! Дар ин роҳ давом деҳ!',
-        'task.skip_confirm': 'Оё шумо боварӣ доред, ки аз ин вазифа сарфи назар кардан мехоҳед?',
+        'task.skip_confirm': 'Оё шумо боварӣ доред, ки аз ин супориш сарфи назар кардан мехоҳед?',
         'skip.title': 'Сарфи назар кардан',
-        'skip.prompt': 'Сабаби сарфи назар кардани вазифаро нависед:',
+        'skip.prompt': 'Сабаби сарфи назар кардани супоришро нависед:',
         'skip.submit': 'Тасдиқ',
+
+        // Badges on task card
+        'task_badge.every_day': 'Ҳар рӯз',
+        'task_badge.photo_required': '📸 Акс ҳатмист',
+        'task_badge.has_test': '🎓 Санҷиш дорад',
+        'task_badge.penalty': '⚠️ Ҷарима:',
+        'task_badge.days': '📅 Рӯзҳо:',
 
         // Timer
         'timer.start': '▶ Оғоз',
@@ -93,18 +100,18 @@ const TRANSLATIONS = {
         'timer.resume': '▶ Давом',
         'timer.status_working': '⏳ Кор карда истодаед...',
         'timer.status_paused': '⏸ Таваққуф карда шуд',
-        'timer.status_done': 'Вазифа иҷро шуд! Волидайн тасдиқ кунад.',
+        'timer.status_done': 'Супориш иҷро шуд! Волидайн тасдиқ кунад.',
         'timer.status_ready': 'Ба кор шурӯъ кунед...',
         'timer.cancel_hint': 'Барои боздоштани таймер рамзи PIN-ро ворид кунед:',
         'timer.finish_hint': 'Лутфан таймерро истифода баред ё онро боздоред',
         'timer.completed': '✅ Ба анҷом расид',
 
         // Confirm Modal
-        'confirm.title': 'Тасдиқи вазифа',
-        'confirm.question': 'Оё вазифаи {name} иҷро шудааст?',
+        'confirm.title': 'Тасдиқи супориш',
+        'confirm.question': 'Оё супориши {name} иҷро шудааст?',
         'confirm.pin_placeholder': '****',
         'confirm.pin_error': 'Рамзи PIN нодуруст аст!',
-        'confirm.success': 'Вазифа тасдиқ шуд!',
+        'confirm.success': 'Супориш тасдиқ шуд!',
         'confirm.exam_score': 'Баҳодиҳии имтиҳон (1-10):',
 
         // Excuse Day
@@ -131,8 +138,8 @@ const TRANSLATIONS = {
 
         // Parent page
         'parent.no_children': 'Ҳеҷ кӯдаке вуҷуд надорад',
-        'parent.task_management': 'Идоракунии вазифаҳо',
-        'parent.add_task_hint': 'Вазифаҳоро волидайн илова мекунад',
+        'parent.task_management': 'Идоракунии супоришҳо',
+        'parent.add_task_hint': 'Супоришҳоро волидайн илова мекунад',
 
         // Calendar
         'calendar.title': 'Тақвим',
@@ -167,15 +174,15 @@ const TRANSLATIONS = {
 
         // Settings
         'settings.title': 'Танзимот',
-        'settings.tasks': '📋 Вазифаҳо',
+        'settings.tasks': '📋 Супоришҳо',
         'settings.bonus': '🎁 Бонусӣ',
         'settings.children': '👶 Кӯдакон',
         'settings.settings': '⚙️ Танзимот',
-        'settings.daily_tasks': '📋 Вазифаҳои ҳаррӯза',
-        'settings.bonus_tasks': '🎁 Вазифаҳои бонусӣ',
-        'settings.no_bonus': 'Ҳанӯз вазифаи бонусӣ нест',
-        'settings.add_task': 'Вазифаи нав',
-        'settings.bonus_examples': '💡 Намунаҳои вазифаҳои бонусӣ',
+        'settings.daily_tasks': '📋 Супоришҳои ҳаррӯза',
+        'settings.bonus_tasks': '🎁 Супоришҳои бонусӣ',
+        'settings.no_bonus': 'Ҳанӯз супориши бонусӣ нест',
+        'settings.add_task': 'Супориши нав',
+        'settings.bonus_examples': '💡 Намунаҳои супоришҳои бонусӣ',
         'settings.children_title': '👶 Кӯдакон',
         'settings.add_child': '👶 Иловаи кӯдак',
         'settings.app_settings': 'Танзимоти барнома',
@@ -189,7 +196,7 @@ const TRANSLATIONS = {
         'settings.data_size': 'Ҳаҷми маълумот',
         'settings.export': 'Содироти маълумот',
         'settings.export_success': 'Маълумот содир шуд!',
-        'settings.delete_task_confirm': 'Оё шумо боварӣ доред, ки ин вазифаро нест кардан мехоҳед?',
+        'settings.delete_task_confirm': 'Оё шумо боварӣ доред, ки ин супоришро нест кардан мехоҳед?',
         'settings.delete_child_confirm': 'Оё шумо боварӣ доред, ки ин кӯдакро нест кардан мехоҳед? Ҳамаи маълумоташ нест мешавад!',
         'settings.language': 'Забон',
         'settings.language_tg': 'Тоҷикӣ',
@@ -236,23 +243,23 @@ const TRANSLATIONS = {
 
         // 10-Day Test
         'test.title': '📝 Санҷиши 10-рӯза',
-        'test.instruction': 'Ба ҳар як вазифа хол диҳед (аз 0 то 1):',
+        'test.instruction': 'Ба ҳар як супориш хол диҳед (аз 0 то 1):',
         'test.total': 'Ҳамагӣ:',
         'test.reward': 'Мукофот:',
         'test.no_reward': 'Мукофот нест',
         'test.reward_amount': 'Мукофот: {amount} сомонӣ',
         'test.reward_amount_stars': 'Мукофот: {amount} ситорача',
-        'test.evaluate_all': 'Лутфан ба ҳамаи вазифаҳо хол диҳед!',
+        'test.evaluate_all': 'Лутфан ба ҳамаи супоришҳо хол диҳед!',
         'test.result': 'Натиҷа: {score}/10',
         'test.result_reward': '{score}/10 — Мукофот: {reward} сомонӣ!',
         'test.result_reward_stars': '{score}/10 — Мукофот: {reward} ⭐!',
 
         // Achievements
         'achievements.title': 'Муваффақиятҳо ва нишонҳо 🏆',
-        'achievement.first_task': '🌟 Вазифаи аввал',
-        'achievement.desc.first_task': 'Иҷрои вазифаи аввал',
-        'achievement.all_today': '⭐ Ҳамаи вазифаҳо',
-        'achievement.desc.all_today': 'Иҷрои ҳамаи вазифаҳои имрӯз',
+        'achievement.first_task': '🌟 Супориши аввал',
+        'achievement.desc.first_task': 'Иҷрои супориши аввал',
+        'achievement.all_today': '⭐ Ҳамаи супоришҳо',
+        'achievement.desc.all_today': 'Иҷрои ҳамаи супоришҳои имрӯз',
         'achievement.week_streak': '🔥 Ҳафтаи пурра',
         'achievement.desc.week_streak': '7 рӯз пай дар пай',
         'achievement.month_streak': '🏆 Моҳи тиллоӣ',
@@ -262,11 +269,11 @@ const TRANSLATIONS = {
         'achievement.test_9': '📚 Донишманд',
         'achievement.desc.test_9': '9 аз 10 дар санҷиш',
         'achievement.bonus_3': '🦁 Шуҷоъ',
-        'achievement.desc.bonus_3': 'Иҷрои вазифаи бонусӣ 3 смн',
+        'achievement.desc.bonus_3': 'Иҷрои супориши бонусӣ 3 смн',
         'achievement.bonus_5': '🦸 Қаҳрамон',
-        'achievement.desc.bonus_5': 'Иҷрои вазифаи бонусӣ 5 смн',
+        'achievement.desc.bonus_5': 'Иҷрои супориши бонусӣ 5 смн',
         'achievement.bonus_10': '🧙 Афсонавӣ',
-        'achievement.desc.bonus_10': 'Иҷрои вазифаи бонусӣ 10 смн',
+        'achievement.desc.bonus_10': 'Иҷрои супориши бонусӣ 10 смн',
         'achievement.savings_10': '🐷 Сарфаҷӯ',
         'achievement.desc.savings_10': 'Ҷамъ кардани 10 сомонӣ',
         'achievement.savings_50': '👑 Сарватманд',
@@ -289,7 +296,7 @@ const TRANSLATIONS = {
 
         // Welcome screen
         'welcome.title': 'Хуш омадед!',
-        'welcome.subtitle': 'Ба барномаи идоракунии вазифаҳои кӯдакон хуш омадед!',
+        'welcome.subtitle': 'Ба барномаи идоракунии супоришҳои кӯдакон хуш омадед!',
         'welcome.select_language': 'Забонро интихоб кунед:',
         'welcome.tg': '🇹🇯 Тоҷикӣ',
         'welcome.ru': '🇷🇺 Русский',
