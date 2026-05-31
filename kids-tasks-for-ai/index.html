@@ -842,8 +842,7 @@
                         <label style="font-weight:600;margin-bottom:4px;display:block;">Ҷо барои акс:</label>
                         <input type="file" id="dream-photo-input" accept="image/*" class="hidden">
                         <div class="premium-upload-card" id="dream-photo-btn">
-                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
-                            <span>Акс илова кунед</span>
+                            <span>+ Акс</span>
                         </div>
                         <div class="premium-photo-preview-container hidden" id="dream-photo-preview">
                             <img id="dream-photo-img" src="" alt="Сурат">
@@ -1025,6 +1024,14 @@
                 
                 <button class="btn btn-primary" style="width: 100%; margin-top: 24px;" onclick="closeAchievementModal()" data-i18n="common.ok">Аъло</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal -->
+    <div id="image-zoom-modal" class="modal-overlay hidden" style="z-index: 1000; background: rgba(0, 0, 0, 0.95); cursor: zoom-out;" onclick="closeImageZoomModal()">
+        <div style="position: absolute; top: 16px; right: 16px; color: white; font-size: 28px; cursor: pointer; font-weight: bold; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 50%; z-index: 1010;">✕</div>
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;">
+            <img id="image-zoom-img" src="" alt="Zoomed Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
         </div>
     </div>
 

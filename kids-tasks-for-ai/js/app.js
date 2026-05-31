@@ -2876,7 +2876,7 @@ function renderParentDashboard() {
             if (req.reason || req.photo) {
                 html += "<div style='margin-top:8px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.1); padding: 8px; border-radius: 6px;'>";
                 if (req.reason) html += "<div style='margin-bottom:4px;'><strong style='color:var(--text);'>📝 Сабаб:</strong> " + req.reason + "</div>";
-                if (req.photo) html += "<img src='" + req.photo + "' style='max-width:150px; border-radius:6px; margin-top:4px; display:block;'>";
+                if (req.photo) html += "<img src='" + req.photo + "' style='max-width:150px; border-radius:6px; margin-top:4px; display:block; cursor:zoom-in;' onclick='openImageZoomModal(\"" + req.photo + "\")'>";
                 html += "</div>";
             }
             html += "</li>";
@@ -2916,7 +2916,7 @@ function renderParentDashboard() {
                 html += "<div style='font-size:12px; color:var(--text-light); margin-top:2px; line-height:1.4;'>" + dream.description + "</div>";
             }
             if (dream.photo) {
-                html += "<div style='margin-top:6px; border-radius:6px; overflow:hidden; max-height:80px; width:fit-content;'>";
+                html += "<div style='margin-top:6px; border-radius:6px; overflow:hidden; max-height:80px; width:fit-content; cursor:zoom-in;' onclick='openImageZoomModal(\"" + dream.photo + "\")'>";
                 html += "<img src='" + dream.photo + "' style='max-height:80px; border-radius:6px; object-fit:cover;'>";
                 html += "</div>";
             }
@@ -2961,14 +2961,13 @@ function renderParentDashboard() {
     }
     
     html += "<div style='margin-top:12px; border-top:1px dashed var(--border); padding-top:10px;'>";
-    html += "<h5 style='font-size:13px; margin-bottom:8px;'>Илова кардани орзуи нав аз номи волидон:</h5>";
+    html += "<h5 style='font-size:13px; margin-bottom:8px;'>" + (currentLang === 'ru' ? 'Мечта от родителей:' : 'Орзу аз волидон:') + "</h5>";
     html += "<div style='display:flex; flex-direction:column; gap:6px;'>";
     html += "<input type='text' id='parent-dream-name-input' placeholder='Номи орзу...' style='width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:12px; box-sizing: border-box;'>";
     html += "<textarea id='parent-dream-desc-input' placeholder='Тавсифи орзу...' style='width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:12px; font-family:inherit; min-height:50px; resize:vertical; box-sizing: border-box;'></textarea>";
     html += "<input type='file' id='parent-dream-photo-input' accept='image/*' style='display:none;'>";
     html += "<div class='premium-upload-card' id='parent-dream-photo-btn' style='margin-top:8px;'>";
-    html += "<span style='font-size:20px;'>📷</span>";
-    html += "<span>" + (currentLang === 'ru' ? 'Добавить фото' : 'Акс илова кунед') + "</span>";
+    html += "<span>" + (currentLang === 'ru' ? '+ Фото' : '+ Акс') + "</span>";
     html += "</div>";
     html += "<div id='parent-dream-photo-preview' class='premium-photo-preview-container hidden' style='margin-top:8px;'>";
     html += "<img id='parent-dream-photo-img' src='' alt=''>";
@@ -3588,7 +3587,7 @@ function renderWithdrawalHistory() {
         if (req.reason || req.photo) {
             html += `<div style="margin-top:8px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.1); padding: 8px; border-radius: 6px;">`;
             if (req.reason) html += `<div style="margin-bottom:4px;"><strong style="color:var(--text);">📝 Сабаб:</strong> ${req.reason}</div>`;
-            if (req.photo) html += `<img src="${req.photo}" style="max-width:150px; border-radius:6px; margin-top:4px; display:block;">`;
+            if (req.photo) html += `<img src="${req.photo}" style="max-width:150px; border-radius:6px; margin-top:4px; display:block; cursor:zoom-in;" onclick="openImageZoomModal('${req.photo}')">`;
             html += `</div>`;
         }
         html += `</li>`;
@@ -4294,6 +4293,22 @@ function showPrestigeModal(newTier, goldPrize, starPrize) {
 function closePrestigeModal() {
     document.getElementById('prestige-modal').classList.add('hidden');
     updateUI();
+}
+
+function openImageZoomModal(src) {
+    var modal = document.getElementById('image-zoom-modal');
+    var img = document.getElementById('image-zoom-img');
+    if (modal && img) {
+        img.src = src;
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeImageZoomModal() {
+    var modal = document.getElementById('image-zoom-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
 }
 
 // ===== EXPORT =====
