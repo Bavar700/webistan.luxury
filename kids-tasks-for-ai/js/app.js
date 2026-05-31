@@ -360,10 +360,54 @@ function switchChild(childId) {
     }
 }
 
+// ===== PROGRESS BAR =====
+function updateProgressBar() {
+    const child = getCurrentChild();
+    if (!child) return;
+    const today = getToday();
+    const log = child.dailyLogs[today] || getOrCreateDailyLog(child.id);
+
+    const titleEl = document.getElementById('progress-title');
+    const textEl = document.getElementById('progress-text');
+    const fillEl = document.getElementById('progress-fill');
+    if (!titleEl || !textEl || !fillEl) return;
+
+    if (log.excused) {
+        titleEl.textContent = currentLang === 'ru' ? 'Статус сегодня' : 'Ҳолати имрӯз';
+        textEl.textContent = currentLang === 'ru' ? 'Уважительная причина' : 'Рӯзи узрнок';
+        fillEl.style.width = '100%';
+        fillEl.style.background = 'linear-gradient(135deg, #F59E0B, #D97706)';
+        return;
+    }
+
+    // Default styling in CSS might be green, let's restore it
+    titleEl.textContent = __('progress.title') || 'Пешрафти имрӯз';
+    fillEl.style.background = ''; // reset to CSS default
+
+    const todayDay = new Date().getDay();
+    const activeTasks = [
+        ...child.tasks.filter(t => t.type !== 'daily' || !t.days || t.days.includes(todayDay)),
+        ...child.bonusTasks
+    ];
+
+    let confirmedCount = 0;
+    activeTasks.forEach(t => {
+        const tl = log.tasks[t.id];
+        if (tl && tl.status === 'completed' && tl.confirmed) confirmedCount++;
+    });
+
+    const totalTasks = activeTasks.length;
+    textEl.textContent = `${confirmedCount}/${totalTasks}`;
+    const pct = totalTasks > 0 ? (confirmedCount / totalTasks) * 100 : 0;
+    fillEl.style.width = `${Math.min(pct, 100)}%`;
+}
+
 // ===== UI UPDATE =====
 function updateUI() {
     const child = getCurrentChild();
     if (!child) return;
+
+    updateProgressBar();
 
     // Header logic toggle
     const selector = document.getElementById('header-child-selector');
@@ -580,9 +624,7 @@ function renderTasks() {
     });
 
     const totalTasks = activeTasks.length;
-    document.getElementById('progress-text').textContent = `${confirmedCount}/${totalTasks}`;
-    const pct = totalTasks > 0 ? (confirmedCount / totalTasks) * 100 : 0;
-    document.getElementById('progress-fill').style.width = `${Math.min(pct, 100)}%`;
+    updateProgressBar();
 
     if (log.excused) {
         container.innerHTML = `
@@ -2654,6 +2696,18 @@ function renderRoutine() {
 
     const today = getToday();
     const log = getOrCreateDailyLog(currentChildId);
+
+    if (log.excused) {
+        container.innerHTML = `
+            <div class="task-card" style="text-align:center;padding:40px 20px;display:block;border-left:3px solid var(--warning);">
+                <div style="font-size:64px;margin-bottom:16px;">🙏</div>
+                <h3 style="font-size:18px;margin-bottom:8px;">${__('excused_day.title')}</h3>
+                <p style="color:var(--text-light);font-size:14px;">${__('excused_day.reason')} ${log.excuseReason}</p>
+            </div>
+        `;
+        return;
+    }
+
     let html = '';
 
     todayTasks.forEach((task, idx) => {
