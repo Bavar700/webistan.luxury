@@ -1265,14 +1265,7 @@ body {
 .balance-big-currency { font-size: 14px; opacity: 0.8; }
 
 .balance-stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 14px;
-    padding: 12px 0;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    position: relative;
-    z-index: 1;
+    display: none;
 }
 
 .stat-item { text-align: center; min-width: 55px; }
@@ -1281,7 +1274,15 @@ body {
 .stat-value.green { color: var(--success-light); }
 .stat-value.red { color: var(--secondary-light); }
 
-#btn-withdraw { position: relative; z-index: 1; }
+#btn-withdraw {
+    position: relative;
+    z-index: 1;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px auto 0 auto;
+}
 
 /* ===== SECTION CARD ===== */
 .section-card {
@@ -1334,6 +1335,39 @@ body {
 
 .achievement-item .achievement-icon { font-size: 24px; display: block; margin-bottom: 3px; }
 .achievement-item .achievement-name { font-size: 9px; font-weight: 600; color: var(--text-secondary); line-height: 1.2; }
+
+/* Prestige Tiers */
+.tier-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-left: 6px;
+    font-weight: 600;
+}
+.tier-silver { color: #64748b; background: #f1f5f9; }
+.tier-gold { color: #b45309; background: #fef3c7; border: 1px solid #fcd34d; }
+.tier-diamond { color: #1d4ed8; background: #dbeafe; border: 1px solid #93c5fd; }
+
+.achievements-grid.tier-silver .achievement-item.unlocked {
+    background: linear-gradient(135deg, #f8fafc, #cbd5e1);
+    box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+}
+.achievements-grid.tier-silver .achievement-item.unlocked .achievement-icon {
+    filter: drop-shadow(0 2px 4px rgba(100, 116, 139, 0.3));
+}
+.achievements-grid.tier-gold .achievement-item.unlocked {
+    background: linear-gradient(135deg, #fffbeb, #fde68a);
+    box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.achievements-grid.tier-gold .achievement-item.unlocked .achievement-icon { filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.5)); }
+.achievements-grid.tier-diamond .achievement-item.unlocked {
+    background: linear-gradient(135deg, #eff6ff, #bfdbfe);
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.achievements-grid.tier-diamond .achievement-item.unlocked .achievement-icon { filter: hue-rotate(180deg) drop-shadow(0 2px 4px rgba(59, 130, 246, 0.5)); }
 
 /* ===== PROOF SECTION (Photo + Explanation) ===== */
 .timer-proof-section {

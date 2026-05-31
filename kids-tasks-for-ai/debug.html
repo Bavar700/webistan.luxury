@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Debug</title></head>
+<body>
+<h2>Debug Page - Check Console (F12)</h2>
+<script src="js/translations.js?v=47"></script>
+<script src="js/data.js?v=48"></script>
+<script>
+// Don't run the full app, just test if functions exist
+</script>
+<script src="js/app.js?v=56"></script>
+<script>
+console.log("=== DEBUG START ===");
+console.log("showWithdrawModal exists:", typeof showWithdrawModal);
+console.log("submitWithdraw exists:", typeof submitWithdraw);
+console.log("renderWithdrawalHistory exists:", typeof renderWithdrawalHistory);
+console.log("renderTestHistory exists:", typeof renderTestHistory);
+console.log("formatBalanceFull exists:", typeof formatBalanceFull);
+console.log("formatDate exists:", typeof formatDate);
+console.log("getCurrentChild exists:", typeof getCurrentChild);
+console.log("state:", state);
+console.log("=== DEBUG END ===");
+</script>
+</body>
+</html>

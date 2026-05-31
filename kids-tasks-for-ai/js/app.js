@@ -167,7 +167,7 @@ function applyStaticTranslations() {
     // Dashboard section header
     const pageDashboardHeader = document.querySelector('#page-dashboard .page-header h2 span');
     if (pageDashboardHeader) {
-        pageDashboardHeader.textContent = __('nav.today');
+        pageDashboardHeader.textContent = __('routine.title');
     }
 
     // Settings section header
@@ -202,28 +202,52 @@ function navigateTo(page) {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.querySelector(`.nav-btn[data-page="${page}"]`).classList.add('active');
 
-    // Hide today-bar: show only on balance page
+    // Hide today-bar, quote-bar, and daily-progress everywhere
     const todayBar = document.querySelector('.today-bar');
     if (todayBar) {
-        todayBar.classList.toggle('hidden', page !== 'balance');
+        todayBar.classList.add('hidden');
     }
 
-    // Quote bar: show only on dashboard (child's page)
     const quoteBar = document.querySelector('.quote-bar');
     if (quoteBar) {
-        quoteBar.classList.toggle('hidden', page !== 'dashboard');
+        quoteBar.classList.add('hidden');
+    }
+
+    const dailyProgress = document.getElementById('daily-progress');
+    if (dailyProgress) {
+        dailyProgress.classList.add('hidden');
+    }
+
+    // Hide/show floating settings FAB based on page
+    var settingsFab = document.getElementById('parent-settings-fab');
+    var settingsModal = document.getElementById('parent-settings-modal');
+    if (page !== 'parent') {
+        if (settingsFab) settingsFab.style.display = 'none';
+        if (settingsModal) settingsModal.style.display = 'none';
+    } else {
+        if (settingsFab) settingsFab.style.display = '';
     }
 
     switch (page) {
-        case 'dashboard': renderTasks(); break;
-        case 'calendar': renderCalendar(); break;
+        case 'dashboard': renderRoutine(); break;
+        case 'dream': renderDreams(); break;
+        case 'routine': renderTasks(); break;
         case 'balance': renderBalance(); break;
-        case 'settings': showSettingsPin(); break;
         case 'parent': showParentPin(); break;
     }
+
     
     // Update the UI header elements based on the new page
     updateUI();
+}
+
+function getMedalDisplay(child) {
+    const tier = child.achievementTier || 0;
+    if (tier === 0) return '';
+    if (tier === 1) return ' 🏅 IV';
+    if (tier === 2) return ' 🏅 III';
+    if (tier === 3) return ' 🏅 II';
+    return ' 🏅 I';
 }
 
 // ===== CHILD TABS =====
@@ -245,7 +269,7 @@ function renderChildTabs() {
         if (rt === 'stars') txt = `⭐ ${child.stars || 0}`;
         else if (rt === 'both') txt = `⭐ ${child.stars || 0}   🪙 ${child.balance}`;
         else txt = `🪙 ${child.balance}`;
-        txt += `   🏅 ${child.medals || 0}`;
+        txt += getMedalDisplay(child);
         balanceEl.textContent = txt;
     }
 
@@ -268,9 +292,9 @@ function renderChildPicker() {
         const rt = c.rewardType || 'money';
         let balanceText = '';
         if (rt === 'stars') balanceText = `⭐ ${c.stars || 0}`;
-        else if (rt === 'both') balanceText = `⭐ ${c.stars || 0}   💰 ${c.balance}`;
-        else balanceText = `💰 ${c.balance} ${__('balance.currency.sm')}`;
-        balanceText += `   🏅 ${c.medals || 0}`;
+        else if (rt === 'both') balanceText = `⭐ ${c.stars || 0}   🪙 ${c.balance}`;
+        else balanceText = `🪙 ${c.balance}`;
+        balanceText += getMedalDisplay(c);
 
         item.innerHTML = `
             <span class="cpi-emoji">${c.emoji}</span>
@@ -348,7 +372,7 @@ function updateUI() {
     const headerBalance = document.getElementById('header-child-balance');
     const balanceText = document.getElementById('greeting-balance-text');
 
-    if (currentPage === 'parent' || currentPage === 'settings') {
+    if (currentPage === 'parent') {
         selector.classList.remove('hidden');
         headerTop.classList.add('hidden');
         headerBalance.classList.add('hidden');
@@ -361,9 +385,9 @@ function updateUI() {
         const rt = child.rewardType || 'money';
         let txt = '';
         if (rt === 'stars') txt = `⭐ ${child.stars || 0}`;
-        else if (rt === 'both') txt = `⭐ ${child.stars || 0}   💰 ${child.balance}`;
-        else txt = `💰 ${child.balance} ${__('balance.currency.sm')}`;
-        txt += `   🏅 ${child.medals || 0}`;
+        else if (rt === 'both') txt = `⭐ ${child.stars || 0}   🪙 ${child.balance}`;
+        else txt = `🪙 ${child.balance}`;
+        txt += getMedalDisplay(child);
         balanceText.textContent = txt;
     }
 
@@ -385,8 +409,12 @@ function updateUI() {
         // Tajik: "Ҷумъа, 26 Май 2026" — use own translation
         document.getElementById('today-date').textContent = `${dow}, ${day} ${mon} ${year}`;
     }
-    document.getElementById('date-badge').textContent =
-        `${__weekday(now.getDay())}, ${now.getDate()} ${__month(now.getMonth())}`;
+    const dateBadgeText = `${__weekday(now.getDay())}, ${now.getDate()} ${__month(now.getMonth())} ${now.getFullYear()}`;
+    document.getElementById('date-badge').textContent = dateBadgeText;
+    const tasksDateBadge = document.getElementById('tasks-date-badge');
+    if (tasksDateBadge) {
+        tasksDateBadge.textContent = dateBadgeText;
+    }
 
     // Balance
     const rtLabel = child.rewardType || 'money';
@@ -402,9 +430,12 @@ function updateUI() {
     // Update balance label
     const balanceLabel = document.querySelector('.balance-display .balance-label');
     if (balanceLabel) balanceLabel.textContent = __('balance.label');
-    document.getElementById('balance-big').textContent = child.balance;
-    document.getElementById('stat-earned').textContent = child.totalEarned;
-    document.getElementById('stat-deducted').textContent = child.totalDeducted;
+    const balanceBig = document.getElementById('balance-big');
+    if (balanceBig) balanceBig.textContent = child.balance;
+    const statEarned = document.getElementById('stat-earned');
+    if (statEarned) statEarned.textContent = child.totalEarned;
+    const statDeducted = document.getElementById('stat-deducted');
+    if (statDeducted) statDeducted.textContent = child.totalDeducted;
 
     // Star stats for balance page
     const starStat = document.getElementById('stat-stars');
@@ -419,8 +450,10 @@ function updateUI() {
         }
     }
 
+    if (!child.withdrawals) child.withdrawals = [];
     const totalWithdrawn = child.withdrawals.reduce((sum, w) => sum + w.amount, 0);
-    document.getElementById('stat-withdrawn').textContent = totalWithdrawn;
+    const statWithdrawn = document.getElementById('stat-withdrawn');
+    if (statWithdrawn) statWithdrawn.textContent = totalWithdrawn;
 
     // Update currency labels (big balance)
     const rt = child.rewardType || 'money';
@@ -438,8 +471,9 @@ function updateUI() {
     updateNavLabels();
 
     renderChildTabs();
-    if (currentPage === 'dashboard') renderTasks();
-    else if (currentPage === 'calendar') renderCalendar();
+    if (currentPage === 'dashboard') renderRoutine();
+    else if (currentPage === 'dream') renderDreams();
+    else if (currentPage === 'routine') renderTasks();
     else if (currentPage === 'balance') {
         renderWithdrawalHistory();
         renderTestHistory();
@@ -449,11 +483,19 @@ function updateUI() {
 }
 
 function updateNavLabels() {
-    document.querySelector('.nav-btn[data-page="dashboard"] .nav-label').textContent = __('nav.today');
-    document.querySelector('.nav-btn[data-page="calendar"] .nav-label').textContent = __('nav.calendar');
-    document.querySelector('.nav-btn[data-page="balance"] .nav-label').textContent = __('nav.balance');
-    document.querySelector('.nav-btn[data-page="settings"] .nav-label').textContent = __('nav.settings');
-    var parentBtn = document.querySelector('.nav-btn[data-page="parent"] .nav-label');
+    const todayEl = document.querySelector('.nav-btn[data-page="dashboard"] .nav-label');
+    if (todayEl) todayEl.textContent = __('nav.routine');
+    
+    const dreamEl = document.querySelector('.nav-btn[data-page="dream"] .nav-label');
+    if (dreamEl) dreamEl.textContent = __('nav.dream');
+    
+    const balanceEl = document.querySelector('.nav-btn[data-page="balance"] .nav-label');
+    if (balanceEl) balanceEl.textContent = __('nav.balance');
+    
+    const routineEl = document.querySelector('.nav-btn[data-page="routine"] .nav-label');
+    if (routineEl) routineEl.textContent = __('nav.tasks');
+    
+    const parentBtn = document.querySelector('.nav-btn[data-page="parent"] .nav-label');
     if (parentBtn) parentBtn.textContent = __('nav.parent');
 }
 
@@ -619,6 +661,9 @@ function renderTasks() {
             }
         }
     }
+    
+    // Auto-render calendar at the bottom of the dashboard
+    renderCalendar();
 }
 
 function createTaskCard(task, tl, log, child, isBonus = false) {
@@ -658,9 +703,7 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
 
     const gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
     const stars = task.rewardStars || 0;
-    const medals = task.rewardMedals || 0;
     let rewardsText = `🪙 ${gold} ⭐ ${stars}`;
-    if (medals > 0) rewardsText += ` 🏅 ${medals}`;
     durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">${rewardsText}</span>`;
 
     // Days of the Week for Daily tasks
@@ -930,6 +973,7 @@ function completeTimer() {
         const task = child.tasks.find(t => t.id === timerTaskId)
             || child.bonusTasks.find(t => t.id === timerTaskId);
         tl.timeSpent = task ? task.duration : 0;
+        tl.completedAt = new Date().toISOString();
         saveState();
     }
 
@@ -1011,6 +1055,36 @@ function handlePhotoUpload(event) {
             document.getElementById('proof-photo-img').src = compressed;
             document.getElementById('proof-photo-preview').classList.remove('hidden');
             document.getElementById('proof-photo-btn').classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function handleWithdrawPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) { h = h * maxDim / w; w = maxDim; }
+                else { w = w * maxDim / h; h = maxDim; }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.7);
+            document.getElementById('withdraw-photo-img').src = compressed;
+            document.getElementById('withdraw-photo-preview').classList.remove('hidden');
+            document.getElementById('withdraw-photo-btn').classList.add('hidden');
         };
         img.src = e.target.result;
     };
@@ -1167,16 +1241,29 @@ function submitConfirm() {
                     task.currentStreak = task.streakTarget; // cap it
                 }
             }
+            if (task.deadline) {
+                const [h, m] = task.deadline.split(':');
+                const deadlineD = new Date();
+                deadlineD.setHours(parseInt(h), parseInt(m), 0);
+                const checkTime = tl.completedAt ? new Date(tl.completedAt) : new Date();
+                if (checkTime > deadlineD) {
+                    tl.missedDeadline = true;
+                }
+            }
         }
 
         saveState();
 
-        const unlocked = checkAchievements(currentChildId);
-        if (unlocked.length > 0) {
-            showToast('🎉', unlocked.join(', '));
+        const result = checkAchievements(currentChildId);
+        if (result.unlocked.length > 0) {
+            showToast('🎉', result.unlocked.join(', '));
             launchConfetti();
         } else {
             showToast('✅', __('confirm.success'));
+        }
+        
+        if (result.prestigeTriggered) {
+            showPrestigeModal(result.newTier, result.goldPrize, result.starPrize);
         }
 
         const allTasks = child.tasks.filter(t => !t.isBonus);
@@ -1262,6 +1349,7 @@ let calendarYear = new Date().getFullYear();
 
 function renderCalendar() {
     const grid = document.getElementById('calendar-grid');
+    if (!grid) return;
     const child = getCurrentChild();
     if (!child) return;
 
@@ -1369,73 +1457,84 @@ function renderBalance() {
     const rt = child.rewardType || 'money';
 
     // Withdrawal history
+    if (!child.withdrawals) child.withdrawals = [];
     const histContainer = document.getElementById('withdrawal-history');
-    if (child.withdrawals.length === 0) {
-        histContainer.innerHTML = `<p class="empty-state">${__('balance.no_withdrawals')}</p>`;
-    } else {
-        histContainer.innerHTML = child.withdrawals.slice().reverse().map(w =>
-            `<div class="withdrawal-item">
-                <span class="withdrawal-date">${formatDate(w.date)}</span>
-                <span class="withdrawal-amount">-${w.amount} ${__('balance.currency.sm')}</span>
-            </div>`
-        ).join('');
+    if (histContainer) {
+        if (child.withdrawals.length === 0) {
+            histContainer.innerHTML = `<p class="empty-state">${__('balance.no_withdrawals')}</p>`;
+        } else {
+            histContainer.innerHTML = child.withdrawals.slice().reverse().map(w => {
+                const sym = w.type === 'stars' ? '⭐' : '🪙';
+                const status = w.status || 'approved';
+                let badgeStyle = '', badgeText = '';
+                if (status === 'pending') {
+                    badgeStyle = 'background: rgba(245, 158, 11, 0.15); color: #F59E0B;';
+                    badgeText = __('balance.status.pending') || 'Дар интизор';
+                } else if (status === 'rejected') {
+                    badgeStyle = 'background: rgba(239, 68, 68, 0.15); color: #EF4444;';
+                    badgeText = __('balance.status.rejected') || 'Рад шуд';
+                } else {
+                    badgeStyle = 'background: rgba(16, 185, 129, 0.15); color: #10B981;';
+                    badgeText = __('balance.status.approved') || 'Тасдиқ шуд';
+                }
+                let commentHtml = '';
+                if (status === 'rejected' && w.parentComment) {
+                    commentHtml = `<div style="font-size:12px;margin-top:6px;color:#F87171;border-left:2px solid #EF4444;padding-left:8px;">💬 ${w.parentComment}</div>`;
+                }
+                return `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-size:13px;opacity:0.7;">${formatDate(w.date)}</span>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span style="font-weight:700;">-${w.amount} ${sym}</span>
+                            <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:9999px;${badgeStyle}">${badgeText}</span>
+                        </div>
+                    </div>${commentHtml}
+                </div>`;
+            }).join('');
+        }
     }
 
     // Test history
     const testContainer = document.getElementById('test-history');
-    const tests = child.tenDayTests;
-    if (tests.length === 0) {
-        testContainer.innerHTML = `<p class="empty-state">${__('balance.no_tests')}</p>`;
-    } else {
-        let html = '';
-        tests.slice().reverse().forEach(t => {
-            const resultClass = t.totalScore === 10 ? 'good' : t.totalScore >= 9 ? 'ok' : 'bad';
-            const rt = child.rewardType || 'money';
-            let rewardStr = '';
-            if (t.reward > 0 || t.starReward > 0) {
-                if (rt === 'stars') rewardStr = `(+${t.starReward}⭐)`;
-                else if (rt === 'both') rewardStr = `(+${t.reward}${__('balance.currency.sm')} +${t.starReward}⭐)`;
-                else rewardStr = `(+${t.reward}${__('balance.currency.sm')})`;
-            }
-            html += `<div class="test-history-item">
-                <span class="test-info">📝 ${formatDate(t.date)}</span>
-                <span class="test-result ${resultClass}">${t.totalScore}/10 ${rewardStr}</span>
-            </div>`;
-        });
-        testContainer.innerHTML = html;
+    if (testContainer) {
+        const tests = child.tenDayTests || [];
+        if (tests.length === 0) {
+            testContainer.innerHTML = `<p class="empty-state">${__('balance.no_tests')}</p>`;
+        } else {
+            let html = '';
+            tests.slice().reverse().forEach(t => {
+                const resultClass = t.totalScore === 10 ? 'good' : t.totalScore >= 9 ? 'ok' : 'bad';
+                let rewardStr = '';
+                if (t.reward > 0 || t.starReward > 0) {
+                    if (rt === 'stars') rewardStr = `(+${t.starReward}⭐)`;
+                    else if (rt === 'both') rewardStr = `(+${t.reward}🪙 +${t.starReward}⭐)`;
+                    else rewardStr = `(+${t.reward}🪙)`;
+                }
+                html += `<div class="test-history-item">
+                    <span class="test-info">📝 ${formatDate(t.date)}</span>
+                    <span class="test-result ${resultClass}">${t.totalScore}/10 ${rewardStr}</span>
+                </div>`;
+            });
+            testContainer.innerHTML = html;
+        }
     }
 
-    // Update balance display with stars info
+    // Update balance display
     const balanceBig = document.querySelector('.balance-big');
-    if (rt === 'stars') {
-        balanceBig.innerHTML = `
-            <span class="balance-icon">⭐</span>
-            <span class="balance-big-amount">${child.stars || 0}</span>
-            <span class="balance-big-currency">${__('balance.stars_only')}</span>
-        `;
-    } else if (rt === 'both') {
-        balanceBig.innerHTML = `
-            <span class="balance-icon">💰</span>
-            <span class="balance-big-amount">${child.balance}</span>
-            <span class="balance-big-currency">${__('balance.currency.sm')}</span>
-            <span style="font-size:24px;margin:0 8px;opacity:0.5;">|</span>
-            <span class="balance-icon">⭐</span>
-            <span class="balance-big-amount" style="font-size:36px;">${child.stars || 0}</span>
-        `;
-    } else {
-        balanceBig.innerHTML = `
-            <span class="balance-icon">💰</span>
-            <span class="balance-big-amount">${child.balance}</span>
-            <span class="balance-big-currency">${__('balance.currency.somoni')}</span>
-        `;
+    if (balanceBig) {
+        if (rt === 'stars') {
+            balanceBig.innerHTML = `<span class="balance-icon">⭐</span><span class="balance-big-amount" id="balance-big">${child.stars || 0}</span>`;
+        } else if (rt === 'both') {
+            balanceBig.innerHTML = `<span class="balance-icon">💰</span><span class="balance-big-amount" id="balance-big">${child.balance}</span><span style="font-size:24px;margin:0 8px;opacity:0.5;">|</span><span class="balance-icon">⭐</span><span class="balance-big-amount" style="font-size:36px;">${child.stars || 0}</span>`;
+        } else {
+            balanceBig.innerHTML = `<span class="balance-icon">💰</span><span class="balance-big-amount" id="balance-big">${child.balance}</span>`;
+        }
     }
 
-    // Withdraw button - only for money/both modes
+    // Withdraw button
     const withdrawBtn = document.getElementById('btn-withdraw');
-    if (rt === 'stars') {
-        withdrawBtn.style.display = 'none';
-    } else {
-        withdrawBtn.style.display = 'flex';
+    if (withdrawBtn) {
+        withdrawBtn.style.display = 'inline-flex';
         withdrawBtn.innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg> ${__('balance.withdraw_title')}`;
     }
 
@@ -1448,18 +1547,173 @@ function renderAchievements() {
     if (!child) return;
 
     if (!child.achievements) child.achievements = [];
+    child.achievementTier = child.achievementTier || 0;
 
     const earned = child.achievements;
+    
+    let tierClass = '';
+    let tierName = '';
+    if (child.achievementTier === 0) {
+        tierClass = 'tier-silver';
+        tierName = __('tier.silver');
+    } else if (child.achievementTier === 1) {
+        tierClass = 'tier-gold';
+        tierName = __('tier.gold');
+    } else {
+        tierClass = 'tier-diamond';
+        tierName = __('tier.diamond');
+    }
+
+    const titleEl = document.querySelector('[data-i18n="achievements.title"]');
+    if (titleEl) {
+        titleEl.innerHTML = `${__('achievements.title')} <span class="tier-badge ${tierClass}">(${tierName})</span>`;
+        // Remove data-i18n so applyStaticTranslations doesn't override the HTML content
+        titleEl.removeAttribute('data-i18n');
+    }
+
+    container.className = `achievements-grid ${tierClass}`;
 
     container.innerHTML = ACHIEVEMENTS.map(a => {
         const unlocked = earned.includes(a.id);
         const nameKey = `achievement.${a.id}`;
         const displayName = __(nameKey);
-        return `<div class="achievement-item ${unlocked ? 'unlocked' : 'locked'}">
+        return `<div class="achievement-item ${unlocked ? 'unlocked' : 'locked'}" onclick="showAchievementDetails('${a.id}')" style="cursor: pointer;">
             <span class="achievement-icon">${a.icon}</span>
             <span class="achievement-name">${displayName}</span>
         </div>`;
     }).join('');
+
+    // Render Grand Prize Banner
+    const banner = document.getElementById('grand-prize-banner');
+    if (banner) {
+        const totalCount = ACHIEVEMENTS.length;
+        const currentCount = child.achievements.length;
+        const t = child.achievementTier || 0;
+        const goldPrizeValue = 200 + 100 * t;
+        const starPrizeValue = 200 + 100 * t;
+        const pct = totalCount > 0 ? (currentCount / totalCount) * 100 : 0;
+        
+        banner.innerHTML = `
+            <div class="grand-prize-card" style="
+                background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(218, 165, 32, 0.15) 100%);
+                border: 2px dashed rgba(255, 215, 0, 0.4);
+                border-radius: 16px;
+                padding: 20px;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 8px 32px rgba(218, 165, 32, 0.08);
+                transition: all 0.3s ease;
+                margin-top: 15px;
+            ">
+                <!-- Decorative background elements -->
+                <div style="
+                    position: absolute;
+                    top: -50px;
+                    right: -50px;
+                    width: 120px;
+                    height: 120px;
+                    background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+                    pointer-events: none;
+                "></div>
+                
+                <div style="font-size: 48px; margin-bottom: 12px; animation: float 3s ease-in-out infinite;">👑</div>
+                <h3 style="
+                    font-size: 36px; 
+                    font-weight: 800; 
+                    background: linear-gradient(to right, #FFD700, #FFA500, #FF8C00);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    margin-bottom: 8px; 
+                    text-align: center;
+                    letter-spacing: 1px;
+                    display: block;
+                ">
+                    ${__('achievements.grand_prize') || 'Шоҳҷоиза'}
+                </h3>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; padding: 0 10px; line-height: 1.4;">
+                    ${__('achievements.grand_prize_desc', { total: totalCount }) || `Барои ба даст овардани ҳамаи ${totalCount} муваффақият дода мешавад.`}
+                </p>
+                
+                <!-- Progress bar -->
+                <div style="margin-bottom: 16px; padding: 0 10px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 6px;">
+                        <span style="color: var(--text-secondary);">${__('achievement_modal.progress_label') || 'Пешрафт:'}</span>
+                        <span style="color: #DAA520;">${currentCount} / ${totalCount}</span>
+                    </div>
+                    <div class="progress-bar" style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; height: 8px; overflow: hidden; border: 1px solid rgba(255,215,0,0.1);">
+                        <div class="progress-fill" style="width: ${pct}%; background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); border-radius: 10px; transition: width 0.5s ease;"></div>
+                    </div>
+                </div>
+                
+                <div class="grand-prize-badge" style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    background: rgba(255, 215, 0, 0.2);
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 215, 0, 0.3);
+                    font-weight: 800;
+                    color: #DAA520;
+                    font-size: 16px;
+                    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+                ">
+                    <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">${__('achievements.grand_prize_prize') || 'Ҷоиза:'}</span>
+                    <span style="display: flex; gap: 6px; align-items: center;">+${goldPrizeValue} 🪙 <span style="color: var(--text-secondary); font-weight: normal; font-size: 12px;">|</span> +${starPrizeValue} ⭐</span>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function showAchievementDetails(id) {
+    const a = ACHIEVEMENTS.find(item => item.id === id);
+    if (!a) return;
+    
+    const child = getCurrentChild();
+    const earned = child && child.achievements ? child.achievements.includes(id) : false;
+    
+    const displayName = __(`achievement.${id}`) || a.name;
+    const displayDesc = __(`achievement.desc.${id}`) || a.desc;
+    
+    document.getElementById('achievement-modal-title').textContent = __('achievement_modal.title') || 'Муваффақият';
+    document.getElementById('achievement-modal-icon').textContent = a.icon;
+    document.getElementById('achievement-modal-name').textContent = displayName;
+    
+    const progress = getAchievementProgress(child, id);
+    
+    const descBox = document.getElementById('achievement-modal-desc-box');
+    if (descBox) {
+        descBox.innerHTML = `
+            <p style="font-weight: 500; font-size: 13px; color: var(--text-secondary); margin-bottom: 5px;">${__('achievement_modal.condition_label') || 'Шарти муваффақият:'}</p>
+            <p style="font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.4;">${displayDesc}</p>
+            <p style="font-weight: 500; font-size: 12px; color: var(--text-secondary);">${__('achievement_modal.progress_label') || 'Пешрафт:'} <span style="font-weight: 700; color: var(--primary); font-size: 13px; margin-left: 4px;">${progress.formatted}</span></p>
+        `;
+    }
+    
+    const statusEl = document.getElementById('achievement-modal-status');
+    if (statusEl) {
+        if (earned) {
+            statusEl.textContent = __('achievement_modal.status_unlocked') || 'Ба даст оварда шуд 🎉';
+            statusEl.className = 'badge';
+            statusEl.style.background = 'rgba(16, 185, 129, 0.1)';
+            statusEl.style.color = '#10b981';
+            statusEl.style.border = '1px solid rgba(16, 185, 129, 0.2)';
+        } else {
+            statusEl.textContent = __('achievement_modal.status_locked') || 'Қулф аст 🔒';
+            statusEl.className = 'badge';
+            statusEl.style.background = 'rgba(107, 114, 128, 0.1)';
+            statusEl.style.color = '#6b7280';
+            statusEl.style.border = '1px solid rgba(107, 114, 128, 0.2)';
+        }
+    }
+    
+    document.getElementById('achievement-modal').classList.remove('hidden');
+}
+
+function closeAchievementModal() {
+    document.getElementById('achievement-modal').classList.add('hidden');
 }
 
 // ===== SETTINGS =====
@@ -1489,7 +1743,7 @@ function verifySettingsPin() {
     }
     settingsPinVerified = true;
     document.getElementById('settings-pin-modal').classList.add('hidden');
-    renderSettings();
+    navigateTo('settings');
 }
 
 function renderSettings() {
@@ -1673,7 +1927,6 @@ function showTaskModal(task = null, forceBonus = false) {
 
         document.getElementById('task-reward-gold').value = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
         document.getElementById('task-reward-stars').value = task.rewardStars || 0;
-        document.getElementById('task-reward-medals').value = task.rewardMedals || 0;
 
         editingTaskId = task.id;
         editingIsBonus = (typeVal === 'bonus');
@@ -1723,7 +1976,6 @@ function showTaskModal(task = null, forceBonus = false) {
 
         document.getElementById('task-reward-gold').value = 0;
         document.getElementById('task-reward-stars').value = 0;
-        document.getElementById('task-reward-medals').value = 0;
 
         editingTaskId = null;
         editingIsBonus = forceBonus;
@@ -1864,7 +2116,7 @@ function saveTask() {
 
     const rewardGold = parseInt(document.getElementById('task-reward-gold').value) || 0;
     const rewardStars = parseInt(document.getElementById('task-reward-stars').value) || 0;
-    const rewardMedals = parseInt(document.getElementById('task-reward-medals').value) || 0;
+    const rewardMedals = 0;
     
     const instructions = document.getElementById('task-instructions').value.trim();
     const instImg = document.getElementById('task-inst-image-img');
@@ -2070,6 +2322,427 @@ function deleteChild() {
     }
 }
 
+// ===== DREAMS =====
+// ===== DREAM MODAL HANDLERS =====
+let dreamPhotoData = null;
+let parentDreamPhotoData = null;
+
+function openDreamModal() {
+    const modal = document.getElementById('dream-modal');
+    if (!modal) return;
+    // Reset fields
+    const nameInput = document.getElementById('dream-name-input');
+    const descInput = document.getElementById('dream-desc-input');
+    const photoInput = document.getElementById('dream-photo-input');
+    const photoPreview = document.getElementById('dream-photo-preview');
+    const photoBtn = document.getElementById('dream-photo-btn');
+    if (nameInput) nameInput.value = '';
+    if (descInput) descInput.value = '';
+    if (photoInput) photoInput.value = '';
+    if (photoPreview) photoPreview.classList.add('hidden');
+    if (photoBtn) photoBtn.classList.remove('hidden');
+    dreamPhotoData = null;
+    modal.classList.remove('hidden');
+}
+
+function closeDreamModal() {
+    const modal = document.getElementById('dream-modal');
+    if (modal) modal.classList.add('hidden');
+    dreamPhotoData = null;
+}
+
+function handleDreamPhoto(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            dreamPhotoData = canvas.toDataURL('image/jpeg', 0.7);
+            const imgEl = document.getElementById('dream-photo-img');
+            if (imgEl) imgEl.src = dreamPhotoData;
+            const preview = document.getElementById('dream-photo-preview');
+            if (preview) preview.classList.remove('hidden');
+            const btn = document.getElementById('dream-photo-btn');
+            if (btn) btn.classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function submitDreamModal() {
+    const nameInput = document.getElementById('dream-name-input');
+    const descInput = document.getElementById('dream-desc-input');
+    if (!nameInput) return;
+    const name = nameInput.value.trim();
+    if (!name) {
+        showToast('⚠️', currentLang === 'ru' ? 'Введите название мечты' : 'Номи орзуро нависед');
+        return;
+    }
+    const desc = descInput ? descInput.value.trim() : '';
+    const child = getCurrentChild();
+    if (!child) return;
+    if (!child.dreams) child.dreams = [];
+    child.dreams.push({
+        id: 'dream_' + Date.now(),
+        name: name,
+        description: desc,
+        photo: dreamPhotoData || null,
+        costGold: 0,
+        costStars: 0,
+        achieved: false,
+        approved: false,
+        createdAt: new Date().toISOString()
+    });
+    saveState();
+    showToast('✨', __('dream.add_success'));
+    closeDreamModal();
+    renderDreams();
+}
+
+function renderDreams() {
+    const child = getCurrentChild();
+    if (!child) return;
+    if (!child.dreams) child.dreams = [];
+
+    const listContainer = document.getElementById('dreams-list');
+    if (!listContainer) return;
+
+    // Update placeholders with translations
+    const nameInput = document.getElementById('dream-input-name');
+    if (nameInput) nameInput.placeholder = __('dream.new');
+
+    // Setup add dream button
+    const addBtn = document.getElementById('btn-add-dream');
+    if (addBtn && !addBtn._bound) {
+        addBtn._bound = true;
+        addBtn.addEventListener('click', function() {
+            const nameEl = document.getElementById('dream-input-name');
+            if (!nameEl) return;
+            const name = nameEl.value.trim();
+            if (!name) return;
+
+            const goldEl = document.getElementById('dream-input-gold');
+            const starsEl = document.getElementById('dream-input-stars');
+            const costGold = goldEl ? (parseInt(goldEl.value) || 0) : 0;
+            const costStars = starsEl ? (parseInt(starsEl.value) || 0) : 0;
+
+            const child = getCurrentChild();
+            if (!child.dreams) child.dreams = [];
+            child.dreams.push({
+                id: 'dream_' + Date.now(),
+                name: name,
+                costGold: costGold,
+                costStars: costStars,
+                achieved: false,
+                approved: (costGold > 0 || costStars > 0),
+                createdAt: new Date().toISOString()
+            });
+            saveState();
+            showToast('✨', __('dream.add_success'));
+            if (nameEl) nameEl.value = '';
+            if (goldEl) goldEl.value = '';
+            if (starsEl) starsEl.value = '';
+            renderDreams();
+        });
+    }
+
+    // Render dreams list
+    if (child.dreams.length === 0) {
+        listContainer.innerHTML = `
+            <div class="section-card" style="text-align: center; padding: 30px 20px;">
+                <div style="font-size: 48px; margin-bottom: 12px;">🌟</div>
+                <p style="color: var(--text-light); font-size: 14px;">${__('dream.list_empty')}</p>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+    const activeDreams = child.dreams.filter(d => !d.achieved);
+    const achievedDreams = child.dreams.filter(d => d.achieved);
+
+    activeDreams.forEach(dream => {
+        const isApproved = dream.approved === true;
+        
+        let progressHtml = '';
+        let canAchieve = false;
+        
+        if (dream.approved === 'rejected') {
+            progressHtml = `
+                <div style="font-size: 12px; color: var(--danger); font-style: italic; margin-top: 4px; display: flex; align-items: center; gap: 4px; font-weight: 500;">
+                    ❌ ${currentLang === 'ru' ? 'Отклонено' : 'Рад карда шуд'} (${currentLang === 'ru' ? 'Причина' : 'Сабаб'}: ${dream.parentComment || (currentLang === 'ru' ? 'без причины' : 'бидуни сабаб')})
+                </div>
+            `;
+        } else if (!isApproved) {
+            progressHtml = `
+                <div style="font-size: 12px; color: var(--warning); font-style: italic; margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                    ⏳ ${__('dream.pending_pricing')}
+                </div>
+            `;
+        } else {
+            const goldProgress = dream.costGold > 0 ? Math.min(100, (child.balance / dream.costGold) * 100) : 100;
+            const starsProgress = dream.costStars > 0 ? Math.min(100, ((child.stars || 0) / dream.costStars) * 100) : 100;
+            canAchieve = (dream.costGold <= 0 || child.balance >= dream.costGold) && (dream.costStars <= 0 || (child.stars || 0) >= dream.costStars);
+            
+            progressHtml = `
+                ${dream.costGold > 0 ? `
+                    <div style="margin-bottom: 4px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); margin-bottom: 2px;">
+                            <span>🪙 ${child.balance} / ${dream.costGold}</span>
+                            <span>${Math.round(goldProgress)}%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(0,0,0,0.1); border-radius: 3px; overflow: hidden;">
+                            <div style="height: 100%; width: ${goldProgress}%; background: linear-gradient(90deg, #F59E0B, #FCD34D); border-radius: 3px; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                ` : ''}
+                ${dream.costStars > 0 ? `
+                    <div style="margin-bottom: 4px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); margin-bottom: 2px;">
+                            <span>⭐ ${child.stars || 0} / ${dream.costStars}</span>
+                            <span>${Math.round(starsProgress)}%</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(0,0,0,0.1); border-radius: 3px; overflow: hidden;">
+                            <div style="height: 100%; width: ${starsProgress}%; background: linear-gradient(90deg, #8B5CF6, #C4B5FD); border-radius: 3px; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        const dreamPhotoHtml = dream.photo ? `
+            <div style="margin-top: 8px; border-radius: var(--radius-sm); overflow: hidden; max-height: 120px;">
+                <img src="${dream.photo}" alt="${dream.name}" style="width: 100%; height: 120px; object-fit: cover; border-radius: var(--radius-sm);">
+            </div>
+        ` : '';
+        const dreamDescHtml = dream.description ? `
+            <div style="font-size: 12px; color: var(--text-light); margin-top: 4px; line-height: 1.4;">${dream.description}</div>
+        ` : '';
+
+        html += `
+            <div class="section-card dream-card" style="margin-bottom: 12px; padding: 14px; border-radius: var(--radius-md); ${canAchieve ? 'border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);' : ''}">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; font-size: 15px; margin-bottom: 4px;">🌟 ${dream.name}${isApproved ? `<span style="display:inline-block;font-size:10px;background:rgba(16,185,129,0.15);color:var(--success);padding:2px 8px;border-radius:10px;font-weight:600;margin-left:6px;">🤝 ${currentLang === 'ru' ? 'Обещано' : 'Ваъда шуд'}</span>` : ''}</div>
+                        ${dreamDescHtml}
+                        ${dreamPhotoHtml}
+                        <div style="margin-top: 6px;">${progressHtml}</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-end;">
+                        ${canAchieve ? `<button class="btn btn-primary btn-small dream-achieve-btn" data-dream-id="${dream.id}" style="font-size: 12px; padding: 6px 12px; white-space: nowrap;">🎉 ${__('dream.achieve_success').split('!')[0]}!</button>` : ''}
+                        <button class="dream-delete-btn" data-dream-id="${dream.id}" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px; padding: 4px;" title="${__('delete')}">🗑️</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    // Achieved dreams
+    if (achievedDreams.length > 0) {
+        html += `<div style="margin-top: 16px;"><h4 style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">✅ ${currentLang === 'ru' ? 'Исполненные мечты' : 'Орзуҳои иҷрошуда'}</h4>`;
+        achievedDreams.forEach(dream => {
+            html += `
+                <div class="section-card" style="margin-bottom: 8px; padding: 10px 14px; opacity: 0.7; border-radius: var(--radius-sm);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="text-decoration: line-through; font-size: 13px;">🌟 ${dream.name}</span>
+                        <span style="font-size: 11px; color: var(--success);">✅</span>
+                    </div>
+                </div>
+            `;
+        });
+        html += `</div>`;
+    }
+
+    listContainer.innerHTML = html;
+
+    // Achieve dream handlers
+    listContainer.querySelectorAll('.dream-achieve-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const dreamId = this.dataset.dreamId;
+            const child = getCurrentChild();
+            const dream = child.dreams.find(d => d.id === dreamId);
+            if (!dream) return;
+
+            if (dream.costGold > 0 && child.balance < dream.costGold) {
+                showToast('❌', __('dream.not_enough'));
+                return;
+            }
+            if (dream.costStars > 0 && (child.stars || 0) < dream.costStars) {
+                showToast('❌', __('dream.not_enough'));
+                return;
+            }
+
+            // Deduct
+            if (dream.costGold > 0) child.balance -= dream.costGold;
+            if (dream.costStars > 0) child.stars = (child.stars || 0) - dream.costStars;
+            dream.achieved = true;
+            dream.achievedAt = new Date().toISOString();
+            saveState();
+            showToast('🎉', __('dream.achieve_success'));
+            launchConfetti();
+            renderDreams();
+            renderChildTabs();
+        });
+    });
+
+    // Delete dream handlers
+    listContainer.querySelectorAll('.dream-delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const dreamId = this.dataset.dreamId;
+            const child = getCurrentChild();
+            const idx = child.dreams.findIndex(d => d.id === dreamId);
+            if (idx !== -1) {
+                child.dreams.splice(idx, 1);
+                saveState();
+                renderDreams();
+            }
+        });
+    });
+}
+
+// ===== DAILY ROUTINE =====
+function renderRoutine() {
+    const child = getCurrentChild();
+    if (!child) return;
+
+    const container = document.getElementById('routine-timeline-list');
+    if (!container) return;
+
+    const todayDay = new Date().getDay();
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // Get all active tasks for today
+    const todayTasks = [
+        ...child.tasks.filter(t => t.type !== 'daily' || !t.days || t.days.includes(todayDay)),
+        ...child.bonusTasks
+    ];
+
+    // Sort by start time
+    todayTasks.sort((a, b) => {
+        const aTime = a.startTime ? parseInt(a.startTime.split(':')[0]) * 60 + parseInt(a.startTime.split(':')[1]) : 9999;
+        const bTime = b.startTime ? parseInt(b.startTime.split(':')[0]) * 60 + parseInt(b.startTime.split(':')[1]) : 9999;
+        return aTime - bTime;
+    });
+
+    if (todayTasks.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 30px 20px;">
+                <div style="font-size: 48px; margin-bottom: 12px;">📋</div>
+                <p style="color: var(--text-light); font-size: 14px;">${__('routine.no_tasks')}</p>
+            </div>
+        `;
+        return;
+    }
+
+    const today = getToday();
+    const log = getOrCreateDailyLog(currentChildId);
+    let html = '';
+
+    todayTasks.forEach((task, idx) => {
+        const tl = log.tasks[task.id];
+        const status = tl ? tl.status : 'pending';
+        const startTime = task.startTime || '--:--';
+        const taskMinutes = task.startTime ? parseInt(task.startTime.split(':')[0]) * 60 + parseInt(task.startTime.split(':')[1]) : null;
+        
+        // Determine if this is past, current, or future
+        let timeState = 'future';
+        if (status === 'completed' && tl && tl.confirmed) {
+            timeState = 'completed';
+        } else if (status === 'skipped') {
+            timeState = 'skipped';
+        } else if (status === 'in-progress') {
+            timeState = 'current';
+        } else if (status === 'awaiting-confirm') {
+            timeState = 'awaiting';
+        } else if (taskMinutes !== null && currentMinutes >= taskMinutes) {
+            timeState = 'current';
+        }
+
+        let dotColor = 'var(--text-light)';
+        let dotIcon = '';
+        let cardBg = '';
+        if (timeState === 'completed') {
+            dotColor = 'var(--success)';
+            dotIcon = '✓';
+            cardBg = 'background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.03) 100%); border-left: 3px solid var(--success);';
+        } else if (timeState === 'skipped') {
+            dotColor = 'var(--danger)';
+            dotIcon = '✕';
+            cardBg = 'opacity: 0.6; border-left: 3px solid var(--danger);';
+        } else if (timeState === 'current' || timeState === 'awaiting') {
+            dotColor = 'var(--primary)';
+            dotIcon = '▶';
+            cardBg = 'background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.03) 100%); border-left: 3px solid var(--primary); box-shadow: 0 0 8px rgba(124, 58, 237, 0.15);';
+        } else {
+            cardBg = 'border-left: 3px solid var(--border);';
+        }
+
+        const gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
+        const stars = task.rewardStars || 0;
+        const isBonus = task.isBonus || task.type === 'bonus';
+
+        const statusLabels = {
+            'pending': __('status.pending'),
+            'in-progress': __('status.in-progress'),
+            'awaiting-confirm': __('status.awaiting-confirm'),
+            'completed': __('status.completed'),
+            'skipped': __('status.skipped')
+        };
+
+        html += `
+            <div class="routine-item" style="display: flex; align-items: flex-start; gap: 12px;">
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 40px; padding-top: 2px;">
+                    <div style="font-size: 11px; font-weight: 700; color: ${dotColor}; margin-bottom: 4px;">${startTime}</div>
+                    <div style="width: 18px; height: 18px; border-radius: 50%; background: ${dotColor}; display: flex; align-items: center; justify-content: center; font-size: 9px; color: white; font-weight: 700;">
+                        ${dotIcon}
+                    </div>
+                </div>
+                <div class="section-card" style="flex: 1; padding: 10px 14px; border-radius: var(--radius-sm); ${cardBg} margin-bottom: 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">
+                                ${isBonus ? '🎁 ' : ''}${task.name}
+                            </div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; font-size: 11px;">
+                                <span style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">⏱ ${task.duration} ${__('task.minutes')}</span>
+                                <span style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); padding: 2px 6px; border-radius: 4px;">🪙 ${gold} ⭐ ${stars}</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600;
+                            ${timeState === 'completed' ? 'background: rgba(16, 185, 129, 0.15); color: var(--success);' : 
+                              timeState === 'skipped' ? 'background: rgba(239, 68, 68, 0.15); color: var(--danger);' :
+                              timeState === 'current' || timeState === 'awaiting' ? 'background: rgba(124, 58, 237, 0.15); color: var(--primary);' :
+                              'background: rgba(0,0,0,0.05); color: var(--text-light);'}
+                        ">
+                            ${statusLabels[status] || statusLabels['pending']}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
 // ===== PARENT DASHBOARD =====
 function showParentPin() {
     if (parentPinVerified) {
@@ -2088,6 +2761,7 @@ function showParentPin() {
 }
 
 function renderParentDashboard() {
+    parentDreamPhotoData = null;
     var container = document.getElementById("parent-content");
     if (!container) return;
     
@@ -2103,6 +2777,8 @@ function renderParentDashboard() {
     }
 
     var html = "<div class='parent-overview'>";
+
+    // Withdrawal requests moved to the bottom
 
     // ---- Task Management Section ----
     html += "<div class='parent-task-section'>";
@@ -2130,9 +2806,7 @@ function renderParentDashboard() {
 
             var gold = task.rewardGold !== undefined ? task.rewardGold : 0;
             var stars = task.rewardStars || 0;
-            var medals = task.rewardMedals || 0;
             var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars;
-            if (medals > 0) rewardsBadge += " 🏅 " + medals;
             rewardsBadge += "</span>";
 
             html += "<li>";
@@ -2157,9 +2831,7 @@ function renderParentDashboard() {
             var iconName = 'icon-gift';
             var gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
             var stars = task.rewardStars || 0;
-            var medals = task.rewardMedals || 0;
             var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars;
-            if (medals > 0) rewardsBadge += " 🏅 " + medals;
             rewardsBadge += "</span>";
 
             html += "<li>";
@@ -2181,10 +2853,218 @@ function renderParentDashboard() {
         __('settings.add_task') + "</button>";
     html += "</div>";
 
+    // Pending Withdrawal Requests Section (Moved here from top)
+    if (!selectedChild.withdrawals) selectedChild.withdrawals = [];
+    var pendingReqs = selectedChild.withdrawals.filter(function(w) { return w.status === 'pending'; });
+    
+    html += "<div class='section-card' style='background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(76,29,149,0.05) 100%); border: 1px solid rgba(124,58,237,0.15); margin-top: 15px;'>";
+    html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;'><use href='#icon-wallet'/></svg> " + __('parent.withdraw_requests') + "</h4>";
+    
+    if (pendingReqs.length === 0) {
+        html += "<p class='empty-state'>" + __('parent.no_withdraw_requests') + "</p>";
+    } else {
+        html += "<ul class='item-list' style='margin-top:10px;list-style:none;padding:0;'>";
+        pendingReqs.forEach(function(req) {
+            var sym = req.type === 'stars' ? '⭐' : '🪙';
+            html += "<li style='display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);'>";
+            html += "<div style='display:flex; justify-content:space-between; align-items:center; width:100%;'>";
+            html += "<span>⏱ " + formatDate(req.date) + " — <strong style='font-size:16px;color:#FCD34D;'>" + req.amount + " " + sym + "</strong></span>";
+            html += "<div style='display:flex; gap:6px;'>";
+            html += "<button class='parent-approve-btn' data-req-id='" + req.id + "' style='padding:6px 12px; font-size:12px; background:#10B981; border:none; color:white; border-radius:6px; cursor:pointer; font-weight:600;'>" + __('parent.approve') + "</button>";
+            html += "<button class='parent-reject-btn' data-req-id='" + req.id + "' style='padding:6px 12px; font-size:12px; background:#EF4444; border:none; color:white; border-radius:6px; cursor:pointer; font-weight:600;'>" + __('parent.reject') + "</button>";
+            html += "</div></div>";
+            if (req.reason || req.photo) {
+                html += "<div style='margin-top:8px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.1); padding: 8px; border-radius: 6px;'>";
+                if (req.reason) html += "<div style='margin-bottom:4px;'><strong style='color:var(--text);'>📝 Сабаб:</strong> " + req.reason + "</div>";
+                if (req.photo) html += "<img src='" + req.photo + "' style='max-width:150px; border-radius:6px; margin-top:4px; display:block;'>";
+                html += "</div>";
+            }
+            html += "</li>";
+        });
+        html += "</ul>";
+    }
+    html += "</div>"; // close section-card
+
+    // ---- Excuse Day Button ----
+    html += "<div style='margin-top: 15px;'>";
+    html += "<button class='btn btn-outline btn-full btn-parent-excuse-day' style='border-color: rgba(245, 158, 11, 0.3); color: var(--warning);'>" +
+        "<svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;'><use href='#icon-skip'/></svg> " +
+        __('excuse.title') + "</button>";
+    html += "</div>";
+
+    // ---- Dreams Management Section ----
+    html += "<div class='section-card' style='margin-top: 15px;'>";
+    html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--secondary);'><use href='#icon-sparkle'/></svg> Идораи орзуҳо</h4>";
+    
+    if (!selectedChild.dreams) selectedChild.dreams = [];
+    
+    if (selectedChild.dreams.length === 0) {
+        html += "<p class='empty-state'>Кӯдак ҳанӯз ягон орзу илова накардааст.</p>";
+    } else {
+        html += "<ul class='item-list' style='margin-top:10px;list-style:none;padding:0;'>";
+        selectedChild.dreams.forEach(function(dream) {
+            var isApproved = dream.approved !== false && (dream.costGold > 0 || dream.costStars > 0);
+            
+            html += "<li style='display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.05);'>";
+            html += "<div style='display:flex; justify-content:space-between; align-items:center; width:100%;'>";
+            html += "<span>🌟 <strong>" + dream.name + "</strong>" + (dream.achieved ? " (✅ Иҷро шуд)" : "") + "</span>";
+            html += "<div style='display:flex; gap:6px;'>";
+            html += "<button class='parent-delete-dream-btn' data-dream-id='" + dream.id + "' style='background:none; border:none; cursor:pointer;'>🗑️</button>";
+            html += "</div></div>";
+            
+            if (dream.description) {
+                html += "<div style='font-size:12px; color:var(--text-light); margin-top:2px; line-height:1.4;'>" + dream.description + "</div>";
+            }
+            if (dream.photo) {
+                html += "<div style='margin-top:6px; border-radius:6px; overflow:hidden; max-height:80px; width:fit-content;'>";
+                html += "<img src='" + dream.photo + "' style='max-height:80px; border-radius:6px; object-fit:cover;'>";
+                html += "</div>";
+            }
+            
+            if (dream.approved === 'rejected') {
+                html += "<div style='font-size: 12px; color: var(--danger); font-style: italic; margin-top: 4px; font-weight: 500;'>";
+                html += "❌ Рад шуд (Сабаб: " + (dream.parentComment || 'сабаб нишон дода нашудааст') + ")";
+                html += "</div>";
+            }
+
+            if (!dream.achieved) {
+                var btnLabel = 'Захира';
+                var showReject = false;
+                if (dream.approved === false) {
+                    btnLabel = 'Тасдиқ кардан';
+                    showReject = true;
+                } else if (dream.approved === 'rejected') {
+                    btnLabel = 'Тасдиқ кардан';
+                }
+
+                html += "<div style='margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;'>";
+                html += "<div style='position: relative; display: inline-block; width: 75px;'>";
+                html += "<input type='number' class='dream-gold-cost-input' data-dream-id='" + dream.id + "' placeholder='0' value='" + (dream.costGold || '') + "' style='width: 100%; padding: 4px 22px 4px 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; height: 30px; box-sizing: border-box;'>";
+                html += "<span style='position: absolute; right: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px;'>🪙</span>";
+                html += "</div>";
+                html += "<div style='position: relative; display: inline-block; width: 75px;'>";
+                html += "<input type='number' class='dream-stars-cost-input' data-dream-id='" + dream.id + "' placeholder='0' value='" + (dream.costStars || '') + "' style='width: 100%; padding: 4px 22px 4px 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; height: 30px; box-sizing: border-box;'>";
+                html += "<span style='position: absolute; right: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px;'>⭐</span>";
+                html += "</div>";
+                html += "<button class='parent-save-dream-price-btn btn btn-primary' data-dream-id='" + dream.id + "' style='padding:4px 8px; font-size:12px; height:30px; line-height:20px;'>" + btnLabel + "</button>";
+                if (showReject) {
+                    html += "<button class='parent-reject-dream-btn btn btn-danger' data-dream-id='" + dream.id + "' style='padding:4px 8px; font-size:12px; height:30px; line-height:20px;'>Рад кардан</button>";
+                }
+                html += "</div>";
+            } else {
+                html += "<div style='margin-top:4px; font-size:12px; color:var(--text-light);'>Арзиш: 🪙 " + dream.costGold + ", ⭐ " + dream.costStars + "</div>";
+            }
+            
+            html += "</li>";
+        });
+        html += "</ul>";
+    }
+    
+    html += "<div style='margin-top:12px; border-top:1px dashed var(--border); padding-top:10px;'>";
+    html += "<h5 style='font-size:13px; margin-bottom:8px;'>Илова кардани орзуи нав аз номи волидон:</h5>";
+    html += "<div style='display:flex; flex-direction:column; gap:6px;'>";
+    html += "<input type='text' id='parent-dream-name-input' placeholder='Номи орзу...' style='width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:12px; box-sizing: border-box;'>";
+    html += "<textarea id='parent-dream-desc-input' placeholder='Тавсифи орзу...' style='width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:12px; font-family:inherit; min-height:50px; resize:vertical; box-sizing: border-box;'></textarea>";
+    html += "<input type='file' id='parent-dream-photo-input' accept='image/*' style='display:none;'>";
+    html += "<div class='premium-upload-card' id='parent-dream-photo-btn' style='margin-top:8px;'>";
+    html += "<span style='font-size:20px;'>📷</span>";
+    html += "<span>" + (currentLang === 'ru' ? 'Добавить фото' : 'Акс илова кунед') + "</span>";
+    html += "</div>";
+    html += "<div id='parent-dream-photo-preview' class='premium-photo-preview-container hidden' style='margin-top:8px;'>";
+    html += "<img id='parent-dream-photo-img' src='' alt=''>";
+    html += "<button id='parent-dream-photo-remove' class='premium-photo-delete-btn'>✕</button>";
+    html += "</div>";
+    html += "<div style='display:flex; gap:6px; align-items:center; margin-top:4px;'>";
+    html += "<div style='position: relative; display: inline-block; width: 75px;'>";
+    html += "<input type='number' id='parent-dream-gold-input' placeholder='0' style='width: 100%; padding: 4px 22px 4px 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; height: 30px; box-sizing: border-box;'>";
+    html += "<span style='position: absolute; right: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px;'>🪙</span>";
+    html += "</div>";
+    html += "<div style='position: relative; display: inline-block; width: 75px;'>";
+    html += "<input type='number' id='parent-dream-stars-input' placeholder='0' style='width: 100%; padding: 4px 22px 4px 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; height: 30px; box-sizing: border-box;'>";
+    html += "<span style='position: absolute; right: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px;'>⭐</span>";
+    html += "</div>";
+    html += "<button class='parent-add-dream-direct-btn btn btn-primary' style='padding:6px 12px; font-size:12px; height:30px; line-height:18px;'>Захира</button>";
+    html += "</div>";
+    html += "</div>";
+    html += "</div>"; // close dreams section-card
+
+    // (Settings moved to floating FAB — see below)
+
     html += "</div>"; // close parent-task-section
     html += "</div>"; // close parent-overview
 
     container.innerHTML = html;
+
+    // ---- Floating Settings FAB + Bottom-Sheet Modal ----
+    var pageParent = document.getElementById('page-parent');
+    // Remove stale FAB/modal from previous renders
+    var _oldFab = document.getElementById('parent-settings-fab');
+    if (_oldFab) _oldFab.remove();
+    var _oldModal = document.getElementById('parent-settings-modal');
+    if (_oldModal) _oldModal.remove();
+
+    // Create FAB
+    var fabEl = document.createElement('div');
+    fabEl.id = 'parent-settings-fab';
+    fabEl.style.cssText = 'position:fixed;bottom:82px;right:16px;z-index:200;';
+    fabEl.innerHTML =
+        '<button id="parent-settings-fab-btn" title="' + (currentLang === 'ru' ? 'Настройки' : 'Танзимот') + '" ' +
+        'style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#4C1D95);' +
+        'border:none;color:white;cursor:pointer;box-shadow:0 4px 20px rgba(124,58,237,0.45);' +
+        'transition:all 0.25s ease;display:flex;align-items:center;justify-content:center;">' +
+        '<svg style="width:22px;height:22px;" aria-hidden="true"><use href="#icon-settings"></use></svg>' +
+        '</button>';
+    pageParent.appendChild(fabEl);
+
+    // Create bottom-sheet modal
+    var modalEl = document.createElement('div');
+    modalEl.id = 'parent-settings-modal';
+    modalEl.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);' +
+        'z-index:250;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);';
+    modalEl.innerHTML =
+        '<div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;' +
+        'background:var(--bg-card);border-radius:20px 20px 0 0;padding:20px 20px 36px;box-shadow:0 -8px 32px rgba(0,0,0,0.25);">' +
+        '<div style="width:40px;height:4px;background:rgba(128,128,128,0.25);border-radius:2px;margin:0 auto 18px;"></div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">' +
+        '<h4 style="font-size:16px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;">' +
+        '<svg class="icon-svg" aria-hidden="true" style="width:18px;height:18px;"><use href="#icon-settings"></use></svg> ' +
+        __('settings.app_settings') + '</h4>' +
+        '<button id="parent-settings-modal-close" style="background:rgba(128,128,128,0.12);border:none;cursor:pointer;' +
+        'color:var(--text-secondary);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;' +
+        'justify-content:center;font-size:16px;transition:all 0.2s;">✕</button>' +
+        '</div>' +
+        '<div class="settings-card">' +
+        '<div class="settings-item parent-settings-pin" style="cursor:pointer;">' +
+        '<span class="settings-item-left"><svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-shield"/></svg>' +
+        '<span class="settings-item-label">' + __('settings.change_pin') + '</span></span>' +
+        '<span class="settings-item-arrow">›</span></div>' +
+        '<div class="settings-item parent-settings-lang" style="cursor:pointer;">' +
+        '<span class="settings-item-left"><svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-flag"/></svg>' +
+        '<span class="settings-item-label">' + __('settings.language') + ': ' + (currentLang === 'ru' ? __('settings.language_ru') : __('settings.language_tg')) + '</span></span>' +
+        '<span class="settings-item-arrow">' + (currentLang === 'ru' ? '🇷🇺' : '🇹🇯') + '</span></div>' +
+        '<div class="settings-item parent-settings-export" style="cursor:pointer;">' +
+        '<span class="settings-item-left"><svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-arrow-up"/></svg>' +
+        '<span class="settings-item-label">' + __('settings.export') + '</span></span>' +
+        '<span class="settings-item-arrow">' + Math.round(JSON.stringify(state).length / 1024) + ' KB</span></div>' +
+        '<div class="settings-item parent-settings-reset" style="cursor:pointer;">' +
+        '<span class="settings-item-left"><svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-skip"/></svg>' +
+        '<span class="settings-item-label">' + __('settings.reset_data') + '</span></span>' +
+        '<span class="settings-item-arrow">›</span></div>' +
+        '</div></div>';
+    pageParent.appendChild(modalEl);
+
+    // FAB: open modal
+    document.getElementById('parent-settings-fab-btn').addEventListener('click', function() {
+        document.getElementById('parent-settings-modal').style.display = 'flex';
+    });
+    // Close button
+    document.getElementById('parent-settings-modal-close').addEventListener('click', function() {
+        document.getElementById('parent-settings-modal').style.display = 'none';
+    });
+    // Tap backdrop to close
+    modalEl.addEventListener('click', function(e) {
+        if (e.target === modalEl) modalEl.style.display = 'none';
+    });
 
     // ---- Attach event listeners ----
 
@@ -2232,6 +3112,273 @@ function renderParentDashboard() {
             document.getElementById('task-emoji').value = this.dataset.emoji;
         });
     });
+
+    // Approve withdraw request
+    container.querySelectorAll('.parent-approve-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var reqId = this.dataset.reqId;
+            var child = getCurrentChild();
+            var req = child.withdrawals.find(function(w) { return w.id === reqId; });
+            if (!req) return;
+
+            // Perform actual deduction
+            if (req.type === 'stars') {
+                child.stars = (child.stars || 0) - req.amount;
+            } else {
+                child.balance -= req.amount;
+            }
+
+            req.status = 'approved';
+            saveState();
+            showToast('✅', __('confirm'));
+            renderParentDashboard();
+            updateUI();
+        });
+    });
+
+    // Reject withdraw request
+    container.querySelectorAll('.parent-reject-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var reqId = this.dataset.reqId;
+            var child = getCurrentChild();
+            var req = child.withdrawals.find(function(w) { return w.id === reqId; });
+            if (!req) return;
+
+            var reason = prompt(__('parent.reject_reason_prompt'));
+            if (reason === null) return; // parent cancelled prompt
+            
+            req.status = 'rejected';
+            req.parentComment = reason.trim();
+            saveState();
+            showToast('❌', __('confirm'));
+            renderParentDashboard();
+            updateUI();
+        });
+    });
+
+    // Excuse day button
+    var excuseBtn = container.querySelector('.btn-parent-excuse-day');
+    if (excuseBtn) {
+        excuseBtn.addEventListener('click', function() {
+            showExcuseModal();
+        });
+    }
+
+    // Settings: Change PIN (now in modal — use document.querySelector)
+    var pinItem = document.querySelector('.parent-settings-pin');
+    if (pinItem) {
+        pinItem.addEventListener('click', function() {
+            document.getElementById('parent-settings-modal').style.display = 'none';
+            var newPin = prompt(__('settings.change_pin_prompt'));
+            if (newPin && /^\d{4}$/.test(newPin)) {
+                state.pin = newPin;
+                saveState();
+                showToast('✅', __('settings.change_pin_success'));
+            } else if (newPin) {
+                showToast('❌', __('settings.change_pin_error'));
+            }
+        });
+    }
+
+    // Settings: Language Toggle
+    var langItem = document.querySelector('.parent-settings-lang');
+    if (langItem) {
+        langItem.addEventListener('click', function() {
+            document.getElementById('parent-settings-modal').style.display = 'none';
+            if (currentLang === 'ru') {
+                setLanguage('tg');
+            } else {
+                setLanguage('ru');
+            }
+            saveState();
+            parentPinVerified = true;
+            updateLanguageUI();
+            renderParentDashboard();
+        });
+    }
+
+    // Settings: Export Data
+    var exportItem = document.querySelector('.parent-settings-export');
+    if (exportItem) {
+        exportItem.addEventListener('click', function() {
+            var dataStr = JSON.stringify(state, null, 2);
+            var blob = new Blob([dataStr], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'kids_tasks_backup_' + getToday() + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('📤', __('settings.export_success'));
+        });
+    }
+
+    // Dreams: Save Dream Price
+    container.querySelectorAll('.parent-save-dream-price-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var dreamId = this.dataset.dreamId;
+            var goldInput = container.querySelector(".dream-gold-cost-input[data-dream-id='" + dreamId + "']");
+            var starsInput = container.querySelector(".dream-stars-cost-input[data-dream-id='" + dreamId + "']");
+            
+            var goldCost = parseInt(goldInput.value) || 0;
+            var starsCost = parseInt(starsInput.value) || 0;
+            
+            if (goldCost <= 0 && starsCost <= 0) {
+                showToast('⚠️', currentLang === 'ru' ? 'Цена не определена!' : 'Нарх муайян карда нашуд!');
+                return;
+            }
+            
+            var dream = selectedChild.dreams.find(function(d) { return d.id === dreamId; });
+            if (dream) {
+                dream.costGold = goldCost;
+                dream.costStars = starsCost;
+                dream.approved = true;
+                saveState();
+                showToast('✨', 'Нархи орзу муайян карда шуд!');
+                renderParentDashboard();
+            }
+        });
+    });
+
+    // Dreams: Reject Dream
+    container.querySelectorAll('.parent-reject-dream-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var dreamId = this.dataset.dreamId;
+            var reason = prompt(currentLang === 'ru' ? 'Введите причину отклонения:' : 'Сабаби радкуниро ворид кунед:');
+            if (reason === null) return; // parent cancelled prompt
+            
+            var dream = selectedChild.dreams.find(function(d) { return d.id === dreamId; });
+            if (dream) {
+                dream.approved = 'rejected';
+                dream.parentComment = reason.trim();
+                saveState();
+                showToast('❌', 'Орзу рад карда шуд!');
+                renderParentDashboard();
+            }
+        });
+    });
+
+    // Dreams: Delete Dream
+    container.querySelectorAll('.parent-delete-dream-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var dreamId = this.dataset.dreamId;
+            var idx = selectedChild.dreams.findIndex(function(d) { return d.id === dreamId; });
+            if (idx !== -1) {
+                selectedChild.dreams.splice(idx, 1);
+                saveState();
+                showToast('🗑️', 'Орзу нест карда шуд!');
+                renderParentDashboard();
+            }
+        });
+    });
+
+    // Dreams: Add dream direct by parent
+    var parentAddDreamBtn = container.querySelector('.parent-add-dream-direct-btn');
+    if (parentAddDreamBtn) {
+        parentAddDreamBtn.addEventListener('click', function() {
+            var nameInput = document.getElementById('parent-dream-name-input');
+            var goldInput = document.getElementById('parent-dream-gold-input');
+            var starsInput = document.getElementById('parent-dream-stars-input');
+            var descInput = document.getElementById('parent-dream-desc-input');
+            
+            var name = nameInput.value.trim();
+            var costGold = parseInt(goldInput.value) || 0;
+            var costStars = parseInt(starsInput.value) || 0;
+            var description = descInput ? descInput.value.trim() : '';
+            
+            if (!name) {
+                showToast('⚠️', currentLang === 'ru' ? 'Введите название мечты' : 'Номи орзуро нависед');
+                return;
+            }
+            
+            selectedChild.dreams.push({
+                id: 'dream_' + Date.now(),
+                name: name,
+                description: description,
+                photo: parentDreamPhotoData || null,
+                costGold: costGold,
+                costStars: costStars,
+                achieved: false,
+                approved: true,
+                createdAt: new Date().toISOString()
+            });
+            saveState();
+            parentDreamPhotoData = null;
+            showToast('✨', 'Орзу бомуваффақият илова шуд!');
+            renderParentDashboard();
+        });
+    }
+
+    // Parent dream photo upload listeners
+    var parentPhotoBtn = container.querySelector('#parent-dream-photo-btn');
+    var parentPhotoInput = container.querySelector('#parent-dream-photo-input');
+    var parentPhotoPreview = container.querySelector('#parent-dream-photo-preview');
+    var parentPhotoImg = container.querySelector('#parent-dream-photo-img');
+    var parentPhotoRemove = container.querySelector('#parent-dream-photo-remove');
+
+    if (parentPhotoBtn && parentPhotoInput) {
+        parentPhotoBtn.addEventListener('click', function() {
+            parentPhotoInput.click();
+        });
+    }
+
+    if (parentPhotoInput) {
+        parentPhotoInput.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var img = new Image();
+                    img.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        var w = img.width, h = img.height;
+                        var maxDim = 800;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) {
+                                h = h * maxDim / w;
+                                w = maxDim;
+                            } else {
+                                w = w * maxDim / h;
+                                h = maxDim;
+                            }
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        var ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        parentDreamPhotoData = canvas.toDataURL('image/jpeg', 0.7);
+                        if (parentPhotoImg) parentPhotoImg.src = parentDreamPhotoData;
+                        if (parentPhotoPreview) parentPhotoPreview.classList.remove('hidden');
+                        if (parentPhotoBtn) parentPhotoBtn.style.display = 'none';
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    if (parentPhotoRemove) {
+        parentPhotoRemove.addEventListener('click', function() {
+            parentDreamPhotoData = null;
+            if (parentPhotoImg) parentPhotoImg.src = '';
+            if (parentPhotoPreview) parentPhotoPreview.classList.add('hidden');
+            if (parentPhotoBtn) parentPhotoBtn.style.display = 'flex';
+            if (parentPhotoInput) parentPhotoInput.value = '';
+        });
+    }
+
+    // Settings: Reset Data
+    var resetItem = document.querySelector('.parent-settings-reset');
+    if (resetItem) {
+        resetItem.addEventListener('click', function() {
+            document.getElementById('parent-settings-modal').style.display = 'none';
+            if (confirm(__('settings.reset_data_confirm'))) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        });
+    }
 }
 
 // ===== EXCUSE DAY =====
@@ -2297,57 +3444,209 @@ function showWithdrawModal() {
     const child = getCurrentChild();
     const rt = child.rewardType || 'money';
 
-    // In stars mode, allow withdrawal if child has stars
-    if (child.balance <= 0 && (rt !== 'stars' || (child.stars || 0) <= 0)) {
-        showToast('❌', __('balance.not_enough'));
-        return;
+    // Allow modal to open even if 0 balance, so user sees it works
+
+    const typeGroup = document.getElementById('withdraw-type-group');
+    const typeSelect = document.getElementById('withdraw-currency-type');
+    
+    if (rt === 'both') {
+        typeGroup.classList.remove('hidden');
+        typeSelect.innerHTML = '';
+        if (child.balance > 0) {
+            typeSelect.innerHTML += `<option value="money">🪙 (${child.balance})</option>`;
+        }
+        if ((child.stars || 0) > 0) {
+            typeSelect.innerHTML += `<option value="stars">⭐ Ситорача (${child.stars || 0})</option>`;
+        }
+        if (typeSelect.options.length === 0) {
+            typeSelect.innerHTML = `<option value="money">🪙 (0)</option><option value="stars">⭐ Ситорача (0)</option>`;
+        }
+        typeSelect.selectedIndex = 0;
+    } else {
+        typeGroup.classList.add('hidden');
+        typeSelect.innerHTML = rt === 'stars' 
+            ? `<option value="stars">⭐ Ситорача</option>` 
+            : `<option value="money">🪙</option>`;
+        typeSelect.value = rt;
     }
 
-    document.getElementById('withdraw-balance').textContent = formatBalanceFull(child);
-    document.getElementById('withdraw-amount').value = '';
-    document.getElementById('withdraw-pin').value = '';
-    document.getElementById('withdraw-error').classList.add('hidden');
-    document.getElementById('withdraw-modal').classList.remove('hidden');
+    // Safely update withdraw modal elements
+    const withdrawModal = document.getElementById('withdraw-modal');
+    if (!withdrawModal) { console.error('withdraw-modal not found'); return; }
 
-    document.querySelector('#withdraw-modal .modal-header h3').innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg> ${__('balance.withdraw_title')}`;
-    document.querySelector('#withdraw-modal .modal-body p').textContent = __('balance.withdraw_how_much');
-    document.querySelector('#withdraw-modal .withdraw-info').innerHTML = `${__('balance.withdraw_current')} <strong>${formatBalanceFull(child)}</strong>`;
-    document.getElementById('withdraw-amount').placeholder = __('balance.withdraw_amount');
+    const withdrawBalanceEl = document.getElementById('withdraw-balance');
+    if (withdrawBalanceEl) withdrawBalanceEl.textContent = formatBalanceFull(child);
+
+    const withdrawAmountEl = document.getElementById('withdraw-amount');
+    if (withdrawAmountEl) {
+        withdrawAmountEl.value = '';
+        withdrawAmountEl.placeholder = __('balance.withdraw_amount') || 'Миқдор...';
+    }
+
+    // Show the modal
+    withdrawModal.classList.remove('hidden');
+
+    const modalHeader = withdrawModal.querySelector('.modal-header h3');
+    if (modalHeader) modalHeader.innerHTML = `<svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg> ${__('balance.withdraw_title') || 'Ихроҷ'}`;
+    
+    const modalBodyP = withdrawModal.querySelector('.modal-body p');
+    if (modalBodyP) modalBodyP.textContent = __('balance.withdraw_how_much') || 'Чӣ қадар мехоҳед ихроҷ кунед?';
+    
+    const withdrawInfo = withdrawModal.querySelector('.withdraw-info');
+    if (withdrawInfo) withdrawInfo.innerHTML = `${__('balance.withdraw_current') || 'Тавозуни ҷорӣ:'} <strong>${formatBalanceFull(child)}</strong>`;
 }
 
 function submitWithdraw() {
-    const pin = document.getElementById('withdraw-pin').value;
-    if (pin !== state.pin) {
-        document.getElementById('withdraw-error').classList.remove('hidden');
-        document.getElementById('withdraw-error').textContent = __('pin.error');
-        return;
-    }
-
     const amount = parseInt(document.getElementById('withdraw-amount').value);
     const child = getCurrentChild();
-    const rt = child.rewardType || 'money';
+    const withdrawType = document.getElementById('withdraw-currency-type').value;
+    const reasonEl = document.getElementById('withdraw-reason');
+    const reason = reasonEl ? reasonEl.value : '';
+    const photoImg = document.getElementById('withdraw-photo-img');
+    const photo = (photoImg && photoImg.src && photoImg.src.startsWith('data:')) ? photoImg.src : null;
 
     if (!amount || amount <= 0) {
         showToast('❌', __('balance.withdraw_error_amount'));
         return;
     }
 
-    if (amount > child.balance && (rt === 'money' || rt === 'both')) {
-        showToast('❌', __('balance.withdraw_error_balance'));
+    // Check if balance is sufficient
+    if (withdrawType === 'stars') {
+        const currentStars = child.stars || 0;
+        if (amount > currentStars) {
+            showToast('❌', __('balance.withdraw_error_balance') || 'Маблағ кофӣ нест!');
+            return;
+        }
+    } else {
+        const currentGold = child.balance || 0;
+        if (amount > currentGold) {
+            showToast('❌', __('balance.withdraw_error_balance') || 'Маблағ кофӣ нест!');
+            return;
+        }
+    }
+
+    if (!child.withdrawals) child.withdrawals = [];
+    child.withdrawals.push({
+        id: 'req_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        date: getToday(),
+        amount: amount,
+        type: withdrawType,
+        reason: reason,
+        photo: photo,
+        status: 'pending',
+        parentComment: ''
+    });
+
+    saveState();
+
+    // Reset fields for next time
+    if (reasonEl) reasonEl.value = '';
+    if (photoImg) photoImg.src = '';
+    const photoPreview = document.getElementById('withdraw-photo-preview');
+    if (photoPreview) photoPreview.classList.add('hidden');
+    const photoBtn = document.getElementById('withdraw-photo-btn');
+    if (photoBtn) photoBtn.classList.remove('hidden');
+
+    document.getElementById('withdraw-modal').classList.add('hidden');
+    showToast('🚀', __('balance.withdraw_sent'));
+    renderBalance();
+    updateUI();
+}
+
+function renderWithdrawalHistory() {
+    const child = getCurrentChild();
+    const container = document.getElementById('withdrawal-history');
+    if (!container) return;
+
+    if (!child.withdrawals || child.withdrawals.length === 0) {
+        container.innerHTML = `<p class="empty-state" style="color:var(--text-muted);font-size:14px;">${__('balance.no_withdrawals') || 'Таърихи ихроҷ холӣ аст'}</p>`;
         return;
     }
 
-    child.balance -= amount;
-    child.withdrawals.push({
-        date: getToday(),
-        amount: amount
-    });
-    saveState();
+    let html = `<h4 style="margin-bottom:12px;display:flex;align-items:center;gap:6px;"><svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-wallet"/></svg> Таърихи ихроҷ</h4>`;
+    html += `<ul class="item-list" style="list-style:none;padding:0;">`;
+    
+    const sorted = [...child.withdrawals].sort((a, b) => b.id.localeCompare(a.id));
+    
+    sorted.forEach((req, index) => {
+        let sym = req.type === 'stars' ? '⭐' : '🪙';
+        let statusBadge = '';
+        if (req.status === 'pending') {
+            statusBadge = `<span style="font-size:11px;background:rgba(245,158,11,0.1);color:#F59E0B;padding:2px 6px;border-radius:4px;">Дар интизор</span>`;
+        } else if (req.status === 'approved') {
+            statusBadge = `<span style="font-size:11px;background:rgba(16,185,129,0.1);color:#10B981;padding:2px 6px;border-radius:4px;">Тасдиқ шуд</span>`;
+        } else {
+            statusBadge = `<span style="font-size:11px;background:rgba(239,68,68,0.1);color:#EF4444;padding:2px 6px;border-radius:4px;">Рад шуд</span>`;
+        }
 
-    document.getElementById('withdraw-modal').classList.add('hidden');
-    showToast('🏦', `${amount} ${__('balance.withdraw_success')}`);
-    renderBalance();
-    updateUI();
+        let hiddenClass = index >= 5 ? ' hidden extra-withdrawal' : '';
+        html += `<li class="withdrawal-item${hiddenClass}" style="display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">`;
+        html += `<div style="display:flex; justify-content:space-between; align-items:center; width:100%;">`;
+        html += `<span>⏱ ${formatDate(req.date)} — <strong style="font-size:15px;color:#FCD34D;">${req.amount} ${sym}</strong></span>`;
+        html += `<div>${statusBadge}</div>`;
+        html += `</div>`;
+        if (req.reason || req.photo) {
+            html += `<div style="margin-top:8px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.1); padding: 8px; border-radius: 6px;">`;
+            if (req.reason) html += `<div style="margin-bottom:4px;"><strong style="color:var(--text);">📝 Сабаб:</strong> ${req.reason}</div>`;
+            if (req.photo) html += `<img src="${req.photo}" style="max-width:150px; border-radius:6px; margin-top:4px; display:block;">`;
+            html += `</div>`;
+        }
+        html += `</li>`;
+    });
+    
+    html += `</ul>`;
+    
+    if (sorted.length > 5) {
+        html += `<button class="btn btn-secondary btn-full" id="toggle-withdrawals-btn" style="margin-top:10px; background:transparent; border:1px solid rgba(255,255,255,0.1); color:var(--text-secondary);">Нишон додани ҳама</button>`;
+    }
+    
+    container.innerHTML = html;
+
+    const toggleBtn = document.getElementById('toggle-withdrawals-btn');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            const extraItems = container.querySelectorAll('.extra-withdrawal');
+            if (!extraItems.length) return;
+            const isHidden = extraItems[0].classList.contains('hidden');
+            extraItems.forEach(item => {
+                if (isHidden) item.classList.remove('hidden');
+                else item.classList.add('hidden');
+            });
+            toggleBtn.textContent = isHidden ? 'Пинҳон кардан' : 'Нишон додани ҳама';
+        });
+    }
+}
+
+function renderTestHistory() {
+    const child = getCurrentChild();
+    const container = document.getElementById('test-history');
+    if (!container) return;
+    
+    if (!child.tenDayTests || child.tenDayTests.length === 0) {
+        container.innerHTML = `<p class="empty-state" style="color:var(--text-muted);font-size:14px;">${__('balance.no_tests') || 'Таърихи санҷишҳо холӣ аст'}</p>`;
+        return;
+    }
+
+    let html = `<h4 style="margin-bottom:12px;display:flex;align-items:center;gap:6px;"><svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-edit"/></svg> ${__('test.history') || 'Таърихи санҷишҳо'}</h4>`;
+    html += `<ul class="item-list" style="list-style:none;padding:0;">`;
+    
+    // Show newest first
+    const sorted = [...child.tenDayTests].sort((a, b) => b.id.localeCompare(a.id));
+    
+    sorted.forEach(test => {
+        let total = Object.values(test.scores).reduce((sum, s) => sum + s, 0);
+        let max = Object.keys(test.scores).length;
+        let badgeColor = total === max ? '#10B981' : (total >= max/2 ? '#F59E0B' : '#EF4444');
+        let badgeBg = total === max ? 'rgba(16,185,129,0.1)' : (total >= max/2 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)');
+        
+        html += `<li style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">`;
+        html += `<span>⏱ ${formatDate(test.date)}</span>`;
+        html += `<div><span style="font-size:13px;background:${badgeBg};color:${badgeColor};padding:3px 8px;border-radius:4px;font-weight:600;">${total} / ${max}</span></div>`;
+        html += `</li>`;
+    });
+    
+    html += `</ul>`;
+    container.innerHTML = html;
 }
 
 // ===== 10-DAY TEST =====
@@ -2457,7 +3756,10 @@ function submitTest() {
         showToast('📝', __('test.result', { score: test.totalScore }));
     }
 
-    checkAchievements(currentChildId);
+    const result = checkAchievements(currentChildId);
+    if (result.prestigeTriggered) {
+        showPrestigeModal(result.newTier, result.goldPrize, result.starPrize);
+    }
     updateUI();
 }
 
@@ -2667,6 +3969,21 @@ function setupEventListeners() {
     });
     document.getElementById('proof-submit-btn').addEventListener('click', submitProof);
 
+    // Withdraw photo upload
+    const withdrawPhotoBtn = document.getElementById('withdraw-photo-btn');
+    if (withdrawPhotoBtn) {
+        withdrawPhotoBtn.addEventListener('click', () => {
+            document.getElementById('withdraw-photo-input').click();
+        });
+        document.getElementById('withdraw-photo-input').addEventListener('change', handleWithdrawPhotoUpload);
+        document.getElementById('withdraw-photo-remove').addEventListener('click', () => {
+            document.getElementById('withdraw-photo-preview').classList.add('hidden');
+            document.getElementById('withdraw-photo-img').src = '';
+            document.getElementById('withdraw-photo-input').value = '';
+            document.getElementById('withdraw-photo-btn').classList.remove('hidden');
+        });
+    }
+
     // Timer cancel: close directly if not actively counting; require PIN if running
     document.getElementById('timer-cancel-btn').addEventListener('click', () => {
         // If timer is not actively counting down (not started, paused, or completed), close directly
@@ -2764,7 +4081,7 @@ function setupEventListeners() {
     // Withdraw
     document.getElementById('btn-withdraw').addEventListener('click', showWithdrawModal);
     document.getElementById('withdraw-submit').addEventListener('click', submitWithdraw);
-    document.getElementById('withdraw-pin').addEventListener('keydown', (e) => {
+    document.getElementById('withdraw-amount').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') submitWithdraw();
     });
     document.getElementById('withdraw-close').addEventListener('click', () => {
@@ -2779,6 +4096,48 @@ function setupEventListeners() {
     document.getElementById('test-close').addEventListener('click', () => {
         document.getElementById('test-modal').classList.add('hidden');
     });
+
+    // Dream modal
+    const dreamOpenBtn = document.getElementById('btn-open-dream-modal');
+    if (dreamOpenBtn) {
+        dreamOpenBtn.addEventListener('click', openDreamModal);
+    }
+    const dreamCloseBtn = document.getElementById('dream-modal-close');
+    if (dreamCloseBtn) {
+        dreamCloseBtn.addEventListener('click', closeDreamModal);
+    }
+    const dreamSubmitBtn = document.getElementById('dream-modal-submit');
+    if (dreamSubmitBtn) {
+        dreamSubmitBtn.addEventListener('click', submitDreamModal);
+    }
+    const dreamPhotoBtn = document.getElementById('dream-photo-btn');
+    if (dreamPhotoBtn) {
+        dreamPhotoBtn.addEventListener('click', () => {
+            document.getElementById('dream-photo-input').click();
+        });
+    }
+    const dreamPhotoInput = document.getElementById('dream-photo-input');
+    if (dreamPhotoInput) {
+        dreamPhotoInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleDreamPhoto(e.target.files[0]);
+            }
+        });
+    }
+    const dreamPhotoRemove = document.getElementById('dream-photo-remove');
+    if (dreamPhotoRemove) {
+        dreamPhotoRemove.addEventListener('click', () => {
+            dreamPhotoData = null;
+            const imgEl = document.getElementById('dream-photo-img');
+            if (imgEl) imgEl.src = '';
+            const preview = document.getElementById('dream-photo-preview');
+            if (preview) preview.classList.add('hidden');
+            const btn = document.getElementById('dream-photo-btn');
+            if (btn) btn.classList.remove('hidden');
+            const input = document.getElementById('dream-photo-input');
+            if (input) input.value = '';
+        });
+    }
 
     // Task modal
     document.getElementById('task-save-btn').addEventListener('click', saveTask);
@@ -2829,7 +4188,7 @@ function setupEventListeners() {
                 parentPinVerified = true;
                 window.__pendingParentAuth = false;
                 document.getElementById('pin-modal').classList.add('hidden');
-                renderParentDashboard();
+                navigateTo('parent');
             } else {
                 document.getElementById('pin-error').classList.remove('hidden');
                 document.getElementById('pin-error').textContent = __('pin.error');
@@ -2888,6 +4247,53 @@ function setupEventListeners() {
             }
         });
     });
+}
+
+// ===== PRESTIGE MODAL =====
+function showPrestigeModal(newTier, goldPrize, starPrize) {
+    const modal = document.getElementById('prestige-modal');
+    if (!modal) return;
+    
+    let tierName = '';
+    if (newTier === 1) tierName = __('tier.gold') || 'Даври Тилло';
+    else if (newTier >= 2) tierName = __('tier.diamond') || 'Даври Алмос';
+    else tierName = 'Даври Нав';
+
+    const tNameEl = document.getElementById('prestige-tier-name');
+    if(tNameEl) tNameEl.textContent = tierName;
+    
+    const pAmtEl = document.getElementById('prestige-prize-amount');
+    if(pAmtEl) pAmtEl.textContent = goldPrize;
+
+    const pStarAmtEl = document.getElementById('prestige-stars-amount');
+    if(pStarAmtEl) pStarAmtEl.textContent = starPrize;
+
+    // Show medal unlocked grade
+    const medalNotifEl = document.getElementById('prestige-medal-notification');
+    if (medalNotifEl) {
+        let grade = '';
+        if (newTier === 1) grade = 'IV';
+        else if (newTier === 2) grade = 'III';
+        else if (newTier === 3) grade = 'II';
+        else if (newTier >= 4) grade = 'I';
+        
+        if (grade) {
+            medalNotifEl.textContent = __('prestige.medal_unlocked', { grade: grade }) || `Шумо соҳиби Медали дараҷаи ${grade} гардидед! 🏅`;
+            medalNotifEl.style.display = 'block';
+        } else {
+            medalNotifEl.style.display = 'none';
+        }
+    }
+
+    modal.classList.remove('hidden');
+    launchConfetti();
+    setTimeout(launchConfetti, 1000);
+    setTimeout(launchConfetti, 2000);
+}
+
+function closePrestigeModal() {
+    document.getElementById('prestige-modal').classList.add('hidden');
+    updateUI();
 }
 
 // ===== EXPORT =====

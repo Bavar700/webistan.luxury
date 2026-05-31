@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Офарин — Супоришҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=44">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
@@ -234,7 +234,7 @@
                     <div class="balance-big">
                         <span class="balance-icon">💰</span>
                         <span class="balance-big-amount" id="balance-big">0</span>
-                        <span class="balance-big-currency" data-i18n="currency.gold">🪙</span>
+                        <span class="balance-big-currency">сомонӣ</span>
                     </div>
                     <div class="balance-stats">
                         <div class="stat-item">
@@ -254,7 +254,7 @@
                             <span class="stat-value" id="stat-withdrawn">0</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-large" id="btn-withdraw">
+                    <button class="btn btn-primary btn-large" id="btn-withdraw" onclick="showWithdrawModal()">
                         <svg class="icon-svg" aria-hidden="true"><use href="#icon-wallet"/></svg>
                         Баровардани пул
                     </button>
@@ -707,7 +707,6 @@
                 </div>
             </div>
         </div>
-        </div>
 
         <!-- Welcome Screen (shown on first launch) -->
         <div class="welcome-overlay hidden" id="welcome-screen">
@@ -791,28 +790,14 @@
                     <div class="form-group" id="withdraw-type-group">
                         <label for="withdraw-currency-type" style="font-weight:600;margin-bottom:4px;display:block;">Намуди ихроҷ:</label>
                         <select id="withdraw-currency-type">
-                            <option value="money" data-i18n="reward_type.money">🪙</option>
+                            <option value="money">🪙 Тилло</option>
                             <option value="stars">⭐ Ситорача</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <input type="number" id="withdraw-amount" min="1" placeholder="Миқдор...">
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="withdraw-reason" placeholder="Барои чӣ сарф мешавад? (Сабаб)...">
-                    </div>
-                    <div class="form-group">
-                        <input type="file" id="withdraw-photo-input" accept="image/*" class="hidden">
-                        <div class="premium-upload-card" id="withdraw-photo-btn">
-                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
-                            <span>Акс</span>
-                        </div>
-                        <div class="premium-photo-preview-container hidden" id="withdraw-photo-preview">
-                            <img id="withdraw-photo-img" src="" alt="Сурат">
-                            <button class="premium-photo-delete-btn" id="withdraw-photo-remove">✕ Нест кардан</button>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-full" id="withdraw-submit" style="margin-top: 15px;">Ихроҷ</button>
+                    <button class="btn btn-primary btn-full" id="withdraw-submit" style="margin-top: 15px;" onclick="submitWithdraw()">Ихроҷ</button>
                 </div>
             </div>
         </div>
@@ -875,7 +860,7 @@
                         <span class="test-score" id="test-score">0</span>
                         <span>/ 10</span>
                     </div>
-                    <p class="test-reward-info" id="test-reward-info">Мукофот: 0 🪙</p>
+                    <p class="test-reward-info" id="test-reward-info">Мукофот: 0 сомонӣ</p>
                     <form onsubmit="return false;">
                     <div class="pin-input-group">
                         <input type="password" id="test-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
@@ -920,9 +905,9 @@
                             Намуди мукофот
                         </label>
                         <select id="child-reward-type">
-                            <option value="money" data-i18n="reward_type.money">🪙</option>
-                            <option value="stars" data-i18n="reward_type.stars">⭐ Ситорача</option>
-                            <option value="both" data-i18n="reward_type.both">🌟 Ҳарду</option>
+                            <option value="money">💰 Пул (сомонӣ)</option>
+                            <option value="stars">⭐ Ситорача</option>
+                            <option value="both">🌟 Ҳарду</option>
                         </select>
                     </div>
                     <div style="display: flex; gap: 8px;">
@@ -934,6 +919,32 @@
                             <svg class="icon-svg" aria-hidden="true"><use href="#icon-trash"/></svg>
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prestige Modal -->
+        <div id="prestige-modal" class="modal-overlay hidden">
+            <div class="modal-content prestige-modal-content">
+                <div class="modal-header">
+                    <h3>👑 Қаҳрамони мутлақ!</h3>
+                    <button class="modal-close" onclick="closePrestigeModal()">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center; padding: 30px 15px;">
+                    <h1 style="font-size: 50px; margin-bottom: 10px;">🌟</h1>
+                    <h2>Табрик!</h2>
+                    <p>Шумо ҳамаи муваффақиятҳоро ба даст овардед ва ба <strong id="prestige-tier-name" style="color: var(--primary);">Даври Нав</strong> гузаштед!</p>
+                    <div class="grand-prize-box" style="margin: 20px 0; padding: 15px; background: rgba(255, 215, 0, 0.2); border-radius: 12px; border: 2px solid gold;">
+                        <p style="font-weight: bold; margin-bottom: 5px;">Ҷоизаи Калон:</p>
+                        <h3 style="color: #b8860b; font-size: 22px; display: flex; justify-content: center; gap: 15px; align-items: center; margin-bottom: 8px;">
+                            <span>+<span id="prestige-prize-amount">0</span> 🪙</span>
+                            <span>+<span id="prestige-stars-amount">0</span> ⭐</span>
+                        </h3>
+                        <p id="prestige-medal-notification" style="font-weight: bold; color: #10B981; font-size: 15px; margin: 0;"></p>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="closePrestigeModal()">Аъло! Давом медиҳем</button>
                 </div>
             </div>
         </div>
@@ -973,61 +984,6 @@
 
     </div>
 
-    <!-- Prestige Modal -->
-    <div id="prestige-modal" class="modal-overlay hidden">
-        <div class="modal-content prestige-modal-content">
-            <div class="modal-header">
-                <h3>👑 Қаҳрамони мутлақ!</h3>
-                <button class="modal-close" onclick="closePrestigeModal()">
-                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
-                </button>
-            </div>
-            <div class="modal-body" style="text-align: center; padding: 30px 15px;">
-                <h1 style="font-size: 50px; margin-bottom: 10px;">🌟</h1>
-                <h2>Табрик!</h2>
-                <p>Шумо ҳамаи муваффақиятҳоро ба даст овардед ва ба <strong id="prestige-tier-name" style="color: var(--primary);">Даври Нав</strong> гузаштед!</p>
-                <div class="grand-prize-box" style="margin: 20px 0; padding: 15px; background: rgba(255, 215, 0, 0.2); border-radius: 12px; border: 2px solid gold;">
-                    <p style="font-weight: bold; margin-bottom: 5px;">Ҷоизаи Калон:</p>
-                    <h3 style="color: #b8860b; font-size: 22px; display: flex; justify-content: center; gap: 15px; align-items: center; margin-bottom: 8px;">
-                        <span>+<span id="prestige-prize-amount">0</span> 🪙</span>
-                        <span>+<span id="prestige-stars-amount">0</span> ⭐</span>
-                    </h3>
-                    <p id="prestige-medal-notification" style="font-weight: bold; color: #10B981; font-size: 15px; margin: 0;"></p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%;" onclick="closePrestigeModal()">Аъло! Давом медиҳем</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Achievement Detail Modal -->
-    <div id="achievement-modal" class="modal-overlay hidden">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>
-                    <svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;fill:currentColor;"><use href="#icon-shield"/></svg>
-                    <span id="achievement-modal-title">Муваффақият</span>
-                </h3>
-                <button class="modal-close" onclick="closeAchievementModal()">
-                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
-                </button>
-            </div>
-            <div class="modal-body" style="text-align: center; padding: 25px 18px;">
-                <div id="achievement-modal-icon" style="font-size: 64px; margin-bottom: 12px; display: inline-block;">🎯</div>
-                <h2 id="achievement-modal-name" style="font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px;">Номи Муваффақият</h2>
-                
-                <div id="achievement-modal-desc-box" style="margin: 16px 0; padding: 14px; background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: var(--radius-md); text-align: left;">
-                    <!-- Will be dynamically populated -->
-                </div>
-                
-                <div style="margin-top: 16px;">
-                    <span id="achievement-modal-status" class="badge" style="font-weight: 600; padding: 6px 14px; border-radius: 20px; font-size: 12px;"></span>
-                </div>
-                
-                <button class="btn btn-primary" style="width: 100%; margin-top: 24px;" onclick="closeAchievementModal()" data-i18n="common.ok">Аъло</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 
@@ -1036,8 +992,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
 
 
-    <script src="js/translations.js?v=48"></script>
-    <script src="js/data.js?v=50"></script>
-    <script src="js/app.js?v=63"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

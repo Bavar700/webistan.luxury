@@ -17,17 +17,21 @@ const DEFAULT_TASKS = [
 ];
 
 const ACHIEVEMENTS = [
-    { id: 'first_task', name: '🌟 Супориши аввал', icon: '🌟', desc: 'Иҷрои супориши аввал' },
+    { id: 'first_task', name: '🌟 Супориши аввал', icon: '🎯', desc: 'Иҷрои 3 супориши аввал' },
     { id: 'all_today', name: '⭐ Ҳамаи супоришҳо', icon: '⭐', desc: 'Иҷрои ҳамаи супоришҳои имрӯз' },
     { id: 'week_streak', name: '🔥 Ҳафтаи пурра', icon: '🔥', desc: '7 рӯз пай дар пай' },
     { id: 'month_streak', name: '🏆 Моҳи тиллоӣ', icon: '🏆', desc: '30 рӯз пай дар пай' },
-    { id: 'test_10', name: '💯 Нолҳои комил', icon: '💯', desc: '10 аз 10 дар санҷиш' },
+    { id: 'perfect_zeroes', name: '💯 Сифрҳои комил', icon: '💯', desc: '30 рӯз бе ҷарима' },
+    { id: 'fast_worker', name: '⚡ Зудамал', icon: '⚡', desc: '30 рӯз бе деркунӣ' },
+    { id: 'early_bird', name: '🌅 Саҳархез', icon: '🌅', desc: '30 рӯз оғози супоришҳо то соати 7:00' },
+    { id: 'helper', name: '🤝 Дастёр', icon: '🤝', desc: 'Иҷрои 10 супориши бонусӣ' },
+    { id: 'marksman', name: '🎯 Ҳадафрас', icon: '🎯', desc: '50 супориш дар умум' },
     { id: 'test_9', name: '📚 Донишманд', icon: '📚', desc: '9 аз 10 дар санҷиш' },
-    { id: 'bonus_3', name: '🦁 Шуҷоъ', icon: '🦁', desc: 'Иҷрои супориши бонусӣ 3 смн' },
-    { id: 'bonus_5', name: '🦸 Қаҳрамон', icon: '🦸', desc: 'Иҷрои супориши бонусӣ 5 смн' },
-    { id: 'bonus_10', name: '🧙 Афсонавӣ', icon: '🧙', desc: 'Иҷрои супориши бонусӣ 10 смн' },
-    { id: 'savings_10', name: '🐷 Сарфаҷӯ', icon: '🐷', desc: 'Ҷамъ кардани 10 сомонӣ' },
-    { id: 'savings_50', name: '👑 Сарватманд', icon: '👑', desc: 'Ҷамъ кардани 50 сомонӣ' }
+    { id: 'bonus_3', name: '🦁 Шуҷоъ', icon: '🦁', desc: 'Иҷрои 10 супориши бонусӣ 3 🪙' },
+    { id: 'bonus_5', name: '🦸 Қаҳрамон', icon: '🦸', desc: 'Иҷрои 10 супориши бонусӣ 5 🪙' },
+    { id: 'bonus_10', name: '🧙 Афсонавӣ', icon: '🧙', desc: 'Иҷрои 10 супориши бонусӣ 10 🪙' },
+    { id: 'savings_100', name: '🪙 Сарфакор', icon: '🪙', desc: 'Ҷамъ кардани 100 🪙' },
+    { id: 'savings_50', name: '💰 Сарватманд', icon: '💰', desc: 'Ҷамъ кардани 500 🪙' }
 ];
 
 const MOTIVATIONAL_QUOTES_TG = [
@@ -117,6 +121,7 @@ function loadState() {
                 if (child.stars === undefined) child.stars = 0;
                 if (child.totalStars === undefined) child.totalStars = 0;
                 if (child.achievements === undefined) child.achievements = [];
+                if (!child.withdrawals) child.withdrawals = [];
                 
                 const migrateTask = (t, isBonusDefault) => {
                     if (t.deadline === undefined) t.deadline = '';
@@ -148,7 +153,7 @@ function loadState() {
             name: 'Юсуфхӯҷа',
             emoji: '👦',
             color: '#6C63FF',
-            rewardType: 'money',
+            rewardType: 'both',
             tasks: JSON.parse(JSON.stringify(DEFAULT_TASKS)),
             bonusTasks: [],
             dailyLogs: {},
@@ -213,9 +218,9 @@ function formatBalanceAmount(child, amount) {
 
 function formatBalanceFull(child) {
     const rt = child.rewardType || 'money';
-    if (rt === 'money') return `${child.balance} ${__('balance.currency.sm')}`;
+    if (rt === 'money') return `${child.balance} 🪙`;
     if (rt === 'stars') return `${child.stars || 0} ⭐`;
-    return `${child.balance} ${__('balance.currency.sm')} | ${child.stars || 0} ⭐`;
+    return `${child.balance} 🪙 | ${child.stars || 0} ⭐`;
 }
 
 function getDailyRewardAmounts(child) {
@@ -485,16 +490,211 @@ function evaluateTest(childId, testId, scores) {
 
 // ===== ACHIEVEMENTS =====
 
+function getAchievementProgress(child, id) {
+    if (!child) return { current: 0, target: 1, formatted: '0 / 1' };
+    
+    child.achievementTier = child.achievementTier || 0;
+    const m = Math.pow(2, Math.min(2, child.achievementTier));
+    const earned = child.achievements ? child.achievements.includes(id) : false;
+    
+    if (earned) {
+        let target = 1;
+        if (id === 'week_streak') target = 7 * m;
+        else if (id === 'month_streak') target = 30 * m;
+        else if (id === 'perfect_zeroes') target = 30 * m;
+        else if (id === 'fast_worker') target = 30 * m;
+        else if (id === 'helper') target = 10 * m;
+        else if (id === 'marksman') target = 50 * m;
+        else if (id === 'savings_100') target = 100 * m;
+        else if (id === 'savings_50') target = 500 * m;
+        return { current: target, target: target, formatted: `${target} / ${target}` };
+    }
+    
+    switch (id) {
+        case 'first_task': {
+            let totalCompleted = 0;
+            Object.values(child.dailyLogs).forEach(log => {
+                Object.values(log.tasks).forEach(t => {
+                    if (t.status === 'completed' && t.confirmed) {
+                        totalCompleted++;
+                    }
+                });
+            });
+            return { current: Math.min(3, totalCompleted), target: 3, formatted: `${Math.min(3, totalCompleted)} / 3` };
+        }
+        case 'all_today': {
+            const todayLog = child.dailyLogs[getToday()];
+            if (!todayLog) return { current: 0, target: 1, formatted: '0 / 1' };
+            const allTasks = child.tasks.filter(t => !t.isBonus);
+            if (allTasks.length === 0) return { current: 0, target: 1, formatted: '0 / 1' };
+            const doneCount = allTasks.filter(t => {
+                const tl = todayLog.tasks[t.id];
+                return tl && tl.status === 'completed' && tl.confirmed;
+            }).length;
+            return { current: doneCount, target: allTasks.length, formatted: `${doneCount} / ${allTasks.length}` };
+        }
+        case 'week_streak':
+        case 'month_streak':
+        case 'perfect_zeroes':
+        case 'fast_worker': {
+            const dates = Object.keys(child.dailyLogs).sort().reverse();
+            let currentStreak = 0;
+            let onTimeStreak = 0;
+            let onTimeStreakBroken = false;
+            let noPenaltyStreak = 0;
+            let noPenaltyStreakBroken = false;
+            const todayStr = getToday();
+            const todayD = new Date(todayStr + 'T12:00:00');
+
+            for (let i = 0; i < dates.length; i++) {
+                const d = new Date(dates[i] + 'T12:00:00');
+                const expected = new Date(todayD);
+                expected.setDate(expected.getDate() - i);
+                if (d.toDateString() === expected.toDateString()) {
+                    const log = child.dailyLogs[dates[i]];
+                    if (log && !log.excused && log.rewardApplied) {
+                        const result = calculateDailyReward(child.id, dates[i]);
+                        if (result.reward >= 0) {
+                            currentStreak++;
+                            if (!onTimeStreakBroken) {
+                                const missedAny = Object.values(log.tasks).some(t => t.status === 'completed' && t.missedDeadline);
+                                if (!missedAny) onTimeStreak++;
+                                else onTimeStreakBroken = true;
+                            }
+                            if (!noPenaltyStreakBroken) {
+                                const penaltyAny = Object.values(log.tasks).some(t => t.penaltyApplied && (t.penaltyApplied.stars > 0 || t.penaltyApplied.gold > 0));
+                                if (!penaltyAny) noPenaltyStreak++;
+                                else noPenaltyStreakBroken = true;
+                            }
+                        } else { break; }
+                    } else if (log && log.excused) {
+                        continue;
+                    } else { break; }
+                } else { break; }
+            }
+            
+            const daysText = __('achievement_modal.days_suffix') || 'рӯз';
+            if (id === 'week_streak') {
+                const target = 7 * m;
+                return { current: currentStreak, target: target, formatted: `${currentStreak} / ${target} ${daysText}` };
+            }
+            if (id === 'month_streak') {
+                const target = 30 * m;
+                return { current: currentStreak, target: target, formatted: `${currentStreak} / ${target} ${daysText}` };
+            }
+            if (id === 'fast_worker') {
+                const target = 30 * m;
+                return { current: onTimeStreak, target: target, formatted: `${onTimeStreak} / ${target} ${daysText}` };
+            }
+            if (id === 'perfect_zeroes') {
+                const target = 30 * m;
+                return { current: noPenaltyStreak, target: target, formatted: `${noPenaltyStreak} / ${target} ${daysText}` };
+            }
+            break;
+        }
+        case 'early_bird': {
+            let earlyBirdDays = 0;
+            Object.values(child.dailyLogs).forEach(log => {
+                const earlyAny = Object.values(log.tasks).some(t => {
+                    if (t.status !== 'completed' || !t.confirmed) return false;
+                    const compDate = t.startedAt ? new Date(t.startedAt) : (t.completedAt ? new Date(t.completedAt) : null);
+                    if (!compDate) return false;
+                    return compDate.getHours() < 7;
+                });
+                if (earlyAny) earlyBirdDays++;
+            });
+            const target = 30 * m;
+            const daysText = __('achievement_modal.days_suffix') || 'рӯз';
+            return { current: earlyBirdDays, target: target, formatted: `${earlyBirdDays} / ${target} ${daysText}` };
+        }
+        case 'helper':
+        case 'marksman': {
+            let totalTasksCompleted = 0;
+            let bonusCount = 0;
+            Object.values(child.dailyLogs).forEach(log => {
+                Object.entries(log.tasks).forEach(([taskId, taskLog]) => {
+                    if (taskLog.status === 'completed' && taskLog.confirmed) {
+                        totalTasksCompleted++;
+                        const bonusTask = child.bonusTasks.find(t => t.id === taskId);
+                        if (bonusTask) {
+                            bonusCount++;
+                        }
+                    }
+                });
+            });
+            
+            if (id === 'marksman') {
+                const target = 50 * m;
+                return { current: totalTasksCompleted, target: target, formatted: `${totalTasksCompleted} / ${target}` };
+            }
+            if (id === 'helper') {
+                const target = 10 * m;
+                return { current: bonusCount, target: target, formatted: `${bonusCount} / ${target}` };
+            }
+            break;
+        }
+        case 'test_9': {
+            let maxScore = 0;
+            child.tenDayTests.forEach(t => {
+                if (t.completed && t.totalScore > maxScore) {
+                    maxScore = t.totalScore;
+                }
+            });
+            return { current: maxScore, target: 9, formatted: `${maxScore} / 9` };
+        }
+        case 'bonus_3':
+        case 'bonus_5':
+        case 'bonus_10': {
+            let targetPrice = id === 'bonus_3' ? 3 : (id === 'bonus_5' ? 5 : 10);
+            let completionsCount = 0;
+            Object.values(child.dailyLogs).forEach(log => {
+                Object.entries(log.tasks).forEach(([taskId, taskLog]) => {
+                    if (taskLog.status === 'completed' && taskLog.confirmed) {
+                        const bonusTask = child.bonusTasks.find(t => t.id === taskId);
+                        if (bonusTask && bonusTask.bonusPrice === targetPrice) {
+                            completionsCount++;
+                        }
+                    }
+                });
+            });
+            const target = 10 * m;
+            return { current: completionsCount, target: target, formatted: `${completionsCount} / ${target}` };
+        }
+        case 'savings_100': {
+            const target = 100 * m;
+            const current = Math.floor(child.totalEarned);
+            const goldText = __('currency.gold') || 'тилло';
+            return { current: current, target: target, formatted: `${current} / ${target} ${goldText}` };
+        }
+        case 'savings_50': {
+            const target = 500 * m;
+            const current = Math.floor(child.totalEarned);
+            const goldText = __('currency.gold') || 'тилло';
+            return { current: current, target: target, formatted: `${current} / ${target} ${goldText}` };
+        }
+    }
+    
+    return { current: 0, target: 1, formatted: '0 / 1' };
+}
+
 function checkAchievements(childId) {
     const child = getChild(childId);
     const unlocked = [];
 
+    child.achievementTier = child.achievementTier || 0;
+    const m = Math.pow(2, Math.min(2, child.achievementTier));
+
     if (!child.achievements) child.achievements = [];
 
-    const hasCompletedAny = Object.values(child.dailyLogs).some(log =>
-        Object.values(log.tasks).some(t => t.status === 'completed' && t.confirmed)
-    );
-    if (hasCompletedAny && !child.achievements.includes('first_task')) {
+    let totalCompleted = 0;
+    Object.values(child.dailyLogs).forEach(log => {
+        Object.values(log.tasks).forEach(t => {
+            if (t.status === 'completed' && t.confirmed) {
+                totalCompleted++;
+            }
+        });
+    });
+    if (totalCompleted >= 3 && !child.achievements.includes('first_task')) {
         child.achievements.push('first_task');
         unlocked.push(__('achievement.first_task'));
     }
@@ -512,6 +712,10 @@ function checkAchievements(childId) {
     // Check streaks
     const dates = Object.keys(child.dailyLogs).sort().reverse();
     let currentStreak = 0;
+    let onTimeStreak = 0;
+    let onTimeStreakBroken = false;
+    let noPenaltyStreak = 0;
+    let noPenaltyStreakBroken = false;
     const todayStr = getToday();
     const todayD = new Date(todayStr + 'T12:00:00');
 
@@ -525,6 +729,16 @@ function checkAchievements(childId) {
                 const result = calculateDailyReward(childId, dates[i]);
                 if (result.reward >= 0) {
                     currentStreak++;
+                    if (!onTimeStreakBroken) {
+                        const missedAny = Object.values(log.tasks).some(t => t.status === 'completed' && t.missedDeadline);
+                        if (!missedAny) onTimeStreak++;
+                        else onTimeStreakBroken = true;
+                    }
+                    if (!noPenaltyStreakBroken) {
+                        const penaltyAny = Object.values(log.tasks).some(t => t.penaltyApplied && (t.penaltyApplied.stars > 0 || t.penaltyApplied.gold > 0));
+                        if (!penaltyAny) noPenaltyStreak++;
+                        else noPenaltyStreakBroken = true;
+                    }
                 } else { break; }
             } else if (log && log.excused) {
                 continue;
@@ -532,21 +746,41 @@ function checkAchievements(childId) {
         } else { break; }
     }
 
-    if (currentStreak >= 7 && !child.achievements.includes('week_streak')) {
+    if (currentStreak >= (7 * m) && !child.achievements.includes('week_streak')) {
         child.achievements.push('week_streak');
         unlocked.push(__('achievement.week_streak'));
     }
-    if (currentStreak >= 30 && !child.achievements.includes('month_streak')) {
+    if (currentStreak >= (30 * m) && !child.achievements.includes('month_streak')) {
         child.achievements.push('month_streak');
         unlocked.push(__('achievement.month_streak'));
+    }
+    if (onTimeStreak >= (30 * m) && !child.achievements.includes('fast_worker')) {
+        child.achievements.push('fast_worker');
+        unlocked.push(__('achievement.fast_worker'));
+    }
+    if (noPenaltyStreak >= (30 * m) && !child.achievements.includes('perfect_zeroes')) {
+        child.achievements.push('perfect_zeroes');
+        unlocked.push(__('achievement.perfect_zeroes'));
+    }
+
+    // Check early bird using startedAt / completedAt (for 30 days in total)
+    let earlyBirdDays = 0;
+    Object.values(child.dailyLogs).forEach(log => {
+        const earlyAny = Object.values(log.tasks).some(t => {
+            if (t.status !== 'completed' || !t.confirmed) return false;
+            const compDate = t.startedAt ? new Date(t.startedAt) : (t.completedAt ? new Date(t.completedAt) : null);
+            if (!compDate) return false;
+            return compDate.getHours() < 7;
+        });
+        if (earlyAny) earlyBirdDays++;
+    });
+    if (earlyBirdDays >= (30 * m) && !child.achievements.includes('early_bird')) {
+        child.achievements.push('early_bird');
+        unlocked.push(__('achievement.early_bird'));
     }
 
     // test achievements
     child.tenDayTests.forEach(t => {
-        if (t.completed && t.totalScore === 10 && !child.achievements.includes('test_10')) {
-            child.achievements.push('test_10');
-            unlocked.push(__('achievement.test_10'));
-        }
         if (t.completed && t.totalScore === 9 && !child.achievements.includes('test_9')) {
             child.achievements.push('test_9');
             unlocked.push(__('achievement.test_9'));
@@ -554,38 +788,86 @@ function checkAchievements(childId) {
     });
 
     // savings
-    if (child.totalEarned >= 10 && !child.achievements.includes('savings_10')) {
-        child.achievements.push('savings_10');
-        unlocked.push(__('achievement.savings_10'));
+    if (child.totalEarned >= (100 * m) && !child.achievements.includes('savings_100')) {
+        child.achievements.push('savings_100');
+        unlocked.push(__('achievement.savings_100'));
     }
-    if (child.totalEarned >= 50 && !child.achievements.includes('savings_50')) {
+    if (child.totalEarned >= (500 * m) && !child.achievements.includes('savings_50')) {
         child.achievements.push('savings_50');
         unlocked.push(__('achievement.savings_50'));
     }
 
-    // bonus task achievements
+    // bonus task achievements and total tasks
+    let totalTasksCompleted = 0;
+    let bonusCount = 0;
+    let bonus3Count = 0;
+    let bonus5Count = 0;
+    let bonus10Count = 0;
     Object.values(child.dailyLogs).forEach(log => {
         Object.entries(log.tasks).forEach(([taskId, taskLog]) => {
             if (taskLog.status === 'completed' && taskLog.confirmed) {
+                totalTasksCompleted++;
                 const bonusTask = child.bonusTasks.find(t => t.id === taskId);
                 if (bonusTask) {
-                    if (bonusTask.bonusPrice === 3 && !child.achievements.includes('bonus_3')) {
-                        child.achievements.push('bonus_3');
-                        unlocked.push(__('achievement.bonus_3'));
+                    bonusCount++;
+                    if (bonusTask.bonusPrice === 3) {
+                        bonus3Count++;
                     }
-                    if (bonusTask.bonusPrice === 5 && !child.achievements.includes('bonus_5')) {
-                        child.achievements.push('bonus_5');
-                        unlocked.push(__('achievement.bonus_5'));
+                    if (bonusTask.bonusPrice === 5) {
+                        bonus5Count++;
                     }
-                    if (bonusTask.bonusPrice === 10 && !child.achievements.includes('bonus_10')) {
-                        child.achievements.push('bonus_10');
-                        unlocked.push(__('achievement.bonus_10'));
+                    if (bonusTask.bonusPrice === 10) {
+                        bonus10Count++;
                     }
                 }
             }
         });
     });
 
+    if (bonus3Count >= (10 * m) && !child.achievements.includes('bonus_3')) {
+        child.achievements.push('bonus_3');
+        unlocked.push(__('achievement.bonus_3'));
+    }
+    if (bonus5Count >= (10 * m) && !child.achievements.includes('bonus_5')) {
+        child.achievements.push('bonus_5');
+        unlocked.push(__('achievement.bonus_5'));
+    }
+    if (bonus10Count >= (10 * m) && !child.achievements.includes('bonus_10')) {
+        child.achievements.push('bonus_10');
+        unlocked.push(__('achievement.bonus_10'));
+    }
+    if (totalTasksCompleted >= (50 * m) && !child.achievements.includes('marksman')) {
+        child.achievements.push('marksman');
+        unlocked.push(__('achievement.marksman'));
+    }
+    if (bonusCount >= (10 * m) && !child.achievements.includes('helper')) {
+        child.achievements.push('helper');
+        unlocked.push(__('achievement.helper'));
+    }
+
+    let prestigeTriggered = false;
+    let newTier = child.achievementTier;
+    let goldPrize = 0;
+    let starPrize = 0;
+
+    // Check if ALL achievements are unlocked
+    if (child.achievements.length >= ACHIEVEMENTS.length) {
+        prestigeTriggered = true;
+        
+        const t = child.achievementTier || 0;
+        goldPrize = 200 + 100 * t;
+        starPrize = 200 + 100 * t;
+        
+        child.balance += goldPrize;
+        child.totalEarned += goldPrize;
+        child.stars = (child.stars || 0) + starPrize;
+        child.totalStars = (child.totalStars || 0) + starPrize;
+        
+        child.achievementTier += 1;
+        newTier = child.achievementTier;
+        child.achievements = []; // Reset achievements
+    }
+
     saveState();
-    return unlocked;
+    return { unlocked, prestigeTriggered, newTier, goldPrize, starPrize };
 }
