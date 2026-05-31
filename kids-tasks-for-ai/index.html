@@ -1035,6 +1035,25 @@
         </div>
     </div>
 
+    <!-- Custom Prompt Modal -->
+    <div id="prompt-modal" class="modal-overlay hidden" style="z-index: 1000; background: rgba(0, 0, 0, 0.65); display: none; align-items: center; justify-content: center;">
+        <div class="modal-content" style="max-width: 400px; padding: 20px; border-radius: 16px; background: var(--bg-card); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border); box-sizing: border-box; width: 90%;">
+            <div class="modal-header" style="margin-bottom: 16px; border-bottom: none; padding-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
+                <h3 id="prompt-modal-title" style="font-size: 16px; font-weight: 700; margin: 0; color: var(--text);">Сабабро нависед</h3>
+                <button class="modal-close" onclick="closeCustomPrompt()" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center;">
+                    <svg class="icon-svg" style="width: 14px; height: 14px; fill: currentColor;" aria-hidden="true"><use href="#icon-x"/></svg>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <textarea id="prompt-modal-input" placeholder="Сабабро нависед..." style="width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; font-family: inherit; min-height: 80px; resize: vertical; box-sizing: border-box; background: var(--bg-body); color: var(--text); outline: none; transition: border-color 0.2s;"></textarea>
+                <div style="display: flex; gap: 8px; margin-top: 18px;">
+                    <button class="btn btn-secondary" onclick="closeCustomPrompt()" style="flex: 1;" data-i18n="cancel">Бекор кардан</button>
+                    <button class="btn btn-primary" id="prompt-modal-submit-btn" style="flex: 1;">Захира</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Confetti Canvas -->
     <canvas id="confetti-canvas" class="hidden"></canvas>
 

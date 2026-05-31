@@ -3197,15 +3197,16 @@ function renderParentDashboard() {
             var req = child.withdrawals.find(function(w) { return w.id === reqId; });
             if (!req) return;
 
-            var reason = prompt(__('parent.reject_reason_prompt'));
-            if (reason === null) return; // parent cancelled prompt
-            
-            req.status = 'rejected';
-            req.parentComment = reason.trim();
-            saveState();
-            showToast('❌', __('confirm'));
-            renderParentDashboard();
-            updateUI();
+            showCustomPrompt(__('parent.reject_reason_prompt')).then(function(reason) {
+                if (reason === null) return; // parent cancelled prompt
+                
+                req.status = 'rejected';
+                req.parentComment = reason.trim();
+                saveState();
+                showToast('❌', __('confirm'));
+                renderParentDashboard();
+                updateUI();
+            });
         });
     });
 
@@ -3297,17 +3298,18 @@ function renderParentDashboard() {
     container.querySelectorAll('.parent-reject-dream-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var dreamId = this.dataset.dreamId;
-            var reason = prompt(currentLang === 'ru' ? 'Введите причину отклонения:' : 'Сабаби радкуниро ворид кунед:');
-            if (reason === null) return; // parent cancelled prompt
-            
-            var dream = selectedChild.dreams.find(function(d) { return d.id === dreamId; });
-            if (dream) {
-                dream.approved = 'rejected';
-                dream.parentComment = reason.trim();
-                saveState();
-                showToast('❌', 'Орзу рад карда шуд!');
-                renderParentDashboard();
-            }
+            showCustomPrompt(currentLang === 'ru' ? 'Введите причину отклонения:' : 'Сабаби радкуниро ворид кунед:').then(function(reason) {
+                if (reason === null) return; // parent cancelled prompt
+                
+                var dream = selectedChild.dreams.find(function(d) { return d.id === dreamId; });
+                if (dream) {
+                    dream.approved = 'rejected';
+                    dream.parentComment = reason.trim();
+                    saveState();
+                    showToast('❌', 'Орзу рад карда шуд!');
+                    renderParentDashboard();
+                }
+            });
         });
     });
 
@@ -4300,6 +4302,20 @@ function setupEventListeners() {
             }
         });
     });
+
+    const promptSubmitBtn = document.getElementById('prompt-modal-submit-btn');
+    if (promptSubmitBtn) {
+        promptSubmitBtn.addEventListener('click', submitCustomPrompt);
+    }
+    const promptInput = document.getElementById('prompt-modal-input');
+    if (promptInput) {
+        promptInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submitCustomPrompt();
+            }
+        });
+    }
 }
 
 // ===== PRESTIGE MODAL =====
@@ -4362,6 +4378,44 @@ function closeImageZoomModal() {
     var modal = document.getElementById('image-zoom-modal');
     if (modal) {
         modal.classList.add('hidden');
+    }
+}
+
+var currentPromptResolver = null;
+
+function showCustomPrompt(title, placeholder) {
+    return new Promise(function(resolve) {
+        currentPromptResolver = resolve;
+        document.getElementById('prompt-modal-title').textContent = title;
+        var input = document.getElementById('prompt-modal-input');
+        input.value = '';
+        input.placeholder = placeholder || (currentLang === 'ru' ? 'Введите причину...' : 'Сабабро нависед...');
+        
+        var modal = document.getElementById('prompt-modal');
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+        input.focus();
+    });
+}
+
+function submitCustomPrompt() {
+    var input = document.getElementById('prompt-modal-input').value;
+    closeCustomPrompt();
+    if (currentPromptResolver) {
+        currentPromptResolver(input);
+        currentPromptResolver = null;
+    }
+}
+
+function closeCustomPrompt() {
+    var modal = document.getElementById('prompt-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+    }
+    if (currentPromptResolver) {
+        currentPromptResolver(null);
+        currentPromptResolver = null;
     }
 }
 
