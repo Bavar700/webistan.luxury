@@ -28,7 +28,7 @@ const TRANSLATIONS = {
         'dream.achieve_success': 'Орзу бо муваффақият иҷро шуд! 🎉',
         'dream.not_enough': 'Маблағи тавозун ё ситорачаҳо кофӣ нест!',
         'dream.list_empty': 'Рӯйхати орзуҳо холӣ аст.',
-        'dream.pending_pricing': 'Мунтазири муайян кардани нарх аз ҷониби волидон',
+        'dream.pending_pricing': 'Мунтазири тасдиқ аст.',
         'routine.title': 'Реҷаи рӯз',
         'routine.no_tasks': 'Барои имрӯз супорише нест.',
 
