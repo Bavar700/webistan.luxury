@@ -1674,9 +1674,8 @@ function completeTimer() {
     // Show proof section
     const proofSection = document.getElementById('timer-proof-section');
     proofSection.classList.remove('hidden');
-    document.getElementById('proof-label').textContent = __('proof.label');
     document.getElementById('proof-explanation').placeholder = __('proof.explanation_placeholder');
-    document.getElementById('proof-photo-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg> <span>${__('proof.add_photo')}</span>`;
+    document.getElementById('proof-photo-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg> <span>${__('common.add_photo_short')}</span>`;
     document.getElementById('proof-submit-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg> ${__('proof.submit')}`;
 
     // Reset proof fields

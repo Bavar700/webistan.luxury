@@ -50,7 +50,7 @@
     </script>
     <title>Офарин — Супоришҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=131">
+    <link rel="stylesheet" href="css/style.css?v=132">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/flatpickr.min.css">
     <style>
@@ -555,7 +555,7 @@
                 <div class="modal-body">
                     <p id="skip-modal-text" data-i18n="skip.prompt">Сабаби сарфи назар кардани супоришро нависед:</p>
                     <div class="form-group">
-                        <textarea id="skip-reason" rows="3" placeholder="Сабабро нависед..."></textarea>
+                        <textarea id="skip-reason" rows="3" data-i18n-placeholder="common.reason_placeholder" placeholder="Сабабро нависед..."></textarea>
                     </div>
                     <button class="btn btn-primary btn-full" id="skip-submit-btn" style="margin-top:10px;">
                         <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
@@ -615,12 +615,11 @@
                     <!-- Proof section: shown after timer completes -->
                     <div class="hidden timer-proof-section" id="timer-proof-section">
                         <div class="proof-divider"></div>
-                        <p class="proof-label" id="proof-label" data-i18n="proof.label">📸 Ба кор андешидани акс ва тавсиф:</p>
                         <div id="proof-photo-area">
                             <input type="file" accept="image/*" capture="environment" id="proof-photo-input" class="hidden">
                             <div class="premium-upload-card" id="proof-photo-btn">
                                 <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
-                                <span data-i18n="proof.add_photo">Акс гирифтан</span>
+                                <span data-i18n="common.add_photo_short">+ Акс</span>
                             </div>
                             <div class="premium-photo-preview-container hidden" id="proof-photo-preview">
                                 <img id="proof-photo-img" alt="">
@@ -660,10 +659,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" id="task-name" placeholder="Номи супориш">
+                        <input type="text" id="task-name" placeholder="Номи супориш" data-i18n-placeholder="task_form.name_placeholder">
                     </div>
                     <div class="form-group">
-                        <textarea id="task-instructions" rows="2" placeholder="Дастур"></textarea>
+                        <textarea id="task-instructions" rows="2" placeholder="Дастур" data-i18n-placeholder="task_form.instructions_placeholder"></textarea>
                     </div>
                     <div class="form-group">
                         <div id="inst-image-area">
@@ -936,7 +935,7 @@
                     </div>
                     <div class="form-group hidden" id="custom-excuse-group">
                         <label for="custom-excuse" data-i18n="excuse.custom_label">Сабаби дигар:</label>
-                        <input type="text" id="custom-excuse" placeholder="Сабабро нависед...">
+                        <input type="text" id="custom-excuse" placeholder="Сабабро нависед..." data-i18n-placeholder="excuse.custom_placeholder">
                     </div>                        <form onsubmit="return false;">
                         <div class="pin-input-group" style="margin-top:15px;">
                             <input type="password" id="excuse-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off">
@@ -1225,7 +1224,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <textarea id="prompt-modal-input" rows="3" placeholder="Сабабро нависед..."></textarea>
+                    <textarea id="prompt-modal-input" rows="3" placeholder="Сабабро нависед..." data-i18n-placeholder="common.reason_placeholder"></textarea>
                 </div>
                 <div style="display: flex; gap: 12px; margin-top: 15px;">
                     <button class="btn btn-secondary" onclick="closeCustomPrompt()" style="flex: 1;" data-i18n="cancel">Лағв</button>
@@ -1261,7 +1260,7 @@
                     <h4 style="margin-top: 0; margin-bottom: 8px; font-size: 13px; color: var(--primary);" data-i18n="parent.routine_add_activity">Илова кардани фаъолияти нав:</h4>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                         <input type="time" id="new-routine-time" class="time-input-native" style="width: 80px !important; height: 36px !important; padding: 4px !important; font-size: 13px !important; border-radius: var(--radius-md) !important;"><span style="color: var(--text-light); font-weight: 700;">→</span><input type="time" id="new-routine-end-time" class="time-input-native" style="width: 80px !important; height: 36px !important; padding: 4px !important; font-size: 13px !important; border-radius: var(--radius-md) !important;">
-                        <input type="text" id="new-routine-name" placeholder="Номи фаъолият..." style="flex: 1; min-width: 150px; height: 36px; font-size: 13px; padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                        <input type="text" id="new-routine-name" placeholder="Номи фаъолият..." data-i18n-placeholder="routine.activity_name_placeholder" style="flex: 1; min-width: 150px; height: 36px; font-size: 13px; padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-md);">
                         <input type="number" id="new-routine-duration" placeholder="Дақ" data-i18n-placeholder="task_form.minutes_placeholder" style="width: 60px; height: 36px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);" min="1">
                         <div style="display: flex; gap: 4px; align-items: center;">
                             <input type="number" id="new-routine-stars" placeholder="⭐" style="width: 60px; height: 36px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);" min="0">
@@ -1454,9 +1453,9 @@
     <!-- Supabase JS Client -->
     <script src="js/supabase-js.js"></script>
 
-    <script src="js/safeStorage.js?v=131"></script>
-    <script src="js/translations.js?v=131"></script>
-    <script src="js/data.js?v=131"></script>
-    <script src="js/app.js?v=131"></script>
+    <script src="js/safeStorage.js?v=132"></script>
+    <script src="js/translations.js?v=132"></script>
+    <script src="js/data.js?v=132"></script>
+    <script src="js/app.js?v=132"></script>
 </body>
 </html>
