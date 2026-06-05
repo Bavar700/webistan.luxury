@@ -64,7 +64,9 @@ function hideLoadingScreen() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadState();
-    currentChildId = getStoredOrFirstChildId();
+    if (state.children.length > 0) {
+        currentChildId = state.children[0].id;
+    }
 
     initSupabase();
 
@@ -87,10 +89,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (activeSession) {
         // Already logged in — skip welcome and auth, go straight to app
-        let deviceRole = safeStorage.getItem('kids_tasks_device_role');
+        let deviceRole = localStorage.getItem('kids_tasks_device_role');
         if (!state || !state.children || state.children.length === 0) {
             deviceRole = 'parent';
-            safeStorage.setItem('kids_tasks_device_role', 'parent');
+            localStorage.setItem('kids_tasks_device_role', 'parent');
         }
         if (!deviceRole) {
             clearTimeout(loadingTimer);
@@ -99,7 +101,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
         await fetchRemoteState();
-        currentChildId = getStoredOrFirstChildId();
+        if (state && state.children && state.children.length > 0) {
+            currentChildId = state.children[0].id;
+        }
         applyDeviceRoleUI();
         initApp();
         setupRealtimeSubscription(activeSession.user.id);
@@ -131,10 +135,10 @@ async function checkAuthAndSetup() {
         }
         
         // Session exists — check device role
-        let deviceRole = safeStorage.getItem('kids_tasks_device_role');
+        let deviceRole = localStorage.getItem('kids_tasks_device_role');
         if (!state || !state.children || state.children.length === 0) {
             deviceRole = 'parent';
-            safeStorage.setItem('kids_tasks_device_role', 'parent');
+            localStorage.setItem('kids_tasks_device_role', 'parent');
         }
         if (!deviceRole) {
             showRoleOverlay();
@@ -145,7 +149,9 @@ async function checkAuthAndSetup() {
         hideRoleOverlay();
         
         await fetchRemoteState();
-        currentChildId = getStoredOrFirstChildId();
+        if (state && state.children && state.children.length > 0) {
+            currentChildId = state.children[0].id;
+        }
         
         applyDeviceRoleUI();
         initApp();
@@ -161,10 +167,10 @@ async function checkAuthAndSetup() {
 
 
 function applyDeviceRoleUI() {
-    let role = safeStorage.getItem('kids_tasks_device_role') || 'parent';
+    let role = localStorage.getItem('kids_tasks_device_role') || 'parent';
     if (!state || !state.children || state.children.length === 0) {
         role = 'parent';
-        safeStorage.setItem('kids_tasks_device_role', 'parent');
+        localStorage.setItem('kids_tasks_device_role', 'parent');
     }
     const parentBtn = document.querySelector('.nav-btn[data-page="parent"]');
     const settingsBtn = document.querySelector('.nav-btn[data-page="settings"]');
@@ -217,20 +223,10 @@ function showAuthOverlay() {
     const submitBtn = document.getElementById('btn-auth-submit');
     if (submitBtn) submitBtn.disabled = false;
 
-    if (title) {
-        title.textContent = __('auth.login_title');
-        title.style.display = 'none';
-    }
+    if (title) title.textContent = __('auth.login_title');
     if (btnText) btnText.textContent = __('auth.login_btn');
     if (toggleText) toggleText.textContent = __('auth.no_account');
     if (link) link.textContent = __('auth.register_title');
-
-    const localText = document.getElementById('auth-local-text');
-    if (localText) {
-        localText.textContent = currentLang === 'ru' 
-            ? 'Войти без интернета (локально)' 
-            : (currentLang === 'tg' ? 'Ворид шудан бе интернет (локалӣ)' : 'Login offline (local)');
-    }
 
     if (!_authEventsSetupDone) {
         setupAuthOverlayEvents();
@@ -240,13 +236,6 @@ function showAuthOverlay() {
 
 function hideAuthOverlay() {
     document.getElementById('auth-overlay').classList.add('hidden');
-}
-
-function hideRoleOverlay() {
-    const overlay = document.getElementById('role-overlay');
-    if (overlay) {
-        overlay.classList.add('hidden');
-    }
 }
 
 function showRoleOverlay() {
@@ -288,10 +277,7 @@ function setupAuthOverlayEvents() {
     const btnText = document.getElementById('auth-btn-text');
     
     // Set initial login labels in current language
-    if (title) {
-        title.textContent = __('auth.login_title');
-        title.style.display = 'none';
-    }
+    if (title) title.textContent = __('auth.login_title');
     if (btnText) btnText.textContent = __('auth.login_btn');
     if (toggleText) toggleText.textContent = __('auth.no_account');
     if (link) link.textContent = __('auth.register_title');
@@ -304,10 +290,7 @@ function setupAuthOverlayEvents() {
         errorMsg.classList.add('hidden');
         if (authMode === 'login') {
             authMode = 'register';
-            if (title) {
-                title.textContent = __('auth.register_title');
-                title.style.display = 'block';
-            }
+            if (title) title.textContent = __('auth.register_title');
             if (btnText) btnText.textContent = __('auth.register_btn');
             if (toggleText) toggleText.textContent = __('auth.has_account');
             link.textContent = __('auth.login_btn');
@@ -315,10 +298,7 @@ function setupAuthOverlayEvents() {
             if (privacyCheckbox) privacyCheckbox.required = true;
         } else {
             authMode = 'login';
-            if (title) {
-                title.textContent = __('auth.login_title');
-                title.style.display = 'none';
-            }
+            if (title) title.textContent = __('auth.login_title');
             if (btnText) btnText.textContent = __('auth.login_btn');
             if (toggleText) toggleText.textContent = __('auth.no_account');
             link.textContent = __('auth.register_title');
@@ -333,19 +313,6 @@ function setupAuthOverlayEvents() {
         const password = document.getElementById('auth-password').value.trim();
         
         errorMsg.classList.add('hidden');
-        
-        // Custom validation
-        if (!email) {
-            errorMsg.textContent = currentLang === 'ru' ? 'Введите email' : (currentLang === 'tg' ? 'Email-ро ворид кунед' : 'Please enter email');
-            errorMsg.classList.remove('hidden');
-            return;
-        }
-        if (!password || password.length < 6) {
-            errorMsg.textContent = currentLang === 'ru' ? 'Пароль должен быть не менее 6 символов' : (currentLang === 'tg' ? 'Гузарвожа бояд на камтар аз 6 аломат бошад' : 'Password must be at least 6 characters');
-            errorMsg.classList.remove('hidden');
-            return;
-        }
-
         submitBtn.disabled = true;
         if (btnText) btnText.textContent = __('auth.wait');
         
@@ -405,7 +372,7 @@ function setupAuthOverlayEvents() {
             hideAuthOverlay();
             updateSyncStatus('offline');
             if (!state || !state.children || state.children.length === 0) {
-                safeStorage.setItem('kids_tasks_device_role', 'parent');
+                localStorage.setItem('kids_tasks_device_role', 'parent');
             }
             applyDeviceRoleUI();
             initApp();
@@ -433,13 +400,13 @@ function setupAuthOverlayEvents() {
 
 function setupRoleOverlayEvents() {
     document.getElementById('btn-role-child').addEventListener('click', () => {
-        safeStorage.setItem('kids_tasks_device_role', 'child');
+        localStorage.setItem('kids_tasks_device_role', 'child');
         hideRoleOverlay();
         location.reload();
     });
     
     document.getElementById('btn-role-parent').addEventListener('click', () => {
-        safeStorage.setItem('kids_tasks_device_role', 'parent');
+        localStorage.setItem('kids_tasks_device_role', 'parent');
         hideRoleOverlay();
         location.reload();
     });
@@ -789,7 +756,7 @@ function renderChildPicker() {
     });
 
     // Add child row (only for parent role)
-    const deviceRole = safeStorage.getItem('kids_tasks_device_role') || 'parent';
+    const deviceRole = localStorage.getItem('kids_tasks_device_role') || 'parent';
     if (deviceRole === 'parent') {
         const addItem = document.createElement('div');
         addItem.className = 'child-picker-item cpi-add';
@@ -827,7 +794,6 @@ function closeChildPicker() {
 function switchChild(childId) {
     if (childId === currentChildId) return;
     currentChildId = childId;
-    safeStorage.setItem('kids_tasks_active_child_id', childId);
     renderChildTabs();
     updateUI();
 
@@ -918,7 +884,7 @@ function updateUI() {
     const headerBalance = document.getElementById('header-child-balance');
     const balanceText = document.getElementById('greeting-balance-text');
 
-    const deviceRole = safeStorage.getItem('kids_tasks_device_role') || 'parent';
+    const deviceRole = localStorage.getItem('kids_tasks_device_role') || 'parent';
 
     if (!child) {
         if (selector) selector.classList.add('hidden');
@@ -1335,26 +1301,33 @@ function renderTasks() {
     renderCalendar();
 }
 
-function getTaskMetaBadgesHTML(task, tl = null) {
-    let html = '';
-    
-    // 1. Timer / Duration (only if useTimer is true or default true)
+function createTaskCard(task, tl, log, child, isBonus = false) {
+    const card = document.createElement('div');
+    card.className = `task-card status-${tl.status}${isBonus ? ' bonus-task' : ''}`;
+    card.dataset.taskId = task.id;
+
+    const statusLabels = {
+        'pending': __('status.pending'),
+        'in-progress': __('status.in-progress'),
+        'awaiting-confirm': __('status.awaiting-confirm'),
+        'completed': __('status.completed'),
+        'skipped': __('status.skipped')
+    };
+
+    let durationText = '';
     if (task.useTimer !== false) {
-        html += `<span class="task-duration">⏱ ${task.duration || 20} ${__('task.minutes')}</span>`;
+        durationText += `<span class="task-duration">⏱ ${task.duration} ${__('task.minutes')}</span>`;
     }
-    
-    // 2. Task Type Badge
     if (task.type === 'one-time') {
-        html += ` <span class="task-duration" style="background: rgba(147, 51, 234, 0.1); color: rgb(147, 51, 234); border: 1px solid rgba(147, 51, 234, 0.2); font-weight: 500;">📅 ${__('task_form.type_one_time')}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(147, 51, 234, 0.1); color: rgb(147, 51, 234); border: 1px solid rgba(147, 51, 234, 0.2); font-weight: 500;">📅 ${__('task_form.type_one_time')}</span>`;
     } else if (task.type === 'exam') {
-        html += ` <span class="task-duration" style="background: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 500;">🎓 ${__('task_form.type_exam')}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 500;">🎓 ${__('task_form.type_exam')}</span>`;
     } else if (task.type === 'bonus') {
-        html += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">🎁 ${__('task_form.type_bonus')}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">🎁 ${__('task_form.type_bonus')}</span>`;
     } else {
-        html += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">🔄 ${__('task_form.type_daily')}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">🔄 ${__('task_form.type_daily')}</span>`;
     }
-    
-    // 3. Time Schedule / Range (if exists)
+
     if (task.startTime || task.startDate) {
         let displayStart = '';
         if (task.startDate) {
@@ -1376,20 +1349,19 @@ function getTaskMetaBadgesHTML(task, tl = null) {
                 displayStart += endTimeVal;
             }
         }
-        html += ` <span class="task-duration" style="background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2); font-weight: 500;">🕒 ${displayStart.trim()}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2); font-weight: 500;">🕒 ${displayStart.trim()}</span>`;
     }
-    
-    // 4. Rewards (Gold / Stars)
+
     const gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
     const stars = task.rewardStars || 0;
     if (gold > 0 || stars > 0) {
         let rewardsText = '';
         if (gold > 0) rewardsText += `🪙 ${gold}`;
         if (stars > 0) rewardsText += (rewardsText ? ' ' : '') + `⭐ ${stars}`;
-        html += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">${rewardsText}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(245, 158, 11, 0.1); color: rgb(245, 158, 11); border: 1px solid rgba(245, 158, 11, 0.2); font-weight: 500;">${rewardsText}</span>`;
     }
-    
-    // 5. Days of Week for Daily tasks
+
+    // Days of the Week for Daily tasks
     if (task.type === 'daily' && task.days && task.days.length > 0) {
         let daysDisplay = '';
         if (task.days.length === 7) {
@@ -1397,67 +1369,47 @@ function getTaskMetaBadgesHTML(task, tl = null) {
         } else {
             daysDisplay = task.days.map(d => __weekday(d)).join(', ');
         }
-        html += ` <span class="task-duration" style="background: rgba(139, 92, 246, 0.1); color: rgb(139, 92, 246); border: 1px solid rgba(139, 92, 246, 0.2); font-weight: 500;">${__('task_badge.days')} ${daysDisplay}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(139, 92, 246, 0.1); color: rgb(139, 92, 246); border: 1px solid rgba(139, 92, 246, 0.2); font-weight: 500;">${__('task_badge.days')} ${daysDisplay}</span>`;
     }
-    
-    // 6. Test Badge
+
+    // Has Test badge
     if (task.hasTest) {
-        html += ` <span class="task-duration" style="background: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 500;">${__('task_badge.has_test')}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 500;">${__('task_badge.has_test')}</span>`;
     }
-    
-    // 7. Photo Required Badge
+
+    // Photo Required badge
     if (task.photoRequired) {
-        html += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">${__('task_badge.photo_required')}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(59, 130, 246, 0.1); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.2); font-weight: 500;">${__('task_badge.photo_required')}</span>`;
     }
-    
-    // 8. Penalty Badge
+
+    // Has Penalty badge
     if (task.hasPenalty) {
         let penaltyParts = [];
         if (task.penaltyGold > 0) penaltyParts.push(`🪙 ${task.penaltyGold}`);
         if (task.penaltyStars > 0) penaltyParts.push(`⭐ ${task.penaltyStars}`);
         const penaltyText = penaltyParts.length > 0 ? ' ' + penaltyParts.join(' ') : '';
-        html += ` <span class="task-duration" style="background: rgba(220, 38, 38, 0.1); color: rgb(220, 38, 38); border: 1px solid rgba(220, 38, 38, 0.2); font-weight: 500;">${__('task_badge.penalty')}${penaltyText}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(220, 38, 38, 0.1); color: rgb(220, 38, 38); border: 1px solid rgba(220, 38, 38, 0.2); font-weight: 500;">${__('task_badge.penalty')}${penaltyText}</span>`;
     }
-    
-    // 9. Streak Badge
+
+    if (task.hasTest && tl.status === 'completed' && tl.score !== undefined) {
+        durationText += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">${__('task.score_label')}: ${tl.score}/10</span>`;
+    }
+
     if (task.isStreak) {
         const current = task.currentStreak || 0;
         const target = task.streakTarget || 5;
-        html += ` <span class="task-duration" style="background: rgba(236, 72, 153, 0.1); color: rgb(236, 72, 153); border: 1px solid rgba(236, 72, 153, 0.2); font-weight: 500;">🔥 ${__('task.marathon_day_label')} ${current} ${__('common.of')} ${target}</span>`;
+        durationText += ` <span class="task-duration" style="background: rgba(236, 72, 153, 0.1); color: rgb(236, 72, 153); border: 1px solid rgba(236, 72, 153, 0.2); font-weight: 500;">🔥 ${__('task.marathon_day_label')} ${current} ${__('common.of')} ${target}</span>`;
     }
-    
-    // 10. Deadline Badge
+
+    // Deadline info
     const deadlineInfo = getDeadlineInfo(task);
     if (deadlineInfo) {
         let deadlineColorStyle = 'background: rgba(107, 114, 128, 0.1); color: rgb(107, 114, 128); border: 1px solid rgba(107, 114, 128, 0.2);';
         if (deadlineInfo.urgent) {
             deadlineColorStyle = 'background: rgba(220, 38, 38, 0.1); color: rgb(220, 38, 38); border: 1px solid rgba(220, 38, 38, 0.2);';
         }
-        html += ` <span class="task-duration" style="${deadlineColorStyle} font-weight: 500;">📅 ${deadlineInfo.text}</span>`;
+        durationText += ` <span class="task-duration" style="${deadlineColorStyle} font-weight: 500;">📅 ${deadlineInfo.text}</span>`;
     }
-    
-    // 11. Test Score Badge (from tl log if finished)
-    if (tl && task.hasTest && tl.status === 'completed' && tl.score !== undefined) {
-        html += ` <span class="task-duration" style="background: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 500;">${__('task.score_label')}: ${tl.score}/10</span>`;
-    }
-    
-    return html;
-}
-
-function createTaskCard(task, tl, log, child, isBonus = false) {
-    const card = document.createElement('div');
-    card.className = `task-card status-${tl.status}${isBonus ? ' bonus-task' : ''}`;
-    card.dataset.taskId = task.id;
-
-    const statusLabels = {
-        'pending': __('status.pending'),
-        'in-progress': __('status.in-progress'),
-        'awaiting-confirm': __('status.awaiting-confirm'),
-        'completed': __('status.completed'),
-        'skipped': __('status.skipped')
-    };
-
-    let durationText = getTaskMetaBadgesHTML(task, tl);
 
     let iconName = 'icon-clock';
     if (task.type === 'one-time') iconName = 'icon-calendar';
@@ -1688,8 +1640,9 @@ function completeTimer() {
     // Show proof section
     const proofSection = document.getElementById('timer-proof-section');
     proofSection.classList.remove('hidden');
+    document.getElementById('proof-label').textContent = __('proof.label');
     document.getElementById('proof-explanation').placeholder = __('proof.explanation_placeholder');
-    document.getElementById('proof-photo-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg> <span>${__('common.photo_short')}</span>`;
+    document.getElementById('proof-photo-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg> <span>${__('proof.add_photo')}</span>`;
     document.getElementById('proof-submit-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg> ${__('proof.submit')}`;
 
     // Reset proof fields
@@ -1992,37 +1945,6 @@ function submitConfirm() {
                 applyDailyReward(currentChildId, today);
             }
         }
-    }
-
-    document.getElementById('confirm-modal').classList.add('hidden');
-    renderTasks();
-    updateUI();
-}
-
-// ===== REJECT CONFIRM (reset task back to pending) =====
-function submitReject() {
-    const pin = document.getElementById('confirm-pin').value;
-    if (pin !== state.pin) {
-        document.getElementById('confirm-error').classList.remove('hidden');
-        return;
-    }
-
-    const child = getCurrentChild();
-    const today = getToday();
-    const log = child.dailyLogs[today];
-    const tl = log.tasks[confirmTaskId];
-
-    if (tl) {
-        // Reset to pending so the child can redo the task
-        tl.status = 'pending';
-        tl.confirmed = false;
-        delete tl.completedAt;
-        delete tl.confirmedAt;
-        delete tl.photo;
-        delete tl.explanation;
-        delete tl.score;
-        saveState();
-        showToast('❌', __('confirm.rejected'));
     }
 
     document.getElementById('confirm-modal').classList.add('hidden');
@@ -2598,7 +2520,7 @@ function renderSettings() {
                     <div class="settings-item" id="btn-change-device-role" style="cursor: pointer;">
                         <span class="settings-item-left">
                             <svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-user"/></svg>
-                            <span class="settings-item-label">${__('settings.device_mode', { mode: safeStorage.getItem('kids_tasks_device_role') === 'child' ? __('settings.role_child') : __('settings.role_parent') })}</span>
+                            <span class="settings-item-label">${__('settings.device_mode', { mode: localStorage.getItem('kids_tasks_device_role') === 'child' ? __('settings.role_child') : __('settings.role_parent') })}</span>
                         </span>
                         <span class="settings-item-arrow">›</span>
                     </div>
@@ -2623,20 +2545,20 @@ function renderSettings() {
         const newKey = prompt('Введите Supabase Anon Key:', config.key);
         if (newKey === null) return;
         
-        safeStorage.setItem('supabase_url', newUrl.trim());
-        safeStorage.setItem('supabase_key', newKey.trim());
+        localStorage.setItem('supabase_url', newUrl.trim());
+        localStorage.setItem('supabase_key', newKey.trim());
         showToast('💾', 'Настройки Supabase сохранены. Перезагрузка...');
         setTimeout(() => location.reload(), 1000);
     });
 
     document.getElementById('btn-change-device-role').addEventListener('click', () => {
-        const currentRole = safeStorage.getItem('kids_tasks_device_role') || 'parent';
+        const currentRole = localStorage.getItem('kids_tasks_device_role') || 'parent';
         const newRole = currentRole === 'child' ? 'parent' : 'child';
         const confirmMsg = currentRole === 'child' ? 
             __('settings.confirm_switch_parent'):
             __('settings.confirm_switch_child');
         if (confirm(confirmMsg)) {
-            safeStorage.setItem('kids_tasks_device_role', newRole);
+            localStorage.setItem('kids_tasks_device_role', newRole);
             showToast('🔄', __('settings.device_role_changed'));
             setTimeout(() => location.reload(), 800);
         }
@@ -2709,7 +2631,7 @@ function renderSettings() {
 
     document.getElementById('btn-reset-data').addEventListener('click', () => {
         if (confirm(__('settings.reset_data_confirm'))) {
-            safeStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(STORAGE_KEY);
             location.reload();
         }
     });
@@ -3040,10 +2962,6 @@ function saveTask() {
     
     const checkboxes = document.querySelectorAll('input[name="task-days"]');
     const days = Array.from(checkboxes).filter(cb => cb.checked).map(cb => parseInt(cb.value));
-    let finalDays = days;
-    if (typeVal === 'daily' && days.length === 0) {
-        finalDays = [1, 2, 3, 4, 5, 6, 0];
-    }
 
     const rewardGold = clamp(document.getElementById('task-reward-gold').value);
     const rewardStars = clamp(document.getElementById('task-reward-stars').value);
@@ -3094,7 +3012,7 @@ function saveTask() {
         isStreak,
         streakTarget,
         currentStreak: 0,
-        days: finalDays,
+        days,
         rewardGold,
         rewardStars,
         rewardMedals,
@@ -3103,21 +3021,14 @@ function saveTask() {
     };
 
     if (editingTaskId) {
-        let targetList = child.tasks;
-        let taskIndex = targetList.findIndex(t => t.id === editingTaskId);
-        let wasBonus = false;
-        if (taskIndex === -1) {
-            targetList = child.bonusTasks;
-            taskIndex = targetList.findIndex(t => t.id === editingTaskId);
-            wasBonus = true;
-        }
-
+        const targetList = editingIsBonus ? child.bonusTasks : child.tasks;
+        const taskIndex = targetList.findIndex(t => t.id === editingTaskId);
         if (taskIndex !== -1) {
             const task = targetList[taskIndex];
             Object.assign(task, taskData);
             
             // Move between lists if type changed to/from bonus
-            if (wasBonus !== isBonus) {
+            if (editingIsBonus !== isBonus) {
                 targetList.splice(taskIndex, 1);
                 if (isBonus) {
                     child.bonusTasks.push(task);
@@ -3138,9 +3049,6 @@ function saveTask() {
         }
     }
 
-    if (typeof syncDailyLogTasks === 'function') {
-        syncDailyLogTasks(child, getToday());
-    }
     saveState();
     document.getElementById('task-modal').classList.add('hidden');
     if (currentPage === 'parent') {
@@ -3255,11 +3163,6 @@ function deleteChild() {
         state.children = state.children.filter(c => c.id !== editingChildId);
         if (currentChildId === editingChildId) {
             currentChildId = state.children.length > 0 ? state.children[0].id : null;
-            if (currentChildId) {
-                safeStorage.setItem('kids_tasks_active_child_id', currentChildId);
-            } else {
-                safeStorage.removeItem('kids_tasks_active_child_id');
-            }
         }
         saveState();
         document.getElementById('child-modal').classList.add('hidden');
@@ -3832,17 +3735,27 @@ function renderParentDashboard() {
             else if (task.type === 'exam') iconName = 'icon-book';
             else if (task.type === 'bonus') iconName = 'icon-gift';
 
-            html += "<li style='display: flex; align-items: flex-start; justify-content: space-between; padding: 10px; gap: 8px; border-bottom: 1px solid var(--border);'>";
-            html += "  <span class='item-emoji' style='color:var(--primary); display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; flex-shrink: 0; margin-top: 2px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
-            html += "  <div style='display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0;'>";
-            html += "    <span style='font-weight: 600; font-size: 13px; color: var(--text); word-break: break-word; line-height: 1.4;'>" + task.name + "</span>";
-            html += "    <div style='display: flex; flex-wrap: wrap; gap: 4px; align-items: center;'>" + getTaskMetaBadgesHTML(task) + "</div>";
-            html += "  </div>";
-            html += "  <span class='item-actions' style='margin-top: 2px;'>";
-            html += "    <button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>✏️</button>";
-            html += "    <button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>🗑️</button>";
-            html += "  </span>";
-            html += "</li>";
+            var typeBadge = "";
+            if (task.type === 'one-time') {
+                typeBadge = " <span style='font-size:10px;background:rgba(147, 51, 234, 0.1);color:rgb(147, 51, 234);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_one_time') + "</span>";
+            } else if (task.type === 'exam') {
+                typeBadge = " <span style='font-size:10px;background:rgba(239, 68, 68, 0.1);color:rgb(239, 68, 68);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_exam') + "</span>";
+            } else {
+                typeBadge = " <span style='font-size:10px;background:rgba(59, 130, 246, 0.1);color:rgb(59, 130, 246);padding:1px 4px;border-radius:4px;margin-left:4px;'>" + __('task_form.type_daily') + "</span>";
+            }
+
+            var gold = task.rewardGold !== undefined ? task.rewardGold : 0;
+            var stars = task.rewardStars || 0;
+            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars;
+            rewardsBadge += "</span>";
+
+            html += "<li>";
+            html += "<span class='item-emoji' style='color:var(--primary);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
+            html += "<span class='item-text'>" + task.name + typeBadge + rewardsBadge + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
+            html += "<span class='item-actions'>";
+            html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>✏️</button>";
+            html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>🗑️</button>";
+            html += "</span></li>";
         });
         html += "</ul>";
         html += "</div>";
@@ -3854,18 +3767,18 @@ function renderParentDashboard() {
         html += "<ul class='item-list'>";
         selectedChild.bonusTasks.forEach(function(task) {
             var iconName = 'icon-gift';
+            var gold = task.rewardGold !== undefined ? task.rewardGold : (task.bonusPrice || 0);
+            var stars = task.rewardStars || 0;
+            var rewardsBadge = " <span style='font-size:10px;background:rgba(245, 158, 11, 0.1);color:rgb(245, 158, 11);padding:1px 4px;border-radius:4px;margin-left:4px;'>🪙 " + gold + " ⭐ " + stars;
+            rewardsBadge += "</span>";
 
-            html += "<li style='display: flex; align-items: flex-start; justify-content: space-between; padding: 10px; gap: 8px; border-bottom: 1px solid var(--border);'>";
-            html += "  <span class='item-emoji' style='color:var(--primary); display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; flex-shrink: 0; margin-top: 2px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
-            html += "  <div style='display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0;'>";
-            html += "    <span style='font-weight: 600; font-size: 13px; color: var(--text); word-break: break-word; line-height: 1.4;'>" + task.name + "</span>";
-            html += "    <div style='display: flex; flex-wrap: wrap; gap: 4px; align-items: center;'>" + getTaskMetaBadgesHTML(task) + "</div>";
-            html += "  </div>";
-            html += "  <span class='item-actions' style='margin-top: 2px;'>";
-            html += "    <button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>✏️</button>";
-            html += "    <button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>🗑️</button>";
-            html += "  </span>";
-            html += "</li>";
+            html += "<li>";
+            html += "<span class='item-emoji' style='color:var(--primary);display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;'><svg class='icon-svg' style='width:16px;height:16px;' aria-hidden='true'><use href='#" + iconName + "'/></svg></span>";
+            html += "<span class='item-text'>" + task.name + rewardsBadge + "</span>";
+            html += "<span class='item-actions'>";
+            html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>✏️</button>";
+            html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>🗑️</button>";
+            html += "</span></li>";
         });
         html += "</ul>";
         html += "</div>";
@@ -4005,9 +3918,6 @@ function renderParentDashboard() {
             var idx = taskList.findIndex(function(t) { return t.id === taskId; });
             if (idx !== -1) {
                 taskList.splice(idx, 1);
-                if (typeof syncDailyLogTasks === 'function') {
-                    syncDailyLogTasks(selectedChild, getToday());
-                }
                 saveState();
                 renderParentDashboard();
                 updateUI();
@@ -4204,7 +4114,7 @@ function renderParentDashboard() {
         resetItem.addEventListener('click', function() {
             document.getElementById('parent-settings-modal').style.display = 'none';
             if (confirm(__('settings.reset_data_confirm'))) {
-                safeStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(STORAGE_KEY);
                 location.reload();
             }
         });
@@ -4765,8 +4675,8 @@ function setupEventListeners() {
             } else if (logoClicks >= 10) {
                 logoClicks = 0;
                 if (confirm('Сбросить все данные и перезагрузить? / Тоза кардани кэш ва маълумот?')) {
-                    safeStorage.clear();
-                    safeSessionStorage.clear();
+                    localStorage.clear();
+                    sessionStorage.clear();
                     location.reload();
                 }
             }
@@ -4930,7 +4840,6 @@ function setupEventListeners() {
 
     // Confirm modal
     document.getElementById('confirm-submit').addEventListener('click', submitConfirm);
-    document.getElementById('confirm-reject').addEventListener('click', submitReject);
     document.getElementById('confirm-pin').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') submitConfirm();
     });
@@ -5673,9 +5582,6 @@ function submitParentRoutineModal() {
     const nonDailyTasks = child.tasks.filter(t => t.type && t.type !== 'daily');
     child.tasks = nonDailyTasks.concat(updatedDailyTasks);
 
-    if (typeof syncDailyLogTasks === 'function') {
-        syncDailyLogTasks(child, getToday());
-    }
     saveState();
     showToast('✨', __('parent.routine_save_success'));
     closeParentRoutineModal();
@@ -5799,7 +5705,7 @@ function setupRealtimeSubscription(userId) {
         .channel('family-state-changes')
         .on(
             'postgres_changes',
-            { event: '*', schema: 'public', table: 'family_states', filter: `id=eq.${userId}` },
+            { event: 'UPDATE', schema: 'public', table: 'family_states', filter: `id=eq.${userId}` },
             (payload) => {
                 console.log('Real-time update received:', payload);
                 if (payload.new && payload.new.state) {
@@ -5820,11 +5726,11 @@ function setupRealtimeSubscription(userId) {
                         console.log('Applying real-time update. Versions: remote=', remoteVersion, ', local=', localVersion);
                         migrateState(remoteState);
                         state = remoteState;
-                        safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                         
                         if (state.children.length > 0) {
                             if (!state.children.some(c => c.id === currentChildId)) {
-                                currentChildId = getStoredOrFirstChildId();
+                                currentChildId = state.children[0].id;
                             }
                         }
                         
@@ -5896,7 +5802,7 @@ function renderDiagnostics() { return; // disabled
     
     diag.innerHTML = `🛠️ Diagnostics`;
     
-    const role = safeStorage.getItem('kids_tasks_device_role') || 'not set';
+    const role = localStorage.getItem('kids_tasks_device_role') || 'not set';
     const sub = typeof supabase !== 'undefined' ? 'Loaded' : 'FAILED';
     const client = supabaseClient ? 'Init OK' : 'Null';
     const session = window.supabaseSession ? `User: ${window.supabaseSession.user.email}` : 'None';
@@ -5912,6 +5818,6 @@ function renderDiagnostics() { return; // disabled
         - Kids Count: ${kids}<br>
         - Child ID: ${currKid}<br>
         - Page: ${currentPage}<br>
-        <button style="margin-top:10px; width:100%; font-size:10px; font-weight:bold; background:#ef4444; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;" onclick="if(confirm('Сбросить все данные и перезагрузить?')){safeStorage.clear(); safeSessionStorage.clear(); location.reload();}">СБРОСИТЬ КЭШ И ДАННЫЕ</button>
+        <button style="margin-top:10px; width:100%; font-size:10px; font-weight:bold; background:#ef4444; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;" onclick="if(confirm('Сбросить все данные и перезагрузить?')){localStorage.clear(); sessionStorage.clear(); location.reload();}">СБРОСИТЬ КЭШ И ДАННЫЕ</button>
     `;
 }

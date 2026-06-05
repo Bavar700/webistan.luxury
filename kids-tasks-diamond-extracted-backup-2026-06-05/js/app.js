@@ -64,7 +64,9 @@ function hideLoadingScreen() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadState();
-    currentChildId = getStoredOrFirstChildId();
+    if (state.children.length > 0) {
+        currentChildId = state.children[0].id;
+    }
 
     initSupabase();
 
@@ -99,7 +101,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
         await fetchRemoteState();
-        currentChildId = getStoredOrFirstChildId();
+        if (state && state.children && state.children.length > 0) {
+            currentChildId = state.children[0].id;
+        }
         applyDeviceRoleUI();
         initApp();
         setupRealtimeSubscription(activeSession.user.id);
@@ -145,7 +149,9 @@ async function checkAuthAndSetup() {
         hideRoleOverlay();
         
         await fetchRemoteState();
-        currentChildId = getStoredOrFirstChildId();
+        if (state && state.children && state.children.length > 0) {
+            currentChildId = state.children[0].id;
+        }
         
         applyDeviceRoleUI();
         initApp();
@@ -217,10 +223,7 @@ function showAuthOverlay() {
     const submitBtn = document.getElementById('btn-auth-submit');
     if (submitBtn) submitBtn.disabled = false;
 
-    if (title) {
-        title.textContent = __('auth.login_title');
-        title.style.display = 'none';
-    }
+    if (title) title.textContent = __('auth.login_title');
     if (btnText) btnText.textContent = __('auth.login_btn');
     if (toggleText) toggleText.textContent = __('auth.no_account');
     if (link) link.textContent = __('auth.register_title');
@@ -240,13 +243,6 @@ function showAuthOverlay() {
 
 function hideAuthOverlay() {
     document.getElementById('auth-overlay').classList.add('hidden');
-}
-
-function hideRoleOverlay() {
-    const overlay = document.getElementById('role-overlay');
-    if (overlay) {
-        overlay.classList.add('hidden');
-    }
 }
 
 function showRoleOverlay() {
@@ -288,10 +284,7 @@ function setupAuthOverlayEvents() {
     const btnText = document.getElementById('auth-btn-text');
     
     // Set initial login labels in current language
-    if (title) {
-        title.textContent = __('auth.login_title');
-        title.style.display = 'none';
-    }
+    if (title) title.textContent = __('auth.login_title');
     if (btnText) btnText.textContent = __('auth.login_btn');
     if (toggleText) toggleText.textContent = __('auth.no_account');
     if (link) link.textContent = __('auth.register_title');
@@ -304,10 +297,7 @@ function setupAuthOverlayEvents() {
         errorMsg.classList.add('hidden');
         if (authMode === 'login') {
             authMode = 'register';
-            if (title) {
-                title.textContent = __('auth.register_title');
-                title.style.display = 'block';
-            }
+            if (title) title.textContent = __('auth.register_title');
             if (btnText) btnText.textContent = __('auth.register_btn');
             if (toggleText) toggleText.textContent = __('auth.has_account');
             link.textContent = __('auth.login_btn');
@@ -315,10 +305,7 @@ function setupAuthOverlayEvents() {
             if (privacyCheckbox) privacyCheckbox.required = true;
         } else {
             authMode = 'login';
-            if (title) {
-                title.textContent = __('auth.login_title');
-                title.style.display = 'none';
-            }
+            if (title) title.textContent = __('auth.login_title');
             if (btnText) btnText.textContent = __('auth.login_btn');
             if (toggleText) toggleText.textContent = __('auth.no_account');
             link.textContent = __('auth.register_title');
@@ -827,7 +814,6 @@ function closeChildPicker() {
 function switchChild(childId) {
     if (childId === currentChildId) return;
     currentChildId = childId;
-    safeStorage.setItem('kids_tasks_active_child_id', childId);
     renderChildTabs();
     updateUI();
 
@@ -1688,8 +1674,9 @@ function completeTimer() {
     // Show proof section
     const proofSection = document.getElementById('timer-proof-section');
     proofSection.classList.remove('hidden');
+    document.getElementById('proof-label').textContent = __('proof.label');
     document.getElementById('proof-explanation').placeholder = __('proof.explanation_placeholder');
-    document.getElementById('proof-photo-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg> <span>${__('common.photo_short')}</span>`;
+    document.getElementById('proof-photo-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-plus"/></svg> <span>${__('proof.add_photo')}</span>`;
     document.getElementById('proof-submit-btn').innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg> ${__('proof.submit')}`;
 
     // Reset proof fields
@@ -1992,37 +1979,6 @@ function submitConfirm() {
                 applyDailyReward(currentChildId, today);
             }
         }
-    }
-
-    document.getElementById('confirm-modal').classList.add('hidden');
-    renderTasks();
-    updateUI();
-}
-
-// ===== REJECT CONFIRM (reset task back to pending) =====
-function submitReject() {
-    const pin = document.getElementById('confirm-pin').value;
-    if (pin !== state.pin) {
-        document.getElementById('confirm-error').classList.remove('hidden');
-        return;
-    }
-
-    const child = getCurrentChild();
-    const today = getToday();
-    const log = child.dailyLogs[today];
-    const tl = log.tasks[confirmTaskId];
-
-    if (tl) {
-        // Reset to pending so the child can redo the task
-        tl.status = 'pending';
-        tl.confirmed = false;
-        delete tl.completedAt;
-        delete tl.confirmedAt;
-        delete tl.photo;
-        delete tl.explanation;
-        delete tl.score;
-        saveState();
-        showToast('❌', __('confirm.rejected'));
     }
 
     document.getElementById('confirm-modal').classList.add('hidden');
@@ -2598,7 +2554,7 @@ function renderSettings() {
                     <div class="settings-item" id="btn-change-device-role" style="cursor: pointer;">
                         <span class="settings-item-left">
                             <svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-user"/></svg>
-                            <span class="settings-item-label">${__('settings.device_mode', { mode: safeStorage.getItem('kids_tasks_device_role') === 'child' ? __('settings.role_child') : __('settings.role_parent') })}</span>
+                            <span class="settings-item-label">${__('settings.device_mode', { mode: localStorage.getItem('kids_tasks_device_role') === 'child' ? __('settings.role_child') : __('settings.role_parent') })}</span>
                         </span>
                         <span class="settings-item-arrow">›</span>
                     </div>
@@ -3255,11 +3211,6 @@ function deleteChild() {
         state.children = state.children.filter(c => c.id !== editingChildId);
         if (currentChildId === editingChildId) {
             currentChildId = state.children.length > 0 ? state.children[0].id : null;
-            if (currentChildId) {
-                safeStorage.setItem('kids_tasks_active_child_id', currentChildId);
-            } else {
-                safeStorage.removeItem('kids_tasks_active_child_id');
-            }
         }
         saveState();
         document.getElementById('child-modal').classList.add('hidden');
@@ -4930,7 +4881,6 @@ function setupEventListeners() {
 
     // Confirm modal
     document.getElementById('confirm-submit').addEventListener('click', submitConfirm);
-    document.getElementById('confirm-reject').addEventListener('click', submitReject);
     document.getElementById('confirm-pin').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') submitConfirm();
     });
@@ -5799,7 +5749,7 @@ function setupRealtimeSubscription(userId) {
         .channel('family-state-changes')
         .on(
             'postgres_changes',
-            { event: '*', schema: 'public', table: 'family_states', filter: `id=eq.${userId}` },
+            { event: 'UPDATE', schema: 'public', table: 'family_states', filter: `id=eq.${userId}` },
             (payload) => {
                 console.log('Real-time update received:', payload);
                 if (payload.new && payload.new.state) {
@@ -5824,7 +5774,7 @@ function setupRealtimeSubscription(userId) {
                         
                         if (state.children.length > 0) {
                             if (!state.children.some(c => c.id === currentChildId)) {
-                                currentChildId = getStoredOrFirstChildId();
+                                currentChildId = state.children[0].id;
                             }
                         }
                         
