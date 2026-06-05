@@ -1346,7 +1346,8 @@ body {
 .achievement-item.locked { opacity: 0.35; filter: grayscale(1); }
 .achievement-item.unlocked {
     background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
-    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+    border: 1.5px solid #F59E0B;
     transform: scale(1.02);
 }
 
@@ -1366,25 +1367,25 @@ body {
 .tier-diamond { color: #1d4ed8; background: #dbeafe; border: 1px solid #93c5fd; }
 
 .achievements-grid.tier-silver .achievement-item.unlocked {
-    background: linear-gradient(135deg, #f8fafc, #cbd5e1);
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
     box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
-    border: 1px solid rgba(148, 163, 184, 0.3);
+    border: 1.5px solid #94a3b8;
 }
 .achievements-grid.tier-silver .achievement-item.unlocked .achievement-icon {
     filter: drop-shadow(0 2px 4px rgba(100, 116, 139, 0.3));
 }
 .achievements-grid.tier-gold .achievement-item.unlocked {
     background: linear-gradient(135deg, #fffbeb, #fde68a);
-    box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
-    border: 1px solid rgba(245, 158, 11, 0.2);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+    border: 2px solid #F59E0B;
 }
-.achievements-grid.tier-gold .achievement-item.unlocked .achievement-icon { filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.5)); }
+.achievements-grid.tier-gold .achievement-item.unlocked .achievement-icon { filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.6)); }
 .achievements-grid.tier-diamond .achievement-item.unlocked {
     background: linear-gradient(135deg, #eff6ff, #bfdbfe);
-    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    border: 2px solid #60a5fa;
 }
-.achievements-grid.tier-diamond .achievement-item.unlocked .achievement-icon { filter: hue-rotate(180deg) drop-shadow(0 2px 4px rgba(59, 130, 246, 0.5)); }
+.achievements-grid.tier-diamond .achievement-item.unlocked .achievement-icon { filter: hue-rotate(180deg) drop-shadow(0 2px 6px rgba(59, 130, 246, 0.6)); }
 
 /* ===== PROOF SECTION (Photo + Explanation) ===== */
 .timer-proof-section {

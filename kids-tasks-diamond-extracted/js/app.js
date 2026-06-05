@@ -2167,24 +2167,89 @@ function showDayDetails(dateStr) {
         return;
     }
 
-    let msg = `📅 ${formatDate(dateStr)}\n`;
+    // Remove existing panel
+    const existing = document.getElementById('day-details-panel');
+    if (existing) existing.remove();
+
+    const allTasks = [...(child.tasks || []), ...(child.bonusTasks || [])];
+    let doneCount = 0;
+    let totalCount = 0;
+    let tasksHTML = '';
+
     if (log.excused) {
-        msg += `${__('daydetails.excused')} ${translateExcuseReason(log.excuseReason)}\n`;
+        tasksHTML = `<div style="text-align:center; padding:16px; color:var(--text-secondary); font-size:14px;">
+            🙏 ${__('daydetails.excused') || 'Рӯзи узрнок'} — ${translateExcuseReason(log.excuseReason)}
+        </div>`;
     } else {
-        let done = 0;
-        let total = 0;
-        const allTasks = [...child.tasks, ...child.bonusTasks];
         allTasks.forEach(t => {
-            const tl = log.tasks[t.id];
-            if (tl) {
-                total++;
-                if (tl.status === 'completed' && tl.confirmed) done++;
-                msg += `${t.emoji} ${t.name}: ${tl.status === 'completed' && tl.confirmed ? '✅' : tl.status === 'skipped' ? '❌' : tl.status === 'in-progress' ? '⏳' : '⬜'}\n`;
-            }
+            const tl = log.tasks ? log.tasks[t.id] : null;
+            if (!tl) return;
+            totalCount++;
+            const isDone = tl.status === 'completed' && tl.confirmed;
+            const isSkipped = tl.status === 'skipped';
+            const isInProgress = tl.status === 'in-progress';
+            if (isDone) doneCount++;
+
+            const statusIcon = isDone ? '✅' : isSkipped ? '❌' : isInProgress ? '⏳' : '⬜';
+            const statusColor = isDone ? 'var(--success,#10B981)' : isSkipped ? 'var(--danger,#EF4444)' : 'var(--text-light)';
+            const emoji = (t.emoji && t.emoji !== 'undefined') ? t.emoji : '📌';
+
+            tasksHTML += `
+                <div style="display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border);">
+                    <span style="font-size:20px; flex-shrink:0; width:28px; text-align:center;">${emoji}</span>
+                    <span style="flex:1; font-size:14px; font-weight:500; color:var(--text);">${t.name}</span>
+                    <span style="font-size:18px;">${statusIcon}</span>
+                </div>`;
         });
-        msg += `\n${__('calendar.result')} ${done}/${total}`;
+
+        if (tasksHTML === '') {
+            tasksHTML = `<div style="text-align:center; padding:16px; color:var(--text-secondary); font-size:13px;">—</div>`;
+        }
     }
-    alert(msg);
+
+    const progressPct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+    const progressBar = totalCount > 0 ? `
+        <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-secondary); margin-bottom:4px;">
+                <span>${__('calendar.result') || 'Натиҷа'}</span>
+                <span style="font-weight:700; color:var(--primary);">${doneCount}/${totalCount} (${progressPct}%)</span>
+            </div>
+            <div style="height:6px; background:var(--border); border-radius:4px; overflow:hidden;">
+                <div style="height:100%; width:${progressPct}%; background:linear-gradient(90deg,var(--primary),var(--secondary,#ec4899)); border-radius:4px; transition:width .4s;"></div>
+            </div>
+        </div>` : '';
+
+    const panel = document.createElement('div');
+    panel.id = 'day-details-panel';
+    panel.style.cssText = `
+        position:fixed; bottom:0; left:0; right:0; z-index:1100;
+        background:var(--surface); border-radius:20px 20px 0 0;
+        box-shadow:0 -8px 32px rgba(0,0,0,0.18);
+        padding:0 0 env(safe-area-inset-bottom,0);
+        max-height:75vh; display:flex; flex-direction:column;
+        animation: slideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);`;
+
+    panel.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 18px 12px; border-bottom:1px solid var(--border); flex-shrink:0;">
+            <div>
+                <div style="font-size:13px; color:var(--text-secondary); margin-bottom:2px;">📅 ${formatDate(dateStr)}</div>
+                <div style="font-size:16px; font-weight:700; color:var(--text);">${log.excused ? ('🙏 ' + (__('excuse.title') || 'Узрнок')) : doneCount + '/' + totalCount + ' ' + (__('status.completed') || 'иҷро шуд')}</div>
+            </div>
+            <button onclick="document.getElementById('day-details-panel').remove()" style="background:var(--bg); border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; color:var(--text-secondary);">✕</button>
+        </div>
+        <div style="overflow-y:auto; padding:14px 18px; flex:1;">
+            ${progressBar}
+            ${tasksHTML}
+        </div>`;
+
+    // Backdrop
+    const backdrop = document.createElement('div');
+    backdrop.id = 'day-details-backdrop';
+    backdrop.style.cssText = `position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.35);`;
+    backdrop.addEventListener('click', () => { panel.remove(); backdrop.remove(); });
+
+    document.body.appendChild(backdrop);
+    document.body.appendChild(panel);
 }
 
 // ===== BALANCE =====
