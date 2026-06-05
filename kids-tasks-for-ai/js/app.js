@@ -31,6 +31,12 @@ function initApp() {
     if (test) {
         setTimeout(() => showTestModal(test), 500);
     }
+
+    // Start gentle nudge checker
+    if (!window._nudgeInterval) {
+        window._nudgeInterval = setInterval(checkGentleNudges, 10000);
+    }
+    checkGentleNudges();
 }
 
 // ===== LANGUAGE =====
@@ -354,6 +360,15 @@ function switchChild(childId) {
     renderChildTabs();
     updateUI();
 
+    // Re-render current page to refresh elements for the new child
+    switch (currentPage) {
+        case 'dashboard': renderRoutine(); break;
+        case 'dream': renderDreams(); break;
+        case 'routine': renderTasks(); break;
+        case 'balance': renderBalance(); break;
+        case 'parent': showParentPin(); break;
+    }
+
     const test = checkAndCreateTest(currentChildId);
     if (test) {
         setTimeout(() => showTestModal(test), 500);
@@ -634,6 +649,7 @@ function renderTasks() {
                 <p style="color:var(--text-light);font-size:14px;">${__('excused_day.reason')} ${log.excuseReason}</p>
             </div>
         `;
+        renderCalendar();
         return;
     }
 
@@ -658,20 +674,130 @@ function renderTasks() {
 
     container.innerHTML = '';
 
-    // Regular tasks
-    child.tasks.sort((a, b) => a.order - b.order).forEach(task => {
+    // Group daily tasks by day cycles
+    const morningTasks = [];
+    const afternoonTasks = [];
+    const eveningTasks = [];
+    const specialTasks = []; // one-time and exam tasks
+
+    child.tasks.forEach(task => {
         const tl = log.tasks[task.id];
         if (!tl) return;
         if (task.type === 'daily' && task.days && !task.days.includes(todayDay)) return;
-        container.appendChild(createTaskCard(task, tl, log, child, false));
+
+        if (task.type === 'daily' || !task.type) {
+            const time = task.startTime || '12:00';
+            const hour = parseInt(time.split(':')[0]);
+            if (hour >= 5 && hour < 12) {
+                morningTasks.push({ task, tl });
+            } else if (hour >= 12 && hour < 18) {
+                afternoonTasks.push({ task, tl });
+            } else {
+                eveningTasks.push({ task, tl });
+            }
+        } else {
+            specialTasks.push({ task, tl });
+        }
     });
 
-    // Bonus tasks
-    child.bonusTasks.forEach(task => {
-        const tl = log.tasks[task.id];
-        if (!tl) return;
-        container.appendChild(createTaskCard(task, tl, log, child, true));
-    });
+    // Helper function to sort tasks by startTime chronologically
+    const sortTasksByTime = (arr) => {
+        arr.sort((a, b) => {
+            const timeA = a.task.startTime || '12:00';
+            const timeB = b.task.startTime || '12:00';
+            return timeA.localeCompare(timeB);
+        });
+    };
+
+    sortTasksByTime(morningTasks);
+    sortTasksByTime(afternoonTasks);
+    sortTasksByTime(eveningTasks);
+
+    // Calculate streaks for the blocks
+    const morningStreak = calculateBlockStreak(child, 'morning');
+    const afternoonStreak = calculateBlockStreak(child, 'afternoon');
+    const eveningStreak = calculateBlockStreak(child, 'evening');
+
+    // Function to render a day cycle block with a timeline
+    const renderBlock = (blockId, title, icon, streak, taskList) => {
+        if (taskList.length === 0) return;
+
+        // Block Header
+        const header = document.createElement('div');
+        header.className = 'timeline-block-header';
+        
+        let streakBadgeHtml = '';
+        if (streak > 0) {
+            streakBadgeHtml = `
+                <span class="block-streak-badge">
+                    <span>🔥</span> 
+                    <span>${__('routine.streak_count', { count: streak })}</span>
+                </span>
+            `;
+        }
+
+        header.innerHTML = `
+            <span class="block-icon-title">${icon} ${title}</span>
+            ${streakBadgeHtml}
+        `;
+        container.appendChild(header);
+
+        // Timeline Container
+        const tlContainer = document.createElement('div');
+        tlContainer.className = 'timeline-container';
+        taskList.forEach(item => {
+            tlContainer.appendChild(createTaskCard(item.task, item.tl, log, child, false));
+        });
+        container.appendChild(tlContainer);
+    };
+
+    // Render blocks
+    renderBlock('morning', __('routine.morning'), '☀️', morningStreak, morningTasks);
+    renderBlock('afternoon', __('routine.afternoon'), '🌤️', afternoonStreak, afternoonTasks);
+    renderBlock('evening', __('routine.evening'), '🌙', eveningStreak, eveningTasks);
+
+    // Render Special Tasks (if any)
+    if (specialTasks.length > 0) {
+        const specialHeader = document.createElement('h3');
+        specialHeader.style.marginTop = '24px';
+        specialHeader.style.marginBottom = '12px';
+        specialHeader.style.fontSize = '15px';
+        specialHeader.style.fontWeight = '700';
+        specialHeader.style.color = 'var(--text)';
+        specialHeader.textContent = '🎯 ' + __('routine.special_tasks');
+        container.appendChild(specialHeader);
+
+        const specialContainer = document.createElement('div');
+        specialContainer.style.display = 'flex';
+        specialContainer.style.flexDirection = 'column';
+        specialContainer.style.gap = '12px';
+        specialTasks.forEach(item => {
+            specialContainer.appendChild(createTaskCard(item.task, item.tl, log, child, false));
+        });
+        container.appendChild(specialContainer);
+    }
+
+    // Render Bonus tasks (if any)
+    const bonusTasks = child.bonusTasks.map(task => ({ task, tl: log.tasks[task.id] })).filter(item => !!item.tl);
+    if (bonusTasks.length > 0) {
+        const bonusHeader = document.createElement('h3');
+        bonusHeader.style.marginTop = '24px';
+        bonusHeader.style.marginBottom = '12px';
+        bonusHeader.style.fontSize = '15px';
+        bonusHeader.style.fontWeight = '700';
+        bonusHeader.style.color = 'var(--text)';
+        bonusHeader.textContent = '🎁 ' + __('routine.bonus_tasks');
+        container.appendChild(bonusHeader);
+
+        const bonusContainer = document.createElement('div');
+        bonusContainer.style.display = 'flex';
+        bonusContainer.style.flexDirection = 'column';
+        bonusContainer.style.gap = '12px';
+        bonusTasks.forEach(item => {
+            bonusContainer.appendChild(createTaskCard(item.task, item.tl, log, child, true));
+        });
+        container.appendChild(bonusContainer);
+    }
 
     if (allRegularDone && totalTasks > 0) {
         const doneDiv = document.createElement('div');
@@ -1409,7 +1535,7 @@ function renderCalendar() {
     for (let i = 0; i < 7; i++) {
         const header = document.createElement('div');
         header.className = 'calendar-header';
-        header.textContent = __weekday(i);
+        header.textContent = __weekday((i + 1) % 7);
         grid.appendChild(header);
     }
 
@@ -2105,6 +2231,18 @@ function updateTaskFieldsVisibility() {
     if (startDateContainer) {
         startDateContainer.classList.toggle('hidden', typeVal === 'daily');
     }
+    
+    // Hide Gold reward container for Daily Routines
+    const goldContainer = document.getElementById('task-reward-gold-container');
+    if (goldContainer) {
+        if (typeVal === 'daily') {
+            goldContainer.classList.add('hidden');
+            document.getElementById('task-reward-gold').value = '0';
+        } else {
+            goldContainer.classList.remove('hidden');
+        }
+    }
+
     // Progressive Disclosure Toggles
     const hasDeadline = document.getElementById('task-has-deadline')?.checked;
     const deadlineGroup = document.getElementById('task-deadline-group');
@@ -2156,7 +2294,7 @@ function saveTask() {
     const checkboxes = document.querySelectorAll('input[name="task-days"]');
     const days = Array.from(checkboxes).filter(cb => cb.checked).map(cb => parseInt(cb.value));
 
-    const rewardGold = parseInt(document.getElementById('task-reward-gold').value) || 0;
+    const rewardGold = typeVal === 'daily' ? 0 : (parseInt(document.getElementById('task-reward-gold').value) || 0);
     const rewardStars = parseInt(document.getElementById('task-reward-stars').value) || 0;
     const rewardMedals = 0;
     
@@ -2240,6 +2378,17 @@ function saveTask() {
             child.tasks.push(newTask);
         }
     }
+
+    // Immediately sync today's daily log so the new/edited task appears
+    // on child dashboard without requiring a page reload
+    const today = getToday();
+    if (!child.dailyLogs[today]) {
+        child.dailyLogs[today] = {
+            tasks: {}, allCompleted: false, partiallyCompleted: false,
+            excused: false, excuseReason: '', rewardApplied: false
+        };
+    }
+    syncDailyLogTasks(child, today);
 
     saveState();
     document.getElementById('task-modal').classList.add('hidden');
@@ -2651,9 +2800,20 @@ function renderDreams() {
             const child = getCurrentChild();
             const idx = child.dreams.findIndex(d => d.id === dreamId);
             if (idx !== -1) {
-                child.dreams.splice(idx, 1);
-                saveState();
-                renderDreams();
+                const title = currentLang === 'ru' ? 'Введите причину удаления мечты:' : 'Сабаби нест кардани орзуро нависед:';
+                const placeholder = currentLang === 'ru' ? 'Введите причину...' : 'Сабабро нависед...';
+                showCustomPrompt(title, placeholder).then(reason => {
+                    if (reason === null) return; // User cancelled
+                    const trimmedReason = reason.trim();
+                    if (trimmedReason === '') {
+                        showToast('⚠️', currentLang === 'ru' ? 'Причина обязательна!' : 'Сабаб албатта лозим аст!');
+                        return;
+                    }
+                    child.dreams.splice(idx, 1);
+                    saveState();
+                    showToast('🗑️', currentLang === 'ru' ? 'Мечта удалена' : 'Орзу нест карда шуд');
+                    renderDreams();
+                });
             }
         });
     });
@@ -2832,16 +2992,26 @@ function renderParentDashboard() {
 
     var html = "<div class='parent-overview'>";
 
-    // Withdrawal requests moved to the bottom
+    // Top action buttons in 2x2 grid
+    html += "<div class='section-card' style='margin-bottom:15px;'>";
+    html += "<div style='display: grid; grid-template-columns: 1fr 1fr; gap: 8px;'>";
+    html += "  <button class='btn btn-primary btn-parent-add-task' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px;'>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + __('settings.add_task') + "</button>";
+    html += "  <button class='btn btn-secondary btn-parent-manage-routine' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border: 1px solid rgba(59, 130, 246, 0.2);'>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;fill:currentColor;' aria-hidden='true'><use href='#icon-clock'/></svg> " + __('parent.manage_routine') + "</button>";
+    html += "  <button class='btn btn-outline btn-parent-excuse-day' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; border-color: rgba(245, 158, 11, 0.3); color: var(--warning);'>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-skip'/></svg> " + __('excuse.title') + "</button>";
+    html += "  <button class='btn btn-secondary btn-parent-add-dream' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2);'>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + (currentLang === 'ru' ? 'Мечта от родителей' : 'Орзу аз волидон') + "</button>";
+    html += "</div>";
+    html += "</div>";
 
     // ---- Task Management Section ----
     html += "<div class='parent-task-section'>";
 
-    // Regular tasks
-    html += "<div class='section-card'><h4>" + __('settings.daily_tasks') + "</h4>";
-    if (selectedChild.tasks.length === 0) {
-        html += "<p class='empty-state'>—</p>";
-    } else {
+    // Regular tasks - render only if count > 0
+    if (selectedChild.tasks.length > 0) {
+        html += "<div class='section-card'><h4>" + __('settings.daily_tasks') + "</h4>";
         html += "<ul class='item-list'>";
         selectedChild.tasks.sort(function(a, b) { return a.order - b.order; }).forEach(function(task) {
             var iconName = 'icon-clock';
@@ -2868,18 +3038,16 @@ function renderParentDashboard() {
             html += "<span class='item-text'>" + task.name + typeBadge + rewardsBadge + " <span class='item-meta'>⏱ " + task.duration + " " + __('task.minutes') + "</span></span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>✏️</button>";
-            html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('delete') + "'>🗑️</button>";
+            html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='false' title='" + __('edit') + "'>🗑️</button>";
             html += "</span></li>";
         });
         html += "</ul>";
+        html += "</div>";
     }
-    html += "</div>";
 
-    // Bonus tasks
-    html += "<div class='section-card'><h4>" + __('settings.bonus_tasks') + "</h4>";
-    if (selectedChild.bonusTasks.length === 0) {
-        html += "<p class='empty-state'>" + __('settings.no_bonus') + "</p>";
-    } else {
+    // Bonus tasks - render only if count > 0
+    if (selectedChild.bonusTasks.length > 0) {
+        html += "<div class='section-card'><h4>" + __('settings.bonus_tasks') + "</h4>";
         html += "<ul class='item-list'>";
         selectedChild.bonusTasks.forEach(function(task) {
             var iconName = 'icon-gift';
@@ -2893,30 +3061,20 @@ function renderParentDashboard() {
             html += "<span class='item-text'>" + task.name + rewardsBadge + "</span>";
             html += "<span class='item-actions'>";
             html += "<button class='edit-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>✏️</button>";
-            html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('delete') + "'>🗑️</button>";
+            html += "<button class='delete-btn' data-task-id='" + task.id + "' data-is-bonus='true' title='" + __('edit') + "'>🗑️</button>";
             html += "</span></li>";
         });
         html += "</ul>";
+        html += "</div>";
     }
-    html += "</div>";
 
-    // Add Task Button (moved here and made larger)
-    html += "<div style='margin-top: 15px;'>";
-    html += "<button class='btn btn-primary btn-large btn-full btn-parent-add-task'>" +
-        "<svg class='icon-svg' aria-hidden='true'><use href='#icon-plus'/></svg> " +
-        __('settings.add_task') + "</button>";
-    html += "</div>";
-
-    // Pending Withdrawal Requests Section (Moved here from top)
+    // Pending Withdrawal Requests Section - render only if count > 0
     if (!selectedChild.withdrawals) selectedChild.withdrawals = [];
     var pendingReqs = selectedChild.withdrawals.filter(function(w) { return w.status === 'pending'; });
     
-    html += "<div class='section-card' style='background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(76,29,149,0.05) 100%); border: 1px solid rgba(124,58,237,0.15); margin-top: 15px;'>";
-    html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;'><use href='#icon-wallet'/></svg> " + __('parent.withdraw_requests') + "</h4>";
-    
-    if (pendingReqs.length === 0) {
-        html += "<p class='empty-state'>" + __('parent.no_withdraw_requests') + "</p>";
-    } else {
+    if (pendingReqs.length > 0) {
+        html += "<div class='section-card' style='background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, rgba(76,29,149,0.05) 100%); border: 1px solid rgba(124,58,237,0.15); margin-top: 15px;'>";
+        html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;'><use href='#icon-wallet'/></svg> " + __('parent.withdraw_requests') + "</h4>";
         html += "<ul class='item-list' style='margin-top:10px;list-style:none;padding:0;'>";
         pendingReqs.forEach(function(req) {
             var sym = req.type === 'stars' ? '⭐' : '🪙';
@@ -2936,25 +3094,15 @@ function renderParentDashboard() {
             html += "</li>";
         });
         html += "</ul>";
+        html += "</div>";
     }
-    html += "</div>"; // close section-card
 
-    // ---- Excuse Day Button ----
-    html += "<div style='margin-top: 15px;'>";
-    html += "<button class='btn btn-outline btn-full btn-parent-excuse-day' style='border-color: rgba(245, 158, 11, 0.3); color: var(--warning);'>" +
-        "<svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;'><use href='#icon-skip'/></svg> " +
-        __('excuse.title') + "</button>";
-    html += "</div>";
-
-    // ---- Dreams Management Section ----
-    html += "<div class='section-card' style='margin-top: 15px;'>";
-    html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--secondary);'><use href='#icon-sparkle'/></svg> Идораи орзуҳо</h4>";
-    
+    // ---- Dreams Management Section - render only if child has written dreams ----
     if (!selectedChild.dreams) selectedChild.dreams = [];
     
-    if (selectedChild.dreams.length === 0) {
-        html += "<p class='empty-state'>Кӯдак ҳанӯз ягон орзу илова накардааст.</p>";
-    } else {
+    if (selectedChild.dreams.length > 0) {
+        html += "<div class='section-card' style='margin-top: 15px;'>";
+        html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--secondary);'><use href='#icon-sparkle'/></svg> Идораи орзуҳо</h4>";
         html += "<ul class='item-list' style='margin-top:10px;list-style:none;padding:0;'>";
         selectedChild.dreams.forEach(function(dream) {
             var isApproved = dream.approved !== false && (dream.costGold > 0 || dream.costStars > 0);
@@ -3012,36 +3160,8 @@ function renderParentDashboard() {
             html += "</li>";
         });
         html += "</ul>";
+        html += "</div>";
     }
-    
-    html += "<div style='margin-top:12px; border-top:1px dashed var(--border); padding-top:10px;'>";
-    html += "<h5 style='font-size:13px; margin-bottom:8px;'>" + (currentLang === 'ru' ? 'Мечта от родителей:' : 'Орзу аз волидон:') + "</h5>";
-    html += "<div style='display:flex; flex-direction:column; gap:6px;'>";
-    html += "<input type='text' id='parent-dream-name-input' placeholder='Номи орзу...' style='width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:12px; box-sizing: border-box;'>";
-    html += "<textarea id='parent-dream-desc-input' placeholder='Тавсифи орзу...' style='width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:12px; font-family:inherit; min-height:50px; resize:vertical; box-sizing: border-box;'></textarea>";
-    html += "<input type='file' id='parent-dream-photo-input' accept='image/*' style='display:none;'>";
-    html += "<div class='premium-upload-card' id='parent-dream-photo-btn' style='margin-top:8px;'>";
-    html += "<span>" + (currentLang === 'ru' ? '+ Фото' : '+ Акс') + "</span>";
-    html += "</div>";
-    html += "<div id='parent-dream-photo-preview' class='premium-photo-preview-container hidden' style='margin-top:8px;'>";
-    html += "<img id='parent-dream-photo-img' src='' alt=''>";
-    html += "<button id='parent-dream-photo-remove' class='premium-photo-delete-btn'>✕</button>";
-    html += "</div>";
-    html += "<div style='display:flex; gap:6px; align-items:center; margin-top:4px;'>";
-    html += "<div style='position: relative; display: inline-block; width: 75px;'>";
-    html += "<input type='number' id='parent-dream-gold-input' placeholder='0' style='width: 100%; padding: 4px 22px 4px 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; height: 30px; box-sizing: border-box;'>";
-    html += "<span style='position: absolute; right: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px;'>🪙</span>";
-    html += "</div>";
-    html += "<div style='position: relative; display: inline-block; width: 75px;'>";
-    html += "<input type='number' id='parent-dream-stars-input' placeholder='0' style='width: 100%; padding: 4px 22px 4px 6px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; height: 30px; box-sizing: border-box;'>";
-    html += "<span style='position: absolute; right: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px;'>⭐</span>";
-    html += "</div>";
-    html += "<button class='parent-add-dream-direct-btn btn btn-primary' style='padding:6px 12px; font-size:12px; height:30px; line-height:18px;'>Захира</button>";
-    html += "</div>";
-    html += "</div>";
-    html += "</div>"; // close dreams section-card
-
-    // (Settings moved to floating FAB — see below)
 
     html += "</div>"; // close parent-task-section
     html += "</div>"; // close parent-overview
@@ -3327,99 +3447,19 @@ function renderParentDashboard() {
         });
     });
 
-    // Dreams: Add dream direct by parent
-    var parentAddDreamBtn = container.querySelector('.parent-add-dream-direct-btn');
+    // Dreams: Add dream via modal
+    var parentAddDreamBtn = container.querySelector('.btn-parent-add-dream');
     if (parentAddDreamBtn) {
         parentAddDreamBtn.addEventListener('click', function() {
-            var nameInput = document.getElementById('parent-dream-name-input');
-            var goldInput = document.getElementById('parent-dream-gold-input');
-            var starsInput = document.getElementById('parent-dream-stars-input');
-            var descInput = document.getElementById('parent-dream-desc-input');
-            
-            var name = nameInput.value.trim();
-            var costGold = parseInt(goldInput.value) || 0;
-            var costStars = parseInt(starsInput.value) || 0;
-            var description = descInput ? descInput.value.trim() : '';
-            
-            if (!name) {
-                showToast('⚠️', currentLang === 'ru' ? 'Введите название мечты' : 'Номи орзуро нависед');
-                return;
-            }
-            
-            selectedChild.dreams.push({
-                id: 'dream_' + Date.now(),
-                name: name,
-                description: description,
-                photo: parentDreamPhotoData || null,
-                costGold: costGold,
-                costStars: costStars,
-                achieved: false,
-                approved: true,
-                createdAt: new Date().toISOString()
-            });
-            saveState();
-            parentDreamPhotoData = null;
-            showToast('✨', 'Орзу бомуваффақият илова шуд!');
-            renderParentDashboard();
+            showParentAddDreamModal();
         });
     }
 
-    // Parent dream photo upload listeners
-    var parentPhotoBtn = container.querySelector('#parent-dream-photo-btn');
-    var parentPhotoInput = container.querySelector('#parent-dream-photo-input');
-    var parentPhotoPreview = container.querySelector('#parent-dream-photo-preview');
-    var parentPhotoImg = container.querySelector('#parent-dream-photo-img');
-    var parentPhotoRemove = container.querySelector('#parent-dream-photo-remove');
-
-    if (parentPhotoBtn && parentPhotoInput) {
-        parentPhotoBtn.addEventListener('click', function() {
-            parentPhotoInput.click();
-        });
-    }
-
-    if (parentPhotoInput) {
-        parentPhotoInput.addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
-                var file = e.target.files[0];
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    var img = new Image();
-                    img.onload = function() {
-                        var canvas = document.createElement('canvas');
-                        var w = img.width, h = img.height;
-                        var maxDim = 800;
-                        if (w > maxDim || h > maxDim) {
-                            if (w > h) {
-                                h = h * maxDim / w;
-                                w = maxDim;
-                            } else {
-                                w = w * maxDim / h;
-                                h = maxDim;
-                            }
-                        }
-                        canvas.width = w;
-                        canvas.height = h;
-                        var ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, w, h);
-                        parentDreamPhotoData = canvas.toDataURL('image/jpeg', 0.7);
-                        if (parentPhotoImg) parentPhotoImg.src = parentDreamPhotoData;
-                        if (parentPhotoPreview) parentPhotoPreview.classList.remove('hidden');
-                        if (parentPhotoBtn) parentPhotoBtn.style.display = 'none';
-                    };
-                    img.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    if (parentPhotoRemove) {
-        parentPhotoRemove.addEventListener('click', function() {
-            parentDreamPhotoData = null;
-            if (parentPhotoImg) parentPhotoImg.src = '';
-            if (parentPhotoPreview) parentPhotoPreview.classList.add('hidden');
-            if (parentPhotoBtn) parentPhotoBtn.style.display = 'flex';
-            if (parentPhotoInput) parentPhotoInput.value = '';
+    // Daily Routine: Manage routine via modal
+    var parentManageRoutineBtn = container.querySelector('.btn-parent-manage-routine');
+    if (parentManageRoutineBtn) {
+        parentManageRoutineBtn.addEventListener('click', function() {
+            showParentRoutineModal();
         });
     }
 
@@ -4194,6 +4234,78 @@ function setupEventListeners() {
         });
     }
 
+    // Parent add dream modal
+    const parentDreamCloseBtn = document.getElementById('parent-add-dream-close');
+    if (parentDreamCloseBtn) {
+        parentDreamCloseBtn.addEventListener('click', closeParentAddDreamModal);
+    }
+    const parentDreamSubmitBtn = document.getElementById('parent-modal-dream-submit');
+    if (parentDreamSubmitBtn) {
+        parentDreamSubmitBtn.addEventListener('click', submitParentAddDreamModal);
+    }
+    const parentDreamPhotoBtn = document.getElementById('parent-modal-dream-photo-btn');
+    if (parentDreamPhotoBtn) {
+        parentDreamPhotoBtn.addEventListener('click', () => {
+            document.getElementById('parent-modal-dream-photo-input').click();
+        });
+    }
+    const parentDreamPhotoInput = document.getElementById('parent-modal-dream-photo-input');
+    if (parentDreamPhotoInput) {
+        parentDreamPhotoInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleParentDreamModalPhoto(e.target.files[0]);
+            }
+        });
+    }
+    const parentDreamPhotoRemove = document.getElementById('parent-modal-dream-photo-remove');
+    if (parentDreamPhotoRemove) {
+        parentDreamPhotoRemove.addEventListener('click', () => {
+            parentDreamPhotoData = null;
+            const imgEl = document.getElementById('parent-modal-dream-photo-img');
+            if (imgEl) imgEl.src = '';
+            const preview = document.getElementById('parent-modal-dream-photo-preview');
+            if (preview) preview.classList.add('hidden');
+            const btn = document.getElementById('parent-modal-dream-photo-btn');
+            if (btn) btn.classList.remove('hidden');
+            const input = document.getElementById('parent-modal-dream-photo-input');
+            if (input) input.value = '';
+        });
+    }
+
+    // Parent manage routine modal
+    const parentRoutineCloseBtn = document.getElementById('parent-routine-modal-close');
+    if (parentRoutineCloseBtn) {
+        parentRoutineCloseBtn.addEventListener('click', closeParentRoutineModal);
+    }
+    const parentRoutineCancelBtn = document.getElementById('parent-routine-modal-cancel');
+    if (parentRoutineCancelBtn) {
+        parentRoutineCancelBtn.addEventListener('click', closeParentRoutineModal);
+    }
+    const parentRoutineSaveBtn = document.getElementById('parent-routine-modal-save');
+    if (parentRoutineSaveBtn) {
+        parentRoutineSaveBtn.addEventListener('click', submitParentRoutineModal);
+    }
+    const parentRoutineAddBtn = document.getElementById('btn-add-routine-row');
+    if (parentRoutineAddBtn) {
+        parentRoutineAddBtn.addEventListener('click', addRoutineRowFromInputs);
+    }
+    const routineModalEl = document.getElementById('parent-routine-modal');
+    if (routineModalEl) {
+        routineModalEl.addEventListener('click', function(e) {
+            if (e.target === routineModalEl) closeParentRoutineModal();
+        });
+    }
+    const routineListEl = document.getElementById('parent-routine-list');
+    if (routineListEl) {
+        routineListEl.addEventListener('click', function(e) {
+            const deleteBtn = e.target.closest('.btn-delete-routine-row');
+            if (deleteBtn) {
+                const row = deleteBtn.closest('.routine-row');
+                if (row) row.remove();
+            }
+        });
+    }
+
     // Task modal
     document.getElementById('task-save-btn').addEventListener('click', saveTask);
     document.getElementById('task-type').addEventListener('change', updateTaskFieldsVisibility);
@@ -4316,6 +4428,18 @@ function setupEventListeners() {
             }
         });
     }
+
+    // Gentle Nudge start button
+    const nudgeStartBtn = document.getElementById('nudge-start-btn');
+    if (nudgeStartBtn) {
+        nudgeStartBtn.addEventListener('click', () => {
+            const task = window._activeNudgeTask;
+            if (task && currentChildId) {
+                closeNudgeModal();
+                showTimer(currentChildId, task);
+            }
+        });
+    }
 }
 
 // ===== PRESTIGE MODAL =====
@@ -4393,7 +4517,6 @@ function showCustomPrompt(title, placeholder) {
         
         var modal = document.getElementById('prompt-modal');
         modal.classList.remove('hidden');
-        modal.style.display = 'flex';
         input.focus();
     });
 }
@@ -4411,12 +4534,415 @@ function closeCustomPrompt() {
     var modal = document.getElementById('prompt-modal');
     if (modal) {
         modal.classList.add('hidden');
-        modal.style.display = 'none';
     }
     if (currentPromptResolver) {
         currentPromptResolver(null);
         currentPromptResolver = null;
     }
+}
+
+// ===== PARENT ADD DREAM MODAL =====
+function showParentAddDreamModal() {
+    const modal = document.getElementById('parent-add-dream-modal');
+    if (!modal) return;
+    
+    // Reset inputs
+    const nameInput = document.getElementById('parent-modal-dream-name');
+    const descInput = document.getElementById('parent-modal-dream-desc');
+    const goldInput = document.getElementById('parent-modal-dream-gold');
+    const starsInput = document.getElementById('parent-modal-dream-stars');
+    const photoInput = document.getElementById('parent-modal-dream-photo-input');
+    const photoPreview = document.getElementById('parent-modal-dream-photo-preview');
+    const photoBtn = document.getElementById('parent-modal-dream-photo-btn');
+    const imgEl = document.getElementById('parent-modal-dream-photo-img');
+
+    if (nameInput) nameInput.value = '';
+    if (descInput) descInput.value = '';
+    if (goldInput) goldInput.value = '';
+    if (starsInput) starsInput.value = '';
+    if (photoInput) photoInput.value = '';
+    if (imgEl) imgEl.src = '';
+    if (photoPreview) photoPreview.classList.add('hidden');
+    if (photoBtn) photoBtn.classList.remove('hidden');
+    
+    parentDreamPhotoData = null;
+    modal.classList.remove('hidden');
+}
+
+function closeParentAddDreamModal() {
+    const modal = document.getElementById('parent-add-dream-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+    parentDreamPhotoData = null;
+}
+
+function handleParentDreamModalPhoto(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            parentDreamPhotoData = canvas.toDataURL('image/jpeg', 0.7);
+            const imgEl = document.getElementById('parent-modal-dream-photo-img');
+            if (imgEl) imgEl.src = parentDreamPhotoData;
+            const preview = document.getElementById('parent-modal-dream-photo-preview');
+            if (preview) preview.classList.remove('hidden');
+            const btn = document.getElementById('parent-modal-dream-photo-btn');
+            if (btn) btn.classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function submitParentAddDreamModal() {
+    const nameInput = document.getElementById('parent-modal-dream-name');
+    const descInput = document.getElementById('parent-modal-dream-desc');
+    const goldInput = document.getElementById('parent-modal-dream-gold');
+    const starsInput = document.getElementById('parent-modal-dream-stars');
+
+    if (!nameInput) return;
+    const name = nameInput.value.trim();
+    if (!name) {
+        showToast('⚠️', currentLang === 'ru' ? 'Введите название мечты' : 'Номи орзуро нависед');
+        return;
+    }
+
+    const description = descInput ? descInput.value.trim() : '';
+    const costGold = goldInput ? (parseInt(goldInput.value) || 0) : 0;
+    const costStars = starsInput ? (parseInt(starsInput.value) || 0) : 0;
+
+    const child = getCurrentChild();
+    if (!child) return;
+    if (!child.dreams) child.dreams = [];
+
+    child.dreams.push({
+        id: 'dream_' + Date.now(),
+        name: name,
+        description: description,
+        photo: parentDreamPhotoData || null,
+        costGold: costGold,
+        costStars: costStars,
+        achieved: false,
+        approved: true, // Pre-approved as it is directly added by a parent
+        createdAt: new Date().toISOString()
+    });
+
+    saveState();
+    showToast('✨', __('dream.add_success'));
+    closeParentAddDreamModal();
+    renderParentDashboard();
+}
+
+// ===== PARENT MANAGE ROUTINE MODAL =====
+function escapeHtmlAttr(str) {
+    if (!str) return '';
+    return str.toString()
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function initRoutineFlatpickr() {
+    if (!window.flatpickr) return;
+    const lang = currentLang === 'ru' ? 'ru' : 'tg';
+    document.querySelectorAll('#parent-routine-modal .flatpickr-time').forEach(function(el) {
+        if (el._flatpickr) el._flatpickr.destroy();
+        flatpickr(el, {
+            locale: lang,
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            disableMobile: true
+        });
+    });
+}
+
+function showParentRoutineModal() {
+    const modal = document.getElementById('parent-routine-modal');
+    if (!modal) return;
+
+    // Reset new row inputs
+    const newTime = document.getElementById('new-routine-time');
+    const newName = document.getElementById('new-routine-name');
+    const newDuration = document.getElementById('new-routine-duration');
+    const newStars = document.getElementById('new-routine-stars');
+
+    if (newTime) newTime.value = '';
+    if (newName) newName.value = '';
+    if (newDuration) newDuration.value = '';
+    if (newStars) newStars.value = '';
+
+    const child = getCurrentChild();
+    if (!child) return;
+
+    // Filter daily tasks (type === 'daily' or type undefined)
+    const dailyTasks = child.tasks.filter(t => t.type === 'daily' || !t.type);
+    
+    // Sort chronologically by startTime
+    dailyTasks.sort((a, b) => {
+        const timeA = a.startTime || '12:00';
+        const timeB = b.startTime || '12:00';
+        return timeA.localeCompare(timeB);
+    });
+
+    renderParentRoutineList(dailyTasks);
+    modal.classList.remove('hidden');
+    initRoutineFlatpickr();
+}
+
+function renderParentRoutineList(tasks) {
+    const list = document.getElementById('parent-routine-list');
+    if (!list) return;
+
+    let html = '';
+    tasks.forEach(task => {
+        html += `<div class="routine-row" data-task-id="${task.id}">`;
+        html += `  <input type="text" class="flatpickr-time routine-start-time" value="${task.startTime || '12:00'}">`;
+        html += `  <input type="text" class="routine-task-name" value="${escapeHtmlAttr(task.name)}" placeholder="${currentLang === 'ru' ? 'Название действия...' : 'Номи фаъолият...'}">`;
+        html += `  <input type="number" class="routine-task-duration" value="${task.duration || 10}" placeholder="${currentLang === 'ru' ? 'Мин' : 'Дақ'}" min="1">`;
+        html += `  <div style="display: flex; gap: 4px; align-items: center;">`;
+        html += `    <input type="number" class="routine-task-stars" value="${task.rewardStars || 0}" min="0" style="width: 60px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);">`;
+        html += `  </div>`;
+        html += `  <button class="btn-delete-routine-row" title="${currentLang === 'ru' ? 'Удалить' : 'Нест кардан'}">🗑️</button>`;
+        html += `</div>`;
+    });
+
+    list.innerHTML = html;
+}
+
+function addRoutineRowFromInputs() {
+    const newTimeEl = document.getElementById('new-routine-time');
+    const newNameEl = document.getElementById('new-routine-name');
+    const newDurationEl = document.getElementById('new-routine-duration');
+    const newStarsEl = document.getElementById('new-routine-stars');
+
+    const name = newNameEl ? newNameEl.value.trim() : '';
+    if (!name) {
+        showToast('⚠️', __('parent.routine_validation_error'));
+        return;
+    }
+
+    const time = newTimeEl && newTimeEl.value ? newTimeEl.value.trim() : '08:00';
+    const duration = newDurationEl ? (parseInt(newDurationEl.value) || 10) : 10;
+    const stars = newStarsEl ? (parseInt(newStarsEl.value) || 0) : 0;
+    const newId = 'task_gen_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+
+    const list = document.getElementById('parent-routine-list');
+    if (list) {
+        const row = document.createElement('div');
+        row.className = 'routine-row';
+        row.dataset.taskId = newId;
+        
+        let html = '';
+        html += `  <input type="text" class="flatpickr-time routine-start-time" value="${time}">`;
+        html += `  <input type="text" class="routine-task-name" value="${escapeHtmlAttr(name)}" placeholder="${currentLang === 'ru' ? 'Название действия...' : 'Номи фаъолият...'}">`;
+        html += `  <input type="number" class="routine-task-duration" value="${duration}" placeholder="${currentLang === 'ru' ? 'Мин' : 'Дақ'}" min="1">`;
+        html += `  <div style="display: flex; gap: 4px; align-items: center;">`;
+        html += `    <input type="number" class="routine-task-stars" value="${stars}" min="0" style="width: 60px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);">`;
+        html += `  </div>`;
+        html += `  <button class="btn-delete-routine-row" title="${currentLang === 'ru' ? 'Удалить' : 'Нест кардан'}">🗑️</button>`;
+        row.innerHTML = html;
+        list.appendChild(row);
+
+        // Clear inputs
+        if (newNameEl) newNameEl.value = '';
+        if (newDurationEl) newDurationEl.value = '';
+        if (newStarsEl) newStarsEl.value = '';
+
+        // Re-initialize Flatpickr for the new row timepicker
+        initRoutineFlatpickr();
+
+        // Scroll to bottom
+        const container = document.getElementById('parent-routine-list-container');
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
+    }
+}
+
+function submitParentRoutineModal() {
+    const child = getCurrentChild();
+    if (!child) return;
+
+    const list = document.getElementById('parent-routine-list');
+    if (!list) return;
+
+    const rows = list.querySelectorAll('.routine-row');
+    const updatedDailyTasks = [];
+    let isValid = true;
+
+    rows.forEach(row => {
+        const taskId = row.dataset.taskId;
+        const timeVal = row.querySelector('.routine-start-time').value.trim();
+        const nameVal = row.querySelector('.routine-task-name').value.trim();
+        const durationVal = parseInt(row.querySelector('.routine-task-duration').value) || 10;
+        const starsVal = parseInt(row.querySelector('.routine-task-stars').value) || 0;
+
+        if (!nameVal) {
+            isValid = false;
+            return;
+        }
+
+        // Preserve original properties (e.g. completion status, custom instruction photos/logs)
+        const originalTask = child.tasks.find(t => t.id === taskId);
+        const taskObj = originalTask ? Object.assign({}, originalTask) : {
+            id: taskId,
+            type: 'daily',
+            days: [1, 2, 3, 4, 5, 6, 0],
+            useTimer: true,
+            isBonus: false,
+            deadline: ''
+        };
+
+        taskObj.name = nameVal;
+        taskObj.startTime = timeVal;
+        taskObj.duration = durationVal;
+        taskObj.rewardGold = 0; // Routines do not reward money
+        taskObj.rewardStars = starsVal;
+        
+        updatedDailyTasks.push(taskObj);
+    });
+
+    if (!isValid) {
+        showToast('⚠️', __('parent.routine_validation_error'));
+        return;
+    }
+
+    // Sort chronologically by startTime before setting order
+    updatedDailyTasks.sort((a, b) => {
+        const timeA = a.startTime || '12:00';
+        const timeB = b.startTime || '12:00';
+        return timeA.localeCompare(timeB);
+    });
+
+    // Set chronological order
+    updatedDailyTasks.forEach((task, idx) => {
+        task.order = idx + 1;
+    });
+
+    // Replace only tasks of type 'daily' or tasks that don't have type (default daily)
+    const nonDailyTasks = child.tasks.filter(t => t.type && t.type !== 'daily');
+    child.tasks = nonDailyTasks.concat(updatedDailyTasks);
+
+    saveState();
+    showToast('✨', __('parent.routine_save_success'));
+    closeParentRoutineModal();
+    renderParentDashboard();
+    updateUI();
+}
+
+function closeParentRoutineModal() {
+    const modal = document.getElementById('parent-routine-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+// ===== GENTLE NUDGES =====
+window._nudgedTasks = {};
+
+function checkGentleNudges() {
+    if (!currentChildId) return;
+    const child = getChild(currentChildId);
+    if (!child) return;
+
+    const todayDate = getToday();
+    const log = getOrCreateDailyLog(currentChildId);
+    if (log.excused) return;
+
+    const todayDay = new Date().getDay();
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // Loop through child's routine tasks (daily type)
+    const dailyTasks = child.tasks.filter(t => t.type === 'daily');
+    
+    for (const task of dailyTasks) {
+        // If task is not active today, skip
+        if (task.days && !task.days.includes(todayDay)) continue;
+        
+        // If no start time, skip
+        if (!task.startTime) continue;
+
+        // Parse start time
+        const [startHour, startMin] = task.startTime.split(':').map(Number);
+        const startMinutes = startHour * 60 + startMin;
+
+        // Trigger nudge if:
+        // 1. Current time is past/at start time, but not too late (within 30 minutes)
+        // 2. Task status is pending in today's log
+        // 3. Task has not been nudged yet today
+        const key = `${currentChildId}_${task.id}_${todayDate}`;
+        const tl = log.tasks[task.id];
+        const isPending = tl ? tl.status === 'pending' : true;
+        
+        if (currentMinutes >= startMinutes && currentMinutes < startMinutes + 30) {
+            if (isPending && !window._nudgedTasks[key]) {
+                // If another nudge modal is currently active, don't overlap. Just queue/wait.
+                const modal = document.getElementById('nudge-modal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    continue; 
+                }
+                
+                window._nudgedTasks[key] = true;
+                showGentleNudge(task);
+                break; // Show one nudge at a time
+            }
+        }
+    }
+}
+
+function showGentleNudge(task) {
+    window._activeNudgeTask = task;
+    const modal = document.getElementById('nudge-modal');
+    const msgEl = document.getElementById('nudge-modal-message');
+    if (modal && msgEl) {
+        msgEl.textContent = __('routine.nudge_message', { taskName: task.name });
+        
+        // Translate labels inside the modal
+        const titleEl = modal.querySelector('[data-i18n="routine.nudge_title"]');
+        if (titleEl) titleEl.textContent = __('routine.nudge_title');
+        
+        const cancelBtn = modal.querySelector('[data-i18n="cancel"]');
+        if (cancelBtn) cancelBtn.textContent = __('cancel');
+        
+        const startBtn = document.getElementById('nudge-start-btn');
+        if (startBtn) startBtn.textContent = __('routine.nudge_start');
+
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+        modal.style.zIndex = '999999';
+    }
+}
+
+function closeNudgeModal() {
+    const modal = document.getElementById('nudge-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+    }
+    window._activeNudgeTask = null;
 }
 
 // ===== EXPORT =====

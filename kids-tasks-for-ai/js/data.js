@@ -593,19 +593,10 @@ function getAchievementProgress(child, id) {
             break;
         }
         case 'early_bird': {
-            let earlyBirdDays = 0;
-            Object.values(child.dailyLogs).forEach(log => {
-                const earlyAny = Object.values(log.tasks).some(t => {
-                    if (t.status !== 'completed' || !t.confirmed) return false;
-                    const compDate = t.startedAt ? new Date(t.startedAt) : (t.completedAt ? new Date(t.completedAt) : null);
-                    if (!compDate) return false;
-                    return compDate.getHours() < 7;
-                });
-                if (earlyAny) earlyBirdDays++;
-            });
-            const target = 30 * m;
+            const morningStreak = calculateBlockStreak(child, 'morning');
+            const target = 7;
             const daysText = __('achievement_modal.days_suffix') || 'рӯз';
-            return { current: earlyBirdDays, target: target, formatted: `${earlyBirdDays} / ${target} ${daysText}` };
+            return { current: morningStreak, target: target, formatted: `${morningStreak} / ${target} ${daysText}` };
         }
         case 'helper':
         case 'marksman': {
@@ -763,18 +754,9 @@ function checkAchievements(childId) {
         unlocked.push(__('achievement.perfect_zeroes'));
     }
 
-    // Check early bird using startedAt / completedAt (for 30 days in total)
-    let earlyBirdDays = 0;
-    Object.values(child.dailyLogs).forEach(log => {
-        const earlyAny = Object.values(log.tasks).some(t => {
-            if (t.status !== 'completed' || !t.confirmed) return false;
-            const compDate = t.startedAt ? new Date(t.startedAt) : (t.completedAt ? new Date(t.completedAt) : null);
-            if (!compDate) return false;
-            return compDate.getHours() < 7;
-        });
-        if (earlyAny) earlyBirdDays++;
-    });
-    if (earlyBirdDays >= (30 * m) && !child.achievements.includes('early_bird')) {
+    // Check early bird using 7-day morning streak
+    const morningStreak = calculateBlockStreak(child, 'morning');
+    if (morningStreak >= 7 && !child.achievements.includes('early_bird')) {
         child.achievements.push('early_bird');
         unlocked.push(__('achievement.early_bird'));
     }
@@ -870,4 +852,130 @@ function checkAchievements(childId) {
 
     saveState();
     return { unlocked, prestigeTriggered, newTier, goldPrize, starPrize };
+}
+
+// ===== DAY CYCLE STREAKS HELPERS =====
+function getBlockTasks(child, blockType, dateDayOfWeek) {
+    return child.tasks.filter(t => {
+        if (t.type && t.type !== 'daily') return false; // only daily routine tasks
+        if (t.days && !t.days.includes(dateDayOfWeek)) return false;
+        const time = t.startTime || '12:00';
+        const hour = parseInt(time.split(':')[0]);
+        if (blockType === 'morning') return hour >= 5 && hour < 12;
+        if (blockType === 'afternoon') return hour >= 12 && hour < 18;
+        if (blockType === 'evening') return hour >= 18 || hour < 5;
+        return false;
+    });
+}
+
+function isBlockCompleted(child, blockType, dateStr) {
+    const log = child.dailyLogs[dateStr];
+    if (!log) return false;
+    if (log.excused) return true; // excused days don't break streak
+
+    const dateDayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
+    const blockTasks = getBlockTasks(child, blockType, dateDayOfWeek);
+    if (blockTasks.length === 0) return true; // no tasks scheduled = completed
+
+    return blockTasks.every(t => {
+        const tl = log.tasks[t.id];
+        return tl && tl.status === 'completed' && tl.confirmed;
+    });
+}
+
+function isMorningBlockStreakCompleted(child, dateStr) {
+    const log = child.dailyLogs[dateStr];
+    if (!log) return false;
+    if (log.excused) return true;
+
+    const dateDayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
+    const morningTasks = getBlockTasks(child, 'morning', dateDayOfWeek);
+    if (morningTasks.length === 0) return true;
+
+    return morningTasks.every(t => {
+        const tl = log.tasks[t.id];
+        if (!tl || tl.status !== 'completed' || !tl.confirmed) return false;
+        const compDate = tl.completedAt ? new Date(tl.completedAt) : (tl.startedAt ? new Date(tl.startedAt) : null);
+        if (!compDate) return false;
+        return compDate.getHours() < 7;
+    });
+}
+
+function calculateBlockStreak(child, blockType) {
+    const todayStr = getToday();
+    const todayD = new Date(todayStr + 'T12:00:00');
+    
+    // Check if child has any tasks configured in this block
+    const anyTasks = child.tasks.some(t => {
+        if (t.type && t.type !== 'daily') return false;
+        const time = t.startTime || '12:00';
+        const hour = parseInt(time.split(':')[0]);
+        if (blockType === 'morning') return hour >= 5 && hour < 12;
+        if (blockType === 'afternoon') return hour >= 12 && hour < 18;
+        if (blockType === 'evening') return hour >= 18 || hour < 5;
+        return false;
+    });
+    if (!anyTasks) return 0;
+
+    let streak = 0;
+    
+    // First, check if today's block is completed
+    let completedToday = false;
+    if (blockType === 'morning') {
+        completedToday = isMorningBlockStreakCompleted(child, todayStr);
+    } else {
+        completedToday = isBlockCompleted(child, blockType, todayStr);
+    }
+
+    if (completedToday) {
+        streak = 1;
+    } else {
+        // Today is not completed. Check if it's already failed.
+        const now = new Date();
+        const currentHour = now.getHours();
+        let failedToday = false;
+        if (blockType === 'morning' && currentHour >= 7) failedToday = true;
+        if (blockType === 'afternoon' && currentHour >= 18) failedToday = true;
+        if (blockType === 'evening' && currentHour >= 5 && currentHour < 18) failedToday = true;
+        
+        if (failedToday) {
+            return 0; // failed, streak is broken
+        } else {
+            streak = 0; // not failed yet, streak is yesterday's streak
+        }
+    }
+
+    // Now loop back for previous days
+    let dayOffset = 1;
+    while (true) {
+        const prevD = new Date(todayD);
+        prevD.setDate(prevD.getDate() - dayOffset);
+        const prevStr = prevD.toISOString().split('T')[0];
+        
+        const log = child.dailyLogs[prevStr];
+        if (!log) {
+            break;
+        }
+        
+        if (log.excused) {
+            dayOffset++;
+            continue; // skip excused days
+        }
+        
+        let completed = false;
+        if (blockType === 'morning') {
+            completed = isMorningBlockStreakCompleted(child, prevStr);
+        } else {
+            completed = isBlockCompleted(child, blockType, prevStr);
+        }
+        
+        if (completed) {
+            streak++;
+            dayOffset++;
+        } else {
+            break;
+        }
+    }
+
+    return streak;
 }

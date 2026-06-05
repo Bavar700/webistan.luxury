@@ -525,7 +525,7 @@
                         <p>Барои боздоштани таймер рамзи PIN-ро ворид кунед:</p>
                         <div class="pin-input-group" style="justify-content:center;">
                             <form onsubmit="return false;">
-                            <input type="password" id="timer-cancel-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" style="width:120px;font-size:18px;background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.2);" autocomplete="off">
+                            <input type="password" id="timer-cancel-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" style="width:120px;font-size:18px;" autocomplete="off">
                             <button class="btn btn-primary btn-small" id="timer-cancel-submit">Тасдиқ</button>
                             </form>
                         </div>
@@ -692,13 +692,13 @@
                             <label id="task-reward-stars-label" style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>
                             <input type="number" id="task-reward-stars" min="0" placeholder="0" style="text-align: center;">
                         </div>
-                        <div style="flex: 1; text-align: center;">
+                        <div style="flex: 1; text-align: center;" id="task-reward-gold-container">
                             <label id="task-reward-gold-label" style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">🪙</label>
                             <input type="number" id="task-reward-gold" min="0" placeholder="0" style="text-align: center;">
                         </div>
                     </div>
                     <div style="display: flex; gap: 12px; margin-top: 12px;">
-                        <button class="btn btn-secondary" id="task-modal-cancel" style="flex: 1;">Бекор кардан</button>
+                        <button class="btn btn-secondary" id="task-modal-cancel" style="flex: 1;" data-i18n="cancel">Лағв</button>
                         <button class="btn btn-primary" id="task-save-btn" style="flex: 2;">
                             <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
                             Захира
@@ -1036,19 +1036,137 @@
     </div>
 
     <!-- Custom Prompt Modal -->
-    <div id="prompt-modal" class="modal-overlay hidden" style="z-index: 1000; background: rgba(0, 0, 0, 0.65); display: none; align-items: center; justify-content: center;">
-        <div class="modal-content" style="max-width: 400px; padding: 20px; border-radius: 16px; background: var(--bg-card); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border); box-sizing: border-box; width: 90%;">
-            <div class="modal-header" style="margin-bottom: 16px; border-bottom: none; padding-bottom: 0; display: flex; justify-content: space-between; align-items: center;">
-                <h3 id="prompt-modal-title" style="font-size: 16px; font-weight: 700; margin: 0; color: var(--text);">Сабабро нависед</h3>
-                <button class="modal-close" onclick="closeCustomPrompt()" style="background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center;">
-                    <svg class="icon-svg" style="width: 14px; height: 14px; fill: currentColor;" aria-hidden="true"><use href="#icon-x"/></svg>
+    <div id="prompt-modal" class="modal-overlay hidden" style="z-index: 1000;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>
+                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-edit"/></svg>
+                    <span id="prompt-modal-title">Сабабро нависед</span>
+                </h3>
+                <button class="modal-close" onclick="closeCustomPrompt()">
+                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
                 </button>
             </div>
-            <div class="modal-body" style="padding: 0;">
-                <textarea id="prompt-modal-input" placeholder="Сабабро нависед..." style="width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; font-family: inherit; min-height: 80px; resize: vertical; box-sizing: border-box; background: var(--bg-body); color: var(--text); outline: none; transition: border-color 0.2s;"></textarea>
-                <div style="display: flex; gap: 8px; margin-top: 18px;">
-                    <button class="btn btn-secondary" onclick="closeCustomPrompt()" style="flex: 1;" data-i18n="cancel">Бекор кардан</button>
+            <div class="modal-body">
+                <div class="form-group">
+                    <textarea id="prompt-modal-input" rows="3" placeholder="Сабабро нависед..."></textarea>
+                </div>
+                <div style="display: flex; gap: 12px; margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="closeCustomPrompt()" style="flex: 1;" data-i18n="cancel">Лағв</button>
                     <button class="btn btn-primary" id="prompt-modal-submit-btn" style="flex: 1;">Захира</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Manage Routine Modal -->
+    <div class="modal-overlay hidden" id="parent-routine-modal">
+        <div class="modal" style="max-width: 680px; width: 100%;">
+            <div class="modal-header">
+                <h3>
+                    <svg class="icon-svg" style="color:var(--primary); width:16px; height:16px; fill:currentColor;" aria-hidden="true"><use href="#icon-clock"/></svg>
+                    <span data-i18n="parent.routine_modal_title">Идораи реҷаи рӯз</span>
+                </h3>
+                <button class="modal-close" id="parent-routine-modal-close">
+                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 16px;">
+                <p style="margin-bottom: 12px; font-size: 13px; color: var(--text-secondary);" data-i18n="parent.add_task_hint">Дар ин ҷо шумо метавонед тамоми реҷаи рӯзи кӯдакро якбора таҳрир ва танзим кунед.</p>
+                
+                <div id="parent-routine-list-container" style="max-height: 40vh; overflow-y: auto; margin-bottom: 16px; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 8px 12px; background: rgba(0,0,0,0.02);">
+                    <div id="parent-routine-list" style="display: flex; flex-direction: column; gap: 8px;">
+                        <!-- Rows will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <!-- Inline Add New Row Section -->
+                <div style="background: rgba(124, 58, 237, 0.03); border: 1px solid rgba(124, 58, 237, 0.15); border-radius: var(--radius-md); padding: 12px; margin-bottom: 16px;">
+                    <h4 style="margin-top: 0; margin-bottom: 8px; font-size: 13px; color: var(--primary);" data-i18n="parent.routine_add_activity">Илова кардани фаъолияти нав:</h4>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                        <input type="text" id="new-routine-time" class="flatpickr-time" placeholder="08:00" style="width: 75px; height: 36px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                        <input type="text" id="new-routine-name" placeholder="Номи фаъолият..." style="flex: 1; min-width: 150px; height: 36px; font-size: 13px; padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-md);">
+                        <input type="number" id="new-routine-duration" placeholder="Дақ" style="width: 60px; height: 36px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);" min="1">
+                        <div style="display: flex; gap: 4px; align-items: center;">
+                            <input type="number" id="new-routine-stars" placeholder="⭐" style="width: 60px; height: 36px; text-align: center; font-size: 13px; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius-md);" min="0">
+                        </div>
+                        <button class="btn btn-secondary" id="btn-add-routine-row" style="height: 36px; padding: 0 16px; font-size: 13px; display: flex; align-items: center; gap: 4px; border-radius: var(--radius-md);">
+                            <svg class="icon-svg" style="width:12px;height:12px;fill:currentColor;" aria-hidden="true"><use href="#icon-plus"/></svg> Илова
+                        </button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-secondary" id="parent-routine-modal-cancel" style="flex: 1;" data-i18n="cancel">Лағв</button>
+                    <button class="btn btn-primary" id="parent-routine-modal-save" style="flex: 1;">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-check"/></svg>
+                        <span data-i18n="save">Захира</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Add Dream Modal -->
+    <div class="modal-overlay hidden" id="parent-add-dream-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>
+                    <svg class="icon-svg" aria-hidden="true" style="color:var(--secondary);"><use href="#icon-sparkle"/></svg>
+                    <span data-i18n="parent.add_dream_title">Орзу аз волидон</span>
+                </h3>
+                <button class="modal-close" id="parent-add-dream-close">
+                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="parent-modal-dream-name" data-i18n="dream.name_label">Номи орзу:</label>
+                    <input type="text" id="parent-modal-dream-name" placeholder="Номи орзу...">
+                </div>
+                <div class="form-group">
+                    <label for="parent-modal-dream-desc" data-i18n="dream.desc_label">Тавсифи орзу:</label>
+                    <textarea id="parent-modal-dream-desc" rows="3" placeholder="Тавсифи орзу..."></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="parent-modal-dream-photo-input" accept="image/*" class="hidden">
+                    <div class="premium-upload-card" id="parent-modal-dream-photo-btn">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                        <span data-i18n="task_form.add_photo">+ Акс</span>
+                    </div>
+                    <div class="premium-photo-preview-container hidden" id="parent-modal-dream-photo-preview">
+                        <img id="parent-modal-dream-photo-img" src="" alt="Сурат">
+                        <button class="premium-photo-delete-btn" id="parent-modal-dream-photo-remove">✕ Нест кардан</button>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; margin-top: 12px;">
+                    <div style="flex: 1; text-align: center;">
+                        <label style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">🪙</label>
+                        <input type="number" id="parent-modal-dream-gold" min="0" placeholder="0" style="text-align: center;">
+                    </div>
+                    <div style="flex: 1; text-align: center;">
+                        <label style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>
+                        <input type="number" id="parent-modal-dream-stars" min="0" placeholder="0" style="text-align: center;">
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-full" id="parent-modal-dream-submit" style="margin-top: 15px;">
+                    <svg class="icon-svg" aria-hidden="true"><use href="#icon-check"/></svg>
+                    <span data-i18n="save">Захира</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gentle Nudge Modal -->
+    <div id="nudge-modal" class="modal-overlay hidden" style="z-index: 150;">
+        <div class="modal" style="text-align: center; border: 2px solid var(--primary); max-width: 340px;">
+            <div class="modal-body" style="padding: 24px 20px;">
+                <div style="font-size: 48px; margin-bottom: 12px;">⏰</div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text);" data-i18n="routine.nudge_title">Вақти супориш расид!</h3>
+                <p style="font-size: 14px; line-height: 1.5; color: var(--text-secondary); margin-bottom: 20px;" id="nudge-modal-message">Қаҳрамон, вақти машқи ҷисмонӣ расид! Оё омодаӣ?</p>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" style="flex: 1;" onclick="closeNudgeModal()" data-i18n="cancel">Лағв</button>
+                    <button class="btn btn-primary" style="flex: 2;" id="nudge-start-btn" data-i18n="routine.nudge_start">Омодаам! (Оғоз)</button>
                 </div>
             </div>
         </div>
