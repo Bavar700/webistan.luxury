@@ -210,6 +210,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Ҳа, тасдиқ мекунам',
         'confirm.submit_no': 'Рад кардан',
         'confirm.rejected': 'Супориш рад шуд, аз нав иҷро кунад!',
+        'confirm.undo': 'Иваз кардан',
         'confirm.exam_score': 'Баҳодиҳии имтиҳон (1-10):',
 
         // Excuse Day
@@ -702,6 +703,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Да, подтвердить',
         'confirm.submit_no': 'Отклонить',
         'confirm.rejected': 'Задание отклонено, пусть переделает!',
+        'confirm.undo': 'Отменить',
         'confirm.exam_score': 'Оценка за экзамен (1-10):',
 
         // Excuse Day
@@ -1190,6 +1192,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Yes, confirm',
         'confirm.submit_no': 'Reject',
         'confirm.rejected': 'Task rejected, let them redo it!',
+        'confirm.undo': 'Undo',
         'confirm.exam_score': 'Grade (1-10):',
         'excuse.title': '🙏 Excused Day',
         'excuse.choose_reason': 'Choose reason:',
@@ -1633,6 +1636,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Ha, tasdiqlash',
         'confirm.submit_no': 'Rad etish',
         'confirm.rejected': 'Vazifa rad etildi, qaytadan qilsin!',
+        'confirm.undo': 'Bekor qilish',
         'confirm.exam_score': 'Baho (1-10):',
         'excuse.title': '🙏 Uzrli kun',
         'excuse.choose_reason': 'Sabab tanlang:',
@@ -2084,6 +2088,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Иә, растаймын',
         'confirm.submit_no': 'Қабылдамау',
         'confirm.rejected': 'Тапсырма қабылданбады, қайта орындасын!',
+        'confirm.undo': 'Болдырмау',
         'confirm.exam_score': 'Баға (1-10):',
         'excuse.title': '🙏 Сылтау күні',
         'excuse.choose_reason': 'Себеп таңдаңыз:',
@@ -2535,6 +2540,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Ооба, тастыктайм',
         'confirm.submit_no': 'Кабыл алынбоо',
         'confirm.rejected': 'Тапшырма кабыл алынбады, кайра аткарсын!',
+        'confirm.undo': 'Болдоруу',
         'confirm.exam_score': 'Баа (1-10):',
         'excuse.title': '🙏 Шылтоо күнү',
         'excuse.choose_reason': 'Себеп тандаңыз:',
@@ -2986,6 +2992,7 @@ const TRANSLATIONS = {
         'confirm.submit_yes': 'Hawa, tassyklaýaryn',
         'confirm.submit_no': 'Ret etmek',
         'confirm.rejected': 'Tabşyryk ret edildi, täzeden etsin!',
+        'confirm.undo': 'Yzyna gaýtarmak',
         'confirm.exam_score': 'Baha (1-10):',
         'excuse.title': '🙏 Geçirilen gün',
         'excuse.choose_reason': 'Sebäp saýlaň:',

@@ -1485,6 +1485,7 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
             ` : ''}
             ${tl.status === 'completed' ? `
                 <div class="task-status-badge status-completed">${statusLabels.completed}</div>
+                <button class="task-btn" data-action="undo-complete" title="${__('confirm.undo') || 'Иваз кардан'}" style="background:rgba(239,68,68,0.1); color:var(--danger,#EF4444); border:1px solid rgba(239,68,68,0.3); border-radius:var(--radius-xs); padding:4px 8px; font-size:11px; cursor:pointer; margin-left:4px; flex-shrink:0;">↩️</button>
             ` : ''}
             ${tl.status === 'skipped' ? `
                 <div class="task-status-badge status-skipped">${statusLabels.skipped}</div>
@@ -1499,6 +1500,8 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
             if (action === 'start') {
                 showTimer(currentChildId, task);
             } else if (action === 'confirm') {
+                showConfirmModal(task);
+            } else if (action === 'undo-complete') {
                 showConfirmModal(task);
             } else if (action === 'finish') {
                 if (timerInterval && timerTaskId === task.id) {
@@ -5207,13 +5210,13 @@ function setupEventListeners() {
         });
     });
 
-    // Auto submit on 4 digits
+    // Auto submit on 4 digits — confirm-pin excluded (has both confirm and reject buttons)
     document.querySelectorAll('.pin-input').forEach(input => {
         input.addEventListener('input', function() {
             if (this.value.length === 4) {
-                if (this.id === 'confirm-pin') submitConfirm();
-                else if (this.id === 'settings-pin-input') verifySettingsPin();
+                if (this.id === 'settings-pin-input') verifySettingsPin();
                 else if (this.id === 'pin-input') document.getElementById('pin-submit').click();
+                // confirm-pin: do NOT auto-submit — user must click confirm or reject manually
             }
         });
     });
