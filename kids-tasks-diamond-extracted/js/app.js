@@ -2016,7 +2016,39 @@ function submitReject() {
     const tl = log.tasks[confirmTaskId];
 
     if (tl) {
-        // Reset to pending so the child can redo the task
+        // Find the task definition to know how many gold/stars to take back
+        const task = child.tasks.find(t => t.id === confirmTaskId)
+                  || child.bonusTasks.find(t => t.id === confirmTaskId);
+
+        // Only deduct if the reward for this day has already been applied
+        if (log.rewardApplied && task) {
+            const goldBack  = parseInt(task.rewardGold  !== undefined ? task.rewardGold  : (task.bonusPrice || 1)) || 0;
+            const starsBack = parseInt(task.rewardStars !== undefined ? task.rewardStars : 1) || 0;
+            const medalsBack = parseInt(task.rewardMedals !== undefined ? task.rewardMedals : 0) || 0;
+
+            if (goldBack > 0) {
+                child.balance    = Math.max(0, (child.balance || 0) - goldBack);
+                child.totalEarned = Math.max(0, (child.totalEarned || 0) - goldBack);
+            }
+            if (starsBack > 0) {
+                child.stars      = Math.max(0, (child.stars || 0) - starsBack);
+                child.totalStars = Math.max(0, (child.totalStars || 0) - starsBack);
+            }
+            if (medalsBack > 0) {
+                child.medals      = Math.max(0, (child.medals || 0) - medalsBack);
+                child.totalMedals = Math.max(0, (child.totalMedals || 0) - medalsBack);
+            }
+
+            // Reset rewardApplied so it can be correctly re-applied after child redoes the task
+            log.rewardApplied = false;
+        }
+
+        // Undo streak increment if applicable
+        if (task && task.isStreak && task.currentStreak > 0) {
+            task.currentStreak = Math.max(0, task.currentStreak - 1);
+        }
+
+        // Reset task log entry back to pending
         tl.status = 'pending';
         tl.confirmed = false;
         delete tl.completedAt;
@@ -2024,6 +2056,8 @@ function submitReject() {
         delete tl.photo;
         delete tl.explanation;
         delete tl.score;
+        delete tl.missedDeadline;
+
         saveState();
         showToast('❌', __('confirm.rejected'));
     }
@@ -2219,12 +2253,19 @@ function showDayDetails(dateStr) {
             </div>
         </div>` : '';
 
-    const panel = document.createElement('div');
-    panel.id = 'day-details-panel';
-    panel.style.cssText = `
+    // Outer wrapper — full-width fixed, used as centering container
+    const wrapper = document.createElement('div');
+    wrapper.id = 'day-details-panel';
+    wrapper.style.cssText = `
         position:fixed; bottom:0; left:0; right:0; z-index:1100;
+        display:flex; justify-content:center; align-items:flex-end;
+        pointer-events:none;`;
+
+    const panel = document.createElement('div');
+    panel.style.cssText = `
+        width:100%; max-width:480px; pointer-events:all;
         background:var(--surface); border-radius:20px 20px 0 0;
-        box-shadow:0 -8px 32px rgba(0,0,0,0.18);
+        box-shadow:0 -8px 32px rgba(0,0,0,0.22);
         padding:0 0 env(safe-area-inset-bottom,0);
         max-height:75vh; display:flex; flex-direction:column;
         animation: slideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);`;
@@ -2235,21 +2276,23 @@ function showDayDetails(dateStr) {
                 <div style="font-size:13px; color:var(--text-secondary); margin-bottom:2px;">📅 ${formatDate(dateStr)}</div>
                 <div style="font-size:16px; font-weight:700; color:var(--text);">${log.excused ? ('🙏 ' + (__('excuse.title') || 'Узрнок')) : doneCount + '/' + totalCount + ' ' + (__('status.completed') || 'иҷро шуд')}</div>
             </div>
-            <button onclick="document.getElementById('day-details-panel').remove()" style="background:var(--bg); border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; color:var(--text-secondary);">✕</button>
+            <button onclick="document.getElementById('day-details-panel').remove(); document.getElementById('day-details-backdrop').remove();" style="background:var(--bg); border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; color:var(--text-secondary);">✕</button>
         </div>
         <div style="overflow-y:auto; padding:14px 18px; flex:1;">
             ${progressBar}
             ${tasksHTML}
         </div>`;
 
+    wrapper.appendChild(panel);
+
     // Backdrop
     const backdrop = document.createElement('div');
     backdrop.id = 'day-details-backdrop';
     backdrop.style.cssText = `position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.35);`;
-    backdrop.addEventListener('click', () => { panel.remove(); backdrop.remove(); });
+    backdrop.addEventListener('click', () => { wrapper.remove(); backdrop.remove(); });
 
     document.body.appendChild(backdrop);
-    document.body.appendChild(panel);
+    document.body.appendChild(wrapper);
 }
 
 // ===== BALANCE =====
