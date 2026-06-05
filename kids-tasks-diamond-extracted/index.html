@@ -50,7 +50,7 @@
     </script>
     <title>Офарин — Супоришҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=129">
+    <link rel="stylesheet" href="css/style.css?v=131">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/flatpickr.min.css">
     <style>
@@ -637,12 +637,12 @@
                     <!-- Cancel timer (PIN protected) -->
                     <div class="hidden timer-cancel-section" id="timer-cancel-pin-group">
                         <p data-i18n="pin.timer_cancel_instruction">Барои боздоштани таймер рамзи PIN-ро ворид кунед:</p>
-                        <div class="pin-input-group" style="justify-content:center;">
-                            <form onsubmit="return false;">
+                        <form onsubmit="return false;">
+                        <div class="pin-input-group" style="justify-content:center; gap:12px;">
                             <input type="password" id="timer-cancel-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" style="width:120px;font-size:18px;" autocomplete="off">
                             <button class="btn btn-primary btn-small" id="timer-cancel-submit"><span data-i18n="pin.submit">Тасдиқ</span></button>
-                            </form>
                         </div>
+                        </form>
                         <p class="hidden pin-error" id="timer-cancel-error" data-i18n="pin.error">Гузарвожаи PIN нодуруст аст!</p>
                     </div>
                 </div>
@@ -1454,9 +1454,9 @@
     <!-- Supabase JS Client -->
     <script src="js/supabase-js.js"></script>
 
-    <script src="js/safeStorage.js?v=129"></script>
-    <script src="js/translations.js?v=129"></script>
-    <script src="js/data.js?v=129"></script>
-    <script src="js/app.js?v=129"></script>
+    <script src="js/safeStorage.js?v=131"></script>
+    <script src="js/translations.js?v=131"></script>
+    <script src="js/data.js?v=131"></script>
+    <script src="js/app.js?v=131"></script>
 </body>
 </html>

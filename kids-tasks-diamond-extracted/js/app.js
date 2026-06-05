@@ -2554,7 +2554,7 @@ function renderSettings() {
                     <div class="settings-item" id="btn-change-device-role" style="cursor: pointer;">
                         <span class="settings-item-left">
                             <svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-user"/></svg>
-                            <span class="settings-item-label">${__('settings.device_mode', { mode: localStorage.getItem('kids_tasks_device_role') === 'child' ? __('settings.role_child') : __('settings.role_parent') })}</span>
+                            <span class="settings-item-label">${__('settings.device_mode', { mode: safeStorage.getItem('kids_tasks_device_role') === 'child' ? __('settings.role_child') : __('settings.role_parent') })}</span>
                         </span>
                         <span class="settings-item-arrow">›</span>
                     </div>
@@ -5749,7 +5749,7 @@ function setupRealtimeSubscription(userId) {
         .channel('family-state-changes')
         .on(
             'postgres_changes',
-            { event: 'UPDATE', schema: 'public', table: 'family_states', filter: `id=eq.${userId}` },
+            { event: '*', schema: 'public', table: 'family_states', filter: `id=eq.${userId}` },
             (payload) => {
                 console.log('Real-time update received:', payload);
                 if (payload.new && payload.new.state) {
