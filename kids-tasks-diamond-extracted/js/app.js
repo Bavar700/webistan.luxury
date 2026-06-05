@@ -245,6 +245,13 @@ function hideAuthOverlay() {
     document.getElementById('auth-overlay').classList.add('hidden');
 }
 
+function hideRoleOverlay() {
+    const overlay = document.getElementById('role-overlay');
+    if (overlay) {
+        overlay.classList.add('hidden');
+    }
+}
+
 function showRoleOverlay() {
     hideLoadingScreen();
     document.getElementById('role-overlay').classList.remove('hidden');
