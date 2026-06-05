@@ -1956,6 +1956,26 @@ function submitConfirm() {
                     tl.missedDeadline = true;
                 }
             }
+
+            // Award individual task reward immediately upon confirmation if not already rewarded
+            if (!tl.rewardPaid) {
+                const isBonus = child.bonusTasks.some(t => t.id === confirmTaskId);
+                const goldReward  = parseInt(task.rewardGold  !== undefined ? task.rewardGold  : (isBonus ? (task.bonusPrice || 0) : 1)) || 0;
+                const starsReward = parseInt(task.rewardStars !== undefined ? task.rewardStars : 1) || 0;
+                const medalsReward = parseInt(task.rewardMedals !== undefined ? task.rewardMedals : 0) || 0;
+
+                child.balance = (child.balance || 0) + goldReward;
+                child.totalEarned = (child.totalEarned || 0) + goldReward;
+                child.stars = (child.stars || 0) + starsReward;
+                child.totalStars = (child.totalStars || 0) + starsReward;
+                child.medals = (child.medals || 0) + medalsReward;
+                child.totalMedals = (child.totalMedals || 0) + medalsReward;
+
+                tl.rewardPaid = true;
+                tl.paidGold = goldReward;
+                tl.paidStars = starsReward;
+                tl.paidMedals = medalsReward;
+            }
         }
 
         saveState();
@@ -2016,30 +2036,42 @@ function submitReject() {
     const tl = log.tasks[confirmTaskId];
 
     if (tl) {
-        // Find the task definition to know how many gold/stars to take back
+        // Find the task definition to know streak or other details
         const task = child.tasks.find(t => t.id === confirmTaskId)
                   || child.bonusTasks.find(t => t.id === confirmTaskId);
 
-        // Only deduct if the reward for this day has already been applied
-        if (log.rewardApplied && task) {
-            const goldBack  = parseInt(task.rewardGold  !== undefined ? task.rewardGold  : (task.bonusPrice || 1)) || 0;
-            const starsBack = parseInt(task.rewardStars !== undefined ? task.rewardStars : 1) || 0;
-            const medalsBack = parseInt(task.rewardMedals !== undefined ? task.rewardMedals : 0) || 0;
+        // Deduct task-specific rewards paid upon confirmation
+        if (tl.rewardPaid) {
+            const goldBack   = parseInt(tl.paidGold) || 0;
+            const starsBack  = parseInt(tl.paidStars) || 0;
+            const medalsBack = parseInt(tl.paidMedals) || 0;
 
             if (goldBack > 0) {
-                child.balance    = Math.max(0, (child.balance || 0) - goldBack);
+                child.balance     = Math.max(0, (child.balance || 0) - goldBack);
                 child.totalEarned = Math.max(0, (child.totalEarned || 0) - goldBack);
             }
             if (starsBack > 0) {
-                child.stars      = Math.max(0, (child.stars || 0) - starsBack);
-                child.totalStars = Math.max(0, (child.totalStars || 0) - starsBack);
+                child.stars       = Math.max(0, (child.stars || 0) - starsBack);
+                child.totalStars  = Math.max(0, (child.totalStars || 0) - starsBack);
             }
             if (medalsBack > 0) {
                 child.medals      = Math.max(0, (child.medals || 0) - medalsBack);
                 child.totalMedals = Math.max(0, (child.totalMedals || 0) - medalsBack);
             }
 
-            // Reset rewardApplied so it can be correctly re-applied after child redoes the task
+            tl.rewardPaid = false;
+            delete tl.paidGold;
+            delete tl.paidStars;
+            delete tl.paidMedals;
+        }
+
+        // Deduct daily completion bonus (+10 stars) if it was applied for today
+        if (log.rewardApplied && log.completionBonusPaid) {
+            child.stars      = Math.max(0, (child.stars || 0) - 10);
+            child.totalStars = Math.max(0, (child.totalStars || 0) - 10);
+            log.completionBonusPaid = false;
+            log.rewardApplied = false;
+        } else {
             log.rewardApplied = false;
         }
 
@@ -2253,6 +2285,28 @@ function showDayDetails(dateStr) {
             </div>
         </div>` : '';
 
+    let bonusPaidHTML = '';
+    if (log && log.completionBonusPaid) {
+        bonusPaidHTML = `
+            <div style="
+                margin-bottom: 12px;
+                background: rgba(245, 158, 11, 0.08);
+                border: 1.5px solid rgba(245, 158, 11, 0.25);
+                border-radius: 10px;
+                padding: 8px 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #d97706;
+            ">
+                <span style="font-size:16px;">🔥</span>
+                <span>+10 ${__('reward_type.stars') || 'ситора'} (${__('achievements.completion_bonus') || 'бонуси пайдарҳамӣ'})</span>
+            </div>
+        `;
+    }
+
     // Outer wrapper — full-width fixed, used as centering container
     const wrapper = document.createElement('div');
     wrapper.id = 'day-details-panel';
@@ -2280,6 +2334,7 @@ function showDayDetails(dateStr) {
         </div>
         <div style="overflow-y:auto; padding:14px 18px; flex:1;">
             ${progressBar}
+            ${bonusPaidHTML}
             ${tasksHTML}
         </div>`;
 

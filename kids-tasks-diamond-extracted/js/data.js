@@ -195,7 +195,12 @@ const ACHIEVEMENTS = [
     { id: 'bonus_5', name: '🦸 Қаҳрамон', icon: '🦸', desc: 'Иҷрои 10 супориши бонусӣ 5 🪙' },
     { id: 'bonus_10', name: '🧙 Афсонавӣ', icon: '🧙', desc: 'Иҷрои 10 супориши бонусӣ 10 🪙' },
     { id: 'savings_100', name: '🪙 Сарфакор', icon: '🪙', desc: 'Ҷамъ кардани 100 🪙' },
-    { id: 'savings_50', name: '💰 Сарватманд', icon: '💰', desc: 'Ҷамъ кардани 500 🪙' }
+    { id: 'savings_50', name: '💰 Сарватманд', icon: '💰', desc: 'Ҷамъ кардани 500 🪙' },
+    { id: 'stars_100', name: '⭐ Ситораи биринҷӣ', icon: '⭐', desc: 'Ҷамъ кардани 100 ⭐' },
+    { id: 'stars_300', name: '🌟 Ситораи нуқрагин', icon: '🌟', desc: 'Ҷамъ кардани 300 ⭐' },
+    { id: 'stars_500', name: '✨ Ситораи тиллоӣ', icon: '✨', desc: 'Ҷамъ кардани 500 ⭐' },
+    { id: 'stars_1000', name: '💫 Ситораи алмосӣ', icon: '💫', desc: 'Ҷамъ кардани 1000 ⭐' },
+    { id: 'stars_2000', name: '🌌 Каҳкашони ситораҳо', icon: '🌌', desc: 'Ҷамъ кардани 2000 ⭐' }
 ];
 
 const MOTIVATIONAL_QUOTES_TG = [
@@ -999,29 +1004,24 @@ function applyDailyReward(childId, date) {
     const log = child.dailyLogs[date];
     if (!log || log.rewardApplied) return;
 
-    const result = calculateDailyReward(childId, date);
+    const todayDay = new Date(date + 'T12:00:00').getDay();
+    const regularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+    
+    if (regularTasks.length === 0) return;
 
-    if (result.reward > 0) {
-        child.balance += result.reward;
-        child.totalEarned += result.reward;
-    } else if (result.reward < 0) {
-        child.totalDeducted += Math.abs(result.reward);
-    }
-    
-    if (result.starReward > 0) {
+    const allRegularDone = regularTasks.every(t => {
+        const tl = log.tasks[t.id];
+        return tl && tl.status === 'completed' && tl.confirmed;
+    });
+
+    if (allRegularDone) {
         if (!child.stars) child.stars = 0;
-        child.stars += result.starReward;
-        child.totalStars = (child.totalStars || 0) + result.starReward;
+        child.stars += 10;
+        child.totalStars = (child.totalStars || 0) + 10;
+        log.completionBonusPaid = true;
+        log.rewardApplied = true;
+        saveState();
     }
-    
-    if (result.medalReward > 0) {
-        if (!child.medals) child.medals = 0;
-        child.medals += result.medalReward;
-        child.totalMedals = (child.totalMedals || 0) + result.medalReward;
-    }
-    
-    log.rewardApplied = true;
-    saveState();
 }
 
 // ===== 10-DAY TEST =====
@@ -1127,6 +1127,11 @@ function getAchievementProgress(child, id) {
         else if (id === 'marksman') target = 50 * m;
         else if (id === 'savings_100') target = 100 * m;
         else if (id === 'savings_50') target = 500 * m;
+        else if (id === 'stars_100') target = 100 * m;
+        else if (id === 'stars_300') target = 300 * m;
+        else if (id === 'stars_500') target = 500 * m;
+        else if (id === 'stars_1000') target = 1000 * m;
+        else if (id === 'stars_2000') target = 2000 * m;
         return { current: target, target: target, formatted: `${target} / ${target}` };
     }
     
@@ -1283,6 +1288,36 @@ function getAchievementProgress(child, id) {
             const goldText = __('currency.gold') || 'тилло';
             return { current: current, target: target, formatted: `${current} / ${target} ${goldText}` };
         }
+        case 'stars_100': {
+            const target = 100 * m;
+            const current = Math.floor(child.totalStars || child.stars || 0);
+            const starsText = __('reward_type.stars') || 'ситора';
+            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
+        }
+        case 'stars_300': {
+            const target = 300 * m;
+            const current = Math.floor(child.totalStars || child.stars || 0);
+            const starsText = __('reward_type.stars') || 'ситора';
+            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
+        }
+        case 'stars_500': {
+            const target = 500 * m;
+            const current = Math.floor(child.totalStars || child.stars || 0);
+            const starsText = __('reward_type.stars') || 'ситора';
+            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
+        }
+        case 'stars_1000': {
+            const target = 1000 * m;
+            const current = Math.floor(child.totalStars || child.stars || 0);
+            const starsText = __('reward_type.stars') || 'ситора';
+            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
+        }
+        case 'stars_2000': {
+            const target = 2000 * m;
+            const current = Math.floor(child.totalStars || child.stars || 0);
+            const starsText = __('reward_type.stars') || 'ситора';
+            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
+        }
     }
     
     return { current: 0, target: 1, formatted: '0 / 1' };
@@ -1398,6 +1433,29 @@ function checkAchievements(childId) {
     if (child.totalEarned >= (500 * m) && !child.achievements.includes('savings_50')) {
         child.achievements.push('savings_50');
         unlocked.push(__('achievement.savings_50'));
+    }
+
+    // stars
+    const currentStarsCheck = child.totalStars || child.stars || 0;
+    if (currentStarsCheck >= (100 * m) && !child.achievements.includes('stars_100')) {
+        child.achievements.push('stars_100');
+        unlocked.push(__('achievement.stars_100'));
+    }
+    if (currentStarsCheck >= (300 * m) && !child.achievements.includes('stars_300')) {
+        child.achievements.push('stars_300');
+        unlocked.push(__('achievement.stars_300'));
+    }
+    if (currentStarsCheck >= (500 * m) && !child.achievements.includes('stars_500')) {
+        child.achievements.push('stars_500');
+        unlocked.push(__('achievement.stars_500'));
+    }
+    if (currentStarsCheck >= (1000 * m) && !child.achievements.includes('stars_1000')) {
+        child.achievements.push('stars_1000');
+        unlocked.push(__('achievement.stars_1000'));
+    }
+    if (currentStarsCheck >= (2000 * m) && !child.achievements.includes('stars_2000')) {
+        child.achievements.push('stars_2000');
+        unlocked.push(__('achievement.stars_2000'));
     }
 
     // bonus task achievements and total tasks
