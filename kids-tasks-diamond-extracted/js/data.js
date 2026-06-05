@@ -23,13 +23,7 @@ function initSupabase() {
     const config = getSupabaseConfig();
     if (config.url && config.key && typeof supabase !== 'undefined') {
         try {
-            supabaseClient = supabase.createClient(config.url, config.key, {
-                auth: {
-                    storage: window.safeStorage || localStorage,
-                    persistSession: true,
-                    autoRefreshToken: true
-                }
-            });
+            supabaseClient = supabase.createClient(config.url, config.key);
         } catch (e) {
             console.error('Failed to initialize Supabase client:', e);
         }
