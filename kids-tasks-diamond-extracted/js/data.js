@@ -116,20 +116,29 @@ async function fetchRemoteState() {
                 
                 if (isRemoteNewer) {
                     console.log('Remote state is newer. Syncing from remote to local. Versions: remote=', remoteVersion, ', local=', localVersion);
-                    migrateState(remoteState);
+                    const wasMigrated = migrateState(remoteState);
                     state = remoteState;
                     safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                    if (wasMigrated) {
+                        saveState(true);
+                    }
                 } else if (isLocalNewer) {
                     console.log('Local state is newer. Syncing from local to remote. Versions: local=', localVersion, ', remote=', remoteVersion);
                     state = localState;
-                    migrateState(state);
-                    // Save local state to database asynchronously (don't block)
-                    saveRemoteState();
+                    const wasMigrated = migrateState(state);
+                    if (wasMigrated) {
+                        saveState(true);
+                    } else {
+                        saveRemoteState();
+                    }
                 } else {
                     console.log('Local and remote states are already in sync. Version:', localVersion);
-                    migrateState(remoteState);
+                    const wasMigrated = migrateState(remoteState);
                     state = remoteState;
                     safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                    if (wasMigrated) {
+                        saveState(true);
+                    }
                 }
                 updateSyncStatus('online');
                 return state;
@@ -657,42 +666,49 @@ function localizeDefaultTaskNames() {
 }
 
 function migrateState(stateObj) {
-    if (!stateObj) return;
+    if (!stateObj) return false;
+    let modified = false;
     if (!stateObj.lastUpdated) {
         stateObj.lastUpdated = Date.now();
+        modified = true;
     }
     if (!stateObj.children) {
         stateObj.children = [];
+        modified = true;
     }
     stateObj.children.forEach(child => {
-        if (!child.rewardType) child.rewardType = 'money';
-        if (child.stars === undefined) child.stars = 0;
-        if (child.totalStars === undefined) child.totalStars = 0;
-        if (child.achievements === undefined) child.achievements = [];
-        if (!child.withdrawals) child.withdrawals = [];
+        if (!child.rewardType) { child.rewardType = 'money'; modified = true; }
+        if (child.stars === undefined) { child.stars = 0; modified = true; }
+        if (child.totalStars === undefined) { child.totalStars = 0; modified = true; }
+        if (child.achievements === undefined) { child.achievements = []; modified = true; }
+        if (!child.withdrawals) { child.withdrawals = []; modified = true; }
         
         const migrateTask = (t, isBonusDefault) => {
-            if (t.deadline === undefined) t.deadline = '';
-            if (t.type === undefined) t.type = t.isBonus ? 'bonus' : 'daily';
-            if (t.rewardGold === undefined) t.rewardGold = t.bonusPrice || (isBonusDefault ? 3 : 1);
-            if (t.rewardStars === undefined) t.rewardStars = isBonusDefault ? 0 : 1;
-            if (t.useTimer === undefined) t.useTimer = true;
-            if (t.days === undefined) t.days = [1, 2, 3, 4, 5, 6, 0];
-            if (t.startTime === undefined) t.startTime = '12:00';
+            if (t.deadline === undefined) { t.deadline = ''; modified = true; }
+            if (t.type === undefined) { t.type = t.isBonus ? 'bonus' : 'daily'; modified = true; }
+            if (t.rewardGold === undefined) { t.rewardGold = t.bonusPrice || (isBonusDefault ? 3 : 1); modified = true; }
+            if (t.rewardStars === undefined) { t.rewardStars = isBonusDefault ? 0 : 1; modified = true; }
+            if (t.useTimer === undefined) { t.useTimer = true; modified = true; }
+            if (t.days === undefined) { t.days = [1, 2, 3, 4, 5, 6, 0]; modified = true; }
+            if (t.startTime === undefined) { t.startTime = '12:00'; modified = true; }
         };
 
         if (child.tasks) child.tasks.forEach(t => migrateTask(t, false));
         if (child.bonusTasks) child.bonusTasks.forEach(t => migrateTask(t, true));
 
         // One-time fix for Yusufkhoja's balance due to historical non-deducted rejected tasks
-        if ((child.name && (child.name.includes('Юсуфхӯҷа') || child.name.includes('Юсуфхуджа') || child.name.includes('Yusuf'))) && !child.yusufkhojaBalanceFixed) {
+        const cName = child.name || '';
+        if ((cName.includes('Юсуф') || cName.toLowerCase().includes('yusuf')) && !child.yusufkhojaBalanceFixed) {
             child.balance = 1;
             child.stars = 1;
             child.totalEarned = 1;
             child.totalStars = 1;
             child.yusufkhojaBalanceFixed = true;
+            modified = true;
+            console.log("Migration: Yusufkhoja balance and stars corrected to 1.");
         }
     });
+    return modified;
 }
 
 function loadState() {
@@ -707,7 +723,10 @@ function loadState() {
                 setLanguage(state.language);
             }
             // Migrate state
-            migrateState(state);
+            const wasMigrated = migrateState(state);
+            if (wasMigrated) {
+                saveState(true);
+            }
             // Localize default task names to the current language
             localizeDefaultTaskNames();
             return;
