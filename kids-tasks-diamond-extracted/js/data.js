@@ -784,9 +784,17 @@ function getChild(id) {
     return state.children.find(c => c.id === id);
 }
 
+function getStoredOrFirstChildId() {
+    const stored = safeStorage.getItem('kids_tasks_active_child_id');
+    if (stored && state && state.children && state.children.some(c => c.id === stored)) {
+        return stored;
+    }
+    return (state && state.children && state.children.length > 0) ? state.children[0].id : null;
+}
+
 function getCurrentChild() {
-    if (!currentChildId && state && state.children && state.children.length > 0) {
-        currentChildId = state.children[0].id;
+    if (!currentChildId) {
+        currentChildId = getStoredOrFirstChildId();
     }
     return getChild(currentChildId);
 }

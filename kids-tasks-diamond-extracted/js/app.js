@@ -64,9 +64,7 @@ function hideLoadingScreen() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadState();
-    if (state.children.length > 0) {
-        currentChildId = state.children[0].id;
-    }
+    currentChildId = getStoredOrFirstChildId();
 
     initSupabase();
 
@@ -101,9 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
         await fetchRemoteState();
-        if (state && state.children && state.children.length > 0) {
-            currentChildId = state.children[0].id;
-        }
+        currentChildId = getStoredOrFirstChildId();
         applyDeviceRoleUI();
         initApp();
         setupRealtimeSubscription(activeSession.user.id);
@@ -149,9 +145,7 @@ async function checkAuthAndSetup() {
         hideRoleOverlay();
         
         await fetchRemoteState();
-        if (state && state.children && state.children.length > 0) {
-            currentChildId = state.children[0].id;
-        }
+        currentChildId = getStoredOrFirstChildId();
         
         applyDeviceRoleUI();
         initApp();
@@ -833,6 +827,7 @@ function closeChildPicker() {
 function switchChild(childId) {
     if (childId === currentChildId) return;
     currentChildId = childId;
+    safeStorage.setItem('kids_tasks_active_child_id', childId);
     renderChildTabs();
     updateUI();
 
@@ -3229,6 +3224,11 @@ function deleteChild() {
         state.children = state.children.filter(c => c.id !== editingChildId);
         if (currentChildId === editingChildId) {
             currentChildId = state.children.length > 0 ? state.children[0].id : null;
+            if (currentChildId) {
+                safeStorage.setItem('kids_tasks_active_child_id', currentChildId);
+            } else {
+                safeStorage.removeItem('kids_tasks_active_child_id');
+            }
         }
         saveState();
         document.getElementById('child-modal').classList.add('hidden');
@@ -5792,7 +5792,7 @@ function setupRealtimeSubscription(userId) {
                         
                         if (state.children.length > 0) {
                             if (!state.children.some(c => c.id === currentChildId)) {
-                                currentChildId = state.children[0].id;
+                                currentChildId = getStoredOrFirstChildId();
                             }
                         }
                         
