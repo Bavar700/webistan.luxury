@@ -89,10 +89,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (activeSession) {
         // Already logged in — skip welcome and auth, go straight to app
-        let deviceRole = localStorage.getItem('kids_tasks_device_role');
+        let deviceRole = safeStorage.getItem('kids_tasks_device_role');
         if (!state || !state.children || state.children.length === 0) {
             deviceRole = 'parent';
-            localStorage.setItem('kids_tasks_device_role', 'parent');
+            safeStorage.setItem('kids_tasks_device_role', 'parent');
         }
         if (!deviceRole) {
             clearTimeout(loadingTimer);
@@ -135,10 +135,10 @@ async function checkAuthAndSetup() {
         }
         
         // Session exists — check device role
-        let deviceRole = localStorage.getItem('kids_tasks_device_role');
+        let deviceRole = safeStorage.getItem('kids_tasks_device_role');
         if (!state || !state.children || state.children.length === 0) {
             deviceRole = 'parent';
-            localStorage.setItem('kids_tasks_device_role', 'parent');
+            safeStorage.setItem('kids_tasks_device_role', 'parent');
         }
         if (!deviceRole) {
             showRoleOverlay();
@@ -167,10 +167,10 @@ async function checkAuthAndSetup() {
 
 
 function applyDeviceRoleUI() {
-    let role = localStorage.getItem('kids_tasks_device_role') || 'parent';
+    let role = safeStorage.getItem('kids_tasks_device_role') || 'parent';
     if (!state || !state.children || state.children.length === 0) {
         role = 'parent';
-        localStorage.setItem('kids_tasks_device_role', 'parent');
+        safeStorage.setItem('kids_tasks_device_role', 'parent');
     }
     const parentBtn = document.querySelector('.nav-btn[data-page="parent"]');
     const settingsBtn = document.querySelector('.nav-btn[data-page="settings"]');
@@ -392,7 +392,7 @@ function setupAuthOverlayEvents() {
             hideAuthOverlay();
             updateSyncStatus('offline');
             if (!state || !state.children || state.children.length === 0) {
-                localStorage.setItem('kids_tasks_device_role', 'parent');
+                safeStorage.setItem('kids_tasks_device_role', 'parent');
             }
             applyDeviceRoleUI();
             initApp();
@@ -420,13 +420,13 @@ function setupAuthOverlayEvents() {
 
 function setupRoleOverlayEvents() {
     document.getElementById('btn-role-child').addEventListener('click', () => {
-        localStorage.setItem('kids_tasks_device_role', 'child');
+        safeStorage.setItem('kids_tasks_device_role', 'child');
         hideRoleOverlay();
         location.reload();
     });
     
     document.getElementById('btn-role-parent').addEventListener('click', () => {
-        localStorage.setItem('kids_tasks_device_role', 'parent');
+        safeStorage.setItem('kids_tasks_device_role', 'parent');
         hideRoleOverlay();
         location.reload();
     });
@@ -776,7 +776,7 @@ function renderChildPicker() {
     });
 
     // Add child row (only for parent role)
-    const deviceRole = localStorage.getItem('kids_tasks_device_role') || 'parent';
+    const deviceRole = safeStorage.getItem('kids_tasks_device_role') || 'parent';
     if (deviceRole === 'parent') {
         const addItem = document.createElement('div');
         addItem.className = 'child-picker-item cpi-add';
@@ -904,7 +904,7 @@ function updateUI() {
     const headerBalance = document.getElementById('header-child-balance');
     const balanceText = document.getElementById('greeting-balance-text');
 
-    const deviceRole = localStorage.getItem('kids_tasks_device_role') || 'parent';
+    const deviceRole = safeStorage.getItem('kids_tasks_device_role') || 'parent';
 
     if (!child) {
         if (selector) selector.classList.add('hidden');
@@ -2579,20 +2579,20 @@ function renderSettings() {
         const newKey = prompt('Введите Supabase Anon Key:', config.key);
         if (newKey === null) return;
         
-        localStorage.setItem('supabase_url', newUrl.trim());
-        localStorage.setItem('supabase_key', newKey.trim());
+        safeStorage.setItem('supabase_url', newUrl.trim());
+        safeStorage.setItem('supabase_key', newKey.trim());
         showToast('💾', 'Настройки Supabase сохранены. Перезагрузка...');
         setTimeout(() => location.reload(), 1000);
     });
 
     document.getElementById('btn-change-device-role').addEventListener('click', () => {
-        const currentRole = localStorage.getItem('kids_tasks_device_role') || 'parent';
+        const currentRole = safeStorage.getItem('kids_tasks_device_role') || 'parent';
         const newRole = currentRole === 'child' ? 'parent' : 'child';
         const confirmMsg = currentRole === 'child' ? 
             __('settings.confirm_switch_parent'):
             __('settings.confirm_switch_child');
         if (confirm(confirmMsg)) {
-            localStorage.setItem('kids_tasks_device_role', newRole);
+            safeStorage.setItem('kids_tasks_device_role', newRole);
             showToast('🔄', __('settings.device_role_changed'));
             setTimeout(() => location.reload(), 800);
         }
@@ -2665,7 +2665,7 @@ function renderSettings() {
 
     document.getElementById('btn-reset-data').addEventListener('click', () => {
         if (confirm(__('settings.reset_data_confirm'))) {
-            localStorage.removeItem(STORAGE_KEY);
+            safeStorage.removeItem(STORAGE_KEY);
             location.reload();
         }
     });
@@ -4155,7 +4155,7 @@ function renderParentDashboard() {
         resetItem.addEventListener('click', function() {
             document.getElementById('parent-settings-modal').style.display = 'none';
             if (confirm(__('settings.reset_data_confirm'))) {
-                localStorage.removeItem(STORAGE_KEY);
+                safeStorage.removeItem(STORAGE_KEY);
                 location.reload();
             }
         });
@@ -4716,8 +4716,8 @@ function setupEventListeners() {
             } else if (logoClicks >= 10) {
                 logoClicks = 0;
                 if (confirm('Сбросить все данные и перезагрузить? / Тоза кардани кэш ва маълумот?')) {
-                    localStorage.clear();
-                    sessionStorage.clear();
+                    safeStorage.clear();
+                    safeSessionStorage.clear();
                     location.reload();
                 }
             }
@@ -5770,7 +5770,7 @@ function setupRealtimeSubscription(userId) {
                         console.log('Applying real-time update. Versions: remote=', remoteVersion, ', local=', localVersion);
                         migrateState(remoteState);
                         state = remoteState;
-                        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                        safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                         
                         if (state.children.length > 0) {
                             if (!state.children.some(c => c.id === currentChildId)) {
@@ -5846,7 +5846,7 @@ function renderDiagnostics() { return; // disabled
     
     diag.innerHTML = `🛠️ Diagnostics`;
     
-    const role = localStorage.getItem('kids_tasks_device_role') || 'not set';
+    const role = safeStorage.getItem('kids_tasks_device_role') || 'not set';
     const sub = typeof supabase !== 'undefined' ? 'Loaded' : 'FAILED';
     const client = supabaseClient ? 'Init OK' : 'Null';
     const session = window.supabaseSession ? `User: ${window.supabaseSession.user.email}` : 'None';
@@ -5862,6 +5862,6 @@ function renderDiagnostics() { return; // disabled
         - Kids Count: ${kids}<br>
         - Child ID: ${currKid}<br>
         - Page: ${currentPage}<br>
-        <button style="margin-top:10px; width:100%; font-size:10px; font-weight:bold; background:#ef4444; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;" onclick="if(confirm('Сбросить все данные и перезагрузить?')){localStorage.clear(); sessionStorage.clear(); location.reload();}">СБРОСИТЬ КЭШ И ДАННЫЕ</button>
+        <button style="margin-top:10px; width:100%; font-size:10px; font-weight:bold; background:#ef4444; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;" onclick="if(confirm('Сбросить все данные и перезагрузить?')){safeStorage.clear(); safeSessionStorage.clear(); location.reload();}">СБРОСИТЬ КЭШ И ДАННЫЕ</button>
     `;
 }

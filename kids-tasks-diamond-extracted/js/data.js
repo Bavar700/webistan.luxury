@@ -13,8 +13,8 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 let supabaseClient = null;
 
 function getSupabaseConfig() {
-    const url = SUPABASE_URL || localStorage.getItem('supabase_url') || '';
-    const key = SUPABASE_ANON_KEY || localStorage.getItem('supabase_key') || '';
+    const url = SUPABASE_URL || safeStorage.getItem('supabase_url') || '';
+    const key = SUPABASE_ANON_KEY || safeStorage.getItem('supabase_key') || '';
     return { url, key };
 }
 
@@ -84,7 +84,7 @@ async function fetchRemoteState() {
             
             if (data && data.state) {
                 const remoteState = data.state;
-                const localStateStr = localStorage.getItem(STORAGE_KEY);
+                const localStateStr = safeStorage.getItem(STORAGE_KEY);
                 let localState = null;
                 if (localStateStr) {
                     try {
@@ -118,7 +118,7 @@ async function fetchRemoteState() {
                     console.log('Remote state is newer. Syncing from remote to local. Versions: remote=', remoteVersion, ', local=', localVersion);
                     migrateState(remoteState);
                     state = remoteState;
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                    safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 } else if (isLocalNewer) {
                     console.log('Local state is newer. Syncing from local to remote. Versions: local=', localVersion, ', remote=', remoteVersion);
                     state = localState;
@@ -129,7 +129,7 @@ async function fetchRemoteState() {
                     console.log('Local and remote states are already in sync. Version:', localVersion);
                     migrateState(remoteState);
                     state = remoteState;
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                    safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 }
                 updateSyncStatus('online');
                 return state;
@@ -683,7 +683,7 @@ function migrateState(stateObj) {
 
 function loadState() {
     try {
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const saved = safeStorage.getItem(STORAGE_KEY);
         if (saved) {
             state = JSON.parse(saved);
             // Auto-delete proof photos older than 7 days after confirmation (frees localStorage)
@@ -753,7 +753,7 @@ function saveState(isUserAction = true) {
         }
         state.lastUpdated = Date.now();
         state.language = getLanguage();
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         if (supabaseClient && isUserAction) {
             saveRemoteState();
         }
@@ -763,7 +763,7 @@ function saveState(isUserAction = true) {
         if (e && (e.name === 'QuotaExceededError' || e.code === 22 || e.code === 1014)) {
             try {
                 cleanupOldPhotos();
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                 if (supabaseClient && isUserAction) {
                     saveRemoteState();
                 }
