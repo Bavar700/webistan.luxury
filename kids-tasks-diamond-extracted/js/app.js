@@ -223,7 +223,10 @@ function showAuthOverlay() {
     const submitBtn = document.getElementById('btn-auth-submit');
     if (submitBtn) submitBtn.disabled = false;
 
-    if (title) title.textContent = __('auth.login_title');
+    if (title) {
+        title.textContent = __('auth.login_title');
+        title.style.display = 'none';
+    }
     if (btnText) btnText.textContent = __('auth.login_btn');
     if (toggleText) toggleText.textContent = __('auth.no_account');
     if (link) link.textContent = __('auth.register_title');
@@ -291,7 +294,10 @@ function setupAuthOverlayEvents() {
     const btnText = document.getElementById('auth-btn-text');
     
     // Set initial login labels in current language
-    if (title) title.textContent = __('auth.login_title');
+    if (title) {
+        title.textContent = __('auth.login_title');
+        title.style.display = 'none';
+    }
     if (btnText) btnText.textContent = __('auth.login_btn');
     if (toggleText) toggleText.textContent = __('auth.no_account');
     if (link) link.textContent = __('auth.register_title');
@@ -304,7 +310,10 @@ function setupAuthOverlayEvents() {
         errorMsg.classList.add('hidden');
         if (authMode === 'login') {
             authMode = 'register';
-            if (title) title.textContent = __('auth.register_title');
+            if (title) {
+                title.textContent = __('auth.register_title');
+                title.style.display = 'block';
+            }
             if (btnText) btnText.textContent = __('auth.register_btn');
             if (toggleText) toggleText.textContent = __('auth.has_account');
             link.textContent = __('auth.login_btn');
@@ -312,7 +321,10 @@ function setupAuthOverlayEvents() {
             if (privacyCheckbox) privacyCheckbox.required = true;
         } else {
             authMode = 'login';
-            if (title) title.textContent = __('auth.login_title');
+            if (title) {
+                title.textContent = __('auth.login_title');
+                title.style.display = 'none';
+            }
             if (btnText) btnText.textContent = __('auth.login_btn');
             if (toggleText) toggleText.textContent = __('auth.no_account');
             link.textContent = __('auth.register_title');
