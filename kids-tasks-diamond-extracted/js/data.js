@@ -683,6 +683,15 @@ function migrateState(stateObj) {
 
         if (child.tasks) child.tasks.forEach(t => migrateTask(t, false));
         if (child.bonusTasks) child.bonusTasks.forEach(t => migrateTask(t, true));
+
+        // One-time fix for Yusufkhoja's balance due to historical non-deducted rejected tasks
+        if ((child.name && (child.name.includes('Юсуфхӯҷа') || child.name.includes('Юсуфхуджа') || child.name.includes('Yusuf'))) && !child.yusufkhojaBalanceFixed) {
+            child.balance = 1;
+            child.stars = 1;
+            child.totalEarned = 1;
+            child.totalStars = 1;
+            child.yusufkhojaBalanceFixed = true;
+        }
     });
 }
 

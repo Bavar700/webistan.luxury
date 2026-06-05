@@ -2263,7 +2263,7 @@ function showDayDetails(dateStr) {
             tasksHTML += `
                 <div style="display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border);">
                     <span style="font-size:20px; flex-shrink:0; width:28px; text-align:center;">${emoji}</span>
-                    <span style="flex:1; font-size:14px; font-weight:500; color:var(--text);">${t.name}</span>
+                    <span style="flex:1; font-size:14px; font-weight:500; color:var(--text); min-width:0; word-break:break-word;">${t.name}</span>
                     <span style="font-size:18px;">${statusIcon}</span>
                 </div>`;
         });
@@ -2318,7 +2318,8 @@ function showDayDetails(dateStr) {
     const panel = document.createElement('div');
     panel.style.cssText = `
         width:100%; max-width:480px; pointer-events:all;
-        background:var(--surface); border-radius:20px 20px 0 0;
+        box-sizing:border-box;
+        background:var(--bg-card); border-radius:20px 20px 0 0;
         box-shadow:0 -8px 32px rgba(0,0,0,0.22);
         padding:0 0 env(safe-area-inset-bottom,0);
         max-height:75vh; display:flex; flex-direction:column;
@@ -2343,7 +2344,7 @@ function showDayDetails(dateStr) {
     // Backdrop
     const backdrop = document.createElement('div');
     backdrop.id = 'day-details-backdrop';
-    backdrop.style.cssText = `position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.35);`;
+    backdrop.style.cssText = `position:fixed; inset:0; z-index:1099; background:rgba(0,0,0,0.6);`;
     backdrop.addEventListener('click', () => { wrapper.remove(); backdrop.remove(); });
 
     document.body.appendChild(backdrop);
