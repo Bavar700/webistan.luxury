@@ -1396,6 +1396,63 @@ function checkAchievements(childId) {
 
     if (!child.achievements) child.achievements = [];
 
+    // Calculate total regular completed tasks
+    let totalCompleted = 0;
+    Object.values(child.dailyLogs).forEach(log => {
+        Object.entries(log.tasks).forEach(([taskId, t]) => {
+            const isBonus = child.bonusTasks.some(bt => bt.id === taskId);
+            if (!isBonus && t.status === 'completed' && t.confirmed) {
+                totalCompleted++;
+            }
+        });
+    });
+
+    // Calculate if all today's tasks are done
+    const todayStr = getToday();
+    const todayLog = child.dailyLogs[todayStr] || { tasks: {} };
+    const todayDay = new Date(todayStr + 'T12:00:00').getDay();
+    const regularTasksToday = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+    const allDone = regularTasksToday.length > 0 && regularTasksToday.every(t => {
+        const tl = todayLog.tasks[t.id];
+        return tl && tl.status === 'completed' && tl.confirmed;
+    });
+
+    // Check streaks
+    const dates = Object.keys(child.dailyLogs).sort().reverse();
+    let currentStreak = 0;
+    let onTimeStreak = 0;
+    let onTimeStreakBroken = false;
+    let noPenaltyStreak = 0;
+    let noPenaltyStreakBroken = false;
+    const todayD = new Date(todayStr + 'T12:00:00');
+
+    for (let i = 0; i < dates.length; i++) {
+        const d = new Date(dates[i] + 'T12:00:00');
+        const expected = new Date(todayD);
+        expected.setDate(expected.getDate() - i);
+        if (d.toDateString() === expected.toDateString()) {
+            const log = child.dailyLogs[dates[i]];
+            if (log && !log.excused && log.rewardApplied) {
+                const result = calculateDailyReward(childId, dates[i]);
+                if (result.reward >= 0) {
+                    currentStreak++;
+                    if (!onTimeStreakBroken) {
+                        const missedAny = Object.values(log.tasks).some(t => t.status === 'completed' && t.missedDeadline);
+                        if (!missedAny) onTimeStreak++;
+                        else onTimeStreakBroken = true;
+                    }
+                    if (!noPenaltyStreakBroken) {
+                        const penaltyAny = Object.values(log.tasks).some(t => t.penaltyApplied && (t.penaltyApplied.stars > 0 || t.penaltyApplied.gold > 0));
+                        if (!penaltyAny) noPenaltyStreak++;
+                        else noPenaltyStreakBroken = true;
+                    }
+                } else { break; }
+            } else if (log && log.excused) {
+                continue;
+            } else { break; }
+        } else { break; }
+    }
+
     // Check early bird morning streak
     const morningStreak = calculateBlockStreak(child, 'morning');
 

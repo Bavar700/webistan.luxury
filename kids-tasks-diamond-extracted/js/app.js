@@ -4243,8 +4243,8 @@ function renderParentDashboard() {
     const todayLog = selectedChild.dailyLogs[today] || { tasks: {} };
     
     html += "<div class='section-card' style='margin-bottom:15px;'>";
-    html += "  <h4 style='margin-bottom:10px; display:flex; align-items:center; gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--primary);'><use href='#icon-clock'/></svg> " + (__('parent.today_progress') || 'Рафти иҷрои супоришҳои имрӯз') + "</h4>";
-    html += "  <ul class='item-list' style='list-style:none; padding:0; margin:0;'>";
+    html += "  <h4 style='margin-bottom:12px; display:flex; align-items:center; gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--primary);'><use href='#icon-clock'/></svg> " + (__('parent.today_progress') || 'Рафти иҷрои супоришҳои имрӯз') + "</h4>";
+    html += "  <ul class='item-list' style='list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;'>";
     
     const todayTasks = [...selectedChild.tasks, ...selectedChild.bonusTasks];
     const parentStatusLabels = {
@@ -4257,42 +4257,41 @@ function renderParentDashboard() {
     };
 
     if (todayTasks.length === 0) {
-        html += `<li style='text-align:center; padding:12px; color:var(--text-light); font-size:13px;'>—</li>`;
+        html += `<li style='text-align:center; padding:16px; color:var(--text-light); font-size:13px; background: rgba(0,0,0,0.02); border-radius: var(--radius-sm);'>—</li>`;
     } else {
         todayTasks.forEach(task => {
             const tl = todayLog.tasks[task.id] || { status: 'pending' };
             let statusText = parentStatusLabels[tl.status] || tl.status;
-            let statusColor = 'var(--text-light)';
-            if (tl.status === 'completed') statusColor = 'var(--success)';
-            if (tl.status === 'skipped') statusColor = 'var(--text-secondary)';
-            if (tl.status === 'in-progress') statusColor = 'var(--warning)';
-            if (tl.status === 'awaiting-confirm') statusColor = 'var(--primary)';
-            if (tl.status === 'failed') statusColor = 'var(--danger)';
             
-            html += "<li style='display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.05); gap:4px;'>";
+            let badgeStyle = "";
+            if (tl.status === 'failed') {
+                badgeStyle = "background: #FEE2E2; color: #991B1B;";
+            }
+            
+            html += "<li style='display:flex; flex-direction:column; padding:10px 12px; border-bottom:1px solid rgba(0,0,0,0.03); gap:6px; background: rgba(0,0,0,0.015); border-radius: var(--radius-sm);'>";
             html += "  <div style='display:flex; justify-content:space-between; align-items:center;'>";
-            html += "    <span style='font-weight:600; font-size:13px; color:var(--text);'>" + (task.emoji || '📌') + " " + task.name + "</span>";
-            html += "    <span style='font-size:11px; font-weight:700; color:" + statusColor + ";'>" + statusText + "</span>";
+            html += "    <span style='font-weight:600; font-size:13px; color:var(--text); display:flex; align-items:center; gap:6px;'>" + (task.emoji || '📌') + " " + task.name + "</span>";
+            html += "    <div class='task-status-badge status-" + tl.status + "' style='" + badgeStyle + "'>" + statusText + "</div>";
             html += "  </div>";
             
             // Skip details
             if (tl.status === 'skipped' && tl.skipReason) {
-                html += "  <div style='font-size:12px; color:var(--text-secondary); background:rgba(0,0,0,0.03); padding:6px; border-radius:6px;'>";
-                html += "    <strong>💬 " + (__('common.reason') || 'Сабаб') + ":</strong> " + tl.skipReason;
+                html += "  <div style='font-size:12px; color:var(--text-secondary); background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:var(--radius-xs); display:flex; align-items:center; justify-content:space-between; gap:8px;'>";
+                html += "    <span><strong>💬 " + (__('common.reason') || 'Сабаб') + ":</strong> " + tl.skipReason + "</span>";
                 if (tl.skipPhoto) {
-                    html += ` <button type="button" class="view-skip-photo-btn-parent" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-left: 6px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>`;
+                    html += `    <button type="button" class="view-skip-photo-btn-parent btn-text" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0; display:inline-flex; align-items:center; gap:2px;">🖼️ ` + (__('common.photo_short') || 'Акс') + `</button>`;
                 }
                 html += "  </div>";
             }
             
             // Awaiting confirm details
             if (tl.status === 'awaiting-confirm') {
-                html += "  <div style='display:flex; justify-content:space-between; align-items:center; background:rgba(124,58,237,0.03); padding:6px; border-radius:6px; margin-top:4px;'>";
-                html += "    <span style='font-size:11px; color:var(--text-secondary);'>";
-                if (tl.photo) html += `📸 Акс замима шудааст `;
+                html += "  <div style='display:flex; justify-content:space-between; align-items:center; background:rgba(124,58,237,0.04); padding:6px 10px; border-radius:var(--radius-xs); border:1px solid rgba(124,58,237,0.08);'>";
+                html += "    <span style='font-size:11px; color:var(--text-secondary); display:flex; align-items:center; gap:4px;'>";
+                if (tl.photo) html += `📸 ` + (__('common.photo_short') || 'Акс') + ` `;
                 if (tl.explanation) html += `💬 ${tl.explanation}`;
                 html += "    </span>";
-                html += "    <button class='parent-review-task-btn btn btn-primary' data-task-id='" + task.id + "' style='padding:2px 8px; font-size:11px; height:24px; line-height:18px;'>" + (__('parent.review_btn') || 'Санҷиш') + "</button>";
+                html += "    <button class='parent-review-task-btn btn btn-primary' data-task-id='" + task.id + "' style='padding:2px 8px; font-size:11px; height:22px; line-height:16px; border-radius:var(--radius-xs); min-width:auto;'>" + (__('parent.review_btn') || 'Санҷиш') + "</button>";
                 html += "  </div>";
             }
             
