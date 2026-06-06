@@ -88,17 +88,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (activeSession) {
         // Already logged in — skip welcome and auth, go straight to app
         let deviceRole = safeStorage.getItem('kids_tasks_device_role');
+        if (!deviceRole) {
+            if (state && state.children && state.children.length > 0) {
+                clearTimeout(loadingTimer);
+                hideLoadingScreen();
+                showRoleOverlay();
+                return;
+            } else {
+                deviceRole = 'parent';
+                safeStorage.setItem('kids_tasks_device_role', 'parent');
+            }
+        }
+        await fetchRemoteState();
         if (!state || !state.children || state.children.length === 0) {
             deviceRole = 'parent';
             safeStorage.setItem('kids_tasks_device_role', 'parent');
         }
-        if (!deviceRole) {
-            clearTimeout(loadingTimer);
-            hideLoadingScreen();
-            showRoleOverlay();
-            return;
-        }
-        await fetchRemoteState();
         currentChildId = getStoredOrFirstChildId();
         applyDeviceRoleUI();
         initApp();
@@ -132,19 +137,24 @@ async function checkAuthAndSetup() {
         
         // Session exists — check device role
         let deviceRole = safeStorage.getItem('kids_tasks_device_role');
-        if (!state || !state.children || state.children.length === 0) {
-            deviceRole = 'parent';
-            safeStorage.setItem('kids_tasks_device_role', 'parent');
-        }
         if (!deviceRole) {
-            showRoleOverlay();
-            return;
+            if (state && state.children && state.children.length > 0) {
+                showRoleOverlay();
+                return;
+            } else {
+                deviceRole = 'parent';
+                safeStorage.setItem('kids_tasks_device_role', 'parent');
+            }
         }
         
         hideAuthOverlay();
         hideRoleOverlay();
         
         await fetchRemoteState();
+        if (!state || !state.children || state.children.length === 0) {
+            deviceRole = 'parent';
+            safeStorage.setItem('kids_tasks_device_role', 'parent');
+        }
         currentChildId = getStoredOrFirstChildId();
         
         applyDeviceRoleUI();
@@ -1476,6 +1486,14 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
                     ` : ''}
                 </div>
             ` : ''}
+            ${(tl.status === 'skipped' && tl.skipReason) ? `
+                <div class="task-card-warning" style="margin-top: 8px; background: rgba(107, 114, 128, 0.08); color: var(--text-secondary); border-color: rgba(107, 114, 128, 0.2);">
+                    <span>💬 ${__('common.reason') || 'Сабаб'}: "${tl.skipReason}"</span>
+                    ${tl.skipPhoto ? `
+                        <button type="button" class="view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-left: 6px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>
+                    ` : ''}
+                </div>
+            ` : ''}
         </div>
         <div class="task-right-actions">
             ${tl.status === 'pending' ? `
@@ -1506,6 +1524,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         viewRejectPhotoBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const photoUrl = decodeURIComponent(viewRejectPhotoBtn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    }
+
+    const viewSkipPhotoBtn = card.querySelector('.view-skip-photo-btn');
+    if (viewSkipPhotoBtn) {
+        viewSkipPhotoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(viewSkipPhotoBtn.dataset.photo);
             showImagePreview(photoUrl);
         });
     }
@@ -2226,6 +2253,7 @@ function submitReject() {
         delete tl.score;
         delete tl.missedDeadline;
 
+        checkAchievements(child.id);
         saveState();
         showToast('❌', __('confirm.rejected'));
     }
@@ -4210,6 +4238,71 @@ function renderParentDashboard() {
     html += "</div>";
     html += "</div>";
 
+    // Today's Child Progress
+    const today = getToday();
+    const todayLog = selectedChild.dailyLogs[today] || { tasks: {} };
+    
+    html += "<div class='section-card' style='margin-bottom:15px;'>";
+    html += "  <h4 style='margin-bottom:10px; display:flex; align-items:center; gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--primary);'><use href='#icon-clock'/></svg> " + (__('parent.today_progress') || 'Рафти иҷрои супоришҳои имрӯз') + "</h4>";
+    html += "  <ul class='item-list' style='list-style:none; padding:0; margin:0;'>";
+    
+    const todayTasks = [...selectedChild.tasks, ...selectedChild.bonusTasks];
+    const parentStatusLabels = {
+        'pending': __('status.pending'),
+        'in-progress': __('status.in-progress'),
+        'awaiting-confirm': __('status.awaiting-confirm'),
+        'completed': __('status.completed'),
+        'skipped': __('status.skipped'),
+        'failed': __('status.failed') || 'Иҷро нашуд'
+    };
+
+    if (todayTasks.length === 0) {
+        html += `<li style='text-align:center; padding:12px; color:var(--text-light); font-size:13px;'>—</li>`;
+    } else {
+        todayTasks.forEach(task => {
+            const tl = todayLog.tasks[task.id] || { status: 'pending' };
+            let statusText = parentStatusLabels[tl.status] || tl.status;
+            let statusColor = 'var(--text-light)';
+            if (tl.status === 'completed') statusColor = 'var(--success)';
+            if (tl.status === 'skipped') statusColor = 'var(--text-secondary)';
+            if (tl.status === 'in-progress') statusColor = 'var(--warning)';
+            if (tl.status === 'awaiting-confirm') statusColor = 'var(--primary)';
+            if (tl.status === 'failed') statusColor = 'var(--danger)';
+            
+            html += "<li style='display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.05); gap:4px;'>";
+            html += "  <div style='display:flex; justify-content:space-between; align-items:center;'>";
+            html += "    <span style='font-weight:600; font-size:13px; color:var(--text);'>" + (task.emoji || '📌') + " " + task.name + "</span>";
+            html += "    <span style='font-size:11px; font-weight:700; color:" + statusColor + ";'>" + statusText + "</span>";
+            html += "  </div>";
+            
+            // Skip details
+            if (tl.status === 'skipped' && tl.skipReason) {
+                html += "  <div style='font-size:12px; color:var(--text-secondary); background:rgba(0,0,0,0.03); padding:6px; border-radius:6px;'>";
+                html += "    <strong>💬 " + (__('common.reason') || 'Сабаб') + ":</strong> " + tl.skipReason;
+                if (tl.skipPhoto) {
+                    html += ` <button type="button" class="view-skip-photo-btn-parent" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-left: 6px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>`;
+                }
+                html += "  </div>";
+            }
+            
+            // Awaiting confirm details
+            if (tl.status === 'awaiting-confirm') {
+                html += "  <div style='display:flex; justify-content:space-between; align-items:center; background:rgba(124,58,237,0.03); padding:6px; border-radius:6px; margin-top:4px;'>";
+                html += "    <span style='font-size:11px; color:var(--text-secondary);'>";
+                if (tl.photo) html += `📸 Акс замима шудааст `;
+                if (tl.explanation) html += `💬 ${tl.explanation}`;
+                html += "    </span>";
+                html += "    <button class='parent-review-task-btn btn btn-primary' data-task-id='" + task.id + "' style='padding:2px 8px; font-size:11px; height:24px; line-height:18px;'>" + (__('parent.review_btn') || 'Санҷиш') + "</button>";
+                html += "  </div>";
+            }
+            
+            html += "</li>";
+        });
+    }
+    
+    html += "  </ul>";
+    html += "</div>";
+
     // ---- Task Management Section ----
     html += "<div class='parent-task-section'>";
 
@@ -4600,6 +4693,27 @@ function renderParentDashboard() {
             }
         });
     }
+
+    // Parent review task button
+    container.querySelectorAll('.parent-review-task-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const taskId = btn.dataset.taskId;
+            const task = selectedChild.tasks.find(t => t.id === taskId)
+                      || selectedChild.bonusTasks.find(t => t.id === taskId);
+            if (task) {
+                showConfirmModal(task);
+            }
+        });
+    });
+
+    // View skip photo in parent dashboard
+    container.querySelectorAll('.view-skip-photo-btn-parent').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(btn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    });
 }
 
 // ===== EXCUSE DAY =====

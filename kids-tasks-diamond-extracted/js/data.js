@@ -1282,7 +1282,7 @@ function getAchievementProgress(child, id) {
         }
         case 'early_bird': {
             const morningStreak = calculateBlockStreak(child, 'morning');
-            const target = 7;
+            const target = 30 * m;
             const daysText = __('achievement_modal.days_suffix') || 'рӯз';
             return { current: morningStreak, target: target, formatted: `${morningStreak} / ${target} ${daysText}` };
         }
@@ -1396,130 +1396,14 @@ function checkAchievements(childId) {
 
     if (!child.achievements) child.achievements = [];
 
-    let totalCompleted = 0;
-    Object.values(child.dailyLogs).forEach(log => {
-        Object.values(log.tasks).forEach(t => {
-            if (t.status === 'completed' && t.confirmed) {
-                totalCompleted++;
-            }
-        });
-    });
-    if (totalCompleted >= 3 && !child.achievements.includes('first_task')) {
-        child.achievements.push('first_task');
-        unlocked.push(__('achievement.first_task'));
-    }
-
-    const todayLog = getOrCreateDailyLog(childId);
-    const allDone = child.tasks.every(t => {
-        const tl = todayLog.tasks[t.id];
-        return tl && tl.status === 'completed' && tl.confirmed;
-    });
-    if (allDone && !child.achievements.includes('all_today')) {
-        child.achievements.push('all_today');
-        unlocked.push(__('achievement.all_today'));
-    }
-
-    // Check streaks
-    const dates = Object.keys(child.dailyLogs).sort().reverse();
-    let currentStreak = 0;
-    let onTimeStreak = 0;
-    let onTimeStreakBroken = false;
-    let noPenaltyStreak = 0;
-    let noPenaltyStreakBroken = false;
-    const todayStr = getToday();
-    const todayD = new Date(todayStr + 'T12:00:00');
-
-    for (let i = 0; i < dates.length; i++) {
-        const d = new Date(dates[i] + 'T12:00:00');
-        const expected = new Date(todayD);
-        expected.setDate(expected.getDate() - i);
-        if (d.toDateString() === expected.toDateString()) {
-            const log = child.dailyLogs[dates[i]];
-            if (log && !log.excused && log.rewardApplied) {
-                const result = calculateDailyReward(childId, dates[i]);
-                if (result.reward >= 0) {
-                    currentStreak++;
-                    if (!onTimeStreakBroken) {
-                        const missedAny = Object.values(log.tasks).some(t => t.status === 'completed' && t.missedDeadline);
-                        if (!missedAny) onTimeStreak++;
-                        else onTimeStreakBroken = true;
-                    }
-                    if (!noPenaltyStreakBroken) {
-                        const penaltyAny = Object.values(log.tasks).some(t => t.penaltyApplied && (t.penaltyApplied.stars > 0 || t.penaltyApplied.gold > 0));
-                        if (!penaltyAny) noPenaltyStreak++;
-                        else noPenaltyStreakBroken = true;
-                    }
-                } else { break; }
-            } else if (log && log.excused) {
-                continue;
-            } else { break; }
-        } else { break; }
-    }
-
-    if (currentStreak >= (7 * m) && !child.achievements.includes('week_streak')) {
-        child.achievements.push('week_streak');
-        unlocked.push(__('achievement.week_streak'));
-    }
-    if (currentStreak >= (30 * m) && !child.achievements.includes('month_streak')) {
-        child.achievements.push('month_streak');
-        unlocked.push(__('achievement.month_streak'));
-    }
-    if (onTimeStreak >= (30 * m) && !child.achievements.includes('fast_worker')) {
-        child.achievements.push('fast_worker');
-        unlocked.push(__('achievement.fast_worker'));
-    }
-    if (noPenaltyStreak >= (30 * m) && !child.achievements.includes('perfect_zeroes')) {
-        child.achievements.push('perfect_zeroes');
-        unlocked.push(__('achievement.perfect_zeroes'));
-    }
-
-    // Check early bird using 7-day morning streak
+    // Check early bird morning streak
     const morningStreak = calculateBlockStreak(child, 'morning');
-    if (morningStreak >= 7 && !child.achievements.includes('early_bird')) {
-        child.achievements.push('early_bird');
-        unlocked.push(__('achievement.early_bird'));
-    }
 
     // test achievements
-    child.tenDayTests.forEach(t => {
-        if (t.completed && t.totalScore === 9 && !child.achievements.includes('test_9')) {
-            child.achievements.push('test_9');
-            unlocked.push(__('achievement.test_9'));
-        }
-    });
+    const hasTest9 = child.tenDayTests.some(t => t.completed && t.totalScore === 9);
 
-    // savings
-    if (child.totalEarned >= (100 * m) && !child.achievements.includes('savings_100')) {
-        child.achievements.push('savings_100');
-        unlocked.push(__('achievement.savings_100'));
-    }
-    if (child.totalEarned >= (500 * m) && !child.achievements.includes('savings_50')) {
-        child.achievements.push('savings_50');
-        unlocked.push(__('achievement.savings_50'));
-    }
-
-    // stars
+    // stars check
     const currentStarsCheck = child.totalStars || child.stars || 0;
-    if (currentStarsCheck >= (100 * m) && !child.achievements.includes('stars_100')) {
-        child.achievements.push('stars_100');
-        unlocked.push(__('achievement.stars_100'));
-    }
-    if (currentStarsCheck >= (300 * m) && !child.achievements.includes('stars_300')) {
-        child.achievements.push('stars_300');
-        unlocked.push(__('achievement.stars_300'));
-    }
-    if (currentStarsCheck >= (500 * m) && !child.achievements.includes('stars_500')) {
-        child.achievements.push('stars_500');
-        unlocked.push(__('achievement.stars_500'));
-    }
-    if (currentStarsCheck >= (1000 * m) && !child.achievements.includes('stars_1000')) {
-        child.achievements.push('stars_1000');
-        unlocked.push(__('achievement.stars_1000'));
-    }
-    if (currentStarsCheck >= (2000 * m) && !child.achievements.includes('stars_2000')) {
-        child.achievements.push('stars_2000');
-        unlocked.push(__('achievement.stars_2000'));
-    }
 
     // bonus task achievements and total tasks
     let totalTasksCompleted = 0;
@@ -1548,26 +1432,39 @@ function checkAchievements(childId) {
         });
     });
 
-    if (bonus3Count >= (10 * m) && !child.achievements.includes('bonus_3')) {
-        child.achievements.push('bonus_3');
-        unlocked.push(__('achievement.bonus_3'));
-    }
-    if (bonus5Count >= (10 * m) && !child.achievements.includes('bonus_5')) {
-        child.achievements.push('bonus_5');
-        unlocked.push(__('achievement.bonus_5'));
-    }
-    if (bonus10Count >= (10 * m) && !child.achievements.includes('bonus_10')) {
-        child.achievements.push('bonus_10');
-        unlocked.push(__('achievement.bonus_10'));
-    }
-    if (totalTasksCompleted >= (50 * m) && !child.achievements.includes('marksman')) {
-        child.achievements.push('marksman');
-        unlocked.push(__('achievement.marksman'));
-    }
-    if (bonusCount >= (10 * m) && !child.achievements.includes('helper')) {
-        child.achievements.push('helper');
-        unlocked.push(__('achievement.helper'));
-    }
+    const conds = {
+        first_task: totalCompleted >= 3,
+        all_today: allDone,
+        week_streak: currentStreak >= (7 * m),
+        month_streak: currentStreak >= (30 * m),
+        perfect_zeroes: noPenaltyStreak >= (30 * m),
+        fast_worker: onTimeStreak >= (30 * m),
+        early_bird: morningStreak >= (30 * m),
+        helper: bonusCount >= (10 * m),
+        marksman: totalTasksCompleted >= (50 * m),
+        bonus_3: bonus3Count >= (10 * m),
+        bonus_5: bonus5Count >= (10 * m),
+        bonus_10: bonus10Count >= (10 * m),
+        savings_100: child.totalEarned >= (100 * m),
+        savings_50: child.totalEarned >= (500 * m),
+        stars_100: currentStarsCheck >= (100 * m),
+        stars_300: currentStarsCheck >= (300 * m),
+        stars_500: currentStarsCheck >= (500 * m),
+        stars_1000: currentStarsCheck >= (1000 * m),
+        stars_2000: currentStarsCheck >= (2000 * m),
+        test_9: hasTest9
+    };
+
+    const newAchievements = [];
+    Object.entries(conds).forEach(([id, met]) => {
+        if (met) {
+            newAchievements.push(id);
+            if (!child.achievements.includes(id)) {
+                unlocked.push(__('achievement.' + id) || id);
+            }
+        }
+    });
+    child.achievements = newAchievements;
 
     let prestigeTriggered = false;
     let newTier = child.achievementTier;
