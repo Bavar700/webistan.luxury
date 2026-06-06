@@ -707,6 +707,24 @@ function migrateState(stateObj) {
             modified = true;
             console.log("Migration: Yusufkhoja balance and stars corrected to 1.");
         }
+
+        // Automatic revocation of 'all_today' badge from Yusufkhoja because it was earned in error
+        if ((cName.includes('Юсуф') || cName.toLowerCase().includes('yusuf')) && !child.yusufkhojaAllTodayBadgeRevoked) {
+            if (child.achievements && child.achievements.includes('all_today')) {
+                const idx = child.achievements.indexOf('all_today');
+                if (idx !== -1) {
+                    child.achievements.splice(idx, 1);
+                }
+            }
+            child.revokedAchievements = child.revokedAchievements || {};
+            child.revokedAchievements['all_today'] = {
+                reason: 'Хато пур карда буд, кӯдак',
+                date: getToday()
+            };
+            child.yusufkhojaAllTodayBadgeRevoked = true;
+            modified = true;
+            console.log("Migration: Yusufkhoja 'all_today' badge revoked automatically.");
+        }
     });
     return modified;
 }
@@ -832,8 +850,15 @@ function getCurrentChild() {
     return getChild(currentChildId);
 }
 
+function getDateString(d) {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 function getToday() {
-    return new Date().toISOString().split('T')[0];
+    return getDateString(new Date());
 }
 
 function formatDate(dateStr) {
@@ -1515,6 +1540,9 @@ function checkAchievements(childId) {
     const newAchievements = [];
     Object.entries(conds).forEach(([id, met]) => {
         if (met) {
+            if (child.revokedAchievements && child.revokedAchievements[id]) {
+                return;
+            }
             newAchievements.push(id);
             if (!child.achievements.includes(id)) {
                 unlocked.push(__('achievement.' + id) || id);
@@ -1646,7 +1674,7 @@ function calculateBlockStreak(child, blockType) {
     while (true) {
         const prevD = new Date(todayD);
         prevD.setDate(prevD.getDate() - dayOffset);
-        const prevStr = prevD.toISOString().split('T')[0];
+        const prevStr = getDateString(prevD);
         
         const log = child.dailyLogs[prevStr];
         if (!log) {
@@ -1738,7 +1766,7 @@ function calculateRoutineStreak(child) {
     while (true) {
         const d = new Date(todayD);
         d.setDate(d.getDate() - offset);
-        const ds = d.toISOString().split('T')[0];
+        const ds = getDateString(d);
         const log = child.dailyLogs[ds];
         if (!log) break;
         if (log.excused) { offset++; continue; } // freeze

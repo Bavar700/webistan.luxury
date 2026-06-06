@@ -50,7 +50,7 @@
     </script>
     <title>Офарин — Супоришҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=147">
+    <link rel="stylesheet" href="css/style.css?v=148">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/flatpickr.min.css">
     <style>
@@ -589,6 +589,64 @@
                     <button class="btn btn-primary btn-full" id="skip-submit-btn" style="margin-top:10px;">
                         <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
                         <span data-i18n="skip.submit">Тасдиқ</span>
+                    </button>
+                </div>
+        </div>
+
+        <!-- Restore Skip Modal -->
+        <div class="modal-overlay hidden" id="restore-skip-modal" style="z-index: 1100;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-clock"/></svg>
+                        <span data-i18n="parent.restore_title">Барқарор кардани супориш</span>
+                    </h3>
+                    <button class="modal-close" id="restore-skip-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p data-i18n="parent.restore_prompt">Сабаби барқарор кардани супоришро ворид кунед:</p>
+                    <div class="form-group">
+                        <textarea id="restore-skip-reason" rows="3" placeholder="Сабабро нависед..."></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px;" data-i18n="pin.confirm_label">PIN-коди волид:</label>
+                        <input type="password" id="restore-skip-pin" placeholder="****" style="text-align: center; font-size: 16px; letter-spacing: 4px; height: 38px;">
+                    </div>
+                    <div class="error-msg hidden" id="restore-skip-error" data-i18n="confirm.pin_error" style="margin-top: 5px;">PIN нодуруст аст!</div>
+                    <button class="btn btn-primary btn-full" id="restore-skip-submit-btn" style="margin-top:15px;">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                        <span data-i18n="confirm">Тасдиқ</span>
+                    </button>
+                </div>
+        </div>
+
+        <!-- Revoke Achievement Modal -->
+        <div class="modal-overlay hidden" id="revoke-achievement-modal" style="z-index: 1200;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-medal"/></svg>
+                        <span data-i18n="parent.revoke_ach_title">Бекор кардани дастовард</span>
+                    </h3>
+                    <button class="modal-close" id="revoke-achievement-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="revoke-achievement-prompt">Сабаби бекор кардани дастовардро ворид кунед:</p>
+                    <div class="form-group">
+                        <textarea id="revoke-achievement-reason" rows="3" placeholder="Сабабро нависед..." data-i18n-placeholder="common.reason_placeholder"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px;" data-i18n="pin.confirm_label">PIN-коди волид:</label>
+                        <input type="password" id="revoke-achievement-pin" placeholder="****" style="text-align: center; font-size: 16px; letter-spacing: 4px; height: 38px;">
+                    </div>
+                    <div class="error-msg hidden" id="revoke-achievement-error" data-i18n="confirm.pin_error" style="margin-top: 5px;">PIN нодуруст аст!</div>
+                    <button class="btn btn-primary btn-full" id="revoke-achievement-submit-btn" style="margin-top:15px; background: var(--danger); border-color: var(--danger);">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                        <span data-i18n="confirm">Тасдиқ</span>
                     </button>
                 </div>
             </div>
@@ -1578,10 +1636,10 @@
     <!-- Supabase JS Client -->
     <script src="js/supabase-js.js"></script>
 
-    <script src="js/safeStorage.js?v=147"></script>
-    <script src="js/translations.js?v=147"></script>
-    <script src="js/guide-translations.js?v=147"></script>
-    <script src="js/data.js?v=147"></script>
-    <script src="js/app.js?v=147"></script>
+    <script src="js/safeStorage.js?v=148"></script>
+    <script src="js/translations.js?v=148"></script>
+    <script src="js/guide-translations.js?v=148"></script>
+    <script src="js/data.js?v=148"></script>
+    <script src="js/app.js?v=148"></script>
 </body>
 </html>

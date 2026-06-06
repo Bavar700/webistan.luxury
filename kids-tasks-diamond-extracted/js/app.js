@@ -2340,6 +2340,135 @@ function submitSkip() {
     document.getElementById('skip-modal').classList.add('hidden');
 }
 
+// ===== RESTORE SKIP MODAL =====
+let restoreSkipTaskId = null;
+
+function showRestoreSkipModal(task) {
+    restoreSkipTaskId = task.id;
+    document.getElementById('restore-skip-reason').value = '';
+    document.getElementById('restore-skip-pin').value = '';
+    document.getElementById('restore-skip-error').classList.add('hidden');
+    document.getElementById('restore-skip-modal').classList.remove('hidden');
+    document.getElementById('restore-skip-reason').focus();
+}
+
+function submitRestoreSkip() {
+    const reason = document.getElementById('restore-skip-reason').value.trim();
+    if (!reason) {
+        showToast('⚠️', __('excuse.error_empty') || 'Сабабро ворид кунед!');
+        return;
+    }
+
+    const pin = document.getElementById('restore-skip-pin').value;
+    if (pin !== state.pin) {
+        document.getElementById('restore-skip-error').classList.remove('hidden');
+        return;
+    }
+
+    const child = getCurrentChild();
+    const today = getToday();
+    const log = child.dailyLogs[today];
+    const tl = log.tasks[restoreSkipTaskId];
+
+    if (tl) {
+        // Revert penalty if it was applied when child skipped
+        if (tl.penaltyApplied) {
+            const pStars = parseInt(tl.penaltyApplied.stars) || 0;
+            const pGold  = parseInt(tl.penaltyApplied.gold) || 0;
+            if (pStars > 0) {
+                child.stars = (child.stars || 0) + pStars;
+                child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - pStars);
+            }
+            if (pGold > 0) {
+                child.balance = (child.balance || 0) + pGold;
+                child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - pGold);
+            }
+            delete tl.penaltyApplied;
+        }
+
+        // Restore task log entry back to pending
+        tl.status = 'pending';
+        tl.confirmed = false;
+        
+        // Save restoration reason as rejectReason so child sees it as feedback
+        tl.rejectReason = reason;
+        
+        // Clear child's skip reason & photo
+        delete tl.skipReason;
+        delete tl.skipPhoto;
+        delete tl.completedAt;
+        delete tl.confirmedAt;
+        delete tl.photo;
+        delete tl.explanation;
+        delete tl.score;
+        delete tl.missedDeadline;
+
+        checkAchievements(child.id);
+        saveState();
+        
+        document.getElementById('restore-skip-modal').classList.add('hidden');
+        showToast('🔄', __('confirm.success') || 'Супориш барқарор шуд!');
+        
+        renderTasks();
+        renderParentDashboard();
+        updateUI();
+    }
+}
+
+// ===== REVOKE ACHIEVEMENT MODAL =====
+let revokeAchId = null;
+
+function showRevokeAchievementModal(achId) {
+    revokeAchId = achId;
+    const ach = ACHIEVEMENTS.find(a => a.id === achId);
+    const displayName = ach ? (__(`achievement.${achId}`) || ach.name) : achId;
+    
+    document.getElementById('revoke-achievement-prompt').textContent = 
+        __('parent.revoke_ach_prompt', { name: displayName }) || `Сабаби бекор кардани дастоварди "${displayName}"-ро ворид кунед:`;
+    
+    document.getElementById('revoke-achievement-reason').value = '';
+    document.getElementById('revoke-achievement-pin').value = '';
+    document.getElementById('revoke-achievement-error').classList.add('hidden');
+    document.getElementById('revoke-achievement-modal').classList.remove('hidden');
+    document.getElementById('revoke-achievement-reason').focus();
+}
+
+function submitRevokeAchievement() {
+    const reason = document.getElementById('revoke-achievement-reason').value.trim();
+    if (!reason) {
+        showToast('⚠️', __('excuse.error_empty') || 'Сабабро ворид кунед!');
+        return;
+    }
+
+    const pin = document.getElementById('revoke-achievement-pin').value;
+    if (pin !== state.pin) {
+        document.getElementById('revoke-achievement-error').classList.remove('hidden');
+        return;
+    }
+
+    const child = getCurrentChild();
+    if (child && child.achievements) {
+        const idx = child.achievements.indexOf(revokeAchId);
+        if (idx !== -1) {
+            child.achievements.splice(idx, 1);
+            
+            child.revokedAchievements = child.revokedAchievements || {};
+            child.revokedAchievements[revokeAchId] = {
+                reason: reason,
+                date: getToday()
+            };
+            
+            saveState();
+            
+            document.getElementById('revoke-achievement-modal').classList.add('hidden');
+            showToast('🗑️', __('confirm.success') || 'Дастовард бекор шуд!');
+            
+            renderParentDashboard();
+            updateUI();
+        }
+    }
+}
+
 // ===== CALENDAR =====
 let calendarMonth = new Date().getMonth();
 let calendarYear = new Date().getFullYear();
@@ -4242,6 +4371,11 @@ function renderParentDashboard() {
     const today = getToday();
     const todayLog = selectedChild.dailyLogs[today] || { tasks: {} };
     
+    // Start parent dashboard responsive grid layout
+    html += "<div class='parent-dashboard-grid'>";
+    
+    // Left side: Today's Task Progress
+    html += "<div class='parent-dashboard-left'>";
     html += "<div class='section-card' style='margin-bottom:15px;'>";
     html += "  <h4 style='margin-bottom:12px; display:flex; align-items:center; gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--primary);'><use href='#icon-clock'/></svg> " + (__('parent.today_progress') || 'Рафти иҷрои супоришҳои имрӯз') + "</h4>";
     html += "  <ul class='item-list' style='list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;'>";
@@ -4263,12 +4397,18 @@ function renderParentDashboard() {
             const tl = todayLog.tasks[task.id] || { status: 'pending' };
             let statusText = parentStatusLabels[tl.status] || tl.status;
             
+            let itemBorder = "border-left: 3px solid #E5E7EB;";
             let badgeStyle = "";
+            if (tl.status === 'completed') itemBorder = "border-left: 3px solid var(--success);";
+            if (tl.status === 'skipped') itemBorder = "border-left: 3px solid var(--text-secondary);";
+            if (tl.status === 'in-progress') itemBorder = "border-left: 3px solid var(--warning);";
+            if (tl.status === 'awaiting-confirm') itemBorder = "border-left: 3px solid var(--primary);";
             if (tl.status === 'failed') {
+                itemBorder = "border-left: 3px solid var(--danger);";
                 badgeStyle = "background: #FEE2E2; color: #991B1B;";
             }
             
-            html += "<li style='display:flex; flex-direction:column; padding:10px 12px; border-bottom:1px solid rgba(0,0,0,0.03); gap:6px; background: rgba(0,0,0,0.015); border-radius: var(--radius-sm);'>";
+            html += "<li style='display:flex; flex-direction:column; padding:10px 12px; border-bottom:1px solid rgba(0,0,0,0.03); gap:6px; background: rgba(0,0,0,0.015); border-radius: var(--radius-sm); " + itemBorder + "'>";
             html += "  <div style='display:flex; justify-content:space-between; align-items:center;'>";
             html += "    <span style='font-weight:600; font-size:13px; color:var(--text); display:flex; align-items:center; gap:6px;'>" + (task.emoji || '📌') + " " + task.name + "</span>";
             html += "    <div class='task-status-badge status-" + tl.status + "' style='" + badgeStyle + "'>" + statusText + "</div>";
@@ -4278,9 +4418,12 @@ function renderParentDashboard() {
             if (tl.status === 'skipped' && tl.skipReason) {
                 html += "  <div style='font-size:12px; color:var(--text-secondary); background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:var(--radius-xs); display:flex; align-items:center; justify-content:space-between; gap:8px;'>";
                 html += "    <span><strong>💬 " + (__('common.reason') || 'Сабаб') + ":</strong> " + tl.skipReason + "</span>";
+                html += "    <div style='display:flex; align-items:center; gap:6px; flex-shrink:0;'>";
                 if (tl.skipPhoto) {
                     html += `    <button type="button" class="view-skip-photo-btn-parent btn-text" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0; display:inline-flex; align-items:center; gap:2px;">🖼️ ` + (__('common.photo_short') || 'Акс') + `</button>`;
                 }
+                html += "      <button class='parent-restore-skip-btn btn btn-outline' data-task-id='" + task.id + "' style='padding:2px 8px; font-size:11px; height:22px; line-height:16px; border-radius:var(--radius-xs); border-color: rgba(16,185,129,0.3); color:#059669; min-width:auto;'>" + (__('parent.restore_btn') || 'Барқарор кардан') + "</button>";
+                html += "    </div>";
                 html += "  </div>";
             }
             
@@ -4301,6 +4444,33 @@ function renderParentDashboard() {
     
     html += "  </ul>";
     html += "</div>";
+
+    // Achievements section on parent dashboard
+    html += "<div class='section-card' style='margin-top:15px;'>";
+    html += "  <h4 style='margin-bottom:12px; display:flex; align-items:center; gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--primary);'><use href='#icon-medal'/></svg> " + (__('achievements.title') || 'Муваффақиятҳо ва нишонҳо') + "</h4>";
+    
+    if (!selectedChild.achievements || selectedChild.achievements.length === 0) {
+        html += "  <p class='empty-state' style='padding: 12px; text-align: center; font-size: 13px; color: var(--text-light);'>—</p>";
+    } else {
+        html += "  <ul class='item-list' style='list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;'>";
+        selectedChild.achievements.forEach(achId => {
+            const ach = ACHIEVEMENTS.find(a => a.id === achId);
+            if (ach) {
+                const displayName = __(`achievement.${achId}`) || ach.name;
+                html += "    <li style='display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:rgba(0,0,0,0.015); border-radius:var(--radius-sm); border:1px solid rgba(0,0,0,0.02);'>";
+                html += "      <span style='font-size:13px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px;'>" + ach.icon + " " + displayName + "</span>";
+                html += "      <button class='parent-revoke-ach-btn btn btn-outline' data-ach-id='" + achId + "' style='padding:2px 8px; font-size:11px; height:22px; line-height:16px; border-radius:var(--radius-xs); border-color: rgba(239,68,68,0.3); color:var(--danger); min-width:auto;'>" + (__('parent.revoke_btn') || 'Бекор кардан') + "</button>";
+                html += "    </li>";
+            }
+        });
+        html += "  </ul>";
+    }
+    html += "</div>"; // end achievements section
+
+    html += "</div>"; // end parent-dashboard-left
+    
+    // Right side: Task Management
+    html += "<div class='parent-dashboard-right'>";
 
     // ---- Task Management Section ----
     html += "<div class='parent-task-section'>";
@@ -4450,6 +4620,8 @@ function renderParentDashboard() {
     }
 
     html += "</div>"; // close parent-task-section
+    html += "</div>"; // close parent-dashboard-right
+    html += "</div>"; // close parent-dashboard-grid
     html += "</div>"; // close parent-overview
 
     container.innerHTML = html;
@@ -4705,12 +4877,33 @@ function renderParentDashboard() {
         });
     });
 
+    // Parent restore skipped task button
+    container.querySelectorAll('.parent-restore-skip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const taskId = btn.dataset.taskId;
+            const task = selectedChild.tasks.find(t => t.id === taskId)
+                      || selectedChild.bonusTasks.find(t => t.id === taskId);
+            if (task) {
+                showRestoreSkipModal(task);
+            }
+        });
+    });
+
     // View skip photo in parent dashboard
     container.querySelectorAll('.view-skip-photo-btn-parent').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const photoUrl = decodeURIComponent(btn.dataset.photo);
             showImagePreview(photoUrl);
+        });
+    });
+
+    // Revoke achievement click handler
+    container.querySelectorAll('.parent-revoke-ach-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const achId = btn.dataset.achId;
+            showRevokeAchievementModal(achId);
         });
     });
 }
@@ -5471,6 +5664,24 @@ function setupEventListeners() {
     document.getElementById('skip-submit-btn').addEventListener('click', submitSkip);
     document.getElementById('skip-close').addEventListener('click', () => {
         document.getElementById('skip-modal').classList.add('hidden');
+    });
+
+    // Restore Skip modal
+    document.getElementById('restore-skip-submit-btn').addEventListener('click', submitRestoreSkip);
+    document.getElementById('restore-skip-pin').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submitRestoreSkip();
+    });
+    document.getElementById('restore-skip-close').addEventListener('click', () => {
+        document.getElementById('restore-skip-modal').classList.add('hidden');
+    });
+
+    // Revoke Achievement Modal
+    document.getElementById('revoke-achievement-submit-btn').addEventListener('click', submitRevokeAchievement);
+    document.getElementById('revoke-achievement-pin').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submitRevokeAchievement();
+    });
+    document.getElementById('revoke-achievement-close').addEventListener('click', () => {
+        document.getElementById('revoke-achievement-modal').classList.add('hidden');
     });
 
     // Image preview modal close
