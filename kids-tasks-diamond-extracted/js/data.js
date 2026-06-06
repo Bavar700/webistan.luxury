@@ -891,6 +891,41 @@ function getOrCreateDailyLog(childId) {
     const today = getToday();
     if (!child.dailyLogs) child.dailyLogs = {};
     if (!child.dailyLogs[today]) {
+        // Process penalties for all past logs before initializing today's log
+        let pastPenaltiesDeducted = false;
+        for (const dateStr in child.dailyLogs) {
+            if (dateStr < today) {
+                const log = child.dailyLogs[dateStr];
+                if (log && log.tasks) {
+                    for (const taskId in log.tasks) {
+                        const tl = log.tasks[taskId];
+                        if (tl && tl.status === 'pending') {
+                            tl.status = 'failed';
+                            tl.confirmed = true;
+                            
+                            // Find task definition
+                            const task = child.tasks.find(t => t.id === taskId)
+                                      || child.bonusTasks.find(t => t.id === taskId);
+                            if (task && task.hasPenalty) {
+                                const pStars = parseInt(task.penaltyStars) || 0;
+                                const pGold  = parseInt(task.penaltyGold)  || 0;
+                                if (pStars > 0) {
+                                    child.stars = Math.max(0, (child.stars || 0) - pStars);
+                                    child.totalDeducted = (child.totalDeducted || 0) + pStars;
+                                }
+                                if (pGold > 0) {
+                                    child.balance = Math.max(0, (child.balance || 0) - pGold);
+                                    child.totalDeducted = (child.totalDeducted || 0) + pGold;
+                                }
+                                tl.penaltyApplied = { stars: pStars, gold: pGold };
+                            }
+                            pastPenaltiesDeducted = true;
+                        }
+                    }
+                }
+            }
+        }
+
         // Clean up completed one-time tasks from active list
         const completedOneTimeIds = [];
         child.tasks.forEach(t => {
@@ -919,7 +954,7 @@ function getOrCreateDailyLog(childId) {
             rewardApplied: false
         };
         syncDailyLogTasks(child, today);
-        saveState(false);
+        saveState(pastPenaltiesDeducted);
     } else {
         syncDailyLogTasks(child, today);
     }

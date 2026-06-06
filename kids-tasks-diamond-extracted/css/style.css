@@ -611,6 +611,27 @@ body {
     flex-shrink: 0;
 }
 
+.task-card-warning {
+    margin-top: 8px;
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px dashed rgba(239, 68, 68, 0.25);
+    color: #DC2626;
+    border-radius: var(--radius-xs);
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    word-break: break-word;
+}
+.dark-mode .task-card-warning {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #F87171;
+}
+
 .task-card .task-info {
     flex: 1;
     min-width: 0;

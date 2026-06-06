@@ -1468,6 +1468,14 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         <div class="task-info">
             <div class="task-name">${task.name}</div>
             <div class="task-meta">${durationText}</div>
+            ${(tl.status === 'pending' && tl.rejectReason) ? `
+                <div class="task-card-warning" style="margin-top: 8px;">
+                    <span>${__('task.rejected_feedback')} "${tl.rejectReason}"</span>
+                    ${tl.rejectPhoto ? `
+                        <button type="button" class="view-reject-photo-btn" data-photo="${encodeURIComponent(tl.rejectPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-left: 6px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>
+                    ` : ''}
+                </div>
+            ` : ''}
         </div>
         <div class="task-right-actions">
             ${tl.status === 'pending' ? `
@@ -1492,6 +1500,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
             ` : ''}
         </div>
     `;
+
+    const viewRejectPhotoBtn = card.querySelector('.view-reject-photo-btn');
+    if (viewRejectPhotoBtn) {
+        viewRejectPhotoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(viewRejectPhotoBtn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    }
 
     card.querySelectorAll('[data-action]').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1722,6 +1739,11 @@ function submitProof() {
         tl.photo = photoImg.src;
     }
     tl.explanation = document.getElementById('proof-explanation').value.trim();
+    
+    // Clear past reject reasons upon resubmission
+    delete tl.rejectReason;
+    delete tl.rejectPhoto;
+
     saveState();
 
     showToast('📸', __('proof.submitted'));
@@ -1765,6 +1787,77 @@ function handlePhotoUpload(event) {
     };
     reader.readAsDataURL(file);
 }
+
+function handleSkipPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.7);
+            document.getElementById('skip-photo-img').src = compressed;
+            document.getElementById('skip-photo-preview').classList.remove('hidden');
+            document.getElementById('skip-photo-btn').classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function handleConfirmRejectPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.7);
+            document.getElementById('confirm-reject-photo-img').src = compressed;
+            document.getElementById('confirm-reject-photo-preview').classList.remove('hidden');
+            document.getElementById('confirm-reject-photo-btn').classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
 
 function handleWithdrawPhotoUpload(event) {
     const file = event.target.files[0];
@@ -1873,6 +1966,16 @@ function showConfirmModal(task) {
         __('confirm.question', { emoji: task.emoji, name: task.name });
     document.getElementById('confirm-pin').value = '';
     document.getElementById('confirm-error').classList.add('hidden');
+
+    // Reset parent reject section
+    document.getElementById('confirm-reject-section').classList.add('hidden');
+    document.getElementById('confirm-reject-reason').value = '';
+    document.getElementById('confirm-reject-photo-input').value = '';
+    document.getElementById('confirm-reject-photo-img').src = '';
+    document.getElementById('confirm-reject-photo-preview').classList.add('hidden');
+    document.getElementById('confirm-reject-photo-btn').classList.remove('hidden');
+    document.getElementById('confirm-submit').classList.remove('hidden');
+    document.getElementById('confirm-reject').textContent = __('confirm.submit_no') || 'Рад кардан';
 
     const scoreGroup = document.getElementById('confirm-exam-score-group');
     if (scoreGroup) {
@@ -2024,6 +2127,30 @@ function submitConfirm() {
 
 // ===== REJECT CONFIRM (reset task back to pending) =====
 function submitReject() {
+    const rejectSection = document.getElementById('confirm-reject-section');
+    const submitBtn = document.getElementById('confirm-submit');
+    const rejectBtn = document.getElementById('confirm-reject');
+
+    // First click: expand reject reason form and change button text
+    if (rejectSection.classList.contains('hidden')) {
+        rejectSection.classList.remove('hidden');
+        submitBtn.classList.add('hidden');
+        rejectBtn.textContent = __('confirm.reject_confirm_btn') || 'Тасдиқи радкунӣ';
+        rejectBtn.style.background = '#EF4444';
+        return;
+    }
+
+    // Second click: perform validations and verify PIN
+    const reason = document.getElementById('confirm-reject-reason').value.trim();
+    const photoImg = document.getElementById('confirm-reject-photo-img');
+    const photoAttached = photoImg.src && photoImg.src.startsWith('data:');
+
+    // Validation: must write a reason OR upload a photo
+    if (!reason && !photoAttached) {
+        showToast('⚠️', __('confirm.validation_error') || 'Лутфан сабабро нависед ё акс бор кунед!');
+        return;
+    }
+
     const pin = document.getElementById('confirm-pin').value;
     if (pin !== state.pin) {
         document.getElementById('confirm-error').classList.remove('hidden');
@@ -2083,6 +2210,15 @@ function submitReject() {
         // Reset task log entry back to pending
         tl.status = 'pending';
         tl.confirmed = false;
+        
+        // Save reject reason and photo
+        tl.rejectReason = reason;
+        if (photoAttached) {
+            tl.rejectPhoto = photoImg.src;
+        } else {
+            delete tl.rejectPhoto;
+        }
+
         delete tl.completedAt;
         delete tl.confirmedAt;
         delete tl.photo;
@@ -2099,18 +2235,43 @@ function submitReject() {
     updateUI();
 }
 
+function showImagePreview(src) {
+    const modal = document.getElementById('image-preview-modal');
+    const content = document.getElementById('image-preview-content');
+    if (modal && content) {
+        content.src = src;
+        modal.classList.remove('hidden');
+    }
+}
+
 // ===== SKIP MODAL =====
 let skipTaskId = null;
 
 function showSkipModal(task) {
     skipTaskId = task.id;
     document.getElementById('skip-reason').value = '';
+    
+    // Reset photo upload state
+    document.getElementById('skip-photo-input').value = '';
+    document.getElementById('skip-photo-img').src = '';
+    document.getElementById('skip-photo-preview').classList.add('hidden');
+    document.getElementById('skip-photo-btn').classList.remove('hidden');
+    
     document.getElementById('skip-modal').classList.remove('hidden');
     document.getElementById('skip-reason').focus();
 }
 
 function submitSkip() {
     const reason = document.getElementById('skip-reason').value.trim();
+    const photoImg = document.getElementById('skip-photo-img');
+    const photoAttached = photoImg.src && photoImg.src.startsWith('data:');
+
+    // Validation: must provide either reason OR photo
+    if (!reason && !photoAttached) {
+        showToast('⚠️', __('skip.validation_error') || 'Лутфан сабабро нависед ё акс бор кунед!');
+        return;
+    }
+
     const child = getCurrentChild();
     const today = getToday();
     const log = child.dailyLogs[today];
@@ -2120,6 +2281,11 @@ function submitSkip() {
         tl.status = 'skipped';
         tl.confirmed = true;
         tl.skipReason = reason; // Save the reason
+        if (photoAttached) {
+            tl.skipPhoto = photoImg.src; // Save the base64 photo
+        } else {
+            delete tl.skipPhoto;
+        }
 
         // Apply penalty if task has one
         const allTasks = [...child.tasks, ...child.bonusTasks];
@@ -2253,18 +2419,45 @@ function showDayDetails(dateStr) {
             totalCount++;
             const isDone = tl.status === 'completed' && tl.confirmed;
             const isSkipped = tl.status === 'skipped';
+            const isFailed = tl.status === 'failed';
             const isInProgress = tl.status === 'in-progress';
             if (isDone) doneCount++;
 
-            const statusIcon = isDone ? '✅' : isSkipped ? '❌' : isInProgress ? '⏳' : '⬜';
-            const statusColor = isDone ? 'var(--success,#10B981)' : isSkipped ? 'var(--danger,#EF4444)' : 'var(--text-light)';
+            const statusIcon = isDone ? '✅' : (isSkipped || isFailed) ? '❌' : isInProgress ? '⏳' : '⬜';
             const emoji = (t.emoji && t.emoji !== 'undefined') ? t.emoji : '📌';
 
+            let detailsHTML = '';
+            if (isSkipped) {
+                if (tl.skipReason) detailsHTML += `<div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">💬 ${__('common.reason') || 'Сабаб'}: ${tl.skipReason}</div>`;
+                if (tl.skipPhoto) {
+                    detailsHTML += `<div style="margin-top:6px;"><button type="button" class="view-calendar-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background:none; border:none; color:var(--primary); font-size:11px; font-weight:600; text-decoration:underline; cursor:pointer; padding:0;">🖼️ ${__('common.photo_short') || 'Акс'}</button></div>`;
+                }
+            } else if (isFailed) {
+                let failText = __('status.failed') || 'Иҷро нашуд';
+                if (tl.penaltyApplied) {
+                    let penaltyParts = [];
+                    if (tl.penaltyApplied.stars > 0) penaltyParts.push(`⭐ ${tl.penaltyApplied.stars}`);
+                    if (tl.penaltyApplied.gold > 0) penaltyParts.push(`🪙 ${tl.penaltyApplied.gold}`);
+                    if (penaltyParts.length > 0) {
+                        failText += ` (${__('task_badge.penalty') || 'Ҷарима'}: ${penaltyParts.join(' ')})`;
+                    }
+                }
+                detailsHTML += `<div style="font-size:12px; color:#EF4444; margin-top:4px;">⚠️ ${failText}</div>`;
+            } else if (isDone) {
+                if (tl.explanation) detailsHTML += `<div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">💬 ${tl.explanation}</div>`;
+                if (tl.photo) {
+                    detailsHTML += `<div style="margin-top:6px;"><button type="button" class="view-calendar-photo-btn" data-photo="${encodeURIComponent(tl.photo)}" style="background:none; border:none; color:var(--primary); font-size:11px; font-weight:600; text-decoration:underline; cursor:pointer; padding:0;">🖼️ ${__('common.photo_short') || 'Акс'}</button></div>`;
+                }
+            }
+
             tasksHTML += `
-                <div style="display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border);">
-                    <span style="font-size:20px; flex-shrink:0; width:28px; text-align:center;">${emoji}</span>
-                    <span style="flex:1; font-size:14px; font-weight:500; color:var(--text); min-width:0; word-break:break-word;">${t.name}</span>
-                    <span style="font-size:18px;">${statusIcon}</span>
+                <div style="display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid var(--border);">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:20px; flex-shrink:0; width:28px; text-align:center;">${emoji}</span>
+                        <span style="flex:1; font-size:14px; font-weight:500; color:var(--text); min-width:0; word-break:break-word;">${t.name}</span>
+                        <span style="font-size:18px; flex-shrink:0;">${statusIcon}</span>
+                    </div>
+                    ${detailsHTML ? `<div style="margin-left:38px;">${detailsHTML}</div>` : ''}
                 </div>`;
         });
 
@@ -2340,6 +2533,14 @@ function showDayDetails(dateStr) {
         </div>`;
 
     wrapper.appendChild(panel);
+
+    panel.querySelectorAll('.view-calendar-photo-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(btn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    });
 
     // Backdrop
     const backdrop = document.createElement('div');
@@ -5028,6 +5229,31 @@ function setupEventListeners() {
         document.getElementById('proof-photo-btn').classList.remove('hidden');
     });
 
+    // Skip photo upload
+    document.getElementById('skip-photo-btn').addEventListener('click', () => {
+        document.getElementById('skip-photo-input').click();
+    });
+    document.getElementById('skip-photo-input').addEventListener('change', handleSkipPhotoUpload);
+    document.getElementById('skip-photo-remove').addEventListener('click', () => {
+        document.getElementById('skip-photo-preview').classList.add('hidden');
+        document.getElementById('skip-photo-img').src = '';
+        document.getElementById('skip-photo-input').value = '';
+        document.getElementById('skip-photo-btn').classList.remove('hidden');
+    });
+
+    // Confirm reject photo upload
+    document.getElementById('confirm-reject-photo-btn').addEventListener('click', () => {
+        document.getElementById('confirm-reject-photo-input').click();
+    });
+    document.getElementById('confirm-reject-photo-input').addEventListener('change', handleConfirmRejectPhotoUpload);
+    document.getElementById('confirm-reject-photo-remove').addEventListener('click', () => {
+        document.getElementById('confirm-reject-photo-preview').classList.add('hidden');
+        document.getElementById('confirm-reject-photo-img').src = '';
+        document.getElementById('confirm-reject-photo-input').value = '';
+        document.getElementById('confirm-reject-photo-btn').classList.remove('hidden');
+    });
+
+
     // Instructions photo upload
     document.getElementById('task-inst-image-btn').addEventListener('click', () => {
         document.getElementById('task-inst-image-input').click();
@@ -5133,6 +5359,12 @@ function setupEventListeners() {
     document.getElementById('skip-close').addEventListener('click', () => {
         document.getElementById('skip-modal').classList.add('hidden');
     });
+
+    // Image preview modal close
+    document.getElementById('image-preview-close').addEventListener('click', () => {
+        document.getElementById('image-preview-modal').classList.add('hidden');
+    });
+
 
     // Excuse buttons
     document.querySelectorAll('.excuse-btn').forEach(btn => {

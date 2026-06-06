@@ -530,6 +530,23 @@
                             <option value="1">1</option>
                         </select>
                     </div>
+                    <div id="confirm-reject-section" class="form-group hidden" style="margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 12px;">
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;" id="confirm-reject-reason-label" data-i18n="confirm.reject_reason_label">Сабаби радкунӣ:</label>
+                        <textarea id="confirm-reject-reason" rows="2" data-i18n-placeholder="common.reason_placeholder" placeholder="Сабабро нависед..." style="width: 100%; box-sizing: border-box; margin-bottom: 8px;"></textarea>
+                        
+                        <label style="font-weight: 600; display: block; margin-bottom: 4px;" id="confirm-reject-photo-label" data-i18n="confirm.reject_photo_label">Акси радкунӣ (ихтиёрӣ):</label>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="file" id="confirm-reject-photo-input" accept="image/*" class="hidden">
+                            <button type="button" class="btn btn-secondary" id="confirm-reject-photo-btn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <svg class="icon-svg" aria-hidden="true" style="width: 14px; height: 14px;"><use href="#icon-plus"/></svg>
+                                <span data-i18n="common.photo_short">Акс</span>
+                            </button>
+                            <div id="confirm-reject-photo-preview" class="hidden" style="position: relative; width: 50px; height: 50px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border);">
+                                <img id="confirm-reject-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
+                                <button type="button" id="confirm-reject-photo-remove" style="position: absolute; top: -2px; right: -2px; background: rgba(0,0,0,0.7); border: none; color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
                     <div style="display:flex; flex-direction:column; gap:10px;">
                         <input type="password" id="confirm-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off" style="width:100%; box-sizing:border-box;">
                         <button class="btn btn-primary" id="confirm-submit" data-i18n="confirm.submit_yes" style="width:100%;">Ҳа, тасдиқ мекунам</button>
@@ -558,10 +575,38 @@
                     <div class="form-group">
                         <textarea id="skip-reason" rows="3" data-i18n-placeholder="common.reason_placeholder" placeholder="Сабабро нависед..."></textarea>
                     </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input type="file" id="skip-photo-input" accept="image/*" class="hidden">
+                        <button type="button" class="btn btn-secondary btn-full" id="skip-photo-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <svg class="icon-svg" aria-hidden="true" style="width: 16px; height: 16px;"><use href="#icon-plus"/></svg>
+                            <span data-i18n="common.photo_short">Акс</span>
+                        </button>
+                        <div id="skip-photo-preview" class="hidden" style="position: relative; width: 100%; height: 150px; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border);">
+                            <img id="skip-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
+                            <button type="button" id="skip-photo-remove" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: none; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; font-weight: bold;">&times;</button>
+                        </div>
+                    </div>
                     <button class="btn btn-primary btn-full" id="skip-submit-btn" style="margin-top:10px;">
                         <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
                         <span data-i18n="skip.submit">Тасдиқ</span>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Preview Modal -->
+        <div class="modal-overlay hidden" id="image-preview-modal" style="z-index: 1500;">
+            <div class="modal" style="max-width: 90%; width: 500px;">
+                <div class="modal-header">
+                    <h3>
+                        <span>Акс</span>
+                    </h3>
+                    <button class="modal-close" id="image-preview-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center; padding: 10px;">
+                    <img id="image-preview-content" style="max-width: 100%; max-height: 70vh; border-radius: 8px; object-fit: contain;">
                 </div>
             </div>
         </div>
