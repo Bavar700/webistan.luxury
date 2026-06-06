@@ -2779,6 +2779,18 @@ function renderSettings() {
                     </div>` : ''}
                 </div>
             </div>
+            <div class="settings-group">
+                <h3><svg class="icon-svg" aria-hidden="true" style="width:18px;height:18px;color:var(--text-secondary);"><use href="#icon-book"/></svg> <span data-i18n="help.modal_title">${__('help.modal_title')}</span></h3>
+                <div class="settings-card">
+                    <div class="settings-item" id="btn-show-help" style="cursor: pointer;">
+                        <span class="settings-item-left">
+                            <svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-book"/></svg>
+                            <span class="settings-item-label" data-i18n="settings.user_guide">${__('settings.user_guide')}</span>
+                        </span>
+                        <span class="settings-item-arrow">›</span>
+                    </div>
+                </div>
+            </div>
         </div>
     `;
 
@@ -2895,6 +2907,17 @@ function renderSettings() {
         showToast('📤', __('settings.export_success'));
         renderSettings();
     });
+
+    const helpBtn = document.getElementById('btn-show-help');
+    if (helpBtn) {
+        helpBtn.addEventListener('click', () => {
+            const modal = document.getElementById('help-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                applyStaticTranslations();
+            }
+        });
+    }
 }
 
 // ===== TASK MODAL =====
@@ -5315,6 +5338,28 @@ function setupEventListeners() {
     });
     document.getElementById('settings-pin-close').addEventListener('click', () => {
         document.getElementById('settings-pin-modal').classList.add('hidden');
+    });
+
+    // User Guide Help Modal Close & Tabs
+    const helpCloseBtn = document.getElementById('help-modal-close');
+    if (helpCloseBtn) {
+        helpCloseBtn.addEventListener('click', () => {
+            document.getElementById('help-modal').classList.add('hidden');
+        });
+    }
+
+    document.querySelectorAll('.help-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.help-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.help-tab-content').forEach(c => c.classList.remove('active'));
+            
+            btn.classList.add('active');
+            const tabId = btn.getAttribute('data-tab');
+            const content = document.getElementById(tabId);
+            if (content) {
+                content.classList.add('active');
+            }
+        });
     });
 
     // PIN modal

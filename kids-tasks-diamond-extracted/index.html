@@ -50,7 +50,7 @@
     </script>
     <title>Офарин — Супоришҳои ман</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%237C3AED' d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
-    <link rel="stylesheet" href="css/style.css?v=143">
+    <link rel="stylesheet" href="css/style.css?v=144">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/flatpickr.min.css">
     <style>
@@ -1143,6 +1143,84 @@
                     <p class="pin-error hidden" id="settings-pin-error" data-i18n="pin.error">Гузарвожаи PIN нодуруст аст!</p>
                     <button type="button" id="settings-pin-forgot" class="pin-forgot-link" data-i18n="settings.forgot_pin">Гузарвожаро фаромӯш кардед?</button>
                 </div>
+        </div>
+
+        <!-- User Guide Help Modal -->
+        <div class="modal-overlay hidden" id="help-modal">
+            <div class="modal" style="max-width: 600px; width: 100%;">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true" style="color:var(--primary); width:18px; height:18px;"><use href="#icon-book"/></svg>
+                        <span data-i18n="help.modal_title">Дастури истифодабаранда</span>
+                    </h3>
+                    <button class="modal-close" id="help-modal-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 75vh; overflow-y: auto; padding: 16px;">
+                    <div class="help-tabs">
+                        <button type="button" class="help-tab-btn active" data-tab="help-about" data-i18n="help.tab_about">О приложении</button>
+                        <button type="button" class="help-tab-btn" data-tab="help-child" data-i18n="help.tab_child">Телефон ребенка</button>
+                        <button type="button" class="help-tab-btn" data-tab="help-parent" data-i18n="help.tab_parent">Родителям</button>
+                        <button type="button" class="help-tab-btn" data-tab="help-rewards" data-i18n="help.tab_rewards">Награды</button>
+                    </div>
+                    
+                    <div class="help-tab-content active" id="help-about">
+                        <h4 data-i18n="help.about_title">О приложении</h4>
+                        <p data-i18n="help.about_p1">«Well Done!» — это интерактивный планировщик задач для детей с игровой механикой наград. Дети выполняют повседневные задания, копят золото (золотые монеты) и звезды, открывают медали и покупают свои «мечты» (реальные награды, одобренные родителями).</p>
+                        <h5 data-i18n="help.reg_title">1. Регистрация и начало работы</h5>
+                        <ul class="help-list">
+                            <li data-i18n="help.reg_step1">Выберите язык интерфейса при первом запуске (таджикский, русский, английский и др.).</li>
+                            <li data-i18n="help.reg_step2">Создайте родительский аккаунт: введите Ваш Email и надежный пароль.</li>
+                            <li data-i18n="help.reg_step3">Задайте родительский 4-значный PIN-код (по умолчанию используется 0000). Он потребуется для подтверждения задач и входа в настройки.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="help-tab-content" id="help-child">
+                        <h4 data-i18n="help.child_setup_title">Пошаговая настройка на телефоне ребенка</h4>
+                        <p data-i18n="help.child_setup_desc">Чтобы ваш ребенок видел только свои задачи и не мог самостоятельно их подтверждать или менять настройки:</p>
+                        <ol class="help-list">
+                            <li data-i18n="help.child_step1">Откройте браузер на телефоне или планшете ребенка и перейдите на сайт: https://well-done-kids.vercel.app</li>
+                            <li data-i18n="help.child_step2">Войдите под тем же Email и паролем, которые Вы использовали на своем родительском телефоне.</li>
+                            <li data-i18n="help.child_step3">Выберите профиль ребенка (например, Юсуф) из списка.</li>
+                            <li data-i18n="help.child_step4">Перейдите в «Настройки» (Settings) -> «Режим устройства» (Device Mode) и переключите его на «Ребенок» (Child).</li>
+                        </ol>
+                        <p style="margin-top: 12px; font-weight: bold; color: var(--danger);" data-i18n="help.child_setup_after">После этого на устройстве ребенка:</p>
+                        <ul class="help-list">
+                            <li data-i18n="help.child_after1">Кнопка родительской панели и настройки автоматически скроются.</li>
+                            <li data-i18n="help.child_after2">Ребенок будет видеть только свои задачи, баланс и достижения.</li>
+                            <li data-i18n="help.child_after3">Подтверждение задач станет возможным только после ввода родительского PIN-кода (на его устройстве) либо удаленно через ваш собственный телефон.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="help-tab-content" id="help-parent">
+                        <h4 data-i18n="help.parent_title">Шаги для родителя (Управление)</h4>
+                        <ol class="help-list">
+                            <li data-i18n="help.parent_step1">Добавление ребенка: В панели родителя добавьте имя ребенка, выберите эмодзи и цвет темы.</li>
+                            <li data-i18n="help.parent_step2">Создание задач: Настройте регулярность (например, ежедневно по будням), награды (золото/звезды), таймер и требование прикреплять фото-отчет.</li>
+                            <li data-i18n="help.parent_step3">Проверка и подтверждение: Просматривайте выполненные ребенком задачи, изучайте фото-отчеты и подтверждайте их с помощью PIN-кода. Награды будут мгновенно зачислены ребенку.</li>
+                            <li data-i18n="help.parent_step4">Отмена ошибочного подтверждения: Если задача была подтверждена случайно или некачественно выполнена — нажмите «Отклонить» в родительском журнале. Все начисленные золото и звезды спишутся автоматически.</li>
+                        </ol>
+                        
+                        <h4 style="margin-top: 16px;" data-i18n="help.child_use_title">Шаги для ребенка (Исполнение)</h4>
+                        <ol class="help-list">
+                            <li data-i18n="help.child_use_step1">Выполняйте задачи из списка, распределенные по времени суток (Утро, День, Вечер).</li>
+                            <li data-i18n="help.child_use_step2">Запускайте таймер выполнения (если настроено родителем).</li>
+                            <li data-i18n="help.child_use_step3">Пишите отчет, делайте фото выполненной работы и отправляйте родителю на проверку.</li>
+                            <li data-i18n="help.child_use_step4">Копите баланс и приобретайте мечты во вкладке «Мечта», которые родитель затем выдаст в реальности.</li>
+                            <li data-i18n="help.child_use_step5">Открывайте 20 уникальных достижений (медалей) в трех лигах (Серебряная, Золотая, Алмазная).</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="help-tab-content" id="help-rewards">
+                        <h4 data-i18n="help.rewards_title">Система наград и серии выполнения</h4>
+                        <ul class="help-list">
+                            <li data-i18n="help.rewards_step1">Мгновенные награды: Каждая подтвержденная родителем задача сразу начисляет золото/звезды на счет ребенка.</li>
+                            <li data-i18n="help.rewards_step2">Бонус за завершение (+10 звезд): Если ребенок выполнил все регулярные задачи дня, он получает дополнительно +10 звезд, а этот день засчитывается в общую серию дней выполнения.</li>
+                            <li data-i18n="help.rewards_step3">Если хотя бы одна задача пропущена или не подтверждена — бонус не начисляется и серия дней сбрасывается.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1454,9 +1532,10 @@
     <!-- Supabase JS Client -->
     <script src="js/supabase-js.js"></script>
 
-    <script src="js/safeStorage.js?v=143"></script>
-    <script src="js/translations.js?v=143"></script>
-    <script src="js/data.js?v=143"></script>
-    <script src="js/app.js?v=143"></script>
+    <script src="js/safeStorage.js?v=144"></script>
+    <script src="js/translations.js?v=144"></script>
+    <script src="js/guide-translations.js?v=144"></script>
+    <script src="js/data.js?v=144"></script>
+    <script src="js/app.js?v=144"></script>
 </body>
 </html>
