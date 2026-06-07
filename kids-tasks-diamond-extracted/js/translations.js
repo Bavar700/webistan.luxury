@@ -147,6 +147,8 @@ const TRANSLATIONS = {
         'parent.reply_and_restore': '🔄 Ҷавоб ва барқарор кардан',
         'parent.restore_title': 'Барқарор кардани супориш',
         'parent.restore_prompt': 'Сабаби барқарор кардани супоришро ворид кунед:',
+        'parent.restored_toast': 'Супориш барқарор карда шуд!',
+        'task.parent_reply': '💬 Ҷавоби волид:',
 
         // Reward type
         'reward.type': 'Намуди мукофот',
@@ -679,6 +681,8 @@ const TRANSLATIONS = {
         'parent.reply_and_restore': '🔄 Ответить и восстановить',
         'parent.restore_title': 'Восстановить задание',
         'parent.restore_prompt': 'Введите причину восстановления задания:',
+        'parent.restored_toast': 'Задание восстановлено!',
+        'task.parent_reply': '💬 Ответ родителя:',
 
         // Reward type
         'reward.type': 'Тип награды',
@@ -1196,6 +1200,8 @@ const TRANSLATIONS = {
         'parent.revoke_btn': 'Revoke',
         'parent.revoke_ach_title': 'Revoke Achievement',
         'parent.revoke_ach_prompt': 'Enter reason for revoking achievement "{name}":',
+        'parent.restored_toast': 'Task restored!',
+        'task.parent_reply': '💬 Parent reply:',
         'reward.type': 'Reward type',
         'reward.money': '🪙',
         'reward.stars': '⭐ Stars',
