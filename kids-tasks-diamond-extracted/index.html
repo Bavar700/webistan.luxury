@@ -375,6 +375,7 @@
                     <h3 id="achievements-title" data-i18n="achievements.title">Муваффақиятҳо ва нишонҳо</h3>
                     <div id="achievements-container" class="achievements-grid"></div>
                     <div id="grand-prize-banner" style="margin-top: 20px;"></div>
+                    <div id="revoked-achievements-container" style="margin-top: 15px;"></div>
                 </div>
             </section>
 
@@ -647,6 +648,78 @@
                     <button class="btn btn-primary btn-full" id="revoke-achievement-submit-btn" style="margin-top:15px; background: var(--danger); border-color: var(--danger);">
                         <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
                         <span data-i18n="confirm">Тасдиқ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parent Reply and Restore Modal -->
+        <div class="modal-overlay hidden" id="parent-reply-modal" style="z-index: 1500;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true" style="color:var(--primary);"><use href="#icon-edit"/></svg>
+                        <span id="parent-reply-modal-title">Ҷавоби волид ва барқароркунӣ</span>
+                    </h3>
+                    <button class="modal-close" id="parent-reply-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="parent-reply-modal-text">Паёми худро ба кӯдак нависед:</p>
+                    <div class="form-group">
+                        <textarea id="parent-reply-text" rows="3" placeholder="Паёми худро нависед..." style="width: 100%; box-sizing: border-box;"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input type="file" id="parent-reply-photo-input" accept="image/*" class="hidden">
+                        <button type="button" class="btn btn-secondary btn-full" id="parent-reply-photo-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+                            <svg class="icon-svg" aria-hidden="true" style="width: 16px; height: 16px;"><use href="#icon-plus"/></svg>
+                            <span>Акс илова кунед (ихтиёрӣ)</span>
+                        </button>
+                        <div id="parent-reply-photo-preview" class="hidden" style="position: relative; width: 100%; height: 150px; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border);">
+                            <img id="parent-reply-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
+                            <button type="button" id="parent-reply-photo-remove" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: none; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; font-weight: bold;">&times;</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="parent-reply-submit-btn" style="margin-top:10px; width: 100%;">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                        <span>Барқарор кардан</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badge Revoke Modal -->
+        <div class="modal-overlay hidden" id="badge-revoke-modal" style="z-index: 1500;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true" style="color:var(--danger);"><use href="#icon-x"/></svg>
+                        <span id="badge-revoke-modal-title">Рад кардани нишон</span>
+                    </h3>
+                    <button class="modal-close" id="badge-revoke-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="badge-revoke-modal-text">Сабаби рад кардани нишонро нависед:</p>
+                    <div class="form-group">
+                        <textarea id="badge-revoke-reason" rows="3" placeholder="Сабабро нависед..." style="width: 100%; box-sizing: border-box;"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <input type="file" id="badge-revoke-photo-input" accept="image/*" class="hidden">
+                        <button type="button" class="btn btn-secondary btn-full" id="badge-revoke-photo-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+                            <svg class="icon-svg" aria-hidden="true" style="width: 16px; height: 16px;"><use href="#icon-plus"/></svg>
+                            <span>Акс илова кунед (ихтиёрӣ)</span>
+                        </button>
+                        <div id="badge-revoke-photo-preview" class="hidden" style="position: relative; width: 100%; height: 150px; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border);">
+                            <img id="badge-revoke-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
+                            <button type="button" id="badge-revoke-photo-remove" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: none; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; font-weight: bold;">&times;</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger btn-full" id="badge-revoke-submit-btn" style="margin-top:10px; width: 100%;">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                        <span>Рад кардан</span>
                     </button>
                 </div>
             </div>
