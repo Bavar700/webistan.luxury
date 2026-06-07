@@ -4531,7 +4531,7 @@ function renderParentDashboard() {
     html += "<div class='section-card' style='margin-bottom:15px;'>";
     html += "<div style='display: grid; grid-template-columns: 1fr; gap: 8px;'>";
     html += "  <button class='btn btn-primary btn-parent-add-task' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px;'>";
-    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + __('settings.add_task') + "</button>";
+    html += "    " + __('settings.add_task') + "</button>";
 
     html += "  <button class='btn btn-outline btn-parent-excuse-day' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; border-color: rgba(245, 158, 11, 0.3); color: var(--warning);'>";
     html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-skip'/></svg> " + __('excuse.title') + "</button>";
@@ -4559,7 +4559,7 @@ function renderParentDashboard() {
                 <div style='background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;'>
                     <div style='display: flex; align-items: center; justify-content: space-between; gap: 8px;'>
                         <div style='font-weight: 700; font-size: 14px; color: var(--text);'>${task.emoji ? task.emoji + ' ' : ''}${task.name}</div>
-                        <span style='display: inline-flex; align-items: center; gap: 4px; background: rgba(239,68,68,0.12); color: var(--danger, #ef4444); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;'>❌ ${__('status.skipped') || 'Сарфи назар'}</span>
+                        <span style='display: inline-flex; align-items: center; gap: 4px; background: rgba(239,68,68,0.12); color: var(--danger, #ef4444); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;'>${__('status.skipped') || '❌ Сарфи назар'}</span>
                     </div>
                     ${tl.skipReason ? `
                     <div style='background: var(--card-bg, rgba(255,255,255,0.04)); border-left: 3px solid rgba(239,68,68,0.5); padding: 8px 12px; border-radius: 0 8px 8px 0;'>

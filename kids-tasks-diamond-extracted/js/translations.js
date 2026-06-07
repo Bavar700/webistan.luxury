@@ -371,9 +371,9 @@ const TRANSLATIONS = {
         'auth.error_invalid_email': 'Имейли нодуруст',
 
         // Task Form
-        'task_form.title_new': 'Супориши нав',
+        'task_form.title_new': '➕ Супориши нав',
         'task_form.title_edit': 'Тағйири супориш',
-        'task_form.title_new_bonus': 'Супориши бонусии нав',
+        'task_form.title_new_bonus': '➕ Супориши бонусии нав',
         'task_form.name': 'Номи супориш',
         'task_form.name_placeholder': 'Номи супоришро ворид кунед',
         'task_form.duration': 'Давомнокӣ (дақиқа)',
