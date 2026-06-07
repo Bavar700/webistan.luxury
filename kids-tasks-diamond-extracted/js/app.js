@@ -1476,6 +1476,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
                     ` : ''}
                 </div>
             ` : ''}
+            ${(tl.status === 'pending' && tl.parentReply) ? `
+                <div class="task-card-warning" style="margin-top: 8px; border-color: var(--primary); background: rgba(124, 58, 237, 0.05);">
+                    <span style="color: var(--primary); font-weight: 600;">${__('task.parent_reply') || '💬 Ҷавоби волид:'}</span>
+                    <span style="display: block; margin-top: 2px;">"${tl.parentReply}"</span>
+                    ${tl.parentReplyPhoto ? `
+                        <button type="button" class="view-parent-reply-photo-btn" data-photo="${encodeURIComponent(tl.parentReplyPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-top: 4px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>
+                    ` : ''}
+                </div>
+            ` : ''}
         </div>
         <div class="task-right-actions">
             ${tl.status === 'pending' ? `
@@ -1523,6 +1532,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         viewSkipPhotoBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const photoUrl = decodeURIComponent(viewSkipPhotoBtn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    }
+
+    const viewParentReplyPhotoBtn = card.querySelector('.view-parent-reply-photo-btn');
+    if (viewParentReplyPhotoBtn) {
+        viewParentReplyPhotoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(viewParentReplyPhotoBtn.dataset.photo);
             showImagePreview(photoUrl);
         });
     }
@@ -1834,6 +1852,76 @@ function handleSkipPhotoUpload(event) {
             document.getElementById('skip-photo-img').src = compressed;
             document.getElementById('skip-photo-preview').classList.remove('hidden');
             document.getElementById('skip-photo-btn').classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function handleParentReplyPhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.7);
+            document.getElementById('parent-reply-photo-img').src = compressed;
+            document.getElementById('parent-reply-photo-preview').classList.remove('hidden');
+            document.getElementById('parent-reply-photo-btn').classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function handleBadgeRevokePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width;
+            let h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.7);
+            document.getElementById('badge-revoke-photo-img').src = compressed;
+            document.getElementById('badge-revoke-photo-preview').classList.remove('hidden');
+            document.getElementById('badge-revoke-photo-btn').classList.add('hidden');
         };
         img.src = e.target.result;
     };
@@ -2329,6 +2417,136 @@ function submitSkip() {
     document.getElementById('skip-modal').classList.add('hidden');
 }
 
+let parentReplyTaskId = null;
+
+function showParentReplyModal(task) {
+    parentReplyTaskId = task.id;
+    document.getElementById('parent-reply-text').value = '';
+    
+    // Reset photo upload state
+    document.getElementById('parent-reply-photo-input').value = '';
+    document.getElementById('parent-reply-photo-img').src = '';
+    document.getElementById('parent-reply-photo-preview').classList.add('hidden');
+    document.getElementById('parent-reply-photo-btn').classList.remove('hidden');
+    
+    document.getElementById('parent-reply-modal').classList.remove('hidden');
+    document.getElementById('parent-reply-text').focus();
+}
+
+function submitParentReply() {
+    const replyText = document.getElementById('parent-reply-text').value.trim();
+    const photoImg = document.getElementById('parent-reply-photo-img');
+    const photoAttached = photoImg.src && photoImg.src.startsWith('data:');
+
+    // Validation: must provide either text OR photo
+    if (!replyText && !photoAttached) {
+        showToast('⚠️', __('skip.validation_error') || 'Лутфан ҷавобро нависед ё акс бор кунед!');
+        return;
+    }
+
+    const selectedChild = getCurrentChild();
+    if (!selectedChild) return;
+
+    const task = selectedChild.tasks.find(t => t.id === parentReplyTaskId) || selectedChild.bonusTasks.find(t => t.id === parentReplyTaskId);
+    if (!task) return;
+
+    const log = getOrCreateDailyLog(selectedChild.id);
+    const tl = log.tasks[task.id];
+    if (tl) {
+        // Refund penalty if applied
+        if (tl.penaltyApplied) {
+            if (tl.penaltyApplied.stars > 0) {
+                selectedChild.stars = (selectedChild.stars || 0) + tl.penaltyApplied.stars;
+                selectedChild.totalDeducted = Math.max(0, (selectedChild.totalDeducted || 0) - tl.penaltyApplied.stars);
+            }
+            if (tl.penaltyApplied.gold > 0) {
+                selectedChild.balance = (selectedChild.balance || 0) + tl.penaltyApplied.gold;
+                selectedChild.totalDeducted = Math.max(0, (selectedChild.totalDeducted || 0) - tl.penaltyApplied.gold);
+            }
+            delete tl.penaltyApplied;
+        }
+
+        tl.status = 'pending';
+        tl.confirmed = false;
+        tl.parentReply = replyText;
+        if (photoAttached) {
+            tl.parentReplyPhoto = photoImg.src; // Save the base64 photo
+        } else {
+            delete tl.parentReplyPhoto;
+        }
+
+        saveState();
+        showToast('🎉', __('parent.restored_toast') || 'Супориш барқарор карда шуд!');
+        document.getElementById('parent-reply-modal').classList.add('hidden');
+        renderParentDashboard();
+        updateUI();
+    }
+}
+
+let badgeRevokeId = null;
+let badgeRevokeSuccessCallback = null;
+
+function showBadgeRevokeModal(id, successCallback) {
+    const a = ACHIEVEMENTS.find(item => item.id === id);
+    if (!a) return;
+
+    badgeRevokeId = id;
+    badgeRevokeSuccessCallback = successCallback;
+
+    const displayName = __(`achievement.${id}`) || a.name;
+    document.getElementById('badge-revoke-name').textContent = displayName;
+    document.getElementById('badge-revoke-reason').value = '';
+    
+    // Reset photo upload state
+    document.getElementById('badge-revoke-photo-input').value = '';
+    document.getElementById('badge-revoke-photo-img').src = '';
+    document.getElementById('badge-revoke-photo-preview').classList.add('hidden');
+    document.getElementById('badge-revoke-photo-btn').classList.remove('hidden');
+
+    document.getElementById('badge-revoke-modal').classList.remove('hidden');
+    document.getElementById('badge-revoke-reason').focus();
+}
+
+function submitBadgeRevoke() {
+    const reason = document.getElementById('badge-revoke-reason').value.trim();
+    const photoImg = document.getElementById('badge-revoke-photo-img');
+    const photoAttached = photoImg.src && photoImg.src.startsWith('data:');
+
+    // Validation: must write a reason OR upload a photo
+    if (!reason && !photoAttached) {
+        showToast('⚠️', __('confirm.validation_error') || 'Лутфан сабабро нависед ё акс бор кунед!');
+        return;
+    }
+
+    const selectedChild = getCurrentChild();
+    if (!selectedChild) return;
+
+    if (!Array.isArray(selectedChild.revokedAchievements)) {
+        selectedChild.revokedAchievements = [];
+    }
+    if (!selectedChild.revokedAchievements.includes(badgeRevokeId)) {
+        selectedChild.revokedAchievements.push(badgeRevokeId);
+    }
+    
+    // Save revocation details
+    selectedChild.revokedAchievementsDetails = selectedChild.revokedAchievementsDetails || {};
+    selectedChild.revokedAchievementsDetails[badgeRevokeId] = {
+        reason: reason,
+        photo: photoAttached ? photoImg.src : null,
+        timestamp: Date.now()
+    };
+
+    selectedChild.achievements = (selectedChild.achievements || []).filter(a => a !== badgeRevokeId);
+    
+    saveState();
+    showToast('❌', __('dream.rejected_short') || 'Рад шуд');
+    document.getElementById('badge-revoke-modal').classList.add('hidden');
+
+    if (badgeRevokeSuccessCallback) {
+        badgeRevokeSuccessCallback();
+    }
+}
+
 // ===== CALENDAR =====
 let calendarMonth = new Date().getMonth();
 let calendarYear = new Date().getFullYear();
@@ -2785,6 +3003,47 @@ function renderAchievements() {
             </div>
         `;
     }
+
+    const revokedContainer = document.getElementById('revoked-achievements-container');
+    if (revokedContainer) {
+        let revokedHtml = '';
+        if (child.revokedAchievements && child.revokedAchievements.length > 0 && child.revokedAchievementsDetails) {
+            revokedHtml += `<h4 style="margin-top: 20px; color: var(--danger); font-size: 14px; font-weight: 700; margin-bottom: 8px;">`;
+            revokedHtml += `  <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;color:var(--danger);vertical-align:middle;margin-right:4px;"><use href="#icon-x"/></svg>`;
+            revokedHtml += `  ${__('achievements.revoked_title') || 'Нишонҳои радшуда'}</h4>`;
+            revokedHtml += `<div style="display: flex; flex-direction: column; gap: 8px;">`;
+            
+            child.revokedAchievements.forEach(badgeId => {
+                const a = ACHIEVEMENTS.find(item => item.id === badgeId);
+                if (!a) return;
+                const details = child.revokedAchievementsDetails[badgeId] || {};
+                const displayName = __(`achievement.${badgeId}`) || a.name;
+                const reasonText = details.reason || 'Сабаб навишта нашудааст';
+                
+                revokedHtml += `<div class="task-card-warning" style="display: block; margin-top: 0; border-color: var(--danger); background: rgba(239, 68, 68, 0.03); padding: 10px 14px; border-radius: var(--radius-sm);">`;
+                revokedHtml += `  <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: var(--danger); margin-bottom: 4px;">`;
+                revokedHtml += `    <span>${a.icon} ${displayName}</span>`;
+                revokedHtml += `    <span style="font-size: 10px; font-weight: normal; color: var(--text-light);">${details.timestamp ? new Date(details.timestamp).toLocaleDateString() : ''}</span>`;
+                revokedHtml += `  </div>`;
+                revokedHtml += `  <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">"${reasonText}"</div>`;
+                if (details.photo) {
+                    revokedHtml += `  <div style="margin-top: 6px;"><button type="button" class="view-revoked-badge-photo-btn" data-photo="${encodeURIComponent(details.photo)}" style="background: none; border: none; color: var(--danger); font-weight: 600; text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
+                }
+                revokedHtml += `</div>`;
+            });
+            revokedHtml += `</div>`;
+        }
+        revokedContainer.innerHTML = revokedHtml;
+        
+        // Attach click listeners for revoked badge photos
+        revokedContainer.querySelectorAll('.view-revoked-badge-photo-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const photoUrl = decodeURIComponent(btn.dataset.photo);
+                showImagePreview(photoUrl);
+            });
+        });
+    }
 }
 
 function showAchievementDetails(id) {
@@ -2843,17 +3102,10 @@ function showAchievementDetails(id) {
     if (earned && parentPinVerified) {
         revokeBtn.style.display = 'block';
         revokeBtn.onclick = function() {
-            if (confirm(__('confirm.reject_reason_label') || 'Оё шумо мутмаин ҳастед, ки ин дастовардро бекор кардан мехоҳед?')) {
-                if (!child.revokedAchievements) child.revokedAchievements = [];
-                if (!child.revokedAchievements.includes(id)) {
-                    child.revokedAchievements.push(id);
-                }
-                child.achievements = child.achievements.filter(a => a !== id);
-                saveState();
-                showToast('❌', __('dream.rejected_short') || 'Рад шуд');
+            showBadgeRevokeModal(id, function() {
                 closeAchievementModal();
                 renderAchievements();
-            }
+            });
         };
     } else {
         revokeBtn.style.display = 'none';
@@ -4155,6 +4407,12 @@ function renderRoutine() {
                         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
                             <div>
                                 <div style="font-weight:600; font-size:14px; margin-bottom:4px;">${task.name}</div>
+                                ${(tl && tl.parentReply && status === 'pending') ? `
+                                    <div style="margin-top:4px; font-size:12px; color:var(--primary); background:rgba(124,58,237,0.05); padding:6px; border-radius:4px; border-left: 2px solid var(--primary); width: fit-content;">
+                                        <strong>${__('task.parent_reply') || '💬 Ҷавоби волид:'}</strong> "${tl.parentReply}"
+                                        ${tl.parentReplyPhoto ? `<br><button type="button" class="view-parent-reply-photo-btn" data-photo="${encodeURIComponent(tl.parentReplyPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-top: 4px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>` : ''}
+                                    </div>
+                                ` : ''}
                                 <div style="display:flex; gap:6px; flex-wrap:wrap; font-size:11px;">
                                     ${task.endTime
                                         ? `<span style="background:rgba(107,114,128,0.12); color:rgb(75,85,99); padding:2px 6px; border-radius:4px;">🕒 ${task.startTime || '--:--'}–${task.endTime}</span>`
@@ -4185,6 +4443,14 @@ function renderRoutine() {
     container.innerHTML = html;
 
     container.querySelectorAll('.view-skip-photo-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(btn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    });
+
+    container.querySelectorAll('.view-parent-reply-photo-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const photoUrl = decodeURIComponent(btn.dataset.photo);
@@ -4258,11 +4524,8 @@ function renderParentDashboard() {
 
     var html = "<div class='parent-overview'>";
 
-    // Header with Exit Button
-    html += "<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;'>";
-    html += "  <h3 style='margin:0;'>" + __('parent.dashboard') + "</h3>";
-    html += "  <button class='btn btn-outline' id='btn-exit-parent' style='padding:6px 12px; font-size:12px; color:var(--danger); border-color:var(--danger);'><svg class='icon-svg' style='width:12px;height:12px;margin-right:4px;' aria-hidden='true'><use href='#icon-close'/></svg> " + (__('parent.exit') || 'Баромадан') + "</button>";
-    html += "</div>";
+    // Header removed or replaced with simple margin
+    html += "<div style='margin-top:10px;'></div>";
 
     // Top action buttons in 2x2 grid
     html += "<div class='section-card' style='margin-bottom:15px;'>";
@@ -4282,7 +4545,7 @@ function renderParentDashboard() {
 
     // Skipped and Awaiting Tasks Review
     const log = getOrCreateDailyLog(selectedChild.id);
-    const reviewTasks = Object.values(log.tasks).filter(tl => tl.status === 'awaiting-confirm' || tl.status === 'skipped');
+    const reviewTasks = Object.values(log.tasks).filter(tl => tl.status === 'awaiting-confirm' || tl.status === 'skipped' || (tl.status === 'pending' && tl.rejectReason));
     if (reviewTasks.length > 0) {
         html += "<div class='section-card' style='border-left: 3px solid var(--warning);'><h4>" + (__('parent.review_tasks') || 'Назорати супоришҳои имрӯза') + "</h4>";
         html += "<ul class='item-list'>";
@@ -4305,8 +4568,21 @@ function renderParentDashboard() {
                 if (tl.skipPhoto) {
                     html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--danger); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
                 }
+                html += `  <div style='margin-top: 8px;'><button class='btn btn-outline parent-reply-restore-btn' data-task-id='${task.id}' style='padding: 4px 10px; font-size: 12px; color: var(--primary); border-color: var(--primary); font-weight: 600;'>${__('parent.reply_and_restore') || 'Ҷавоб ва барқарор кардан'}</button></div>`;
             } else if (tl.status === 'awaiting-confirm') {
                 html += `  <div style='color: var(--warning); font-size: 12px; margin-top: 4px;'>⏳ Интизори тасдиқ</div>`;
+                if (tl.explanation) {
+                    html += `  <div style='font-size: 12px; background: rgba(245,158,11,0.05); padding: 6px; border-radius: 4px; margin-top: 4px; border-left: 2px solid var(--warning);'>📝 Шарҳ: ${tl.explanation}</div>`;
+                }
+                if (tl.photo) {
+                    html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.photo)}" style="background: none; border: none; color: var(--warning); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
+                }
+            } else if (tl.status === 'pending' && tl.rejectReason) {
+                html += `  <div style='color: var(--danger); font-size: 12px; margin-top: 4px;'>❌ Рад карда шуд</div>`;
+                html += `  <div style='font-size: 12px; background: rgba(239,68,68,0.05); padding: 6px; border-radius: 4px; margin-top: 4px; border-left: 2px solid var(--danger);'>📝 Сабаби радкунӣ: ${tl.rejectReason}</div>`;
+                if (tl.rejectPhoto) {
+                    html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.rejectPhoto)}" style="background: none; border: none; color: var(--danger); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
+                }
             }
             html += "</li>";
         });
@@ -4474,6 +4750,13 @@ function renderParentDashboard() {
     }
 
     html += "</div>"; // close parent-task-section
+
+    // Bottom Exit Button
+    html += "<div style='margin-top: 24px; display: flex; justify-content: center; padding-bottom: 24px;'>";
+    html += "  <button class='btn btn-outline' id='btn-exit-parent' style='width: 100%; max-width: 260px; height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--danger); border-color: var(--danger); font-weight: 600; font-size: 14px;'>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-x'/></svg> " + (__('parent.exit') || 'Баромадан') + "</button>";
+    html += "</div>";
+
     html += "</div>"; // close parent-overview
 
     container.innerHTML = html;
@@ -4505,6 +4788,18 @@ function renderParentDashboard() {
         });
     });
 
+    // Reply and restore skipped tasks
+    container.querySelectorAll('.parent-reply-restore-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var taskId = this.dataset.taskId;
+            var task = selectedChild.tasks.find(t => t.id === taskId) || selectedChild.bonusTasks.find(t => t.id === taskId);
+            if (task) {
+                showParentReplyModal(task);
+            }
+        });
+    });
+
     // View skip photo
     container.querySelectorAll('.parent-view-skip-photo-btn').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -4519,16 +4814,9 @@ function renderParentDashboard() {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             var id = this.dataset.id;
-            if (confirm(__('confirm.reject_reason_label') || 'Оё шумо мутмаин ҳастед, ки ин дастовардро бекор кардан мехоҳед?')) {
-                if (!selectedChild.revokedAchievements) selectedChild.revokedAchievements = [];
-                if (!selectedChild.revokedAchievements.includes(id)) {
-                    selectedChild.revokedAchievements.push(id);
-                }
-                selectedChild.achievements = selectedChild.achievements.filter(a => a !== id);
-                saveState();
-                showToast('❌', __('dream.rejected_short') || 'Рад шуд');
+            showBadgeRevokeModal(id, function() {
                 renderParentDashboard();
-            }
+            });
         });
     });
 
@@ -5416,6 +5704,42 @@ function setupEventListeners() {
         document.getElementById('confirm-reject-photo-input').value = '';
         document.getElementById('confirm-reject-photo-btn').classList.remove('hidden');
     });
+
+    // Parent reply photo upload
+    document.getElementById('parent-reply-photo-btn').addEventListener('click', () => {
+        document.getElementById('parent-reply-photo-input').click();
+    });
+    document.getElementById('parent-reply-photo-input').addEventListener('change', handleParentReplyPhotoUpload);
+    document.getElementById('parent-reply-photo-remove').addEventListener('click', () => {
+        document.getElementById('parent-reply-photo-preview').classList.add('hidden');
+        document.getElementById('parent-reply-photo-img').src = '';
+        document.getElementById('parent-reply-photo-input').value = '';
+        document.getElementById('parent-reply-photo-btn').classList.remove('hidden');
+    });
+
+    // Parent reply modal close
+    document.getElementById('parent-reply-close').addEventListener('click', () => {
+        document.getElementById('parent-reply-modal').classList.add('hidden');
+    });
+    document.getElementById('parent-reply-submit-btn').addEventListener('click', submitParentReply);
+
+    // Badge revoke photo upload
+    document.getElementById('badge-revoke-photo-btn').addEventListener('click', () => {
+        document.getElementById('badge-revoke-photo-input').click();
+    });
+    document.getElementById('badge-revoke-photo-input').addEventListener('change', handleBadgeRevokePhotoUpload);
+    document.getElementById('badge-revoke-photo-remove').addEventListener('click', () => {
+        document.getElementById('badge-revoke-photo-preview').classList.add('hidden');
+        document.getElementById('badge-revoke-photo-img').src = '';
+        document.getElementById('badge-revoke-photo-input').value = '';
+        document.getElementById('badge-revoke-photo-btn').classList.remove('hidden');
+    });
+
+    // Badge revoke modal close
+    document.getElementById('badge-revoke-close').addEventListener('click', () => {
+        document.getElementById('badge-revoke-modal').classList.add('hidden');
+    });
+    document.getElementById('badge-revoke-submit-btn').addEventListener('click', submitBadgeRevoke);
 
 
     // Instructions photo upload
