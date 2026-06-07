@@ -27,7 +27,7 @@ export default async function Index({
     <main className="relative flex flex-col bg-background selection:bg-accent/10 selection:text-foreground">
       <Navbar />
 
-      <HeroSection id="home" />
+      <HeroSection />
       
       <div className="flex flex-col space-y-[120px] pb-[120px]">
         <ProjectCalculator />
