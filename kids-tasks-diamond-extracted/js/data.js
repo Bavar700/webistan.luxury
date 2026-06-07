@@ -190,7 +190,7 @@ function getDefaultTasks() {
 }
 
 const ACHIEVEMENTS = [
-    { id: 'first_task', name: '🌟 Супориши аввал', icon: '🎯', desc: 'Иҷрои 3 супориши аввал' },
+    { id: 'first_task', name: '🌟 Супориши аввал', icon: '🎯', desc: 'Иҷрои 1 супориши аввал' },
     { id: 'all_today', name: '⭐ Ҳамаи супоришҳо', icon: '⭐', desc: 'Иҷрои ҳамаи супоришҳои имрӯз' },
     { id: 'week_streak', name: '🔥 Ҳафтаи пурра', icon: '🔥', desc: '7 рӯз пай дар пай' },
     { id: 'month_streak', name: '🏆 Моҳи тиллоӣ', icon: '🏆', desc: '30 рӯз пай дар пай' },
@@ -833,7 +833,9 @@ function getCurrentChild() {
 }
 
 function getToday() {
-    return new Date().toISOString().split('T')[0];
+    const d = new Date();
+    const tzOffset = d.getTimezoneOffset() * 60000;
+    return new Date(d - tzOffset).toISOString().split('T')[0];
 }
 
 function formatDate(dateStr) {
@@ -1208,7 +1210,7 @@ function getAchievementProgress(child, id) {
                     }
                 });
             });
-            return { current: Math.min(3, totalCompleted), target: 3, formatted: `${Math.min(3, totalCompleted)} / 3` };
+            return { current: Math.min(1, totalCompleted), target: 1, formatted: `${Math.min(1, totalCompleted)} / 1` };
         }
         case 'all_today': {
             const todayLog = child.dailyLogs[getToday()];
@@ -1395,6 +1397,13 @@ function checkAchievements(childId) {
     const m = Math.pow(2, Math.min(2, child.achievementTier));
 
     if (!child.achievements) child.achievements = [];
+    if (!child.revokedAchievements) child.revokedAchievements = [];
+
+    // Temporarily override includes to prevent re-awarding revoked achievements
+    const _origIncludes = child.achievements.includes;
+    child.achievements.includes = function(id) {
+        return _origIncludes.call(this, id) || child.revokedAchievements.includes(id);
+    };
 
     let totalCompleted = 0;
     Object.values(child.dailyLogs).forEach(log => {
@@ -1404,7 +1413,7 @@ function checkAchievements(childId) {
             }
         });
     });
-    if (totalCompleted >= 3 && !child.achievements.includes('first_task')) {
+    if (totalCompleted >= 1 && !child.achievements.includes('first_task')) {
         child.achievements.push('first_task');
         unlocked.push(__('achievement.first_task'));
     }

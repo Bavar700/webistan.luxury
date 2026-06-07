@@ -1497,6 +1497,14 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
             ` : ''}
             ${tl.status === 'skipped' ? `
                 <div class="task-status-badge status-skipped">${statusLabels.skipped}</div>
+                ${tl.skipReason ? `
+                    <div class="task-card-warning" style="margin-top: 8px; width: 100%; border-color: var(--danger, #EF4444); background: rgba(239, 68, 68, 0.05);">
+                        <span>📝 ${__('common.reason') || 'Сабаб'}: ${tl.skipReason}</span>
+                        ${tl.skipPhoto ? `
+                            <button type="button" class="view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--danger, #EF4444); font-weight: 600; text-decoration: underline; margin-left: 6px; font-size: 11px; cursor: pointer; padding: 0;">📸 Акс</button>
+                        ` : ''}
+                    </div>
+                ` : ''}
             ` : ''}
         </div>
     `;
@@ -1506,6 +1514,15 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         viewRejectPhotoBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const photoUrl = decodeURIComponent(viewRejectPhotoBtn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    }
+
+    const viewSkipPhotoBtn = card.querySelector('.view-skip-photo-btn');
+    if (viewSkipPhotoBtn) {
+        viewSkipPhotoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(viewSkipPhotoBtn.dataset.photo);
             showImagePreview(photoUrl);
         });
     }
@@ -2810,6 +2827,36 @@ function showAchievementDetails(id) {
             statusEl.style.color = '#6b7280';
             statusEl.style.border = '1px solid rgba(107, 114, 128, 0.2)';
         }
+    }
+
+    let revokeBtn = document.getElementById('achievement-revoke-btn');
+    if (!revokeBtn) {
+        revokeBtn = document.createElement('button');
+        revokeBtn.id = 'achievement-revoke-btn';
+        revokeBtn.className = 'btn btn-danger';
+        revokeBtn.style.marginTop = '15px';
+        revokeBtn.style.width = '100%';
+        revokeBtn.textContent = __('parent.reject') || 'Рад кардан';
+        document.getElementById('achievement-modal').querySelector('.modal-body').appendChild(revokeBtn);
+    }
+    
+    if (earned && parentPinVerified) {
+        revokeBtn.style.display = 'block';
+        revokeBtn.onclick = function() {
+            if (confirm(__('confirm.reject_reason_label') || 'Оё шумо мутмаин ҳастед, ки ин дастовардро бекор кардан мехоҳед?')) {
+                if (!child.revokedAchievements) child.revokedAchievements = [];
+                if (!child.revokedAchievements.includes(id)) {
+                    child.revokedAchievements.push(id);
+                }
+                child.achievements = child.achievements.filter(a => a !== id);
+                saveState();
+                showToast('❌', __('dream.rejected_short') || 'Рад шуд');
+                closeAchievementModal();
+                renderAchievements();
+            }
+        };
+    } else {
+        revokeBtn.style.display = 'none';
     }
     
     document.getElementById('achievement-modal').classList.remove('hidden');
@@ -4123,6 +4170,12 @@ function renderRoutine() {
                                 ${statusLabels[status] || statusLabels['pending']}
                             </div>
                         </div>
+                        ${(timeState === 'skipped' && tl && tl.skipReason) ? `
+                            <div style="margin-top:8px; font-size:12px; color:var(--text-secondary); background:rgba(239,68,68,0.05); padding:6px; border-radius:4px; border-left: 2px solid var(--danger);">
+                                📝 ${__('common.reason') || 'Сабаб'}: ${tl.skipReason}
+                                ${tl.skipPhoto ? `<br><button type="button" class="view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--danger, #EF4444); font-weight: 600; text-decoration: underline; margin-top: 4px; font-size: 11px; cursor: pointer; padding: 0;">📸 Акс</button>` : ''}
+                            </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
@@ -4130,6 +4183,14 @@ function renderRoutine() {
     });
 
     container.innerHTML = html;
+
+    container.querySelectorAll('.view-skip-photo-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const photoUrl = decodeURIComponent(btn.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    });
 
     // Tap a pending/active routine item → reuse the existing, proven completion flow.
     container.querySelectorAll('.routine-item[data-task-id]').forEach(el => {
@@ -4197,6 +4258,12 @@ function renderParentDashboard() {
 
     var html = "<div class='parent-overview'>";
 
+    // Header with Exit Button
+    html += "<div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;'>";
+    html += "  <h3 style='margin:0;'>" + __('parent.dashboard') + "</h3>";
+    html += "  <button class='btn btn-outline' id='btn-exit-parent' style='padding:6px 12px; font-size:12px; color:var(--danger); border-color:var(--danger);'><svg class='icon-svg' style='width:12px;height:12px;margin-right:4px;' aria-hidden='true'><use href='#icon-close'/></svg> " + (__('parent.exit') || 'Баромадан') + "</button>";
+    html += "</div>";
+
     // Top action buttons in 2x2 grid
     html += "<div class='section-card' style='margin-bottom:15px;'>";
     html += "<div style='display: grid; grid-template-columns: 1fr; gap: 8px;'>";
@@ -4212,6 +4279,55 @@ function renderParentDashboard() {
 
     // ---- Task Management Section ----
     html += "<div class='parent-task-section'>";
+
+    // Skipped and Awaiting Tasks Review
+    const log = getOrCreateDailyLog(selectedChild.id);
+    const reviewTasks = Object.values(log.tasks).filter(tl => tl.status === 'awaiting-confirm' || tl.status === 'skipped');
+    if (reviewTasks.length > 0) {
+        html += "<div class='section-card' style='border-left: 3px solid var(--warning);'><h4>" + (__('parent.review_tasks') || 'Назорати супоришҳои имрӯза') + "</h4>";
+        html += "<ul class='item-list'>";
+        reviewTasks.forEach(tl => {
+            const task = selectedChild.tasks.find(t => t.id === tl.id) || selectedChild.bonusTasks.find(t => t.id === tl.id);
+            if (!task) return;
+            html += "<li style='padding: 10px; border-bottom: 1px solid var(--border);'>";
+            html += `  <div style='display: flex; justify-content: space-between; align-items: center;'>`;
+            html += `    <div style='font-weight: 600; font-size: 14px;'>${task.name}</div>`;
+            if (tl.status === 'awaiting-confirm') {
+                html += `    <button class='btn btn-primary parent-confirm-task-btn' data-task-id='${task.id}' style='padding: 4px 10px; font-size: 12px;'>${__('task.confirm') || 'Тасдиқ'}</button>`;
+            }
+            html += `  </div>`;
+            
+            if (tl.status === 'skipped') {
+                html += `  <div style='color: var(--danger); font-size: 12px; margin-top: 4px;'>❌ Сарфи назар шуд</div>`;
+                if (tl.skipReason) {
+                    html += `  <div style='font-size: 12px; background: rgba(239,68,68,0.05); padding: 6px; border-radius: 4px; margin-top: 4px; border-left: 2px solid var(--danger);'>📝 Сабаб: ${tl.skipReason}</div>`;
+                }
+                if (tl.skipPhoto) {
+                    html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--danger); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
+                }
+            } else if (tl.status === 'awaiting-confirm') {
+                html += `  <div style='color: var(--warning); font-size: 12px; margin-top: 4px;'>⏳ Интизори тасдиқ</div>`;
+            }
+            html += "</li>";
+        });
+        html += "</ul></div>";
+    }
+
+    // Achievements Review
+    if (selectedChild.achievements && selectedChild.achievements.length > 0) {
+        html += "<div class='section-card'><h4>" + (__('achievements.title') || 'Дастовардҳо') + "</h4>";
+        html += "<div style='display: flex; flex-wrap: wrap; gap: 8px;'>";
+        selectedChild.achievements.forEach(id => {
+            const a = ACHIEVEMENTS.find(item => item.id === id);
+            if (!a) return;
+            const displayName = __(`achievement.${id}`) || a.name;
+            html += `<div style="background: rgba(124, 58, 237, 0.1); padding: 6px 12px; border-radius: 16px; font-size: 12px; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(124,58,237,0.2);">`;
+            html += `<span>${a.icon} ${displayName}</span>`;
+            html += `<button class="parent-revoke-badge-btn" data-id="${id}" style="background:none; border:none; color:var(--danger); cursor:pointer; font-size:16px; margin-left:4px; line-height: 1;" title="${__('parent.reject') || 'Рад кардан'}">×</button>`;
+            html += `</div>`;
+        });
+        html += "</div></div>";
+    }
 
     // Regular tasks - render only if count > 0
     if (selectedChild.tasks.length > 0) {
@@ -4367,6 +4483,54 @@ function renderParentDashboard() {
     // Remove stale FAB/modal from previous renders
 
     // ---- Attach event listeners ----
+
+    // Exit Parent Dashboard
+    var exitBtn = container.querySelector('#btn-exit-parent');
+    if (exitBtn) {
+        exitBtn.addEventListener('click', function() {
+            parentPinVerified = false;
+            navigateTo('routine');
+        });
+    }
+
+    // Confirm awaiting tasks
+    container.querySelectorAll('.parent-confirm-task-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var taskId = this.dataset.taskId;
+            var task = selectedChild.tasks.find(t => t.id === taskId) || selectedChild.bonusTasks.find(t => t.id === taskId);
+            if (task) {
+                showConfirmModal(task);
+            }
+        });
+    });
+
+    // View skip photo
+    container.querySelectorAll('.parent-view-skip-photo-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var photoUrl = decodeURIComponent(this.dataset.photo);
+            showImagePreview(photoUrl);
+        });
+    });
+
+    // Revoke badge
+    container.querySelectorAll('.parent-revoke-badge-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var id = this.dataset.id;
+            if (confirm(__('confirm.reject_reason_label') || 'Оё шумо мутмаин ҳастед, ки ин дастовардро бекор кардан мехоҳед?')) {
+                if (!selectedChild.revokedAchievements) selectedChild.revokedAchievements = [];
+                if (!selectedChild.revokedAchievements.includes(id)) {
+                    selectedChild.revokedAchievements.push(id);
+                }
+                selectedChild.achievements = selectedChild.achievements.filter(a => a !== id);
+                saveState();
+                showToast('❌', __('dream.rejected_short') || 'Рад шуд');
+                renderParentDashboard();
+            }
+        });
+    });
 
     // Add task
     container.querySelector('.btn-parent-add-task').addEventListener('click', function() {
@@ -6359,3 +6523,11 @@ function renderDiagnostics() { return; // disabled
         <button style="margin-top:10px; width:100%; font-size:10px; font-weight:bold; background:#ef4444; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer;" onclick="if(confirm('Сбросить все данные и перезагрузить?')){safeStorage.clear(); safeSessionStorage.clear(); location.reload();}">СБРОСИТЬ КЭШ И ДАННЫЕ</button>
     `;
 }
+
+// Clear parent auth on background
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        parentPinVerified = false;
+        settingsPinVerified = false;
+    }
+});
