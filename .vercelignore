@@ -1,0 +1,8 @@
+# Ignore everything by default
+*
+
+# Allow only the app subdirectory and vercel config
+!kids-tasks-diamond-extracted
+!kids-tasks-diamond-extracted/**
+!.vercel
+!.vercel/**
