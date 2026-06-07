@@ -144,6 +144,9 @@ const TRANSLATIONS = {
         'parent.revoke_btn': 'Бекор кардан',
         'parent.revoke_ach_title': 'Бекор кардани дастовард',
         'parent.revoke_ach_prompt': 'Сабаби бекор кардани дастоварди "{name}"-ро ворид кунед:',
+        'parent.reply_and_restore': '🔄 Ҷавоб ва барқарор кардан',
+        'parent.restore_title': 'Барқарор кардани супориш',
+        'parent.restore_prompt': 'Сабаби барқарор кардани супоришро ворид кунед:',
 
         // Reward type
         'reward.type': 'Намуди мукофот',
@@ -673,6 +676,9 @@ const TRANSLATIONS = {
         'parent.revoke_btn': 'Отменить',
         'parent.revoke_ach_title': 'Отмена достижения',
         'parent.revoke_ach_prompt': 'Введите причину отмены достижения "{name}":',
+        'parent.reply_and_restore': '🔄 Ответить и восстановить',
+        'parent.restore_title': 'Восстановить задание',
+        'parent.restore_prompt': 'Введите причину восстановления задания:',
 
         // Reward type
         'reward.type': 'Тип награды',

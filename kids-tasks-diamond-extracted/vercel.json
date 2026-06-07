@@ -1,5 +1,9 @@
 {
   "cleanUrls": true,
-  "framework": null,
-  "buildCommand": "echo noop"
+  "builds": [
+    {
+      "src": "**",
+      "use": "@vercel/static"
+    }
+  ]
 }

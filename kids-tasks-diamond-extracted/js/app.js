@@ -4545,48 +4545,72 @@ function renderParentDashboard() {
 
     // Skipped and Awaiting Tasks Review
     const log = getOrCreateDailyLog(selectedChild.id);
-    const reviewTasks = Object.values(log.tasks).filter(tl => tl.status === 'awaiting-confirm' || tl.status === 'skipped' || (tl.status === 'pending' && tl.rejectReason));
-    if (reviewTasks.length > 0) {
-        html += "<div class='section-card' style='border-left: 3px solid var(--warning);'><h4>" + (__('parent.review_tasks') || 'Назорати супоришҳои имрӯза') + "</h4>";
-        html += "<ul class='item-list'>";
-        reviewTasks.forEach(tl => {
-            const task = selectedChild.tasks.find(t => t.id === tl.id) || selectedChild.bonusTasks.find(t => t.id === tl.id);
+    const reviewTaskEntries = Object.entries(log.tasks).filter(([taskId, tl]) => tl.status === 'awaiting-confirm' || tl.status === 'skipped' || (tl.status === 'pending' && tl.rejectReason));
+    if (reviewTaskEntries.length > 0) {
+        html += `<div class='section-card' style='margin-bottom:16px; border-left: 3px solid var(--warning); padding: 14px 16px;'>`;
+        html += `<h4 style='margin: 0 0 12px 0; font-size: 13px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;'>${__('parent.review_tasks') || 'Назорати супоришҳои имрӯза'}</h4>`;
+        html += `<div style='display: flex; flex-direction: column; gap: 12px;'>`;
+        reviewTaskEntries.forEach(([taskId, tl]) => {
+            const task = selectedChild.tasks.find(t => t.id === taskId) || selectedChild.bonusTasks.find(t => t.id === taskId);
             if (!task) return;
-            html += "<li style='padding: 10px; border-bottom: 1px solid var(--border);'>";
-            html += `  <div style='display: flex; justify-content: space-between; align-items: center;'>`;
-            html += `    <div style='font-weight: 600; font-size: 14px;'>${task.name}</div>`;
-            if (tl.status === 'awaiting-confirm') {
-                html += `    <button class='btn btn-primary parent-confirm-task-btn' data-task-id='${task.id}' style='padding: 4px 10px; font-size: 12px;'>${__('task.confirm') || 'Тасдиқ'}</button>`;
-            }
-            html += `  </div>`;
-            
+
             if (tl.status === 'skipped') {
-                html += `  <div style='color: var(--danger); font-size: 12px; margin-top: 4px;'>❌ Сарфи назар шуд</div>`;
-                if (tl.skipReason) {
-                    html += `  <div style='font-size: 12px; background: rgba(239,68,68,0.05); padding: 6px; border-radius: 4px; margin-top: 4px; border-left: 2px solid var(--danger);'>📝 Сабаб: ${tl.skipReason}</div>`;
-                }
-                if (tl.skipPhoto) {
-                    html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="background: none; border: none; color: var(--danger); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
-                }
-                html += `  <div style='margin-top: 8px;'><button class='btn btn-outline parent-reply-restore-btn' data-task-id='${task.id}' style='padding: 4px 10px; font-size: 12px; color: var(--primary); border-color: var(--primary); font-weight: 600;'>${__('parent.reply_and_restore') || 'Ҷавоб ва барқарор кардан'}</button></div>`;
+                html += `
+                <div style='background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;'>
+                    <div style='display: flex; align-items: center; justify-content: space-between; gap: 8px;'>
+                        <div style='font-weight: 700; font-size: 14px; color: var(--text);'>${task.emoji ? task.emoji + ' ' : ''}${task.name}</div>
+                        <span style='display: inline-flex; align-items: center; gap: 4px; background: rgba(239,68,68,0.12); color: var(--danger, #ef4444); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;'>❌ ${__('status.skipped') || 'Сарфи назар'}</span>
+                    </div>
+                    ${tl.skipReason ? `
+                    <div style='background: var(--card-bg, rgba(255,255,255,0.04)); border-left: 3px solid rgba(239,68,68,0.5); padding: 8px 12px; border-radius: 0 8px 8px 0;'>
+                        <div style='font-size: 11px; color: var(--text-light); font-weight: 600; margin-bottom: 3px;'>📝 ${__('common.reason') || 'Сабаб'}</div>
+                        <div style='font-size: 13px; color: var(--text);'>${tl.skipReason}</div>
+                    </div>` : ''}
+                    ${tl.skipPhoto ? `
+                    <div>
+                        <button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: var(--danger, #ef4444); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; cursor: pointer;">📸 ${__('common.photo_short') || 'Акс'}</button>
+                    </div>` : ''}
+                    <button class='btn btn-outline parent-reply-restore-btn' data-task-id='${task.id}' style='width: 100%; padding: 9px 14px; font-size: 13px; font-weight: 600; color: var(--primary); border-color: rgba(124,58,237,0.35); background: rgba(124,58,237,0.07); border-radius: 10px; margin-top: 2px;'>${__('parent.reply_and_restore') || '🔄 Ҷавоб ва барқарор кардан'}</button>
+                </div>`;
+
             } else if (tl.status === 'awaiting-confirm') {
-                html += `  <div style='color: var(--warning); font-size: 12px; margin-top: 4px;'>⏳ Интизори тасдиқ</div>`;
-                if (tl.explanation) {
-                    html += `  <div style='font-size: 12px; background: rgba(245,158,11,0.05); padding: 6px; border-radius: 4px; margin-top: 4px; border-left: 2px solid var(--warning);'>📝 Шарҳ: ${tl.explanation}</div>`;
-                }
-                if (tl.photo) {
-                    html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.photo)}" style="background: none; border: none; color: var(--warning); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
-                }
+                html += `
+                <div style='background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.2); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;'>
+                    <div style='display: flex; align-items: center; justify-content: space-between; gap: 8px;'>
+                        <div style='font-weight: 700; font-size: 14px; color: var(--text);'>${task.emoji ? task.emoji + ' ' : ''}${task.name}</div>
+                        <span style='display: inline-flex; align-items: center; gap: 4px; background: rgba(245,158,11,0.12); color: var(--warning, #f59e0b); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;'>⏳ Интизор</span>
+                    </div>
+                    ${tl.explanation ? `
+                    <div style='background: var(--card-bg, rgba(255,255,255,0.04)); border-left: 3px solid rgba(245,158,11,0.5); padding: 8px 12px; border-radius: 0 8px 8px 0;'>
+                        <div style='font-size: 11px; color: var(--text-light); font-weight: 600; margin-bottom: 3px;'>💬 Шарҳ</div>
+                        <div style='font-size: 13px; color: var(--text);'>${tl.explanation}</div>
+                    </div>` : ''}
+                    ${tl.photo ? `
+                    <div>
+                        <button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.photo)}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); color: var(--warning, #f59e0b); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; cursor: pointer;">📸 ${__('common.photo_short') || 'Акс'}</button>
+                    </div>` : ''}
+                    <button class='btn btn-primary parent-confirm-task-btn' data-task-id='${task.id}' style='width: 100%; padding: 9px 14px; font-size: 13px; font-weight: 600; border-radius: 10px; margin-top: 2px;'>${__('task.confirm') || '✅ Тасдиқ'}</button>
+                </div>`;
+
             } else if (tl.status === 'pending' && tl.rejectReason) {
-                html += `  <div style='color: var(--danger); font-size: 12px; margin-top: 4px;'>❌ Рад карда шуд</div>`;
-                html += `  <div style='font-size: 12px; background: rgba(239,68,68,0.05); padding: 6px; border-radius: 4px; margin-top: 4px; border-left: 2px solid var(--danger);'>📝 Сабаби радкунӣ: ${tl.rejectReason}</div>`;
-                if (tl.rejectPhoto) {
-                    html += `  <div style='margin-top: 4px;'><button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.rejectPhoto)}" style="background: none; border: none; color: var(--danger); text-decoration: underline; font-size: 11px; cursor: pointer; padding: 0;">📸 Аксро дидан</button></div>`;
-                }
+                html += `
+                <div style='background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;'>
+                    <div style='display: flex; align-items: center; justify-content: space-between; gap: 8px;'>
+                        <div style='font-weight: 700; font-size: 14px; color: var(--text);'>${task.emoji ? task.emoji + ' ' : ''}${task.name}</div>
+                        <span style='display: inline-flex; align-items: center; gap: 4px; background: rgba(239,68,68,0.12); color: var(--danger, #ef4444); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;'>❌ Рад шуд</span>
+                    </div>
+                    <div style='background: var(--card-bg, rgba(255,255,255,0.04)); border-left: 3px solid rgba(239,68,68,0.5); padding: 8px 12px; border-radius: 0 8px 8px 0;'>
+                        <div style='font-size: 11px; color: var(--text-light); font-weight: 600; margin-bottom: 3px;'>📝 Сабаби радкунӣ</div>
+                        <div style='font-size: 13px; color: var(--text);'>${tl.rejectReason}</div>
+                    </div>
+                    ${tl.rejectPhoto ? `
+                    <div>
+                        <button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.rejectPhoto)}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: var(--danger, #ef4444); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; cursor: pointer;">📸 ${__('common.photo_short') || 'Акс'}</button>
+                    </div>` : ''}
+                </div>`;
             }
-            html += "</li>";
         });
-        html += "</ul></div>";
+        html += `</div></div>`;
     }
 
     // Achievements Review
