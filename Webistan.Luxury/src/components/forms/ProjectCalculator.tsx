@@ -137,7 +137,7 @@ export const ProjectCalculator = () => {
                                 01
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-relaxed md:leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
                             </div>
                         </motion.div>
@@ -200,7 +200,7 @@ export const ProjectCalculator = () => {
                                 02
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-relaxed md:leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
                             </div>
                         </motion.div>
@@ -272,7 +272,7 @@ export const ProjectCalculator = () => {
                                 03
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-relaxed md:leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
                             </div>
                         </motion.div>
@@ -331,7 +331,7 @@ export const ProjectCalculator = () => {
                                 04
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-relaxed md:leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system04.desc')}</p>
                             </div>
                         </motion.div>
@@ -420,7 +420,7 @@ export const ProjectCalculator = () => {
                                 05
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-relaxed md:leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
                             </div>
                         </motion.div>
@@ -465,7 +465,7 @@ export const ProjectCalculator = () => {
 
                                         <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                                             <div className="flex justify-between items-start gap-3">
-                                                <span className={`text-[11.5px] md:text-[12.5px] uppercase tracking-[0.2em] font-black leading-tight ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
+                                                <span className={`text-[11.5px] md:text-[12.5px] uppercase tracking-[0.2em] font-black leading-relaxed ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
                                                     {ta(`${addon.id}.label`)}
                                                 </span>
                                                 <div className={`w-1.5 h-1.5 rounded-full transition-all duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)]' : 'bg-white/10'}`} />

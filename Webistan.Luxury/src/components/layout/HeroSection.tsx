@@ -69,7 +69,7 @@ export const HeroSection = () => {
                         </div>
 
                         {/* Protocol Header */}
-                        <span className="text-xs md:text-sm font-display font-light tracking-[0.25em] text-accent uppercase block leading-none mb-4 text-center">
+                        <span className="text-xs md:text-sm font-display font-light tracking-[0.25em] text-accent uppercase block leading-relaxed md:leading-none mb-4 text-center">
                             {t('protocol_title')}
                         </span>
 
