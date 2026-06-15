@@ -54,7 +54,7 @@ export const ContactForm = () => {
                             06
                         </div>
                         <div>
-                            <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('initiation_title')}</h3>
+                            <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('initiation_title')}</h3>
                             <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('initiation_desc')}</p>
                         </div>
                     </motion.div>

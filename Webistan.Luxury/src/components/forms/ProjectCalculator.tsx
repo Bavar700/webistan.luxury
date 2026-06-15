@@ -137,7 +137,7 @@ export const ProjectCalculator = () => {
                                 01
                             </div>
                             <div>
-                                <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
                             </div>
                         </motion.div>
@@ -200,7 +200,7 @@ export const ProjectCalculator = () => {
                                 02
                             </div>
                             <div>
-                                <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
                             </div>
                         </motion.div>
@@ -272,7 +272,7 @@ export const ProjectCalculator = () => {
                                 03
                             </div>
                             <div>
-                                <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
                             </div>
                         </motion.div>
@@ -331,7 +331,7 @@ export const ProjectCalculator = () => {
                                 04
                             </div>
                             <div>
-                                <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system04.desc')}</p>
                             </div>
                         </motion.div>
@@ -420,7 +420,7 @@ export const ProjectCalculator = () => {
                                 05
                             </div>
                             <div>
-                                <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
                             </div>
                         </motion.div>

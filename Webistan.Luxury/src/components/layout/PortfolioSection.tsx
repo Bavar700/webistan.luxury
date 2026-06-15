@@ -55,7 +55,7 @@ export const PortfolioSection = () => {
                             <div className="relative z-10 text-center flex flex-col items-center">
                                 <div className="space-y-4 w-full">
                                     <span className="text-[9px] md:text-[10px] font-display uppercase tracking-[0.6em] text-foreground/40 block -mr-[0.6em] font-medium">Portfolio_Ref 0{i + 1}</span>
-                                    <h3 className="text-xl md:text-3xl font-display font-light group-hover:text-accent transition-all duration-1000 tracking-[0.2em] uppercase leading-none">
+                                    <h3 className="text-base md:text-3xl font-display font-light group-hover:text-accent transition-all duration-1000 tracking-[0.2em] uppercase leading-none">
                                         {s.title.toLowerCase().includes('yaghnob.com') ? (
                                             <a 
                                               href="https://yaghnob.com" 
