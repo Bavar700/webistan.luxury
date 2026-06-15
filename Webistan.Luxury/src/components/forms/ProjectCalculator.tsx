@@ -337,7 +337,7 @@ export const ProjectCalculator = () => {
                         </motion.div>
 
                         <div className="flex justify-center w-full">
-                            <div className="flex gap-6">
+                            <div className="flex flex-col sm:flex-row gap-6 items-center">
                                 {(['Monthly', 'Yearly'] as BillingCycle[]).map((cycle) => (
                                     <button
                                         key={cycle}

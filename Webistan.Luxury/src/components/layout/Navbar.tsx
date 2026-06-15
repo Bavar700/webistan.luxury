@@ -80,7 +80,7 @@ export const Navbar = () => {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="lg:hidden p-2 text-foreground/60"
+                    className="lg:hidden p-2 text-foreground/60 relative z-[110]"
                 >
                     {isOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
@@ -123,6 +123,17 @@ export const Navbar = () => {
                                     </Link>
                                 ))}
                             </div>
+                            {/* Close Button at the Bottom */}
+                            <motion.button
+                                onClick={() => setIsOpen(false)}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 0.5, x: 0 }}
+                                transition={{ delay: (navLinks.length + 1) * 0.1 }}
+                                className="flex items-center gap-3 mt-12 pr-4 text-foreground/40 hover:text-accent transition-colors duration-500 uppercase tracking-[0.3em] text-[12px] font-light cursor-pointer"
+                            >
+                                <span>{tn('close')}</span>
+                                <X size={16} strokeWidth={1} />
+                            </motion.button>
                         </div>
                     </motion.div>
                 )}
