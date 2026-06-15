@@ -28,14 +28,21 @@ export const Navbar = () => {
     ];
 
     return (
-        <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 ${isOpen ? 'h-screen bg-background py-4' : scrolled ? 'py-4 bg-background/80 backdrop-blur-xl' : 'py-8'}`}>
+        <nav
+            style={{
+                transitionProperty: 'padding, background-color, backdrop-filter',
+                transitionDuration: '700ms',
+                transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            }}
+            className={`fixed top-0 w-full z-[100] ${isOpen ? 'h-screen bg-background' : ''} ${scrolled ? 'py-4 bg-background/80 backdrop-blur-xl' : 'py-8'}`}
+        >
             <div className="container mx-auto px-6 min-[1200px]:px-0 max-w-6xl flex items-center justify-between box-border">
 
                 {/* Logo - Restored Branding Style */}
-                <Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-foreground">
-                    <WebistanSymbol className="w-[30px] h-[15px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
+                <Link href="/" className="relative z-[110] flex items-center gap-[3px] md:gap-[2px] group brand-logo text-foreground">
+                    <WebistanSymbol className="w-[44px] h-[22px] md:w-[30px] md:h-[15px] opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
 
-                    <div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[12px] md:text-[14px] leading-none">
+                    <div className="flex items-center tracking-[0.05em] uppercase font-display font-bold text-[16px] md:text-[14px] leading-none">
                         <span>&nbsp;</span>
                         <span className="text-foreground transition-all duration-700">WEBISTAN</span>
                         <span className="text-accent">.LUXURY</span>
@@ -90,9 +97,10 @@ export const Navbar = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
                         className="fixed inset-0 bg-background z-[105] flex flex-col items-center justify-center lg:hidden"
                     >
                         <div className="flex flex-col items-end gap-10 pr-12 w-full">
