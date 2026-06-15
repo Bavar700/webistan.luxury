@@ -85,9 +85,9 @@ export const ContactForm = () => {
                                             { label: t('support_proto'), value: tcalc(`support_levels.${support.toLowerCase()}` as any) },
                                             { label: t('momentum'), value: tcalc(`momentum.${momentum.toLowerCase() === 'fast' ? 'fast' : momentum.toLowerCase()}` as any) },
                                         ].map((item, id) => (
-                                            <div key={id} className="space-y-2 border-l-[0.5px] border-accent/5 pl-4">
-                                                <span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{item.label}</span>
-                                                <span className="text-[11px] font-display uppercase tracking-[0.3em] text-foreground/60">{item.value}</span>
+                                            <div key={id} className="space-y-2 border-l-[0.5px] border-accent/5 pl-4 overflow-hidden">
+                                                <span className="text-[9px] font-display uppercase tracking-[0.1em] md:tracking-[0.2em] opacity-30 block truncate">{item.label}</span>
+                                                <span className="text-[10px] md:text-[11px] font-display uppercase tracking-[0.1em] md:tracking-[0.3em] text-foreground/60 leading-normal block">{item.value}</span>
                                             </div>
                                         ))}
                                     </div>
