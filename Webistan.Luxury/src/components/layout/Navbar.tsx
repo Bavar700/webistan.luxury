@@ -29,7 +29,7 @@ export const Navbar = () => {
 
     return (
         <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 ${scrolled ? 'py-4 bg-background/80 backdrop-blur-xl' : 'py-8'}`}>
-            <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border">
+            <div className="container mx-auto px-6 min-[1200px]:px-0 max-w-6xl flex items-center justify-between box-border">
 
                 {/* Logo - Restored Branding Style */}
                 <Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-foreground">
