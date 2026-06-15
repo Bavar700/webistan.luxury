@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type ProjectType = 'Landing' | 'Corporate' | 'Ecommerce' | 'Portal' | 'SaaS' | 'Immersive' | 'Sovereign';
+export type ProjectType = 'Landing' | 'Promo' | 'Corporate' | 'Ecommerce' | 'Portal' | 'SaaS' | 'Immersive' | 'Sovereign';
 export type SupportLevel = 'None' | 'Standard' | 'Elite';
 export type MomentumProtocol = 'Standard' | 'Fast' | 'Ultra';
 export type BillingCycle = 'Monthly' | 'Yearly';
@@ -22,34 +22,43 @@ interface CalculatorState {
         maps: boolean;
         narrative: boolean;
         kinetic: boolean;
-        linguistic: boolean;
+        localpay: boolean;
         velocity: boolean;
+        crm: boolean;
+        telegram: boolean;
+        security: boolean;
+        erp: boolean;
     };
     totalPrice: number;
+    originalPrice: number;
+    monthlyTotal: number;
+    isFounderRateActive: boolean;
 
     setProjectType: (type: ProjectType) => void;
     setLanguages: (count: number) => void;
     setSupport: (level: SupportLevel) => void;
     setMomentum: (protocol: MomentumProtocol) => void;
     setBillingCycle: (cycle: BillingCycle) => void;
-    toggleAddon: (addon: 'seo' | 'ai' | 'branding' | 'infrastructure' | 'ads' | 'smm' | 'adsense' | 'maps' | 'narrative' | 'kinetic' | 'linguistic' | 'velocity') => void;
+    setFounderRateActive: (active: boolean) => void;
+    toggleAddon: (addon: 'seo' | 'ai' | 'branding' | 'infrastructure' | 'ads' | 'smm' | 'adsense' | 'maps' | 'narrative' | 'kinetic' | 'localpay' | 'velocity' | 'crm' | 'telegram' | 'security' | 'erp') => void;
     calculate: () => void;
 }
 
 const BASE_PRICES: Record<ProjectType, number> = {
-    Landing: 7500,
-    Corporate: 17500,
-    Ecommerce: 32500,
-    Portal: 45000,
-    SaaS: 60000,
-    Immersive: 40000,
-    Sovereign: 12000,
+    Landing: 999,
+    Promo: 2499,
+    Corporate: 4999,
+    Ecommerce: 9999,
+    Immersive: 12000,
+    Sovereign: 15000,
+    Portal: 19999,
+    SaaS: 29999,
 };
 
 const SUPPORT_PRICES: Record<SupportLevel, number> = {
     None: 0,
-    Standard: 1000, // Monthly TJS
-    Elite: 3000,    // Monthly TJS
+    Standard: 300,
+    Elite: 900,
 };
 
 export const useCalculatorStore = create<CalculatorState>((set, get) => ({
@@ -69,10 +78,17 @@ export const useCalculatorStore = create<CalculatorState>((set, get) => ({
         maps: false,
         narrative: false,
         kinetic: false,
-        linguistic: false,
+        localpay: false,
         velocity: false,
+        crm: false,
+        telegram: false,
+        security: false,
+        erp: false,
     },
-    totalPrice: 7500,
+    totalPrice: 999,
+    originalPrice: 999,
+    monthlyTotal: 0,
+    isFounderRateActive: true,
 
     setProjectType: (projectType) => {
         set({ projectType });
@@ -94,6 +110,10 @@ export const useCalculatorStore = create<CalculatorState>((set, get) => ({
         set({ billingCycle });
         get().calculate();
     },
+    setFounderRateActive: (isFounderRateActive) => {
+        set({ isFounderRateActive });
+        get().calculate();
+    },
     toggleAddon: (addon) => {
         set((state) => ({
             addons: { ...state.addons, [addon]: !state.addons[addon] },
@@ -102,41 +122,54 @@ export const useCalculatorStore = create<CalculatorState>((set, get) => ({
     },
 
     calculate: () => {
-        const { projectType, languages, support, momentum, billingCycle, addons } = get();
+        const { projectType, languages, support, momentum, billingCycle, addons, isFounderRateActive } = get();
 
-        let total = BASE_PRICES[projectType];
+        let base = BASE_PRICES[projectType];
+        // Narrative: added to base
+        let localeBase = base + (addons.narrative ? 500 : 0);
+        
+        // Locales (+30% for each extra language beyond the first)
+        let extraLangs = Math.max(0, languages - 1);
+        let total = localeBase * (1 + (extraLangs * 0.3));
 
         // Add-ons
-        if (addons.seo) total += 2000;           // Search Architecture
-        if (addons.ai) total += 3750;            // Neural Protocol
-        if (addons.branding) total += 3000;      // Visual Identity (updated)
-        if (addons.infrastructure) total += 1000; // Digital Real Estate
-        if (addons.ads) total += 3000;           // Market Penetration
-        if (addons.smm) total += 2500;           // Social Audit
-        if (addons.adsense) total += 1500;       // Monetization Engine
-        if (addons.maps) total += 1000;          // Interactive Geolocation
-        if (addons.narrative) total += 3000;     // Narrative Architecture (midpoint 2500-4000)
-        if (addons.kinetic) total += 2500;       // Kinetic Elegance
-        if (addons.velocity) total += 1750;      // Performance Velocity Tuning (midpoint)
+        if (addons.ads) total += 500;
+        if (addons.infrastructure) total += 300;
+        if (addons.seo) total += 500;
+        if (addons.ai) total += 1500;
+        if (addons.branding) total += 800;
+        if (addons.smm) total += 700;
+        if (addons.adsense) total += 500;
+        if (addons.maps) total += 300;
+        if (addons.kinetic) total += 800;
+        if (addons.localpay) total += 1200;
+        if (addons.velocity) total += 600;
+        if (addons.crm) total += 900;
+        if (addons.telegram) total += 800;
+        if (addons.security) total += 1000;
+        if (addons.erp) total += 1500;
 
-        // Linguistic Expansion: +27.5% on current total (before support)
-        if (addons.linguistic) total *= 1.275;
-
-        // Locales (+20% for each extra language beyond the first)
-        const languageMultiplier = 1 + (Math.max(0, languages - 1) * 0.20);
-        total *= languageMultiplier;
-
-        // Support calculation
-        let supportCost = SUPPORT_PRICES[support];
-        if (billingCycle === 'Yearly') {
-            supportCost = supportCost * 0.7; // 30% discount
-        }
-        total += supportCost;
-
-        // Momentum Multiplier
+        // Momentum Multiplier (applied only to development cost)
         if (momentum === 'Fast') total *= 1.2;
         if (momentum === 'Ultra') total *= 1.5;
 
-        set({ totalPrice: Math.round(total) });
+        let originalTotal = total;
+
+        // Founder Rate (-30% discount), does NOT apply to Landing
+        if (isFounderRateActive && projectType !== 'Landing') {
+            total *= 0.7;
+        }
+
+        // Support calculation (billed separately)
+        let supportCost = SUPPORT_PRICES[support];
+        if (billingCycle === 'Yearly' && projectType !== 'Landing') {
+            supportCost = supportCost * 0.7; // 30% discount
+        }
+
+        set({ 
+            totalPrice: Math.round(total),
+            originalPrice: Math.round(originalTotal),
+            monthlyTotal: Math.round(supportCost)
+        });
     },
 }));

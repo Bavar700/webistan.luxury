@@ -30,8 +30,39 @@
   --glass-bg: rgba(255, 255, 255, 0.02);
 }
 
+[data-theme='light'] {
+  --background: #F0F0F2;
+  --foreground: #1A1A1C;
+  --surface: #FFFFFF;
+  --accent: #8B735B;
+  --border-color: rgba(0, 0, 0, 0.08);
+}
 
+[data-theme='light'] .bg-white\/\[0\.01\] {
+  background-color: var(--surface) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+}
 
+[data-theme='light'] .hover\:bg-white\/\[0\.01\]:hover {
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+[data-theme='light'] .hover\:bg-white\/\[0\.02\]:hover {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+[data-theme='light'] .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme='light'] .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme='light'] .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
 
 @layer base {
 

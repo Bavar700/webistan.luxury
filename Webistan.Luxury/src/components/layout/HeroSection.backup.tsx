@@ -46,7 +46,7 @@ export const HeroSection = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-6xl w-full mx-auto flex flex-col items-center gap-12"
+                    className="max-w-4xl w-full mx-auto flex flex-col items-center gap-12"
                 >
                     {/* Promotion Block (Блок акции) */}
                     <motion.div
@@ -88,12 +88,12 @@ export const HeroSection = () => {
                     {/* CTA Buttons */}
                     <motion.div
                         variants={itemVariants}
-                        className="flex flex-col sm:flex-row items-stretch justify-center gap-8 w-full mt-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-8 w-full mt-4"
                     >
-                        <LuxuryButton width="w-full sm:flex-1" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                        <LuxuryButton width="w-full sm:w-[450px]" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
                             {t('cta1')}
                         </LuxuryButton>
-                        <LuxuryButton width="w-full sm:flex-1" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
+                        <LuxuryButton width="w-full sm:w-[450px]" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
                             {t('cta2')}
                         </LuxuryButton>
                     </motion.div>
@@ -104,7 +104,7 @@ export const HeroSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.2 }}
                 transition={{ delay: 2, duration: 2 }}
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-accent to-transparent"
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-accent to-transparent"
             />
         </section>
     );

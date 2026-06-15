@@ -122,7 +122,7 @@ export const ProjectCalculator = () => {
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
 
 
-                <div className="max-w-6xl mx-auto bg-white/[0.01] p-6 md:p-20 space-y-16 relative group/calc">
+                <div className="max-w-4xl mx-auto bg-white/[0.01] p-10 md:p-20 space-y-16 relative group/calc">
                     {/* System 01: The Shell */}
                     <div className="space-y-12 mb-36">
                         <motion.div
@@ -138,7 +138,7 @@ export const ProjectCalculator = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
-                                <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
+                                <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
                             </div>
                         </motion.div>
                         <div className="relative">
@@ -201,11 +201,11 @@ export const ProjectCalculator = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
-                                <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
+                                <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
                             </div>
                         </motion.div>
 
-                        <div className="bg-background/20 p-4 md:p-10 relative overflow-hidden group/lang">
+                        <div className="bg-background/20 p-8 relative overflow-hidden group/lang">
                             <div className="absolute top-0 left-0 w-4 h-4 border-t-[0.5px] border-l-[0.5px] border-accent/20" />
                             <div className="absolute top-0 right-0 w-4 h-4 border-t-[0.5px] border-r-[0.5px] border-accent/20" />
                             <div className="absolute bottom-0 left-0 w-4 h-4 border-b-[0.5px] border-l-[0.5px] border-accent/20" />
@@ -223,7 +223,7 @@ export const ProjectCalculator = () => {
                                                 setLanguages(selectedPresets.length + newList.length);
                                             }
                                         }}
-                                        className={`p-6 transition-all duration-500 flex flex-col items-center gap-3 relative group/lang-item ${item.active ? 'bg-accent/[0.05] text-accent' : 'text-foreground/20 hover:bg-white/[0.02]'}`}
+                                        className={`p-4 transition-all duration-500 flex flex-col items-center gap-3 relative group/lang-item ${item.active ? 'bg-accent/[0.05] text-accent' : 'text-foreground/20 hover:bg-white/[0.02]'}`}
                                     >
                                         {item.active && (
                                             <>
@@ -234,7 +234,7 @@ export const ProjectCalculator = () => {
                                             </>
                                         )}
                                         <Globe size={14} strokeWidth={1.5} className={item.active ? 'opacity-100' : 'opacity-40'} />
-                                        <span className={`text-[10.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold ${item.active ? 'text-accent' : 'text-foreground/60'}`}>{item.label}</span>
+                                        <span className={`text-[8.5px] uppercase tracking-[0.2em] truncate w-full text-center font-bold ${item.active ? 'text-accent' : 'text-foreground/60'}`}>{item.label}</span>
                                     </button>
                                 ))}
                             </div>
@@ -247,12 +247,12 @@ export const ProjectCalculator = () => {
                                         onChange={(e) => setOtherInput(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && addCustomLang()}
                                         placeholder={t('input_custom_norm')}
-                                        className="w-full bg-accent/2 px-6 py-5 text-[11px] md:text-[12px] uppercase tracking-[0.3em] text-accent focus:outline-none placeholder:text-foreground/40 transition-all font-light"
+                                        className="w-full bg-accent/2 px-6 py-5 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-accent focus:outline-none placeholder:text-foreground/40 transition-all font-light"
                                     />
                                     <div className="absolute bottom-0 left-0 w-full h-[0.5px] bg-accent/10 group-focus-within/input:bg-accent/40 transition-colors duration-700" />
                                 </div>
                                 <LuxuryButton onClick={addCustomLang} width="px-12" height="h-[56px]">
-                                    <span className="text-[11px] md:text-sm">{t('append_unit')}</span>
+                                    <span className="text-[10px] md:text-sm">{t('append_unit')}</span>
                                 </LuxuryButton>
                             </div>
                         </div>
@@ -273,7 +273,7 @@ export const ProjectCalculator = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
-                                <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
+                                <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
                             </div>
                         </motion.div>
 
@@ -286,7 +286,7 @@ export const ProjectCalculator = () => {
                                 <button
                                     key={mode.id}
                                     onClick={() => setMomentum(mode.id)}
-                                    className={`group relative p-6 md:p-12 text-left transition-all duration-1000 overflow-hidden min-h-[260px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                    className={`group relative p-8 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
                                 >
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                                     {momentum === mode.id && (
@@ -304,13 +304,13 @@ export const ProjectCalculator = () => {
                                             <div className={`p-3 ${momentum === mode.id ? 'bg-accent/20 text-accent' : 'bg-white/5 text-foreground/20'}`}>
                                                 <mode.icon size={16} strokeWidth={1} />
                                             </div>
-                                            <span className={`text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold ${momentum === mode.id ? 'text-accent' : 'text-foreground/20'}`}>{mode.cost}</span>
+                                            <span className={`text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-bold ${momentum === mode.id ? 'text-accent' : 'text-foreground/20'}`}>{mode.cost}</span>
                                         </div>
                                         <div className="space-y-2">
-                                            <span className={`block text-[12px] md:text-[13px] uppercase tracking-[0.3em] font-medium leading-tight ${momentum === mode.id ? 'text-accent' : 'text-foreground/60'}`}>{mode.label}</span>
-                                            <span className="text-[11px] md:text-[12px] uppercase tracking-widest text-accent font-display">{mode.duration}</span>
+                                            <span className={`block text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-medium leading-tight ${momentum === mode.id ? 'text-accent' : 'text-foreground/60'}`}>{mode.label}</span>
+                                            <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-accent font-display">{mode.duration}</span>
                                         </div>
-                                        <p className="text-[11px] text-foreground/60 font-medium italic mt-auto leading-relaxed">{mode.desc}</p>
+                                        <p className="text-[9px] text-foreground/60 font-medium italic mt-auto leading-relaxed">{mode.desc}</p>
                                     </div>
                                 </button>
                             ))}
@@ -332,7 +332,7 @@ export const ProjectCalculator = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
-                                <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system04.desc')}</p>
+                                <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system04.desc')}</p>
                             </div>
                         </motion.div>
 
@@ -348,7 +348,7 @@ export const ProjectCalculator = () => {
                                             <span className={`text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black ${billingCycle === cycle ? 'text-accent' : 'text-foreground/40'}`}>
                                                 {cycle === 'Monthly' ? t('billing.monthly') : t('billing.yearly')}
                                             </span>
-                                            {cycle === 'Yearly' && projectType !== 'Landing' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>}
+                                            {cycle === 'Yearly' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>}
                                         </div>
                                         {billingCycle === cycle && (
                                             <div className="absolute inset-0">
@@ -374,7 +374,7 @@ export const ProjectCalculator = () => {
                                 <button
                                     key={item.level}
                                     onClick={() => setSupport(item.level)}
-                                    className={`group relative p-6 md:p-12 text-left transition-all duration-1000 flex flex-col gap-10 md:gap-14 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                    className={`group relative p-10 md:p-12 text-left transition-all duration-1000 flex flex-col gap-8 md:gap-12 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
                                 >
                                     {support === item.level && (
                                         <div className="absolute inset-0">
@@ -386,17 +386,17 @@ export const ProjectCalculator = () => {
                                             <div className="absolute inset-0 border border-accent/10" />
                                         </div>
                                     )}
-                                    <div className="flex flex-col gap-10 md:gap-12 relative z-10 w-full">
-                                        <span className={`text-[12px] md:text-[14px] uppercase tracking-[0.3em] font-black ${support === item.level ? 'text-accent' : 'text-foreground/20'}`}>{t(`support_levels.${item.level.toLowerCase()}`)}</span>
+                                    <div className="flex flex-col gap-8 md:gap-10 relative z-10 w-full">
+                                        <span className={`text-[10px] md:text-[12px] uppercase tracking-[0.3em] font-black ${support === item.level ? 'text-accent' : 'text-foreground/20'}`}>{t(`support_levels.${item.level.toLowerCase()}`)}</span>
                                         <div className="flex items-baseline gap-1">
                                             <span className="text-3xl md:text-4xl font-display text-accent">{item.cost}</span>
-                                            <span className="text-[11px] md:text-[12px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
+                                            <span className="text-[9px] md:text-[10px] text-accent/40 uppercase tracking-widest leading-none">{t('tjs_mo')}</span>
                                         </div>
                                         <div className="space-y-4 pt-6 border-t border-white/5">
                                             {item.features.map((f, i) => (
                                                 <div key={i} className="flex items-start gap-3">
-                                                    <div className={`mt-1.5 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-white/10'}`} />
-                                                    <span className={`text-[10.5px] md:text-[11px] uppercase tracking-wide leading-relaxed font-medium ${support === item.level ? 'text-foreground' : 'text-foreground/60'}`}>{f}</span>
+                                                    <div className={`mt-1 w-1 h-1 flex-shrink-0 ${support === item.level ? 'bg-accent' : 'bg-white/10'}`} />
+                                                    <span className={`text-[8.5px] md:text-[9px] uppercase tracking-wide leading-relaxed font-medium ${support === item.level ? 'text-foreground' : 'text-foreground/60'}`}>{f}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -421,11 +421,11 @@ export const ProjectCalculator = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
-                                <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
+                                <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
                             </div>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                             {[
                                 { id: 'branding' as const, cost: '800 TJS' },
                                 { id: 'infrastructure' as const, cost: '300 TJS' },
@@ -439,16 +439,12 @@ export const ProjectCalculator = () => {
                                 { id: 'kinetic' as const, cost: '800 TJS' },
                                 { id: 'localpay' as const, cost: '1,200 TJS' },
                                 { id: 'velocity' as const, cost: '600 TJS' },
-                                { id: 'crm' as const, cost: '900 TJS' },
-                                { id: 'telegram' as const, cost: '800 TJS' },
-                                { id: 'security' as const, cost: '1,000 TJS' },
-                                { id: 'erp' as const, cost: '1,500 TJS' },
                             ].map((addon) => {
                                 return (
                                     <button
                                         key={addon.id}
                                         onClick={() => toggleAddon(addon.id)}
-                                        className={`group relative p-6 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                        className={`group relative p-8 text-left transition-all duration-1000 overflow-hidden min-h-[180px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-background hover:bg-white/[0.01]'}`}
                                     >
                                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" />
                                         
@@ -465,15 +461,15 @@ export const ProjectCalculator = () => {
 
                                         <div className="relative z-10 space-y-4 w-full h-full flex flex-col justify-between">
                                             <div className="flex justify-between items-start gap-3">
-                                                <span className={`text-[11.5px] md:text-[12.5px] uppercase tracking-[0.2em] font-black leading-tight ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
+                                                <span className={`text-[9.5px] md:text-[10.5px] uppercase tracking-[0.2em] font-black leading-tight ${addons[addon.id] ? 'text-accent' : 'text-foreground/80'}`}>
                                                     {ta(`${addon.id}.label`)}
                                                 </span>
                                                 <div className={`w-1.5 h-1.5 rounded-full transition-all duration-700 ${addons[addon.id] ? 'bg-accent shadow-[0_0_10px_rgba(192,160,128,0.5)]' : 'bg-white/10'}`} />
                                             </div>
                                             
                                             <div className="space-y-4">
-                                                <p className="text-[11px] text-foreground/40 font-medium italic leading-relaxed line-clamp-3">{ta(`${addon.id}.desc`)}</p>
-                                                <span className={`block text-[11px] font-bold tracking-[0.1em] ${addons[addon.id] ? 'text-accent' : 'text-accent/30'}`}>{addon.cost}</span>
+                                                <p className="text-[9px] text-foreground/40 font-medium italic leading-relaxed line-clamp-2">{ta(`${addon.id}.desc`)}</p>
+                                                <span className={`block text-[9px] font-bold tracking-[0.1em] ${addons[addon.id] ? 'text-accent' : 'text-accent/30'}`}>{addon.cost}</span>
                                             </div>
                                         </div>
                                     </button>
@@ -483,7 +479,7 @@ export const ProjectCalculator = () => {
                         <div className="flex justify-center mt-12">
                             <button
                                 onClick={() => setIsDrawerOpen(true)}
-                                className="text-[11px] md:text-[12px] uppercase tracking-widest text-accent hover:text-accent border-b border-accent/30 hover:border-accent transition-all duration-500 pb-1"
+                                className="text-[10px] md:text-[11px] uppercase tracking-widest text-accent hover:text-accent border-b border-accent/30 hover:border-accent transition-all duration-500 pb-1"
                             >
                                 {t('details_drawer_trigger')}
                             </button>
@@ -494,34 +490,30 @@ export const ProjectCalculator = () => {
                     <div className="pt-24 border-t-[0.5px] border-accent/10 flex flex-col items-center gap-20">
                         <div className="text-center space-y-8">
                             <div className="flex flex-col items-center">
-                                <span className="text-[11px] md:text-[12px] uppercase tracking-[1em] text-accent/60 font-bold block mb-8 -mr-[1em]">{t('valuation_asset')}</span>
+                                <span className="text-[9px] md:text-[10px] uppercase tracking-[1em] text-accent/60 font-bold block mb-8 -mr-[1em]">{t('valuation_asset')}</span>
                                 <div className="text-5xl md:text-9xl font-display font-extralight text-accent tracking-tighter flex items-center justify-center gap-4">
                                     {originalPrice.toLocaleString()} <span className="text-2xl md:text-6xl text-accent/30">TJS</span>
                                 </div>
                             </div>
-                            {projectType !== 'Landing' ? (
+                            {projectType !== 'Landing' && (
                                 <div className="flex flex-col items-center gap-2">
-                                    <span className="text-[11px] md:text-[12px] uppercase tracking-[0.4em] text-accent font-black animate-pulse -mr-[0.4em] mb-2">{t('access_rate')}</span>
-                                    <span className="text-3xl md:text-6xl font-display text-accent tracking-[0.2em]">{totalPrice.toLocaleString()} TJS</span>
-                                    <p className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-foreground/40 italic mt-4 max-w-xs">{t('promo_disclaimer')}</p>
-                                </div>
-                            ) : (
-                                <div className="flex flex-col items-center gap-2">
-                                    <p className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-foreground/40 italic mt-4 max-w-md text-center">{t('landing_no_discount')}</p>
+                                    <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-accent font-black animate-pulse -mr-[0.4em] mb-2">{t('access_rate')}</span>
+                                    <span className="text-2xl md:text-5xl font-display text-accent tracking-[0.2em]">{totalPrice.toLocaleString()} TJS</span>
+                                    <p className="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-foreground/40 italic mt-4 max-w-xs">{t('promo_disclaimer')}</p>
                                 </div>
                             )}
                             {monthlyTotal > 0 && (
                                 <div className="flex flex-col items-center gap-2 mt-4 pt-4 border-t border-white/5">
-                                    <span className="text-[11px] md:text-[12px] uppercase tracking-[0.4em] text-accent/60 font-bold -mr-[0.4em] mb-2">
+                                    <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-accent/60 font-bold -mr-[0.4em] mb-2">
                                         {billingCycle === 'Yearly' ? t('support_annual') : t('support_monthly')}
                                     </span>
-                                    <span className="text-2xl md:text-4xl font-display text-foreground/80 tracking-[0.1em]">
+                                    <span className="text-xl md:text-3xl font-display text-foreground/80 tracking-[0.1em]">
                                         {billingCycle === 'Yearly' ? (monthlyTotal * 12).toLocaleString() : monthlyTotal.toLocaleString()} TJS
                                         <span className="text-xs text-foreground/40 ml-2 uppercase tracking-widest">
                                             {billingCycle === 'Yearly' ? t('tjs_yr') : t('tjs_mo')}
                                         </span>
                                     </span>
-                                    <p className="text-[11px] text-foreground/35 uppercase tracking-[0.1em] mt-1 italic max-w-md text-center">
+                                    <p className="text-[9px] text-foreground/35 uppercase tracking-[0.1em] mt-1 italic max-w-md text-center">
                                         {t('support_disclaimer')}
                                     </p>
                                 </div>

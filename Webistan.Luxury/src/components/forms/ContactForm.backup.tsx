@@ -12,7 +12,7 @@ export const ContactForm = () => {
     const ta = useTranslations('Addons');
     const tcalc = useTranslations('Calculator');
 
-    const { projectType, totalPrice, originalPrice, addons, languages } = useCalculatorStore();
+    const { projectType, totalPrice, addons, languages } = useCalculatorStore();
     const support = useCalculatorStore(state => state.support);
     const momentum = useCalculatorStore(state => state.momentum);
 
@@ -41,7 +41,7 @@ export const ContactForm = () => {
             <div className="container mx-auto px-6 relative z-10 max-w-7xl">
 
 
-                <div className="mx-auto max-w-6xl space-y-12">
+                <div className="mx-auto max-w-4xl space-y-12">
                     <motion.div
                         initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
                         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -66,11 +66,11 @@ export const ContactForm = () => {
                         viewport={{ once: true }}
                         className="w-full"
                     >
-                        <div className="bg-white/[0.01] p-6 md:p-20 relative group/form overflow-hidden transition-all duration-1000">
+                        <div className="bg-white/[0.01] p-10 md:p-20 relative group/form overflow-hidden transition-all duration-1000">
                             <form onSubmit={handleSubmit} className="space-y-16">
 
                                 {/* Transmission_Protocol Panel */}
-                                <div className="p-6 md:p-10 bg-background border-[0.5px] border-white/5 mb-20 relative overflow-hidden group/plate transition-all duration-1000 hover:bg-white/[0.01]">
+                                <div className="p-10 bg-background border-[0.5px] border-white/5 mb-20 relative overflow-hidden group/plate transition-all duration-1000 hover:bg-white/[0.01]">
                                     {/* Shimmer Effect */}
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
 
@@ -110,14 +110,12 @@ export const ContactForm = () => {
                                     <div className="pt-8 flex items-end justify-between gap-4 flex-wrap border-t border-accent/5 mt-8">
                                         <div className="space-y-1">
                                             <span className="text-[9px] font-display uppercase tracking-[0.2em] opacity-30 block">{t('standard_val')}</span>
-                                            <span className="text-[13px] font-display uppercase tracking-[0.3em] text-accent/50">{originalPrice.toLocaleString()} TJS</span>
+                                            <span className="text-[13px] font-display uppercase tracking-[0.3em] text-accent/50">{totalPrice.toLocaleString()} TJS</span>
                                         </div>
-                                        {projectType !== 'Landing' && (
                                         <div className="space-y-1 text-right">
                                             <span className="text-[9px] font-display uppercase tracking-[0.2em] text-accent/50 block animate-pulse">{t('partner_rate')}</span>
-                                            <span className="text-[15px] font-display uppercase tracking-[0.3em] text-accent">{totalPrice.toLocaleString()} TJS</span>
+                                            <span className="text-[15px] font-display uppercase tracking-[0.3em] text-accent">{Math.round(totalPrice * 0.7).toLocaleString()} TJS</span>
                                         </div>
-                                        )}
                                     </div>
                                 </div>
 

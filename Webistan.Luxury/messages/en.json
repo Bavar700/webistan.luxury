@@ -10,7 +10,11 @@
       "base": "DOMINANCE",
       "description": "Engineering high-stakes assets for visionaries who demand precision over promises. Your legacy, rendered in code.",
       "cta1": "REQUEST EXCLUSIVE BRIEFING",
-      "cta2": "THE ARCHIVE"
+      "cta2": "THE ARCHIVE",
+      "protocol_title": "FOUNDATIONAL PARTNER PROTOCOL_",
+      "protocol_body": "THE FIRST 10 RESIDENTS IN THE NEW ARCHIVE RECEIVE <highlight>-30% CALIBRATION DISCOUNT</highlight> ON ALL PRODUCTION CYCLES.",
+      "protocol_status": "PROTOCOL // ACTIVE",
+      "node_status": "NODE // SECURE_LINK"
     }
   },
   "Navigation": {
@@ -79,8 +83,10 @@
     "investment": "INVESTMENT",
     "calibration": "PRECISION CALIBRATION",
     "foundational_partner_protocol": "FOUNDATIONAL PARTNER PROTOCOL_",
-    "discount_text": "THE FIRST 10 RESIDENTS IN THE NEW ARCHIVE RECEIVE <discount>-30%</discount> CALIBRATION DISCOUNT ON ALL PRODUCTION CYCLES.",
-    "input_custom_norm": "INPUT CUSTOM UNIT NORM...",
+    "ribbon_label": "PROMO!",
+    "discount_text": "We offer a <accent>30%</accent> discount on all development stages for the first 10 websites",
+    "discount_text_2": "featured in our portfolio. Don't miss this great opportunity!",
+    "input_custom_norm": "ANOTHER LANGUAGE...",
     "append_unit": "APPEND UNIT",
     "momentum_std_desc": "Standard architectural cycle.",
     "momentum_fast_desc": "Priority resource allocation.",
@@ -90,7 +96,10 @@
     "valuation_asset": "EST. ASSET VALUE_",
     "access_rate": "FOUNDATIONAL_ACCESS_RATE:",
     "promo_disclaimer": "-30% applied for the first 10 residents of the new archive",
+    "landing_no_discount": "Minimum price is already applied to this tier",
     "algo_analysis": "PROPRIETARY ALGORITHMIC INVESTMENT ANALYSIS v8.8_ACTIVE",
+    "monthly_suffix": "TJS/mo",
+    "disclaimer_note": "📌 The estimate includes only development costs. Domain, hosting, and ad budgets are paid separately.",
     "billing": {
       "monthly": "Monthly",
       "yearly": "Yearly"
@@ -111,7 +120,7 @@
     },
     "system02": {
       "title": "LANGUAGE ARCHITECTURE",
-      "desc": "Expand your global Reach | +20% per additional localization unit."
+      "desc": "Expand your global Reach | +30% per additional localization unit."
     },
     "system03": {
       "title": "CHOOSE YOUR MOMENTUM",
@@ -123,12 +132,38 @@
     },
     "system05": {
       "title": "EXPANSION MODULES",
-      "desc": "Enhance your digital asset with specialized infrastructure and strategic identity protocols."
+      "desc": "Enhance your digital asset with specialized infrastructure."
+    },
+    "details_drawer_trigger": "What's included in the price?",
+    "details_drawer_title": "Service Breakdown",
+    "details_drawer_close": "Close",
+    "drawer_content": {
+      "title": "Webistan.Luxury Studio Service Breakdown",
+      "intro": "We value honesty and transparency. In our estimate, we separate the cost of our developers' intellectual labor from external expenses for third-party services.",
+      "base_works_title": "Base Works:",
+      "base_works": {
+        "dev": "<span class='text-accent font-bold'>Website Development:</span> Writing 'clean code' (no site builders), mobile adaptation, basic security configuration.",
+        "lang": "<span class='text-accent font-bold'>Multi-language (+30%):</span> Translation architecture creation and technical implementation of language switching."
+      },
+      "modules_title": "Additional Modules (What's Included):",
+      "modules": {
+        "localpay": "<span class='text-accent font-bold'>LocalPay (1,200 TJS):</span> Integration with Tajikistan's payment systems (Alif, DC, Korti Milli). We configure payment acceptance. Bank transaction fees are paid separately.",
+        "ads": "<span class='text-accent font-bold'>Ad Campaign Setup (500 TJS):</span> Professional launch of Google/Meta accounts and audience targeting. You determine and top up the ad budget yourself.",
+        "infrastructure": "<span class='text-accent font-bold'>Infrastructure Setup (300 TJS):</span> Technical server preparation, domain linking, and SSL protection. The cost of the domain itself (.tj/.com) and hosting is paid to the provider.",
+        "ai": "<span class='text-accent font-bold'>AI (Neuro-Protocol) (1,500 TJS):</span> Implementation of neural networks into site logic. API token consumption is paid to the AI developer platform.",
+        "seo": "<span class='text-accent font-bold'>SEO Optimization (500 TJS):</span> Technical preparation of the site so that Google and Yandex can 'see' you.",
+        "narrative": "<span class='text-accent font-bold'>Narrative (500 TJS):</span> Creation of a selling story and text for one key section. Each new text idea requires deep processing.",
+        "branding": "<span class='text-accent font-bold'>Branding (800 TJS):</span> Development of a logo, palette, and unique visual style."
+      },
+      "note_title": "Important Note:",
+      "note_text": "All third-party payments (domains, hosting, ad budgets) are your property. We help set them up, but access to accounts and ownership remain with you."
     },
     "types": {
       "landing": "Landing Page",
+      "promo": "Promo Page",
       "corporate": "Corporate Platform",
       "ecommerce": "Digital Store",
+      "crm": "Bespoke CRM System",
       "portal": "Enterprise Portal",
       "saas": "SaaS Architecture",
       "immersive": "Immersive Experience",
@@ -141,10 +176,26 @@
     },
     "cta": "INITIALIZE PROTOCOL",
     "support_levels": {
-      "None": "None",
-      "Standard": "Standard",
-      "Elite": "Elite"
+      "none": "None",
+      "standard": "Standard",
+      "elite": "Elite"
     },
+    "work_label": "Development Cost",
+    "support_label": "Technical Support",
+    "founder_rate_label": "FOUNDER RATE",
+    "billing_cycle_monthly": "MONTHLY SUBSCRIPTION",
+    "billing_cycle_yearly": "YEARLY SUBSCRIPTION",
+    "support_annual": "ANNUAL SUPPORT",
+    "support_monthly": "MONTHLY SUPPORT",
+    "tjs_yr": "tjs / yr",
+    "tjs_mo": "tjs / mo",
+    "momentum_labels": {
+      "standard": "STANDARD",
+      "fast": "ACCELERATED",
+      "ultra": "ULTRA-FAST"
+    },
+    "support_disclaimer": "The first month of technical supervision (Hypercare) is provided complimentary. Regular billing begins 30 days after project launch.",
+    "initial_investment_label": "DUE FOR SETTLEMENT:",
     "duration": {
       "standard": "21–30 DAYS",
       "fast": "10–14 DAYS",
@@ -158,8 +209,8 @@
     "protocol_label": "Protocol",
     "genesis_protocol": "GENESIS PRODUCTION PROTOCOL_TX-90",
     "slot1": {
-      "title": "yaghnob.com",
-      "desc": "Foundational flagship development cycle for our initial production."
+      "title": "RESERVED SLOT",
+      "desc": "Accepting a limited number of foundation partners this quarter."
     },
     "slot2": {
       "title": "RESERVED SLOT",
@@ -189,7 +240,13 @@
     "brief_label": "Blueprint Briefing_",
     "brief_placeholder": "TELL US ABOUT THE VISION",
     "footer_tag": "SECURE TRANSMISSION PROTOCOL_v1.0_ENCRYPTED",
-    "locales": "{count, plural, =1 {# Locale} other {# Locales}}"
+    "locales": "{count, plural, =1 {# Locale} other {# Locales}}",
+    "transmission_complete": "Transmission_Complete",
+    "success_message": "Your request has been successfully encrypted and transmitted to Webistan Luxury HQ. <br/> We will contact you within 24 hours.",
+    "back_to_form": "Return to form",
+    "initializing_transmission": "INITIALIZING_TRANSMISSION",
+    "field_required": "Please fill out this field",
+    "email_invalid": "Please enter a valid email address"
   },
   "Addons": {
     "branding": {
@@ -197,8 +254,9 @@
       "desc": "Logo + Brand Guidelines"
     },
     "infrastructure": {
-      "label": "Digital Real Estate",
-      "desc": "Domain + 1Y Hosting"
+      "label": "Deployment Service (Setup)",
+      "desc": "Domain + 1Y Hosting",
+      "tooltip": "Labor cost only. Third-party fees not included"
     },
     "seo": {
       "label": "Search Architecture",
@@ -209,8 +267,9 @@
       "desc": "LLM / AI Integration"
     },
     "ads": {
-      "label": "Market Penetration",
-      "desc": "Ads Google/Yandex"
+      "label": "Ad Campaign Setup",
+      "desc": "Ads Google/Yandex",
+      "tooltip": "Labor cost only. Third-party fees not included"
     },
     "smm": {
       "label": "Social Audit",
@@ -225,20 +284,37 @@
       "desc": "Google Maps API"
     },
     "narrative": {
-      "label": "Narrative Architecture",
+      "label": "Copywriting (per section)",
       "desc": "Copywriting & Storytelling"
     },
     "kinetic": {
       "label": "Kinetic Elegance",
       "desc": "Premium Scroll Animations"
     },
-    "linguistic": {
-      "label": "Linguistic Expansion",
-      "desc": "3-Language Localization"
+    "localpay": {
+      "label": "Payment Integration (Alif, DC)",
+      "desc": "Acquiring Setup",
+      "tooltip": "Labor cost only. Third-party fees not included"
     },
     "velocity": {
       "label": "Performance Velocity",
       "desc": "Lighthouse 90+ Tuning"
+    },
+    "crm": {
+      "label": "Bespoke CRM Creation",
+      "desc": "Custom CRM system to automate internal business workflows"
+    },
+    "telegram": {
+      "label": "Telegram Bot Integration",
+      "desc": "Connect your website with Telegram for instant notifications and replies"
+    },
+    "security": {
+      "label": "DDoS Protection & WAF Shield",
+      "desc": "Enterprise-grade cybersecurity suite and advanced DDoS protection"
+    },
+    "erp": {
+      "label": "1C / ERP Synchronization",
+      "desc": "Sync catalogs, prices, inventory, and orders with your ERP system"
     }
   },
   "Trust": {

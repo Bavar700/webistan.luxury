@@ -122,7 +122,7 @@ export const ProjectCalculator = () => {
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
 
 
-                <div className="max-w-6xl mx-auto bg-white/[0.01] p-6 md:p-20 space-y-16 relative group/calc">
+                <div className="max-w-6xl mx-auto bg-white/[0.01] p-10 md:p-20 space-y-16 relative group/calc">
                     {/* System 01: The Shell */}
                     <div className="space-y-12 mb-36">
                         <motion.div
@@ -205,7 +205,7 @@ export const ProjectCalculator = () => {
                             </div>
                         </motion.div>
 
-                        <div className="bg-background/20 p-4 md:p-10 relative overflow-hidden group/lang">
+                        <div className="bg-background/20 p-10 relative overflow-hidden group/lang">
                             <div className="absolute top-0 left-0 w-4 h-4 border-t-[0.5px] border-l-[0.5px] border-accent/20" />
                             <div className="absolute top-0 right-0 w-4 h-4 border-t-[0.5px] border-r-[0.5px] border-accent/20" />
                             <div className="absolute bottom-0 left-0 w-4 h-4 border-b-[0.5px] border-l-[0.5px] border-accent/20" />
@@ -286,7 +286,7 @@ export const ProjectCalculator = () => {
                                 <button
                                     key={mode.id}
                                     onClick={() => setMomentum(mode.id)}
-                                    className={`group relative p-6 md:p-12 text-left transition-all duration-1000 overflow-hidden min-h-[260px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                    className={`group relative p-10 md:p-12 text-left transition-all duration-1000 overflow-hidden min-h-[260px] flex flex-col justify-between ${momentum === mode.id ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
                                 >
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                                     {momentum === mode.id && (
@@ -348,7 +348,7 @@ export const ProjectCalculator = () => {
                                             <span className={`text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-black ${billingCycle === cycle ? 'text-accent' : 'text-foreground/40'}`}>
                                                 {cycle === 'Monthly' ? t('billing.monthly') : t('billing.yearly')}
                                             </span>
-                                            {cycle === 'Yearly' && projectType !== 'Landing' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>}
+                                            {cycle === 'Yearly' && <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-accent font-bold mt-1">{t('save_30')}</span>}
                                         </div>
                                         {billingCycle === cycle && (
                                             <div className="absolute inset-0">
@@ -374,7 +374,7 @@ export const ProjectCalculator = () => {
                                 <button
                                     key={item.level}
                                     onClick={() => setSupport(item.level)}
-                                    className={`group relative p-6 md:p-12 text-left transition-all duration-1000 flex flex-col gap-10 md:gap-14 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                    className={`group relative p-10 md:p-12 text-left transition-all duration-1000 flex flex-col gap-10 md:gap-14 ${support === item.level ? 'bg-accent/[0.05]' : 'bg-background hover:bg-white/[0.01]'}`}
                                 >
                                     {support === item.level && (
                                         <div className="absolute inset-0">
@@ -448,7 +448,7 @@ export const ProjectCalculator = () => {
                                     <button
                                         key={addon.id}
                                         onClick={() => toggleAddon(addon.id)}
-                                        className={`group relative p-6 md:p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-background hover:bg-white/[0.01]'}`}
+                                        className={`group relative p-10 text-left transition-all duration-1000 overflow-hidden min-h-[220px] flex flex-col justify-between ${addons[addon.id] ? 'bg-accent/[0.08]' : 'bg-background hover:bg-white/[0.01]'}`}
                                     >
                                         <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out" />
                                         

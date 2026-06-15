@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
-import { Menu, X, ArrowRight } from 'lucide-react';
-
+import { Menu, X, Sun, Moon, ArrowRight } from 'lucide-react';
+import { useTheme } from '@/lib/ThemeProvider';
 import { WebistanSymbol } from '@/components/ui/WebistanSymbol';
 import Link from 'next/link';
 
@@ -13,7 +13,7 @@ export const Navbar = () => {
     const locale = useLocale();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -29,7 +29,7 @@ export const Navbar = () => {
 
     return (
         <nav className={`fixed top-0 w-full z-[100] transition-all duration-700 ${scrolled ? 'py-4 bg-background/80 backdrop-blur-xl' : 'py-8'}`}>
-            <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between box-border">
+            <div className="container mx-auto px-6 min-[1200px]:px-0 max-w-6xl flex items-center justify-between box-border">
 
                 {/* Logo - Restored Branding Style */}
                 <Link href="/" className="relative z-[110] flex items-center gap-[2px] group brand-logo text-foreground">
@@ -55,6 +55,13 @@ export const Navbar = () => {
                     ))}
 
                     <div className="w-[0.5px] h-4 bg-accent/20 mx-4" />
+
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 text-accent/60 hover:text-accent transition-colors duration-500"
+                    >
+                        {theme === 'dark' ? <Sun size={15} strokeWidth={1.5} className="text-accent" /> : <Moon size={14} strokeWidth={1} />}
+                    </button>
 
                     {/* Language Switcher - Precision Box */}
                     <div className="flex items-center gap-6 ml-8 px-6 py-2 bg-accent/[0.03] relative group/lang">

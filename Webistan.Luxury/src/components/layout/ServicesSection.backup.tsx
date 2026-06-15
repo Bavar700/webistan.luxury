@@ -78,7 +78,7 @@ export const ServicesSection = () => {
                         <motion.div
                             key={i}
                             variants={cardVariants}
-                            className="group relative bg-white/[0.01] text-foreground p-12 hover:bg-white/[0.02] overflow-hidden shadow-xl rounded-lg border border-white/5"
+                            className="group relative bg-card-bg text-card-text p-12 hover:bg-surface/80 overflow-hidden shadow-xl rounded-lg border border-white/5"
                             /* Fixed: was transition-duration-1500 (invalid Tailwind) → inline style */
                             style={{ transition: 'background 1500ms ease' }}
                         >
@@ -96,7 +96,7 @@ export const ServicesSection = () => {
 
                             {/* Card top row */}
                             <div className="relative z-10 flex justify-between items-start mb-24">
-                                <div className="p-4 bg-accent/[0.05] backdrop-blur-sm">
+                                <div className="p-4 bg-btn-bg backdrop-blur-sm">
                                     <s.icon
                                         size={22}
                                         strokeWidth={1}
