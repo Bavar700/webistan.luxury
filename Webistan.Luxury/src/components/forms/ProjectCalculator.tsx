@@ -137,7 +137,7 @@ export const ProjectCalculator = () => {
                                 01
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system01.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system01.desc')}</p>
                             </div>
                         </motion.div>
@@ -200,7 +200,7 @@ export const ProjectCalculator = () => {
                                 02
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system02.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system02.desc')}</p>
                             </div>
                         </motion.div>
@@ -272,7 +272,7 @@ export const ProjectCalculator = () => {
                                 03
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system03.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system03.desc')}</p>
                             </div>
                         </motion.div>
@@ -331,7 +331,7 @@ export const ProjectCalculator = () => {
                                 04
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system04.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system04.desc')}</p>
                             </div>
                         </motion.div>
@@ -420,7 +420,7 @@ export const ProjectCalculator = () => {
                                 05
                             </div>
                             <div>
-                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
+                                <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('system05.title')}</h3>
                                 <p className="text-[12px] md:text-[14px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('system05.desc')}</p>
                             </div>
                         </motion.div>
@@ -502,7 +502,7 @@ export const ProjectCalculator = () => {
                             {projectType !== 'Landing' ? (
                                 <div className="flex flex-col items-center gap-2">
                                     <span className="text-[11px] md:text-[12px] uppercase tracking-[0.4em] text-accent font-black animate-pulse -mr-[0.4em] mb-2">{t('access_rate')}</span>
-                                    <span className="text-3xl md:text-6xl font-display text-accent tracking-[0.2em]">{totalPrice.toLocaleString()} TJS</span>
+                                    <span className="text-3xl md:text-6xl font-display text-accent tracking-[0.05em] md:tracking-[0.2em]">{totalPrice.toLocaleString()} TJS</span>
                                     <p className="text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-foreground/40 italic mt-4 max-w-xs">{t('promo_disclaimer')}</p>
                                 </div>
                             ) : (

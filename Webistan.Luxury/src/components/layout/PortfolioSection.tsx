@@ -17,12 +17,12 @@ export const PortfolioSection = () => {
                         transition={{ duration: 1.5 }}
                         className="flex flex-col items-center"
                     >
-                        <span className="text-[11px] md:text-[13px] font-display font-medium tracking-[1em] text-foreground/30 uppercase block mb-6 -mr-[1em]">
+                        <span className="text-[11px] md:text-[13px] font-display font-medium tracking-[0.4em] md:tracking-[1em] text-foreground/30 uppercase block mb-6 -mr-[0.4em] md:-mr-[1em]">
                             {t('subheading')}
                         </span>
 
                         <div className="flex flex-col items-center">
-                            <h2 className="text-4xl md:text-7xl font-display font-light tracking-[0.25em] leading-none uppercase -mr-[0.25em] text-foreground/90">
+                            <h2 className="text-2xl md:text-7xl font-display font-light tracking-[0.15em] md:tracking-[0.25em] leading-none uppercase -mr-[0.15em] md:-mr-[0.25em] text-foreground/90">
                                 {t('legacies')}
                             </h2>
                             <div className="w-24 h-[0.5px] bg-accent/30 mt-10" />

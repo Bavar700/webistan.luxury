@@ -26,6 +26,7 @@
     "close": "Пӯшидан"
   },
   "Common": {
+    "splash_tagline": "Бартарии рақамӣ",
     "trust_bar": "Дақиқии Швейтсарӣ. Зебоии Шарқ. Дидгоҳи Ҷаҳонӣ.",
     "footer": {
       "tagline": "ҚУДРАТИ ХОМӮШ. МАНТИҚИ СУФТА.",
@@ -238,7 +239,7 @@
     "partner_rate": "Нархи шарики муассис_",
     "name_label": "ИМЗO_",
     "name_placeholder": "НОМ / ШИРКАТ",
-    "channel_label": "Канал связи_",
+    "channel_label": "Канали алоқа_",
     "channel_placeholder": "ПОЧТАИ ЭЛЕКТРОНӢ",
     "brief_label": "Дар бораи лоиҳа:",
     "brief_placeholder": "ДАР БОРАИ ЛОИҲА:",
@@ -246,7 +247,7 @@
     "locales": "{count, plural, =1 {# Забон} other {# Забонҳо}}",
     "transmission_complete": "Интиқол_анҷом_ёфт",
     "success_message": "Дархости шумо бомуваффақият рамзгузорӣ ва ба қароргоҳи Webistan Luxury фиристода шуд. <br/> Мо дар давоми 24 соат бо шумо тамос хоҳем гирифт.",
-    "back_to_form": "Бозгашт ба форма",
+    "back_to_form": "Бозгашт ба шакл",
     "initializing_transmission": "ОҒОЗИ_ИНТИҚОЛ",
     "field_required": "Лутфан, ин заминаро пур кунед",
     "email_invalid": "Лутфан, суроғаи электронии дурустро ворид кунед"

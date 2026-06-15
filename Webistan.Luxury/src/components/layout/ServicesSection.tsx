@@ -46,16 +46,16 @@ export const ServicesSection = () => {
                         transition={{ duration: 1.5 }}
                         className="flex flex-col items-center gap-8"
                     >
-                        <span className="text-sm md:text-lg font-display font-medium tracking-[1.05em] text-foreground uppercase block leading-none -mr-[1.05em]">
+                        <span className="text-sm md:text-lg font-display font-medium tracking-[0.4em] md:tracking-[1.05em] text-foreground uppercase block leading-none -mr-[0.4em] md:-mr-[1.05em]">
                             {t('subheading')}
                         </span>
 
-                        <span className="text-3xl md:text-6xl uppercase tracking-[0.4em] text-accent/70 font-light leading-none -mr-[0.4em]">
+                        <span className="text-2xl md:text-6xl uppercase tracking-[0.2em] md:tracking-[0.4em] text-accent/70 font-light leading-none -mr-[0.2em] md:-mr-[0.4em]">
                             {t('heading_digital')}
                         </span>
 
                         <div className="flex flex-col items-center">
-                            <h2 className="text-5xl md:text-8xl font-display font-bold tracking-[0.1em] leading-none uppercase -mr-[0.1em]">
+                            <h2 className="text-4xl md:text-8xl font-display font-bold tracking-[0.1em] leading-none uppercase -mr-[0.1em]">
                                 {/* Fixed: was animate-shimmer (undefined), now uses hero-shimmer */}
                                 <span className="hero-shimmer inline-block pb-4">
                                     {t('heading_solutions')}
@@ -129,7 +129,7 @@ export const ServicesSection = () => {
 
             {/* Bottom label */}
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-90 pointer-events-none w-full text-center">
-                <span className="text-[10px] uppercase tracking-[1.25em] text-accent/80 font-bold -mr-[1.25em]">
+                <span className="text-[10px] uppercase tracking-[0.3em] md:tracking-[1.25em] text-accent/80 font-bold -mr-[0.3em] md:-mr-[1.25em]">
                     {t('bottom_label')}
                 </span>
             </div>

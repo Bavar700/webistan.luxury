@@ -54,7 +54,7 @@ export const ContactForm = () => {
                             06
                         </div>
                         <div>
-                            <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('initiation_title')}</h3>
+                            <h3 className="text-base md:text-2xl font-display font-medium tracking-[0.05em] md:tracking-[0.2em] uppercase leading-tight group-hover:text-accent transition-colors duration-700">{t('initiation_title')}</h3>
                             <p className="text-[11px] md:text-[13px] text-foreground/70 mt-1 tracking-wider uppercase font-medium">{t('initiation_desc')}</p>
                         </div>
                     </motion.div>
@@ -75,7 +75,7 @@ export const ContactForm = () => {
                                     <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-accent/[0.05] to-transparent -translate-x-full group-hover/plate:translate-x-full transition-transform duration-1500 ease-in-out" />
 
 
-                                    <h4 className="text-accent/40 font-display italic text-[13px] uppercase tracking-[0.5em] mb-10">{t('transmission')}:</h4>
+                                    <h4 className="text-accent/40 font-display italic text-[13px] uppercase tracking-[0.2em] md:tracking-[0.5em] mb-10">{t('transmission')}:</h4>
 
                                     {/* Core Config Row */}
                                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-accent/5">

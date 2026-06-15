@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { WebistanSymbol } from '@/components/ui/WebistanSymbol';
 
 export const SplashScreen = () => {
+    const t = useTranslations('Common');
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
@@ -69,7 +71,7 @@ export const SplashScreen = () => {
                         transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
                         className="relative z-10 mt-4 text-[9px] uppercase tracking-[0.45em] text-[#F1F1F3] font-light -mr-[0.45em]"
                     >
-                        Цифровое превосходство
+                        {t('splash_tagline')}
                     </motion.p>
                 </motion.div>
             )}
