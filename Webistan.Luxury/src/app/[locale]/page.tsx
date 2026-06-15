@@ -62,7 +62,7 @@ export default async function Index({
 
       <HeroSection />
 
-      <div className="flex flex-col px-6 mb-[120px] gap-[120px]">
+      <div className="flex flex-col px-0 md:px-6 mb-[120px] gap-[120px]">
         <ProjectCalculator />
 
         <div className="relative group/block max-w-[1600px] mx-auto w-full py-[60px]">
