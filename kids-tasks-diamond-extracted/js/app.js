@@ -469,6 +469,36 @@ function initApp() {
         setTimeout(() => showTestModal(test), 500);
     }
 
+    // Sync immediately on tab focus / wake up
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            console.log('App became visible, checking remote state...');
+            if (window.supabaseSession && window.supabaseSession.user) {
+                fetchRemoteState().then((remoteState) => {
+                    if (remoteState) {
+                        const remoteVersion = Number(remoteState.version) || 0;
+                        const localVersion = Number(state.version) || 0;
+                        const remoteTime = Number(remoteState.lastUpdated) || 0;
+                        const localTime = Number(state.lastUpdated) || 0;
+                        let isRemoteNewer = false;
+                        if (remoteVersion > localVersion) {
+                            isRemoteNewer = true;
+                        } else if (remoteVersion === localVersion && remoteTime > localTime) {
+                            isRemoteNewer = true;
+                        }
+                        if (isRemoteNewer) {
+                            migrateState(remoteState);
+                            state = remoteState;
+                            safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                            updateUI();
+                        }
+                    }
+                });
+                setupRealtimeSubscription(window.supabaseSession.user.id);
+            }
+        }
+    });
+
     // Start gentle nudge checker
     if (!window._nudgeInterval) {
         window._nudgeInterval = setInterval(checkGentleNudges, 10000);
@@ -870,7 +900,7 @@ function updateProgressBar() {
     titleEl.textContent = __('progress.title') || 'Пешрафти имрӯз';
     fillEl.style.background = ''; // reset to CSS default
 
-    const todayDay = new Date().getDay();
+    const todayDay = new Date(today + 'T12:00:00').getDay();
     const activeTasks = [
         ...child.tasks.filter(t => t.type !== 'daily' || !t.days || t.days.includes(todayDay)),
         ...child.bonusTasks
@@ -910,6 +940,16 @@ function updateUI() {
     }
 
     updateProgressBar();
+
+    // Check achievements automatically
+    const achResult = checkAchievements(child.id);
+    if (achResult.unlocked && achResult.unlocked.length > 0) {
+        showToast('🎉', achResult.unlocked.join(', '));
+        launchConfetti();
+    }
+    if (achResult.prestigeTriggered) {
+        showPrestigeModal(achResult.newTier, achResult.goldPrize, achResult.starPrize);
+    }
 
     // Header logic toggle
     const selector = document.getElementById('header-child-selector');
@@ -1127,7 +1167,7 @@ function renderTasks() {
     const log = getOrCreateDailyLog(currentChildId);
 
     // Update progress based on tasks active today
-    const todayDay = new Date().getDay();
+    const todayDay = new Date(today + 'T12:00:00').getDay();
     const activeTasks = [
         ...child.tasks.filter(t => t.type !== 'daily' || !t.days || t.days.includes(todayDay)),
         ...child.bonusTasks
@@ -1174,6 +1214,7 @@ function renderTasks() {
     });
 
     container.innerHTML = '';
+    renderRewardsPunishments(container, child);
 
     // Group daily tasks by day cycles
     const morningTasks = [];
@@ -1333,6 +1374,7 @@ function renderTasks() {
     
     // Auto-render calendar at the bottom of the dashboard
     renderCalendar();
+    attachRewardsPunishmentsListeners(container);
 }
 
 function getTaskMetaBadgesHTML(task, tl = null) {
@@ -1454,7 +1496,8 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
         'in-progress': __('status.in-progress'),
         'awaiting-confirm': __('status.awaiting-confirm'),
         'completed': __('status.completed'),
-        'skipped': __('status.skipped')
+        'skipped': __('status.skipped'),
+        'excused': __('status.excused')
     };
 
     let durationText = getTaskMetaBadgesHTML(task, tl);
@@ -1483,6 +1526,12 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
                     ${tl.parentReplyPhoto ? `
                         <button type="button" class="view-parent-reply-photo-btn" data-photo="${encodeURIComponent(tl.parentReplyPhoto)}" style="background: none; border: none; color: var(--primary); font-weight: 600; text-decoration: underline; margin-top: 4px; font-size: 11px; cursor: pointer; padding: 0;">🖼️ Акс</button>
                     ` : ''}
+                </div>
+            ` : ''}
+            ${tl.status === 'excused' ? `
+                <div class="task-card-warning" style="margin-top: 8px; border-color: #d97706; background: rgba(245, 158, 11, 0.05);">
+                    <span style="color: #d97706; font-weight: 600;">🙏 ${__('status.excused') || 'Узрнок'}:</span>
+                    <span>"${tl.excuseReason || ''}"</span>
                 </div>
             ` : ''}
         </div>
@@ -1514,6 +1563,9 @@ function createTaskCard(task, tl, log, child, isBonus = false) {
                         ` : ''}
                     </div>
                 ` : ''}
+            ` : ''}
+            ${tl.status === 'excused' ? `
+                <div class="task-status-badge status-excused" style="background: rgba(245, 158, 11, 0.12); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.25);">${statusLabels.excused}</div>
             ` : ''}
         </div>
     `;
@@ -2069,8 +2121,17 @@ function showConfirmModal(task) {
     confirmTaskId = task.id;
     document.getElementById('confirm-task-name').innerHTML =
         __('confirm.question', { emoji: task.emoji, name: task.name });
-    document.getElementById('confirm-pin').value = '';
+    const pinInput = document.getElementById('confirm-pin');
+    if (pinInput) {
+        pinInput.value = '';
+        pinInput.style.display = parentPinVerified ? 'none' : 'block';
+    }
     document.getElementById('confirm-error').classList.add('hidden');
+
+    const confirmHeader = document.querySelector('#confirm-modal .modal-header h3');
+    if (confirmHeader) {
+        confirmHeader.innerHTML = `<svg class="icon-svg" aria-hidden="true" style="color:var(--success);"><use href="#icon-check"/></svg> ${__('confirm.title')}`;
+    }
 
     // Reset parent reject section
     document.getElementById('confirm-reject-section').classList.add('hidden');
@@ -2080,7 +2141,9 @@ function showConfirmModal(task) {
     document.getElementById('confirm-reject-photo-preview').classList.add('hidden');
     document.getElementById('confirm-reject-photo-btn').classList.remove('hidden');
     document.getElementById('confirm-submit').classList.remove('hidden');
-    document.getElementById('confirm-reject').textContent = __('confirm.submit_no') || 'Рад кардан';
+    
+    const rejectBtn = document.getElementById('confirm-reject');
+    rejectBtn.innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width: 14px; height: 14px; fill: currentColor;"><use href="#icon-x"/></svg> <span>${__('confirm.submit_no') || 'Рад кардан'}</span>`;
 
     const scoreGroup = document.getElementById('confirm-exam-score-group');
     if (scoreGroup) {
@@ -2128,10 +2191,12 @@ function showConfirmModal(task) {
 }
 
 function submitConfirm() {
-    const pin = document.getElementById('confirm-pin').value;
-    if (pin !== state.pin) {
-        document.getElementById('confirm-error').classList.remove('hidden');
-        return;
+    if (!parentPinVerified) {
+        const pin = document.getElementById('confirm-pin').value;
+        if (pin !== state.pin) {
+            document.getElementById('confirm-error').classList.remove('hidden');
+            return;
+        }
     }
 
     const child = getCurrentChild();
@@ -2200,8 +2265,9 @@ function submitConfirm() {
             showPrestigeModal(result.newTier, result.goldPrize, result.starPrize);
         }
 
-        const allTasks = child.tasks.filter(t => !t.isBonus);
-        const allDone = allTasks.every(t => {
+        const todayDay = new Date(today + 'T12:00:00').getDay();
+        const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+        const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
             const tl2 = log.tasks[t.id];
             return tl2 && tl2.status === 'completed' && tl2.confirmed;
         });
@@ -2215,7 +2281,7 @@ function submitConfirm() {
                 setTimeout(() => showTestModal(test), 1000);
             }
         } else {
-            const allResolved = allTasks.every(t => {
+            const allResolved = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
                 const tl2 = log.tasks[t.id];
                 return tl2 && (tl2.status === 'completed' && tl2.confirmed || tl2.status === 'skipped');
             });
@@ -2256,10 +2322,12 @@ function submitReject() {
         return;
     }
 
-    const pin = document.getElementById('confirm-pin').value;
-    if (pin !== state.pin) {
-        document.getElementById('confirm-error').classList.remove('hidden');
-        return;
+    if (!parentPinVerified) {
+        const pin = document.getElementById('confirm-pin').value;
+        if (pin !== state.pin) {
+            document.getElementById('confirm-error').classList.remove('hidden');
+            return;
+        }
     }
 
     const child = getCurrentChild();
@@ -2483,6 +2551,163 @@ function submitParentReply() {
     }
 }
 
+function confirmTaskDirectly(taskId) {
+    const child = getCurrentChild();
+    if (!child) return;
+    const today = getToday();
+    const log = child.dailyLogs[today] || getOrCreateDailyLog(child.id);
+    const tl = log.tasks[taskId];
+    if (tl) {
+        tl.status = 'completed';
+        tl.confirmed = true;
+        tl.confirmedAt = new Date().toISOString();
+        
+        const task = child.tasks.find(t => t.id === taskId) || child.bonusTasks.find(t => t.id === taskId);
+        if (task) {
+            if (task.isStreak) {
+                task.currentStreak = (task.currentStreak || 0) + 1;
+                task.lastStreakUpdate = today;
+            }
+            
+            // Apply rewards
+            const rt = child.rewardType || 'money';
+            const goldReward = parseInt(task.rewardGold !== undefined ? task.rewardGold : 1) || 0;
+            const starsReward = parseInt(task.rewardStars !== undefined ? task.rewardStars : 1) || 0;
+            const medalsReward = parseInt(task.rewardMedals !== undefined ? task.rewardMedals : 0) || 0;
+            
+            if (!tl.rewardPaid) {
+                if (goldReward > 0 && (rt === 'money' || rt === 'both')) {
+                    child.balance = (child.balance || 0) + goldReward;
+                    child.totalEarned = (child.totalEarned || 0) + goldReward;
+                }
+                if (starsReward > 0 && (rt === 'stars' || rt === 'both')) {
+                    child.stars = (child.stars || 0) + starsReward;
+                    child.totalStars = (child.totalStars || 0) + starsReward;
+                }
+                if (medalsReward > 0) {
+                    child.medals = (child.medals || 0) + medalsReward;
+                    child.totalMedals = (child.totalMedals || 0) + medalsReward;
+                }
+                tl.rewardPaid = true;
+                tl.paidGold = goldReward;
+                tl.paidStars = starsReward;
+                tl.paidMedals = medalsReward;
+            }
+        }
+        
+        saveState();
+        
+        const result = checkAchievements(child.id);
+        if (result.unlocked.length > 0) {
+            showToast('🎉', result.unlocked.join(', '));
+            launchConfetti();
+        } else {
+            showToast('✅', __('confirm.success') || 'Супориш тасдиқ шуд!');
+        }
+        if (result.prestigeTriggered) {
+            showPrestigeModal(result.newTier, result.goldPrize, result.starPrize);
+        }
+        
+        // Handle routine completions / daily reward
+        const todayDay = new Date(today + 'T12:00:00').getDay();
+        const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+        const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
+            const tl2 = log.tasks[t.id];
+            return tl2 && tl2.status === 'completed' && tl2.confirmed;
+        });
+
+        if (allDone) {
+            applyDailyReward(child.id, today);
+            setTimeout(() => launchConfetti(), 300);
+            const test = checkAndCreateTest(child.id);
+            if (test) {
+                setTimeout(() => showTestModal(test), 1000);
+            }
+        } else {
+            const allResolved = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
+                const tl2 = log.tasks[t.id];
+                return tl2 && (tl2.status === 'completed' && tl2.confirmed || tl2.status === 'skipped');
+            });
+            if (allResolved) {
+                applyDailyReward(child.id, today);
+            }
+        }
+        
+        renderParentDashboard();
+        updateUI();
+    }
+}
+
+function showParentRejectModal(task) {
+    const confirmHeader = document.querySelector('#confirm-modal .modal-header h3');
+    if (confirmHeader) {
+        confirmHeader.innerHTML = `<svg class="icon-svg" aria-hidden="true" style="color:var(--danger);"><use href="#icon-x"/></svg> ${currentLang === 'ru' ? 'Отклонение задания' : 'Рад кардани супориш'}`;
+    }
+
+    confirmTaskId = task.id;
+    const taskNameText = currentLang === 'ru' 
+        ? `Вы действительно хотите отклонить задание <strong>${task.emoji ? task.emoji + ' ' : ''}${task.name}</strong>?` 
+        : `Оё шумо дар ҳақиқат мехоҳед супориши <strong>${task.emoji ? task.emoji + ' ' : ''}${task.name}</strong>-ро рад кунед?`;
+    document.getElementById('confirm-task-name').innerHTML = taskNameText;
+    
+    // Hide PIN input
+    const pinInput = document.getElementById('confirm-pin');
+    if (pinInput) pinInput.style.display = 'none';
+    document.getElementById('confirm-error').classList.add('hidden');
+
+    // Show parent reject section immediately
+    document.getElementById('confirm-reject-section').classList.remove('hidden');
+    document.getElementById('confirm-reject-reason').value = '';
+    document.getElementById('confirm-reject-photo-input').value = '';
+    document.getElementById('confirm-reject-photo-img').src = '';
+    document.getElementById('confirm-reject-photo-preview').classList.add('hidden');
+    document.getElementById('confirm-reject-photo-btn').classList.remove('hidden');
+    
+    // Hide standard confirm button
+    document.getElementById('confirm-submit').classList.add('hidden');
+    
+    // Show reject button and configure text to "Тасдиқи радкунӣ"
+    const rejectBtn = document.getElementById('confirm-reject');
+    rejectBtn.innerHTML = `<svg class="icon-svg" aria-hidden="true" style="width: 14px; height: 14px; fill: currentColor;"><use href="#icon-x"/></svg> <span>${__('confirm.reject_confirm_btn') || 'Тасдиқи радкунӣ'}</span>`;
+    rejectBtn.style.background = '#EF4444';
+    
+    // Hide score group
+    const scoreGroup = document.getElementById('confirm-exam-score-group');
+    if (scoreGroup) scoreGroup.classList.add('hidden');
+
+    // Show child proof details
+    const child = getCurrentChild();
+    const today = getToday();
+    const log = child.dailyLogs[today];
+    const tl = log.tasks[task.id];
+    const confirmProof = document.getElementById('confirm-proof');
+    const confirmPhoto = document.getElementById('confirm-proof-photo');
+    const confirmExplanation = document.getElementById('confirm-proof-explanation');
+
+    let hasProof = false;
+    if (tl && tl.photo) {
+        document.getElementById('confirm-proof-img').src = tl.photo;
+        confirmPhoto.classList.remove('hidden');
+        hasProof = true;
+    } else {
+        confirmPhoto.classList.add('hidden');
+    }
+    if (tl && tl.explanation) {
+        document.getElementById('confirm-proof-text').textContent = tl.explanation;
+        confirmExplanation.classList.remove('hidden');
+        hasProof = true;
+    } else {
+        confirmExplanation.classList.add('hidden');
+    }
+    if (hasProof) {
+        confirmProof.classList.remove('hidden');
+    } else {
+        confirmProof.classList.add('hidden');
+    }
+
+    document.getElementById('confirm-modal').classList.remove('hidden');
+}
+
 let badgeRevokeId = null;
 let badgeRevokeSuccessCallback = null;
 
@@ -2494,7 +2719,6 @@ function showBadgeRevokeModal(id, successCallback) {
     badgeRevokeSuccessCallback = successCallback;
 
     const displayName = __(`achievement.${id}`) || a.name;
-    document.getElementById('badge-revoke-name').textContent = displayName;
     document.getElementById('badge-revoke-reason').value = '';
     
     // Reset photo upload state
@@ -2597,12 +2821,13 @@ function renderCalendar() {
             if (log.excused) {
                 cell.classList.add('excused');
             } else {
-                const allTasks = (child.tasks || []).filter(t => !t.isBonus);
-                const allDone = allTasks.every(t => {
+                const dateDayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
+                const activeRegularTasks = (child.tasks || []).filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(dateDayOfWeek)));
+                const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
                     const tl = log.tasks[t.id];
                     return tl && (tl.status === 'completed' || tl.status === 'skipped');
                 });
-                const anyDone = allTasks.some(t => {
+                const anyDone = activeRegularTasks.some(t => {
                     const tl = log.tasks[t.id];
                     return tl && tl.status === 'completed' && tl.confirmed;
                 });
@@ -2655,10 +2880,11 @@ function showDayDetails(dateStr) {
             const isDone = tl.status === 'completed' && tl.confirmed;
             const isSkipped = tl.status === 'skipped';
             const isFailed = tl.status === 'failed';
+            const isExcused = tl.status === 'excused';
             const isInProgress = tl.status === 'in-progress';
-            if (isDone) doneCount++;
+            if (isDone || isExcused) doneCount++;
 
-            const statusIcon = isDone ? '✅' : (isSkipped || isFailed) ? '❌' : isInProgress ? '⏳' : '⬜';
+            const statusIcon = isDone ? '✅' : isExcused ? '🙏' : (isSkipped || isFailed) ? '❌' : isInProgress ? '⏳' : '⬜';
             const emoji = (t.emoji && t.emoji !== 'undefined') ? t.emoji : '📌';
 
             let detailsHTML = '';
@@ -2678,10 +2904,24 @@ function showDayDetails(dateStr) {
                     }
                 }
                 detailsHTML += `<div style="font-size:12px; color:#EF4444; margin-top:4px;">⚠️ ${failText}</div>`;
+            } else if (isExcused) {
+                detailsHTML += `<div style="font-size:12px; color:#d97706; margin-top:4px;">🙏 ${__('status.excused') || 'Узрнок'}${tl.excuseReason ? ': ' + tl.excuseReason : ''}</div>`;
             } else if (isDone) {
                 if (tl.explanation) detailsHTML += `<div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">💬 ${tl.explanation}</div>`;
                 if (tl.photo) {
                     detailsHTML += `<div style="margin-top:6px;"><button type="button" class="view-calendar-photo-btn" data-photo="${encodeURIComponent(tl.photo)}" style="background:none; border:none; color:var(--primary); font-size:11px; font-weight:600; text-decoration:underline; cursor:pointer; padding:0;">🖼️ ${__('common.photo_short') || 'Акс'}</button></div>`;
+                }
+            }
+
+            let actionButtonsHTML = '';
+            if (parentPinVerified) {
+                if (!isDone || isExcused) {
+                    actionButtonsHTML += `<div style="margin-left:38px; margin-top:8px; display:flex; flex-wrap:wrap; gap:8px;">`;
+                    actionButtonsHTML += `<button type="button" class="complete-calendar-task-btn" data-task-id="${t.id}" data-date="${dateStr}" style="padding:4px 10px; font-size:11px; font-weight:600; border-radius:6px; border:1px solid rgba(16,185,129,0.3); color:var(--success); background:rgba(16,185,129,0.05); cursor:pointer; white-space:normal; text-align:center; box-sizing:border-box;">✅ ${__('parent.complete_title') || 'Иҷро шуд'}</button>`;
+                    if (!isExcused) {
+                        actionButtonsHTML += `<button type="button" class="excuse-calendar-task-btn" data-task-id="${t.id}" data-date="${dateStr}" style="padding:4px 10px; font-size:11px; font-weight:600; border-radius:6px; border:1px solid rgba(245,158,11,0.3); color:#d97706; background:rgba(245,158,11,0.05); cursor:pointer; white-space:normal; text-align:center; box-sizing:border-box;">🙏 ${__('parent.excuse_title') || 'Узрнок'}</button>`;
+                    }
+                    actionButtonsHTML += `</div>`;
                 }
             }
 
@@ -2693,6 +2933,7 @@ function showDayDetails(dateStr) {
                         <span style="font-size:18px; flex-shrink:0;">${statusIcon}</span>
                     </div>
                     ${detailsHTML ? `<div style="margin-left:38px;">${detailsHTML}</div>` : ''}
+                    ${actionButtonsHTML}
                 </div>`;
         });
 
@@ -2777,6 +3018,36 @@ function showDayDetails(dateStr) {
         });
     });
 
+    panel.querySelectorAll('.complete-calendar-task-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const taskId = btn.dataset.taskId;
+            const dateStr = btn.dataset.date;
+            completePastTask(child.id, dateStr, taskId);
+        });
+    });
+
+    panel.querySelectorAll('.excuse-calendar-task-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const taskId = btn.dataset.taskId;
+            const dateStr = btn.dataset.date;
+            showCustomPrompt(
+                __('parent.excuse_title') || 'Узрнок',
+                __('parent.excuse_reason_prompt') || 'Сабаби узрнокро ворид кунед (Уважительная причина):'
+            ).then(result => {
+                if (result === null) return;
+                const text = (result.text || '').trim();
+                const photo = result.photo || null;
+                if (!text) {
+                    showToast('⚠️', 'Лутфан сабаби узрнокро нависед!');
+                    return;
+                }
+                excusePastTask(child.id, dateStr, taskId, text, photo);
+            });
+        });
+    });
+
     // Backdrop
     const backdrop = document.createElement('div');
     backdrop.id = 'day-details-backdrop';
@@ -2793,43 +3064,7 @@ function renderBalance() {
     if (!child) return;
     const rt = child.rewardType || 'money';
 
-    // Withdrawal history
-    if (!child.withdrawals) child.withdrawals = [];
-    const histContainer = document.getElementById('withdrawal-history');
-    if (histContainer) {
-        if (child.withdrawals.length === 0) {
-            histContainer.innerHTML = `<p class="empty-state">${__('balance.no_withdrawals')}</p>`;
-        } else {
-            histContainer.innerHTML = child.withdrawals.slice().reverse().map(w => {
-                const sym = w.type === 'stars' ? '⭐' : '🪙';
-                const status = w.status || 'approved';
-                let badgeStyle = '', badgeText = '';
-                if (status === 'pending') {
-                    badgeStyle = 'background: rgba(245, 158, 11, 0.15); color: #F59E0B;';
-                    badgeText = __('balance.status.pending') || 'Дар интизор';
-                } else if (status === 'rejected') {
-                    badgeStyle = 'background: rgba(239, 68, 68, 0.15); color: #EF4444;';
-                    badgeText = __('balance.status.rejected') || 'Рад шуд';
-                } else {
-                    badgeStyle = 'background: rgba(16, 185, 129, 0.15); color: #10B981;';
-                    badgeText = __('balance.status.approved') || 'Тасдиқ шуд';
-                }
-                let commentHtml = '';
-                if (status === 'rejected' && w.parentComment) {
-                    commentHtml = `<div style="font-size:12px;margin-top:6px;color:#F87171;border-left:2px solid #EF4444;padding-left:8px;">💬 ${w.parentComment}</div>`;
-                }
-                return `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <span style="font-size:13px;opacity:0.7;">${formatDate(w.date)}</span>
-                        <div style="display:flex;align-items:center;gap:8px;">
-                            <span style="font-weight:700;">-${w.amount} ${sym}</span>
-                            <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:9999px;${badgeStyle}">${badgeText}</span>
-                        </div>
-                    </div>${commentHtml}
-                </div>`;
-            }).join('');
-        }
-    }
+
 
     // Test history
     const testContainer = document.getElementById('test-history');
@@ -4248,9 +4483,9 @@ function renderDreams() {
             if (idx !== -1) {
                 const title = __('dream.delete_prompt');
                 const placeholder = __('common.reason_placeholder');
-                showCustomPrompt(title, placeholder).then(reason => {
-                    if (reason === null) return; // User cancelled
-                    const trimmedReason = reason.trim();
+                showCustomPrompt(title, placeholder).then(result => {
+                    if (result === null) return; // User cancelled
+                    const trimmedReason = (result.text || '').trim();
                     if (trimmedReason === '') {
                         showToast('⚠️', __('common.reason_required'));
                         return;
@@ -4529,14 +4764,15 @@ function renderParentDashboard() {
 
     // Top action buttons in 2x2 grid
     html += "<div class='section-card' style='margin-bottom:15px;'>";
-    html += "<div style='display: grid; grid-template-columns: 1fr; gap: 8px;'>";
-    html += "  <button class='btn btn-primary btn-parent-add-task' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px;'>";
+    html += "<div class='parent-actions-grid'>";
+    html += "  <button class='btn btn-primary btn-parent-add-task' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    " + __('settings.add_task') + "</button>";
-
-    html += "  <button class='btn btn-outline btn-parent-excuse-day' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; border-color: rgba(245, 158, 11, 0.3); color: var(--warning);'>";
+    html += "  <button class='btn btn-outline btn-parent-excuse-day' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; border-color: rgba(245, 158, 11, 0.3); color: var(--warning); padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-skip'/></svg> " + __('excuse.title') + "</button>";
-    html += "  <button class='btn btn-secondary btn-parent-add-dream' style='height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2);'>";
+    html += "  <button class='btn btn-secondary btn-parent-add-dream' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + (__('parent.add_dream_title_btn')) + "</button>";
+    html += "  <button class='btn btn-secondary btn-parent-add-rev-pun' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
+    html += "    " + __('parent.add_rev_pun_btn') + "</button>";
     html += "</div>";
     html += "</div>";
 
@@ -4545,7 +4781,7 @@ function renderParentDashboard() {
 
     // Skipped and Awaiting Tasks Review
     const log = getOrCreateDailyLog(selectedChild.id);
-    const reviewTaskEntries = Object.entries(log.tasks).filter(([taskId, tl]) => tl.status === 'awaiting-confirm' || tl.status === 'skipped' || (tl.status === 'pending' && tl.rejectReason));
+    const reviewTaskEntries = Object.entries(log.tasks).filter(([taskId, tl]) => tl.status === 'awaiting-confirm' || tl.status === 'skipped' || tl.status === 'failed' || (tl.status === 'pending' && tl.rejectReason));
     if (reviewTaskEntries.length > 0) {
         html += `<div class='section-card' style='margin-bottom:16px; border-left: 3px solid var(--warning); padding: 14px 16px;'>`;
         html += `<h4 style='margin: 0 0 12px 0; font-size: 13px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;'>${__('parent.review_tasks') || 'Назорати супоришҳои имрӯза'}</h4>`;
@@ -4570,7 +4806,11 @@ function renderParentDashboard() {
                     <div>
                         <button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.skipPhoto)}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: var(--danger, #ef4444); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; cursor: pointer;">📸 ${__('common.photo_short') || 'Акс'}</button>
                     </div>` : ''}
-                    <button class='btn btn-outline parent-reply-restore-btn' data-task-id='${task.id}' style='width: 100%; padding: 9px 14px; font-size: 13px; font-weight: 600; color: var(--primary); border-color: rgba(124,58,237,0.35); background: rgba(124,58,237,0.07); border-radius: 10px; margin-top: 2px;'>${__('parent.reply_and_restore') || '🔄 Ҷавоб ва барқарор кардан'}</button>
+                    <div style='display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px;'>
+                        <button class='btn btn-primary parent-approve-skip-btn' data-task-id='${task.id}' style='flex: 1 1 calc(33% - 6px); min-width: 80px; padding: 9px 10px; font-size: 13px; font-weight: 600; border-radius: 10px; white-space: normal; text-align: center;'>✅ ${__('parent.approve') || 'Одобрить'}</button>
+                        <button class='btn btn-danger parent-reject-skip-btn' data-task-id='${task.id}' style='flex: 1 1 calc(33% - 6px); min-width: 80px; padding: 9px 10px; font-size: 13px; font-weight: 600; border-radius: 10px; background: var(--danger, #EF4444); border: none; color: white; white-space: normal; text-align: center;'>✕ ${__('parent.reject') || 'Отклонить'}</button>
+                        <button class='btn btn-outline parent-complete-today-task-btn' data-task-id='${task.id}' style='flex: 1 1 calc(33% - 6px); min-width: 80px; padding: 9px 10px; font-size: 13px; font-weight: 600; color: var(--success); border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.07); border-radius: 10px; white-space: normal; text-align: center;'>✨ ${__('parent.complete_title') || 'Сделано'}</button>
+                    </div>
                 </div>`;
 
             } else if (tl.status === 'awaiting-confirm') {
@@ -4589,7 +4829,10 @@ function renderParentDashboard() {
                     <div>
                         <button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.photo)}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); color: var(--warning, #f59e0b); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; cursor: pointer;">📸 ${__('common.photo_short') || 'Акс'}</button>
                     </div>` : ''}
-                    <button class='btn btn-primary parent-confirm-task-btn' data-task-id='${task.id}' style='width: 100%; padding: 9px 14px; font-size: 13px; font-weight: 600; border-radius: 10px; margin-top: 2px;'>${__('task.confirm') || '✅ Тасдиқ'}</button>
+                    <div style='display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px;'>
+                        <button class='btn btn-primary parent-direct-confirm-task-btn' data-task-id='${task.id}' style='flex: 1 1 calc(50% - 4px); min-width: 100px; padding: 9px 10px; font-size: 13px; font-weight: 600; border-radius: 10px; white-space: normal; text-align: center;'>✅ ${__('parent.approve') || 'Тасдиқ'}</button>
+                        <button class='btn btn-danger parent-direct-reject-task-btn' data-task-id='${task.id}' style='flex: 1 1 calc(50% - 4px); min-width: 100px; padding: 9px 10px; font-size: 13px; font-weight: 600; border-radius: 10px; background: var(--danger, #EF4444); border: none; color: white; white-space: normal; text-align: center;'>✕ ${__('parent.reject') || 'Рад'}</button>
+                    </div>
                 </div>`;
 
             } else if (tl.status === 'pending' && tl.rejectReason) {
@@ -4607,6 +4850,35 @@ function renderParentDashboard() {
                     <div>
                         <button class="parent-view-skip-photo-btn" data-photo="${encodeURIComponent(tl.rejectPhoto)}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: var(--danger, #ef4444); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; cursor: pointer;">📸 ${__('common.photo_short') || 'Акс'}</button>
                     </div>` : ''}
+                </div>`;
+            } else if (tl.status === 'failed') {
+                const badgeText = __('status.failed') || '⚠️ Иҷро нашуд';
+                let penaltyHTML = '';
+                if (tl.penaltyApplied) {
+                    let penaltyParts = [];
+                    if (tl.penaltyApplied.stars > 0) penaltyParts.push(`⭐ ${tl.penaltyApplied.stars}`);
+                    if (tl.penaltyApplied.gold > 0) penaltyParts.push(`🪙 ${tl.penaltyApplied.gold}`);
+                    if (penaltyParts.length > 0) {
+                        penaltyHTML = `<div style='font-size: 12px; color: var(--text-secondary);'>
+                            ${__('task_badge.penalty') || 'Ҷарима'}: <strong style="color: var(--danger);">${penaltyParts.join(' ')}</strong>
+                        </div>`;
+                    }
+                }
+                html += `
+                <div style='background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;'>
+                    <div style='display: flex; align-items: center; justify-content: space-between; gap: 8px;'>
+                        <div style='font-weight: 700; font-size: 14px; color: var(--text);'>${task.emoji ? task.emoji + ' ' : ''}${task.name}</div>
+                        <span style='display: inline-flex; align-items: center; gap: 4px; background: rgba(239,68,68,0.12); color: var(--danger, #ef4444); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;'>${badgeText}</span>
+                    </div>
+                    ${tl.missedDeadline ? `
+                    <div style='font-size: 12px; color: var(--text-light);'>
+                        ${__('status.missed_deadline') || '⏰ Гузаштани мӯҳлат'}
+                    </div>` : ''}
+                    ${penaltyHTML}
+                    <div style='display: flex; gap: 8px; flex-wrap: wrap;'>
+                        <button class='btn btn-outline parent-complete-today-task-btn' data-task-id='${task.id}' style='flex: 1 1 calc(50% - 4px); min-width: 100px; padding: 9px 10px; font-size: 13px; font-weight: 600; color: var(--success); border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.07); border-radius: 10px; white-space: normal; text-align: center;'>✅ ${__('parent.complete_title') || 'Иҷро шуд'}</button>
+                        <button class='btn btn-outline parent-excuse-today-task-btn' data-task-id='${task.id}' style='flex: 1 1 calc(50% - 4px); min-width: 100px; padding: 9px 10px; font-size: 13px; font-weight: 600; color: #d97706; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.07); border-radius: 10px; white-space: normal; text-align: center;'>🙏 ${__('parent.excuse_title') || 'Узрнок'}</button>
+                    </div>
                 </div>`;
             }
         });
@@ -4770,6 +5042,71 @@ function renderParentDashboard() {
             html += "</li>";
         });
         html += "</ul>";
+    }
+
+    // Rewards & Punishments Section
+    if (!selectedChild.rewardsPunishments) selectedChild.rewardsPunishments = [];
+    if (selectedChild.rewardsPunishments.length > 0) {
+        html += "<div class='section-card' style='margin-top:15px;'>";
+        html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--primary);'><use href='#icon-gift'/></svg> " + (__('parent.revpun_title') || 'Таърихи мукофот ва ҷаримаҳо') + "</h4>";
+        html += "<ul class='item-list' style='margin-top:10px;list-style:none;padding:0;'>";
+        // Sort: pending & disputed first, then accepted, then by timestamp descending
+        const sortedRevPuns = [...selectedChild.rewardsPunishments].sort((a, b) => {
+            if (a.status !== 'accepted' && b.status === 'accepted') return -1;
+            if (a.status === 'accepted' && b.status !== 'accepted') return 1;
+            return b.timestamp - a.timestamp;
+        });
+
+        sortedRevPuns.forEach(function(item) {
+            const isReward = item.type === 'reward';
+            const sym = isReward ? '🟢' : '🔴';
+            const statusLabel = item.status === 'pending' 
+                ? `<span style='color:var(--text-light); font-weight:600;'>⌛ Интизор</span>` 
+                : item.status === 'disputed' 
+                    ? `<span style='color:var(--warning); font-weight:700;'>⚠️ Баҳс</span>` 
+                    : `<span style='color:var(--success); font-weight:600;'>✅ Қабул шуд</span>`;
+
+            const typeLabel = isReward ? (__('revpun.reward_label') || 'Мукофот') : (__('revpun.punish_label') || 'Ҷарима');
+            const starsText = item.stars > 0 ? `⭐ ${isReward ? '+' : '-'}${item.stars} ` : '';
+            const goldText = item.gold > 0 ? `🪙 ${isReward ? '+' : '-'}${item.gold}` : '';
+            const valueText = `${starsText}${goldText}`.trim();
+
+            html += "<li style='display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);'>";
+            html += "<div style='display:flex; justify-content:space-between; align-items:center; width:100%; gap: 8px;'>";
+            html += "<span>" + sym + " <strong>" + item.title + "</strong> (" + typeLabel + ")</span>";
+            html += "<div style='display:flex; align-items:center; gap:8px;'>";
+            html += statusLabel;
+            html += "<button class='parent-delete-revpun-btn' data-id='" + item.id + "' style='background:none; border:none; cursor:pointer;' title='Нез'>🗑️</button>";
+            html += "</div></div>";
+
+            if (item.description) {
+                html += "<div style='font-size:12px; color:var(--text-light); margin-top:2px; line-height:1.4;'>" + item.description + "</div>";
+            }
+            if (valueText) {
+                html += "<div style='font-size:12px; color:var(--text-secondary); margin-top:4px;'>Таъсир: <strong style='color: " + (isReward ? 'var(--success)' : 'var(--danger)') + ";'>" + valueText + "</strong></div>";
+            }
+            if (item.photo) {
+                html += "<div style='margin-top:6px; border-radius:6px; overflow:hidden; max-height:80px; width:fit-content; cursor:zoom-in;' onclick='openImageZoomModal(\"" + item.photo + "\")'>";
+                html += "<img src='" + item.photo + "' style='max-height:80px; border-radius:6px; object-fit:cover;'>";
+                html += "</div>";
+            }
+
+            if (item.status === 'disputed') {
+                html += "<div style='font-size: 12px; color: var(--warning); font-style: italic; margin-top: 6px; font-weight: 500; background: rgba(245, 158, 11, 0.08); padding: 6px; border-radius: 6px; border-left: 3px solid var(--warning);'>";
+                html += "💬 Сабаби баҳс: " + item.disputeReason;
+                html += "</div>";
+            }
+
+            if (item.status === 'pending' || item.status === 'disputed') {
+                html += "<div style='margin-top:8px; display:flex; gap:8px;'>";
+                html += "<button class='parent-enforce-revpun-btn btn btn-primary' data-id='" + item.id + "' style='padding:4px 8px; font-size:12px; height:28px; line-height:18px;'>⚖️ Татбиқ кардан</button>";
+                html += "<button class='parent-cancel-revpun-btn btn btn-danger' data-id='" + item.id + "' style='padding:4px 8px; font-size:12px; height:28px; line-height:18px;'>❌ Бекор кардан</button>";
+                html += "</div>";
+            }
+
+            html += "</li>";
+        });
+        html += "</ul>";
         html += "</div>";
     }
 
@@ -4800,27 +5137,49 @@ function renderParentDashboard() {
         });
     }
 
-    // Confirm awaiting tasks
-    container.querySelectorAll('.parent-confirm-task-btn').forEach(function(btn) {
+    // Confirm awaiting tasks (Approve)
+    container.querySelectorAll('.parent-direct-confirm-task-btn').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             var taskId = this.dataset.taskId;
             var task = selectedChild.tasks.find(t => t.id === taskId) || selectedChild.bonusTasks.find(t => t.id === taskId);
             if (task) {
-                showConfirmModal(task);
+                if (task.hasTest) {
+                    showConfirmModal(task);
+                } else {
+                    confirmTaskDirectly(taskId);
+                }
             }
         });
     });
 
-    // Reply and restore skipped tasks
-    container.querySelectorAll('.parent-reply-restore-btn').forEach(function(btn) {
+    // Reject awaiting tasks (Reject)
+    container.querySelectorAll('.parent-direct-reject-task-btn').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
             e.stopPropagation();
             var taskId = this.dataset.taskId;
             var task = selectedChild.tasks.find(t => t.id === taskId) || selectedChild.bonusTasks.find(t => t.id === taskId);
             if (task) {
-                showParentReplyModal(task);
+                showParentRejectModal(task);
             }
+        });
+    });
+
+    // Approve skip request
+    container.querySelectorAll('.parent-approve-skip-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var taskId = this.dataset.taskId;
+            approveSkipRequest(selectedChild.id, taskId);
+        });
+    });
+
+    // Reject skip request
+    container.querySelectorAll('.parent-reject-skip-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var taskId = this.dataset.taskId;
+            rejectSkipRequest(selectedChild.id, taskId);
         });
     });
 
@@ -4847,6 +5206,71 @@ function renderParentDashboard() {
     // Add task
     container.querySelector('.btn-parent-add-task').addEventListener('click', function() {
         showTaskModal(null, false);
+    });
+
+    // Add reward/punishment
+    const addRevPunBtn = container.querySelector('.btn-parent-add-rev-pun');
+    if (addRevPunBtn) {
+        addRevPunBtn.addEventListener('click', function() {
+            showParentRevPunModal();
+        });
+    }
+
+    // Complete today's failed/missed tasks directly
+    container.querySelectorAll('.parent-complete-today-task-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var taskId = this.dataset.taskId;
+            completePastTask(selectedChild.id, getToday(), taskId);
+        });
+    });
+
+    // Excuse today's tasks
+    container.querySelectorAll('.parent-excuse-today-task-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var taskId = this.dataset.taskId;
+            showCustomPrompt(
+                __('parent.excuse_title') || 'Узрнок',
+                __('parent.excuse_reason_prompt') || 'Сабаби узрнокро ворид кунед (Уважительная причина):'
+            ).then(result => {
+                if (result === null) return;
+                const text = (result.text || '').trim();
+                const photo = result.photo || null;
+                if (!text) {
+                    showToast('⚠️', 'Лутфан сабаби узрнокро нависед!');
+                    return;
+                }
+                excusePastTask(selectedChild.id, getToday(), taskId, text, photo);
+            });
+        });
+    });
+
+    // Rewards & Punishments Enforce/Cancel/Delete listeners
+    container.querySelectorAll('.parent-enforce-revpun-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var id = this.dataset.id;
+            enforceRewardPunishment(id);
+        });
+    });
+
+    container.querySelectorAll('.parent-cancel-revpun-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var id = this.dataset.id;
+            cancelRewardPunishment(id);
+        });
+    });
+
+    container.querySelectorAll('.parent-delete-revpun-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (confirm('Оё мехоҳед ин амалро нест кунед?')) {
+                var id = this.dataset.id;
+                cancelRewardPunishment(id);
+            }
+        });
     });
 
     // Edit task
@@ -4896,7 +5320,7 @@ function renderParentDashboard() {
     container.querySelectorAll('.parent-approve-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var reqId = this.dataset.reqId;
-            var child = getCurrentChild();
+            var child = selectedChild;
             var req = child.withdrawals.find(function(w) { return w.id === reqId; });
             if (!req) return;
 
@@ -4909,7 +5333,7 @@ function renderParentDashboard() {
 
             req.status = 'approved';
             saveState();
-            showToast('✅', __('confirm'));
+            showToast('✅', __('balance.status.approved') || 'Тасдиқ шуд');
             renderParentDashboard();
             updateUI();
         });
@@ -4919,17 +5343,17 @@ function renderParentDashboard() {
     container.querySelectorAll('.parent-reject-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var reqId = this.dataset.reqId;
-            var child = getCurrentChild();
+            var child = selectedChild;
             var req = child.withdrawals.find(function(w) { return w.id === reqId; });
             if (!req) return;
 
-            showCustomPrompt(__('parent.reject_reason_prompt')).then(function(reason) {
-                if (reason === null) return; // parent cancelled prompt
-                
+            showCustomPrompt(__('parent.reject_withdraw_title') || 'Рад кардани ихроҷ').then(function(result) {
+                if (result === null) return; // parent cancelled prompt
                 req.status = 'rejected';
-                req.parentComment = reason.trim();
+                req.parentComment = (result.text || '').trim();
+                if (result.photo) req.parentPhoto = result.photo;
                 saveState();
-                showToast('❌', __('confirm'));
+                showToast('❌', __('balance.status.rejected') || 'Рад шуд');
                 renderParentDashboard();
                 updateUI();
             });
@@ -5025,13 +5449,13 @@ function renderParentDashboard() {
     container.querySelectorAll('.parent-reject-dream-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var dreamId = this.dataset.dreamId;
-            showCustomPrompt(__('parent.reject_reason_prompt_btn')).then(function(reason) {
-                if (reason === null) return; // parent cancelled prompt
-                
+            showCustomPrompt(__('parent.reject_reason_prompt_btn')).then(function(result) {
+                if (result === null) return;
                 var dream = selectedChild.dreams.find(function(d) { return d.id === dreamId; });
                 if (dream) {
                     dream.approved = 'rejected';
-                    dream.parentComment = reason.trim();
+                    dream.parentComment = (result.text || '').trim();
+                    if (result.photo) dream.parentPhoto = result.photo;
                     saveState();
                     showToast('❌', __('dream.rejected_toast'));
                     renderParentDashboard();
@@ -5260,7 +5684,7 @@ function renderWithdrawalHistory() {
         return;
     }
 
-    let html = `<h4 style="margin-bottom:12px;display:flex;align-items:center;gap:6px;"><svg class="icon-svg" aria-hidden="true" style="width:16px;height:16px;"><use href="#icon-wallet"/></svg> ${__('balance.history_title')}</h4>`;
+    let html = '';
     html += `<ul class="item-list" style="list-style:none;padding:0;">`;
     
     const sorted = [...child.withdrawals].sort((a, b) => b.id.localeCompare(a.id));
@@ -5268,6 +5692,8 @@ function renderWithdrawalHistory() {
     sorted.forEach((req, index) => {
         let sym = req.type === 'stars' ? '⭐' : '🪙';
         let statusBadge = '';
+        let isRejected = req.status === 'rejected';
+        
         if (req.status === 'pending') {
             statusBadge = `<span style="font-size:11px;background:rgba(245,158,11,0.1);color:#F59E0B;padding:2px 6px;border-radius:4px;">${__('balance.status.pending')}</span>`;
         } else if (req.status === 'approved') {
@@ -5277,18 +5703,40 @@ function renderWithdrawalHistory() {
         }
 
         let hiddenClass = index >= 5 ? ' hidden extra-withdrawal' : '';
-        html += `<li class="withdrawal-item${hiddenClass}" style="display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">`;
-        html += `<div style="display:flex; justify-content:space-between; align-items:center; width:100%;">`;
-        html += `<span>⏱ ${formatDate(req.date)} — <strong style="font-size:15px;color:#FCD34D;">${req.amount} ${sym}</strong></span>`;
-        html += `<div>${statusBadge}</div>`;
-        html += `</div>`;
-        if (req.reason || req.photo) {
-            html += `<div style="margin-top:8px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.1); padding: 8px; border-radius: 6px;">`;
-            if (req.reason) html += `<div style="margin-bottom:4px;"><strong style="color:var(--text);">📝 ${__('common.reason')}:</strong> ${req.reason}</div>`;
-            if (req.photo) html += `<img src="${req.photo}" style="max-width:150px; border-radius:6px; margin-top:4px; display:block; cursor:zoom-in;" onclick="openImageZoomModal('${req.photo}')">`;
+        
+        if (isRejected) {
+            html += `<li class="withdrawal-item${hiddenClass}" style="background: rgba(239, 68, 68, 0.04); border: 1.5px solid rgba(239, 68, 68, 0.15); border-radius: 12px; padding: 12px; margin-bottom: 10px; display: flex !important; flex-direction: column !important; align-items: stretch !important; justify-content: flex-start !important;">`;
+            html += `<div style="display:flex; justify-content:space-between; align-items:center; width:100%; gap: 12px; margin-bottom: 8px;">`;
+            html += `<span>⏱ ${formatDate(req.date)} — <strong style="font-size:15px;color:#FCD34D;">${req.amount} ${sym}</strong></span>`;
+            html += `<div style="display:flex; align-items:center; gap:8px;">`;
+            html += `${statusBadge}`;
+            html += `<button class="delete-rejected-withdraw-btn" data-req-id="${req.id}" style="background: rgba(255,255,255,0.05); border: none; color: var(--text-secondary); font-size: 13px; cursor: pointer; padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.color='var(--danger)'; this.style.background='rgba(239,68,68,0.1)'" onmouseout="this.style.color='var(--text-secondary)'; this.style.background='rgba(255,255,255,0.05)'">✕</button>`;
             html += `</div>`;
+            html += `</div>`;
+            if (req.reason || req.photo || req.parentComment) {
+                html += `<div style="margin-top:2px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.15); padding: 8px; border-radius: 6px; word-break: break-word; line-height: 1.4;">`;
+                if (req.reason) html += `<div style="margin-bottom:4px;"><strong style="color:var(--text);">📝 ${__('common.reason') || 'Сабаб'}:</strong> ${req.reason}</div>`;
+                if (req.parentComment) {
+                    html += `<div style="margin-bottom:4px; color:#EF4444;"><strong style="color:#EF4444;">${__('task.parent_reply') || '💬 Ҷавоби волидон:'}</strong> ${req.parentComment}</div>`;
+                }
+                if (req.photo) html += `<img src="${req.photo}" style="max-width:150px; border-radius:6px; margin-top:4px; display:block; cursor:zoom-in;" onclick="openImageZoomModal('${req.photo}')">`;
+                html += `</div>`;
+            }
+            html += `</li>`;
+        } else {
+            html += `<li class="withdrawal-item${hiddenClass}" style="display:flex; flex-direction:column; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); margin-bottom: 5px;">`;
+            html += `<div style="display:flex; justify-content:space-between; align-items:center; width:100%;">`;
+            html += `<span>⏱ ${formatDate(req.date)} — <strong style="font-size:15px;color:#FCD34D;">${req.amount} ${sym}</strong></span>`;
+            html += `<div>${statusBadge}</div>`;
+            html += `</div>`;
+            if (req.reason || req.photo) {
+                html += `<div style="margin-top:8px; font-size:13px; color:var(--text-secondary); background: rgba(0,0,0,0.1); padding: 8px; border-radius: 6px;">`;
+                if (req.reason) html += `<div style="margin-bottom:4px;"><strong style="color:var(--text);">📝 ${__('common.reason') || 'Сабаб'}:</strong> ${req.reason}</div>`;
+                if (req.photo) html += `<img src="${req.photo}" style="max-width:150px; border-radius:6px; margin-top:4px; display:block; cursor:zoom-in;" onclick="openImageZoomModal('${req.photo}')">`;
+                html += `</div>`;
+            }
+            html += `</li>`;
         }
-        html += `</li>`;
     });
     
     html += `</ul>`;
@@ -5312,6 +5760,23 @@ function renderWithdrawalHistory() {
             toggleBtn.textContent = isHidden ? (__('common.hide')) : (__('common.show_all'));
         });
     }
+
+    // Attach delete rejected withdrawal listeners
+    container.querySelectorAll('.delete-rejected-withdraw-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const reqId = this.dataset.reqId;
+            const child = getCurrentChild();
+            const idx = child.withdrawals.findIndex(w => w.id === reqId);
+            if (idx !== -1) {
+                if (confirm(__('withdraw.delete_confirm') || 'Оё мехоҳед ин таърихи радшударо нест кунед?')) {
+                    child.withdrawals.splice(idx, 1);
+                    saveState();
+                    renderWithdrawalHistory();
+                }
+            }
+        });
+    });
 }
 
 function renderTestHistory() {
@@ -5739,6 +6204,34 @@ function setupEventListeners() {
         document.getElementById('parent-reply-photo-img').src = '';
         document.getElementById('parent-reply-photo-input').value = '';
         document.getElementById('parent-reply-photo-btn').classList.remove('hidden');
+    });
+
+    // Prompt-modal photo upload
+    document.getElementById('prompt-modal-photo-btn').addEventListener('click', () => {
+        document.getElementById('prompt-modal-photo-input').click();
+    });
+    document.getElementById('prompt-modal-photo-input').addEventListener('change', handleGenericPhotoUpload(
+        'prompt-modal-photo-img', 'prompt-modal-photo-preview', 'prompt-modal-photo-btn', 'prompt-modal-photo-input'
+    ));
+    document.getElementById('prompt-modal-photo-remove').addEventListener('click', () => {
+        document.getElementById('prompt-modal-photo-preview').classList.add('hidden');
+        document.getElementById('prompt-modal-photo-img').src = '';
+        document.getElementById('prompt-modal-photo-input').value = '';
+        document.getElementById('prompt-modal-photo-btn').classList.remove('hidden');
+    });
+
+    // Restore-skip-modal photo upload
+    document.getElementById('restore-skip-photo-btn').addEventListener('click', () => {
+        document.getElementById('restore-skip-photo-input').click();
+    });
+    document.getElementById('restore-skip-photo-input').addEventListener('change', handleGenericPhotoUpload(
+        'restore-skip-photo-img', 'restore-skip-photo-preview', 'restore-skip-photo-btn', 'restore-skip-photo-input'
+    ));
+    document.getElementById('restore-skip-photo-remove').addEventListener('click', () => {
+        document.getElementById('restore-skip-photo-preview').classList.add('hidden');
+        document.getElementById('restore-skip-photo-img').src = '';
+        document.getElementById('restore-skip-photo-input').value = '';
+        document.getElementById('restore-skip-photo-btn').classList.remove('hidden');
     });
 
     // Parent reply modal close
@@ -6199,6 +6692,115 @@ function setupEventListeners() {
             }
         });
     }
+
+    // Parent Reward/Punishment Modal Event Listeners
+    const btnReward = document.getElementById('parent-rev-pun-type-reward');
+    const btnPunish = document.getElementById('parent-rev-pun-type-punish');
+    if (btnReward && btnPunish) {
+        btnReward.addEventListener('click', () => {
+            parentRevPunType = 'reward';
+            btnReward.className = 'btn btn-primary';
+            btnReward.style.background = '';
+            btnReward.style.borderColor = '';
+            btnReward.style.color = '';
+            
+            btnPunish.className = 'btn btn-outline';
+            btnPunish.style.background = 'transparent';
+            btnPunish.style.borderColor = 'var(--danger)';
+            btnPunish.style.color = 'var(--danger)';
+
+            const sInput = document.getElementById('parent-rev-pun-stars');
+            const gInput = document.getElementById('parent-rev-pun-gold');
+            if (sInput) {
+                sInput.classList.remove('punish-input-mode');
+                sInput.placeholder = '0';
+            }
+            if (gInput) {
+                gInput.classList.remove('punish-input-mode');
+                gInput.placeholder = '0';
+            }
+            const sSym = document.getElementById('parent-rev-pun-stars-sym');
+            const gSym = document.getElementById('parent-rev-pun-gold-sym');
+            if (sSym) {
+                sSym.textContent = '⭐';
+                sSym.style.color = '';
+            }
+            if (gSym) {
+                gSym.textContent = '🪙';
+                gSym.style.color = '';
+            }
+        });
+        btnPunish.addEventListener('click', () => {
+            parentRevPunType = 'punish';
+            btnPunish.className = 'btn btn-danger';
+            btnPunish.style.background = 'var(--danger)';
+            btnPunish.style.borderColor = 'var(--danger)';
+            btnPunish.style.color = '#fff';
+            
+            btnReward.className = 'btn btn-outline';
+            btnReward.style.background = 'transparent';
+            btnReward.style.borderColor = 'var(--success)';
+            btnReward.style.color = 'var(--success)';
+
+            const sInput = document.getElementById('parent-rev-pun-stars');
+            const gInput = document.getElementById('parent-rev-pun-gold');
+            if (sInput) {
+                sInput.classList.add('punish-input-mode');
+                sInput.placeholder = '-0';
+            }
+            if (gInput) {
+                gInput.classList.add('punish-input-mode');
+                gInput.placeholder = '-0';
+            }
+            const sSym = document.getElementById('parent-rev-pun-stars-sym');
+            const gSym = document.getElementById('parent-rev-pun-gold-sym');
+            if (sSym) {
+                sSym.textContent = '-⭐';
+                sSym.style.color = 'var(--danger)';
+            }
+            if (gSym) {
+                gSym.textContent = '-🪙';
+                gSym.style.color = 'var(--danger)';
+            }
+        });
+    }
+
+    const rpClose = document.getElementById('parent-rev-pun-close');
+    if (rpClose) rpClose.addEventListener('click', closeParentRevPunModal);
+
+    const rpPhotoBtn = document.getElementById('parent-rev-pun-photo-btn');
+    if (rpPhotoBtn) {
+        rpPhotoBtn.addEventListener('click', () => {
+            document.getElementById('parent-rev-pun-photo-input').click();
+        });
+    }
+
+    const rpPhotoInput = document.getElementById('parent-rev-pun-photo-input');
+    if (rpPhotoInput) {
+        rpPhotoInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleParentRevPunModalPhoto(e.target.files[0]);
+            }
+        });
+    }
+
+    const rpPhotoRemove = document.getElementById('parent-rev-pun-photo-remove');
+    if (rpPhotoRemove) {
+        rpPhotoRemove.addEventListener('click', () => {
+            parentRevPunPhotoData = null;
+            const imgEl = document.getElementById('parent-rev-pun-photo-img');
+            if (imgEl) imgEl.src = '';
+            const preview = document.getElementById('parent-rev-pun-photo-preview');
+            if (preview) preview.classList.add('hidden');
+            const btn = document.getElementById('parent-rev-pun-photo-btn');
+            if (btn) btn.classList.remove('hidden');
+            const input = document.getElementById('parent-rev-pun-photo-input');
+            if (input) input.value = '';
+        });
+    }
+
+    const rpSubmit = document.getElementById('parent-rev-pun-submit-btn');
+    if (rpSubmit) rpSubmit.addEventListener('click', submitParentRevPun);
 }
 
 // ===== PRESTIGE MODAL =====
@@ -6266,6 +6868,35 @@ function closeImageZoomModal() {
 
 var currentPromptResolver = null;
 
+// ===== GENERIC PHOTO UPLOAD HELPER =====
+function handleGenericPhotoUpload(imgId, previewId, btnId, inputId) {
+    return function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                const maxDim = 800;
+                if (w > maxDim || h > maxDim) {
+                    if (w > h) { h = h * maxDim / w; w = maxDim; }
+                    else { w = w * maxDim / h; h = maxDim; }
+                }
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                const compressed = canvas.toDataURL('image/jpeg', 0.7);
+                document.getElementById(imgId).src = compressed;
+                document.getElementById(previewId).classList.remove('hidden');
+                document.getElementById(btnId).classList.add('hidden');
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+}
+
 function showCustomPrompt(title, placeholder) {
     return new Promise(function(resolve) {
         currentPromptResolver = resolve;
@@ -6273,7 +6904,16 @@ function showCustomPrompt(title, placeholder) {
         var input = document.getElementById('prompt-modal-input');
         input.value = '';
         input.placeholder = placeholder || (__('common.reason_placeholder'));
-        
+        // Reset photo each time
+        var photoImg = document.getElementById('prompt-modal-photo-img');
+        var photoPreview = document.getElementById('prompt-modal-photo-preview');
+        var photoBtn = document.getElementById('prompt-modal-photo-btn');
+        var photoInput = document.getElementById('prompt-modal-photo-input');
+        if (photoImg) photoImg.src = '';
+        if (photoPreview) photoPreview.classList.add('hidden');
+        if (photoBtn) photoBtn.classList.remove('hidden');
+        if (photoInput) photoInput.value = '';
+
         var modal = document.getElementById('prompt-modal');
         modal.classList.remove('hidden');
         input.focus();
@@ -6281,12 +6921,16 @@ function showCustomPrompt(title, placeholder) {
 }
 
 function submitCustomPrompt() {
-    var input = document.getElementById('prompt-modal-input').value;
-    closeCustomPrompt();
-    if (currentPromptResolver) {
-        currentPromptResolver(input);
-        currentPromptResolver = null;
-    }
+    var text = document.getElementById('prompt-modal-input').value;
+    var photoImg = document.getElementById('prompt-modal-photo-img');
+    var photo = (photoImg && photoImg.src && photoImg.src.startsWith('data:')) ? photoImg.src : null;
+    var resolver = currentPromptResolver;
+    currentPromptResolver = null;
+
+    var modal = document.getElementById('prompt-modal');
+    if (modal) modal.classList.add('hidden');
+
+    if (resolver) resolver({ text: text, photo: photo });
 }
 
 function closeCustomPrompt() {
@@ -6649,7 +7293,151 @@ function closeParentRoutineModal() {
 // ===== GENTLE NUDGES =====
 window._nudgedTasks = {};
 
+function checkStrictDeadlines() {
+    if (!state || !state.children || state.children.length === 0) return;
+
+    const GRACE_MINUTES = 15; // 15-minute grace period after deadline
+    const today = getToday();
+    const now = new Date();
+    const todayDay = now.getDay();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    let stateChanged = false;
+
+    // Check ALL children, not just the currently viewed one
+    for (const child of state.children) {
+        const log = child.dailyLogs ? child.dailyLogs[today] : null;
+        if (!log || log.excused) continue;
+        if (!log.tasks) continue;
+
+        for (const taskId in log.tasks) {
+            const tl = log.tasks[taskId];
+            if (!tl) continue;
+
+            // Skip completed, failed, or already confirmed tasks
+            if (tl.status === 'completed' || tl.status === 'failed' || tl.confirmed || tl.deadlineBypassed) continue;
+
+            // RULE 1: If child submitted ("awaiting-confirm"), do NOT auto-fail — wait for parent
+            if (tl.status === 'awaiting-confirm') continue;
+
+            // Find task definition in regular tasks or bonus tasks
+            const allTasks = [...(child.tasks || []), ...(child.bonusTasks || [])];
+            const task = allTasks.find(t => t.id === taskId);
+            if (!task) continue;
+
+            let isPastDeadline = false;
+            let deadlineTimeStr = '';
+
+            // Case 1: Strict deadline (task.hasDeadline is true)
+            if (task.hasDeadline) {
+                if (task.deadlineDate === today && task.deadlineTime) {
+                    deadlineTimeStr = task.deadlineTime;
+                    const deadlineMin = timeToMinutes(task.deadlineTime);
+                    // RULE 2: Add 15-minute grace period
+                    if (deadlineMin !== null && currentMinutes > (deadlineMin + GRACE_MINUTES)) {
+                        isPastDeadline = true;
+                    }
+                }
+            }
+            // Case 2: Daily task end time (task.endTime exists)
+            else if (task.endTime) {
+                // Check if task is active today
+                const isActiveToday = !task.days || task.days.includes(todayDay);
+                if (isActiveToday) {
+                    deadlineTimeStr = task.endTime;
+                    const endMin = timeToMinutes(task.endTime);
+                    // RULE 2: Add 15-minute grace period
+                    if (endMin !== null && currentMinutes > (endMin + GRACE_MINUTES)) {
+                        isPastDeadline = true;
+                    }
+                }
+            }
+
+            if (isPastDeadline) {
+                tl.status = 'failed';
+                tl.confirmed = true;
+                tl.missedDeadline = true;
+
+                // Process penalty if enabled and not already applied
+                if (task.hasPenalty && !tl.penaltyApplied) {
+                    const pStars = parseInt(task.penaltyStars) || 0;
+                    const pGold  = parseInt(task.penaltyGold)  || 0;
+                    if (pStars > 0) {
+                        child.stars = Math.max(0, (child.stars || 0) - pStars);
+                        child.totalDeducted = (child.totalDeducted || 0) + pStars;
+                    }
+                    if (pGold > 0) {
+                        child.balance = Math.max(0, (child.balance || 0) - pGold);
+                        child.totalDeducted = (child.totalDeducted || 0) + pGold;
+                    }
+                    tl.penaltyApplied = { stars: pStars, gold: pGold };
+                }
+
+                stateChanged = true;
+                console.log(`[Deadline] Child "${child.name}" — Task "${task.name}" (${taskId}) → FAILED (after ${GRACE_MINUTES}min grace). Deadline/endTime: ${deadlineTimeStr}`);
+            }
+        }
+    }
+
+    if (stateChanged) {
+        saveState();
+        if (typeof renderTasks === 'function') {
+            renderTasks();
+        }
+        if (typeof updateUI === 'function') {
+            updateUI();
+        }
+    }
+}
+
+
+function timeToMinutes(timeStr) {
+    if (!timeStr) return null;
+    const parts = timeStr.split(':');
+    if (parts.length < 2) return null;
+    const hrs = parseInt(parts[0], 10);
+    const mins = parseInt(parts[1], 10);
+    if (isNaN(hrs) || isNaN(mins)) return null;
+    return hrs * 60 + mins;
+}
+
 function checkGentleNudges() {
+    checkStrictDeadlines();
+
+    // Periodic Background Sync check (every 20 seconds) and WebSocket health check
+    window._syncCounter = (window._syncCounter || 0) + 1;
+    if (window._syncCounter >= 2) {
+        window._syncCounter = 0;
+        if (window.supabaseSession && window.supabaseSession.user) {
+            fetchRemoteState().then((remoteState) => {
+                if (remoteState) {
+                    const remoteVersion = Number(remoteState.version) || 0;
+                    const localVersion = Number(state.version) || 0;
+                    const remoteTime = Number(remoteState.lastUpdated) || 0;
+                    const localTime = Number(state.lastUpdated) || 0;
+                    let isRemoteNewer = false;
+                    if (remoteVersion > localVersion) {
+                        isRemoteNewer = true;
+                    } else if (remoteVersion === localVersion && remoteTime > localTime) {
+                        isRemoteNewer = true;
+                    }
+                    if (isRemoteNewer) {
+                        console.log('Periodic sync found newer state. Applying...');
+                        migrateState(remoteState);
+                        state = remoteState;
+                        safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                        updateUI();
+                    }
+                }
+            });
+
+            // WebSocket Connection Health check
+            if (!window.supabaseRealtimeChannel || window.supabaseRealtimeChannel.state !== 'joined') {
+                console.log('Real-time connection inactive. Reconnecting...');
+                setupRealtimeSubscription(window.supabaseSession.user.id);
+            }
+        }
+    }
+
     if (!currentChildId) return;
     const child = getChild(currentChildId);
     if (!child) return;
@@ -6879,3 +7667,663 @@ document.addEventListener('visibilitychange', function() {
         settingsPinVerified = false;
     }
 });
+
+// ===== REWARDS & PUNISHMENTS SYSTEM =====
+let parentRevPunPhotoData = null;
+let parentRevPunType = 'reward'; // 'reward' | 'punish'
+
+function showParentRevPunModal() {
+    parentRevPunPhotoData = null;
+    parentRevPunType = 'reward';
+    
+    // Reset buttons
+    const btnReward = document.getElementById('parent-rev-pun-type-reward');
+    const btnPunish = document.getElementById('parent-rev-pun-type-punish');
+    if (btnReward) {
+        btnReward.className = 'btn btn-primary';
+        btnReward.style.background = '';
+        btnReward.style.borderColor = '';
+        btnReward.style.color = '';
+    }
+    if (btnPunish) {
+        btnPunish.className = 'btn btn-outline';
+        btnPunish.style.background = '';
+        btnPunish.style.borderColor = 'var(--danger)';
+        btnPunish.style.color = 'var(--danger)';
+    }
+
+    // Reset fields & styling
+    document.getElementById('parent-rev-pun-name').value = '';
+    document.getElementById('parent-rev-pun-desc').value = '';
+    
+    const starsInput = document.getElementById('parent-rev-pun-stars');
+    const goldInput = document.getElementById('parent-rev-pun-gold');
+    const starsSym = document.getElementById('parent-rev-pun-stars-sym');
+    const goldSym = document.getElementById('parent-rev-pun-gold-sym');
+    
+    if (starsInput) {
+        starsInput.value = '';
+        starsInput.classList.remove('punish-input-mode');
+        starsInput.placeholder = '0';
+    }
+    if (goldInput) {
+        goldInput.value = '';
+        goldInput.classList.remove('punish-input-mode');
+        goldInput.placeholder = '0';
+    }
+    if (starsSym) {
+        starsSym.textContent = '⭐';
+        starsSym.style.color = '';
+    }
+    if (goldSym) {
+        goldSym.textContent = '🪙';
+        goldSym.style.color = '';
+    }
+    
+    // Reset photo upload state
+    document.getElementById('parent-rev-pun-photo-input').value = '';
+    document.getElementById('parent-rev-pun-photo-img').src = '';
+    document.getElementById('parent-rev-pun-photo-preview').classList.add('hidden');
+    document.getElementById('parent-rev-pun-photo-btn').classList.remove('hidden');
+    
+    document.getElementById('parent-rev-pun-modal').classList.remove('hidden');
+    document.getElementById('parent-rev-pun-name').focus();
+}
+
+function closeParentRevPunModal() {
+    document.getElementById('parent-rev-pun-modal').classList.add('hidden');
+}
+
+function handleParentRevPunModalPhoto(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            const maxDim = 800;
+            if (w > maxDim || h > maxDim) {
+                if (w > h) {
+                    h = h * maxDim / w;
+                    w = maxDim;
+                } else {
+                    w = w * maxDim / h;
+                    h = maxDim;
+                }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            parentRevPunPhotoData = canvas.toDataURL('image/jpeg', 0.7);
+            const imgEl = document.getElementById('parent-rev-pun-photo-img');
+            if (imgEl) imgEl.src = parentRevPunPhotoData;
+            const preview = document.getElementById('parent-rev-pun-photo-preview');
+            if (preview) preview.classList.remove('hidden');
+            const btn = document.getElementById('parent-rev-pun-photo-btn');
+            if (btn) btn.classList.add('hidden');
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function submitParentRevPun() {
+    const title = document.getElementById('parent-rev-pun-name').value.trim();
+    const desc = document.getElementById('parent-rev-pun-desc').value.trim();
+    const stars = Math.abs(parseInt(document.getElementById('parent-rev-pun-stars').value) || 0);
+    const gold = Math.abs(parseFloat(document.getElementById('parent-rev-pun-gold').value) || 0);
+    
+    if (!title) {
+        showToast('⚠️', 'Лутфан номи амалро нависед!');
+        return;
+    }
+    if (stars <= 0 && gold <= 0) {
+        showToast('⚠️', 'Лутфан миқдори ситора ё тиллоро ворид кунед!');
+        return;
+    }
+
+    const selectedChild = getCurrentChild();
+    if (!selectedChild) return;
+
+    selectedChild.rewardsPunishments = selectedChild.rewardsPunishments || [];
+    const item = {
+        id: generateId(),
+        type: parentRevPunType,
+        title: title,
+        description: desc,
+        photo: parentRevPunPhotoData,
+        stars: stars,
+        gold: gold,
+        status: 'pending',
+        disputeReason: '',
+        timestamp: Date.now()
+    };
+
+    selectedChild.rewardsPunishments.push(item);
+    saveState();
+    showToast('✉️', 'Амал ба кӯдак фиристода шуд!');
+    closeParentRevPunModal();
+    renderParentDashboard();
+    updateUI();
+}
+
+function acceptRewardPunishment(id) {
+    const child = getCurrentChild();
+    if (!child || !child.rewardsPunishments) return;
+
+    const item = child.rewardsPunishments.find(x => x.id === id);
+    if (!item) return;
+
+    // Apply the rewards or punishments
+    if (item.type === 'reward') {
+        child.stars = (child.stars || 0) + (item.stars || 0);
+        child.totalStars = (child.totalStars || 0) + (item.stars || 0);
+        child.balance = (child.balance || 0) + (item.gold || 0);
+        child.totalEarned = (child.totalEarned || 0) + (item.gold || 0);
+        showToast('🎁', __('revpun.success_reward') || 'Мукофот қабул шуд! Ташаккур! 🎉');
+    } else {
+        child.stars = Math.max(0, (child.stars || 0) - (item.stars || 0));
+        child.balance = Math.max(0, (child.balance || 0) - (item.gold || 0));
+        child.totalDeducted = (child.totalDeducted || 0) + (item.stars || 0) + (item.gold || 0);
+        showToast('😔', __('revpun.success_punish') || 'Танбеҳ қабул шуд.');
+    }
+
+    item.status = 'accepted';
+    item.resolvedAt = Date.now();
+
+    saveState();
+    renderTasks();
+    updateUI();
+}
+
+function disputeRewardPunishment(id) {
+    const child = getCurrentChild();
+    if (!child || !child.rewardsPunishments) return;
+
+    const item = child.rewardsPunishments.find(x => x.id === id);
+    if (!item) return;
+
+    showCustomPrompt('Сабаби баҳс (Несогласие)', 'Чаро шумо норозӣ ҳастед?').then(result => {
+        if (result === null) return; // cancelled
+        const text = (result.text || '').trim();
+        if (!text) {
+            showToast('⚠️', 'Лутфан сабаби баҳсро нависед!');
+            return;
+        }
+
+        item.status = 'disputed';
+        item.disputeReason = text;
+        if (result.photo) item.disputePhoto = result.photo;
+
+        saveState();
+        showToast('⚖️', __('revpun.disputed_toast') || 'Баҳс фиристода шуд ба волидон.');
+        renderTasks();
+        updateUI();
+    });
+}
+
+function enforceRewardPunishment(id) {
+    const child = getCurrentChild();
+    if (!child || !child.rewardsPunishments) return;
+
+    const item = child.rewardsPunishments.find(x => x.id === id);
+    if (!item) return;
+
+    // Apply the rewards or punishments immediately
+    if (item.type === 'reward') {
+        child.stars = (child.stars || 0) + (item.stars || 0);
+        child.totalStars = (child.totalStars || 0) + (item.stars || 0);
+        child.balance = (child.balance || 0) + (item.gold || 0);
+        child.totalEarned = (child.totalEarned || 0) + (item.gold || 0);
+    } else {
+        child.stars = Math.max(0, (child.stars || 0) - (item.stars || 0));
+        child.balance = Math.max(0, (child.balance || 0) - (item.gold || 0));
+        child.totalDeducted = (child.totalDeducted || 0) + (item.stars || 0) + (item.gold || 0);
+    }
+
+    item.status = 'accepted';
+    item.resolvedAt = Date.now();
+
+    saveState();
+    showToast('⚖️', __('revpun.enforced_toast') || 'Амал маҷбурӣ татбиқ карда шуд.');
+    renderParentDashboard();
+    updateUI();
+}
+
+function cancelRewardPunishment(id) {
+    const child = getCurrentChild();
+    if (!child || !child.rewardsPunishments) return;
+
+    child.rewardsPunishments = child.rewardsPunishments.filter(x => x.id !== id);
+
+    saveState();
+    showToast('❌', __('revpun.cancelled_toast') || 'Амал бекор карда шуд.');
+    renderParentDashboard();
+    updateUI();
+}
+
+function restorePastTask(childId, dateStr, taskId) {
+    const child = getChild ? getChild(childId) : state.children.find(c => c.id === childId);
+    if (!child) return;
+    const log = child.dailyLogs[dateStr];
+    if (!log || !log.tasks) return;
+    const tl = log.tasks[taskId];
+    if (!tl) return;
+
+    // Refund penalty if applied
+    if (tl.penaltyApplied) {
+        if (tl.penaltyApplied.stars > 0) {
+            child.stars = (child.stars || 0) + tl.penaltyApplied.stars;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.stars);
+        }
+        if (tl.penaltyApplied.gold > 0) {
+            child.balance = (child.balance || 0) + tl.penaltyApplied.gold;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.gold);
+        }
+        delete tl.penaltyApplied;
+    }
+
+    tl.status = 'pending';
+    tl.confirmed = false;
+    tl.deadlineBypassed = true;
+    delete tl.missedDeadline;
+    delete tl.skipReason;
+    delete tl.skipPhoto;
+    delete tl.rejectReason;
+    delete tl.rejectPhoto;
+
+    saveState();
+    showToast('🎉', __('parent.restored_toast') || 'Супориш барқарор карда шуд!');
+    
+    // Close day details popup
+    const p = document.getElementById('day-details-panel');
+    const b = document.getElementById('day-details-backdrop');
+    if (p) p.remove();
+    if (b) b.remove();
+
+    if (typeof renderTasks === 'function') renderTasks();
+    if (typeof renderCalendar === 'function') renderCalendar();
+    if (typeof updateUI === 'function') updateUI();
+}
+
+function completePastTask(childId, dateStr, taskId) {
+    const child = getChild ? getChild(childId) : state.children.find(c => c.id === childId);
+    if (!child) return;
+    const log = child.dailyLogs[dateStr];
+    if (!log || !log.tasks) return;
+    const tl = log.tasks[taskId];
+    if (!tl) return;
+
+    // Refund penalty if applied
+    if (tl.penaltyApplied) {
+        if (tl.penaltyApplied.stars > 0) {
+            child.stars = (child.stars || 0) + tl.penaltyApplied.stars;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.stars);
+        }
+        if (tl.penaltyApplied.gold > 0) {
+            child.balance = (child.balance || 0) + tl.penaltyApplied.gold;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.gold);
+        }
+        delete tl.penaltyApplied;
+    }
+
+    tl.status = 'completed';
+    tl.confirmed = true;
+    tl.confirmedAt = new Date().toISOString();
+    delete tl.missedDeadline;
+    delete tl.skipReason;
+    delete tl.skipPhoto;
+    delete tl.rejectReason;
+    delete tl.rejectPhoto;
+
+    // Apply rewards
+    const task = child.tasks.find(t => t.id === taskId) || child.bonusTasks.find(t => t.id === taskId);
+    if (task && !tl.rewardPaid) {
+        const rt = child.rewardType || 'money';
+        const goldReward = parseInt(task.rewardGold !== undefined ? task.rewardGold : 1) || 0;
+        const starsReward = parseInt(task.rewardStars !== undefined ? task.rewardStars : 1) || 0;
+        const medalsReward = parseInt(task.rewardMedals !== undefined ? task.rewardMedals : 0) || 0;
+
+        if (goldReward > 0 && (rt === 'money' || rt === 'both')) {
+            child.balance = (child.balance || 0) + goldReward;
+            child.totalEarned = (child.totalEarned || 0) + goldReward;
+        }
+        if (starsReward > 0 && (rt === 'stars' || rt === 'both')) {
+            child.stars = (child.stars || 0) + starsReward;
+            child.totalStars = (child.totalStars || 0) + starsReward;
+        }
+        if (medalsReward > 0) {
+            child.medals = (child.medals || 0) + medalsReward;
+            child.totalMedals = (child.totalMedals || 0) + medalsReward;
+        }
+        tl.rewardPaid = true;
+        tl.paidGold = goldReward;
+        tl.paidStars = starsReward;
+        tl.paidMedals = medalsReward;
+    }
+
+    saveState();
+    
+    if (typeof checkAchievements === 'function') {
+        checkAchievements(child.id);
+    }
+
+    showToast('🎉', __('parent.completed_toast') || 'Супориш ҳамчун иҷрошуда қайд карда шуд!');
+    
+    // Close day details popup
+    const p = document.getElementById('day-details-panel');
+    const b = document.getElementById('day-details-backdrop');
+    if (p) p.remove();
+    if (b) b.remove();
+
+    if (typeof renderTasks === 'function') renderTasks();
+    if (typeof renderCalendar === 'function') renderCalendar();
+    if (typeof renderParentDashboard === 'function') renderParentDashboard();
+    if (typeof updateUI === 'function') updateUI();
+}
+
+function excusePastTask(childId, dateStr, taskId, reason, photo) {
+    const child = getChild ? getChild(childId) : state.children.find(c => c.id === childId);
+    if (!child) return;
+    const log = child.dailyLogs[dateStr];
+    if (!log || !log.tasks) return;
+    const tl = log.tasks[taskId];
+    if (!tl) return;
+
+    // Refund penalty if applied
+    if (tl.penaltyApplied) {
+        if (tl.penaltyApplied.stars > 0) {
+            child.stars = (child.stars || 0) + tl.penaltyApplied.stars;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.stars);
+        }
+        if (tl.penaltyApplied.gold > 0) {
+            child.balance = (child.balance || 0) + tl.penaltyApplied.gold;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.gold);
+        }
+        delete tl.penaltyApplied;
+    }
+
+    tl.status = 'excused';
+    tl.confirmed = true;
+    tl.excuseReason = reason || '';
+    if (photo) {
+        tl.excusePhoto = photo;
+    } else {
+        delete tl.excusePhoto;
+    }
+    
+    delete tl.missedDeadline;
+    delete tl.skipReason;
+    delete tl.skipPhoto;
+    delete tl.rejectReason;
+    delete tl.rejectPhoto;
+
+    saveState();
+    showToast('🙏', __('parent.excused_toast') || 'Супориш узрнок ҳисоб карда шуд!');
+    
+    // Close day details popup
+    const p = document.getElementById('day-details-panel');
+    const b = document.getElementById('day-details-backdrop');
+    if (p) p.remove();
+    if (b) b.remove();
+
+    if (typeof renderTasks === 'function') renderTasks();
+    if (typeof renderCalendar === 'function') renderCalendar();
+    if (typeof renderParentDashboard === 'function') renderParentDashboard();
+    if (typeof updateUI === 'function') updateUI();
+}
+
+function renderRewardsPunishments(container, child) {
+    // 1. Render Rejected Withdrawals
+    const rejectedWithdrawals = (child.withdrawals || []).filter(w => w.status === 'rejected' && !w.acknowledged);
+    rejectedWithdrawals.forEach(req => {
+        const sym = req.type === 'stars' ? '⭐' : '🪙';
+        const cardStyle = "background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.08) 100%); border: 1.5px solid rgba(239, 68, 68, 0.3); color: var(--text);";
+        const badgeText = `❌ ${__('parent.reject_withdraw_title') || 'Рад кардани ихроҷ'}`;
+        
+        let parentCommentHTML = '';
+        if (req.parentComment) {
+            parentCommentHTML = `<div style="margin-top:4px; color:#EF4444;"><strong style="color:#EF4444;">${__('task.parent_reply') || '💬 Ҷавоби волидон:'}</strong> ${req.parentComment}</div>`;
+        }
+
+        let reasonHTML = '';
+        if (req.reason) {
+            reasonHTML = `<div style="margin-bottom:4px;"><strong style="color:var(--text);">📝 ${__('common.reason') || 'Сабаб'}:</strong> ${req.reason}</div>`;
+        }
+
+        let photoHTML = '';
+        if (req.photo) {
+            photoHTML = `<div style="margin-top: 10px; max-height: 150px; overflow: hidden; border-radius: 8px; cursor: zoom-in;" onclick="openImageZoomModal('${req.photo}')">
+                <img src="${req.photo}" style="width: 100%; height: auto; max-height: 150px; object-fit: cover;">
+            </div>`;
+        }
+
+        const descText = currentLang === 'ru' 
+            ? `Запрос на вывод ${req.amount} ${sym} был отклонен родителями.`
+            : (currentLang === 'en' 
+                ? `Your withdrawal request of ${req.amount} ${sym} was rejected by parents.`
+                : `Дархости ихроҷи шумо ба маблағи ${req.amount} ${sym} аз ҷониби волидон рад карда шуд.`);
+
+        const div = document.createElement('div');
+        div.className = 'task-card';
+        div.style.cssText = `display: flex; flex-direction: column; padding: 16px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); ${cardStyle}`;
+        div.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">${badgeText}</span>
+                <span style="font-size: 10px; color: var(--text-light);">${formatDate(req.date)}</span>
+            </div>
+            <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 6px 0; color: var(--text);">${__('balance.status.rejected') || 'Рад шуд'}</h3>
+            <p style="font-size: 13px; color: var(--text-secondary); margin: 0 0 8px 0; line-height: 1.4;">${descText}</p>
+            ${reasonHTML}
+            ${parentCommentHTML}
+            ${photoHTML}
+            <div style="display: flex; gap: 10px; margin-top: 12px; width: 100%;">
+                <button class="btn btn-primary child-acknowledge-withdraw-btn" data-id="${req.id}" style="flex: 1; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; background: var(--danger); border-color: var(--danger);">Ҳамааш хуб, қабул мекунам</button>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+
+    // 2. Render Rewards & Punishments
+    child.rewardsPunishments = child.rewardsPunishments || [];
+    const pendingRevPun = child.rewardsPunishments.filter(item => item.status === 'pending' || item.status === 'disputed');
+    
+    pendingRevPun.forEach(item => {
+        const isReward = item.type === 'reward';
+        const isDisputed = item.status === 'disputed';
+        const cardStyle = isReward 
+            ? "background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%); border: 1.5px solid rgba(16, 185, 129, 0.3); color: var(--text);"
+            : "background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.08) 100%); border: 1.5px solid rgba(239, 68, 68, 0.3); color: var(--text);";
+        
+        const badgeText = isReward 
+            ? `🟢 ${__('revpun.reward_label') || 'Мукофот аз волид'}` 
+            : `🔴 ${__('revpun.punish_label') || 'Ҷарима аз волид'}`;
+        
+        const starsText = item.stars > 0 ? `⭐ +${item.stars} ` : '';
+        const goldText = item.gold > 0 ? `🪙 +${item.gold}смн` : '';
+        const valueText = isReward 
+            ? `${starsText}${goldText}`.trim()
+            : `⭐ -${item.stars} 🪙 -${item.gold}смн`.trim();
+        
+        let photoHTML = '';
+        if (item.photo) {
+            photoHTML = `<div style="margin-top: 10px; max-height: 150px; overflow: hidden; border-radius: 8px; cursor: zoom-in;" onclick="openImageZoomModal('${item.photo}')">
+                <img src="${item.photo}" style="width: 100%; height: auto; max-height: 150px; object-fit: cover;">
+            </div>`;
+        }
+
+        let disputeStatusHTML = '';
+        if (isDisputed) {
+            disputeStatusHTML = `<div style="font-size:12px; font-weight:700; color:var(--warning); margin-top:8px;">⚠️ Шумо инро баҳс кардед (Сабаб: "${item.disputeReason}")</div>`;
+        }
+
+        let buttonsHTML = '';
+        if (!isDisputed) {
+            buttonsHTML = `
+            <div style="display: flex; gap: 10px; margin-top: 12px; width: 100%;">
+                <button class="btn btn-primary child-accept-revpun-btn" data-id="${item.id}" style="flex: 1; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; background: ${isReward ? 'var(--success)' : 'var(--danger)'}; border-color: ${isReward ? 'var(--success)' : 'var(--danger)'};">Қабул кардан</button>
+                <button class="btn btn-outline child-dispute-revpun-btn" data-id="${item.id}" style="flex: 1; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--warning); border-color: rgba(245, 158, 11, 0.4);">Баҳс кардан</button>
+            </div>`;
+        } else {
+            buttonsHTML = `
+            <div style="display: flex; gap: 10px; margin-top: 12px; width: 100%;">
+                <button class="btn btn-primary child-accept-revpun-btn" data-id="${item.id}" style="flex: 1; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; background: ${isReward ? 'var(--success)' : 'var(--danger)'}; border-color: ${isReward ? 'var(--success)' : 'var(--danger)'};">Ҳамааш хуб, қабул мекунам</button>
+            </div>`;
+        }
+
+        const div = document.createElement('div');
+        div.className = 'task-card';
+        div.style.cssText = `display: flex; flex-direction: column; padding: 16px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); ${cardStyle}`;
+        div.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">${badgeText}</span>
+                <span style="font-size: 10px; color: var(--text-light);">${formatDate(item.timestamp)}</span>
+            </div>
+            <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 6px 0; color: var(--text);">${item.title}</h3>
+            ${item.description ? `<p style="font-size: 13px; color: var(--text-secondary); margin: 0 0 8px 0; line-height: 1.4;">${item.description}</p>` : ''}
+            <div style="font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                <span>Таъсир:</span> <span style="color: ${isReward ? 'var(--success)' : 'var(--danger)'}; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 20px;">${valueText}</span>
+            </div>
+            ${photoHTML}
+            ${disputeStatusHTML}
+            ${buttonsHTML}
+        `;
+        container.appendChild(div);
+    });
+}
+
+function attachRewardsPunishmentsListeners(container) {
+    container.querySelectorAll('.child-accept-revpun-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            acceptRewardPunishment(id);
+        });
+    });
+    container.querySelectorAll('.child-dispute-revpun-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            disputeRewardPunishment(id);
+        });
+    });
+    container.querySelectorAll('.child-acknowledge-withdraw-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            acknowledgeRejectedWithdrawal(id);
+        });
+    });
+}
+
+function acknowledgeRejectedWithdrawal(id) {
+    const child = getCurrentChild();
+    if (!child || !child.withdrawals) return;
+    const req = child.withdrawals.find(w => w.id === id);
+    if (req) {
+        req.acknowledged = true;
+        saveState();
+        if (typeof renderTasks === 'function') renderTasks();
+        if (typeof updateUI === 'function') updateUI();
+    }
+}
+
+function approveSkipRequest(childId, taskId) {
+    const child = getChild ? getChild(childId) : state.children.find(c => c.id === childId);
+    if (!child) return;
+    const today = getToday();
+    const log = child.dailyLogs[today] || getOrCreateDailyLog(child.id);
+    const tl = log.tasks[taskId];
+    if (!tl) return;
+
+    // Refund penalty if applied
+    if (tl.penaltyApplied) {
+        if (tl.penaltyApplied.stars > 0) {
+            child.stars = (child.stars || 0) + tl.penaltyApplied.stars;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.stars);
+        }
+        if (tl.penaltyApplied.gold > 0) {
+            child.balance = (child.balance || 0) + tl.penaltyApplied.gold;
+            child.totalDeducted = Math.max(0, (child.totalDeducted || 0) - tl.penaltyApplied.gold);
+        }
+        delete tl.penaltyApplied;
+    }
+
+    tl.status = 'excused';
+    tl.confirmed = true;
+    tl.excuseReason = tl.skipReason || '';
+    if (tl.skipPhoto) {
+        tl.excusePhoto = tl.skipPhoto;
+    }
+    
+    delete tl.missedDeadline;
+    delete tl.skipReason;
+    delete tl.skipPhoto;
+    delete tl.rejectReason;
+    delete tl.rejectPhoto;
+
+    saveState();
+    showToast('🙏', __('parent.excused_toast') || 'Супориш узрнок ҳисоб карда шуд!');
+    
+    if (typeof renderTasks === 'function') renderTasks();
+    if (typeof renderCalendar === 'function') renderCalendar();
+    if (typeof renderParentDashboard === 'function') renderParentDashboard();
+    if (typeof updateUI === 'function') updateUI();
+}
+
+function rejectSkipRequest(childId, taskId) {
+    const child = getChild ? getChild(childId) : state.children.find(c => c.id === childId);
+    if (!child) return;
+    const today = getToday();
+    const log = child.dailyLogs[today] || getOrCreateDailyLog(child.id);
+    const tl = log.tasks[taskId];
+    if (!tl) return;
+
+    showCustomPrompt(
+        __('parent.reject_title') || 'Рад кардани супориш',
+        __('parent.reject_reason_prompt') || 'Сабаби радкуниро ворид кунед:'
+    ).then(result => {
+        if (result === null) return;
+        const text = (result.text || '').trim();
+        
+        tl.status = 'failed';
+        tl.confirmed = true;
+        tl.rejectReason = text;
+        if (result.photo) {
+            tl.rejectPhoto = result.photo;
+        }
+
+        delete tl.missedDeadline;
+        delete tl.skipReason;
+        delete tl.skipPhoto;
+
+        // Apply penalty
+        const task = child.tasks.find(t => t.id === taskId) || child.bonusTasks.find(t => t.id === taskId);
+        if (task && task.hasPenalty && !tl.penaltyApplied) {
+            const starsPenalty = parseInt(task.penaltyStars !== undefined ? task.penaltyStars : 1) || 0;
+            const goldPenalty = parseInt(task.penaltyGold !== undefined ? task.penaltyGold : 1) || 0;
+            
+            tl.penaltyApplied = { stars: 0, gold: 0 };
+            if (starsPenalty > 0) {
+                child.stars = Math.max(0, (child.stars || 0) - starsPenalty);
+                child.totalDeducted = (child.totalDeducted || 0) + starsPenalty;
+                tl.penaltyApplied.stars = starsPenalty;
+            }
+            if (goldPenalty > 0) {
+                child.balance = Math.max(0, (child.balance || 0) - goldPenalty);
+                child.totalDeducted = (child.totalDeducted || 0) + goldPenalty;
+                tl.penaltyApplied.gold = goldPenalty;
+            }
+        }
+
+        saveState();
+        showToast('❌', __('parent.rejected_toast') || 'Дархости узрнок рад карда шуд!');
+        
+        if (typeof renderTasks === 'function') renderTasks();
+        if (typeof renderCalendar === 'function') renderCalendar();
+        if (typeof renderParentDashboard === 'function') renderParentDashboard();
+        if (typeof updateUI === 'function') updateUI();
+    });
+}

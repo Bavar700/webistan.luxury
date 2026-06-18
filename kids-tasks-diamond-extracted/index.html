@@ -532,26 +532,28 @@
                         </select>
                     </div>
                     <div id="confirm-reject-section" class="form-group hidden" style="margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 12px;">
-                        <label style="font-weight: 600; display: block; margin-bottom: 4px;" id="confirm-reject-reason-label" data-i18n="confirm.reject_reason_label">Сабаби радкунӣ:</label>
-                        <textarea id="confirm-reject-reason" rows="2" data-i18n-placeholder="common.reason_placeholder" placeholder="Сабабро нависед..." style="width: 100%; box-sizing: border-box; margin-bottom: 8px;"></textarea>
-                        
-                        <label style="font-weight: 600; display: block; margin-bottom: 4px;" id="confirm-reject-photo-label" data-i18n="confirm.reject_photo_label">Акси радкунӣ (ихтиёрӣ):</label>
-                        <div style="display: flex; gap: 10px; align-items: center;">
+                        <div class="form-group">
+                            <textarea id="confirm-reject-reason" rows="2" data-i18n-placeholder="common.reason_placeholder" placeholder="Сабабро нависед..." style="width: 100%; box-sizing: border-box;"></textarea>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
                             <input type="file" id="confirm-reject-photo-input" accept="image/*" class="hidden">
-                            <button type="button" class="btn btn-secondary" id="confirm-reject-photo-btn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                                <svg class="icon-svg" aria-hidden="true" style="width: 14px; height: 14px;"><use href="#icon-plus"/></svg>
+                            <div class="premium-upload-card" id="confirm-reject-photo-btn">
+                                <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
                                 <span data-i18n="common.photo_short">Акс</span>
-                            </button>
-                            <div id="confirm-reject-photo-preview" class="hidden" style="position: relative; width: 50px; height: 50px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border);">
-                                <img id="confirm-reject-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
-                                <button type="button" id="confirm-reject-photo-remove" style="position: absolute; top: -2px; right: -2px; background: rgba(0,0,0,0.7); border: none; color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer;">&times;</button>
+                            </div>
+                            <div class="premium-photo-preview-container hidden" id="confirm-reject-photo-preview">
+                                <img id="confirm-reject-photo-img" src="" alt="" style="max-width:100%; border-radius:12px; margin-bottom: 6px;">
+                                <button type="button" class="premium-photo-delete-btn" id="confirm-reject-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
                             </div>
                         </div>
                     </div>
                     <div style="display:flex; flex-direction:column; gap:10px;">
                         <input type="password" id="confirm-pin" maxlength="4" inputmode="numeric" class="pin-input" placeholder="****" autocomplete="off" style="width:100%; box-sizing:border-box;">
                         <button class="btn btn-primary" id="confirm-submit" data-i18n="confirm.submit_yes" style="width:100%;">Ҳа, тасдиқ мекунам</button>
-                        <button class="btn btn-danger" id="confirm-reject" data-i18n="confirm.submit_no" style="width:100%; background:var(--danger,#EF4444); color:#fff; border:none;">Рад кардан</button>
+                        <button class="btn btn-danger" id="confirm-reject" style="width:100%; background:var(--danger,#EF4444); color:#fff; border:none; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <svg class="icon-svg" aria-hidden="true" style="width: 14px; height: 14px; fill: currentColor;"><use href="#icon-x"/></svg>
+                            <span data-i18n="confirm.submit_no">Рад кардан</span>
+                        </button>
                     </div>
                     </form>
                     <p class="pin-error hidden" id="confirm-error" data-i18n="confirm.pin_error">Гузарвожаи PIN нодуруст аст!</p>
@@ -572,22 +574,56 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="skip-modal-text" data-i18n="skip.prompt">Сабаби сарфи назар кардани супоришро нависед:</p>
                     <div class="form-group">
                         <textarea id="skip-reason" rows="3" data-i18n-placeholder="common.reason_placeholder" placeholder="Сабабро нависед..."></textarea>
                     </div>
-                    <div class="form-group" style="margin-top: 10px;">
+                    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
                         <input type="file" id="skip-photo-input" accept="image/*" class="hidden">
-                        <button type="button" class="btn btn-secondary btn-full" id="skip-photo-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                            <svg class="icon-svg" aria-hidden="true" style="width: 16px; height: 16px;"><use href="#icon-plus"/></svg>
+                        <div class="premium-upload-card" id="skip-photo-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
                             <span data-i18n="common.photo_short">Акс</span>
-                        </button>
-                        <div id="skip-photo-preview" class="hidden" style="position: relative; width: 100%; height: 150px; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border);">
-                            <img id="skip-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
-                            <button type="button" id="skip-photo-remove" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: none; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; font-weight: bold;">&times;</button>
+                        </div>
+                        <div class="premium-photo-preview-container hidden" id="skip-photo-preview">
+                            <img id="skip-photo-img" src="" alt="">
+                            <button type="button" class="premium-photo-delete-btn" id="skip-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
                         </div>
                     </div>
                     <button class="btn btn-primary btn-full" id="skip-submit-btn" style="margin-top:10px;">
+                        <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                        <span data-i18n="skip.submit">Тасдиқ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Excuse Task Modal -->
+        <div class="modal-overlay hidden" id="excuse-task-modal" style="z-index: 1150;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-skip"/></svg>
+                        <span id="excuse-task-modal-title" data-i18n="parent.excuse_title">Узрнок</span>
+                    </h3>
+                    <button class="modal-close" id="excuse-task-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea id="excuse-task-reason" rows="3" placeholder="Сабабро нависед..."></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+                        <input type="file" id="excuse-task-photo-input" accept="image/*" class="hidden">
+                        <div class="premium-upload-card" id="excuse-task-photo-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                            <span data-i18n="common.photo_short">Акс</span>
+                        </div>
+                        <div class="premium-photo-preview-container hidden" id="excuse-task-photo-preview">
+                            <img id="excuse-task-photo-img" src="" alt="" style="max-width:100%; border-radius:12px; margin-bottom: 6px;">
+                            <button type="button" class="premium-photo-delete-btn" id="excuse-task-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="excuse-task-submit-btn" style="margin-top:10px;">
                         <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
                         <span data-i18n="skip.submit">Тасдиқ</span>
                     </button>
@@ -611,6 +647,17 @@
                     <p data-i18n="parent.restore_prompt">Сабаби барқарор кардани супоришро ворид кунед:</p>
                     <div class="form-group">
                         <textarea id="restore-skip-reason" rows="3" placeholder="Сабабро нависед..."></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+                        <input type="file" id="restore-skip-photo-input" accept="image/*" class="hidden">
+                        <div class="premium-upload-card" id="restore-skip-photo-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                            <span data-i18n="common.photo_short">Акс</span>
+                        </div>
+                        <div class="premium-photo-preview-container hidden" id="restore-skip-photo-preview">
+                            <img id="restore-skip-photo-img" src="" alt="">
+                            <button type="button" class="premium-photo-delete-btn" id="restore-skip-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
+                        </div>
                     </div>
                     <div class="form-group" style="margin-top: 10px;">
                         <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px;" data-i18n="pin.confirm_label">PIN-коди волид:</label>
@@ -671,14 +718,15 @@
                     <div class="form-group">
                         <textarea id="parent-reply-text" rows="3" placeholder="Паёми худро нависед..." style="width: 100%; box-sizing: border-box;"></textarea>
                     </div>
-                    <div class="form-group" style="margin-top: 10px;">
+                    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
                         <input type="file" id="parent-reply-photo-input" accept="image/*" class="hidden">
-                        <button type="button" class="btn btn-secondary btn-full" id="parent-reply-photo-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
-                            <span>+ Акс</span>
-                        </button>
-                        <div id="parent-reply-photo-preview" class="hidden" style="position: relative; width: 100%; height: 150px; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border);">
-                            <img id="parent-reply-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
-                            <button type="button" id="parent-reply-photo-remove" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: none; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; font-weight: bold;">&times;</button>
+                        <div class="premium-upload-card" id="parent-reply-photo-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                            <span data-i18n="common.photo_short">Акс</span>
+                        </div>
+                        <div class="premium-photo-preview-container hidden" id="parent-reply-photo-preview">
+                            <img id="parent-reply-photo-img" src="" alt="">
+                            <button type="button" class="premium-photo-delete-btn" id="parent-reply-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
                         </div>
                     </div>
                     <button class="btn btn-primary btn-full" id="parent-reply-submit-btn" style="margin-top:10px; width: 100%;">
@@ -702,25 +750,87 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p id="badge-revoke-modal-text">Сабаби рад кардани нишонро нависед:</p>
                     <div class="form-group">
                         <textarea id="badge-revoke-reason" rows="3" placeholder="Сабабро нависед..." style="width: 100%; box-sizing: border-box;"></textarea>
                     </div>
-                    <div class="form-group" style="margin-top: 10px;">
+                    <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
                         <input type="file" id="badge-revoke-photo-input" accept="image/*" class="hidden">
-                        <button type="button" class="btn btn-secondary btn-full" id="badge-revoke-photo-btn" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;">
-                            <svg class="icon-svg" aria-hidden="true" style="width: 16px; height: 16px;"><use href="#icon-plus"/></svg>
-                            <span>Акс илова кунед (ихтиёрӣ)</span>
-                        </button>
-                        <div id="badge-revoke-photo-preview" class="hidden" style="position: relative; width: 100%; height: 150px; margin-top: 10px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border);">
-                            <img id="badge-revoke-photo-img" style="width: 100%; height: 100%; object-fit: cover;">
-                            <button type="button" id="badge-revoke-photo-remove" style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: none; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; font-weight: bold;">&times;</button>
+                        <div class="premium-upload-card" id="badge-revoke-photo-btn">
+                            <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                            <span data-i18n="common.photo_short">Акс</span>
+                        </div>
+                        <div class="premium-photo-preview-container hidden" id="badge-revoke-photo-preview">
+                            <img id="badge-revoke-photo-img" src="" alt="">
+                            <button type="button" class="premium-photo-delete-btn" id="badge-revoke-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
                         </div>
                     </div>
                     <button class="btn btn-danger btn-full" id="badge-revoke-submit-btn" style="margin-top:10px; width: 100%;">
                         <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
                         <span>Рад кардан</span>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reward/Punishment Modal -->
+        <div class="modal-overlay hidden" id="parent-rev-pun-modal" style="z-index: 1500;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>
+                        <svg class="icon-svg" aria-hidden="true" style="color:var(--primary);"><use href="#icon-gift"/></svg>
+                        <span id="parent-rev-pun-modal-title" data-i18n="parent.add_rev_pun_modal_title">Мукофот ва Танбеҳ</span>
+                    </h3>
+                    <button class="modal-close" id="parent-rev-pun-close">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-x"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="return false;">
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <div style="display: flex; gap: 8px;">
+                                <button type="button" class="btn btn-primary" id="parent-rev-pun-type-reward" style="flex: 1; font-weight: 700; height: 38px;" data-i18n="parent.rev_pun_reward_type">🟢 Мукофот</button>
+                                <button type="button" class="btn btn-outline" id="parent-rev-pun-type-punish" style="flex: 1; font-weight: 700; height: 38px;" data-i18n="parent.rev_pun_punish_type">🔴 Танбеҳ</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <input type="text" id="parent-rev-pun-name" placeholder="Номи мукофот ё танбеҳ..." data-i18n-placeholder="parent.rev_pun_name_placeholder" style="width: 100%; box-sizing: border-box;">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <textarea id="parent-rev-pun-desc" rows="3" placeholder="Тавсифи бештар..." data-i18n-placeholder="parent.rev_pun_desc_placeholder" style="width: 100%; box-sizing: border-box;"></textarea>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <div style="display: flex; gap: 10px;">
+                                <div style="position: relative; flex: 1;">
+                                    <input type="number" id="parent-rev-pun-stars" placeholder="0" style="width: 100%; padding-right: 28px; box-sizing: border-box; text-align: center; transition: border-color 0.2s, box-shadow 0.2s;">
+                                    <span id="parent-rev-pun-stars-sym" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; transition: color 0.2s;">⭐</span>
+                                </div>
+                                <div style="position: relative; flex: 1;">
+                                    <input type="number" id="parent-rev-pun-gold" placeholder="0" style="width: 100%; padding-right: 28px; box-sizing: border-box; text-align: center; transition: border-color 0.2s, box-shadow 0.2s;">
+                                    <span id="parent-rev-pun-gold-sym" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; transition: color 0.2s;">🪙</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <input type="file" id="parent-rev-pun-photo-input" accept="image/*" class="hidden">
+                            <div class="premium-upload-card" id="parent-rev-pun-photo-btn">
+                                <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                                <span data-i18n="common.photo_short">Акс</span>
+                            </div>
+                            <div class="premium-photo-preview-container hidden" id="parent-rev-pun-photo-preview">
+                                <img id="parent-rev-pun-photo-img" src="" alt="">
+                                <button type="button" class="premium-photo-delete-btn" id="parent-rev-pun-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-full" id="parent-rev-pun-submit-btn" style="margin-top: 15px; width: 100%;">
+                            <svg class="icon-svg" aria-hidden="true" style="width:14px;height:14px;"><use href="#icon-check"/></svg>
+                            <span data-i18n="parent.rev_pun_submit_btn">Ирсол</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1008,26 +1118,30 @@
                             <span id="task-has-penalty-label">⚠️ Ҷарима дорад</span>
                         </label>
                         <!-- Penalty inputs (hidden by default) -->
-                        <div id="task-penalty-group" class="hidden" style="display: flex; gap: 12px; margin-top: 10px; padding: 12px 14px; background: rgba(239,68,68,0.08); border: 1.5px solid rgba(239,68,68,0.25); border-radius: 12px;">
-                            <div style="flex: 1; text-align: center;">
-                                <label id="task-penalty-stars-label" style="font-weight: 700; font-size: 20px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>
-                                <input type="number" id="task-penalty-stars" min="0" placeholder="0" style="text-align: center; border-color: rgba(239,68,68,0.4);">
+                        <div id="task-penalty-group" class="hidden" style="margin-top: 10px; padding: 12px 14px; background: rgba(239,68,68,0.08); border: 1.5px solid rgba(239,68,68,0.25); border-radius: 12px;">
+                            <div style="display: flex; gap: 10px;">
+                                <div style="position: relative; flex: 1;">
+                                    <input type="number" id="task-penalty-stars" min="0" placeholder="0" style="width: 100%; padding-right: 24px; box-sizing: border-box; text-align: center; border-color: rgba(239,68,68,0.4);">
+                                    <span id="task-penalty-stars-label" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">⭐</span>
+                                </div>
+                                <div style="position: relative; flex: 1;">
+                                    <input type="number" id="task-penalty-gold" min="0" placeholder="0" style="width: 100%; padding-right: 24px; box-sizing: border-box; text-align: center; border-color: rgba(239,68,68,0.4);">
+                                    <span id="task-penalty-gold-label" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">🪙</span>
+                                </div>
                             </div>
-                            <div style="flex: 1; text-align: center;">
-                                <label id="task-penalty-gold-label" style="font-weight: 700; font-size: 20px; margin-bottom: 6px; display: block; color: var(--text);">🪙</label>
-                                <input type="number" id="task-penalty-gold" min="0" placeholder="0" style="text-align: center; border-color: rgba(239,68,68,0.4);">
+                        </div>
+                        <div class="form-group" style="margin-top: 12px; margin-bottom: 12px;">
+                            <div style="display: flex; gap: 10px;">
+                                <div style="position: relative; flex: 1;">
+                                    <input type="number" id="task-reward-stars" min="0" placeholder="0" style="width: 100%; padding-right: 24px; box-sizing: border-box; text-align: center;">
+                                    <span id="task-reward-stars-label" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">⭐</span>
+                                </div>
+                                <div style="position: relative; flex: 1;" id="task-reward-gold-container">
+                                    <input type="number" id="task-reward-gold" min="0" placeholder="0" style="width: 100%; padding-right: 24px; box-sizing: border-box; text-align: center;">
+                                    <span id="task-reward-gold-label" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">🪙</span>
+                                </div>
                             </div>
                         </div>
-                    <div class="form-group" style="display: flex; gap: 12px; margin-top: 8px;">
-                        <div style="flex: 1; text-align: center;">
-                            <label id="task-reward-stars-label" style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>
-                            <input type="number" id="task-reward-stars" min="0" placeholder="0" style="text-align: center;">
-                        </div>
-                        <div style="flex: 1; text-align: center;" id="task-reward-gold-container">
-                            <label id="task-reward-gold-label" style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">🪙</label>
-                            <input type="number" id="task-reward-gold" min="0" placeholder="0" style="text-align: center;">
-                        </div>
-                    </div>
                     <div style="display: flex; gap: 12px; margin-top: 12px;">
                         <button class="btn btn-secondary" id="task-modal-cancel" style="flex: 1;" data-i18n="cancel">Лағв</button>
                         <button class="btn btn-primary" id="task-save-btn" style="flex: 2;">
@@ -1137,10 +1251,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Чӣ қадар мехоҳед ихроҷ кунед?</p>
+                    <p data-i18n="balance.withdraw_how_much">Чӣ қадар мехоҳед ихроҷ кунед?</p>
                     <p class="withdraw-info">Тавозуни ҷорӣ: <strong id="withdraw-balance">0</strong></p>
                     <div class="form-group" id="withdraw-type-group">
-                        <label for="withdraw-currency-type" style="font-weight:600;margin-bottom:4px;display:block;" data-i18n="balance.withdraw_type_label">Намуди ихроҷ:</label>
                         <select id="withdraw-currency-type">
                             <option value="money" data-i18n="reward_type.money">🪙</option>
                             <option value="stars" data-i18n="reward_type.stars">⭐ Ситорача</option>
@@ -1182,15 +1295,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label style="font-weight:600;margin-bottom:4px;display:block;" data-i18n="dream.name_label">Номи орзу:</label>
                         <input type="text" id="dream-name-input" placeholder="Орзуи нав..." data-i18n-placeholder="dream.name_placeholder" style="width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px;">
                     </div>
                     <div class="form-group">
-                        <label style="font-weight:600;margin-bottom:4px;display:block;" data-i18n="dream.desc_label">Ҷой барои тафсир:</label>
                         <textarea id="dream-desc-input" placeholder="Тафсир ё шарҳ..." data-i18n-placeholder="dream.desc_placeholder" style="width:100%; border:1px solid var(--border); border-radius:var(--radius-sm); padding:8px 12px; font-size:13px; font-family:inherit; min-height:80px; resize:vertical;"></textarea>
                     </div>
                     <div class="form-group">
-                        <label style="font-weight:600;margin-bottom:4px;display:block;" data-i18n="dream.photo_label">Ҷо барои акс:</label>
                         <input type="file" id="dream-photo-input" accept="image/*" class="hidden">
                         <div class="premium-upload-card" id="dream-photo-btn">
                             <span data-i18n="common.add_photo_short">+ Акс</span>
@@ -1482,6 +1592,17 @@
                 <div class="form-group">
                     <textarea id="prompt-modal-input" rows="3" placeholder="Сабабро нависед..." data-i18n-placeholder="common.reason_placeholder"></textarea>
                 </div>
+                <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+                    <input type="file" id="prompt-modal-photo-input" accept="image/*" class="hidden">
+                    <div class="premium-upload-card" id="prompt-modal-photo-btn">
+                        <svg class="icon-svg" aria-hidden="true"><use href="#icon-plus"/></svg>
+                        <span data-i18n="common.photo_short">Акс</span>
+                    </div>
+                    <div class="premium-photo-preview-container hidden" id="prompt-modal-photo-preview">
+                        <img id="prompt-modal-photo-img" src="" alt="">
+                        <button type="button" class="premium-photo-delete-btn" id="prompt-modal-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
+                    </div>
+                </div>
                 <div style="display: flex; gap: 12px; margin-top: 15px;">
                     <button class="btn btn-secondary" onclick="closeCustomPrompt()" style="flex: 1;" data-i18n="cancel">Лағв</button>
                     <button class="btn btn-primary" id="prompt-modal-submit-btn" style="flex: 1;" data-i18n="task_form.save">Захира</button>
@@ -1552,11 +1673,9 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="parent-modal-dream-name" data-i18n="dream.name_label">Номи орзу:</label>
                     <input type="text" id="parent-modal-dream-name" placeholder="Номи орзу..." data-i18n-placeholder="dream.name_placeholder">
                 </div>
                 <div class="form-group">
-                    <label for="parent-modal-dream-desc" data-i18n="dream.desc_label">Тавсифи орзу:</label>
                     <textarea id="parent-modal-dream-desc" rows="3" placeholder="Тавсифи орзу..." data-i18n-placeholder="dream.desc_placeholder"></textarea>
                 </div>
                 <div class="form-group">
@@ -1570,14 +1689,16 @@
                         <button class="premium-photo-delete-btn" id="parent-modal-dream-photo-remove" data-i18n="common.remove_photo">✕ Нест кардан</button>
                     </div>
                 </div>
-                <div style="display: flex; gap: 12px; margin-top: 12px;">
-                    <div style="flex: 1; text-align: center;">
-                        <label style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">🪙</label>
-                        <input type="number" id="parent-modal-dream-gold" min="0" placeholder="0" style="text-align: center;">
-                    </div>
-                    <div style="flex: 1; text-align: center;">
-                        <label style="font-weight: 600; font-size: 18px; margin-bottom: 6px; display: block; color: var(--text);">⭐</label>
-                        <input type="number" id="parent-modal-dream-stars" min="0" placeholder="0" style="text-align: center;">
+                <div class="form-group" style="margin-top: 12px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 10px;">
+                        <div style="position: relative; flex: 1;">
+                            <input type="number" id="parent-modal-dream-stars" min="0" placeholder="0" style="width: 100%; padding-right: 24px; box-sizing: border-box; text-align: center;">
+                            <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">⭐</span>
+                        </div>
+                        <div style="position: relative; flex: 1;">
+                            <input type="number" id="parent-modal-dream-gold" min="0" placeholder="0" style="width: 100%; padding-right: 24px; box-sizing: border-box; text-align: center;">
+                            <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none;">🪙</span>
+                        </div>
                     </div>
                 </div>
                 <button class="btn btn-primary btn-full" id="parent-modal-dream-submit" style="margin-top: 15px;">
@@ -1709,10 +1830,10 @@
     <!-- Supabase JS Client -->
     <script src="js/supabase-js.js"></script>
 
-    <script src="js/safeStorage.js?v=156"></script>
-    <script src="js/translations.js?v=156"></script>
-    <script src="js/guide-translations.js?v=156"></script>
-    <script src="js/data.js?v=156"></script>
-    <script src="js/app.js?v=156"></script>
+    <script src="js/safeStorage.js?v=158"></script>
+    <script src="js/translations.js?v=158"></script>
+    <script src="js/guide-translations.js?v=158"></script>
+    <script src="js/data.js?v=158"></script>
+    <script src="js/app.js?v=158"></script>
 </body>
 </html>

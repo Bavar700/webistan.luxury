@@ -901,7 +901,10 @@ function getOrCreateDailyLog(childId) {
                 if (log && log.tasks) {
                     for (const taskId in log.tasks) {
                         const tl = log.tasks[taskId];
+                        // Skip 'awaiting-confirm' — child submitted, parent hasn't reviewed
+                        if (tl && tl.status === 'awaiting-confirm') continue;
                         if (tl && tl.status === 'pending') {
+
                             tl.status = 'failed';
                             tl.confirmed = true;
                             
@@ -967,9 +970,18 @@ function syncDailyLogTasks(child, dateStr) {
     const log = child.dailyLogs[dateStr];
     if (!log) return;
 
+    // Determine day-of-week for this date to filter tasks correctly
+    const dayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
+
     let modified = false;
     const allTasks = [...child.tasks, ...child.bonusTasks];
+
+    // Only add tasks that are active on this specific day
     allTasks.forEach(t => {
+        // For daily tasks with specific days assigned, check if this day is included
+        if (t.type === 'daily' && t.days && t.days.length > 0 && !t.days.includes(dayOfWeek)) {
+            return; // Skip — this task is not scheduled for this day
+        }
         if (!log.tasks[t.id]) {
             log.tasks[t.id] = {
                 status: 'pending',
@@ -983,11 +995,25 @@ function syncDailyLogTasks(child, dateStr) {
         }
     });
 
-    const validTaskIds = new Set(allTasks.map(t => t.id));
+    // Build the set of valid task IDs for today (respecting day-of-week filter)
+    const validTaskIds = new Set();
+    allTasks.forEach(t => {
+        if (t.type === 'daily' && t.days && t.days.length > 0 && !t.days.includes(dayOfWeek)) {
+            return; // Not valid today
+        }
+        validTaskIds.add(t.id);
+    });
+
+    // Remove tasks from daily log that are NOT valid for today
+    // BUT keep tasks that already have some progress (status !== 'pending') to avoid data loss
     Object.keys(log.tasks).forEach(taskId => {
         if (!validTaskIds.has(taskId)) {
-            delete log.tasks[taskId];
-            modified = true;
+            const tl = log.tasks[taskId];
+            // Only remove if still in fresh 'pending' state with no interaction
+            if (tl && tl.status === 'pending' && !tl.confirmed && !tl.timeSpent && !tl.photo) {
+                delete log.tasks[taskId];
+                modified = true;
+            }
         }
     });
 
@@ -1159,6 +1185,7 @@ function evaluateTest(childId, testId, scores) {
     test.reward = reward;
     test.starReward = starReward;
     test.completed = true;
+    test.completedAt = new Date().toISOString();
 
     if (reward > 0 && (rt === 'money' || rt === 'both')) {
         child.balance += reward;
@@ -1215,13 +1242,14 @@ function getAchievementProgress(child, id) {
         case 'all_today': {
             const todayLog = child.dailyLogs[getToday()];
             if (!todayLog) return { current: 0, target: 1, formatted: '0 / 1' };
-            const allTasks = child.tasks.filter(t => !t.isBonus);
-            if (allTasks.length === 0) return { current: 0, target: 1, formatted: '0 / 1' };
-            const doneCount = allTasks.filter(t => {
+            const todayDay = new Date(getToday() + 'T12:00:00').getDay();
+            const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+            if (activeRegularTasks.length === 0) return { current: 0, target: 1, formatted: '0 / 1' };
+            const doneCount = activeRegularTasks.filter(t => {
                 const tl = todayLog.tasks[t.id];
                 return tl && tl.status === 'completed' && tl.confirmed;
             }).length;
-            return { current: doneCount, target: allTasks.length, formatted: `${doneCount} / ${allTasks.length}` };
+            return { current: doneCount, target: activeRegularTasks.length, formatted: `${doneCount} / ${activeRegularTasks.length}` };
         }
         case 'week_streak':
         case 'month_streak':
@@ -1402,7 +1430,56 @@ function checkAchievements(childId) {
     // Temporarily override includes to prevent re-awarding revoked achievements
     const _origIncludes = child.achievements.includes;
     child.achievements.includes = function(id) {
-        return _origIncludes.call(this, id) || child.revokedAchievements.includes(id);
+        if (_origIncludes.call(this, id)) {
+            return true;
+        }
+        if (child.revokedAchievements && child.revokedAchievements.includes(id)) {
+            const details = child.revokedAchievementsDetails && child.revokedAchievementsDetails[id];
+            if (details && details.timestamp) {
+                const revokeTime = details.timestamp;
+                let hasActionAfter = false;
+                
+                // Check if child has confirmed tasks AFTER the achievement was revoked
+                if (child.dailyLogs) {
+                    for (const log of Object.values(child.dailyLogs)) {
+                        if (log.tasks) {
+                            for (const tl of Object.values(log.tasks)) {
+                                if (tl.confirmed && tl.status === 'completed' && tl.confirmedAt) {
+                                    if (new Date(tl.confirmedAt).getTime() > revokeTime) {
+                                        hasActionAfter = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (hasActionAfter) break;
+                    }
+                }
+                
+                // Check if child completed any tests AFTER revocation
+                if (!hasActionAfter && child.tenDayTests) {
+                    for (const test of child.tenDayTests) {
+                        if (test.completed && test.completedAt) {
+                            if (new Date(test.completedAt).getTime() > revokeTime) {
+                                hasActionAfter = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if (hasActionAfter) {
+                    // Remove from revokedAchievements so we don't keep checking
+                    child.revokedAchievements = child.revokedAchievements.filter(x => x !== id);
+                    if (child.revokedAchievementsDetails) {
+                        delete child.revokedAchievementsDetails[id];
+                    }
+                    return false; // Allow re-unlocking!
+                }
+            }
+            return true;
+        }
+        return false;
     };
 
     let totalCompleted = 0;
@@ -1419,7 +1496,9 @@ function checkAchievements(childId) {
     }
 
     const todayLog = getOrCreateDailyLog(childId);
-    const allDone = child.tasks.every(t => {
+    const todayDay = new Date((todayLog.date || getToday()) + 'T12:00:00').getDay();
+    const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+    const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
         const tl = todayLog.tasks[t.id];
         return tl && tl.status === 'completed' && tl.confirmed;
     });
@@ -1601,7 +1680,9 @@ function checkAchievements(childId) {
         child.achievements = []; // Reset achievements
     }
 
-    saveState();
+    if (unlocked.length > 0 || prestigeTriggered) {
+        saveState();
+    }
     return { unlocked, prestigeTriggered, newTier, goldPrize, starPrize };
 }
 
@@ -1630,7 +1711,7 @@ function isBlockCompleted(child, blockType, dateStr) {
 
     return blockTasks.every(t => {
         const tl = log.tasks[t.id];
-        return tl && tl.status === 'completed' && tl.confirmed;
+        return tl && ((tl.status === 'completed' && tl.confirmed) || tl.status === 'excused');
     });
 }
 
@@ -1645,6 +1726,7 @@ function isMorningBlockStreakCompleted(child, dateStr) {
 
     return morningTasks.every(t => {
         const tl = log.tasks[t.id];
+        if (tl && tl.status === 'excused') return true;
         if (!tl || tl.status !== 'completed' || !tl.confirmed) return false;
         const compDate = tl.completedAt ? new Date(tl.completedAt) : (tl.startedAt ? new Date(tl.startedAt) : null);
         if (!compDate) return false;
@@ -1752,7 +1834,7 @@ function isRoutineDayComplete(child, dateStr) {
     if (tasks.length === 0) return true; // nothing scheduled = non-breaking
     return tasks.every(t => {
         const tl = log.tasks[t.id];
-        return tl && tl.status === 'completed' && tl.confirmed;
+        return tl && ((tl.status === 'completed' && tl.confirmed) || tl.status === 'excused');
     });
 }
 
@@ -1765,7 +1847,7 @@ function getRoutineProgress(child) {
     if (log) {
         tasks.forEach(t => {
             const tl = log.tasks[t.id];
-            if (tl && tl.status === 'completed' && tl.confirmed) done++;
+            if (tl && ((tl.status === 'completed' && tl.confirmed) || tl.status === 'excused')) done++;
         });
     }
     const total = tasks.length;

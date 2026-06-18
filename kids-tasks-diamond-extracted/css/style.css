@@ -3836,3 +3836,25 @@ input::-webkit-credentials-auto-fill-button {
         transform: translateY(0);
     }
 }
+
+/* Parent Dashboard actions responsive layout */
+.parent-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+@media (max-width: 480px) {
+    .parent-actions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Reward/Punishment Modal Styling */
+.punish-input-mode {
+    border-color: var(--danger) !important;
+}
+.punish-input-mode:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+    border-color: var(--danger) !important;
+}
