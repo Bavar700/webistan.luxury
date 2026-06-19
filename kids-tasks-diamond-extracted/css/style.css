@@ -156,7 +156,7 @@ body {
 .logo h1 {
     font-size: 24px;
     font-weight: 700;
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     letter-spacing: -0.3px;
     background: linear-gradient(135deg, #FFD700, #FFF3B0, #FFD700);
     -webkit-background-clip: text;
@@ -170,7 +170,7 @@ body {
     font-size: 13px;
     font-weight: 500;
     color: rgba(255,255,255,0.7);
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     letter-spacing: 0.5px;
     margin-top: 0px;
 }
@@ -412,7 +412,7 @@ body {
     font-size: 18px;
     font-weight: 700;
     color: var(--primary);
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     line-height: 1;
 }
 
@@ -475,7 +475,7 @@ body {
 .progress-text {
     font-weight: 700;
     color: var(--primary);
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     font-size: 13px;
 }
 
@@ -765,7 +765,7 @@ body {
 }
 
 .task-card.all-done-card .done-icon { font-size: 48px; margin-bottom: 8px; display: block; }
-.task-card.all-done-card .done-title { font-size: 18px; font-family: var(--font-fun); color: #065F46; margin-bottom: 2px; }
+.task-card.all-done-card .done-title { font-size: 18px; font-family: 'Nunito', 'Comic Neue', sans-serif !important; color: #065F46; margin-bottom: 2px; }
 .task-card.all-done-card .done-msg { color: #065F46; font-size: 13px; opacity: 0.8; }
 
 /* ===== ACTION BAR ===== */
@@ -1305,7 +1305,7 @@ body {
 }
 
 .balance-icon { font-size: 32px; }
-.balance-big-amount { font-size: 42px; font-weight: 700; font-family: var(--font-fun); line-height: 1; }
+.balance-big-amount { font-size: 42px; font-weight: 700; font-family: 'Nunito', 'Comic Neue', sans-serif !important; line-height: 1; }
 .balance-big-currency { font-size: 14px; opacity: 0.8; }
 
 .balance-stats {
@@ -1314,7 +1314,7 @@ body {
 
 .stat-item { text-align: center; min-width: 55px; }
 .stat-label { font-size: 11px; opacity: 0.7; display: block; margin-bottom: 3px; }
-.stat-value { font-size: 18px; font-weight: 700; font-family: var(--font-fun); }
+.stat-value { font-size: 18px; font-weight: 700; font-family: 'Nunito', 'Comic Neue', sans-serif !important; }
 .stat-value.green { color: var(--success-light); }
 .stat-value.red { color: var(--secondary-light); }
 
@@ -1582,7 +1582,7 @@ body {
 .timer-display {
     font-size: 52px;
     font-weight: 700;
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     color: var(--primary);
     text-shadow: none;
     margin-bottom: 4px;
@@ -1720,7 +1720,7 @@ body {
     margin-top: 10px;
 }
 
-.test-score { font-size: 28px; font-weight: 700; color: var(--primary); font-family: var(--font-fun); }
+.test-score { font-size: 28px; font-weight: 700; color: var(--primary); font-family: 'Nunito', 'Comic Neue', sans-serif !important; }
 
 .test-reward-info {
     text-align: center;
@@ -2052,7 +2052,7 @@ body {
 }
 
 .test-history-item .test-info { font-size: 12px; font-weight: 500; }
-.test-history-item .test-result { font-size: 16px; font-weight: 700; font-family: var(--font-fun); flex-shrink: 0; }
+.test-history-item .test-result { font-size: 16px; font-weight: 700; font-family: 'Nunito', 'Comic Neue', sans-serif !important; flex-shrink: 0; }
 .test-history-item .test-result.good { color: var(--success); }
 .test-history-item .test-result.ok { color: var(--warning); }
 .test-history-item .test-result.bad { color: var(--danger); }
@@ -2165,7 +2165,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .welcome-title {
     font-size: 40px;
     font-weight: 700;
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     background: linear-gradient(135deg, #FFD700, #FFF3B0, #FFD700);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -2178,7 +2178,7 @@ input[type="number"] { -moz-appearance: textfield; }
     font-weight: 600;
     color: white;
     margin-bottom: 4px;
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
 }
 
 .welcome-subtitle {
@@ -4059,13 +4059,13 @@ input::-webkit-credentials-auto-fill-button {
 .prestige-era-title {
     font-size: 32px;
     font-weight: 800;
-    text-transform: uppercase;
+    text-transform: none !important;
     display: block;
     text-align: center;
     margin-top: 36px;
     margin-bottom: 20px;
     letter-spacing: 1.5px;
-    font-family: var(--font-fun);
+    font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -4118,4 +4118,12 @@ input::-webkit-credentials-auto-fill-button {
 @keyframes superprizeTextShine {
     0% { background-position: -200% center; }
     100% { background-position: 200% center; }
+}
+
+
+#achievements-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
