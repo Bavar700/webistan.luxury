@@ -190,26 +190,26 @@ function getDefaultTasks() {
 }
 
 const ACHIEVEMENTS = [
-    { id: 'first_task', name: '🌟 Супориши аввал', icon: '🎯', desc: 'Иҷрои 1 супориши аввал' },
-    { id: 'all_today', name: '⭐ Ҳамаи супоришҳо', icon: '⭐', desc: 'Иҷрои ҳамаи супоришҳои имрӯз' },
-    { id: 'week_streak', name: '🔥 Ҳафтаи пурра', icon: '🔥', desc: '7 рӯз пай дар пай' },
-    { id: 'month_streak', name: '🏆 Моҳи тиллоӣ', icon: '🏆', desc: '30 рӯз пай дар пай' },
-    { id: 'perfect_zeroes', name: '💯 Сифрҳои комил', icon: '💯', desc: '30 рӯз бе ҷарима' },
-    { id: 'fast_worker', name: '⚡ Зудамал', icon: '⚡', desc: '30 рӯз бе деркунӣ' },
-    { id: 'early_bird', name: '🌅 Саҳархез', icon: '🌅', desc: '30 рӯз оғози супоришҳо то соати 7:00' },
-    { id: 'helper', name: '🤝 Дастёр', icon: '🤝', desc: 'Иҷрои 10 супориши бонусӣ' },
-    { id: 'marksman', name: '🎯 Ҳадафрас', icon: '🎯', desc: '50 супориш дар умум' },
-    { id: 'test_9', name: '📚 Донишманд', icon: '📚', desc: '9 аз 10 дар санҷиш' },
-    { id: 'bonus_3', name: '🦁 Шуҷоъ', icon: '🦁', desc: 'Иҷрои 10 супориши бонусӣ 3 🪙' },
-    { id: 'bonus_5', name: '🦸 Қаҳрамон', icon: '🦸', desc: 'Иҷрои 10 супориши бонусӣ 5 🪙' },
-    { id: 'bonus_10', name: '🧙 Афсонавӣ', icon: '🧙', desc: 'Иҷрои 10 супориши бонусӣ 10 🪙' },
-    { id: 'savings_100', name: '🪙 Сарфакор', icon: '🪙', desc: 'Ҷамъ кардани 100 🪙' },
-    { id: 'savings_50', name: '💰 Сарватманд', icon: '💰', desc: 'Ҷамъ кардани 500 🪙' },
-    { id: 'stars_100', name: '⭐ Ситораи биринҷӣ', icon: '⭐', desc: 'Ҷамъ кардани 100 ⭐' },
-    { id: 'stars_300', name: '🌟 Ситораи нуқрагин', icon: '🌟', desc: 'Ҷамъ кардани 300 ⭐' },
-    { id: 'stars_500', name: '✨ Ситораи тиллоӣ', icon: '✨', desc: 'Ҷамъ кардани 500 ⭐' },
-    { id: 'stars_1000', name: '💫 Ситораи алмосӣ', icon: '💫', desc: 'Ҷамъ кардани 1000 ⭐' },
-    { id: 'stars_2000', name: '🌌 Каҳкашони ситораҳо', icon: '🌌', desc: 'Ҷамъ кардани 2000 ⭐' }
+    { id: 'adventure_seeker', name: 'Adventure Seeker', icon: '🧭' },
+    { id: 'sun_catcher', name: 'Sun Catcher', icon: '☀️' },
+    { id: 'time_keeper', name: 'Time Keeper', icon: '⏱️' },
+    { id: 'peak_conqueror', name: 'Peak Conqueror', icon: '🏔️' },
+    { id: 'miracle_hunter', name: 'Miracle Hunter', icon: '✨' },
+    { id: 'stardust', name: 'Stardust', icon: '🌌' },
+    { id: 'ringing_coin', name: 'Ringing Coin', icon: '🪙' },
+    { id: 'bright_constellation', name: 'Bright Constellation', icon: '✨' },
+    { id: 'golden_compass', name: 'Golden Compass', icon: '🧭' },
+    { id: 'milky_way', name: 'Milky Way', icon: '🌌' },
+    { id: 'treasure_island', name: 'Treasure Island', icon: '🏝️' },
+    { id: 'seconds_tamer', name: 'Seconds Tamer', icon: '⏳' },
+    { id: 'young_genius', name: 'Young Genius', icon: '🎓' },
+    { id: 'moment_keeper', name: 'Moment Keeper', icon: '⏰' },
+    { id: 'call_of_adventure', name: 'Call of Adventure', icon: '🗺️' },
+    { id: 'spark_of_magic', name: 'Spark of Magic', icon: '⚡' },
+    { id: 'star_shower', name: 'Star Shower', icon: '🌠' },
+    { id: 'wings_of_freedom', name: 'Wings of Freedom', icon: '🕊️' },
+    { id: 'path_of_the_comet', name: 'Path of the Comet', icon: '☄️' },
+    { id: 'titan', name: 'Titan', icon: '🛡️' }
 ];
 
 const MOTIVATIONAL_QUOTES_TG = [
@@ -682,6 +682,8 @@ function migrateState(stateObj) {
         if (child.totalStars === undefined) { child.totalStars = 0; modified = true; }
         if (child.achievements === undefined) { child.achievements = []; modified = true; }
         if (!child.withdrawals) { child.withdrawals = []; modified = true; }
+        if (child.achievementTier === undefined) { child.achievementTier = 0; modified = true; }
+        if (!child.tierStartDate) { child.tierStartDate = getToday(); modified = true; }
         
         const migrateTask = (t, isBonusDefault) => {
             if (t.deadline === undefined) { t.deadline = ''; modified = true; }
@@ -1039,7 +1041,7 @@ function calculateDailyReward(childId, date) {
     if (log.rewardApplied) return { reward: 0, reason: 'already_applied', starReward: 0 };
 
     const todayDay = new Date(date + 'T12:00:00').getDay();
-    const regularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+    const regularTasks = child.tasks.filter(t => !t.isBonus && t.type !== 'optional' && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
     let completedCount = 0;
     let totalCount = regularTasks.length;
 
@@ -1096,7 +1098,7 @@ function applyDailyReward(childId, date) {
     if (!log || log.rewardApplied) return;
 
     const todayDay = new Date(date + 'T12:00:00').getDay();
-    const regularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+    const regularTasks = child.tasks.filter(t => !t.isBonus && t.type !== 'optional' && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
     
     if (regularTasks.length === 0) return;
 
@@ -1202,214 +1204,352 @@ function evaluateTest(childId, testId, scores) {
 
 // ===== ACHIEVEMENTS =====
 
+const BADGE_TARGETS = {
+    adventure_seeker: [3, 5, 9, 18],
+    sun_catcher: [1, 2, 4, 8],
+    time_keeper: [7, 14, 28, 56],
+    peak_conqueror: [30, 45, 75, 150],
+    miracle_hunter: [7, 11, 19, 38],
+    stardust: [100, 150, 255, 510],
+    ringing_coin: [100, 150, 255, 510],
+    bright_constellation: [300, 450, 765, 1530],
+    golden_compass: [300, 450, 765, 1530],
+    milky_way: [600, 900, 1530, 3060],
+    treasure_island: [600, 900, 1530, 3060],
+    seconds_tamer: [10, 15, 26, 52],
+    young_genius: [10, 15, 26, 52],
+    moment_keeper: [15, 23, 40, 80],
+    call_of_adventure: [20, 30, 51, 102],
+    spark_of_magic: [3, 5, 9, 18],
+    star_shower: [50, 75, 130, 260],
+    wings_of_freedom: [7, 11, 19, 38],
+    path_of_the_comet: [3, 5, 9, 18],
+    titan: [50, 75, 130, 260]
+};
+
+function isSunCatcherDay(child, dateStr) {
+    const log = child.dailyLogs[dateStr];
+    if (!log) return false;
+    if (log.excused) return true;
+    const dayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
+    const activeRegularTasks = child.tasks.filter(t => !t.isBonus && t.type !== 'optional' && (t.type !== 'daily' || !t.days || t.days.includes(dayOfWeek)));
+    if (activeRegularTasks.length === 0) return false;
+    return activeRegularTasks.every(t => {
+        const tl = log.tasks[t.id];
+        return tl && ((tl.status === 'completed' && tl.confirmed) || tl.status === 'excused');
+    });
+}
+
+function calculateSunCatcherStreak(child) {
+    const start = new Date(child.tierStartDate + 'T12:00:00');
+    const end = new Date(getToday() + 'T12:00:00');
+    let currentStreak = 0;
+    let maxStreak = 0;
+    
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        const dateStr = d.toISOString().split('T')[0];
+        const log = child.dailyLogs[dateStr];
+        
+        const dayOfWeek = d.getDay();
+        const activeRegularTasks = child.tasks.filter(t => !t.isBonus && t.type !== 'optional' && (t.type !== 'daily' || !t.days || t.days.includes(dayOfWeek)));
+        
+        if (log && log.excused) {
+            continue;
+        }
+        
+        if (activeRegularTasks.length === 0) {
+            continue;
+        }
+        
+        if (!log) {
+            if (dateStr !== getToday()) {
+                currentStreak = 0;
+            }
+            continue;
+        }
+        
+        const isDone = activeRegularTasks.every(t => {
+            const tl = log.tasks[t.id];
+            return tl && ((tl.status === 'completed' && tl.confirmed) || tl.status === 'excused');
+        });
+        
+        if (isDone) {
+            currentStreak++;
+            if (currentStreak > maxStreak) maxStreak = currentStreak;
+        } else {
+            if (dateStr !== getToday()) {
+                currentStreak = 0;
+            }
+        }
+    }
+    return maxStreak;
+}
+
 function getAchievementProgress(child, id) {
     if (!child) return { current: 0, target: 1, formatted: '0 / 1' };
     
     child.achievementTier = child.achievementTier || 0;
-    const m = Math.pow(2, Math.min(2, child.achievementTier));
-    const earned = child.achievements ? child.achievements.includes(id) : false;
+    if (!child.tierStartDate) child.tierStartDate = getToday();
     
+    const tierIndex = Math.min(3, child.achievementTier);
+    const targets = BADGE_TARGETS[id] || [1, 1, 1, 1];
+    const target = targets[tierIndex];
+    
+    const earned = child.achievements ? child.achievements.includes(id) : false;
     if (earned) {
-        let target = 1;
-        if (id === 'week_streak') target = 7 * m;
-        else if (id === 'month_streak') target = 30 * m;
-        else if (id === 'perfect_zeroes') target = 30 * m;
-        else if (id === 'fast_worker') target = 30 * m;
-        else if (id === 'helper') target = 10 * m;
-        else if (id === 'marksman') target = 50 * m;
-        else if (id === 'savings_100') target = 100 * m;
-        else if (id === 'savings_50') target = 500 * m;
-        else if (id === 'stars_100') target = 100 * m;
-        else if (id === 'stars_300') target = 300 * m;
-        else if (id === 'stars_500') target = 500 * m;
-        else if (id === 'stars_1000') target = 1000 * m;
-        else if (id === 'stars_2000') target = 2000 * m;
         return { current: target, target: target, formatted: `${target} / ${target}` };
     }
     
+    const dates = Object.keys(child.dailyLogs || {}).filter(d => d >= child.tierStartDate).sort();
+    
     switch (id) {
-        case 'first_task': {
-            let totalCompleted = 0;
-            Object.values(child.dailyLogs).forEach(log => {
-                Object.values(log.tasks).forEach(t => {
-                    if (t.status === 'completed' && t.confirmed) {
-                        totalCompleted++;
-                    }
-                });
-            });
-            return { current: Math.min(1, totalCompleted), target: 1, formatted: `${Math.min(1, totalCompleted)} / 1` };
-        }
-        case 'all_today': {
-            const todayLog = child.dailyLogs[getToday()];
-            if (!todayLog) return { current: 0, target: 1, formatted: '0 / 1' };
-            const todayDay = new Date(getToday() + 'T12:00:00').getDay();
-            const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
-            if (activeRegularTasks.length === 0) return { current: 0, target: 1, formatted: '0 / 1' };
-            const doneCount = activeRegularTasks.filter(t => {
-                const tl = todayLog.tasks[t.id];
-                return tl && tl.status === 'completed' && tl.confirmed;
-            }).length;
-            return { current: doneCount, target: activeRegularTasks.length, formatted: `${doneCount} / ${activeRegularTasks.length}` };
-        }
-        case 'week_streak':
-        case 'month_streak':
-        case 'perfect_zeroes':
-        case 'fast_worker': {
-            const dates = Object.keys(child.dailyLogs).sort().reverse();
-            let currentStreak = 0;
-            let onTimeStreak = 0;
-            let onTimeStreakBroken = false;
-            let noPenaltyStreak = 0;
-            let noPenaltyStreakBroken = false;
-            const todayStr = getToday();
-            const todayD = new Date(todayStr + 'T12:00:00');
-
-            for (let i = 0; i < dates.length; i++) {
-                const d = new Date(dates[i] + 'T12:00:00');
-                const expected = new Date(todayD);
-                expected.setDate(expected.getDate() - i);
-                if (d.toDateString() === expected.toDateString()) {
-                    const log = child.dailyLogs[dates[i]];
-                    if (log && !log.excused && log.rewardApplied) {
-                        const result = calculateDailyReward(child.id, dates[i]);
-                        if (result.reward >= 0) {
-                            currentStreak++;
-                            if (!onTimeStreakBroken) {
-                                const missedAny = Object.values(log.tasks).some(t => t.status === 'completed' && t.missedDeadline);
-                                if (!missedAny) onTimeStreak++;
-                                else onTimeStreakBroken = true;
-                            }
-                            if (!noPenaltyStreakBroken) {
-                                const penaltyAny = Object.values(log.tasks).some(t => t.penaltyApplied && (t.penaltyApplied.stars > 0 || t.penaltyApplied.gold > 0));
-                                if (!penaltyAny) noPenaltyStreak++;
-                                else noPenaltyStreakBroken = true;
-                            }
-                        } else { break; }
-                    } else if (log && log.excused) {
-                        continue;
-                    } else { break; }
-                } else { break; }
-            }
-            
-            const daysText = __('achievement_modal.days_suffix') || 'рӯз';
-            if (id === 'week_streak') {
-                const target = 7 * m;
-                return { current: currentStreak, target: target, formatted: `${currentStreak} / ${target} ${daysText}` };
-            }
-            if (id === 'month_streak') {
-                const target = 30 * m;
-                return { current: currentStreak, target: target, formatted: `${currentStreak} / ${target} ${daysText}` };
-            }
-            if (id === 'fast_worker') {
-                const target = 30 * m;
-                return { current: onTimeStreak, target: target, formatted: `${onTimeStreak} / ${target} ${daysText}` };
-            }
-            if (id === 'perfect_zeroes') {
-                const target = 30 * m;
-                return { current: noPenaltyStreak, target: target, formatted: `${noPenaltyStreak} / ${target} ${daysText}` };
-            }
-            break;
-        }
-        case 'early_bird': {
-            const morningStreak = calculateBlockStreak(child, 'morning');
-            const target = 7;
-            const daysText = __('achievement_modal.days_suffix') || 'рӯз';
-            return { current: morningStreak, target: target, formatted: `${morningStreak} / ${target} ${daysText}` };
-        }
-        case 'helper':
-        case 'marksman': {
-            let totalTasksCompleted = 0;
-            let bonusCount = 0;
-            Object.values(child.dailyLogs).forEach(log => {
-                Object.entries(log.tasks).forEach(([taskId, taskLog]) => {
-                    if (taskLog.status === 'completed' && taskLog.confirmed) {
-                        totalTasksCompleted++;
-                        const bonusTask = child.bonusTasks.find(t => t.id === taskId);
-                        if (bonusTask) {
-                            bonusCount++;
-                        }
-                    }
-                });
-            });
-            
-            if (id === 'marksman') {
-                const target = 50 * m;
-                return { current: totalTasksCompleted, target: target, formatted: `${totalTasksCompleted} / ${target}` };
-            }
-            if (id === 'helper') {
-                const target = 10 * m;
-                return { current: bonusCount, target: target, formatted: `${bonusCount} / ${target}` };
-            }
-            break;
-        }
-        case 'test_9': {
-            let maxScore = 0;
-            child.tenDayTests.forEach(t => {
-                if (t.completed && t.totalScore > maxScore) {
-                    maxScore = t.totalScore;
+        case 'adventure_seeker': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        if (tl.status === 'completed' && tl.confirmed) count++;
+                    });
                 }
             });
-            return { current: maxScore, target: 9, formatted: `${maxScore} / 9` };
+            return { current: count, target: target, formatted: `${count} / ${target}` };
         }
-        case 'bonus_3':
-        case 'bonus_5':
-        case 'bonus_10': {
-            let targetPrice = id === 'bonus_3' ? 3 : (id === 'bonus_5' ? 5 : 10);
-            let completionsCount = 0;
-            Object.values(child.dailyLogs).forEach(log => {
-                Object.entries(log.tasks).forEach(([taskId, taskLog]) => {
-                    if (taskLog.status === 'completed' && taskLog.confirmed) {
-                        const bonusTask = child.bonusTasks.find(t => t.id === taskId);
-                        if (bonusTask && bonusTask.bonusPrice === targetPrice) {
-                            completionsCount++;
+        case 'sun_catcher': {
+            let count = 0;
+            dates.forEach(d => {
+                if (isSunCatcherDay(child, d)) count++;
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
+        }
+        case 'time_keeper':
+        case 'peak_conqueror': {
+            const streak = calculateSunCatcherStreak(child);
+            return { current: streak, target: target, formatted: `${streak} / ${target}` };
+        }
+        case 'miracle_hunter': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        if (tl.status === 'completed' && tl.confirmed && (tl.type === 'bonus' || child.bonusTasks.some(bt => bt.id === tl.id))) {
+                            count++;
                         }
+                    });
+                }
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
+        }
+        case 'stardust':
+        case 'bright_constellation':
+        case 'milky_way': {
+            const stars = child.stars || 0;
+            return { current: stars, target: target, formatted: `${stars} / ${target}` };
+        }
+        case 'ringing_coin':
+        case 'golden_compass':
+        case 'treasure_island': {
+            const gold = child.balance || 0;
+            return { current: gold, target: target, formatted: `${gold} / ${target}` };
+        }
+        case 'seconds_tamer': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        if (tl.status === 'completed' && tl.confirmed && tl.completedBeforeTimerExpired) {
+                            count++;
+                        }
+                    });
+                }
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
+        }
+        case 'young_genius': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        if (tl.status === 'completed' && tl.confirmed && (tl.hasTest || tl.score !== undefined)) {
+                            const score = tl.score;
+                            if (score === 9 || score === 10 || score === 90 || score === 100) {
+                                count++;
+                            }
+                        }
+                    });
+                }
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
+        }
+        case 'moment_keeper': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        const task = child.tasks.find(t => t.id === tl.id) || child.bonusTasks.find(t => t.id === tl.id);
+                        const hasTimeLimit = (task && task.deadline) || tl.deadline;
+                        if (tl.status === 'completed' && tl.confirmed && hasTimeLimit && !tl.missedDeadline) {
+                            count++;
+                        }
+                    });
+                }
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
+        }
+        case 'call_of_adventure': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        const task = child.tasks.find(t => t.id === tl.id) || child.bonusTasks.find(t => t.id === tl.id);
+                        const isOneTime = (task && task.type === 'one-time') || tl.type === 'one-time';
+                        if (tl.status === 'completed' && tl.confirmed && isOneTime) {
+                            count++;
+                        }
+                    });
+                }
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
+        }
+        case 'spark_of_magic': {
+            let maxBonus = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                let dayCount = 0;
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        if (tl.status === 'completed' && tl.confirmed && (tl.type === 'bonus' || child.bonusTasks.some(bt => bt.id === tl.id))) {
+                            dayCount++;
+                        }
+                    });
+                }
+                if (dayCount > maxBonus) maxBonus = dayCount;
+            });
+            return { current: maxBonus, target: target, formatted: `${maxBonus} / ${target}` };
+        }
+        case 'star_shower': {
+            let maxStars = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                let dayStars = 0;
+                if (log) {
+                    if (log.tasks) {
+                        Object.values(log.tasks).forEach(tl => {
+                            if (tl.status === 'completed' && tl.confirmed) {
+                                dayStars += parseInt(tl.paidStars || tl.rewardStars || 0);
+                            }
+                        });
+                    }
+                    if (log.completionBonusPaid) {
+                        dayStars += 10;
+                    }
+                }
+                (child.tenDayTests || []).forEach(test => {
+                    if (test.completed && test.completedAt && test.completedAt.startsWith(d)) {
+                        dayStars += parseInt(test.starReward || 0);
                     }
                 });
+                if (dayStars > maxStars) maxStars = dayStars;
             });
-            const target = 10 * m;
-            return { current: completionsCount, target: target, formatted: `${completionsCount} / ${target}` };
+            return { current: maxStars, target: target, formatted: `${maxStars} / ${target}` };
         }
-        case 'savings_100': {
-            const target = 100 * m;
-            const current = Math.floor(child.totalEarned);
-            const goldText = __('currency.gold') || 'тилло';
-            return { current: current, target: target, formatted: `${current} / ${target} ${goldText}` };
+        case 'wings_of_freedom': {
+            let count = 0;
+            dates.forEach(d => {
+                const log = child.dailyLogs[d];
+                if (log && log.tasks) {
+                    Object.values(log.tasks).forEach(tl => {
+                        const task = child.tasks.find(t => t.id === tl.id);
+                        const isOptional = (task && task.type === 'optional') || tl.type === 'optional';
+                        if (tl.status === 'completed' && tl.confirmed && isOptional) {
+                            count++;
+                        }
+                    });
+                }
+            });
+            return { current: count, target: target, formatted: `${count} / ${target}` };
         }
-        case 'savings_50': {
-            const target = 500 * m;
-            const current = Math.floor(child.totalEarned);
-            const goldText = __('currency.gold') || 'тилло';
-            return { current: current, target: target, formatted: `${current} / ${target} ${goldText}` };
+        case 'path_of_the_comet': {
+            let currentStreak = 0;
+            let maxStreak = 0;
+            const start = new Date(child.tierStartDate + 'T12:00:00');
+            const end = new Date(getToday() + 'T12:00:00');
+            
+            for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+                const dateStr = d.toISOString().split('T')[0];
+                const log = child.dailyLogs[dateStr];
+                
+                let hasBonus = false;
+                if (log && log.tasks) {
+                    hasBonus = Object.values(log.tasks).some(tl => 
+                        tl.status === 'completed' && tl.confirmed && 
+                        (tl.type === 'bonus' || child.bonusTasks.some(bt => bt.id === tl.id))
+                    );
+                }
+                
+                if (hasBonus) {
+                    currentStreak++;
+                    if (currentStreak > maxStreak) maxStreak = currentStreak;
+                } else {
+                    if (dateStr !== getToday()) {
+                        currentStreak = 0;
+                    }
+                }
+            }
+            return { current: maxStreak, target: target, formatted: `${maxStreak} / ${target}` };
         }
-        case 'stars_100': {
-            const target = 100 * m;
-            const current = Math.floor(child.totalStars || child.stars || 0);
-            const starsText = __('reward_type.stars') || 'ситора';
-            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
-        }
-        case 'stars_300': {
-            const target = 300 * m;
-            const current = Math.floor(child.totalStars || child.stars || 0);
-            const starsText = __('reward_type.stars') || 'ситора';
-            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
-        }
-        case 'stars_500': {
-            const target = 500 * m;
-            const current = Math.floor(child.totalStars || child.stars || 0);
-            const starsText = __('reward_type.stars') || 'ситора';
-            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
-        }
-        case 'stars_1000': {
-            const target = 1000 * m;
-            const current = Math.floor(child.totalStars || child.stars || 0);
-            const starsText = __('reward_type.stars') || 'ситора';
-            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
-        }
-        case 'stars_2000': {
-            const target = 2000 * m;
-            const current = Math.floor(child.totalStars || child.stars || 0);
-            const starsText = __('reward_type.stars') || 'ситора';
-            return { current: current, target: target, formatted: `${current} / ${target} ${starsText}` };
+        case 'titan': {
+            let currentStreak = 0;
+            let maxStreak = 0;
+            
+            for (let i = 0; i < dates.length; i++) {
+                const d = dates[i];
+                const log = child.dailyLogs[d];
+                if (!log || !log.tasks) continue;
+                
+                const taskLogs = Object.entries(log.tasks).map(([taskId, tl]) => {
+                    const task = child.tasks.find(t => t.id === taskId) || child.bonusTasks.find(t => t.id === taskId);
+                    return {
+                        id: taskId,
+                        log: tl,
+                        task: task,
+                        confirmedAt: tl.confirmedAt ? new Date(tl.confirmedAt).getTime() : 0
+                    };
+                });
+                
+                taskLogs.sort((a, b) => a.confirmedAt - b.confirmedAt);
+                
+                for (const entry of taskLogs) {
+                    const tl = entry.log;
+                    const task = entry.task;
+                    const isOptional = (task && task.type === 'optional') || tl.type === 'optional';
+                    
+                    if (tl.status === 'completed' && tl.confirmed) {
+                        if (tl.missedDeadline) {
+                            currentStreak = 0;
+                        } else {
+                            currentStreak++;
+                            if (currentStreak > maxStreak) maxStreak = currentStreak;
+                        }
+                    } else if (tl.status === 'failed') {
+                        currentStreak = 0;
+                    } else if (tl.status === 'skipped' || tl.status === 'excused') {
+                        continue;
+                    } else {
+                        if (d !== getToday()) {
+                            if (!isOptional) {
+                                currentStreak = 0;
+                            }
+                        }
+                    }
+                }
+            }
+            return { current: maxStreak, target: target, formatted: `${maxStreak} / ${target}` };
         }
     }
     
@@ -1422,24 +1562,16 @@ function checkAchievements(childId) {
     const unlocked = [];
 
     child.achievementTier = child.achievementTier || 0;
-    const m = Math.pow(2, Math.min(2, child.achievementTier));
-
     if (!child.achievements) child.achievements = [];
-    if (!child.revokedAchievements) child.revokedAchievements = [];
+    if (!child.tierStartDate) child.tierStartDate = getToday();
 
-    // Temporarily override includes to prevent re-awarding revoked achievements
-    const _origIncludes = child.achievements.includes;
-    child.achievements.includes = function(id) {
-        if (_origIncludes.call(this, id)) {
-            return true;
-        }
-        if (child.revokedAchievements && child.revokedAchievements.includes(id)) {
-            const details = child.revokedAchievementsDetails && child.revokedAchievementsDetails[id];
+    ACHIEVEMENTS.forEach(a => {
+        if (child.revokedAchievements && child.revokedAchievements.includes(a.id)) {
+            const details = child.revokedAchievementsDetails && child.revokedAchievementsDetails[a.id];
             if (details && details.timestamp) {
                 const revokeTime = details.timestamp;
                 let hasActionAfter = false;
                 
-                // Check if child has confirmed tasks AFTER the achievement was revoked
                 if (child.dailyLogs) {
                     for (const log of Object.values(child.dailyLogs)) {
                         if (log.tasks) {
@@ -1456,7 +1588,6 @@ function checkAchievements(childId) {
                     }
                 }
                 
-                // Check if child completed any tests AFTER revocation
                 if (!hasActionAfter && child.tenDayTests) {
                     for (const test of child.tenDayTests) {
                         if (test.completed && test.completedAt) {
@@ -1469,215 +1600,57 @@ function checkAchievements(childId) {
                 }
                 
                 if (hasActionAfter) {
-                    // Remove from revokedAchievements so we don't keep checking
-                    child.revokedAchievements = child.revokedAchievements.filter(x => x !== id);
+                    child.revokedAchievements = child.revokedAchievements.filter(x => x !== a.id);
                     if (child.revokedAchievementsDetails) {
-                        delete child.revokedAchievementsDetails[id];
+                        delete child.revokedAchievementsDetails[a.id];
                     }
-                    return false; // Allow re-unlocking!
+                } else {
+                    return; // Skip re-awarding
                 }
             }
-            return true;
         }
-        return false;
-    };
 
-    let totalCompleted = 0;
-    Object.values(child.dailyLogs).forEach(log => {
-        Object.values(log.tasks).forEach(t => {
-            if (t.status === 'completed' && t.confirmed) {
-                totalCompleted++;
+        if (!child.achievements.includes(a.id)) {
+            const progress = getAchievementProgress(child, a.id);
+            if (progress.current >= progress.target) {
+                child.achievements.push(a.id);
+                unlocked.push(__(`achievement.${a.id}`) || a.name);
             }
-        });
-    });
-    if (totalCompleted >= 1 && !child.achievements.includes('first_task')) {
-        child.achievements.push('first_task');
-        unlocked.push(__('achievement.first_task'));
-    }
-
-    const todayLog = getOrCreateDailyLog(childId);
-    const todayDay = new Date((todayLog.date || getToday()) + 'T12:00:00').getDay();
-    const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
-    const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
-        const tl = todayLog.tasks[t.id];
-        return tl && tl.status === 'completed' && tl.confirmed;
-    });
-    if (allDone && !child.achievements.includes('all_today')) {
-        child.achievements.push('all_today');
-        unlocked.push(__('achievement.all_today'));
-    }
-
-    // Check streaks
-    const dates = Object.keys(child.dailyLogs).sort().reverse();
-    let currentStreak = 0;
-    let onTimeStreak = 0;
-    let onTimeStreakBroken = false;
-    let noPenaltyStreak = 0;
-    let noPenaltyStreakBroken = false;
-    const todayStr = getToday();
-    const todayD = new Date(todayStr + 'T12:00:00');
-
-    for (let i = 0; i < dates.length; i++) {
-        const d = new Date(dates[i] + 'T12:00:00');
-        const expected = new Date(todayD);
-        expected.setDate(expected.getDate() - i);
-        if (d.toDateString() === expected.toDateString()) {
-            const log = child.dailyLogs[dates[i]];
-            if (log && !log.excused && log.rewardApplied) {
-                const result = calculateDailyReward(childId, dates[i]);
-                if (result.reward >= 0) {
-                    currentStreak++;
-                    if (!onTimeStreakBroken) {
-                        const missedAny = Object.values(log.tasks).some(t => t.status === 'completed' && t.missedDeadline);
-                        if (!missedAny) onTimeStreak++;
-                        else onTimeStreakBroken = true;
-                    }
-                    if (!noPenaltyStreakBroken) {
-                        const penaltyAny = Object.values(log.tasks).some(t => t.penaltyApplied && (t.penaltyApplied.stars > 0 || t.penaltyApplied.gold > 0));
-                        if (!penaltyAny) noPenaltyStreak++;
-                        else noPenaltyStreakBroken = true;
-                    }
-                } else { break; }
-            } else if (log && log.excused) {
-                continue;
-            } else { break; }
-        } else { break; }
-    }
-
-    if (currentStreak >= (7 * m) && !child.achievements.includes('week_streak')) {
-        child.achievements.push('week_streak');
-        unlocked.push(__('achievement.week_streak'));
-    }
-    if (currentStreak >= (30 * m) && !child.achievements.includes('month_streak')) {
-        child.achievements.push('month_streak');
-        unlocked.push(__('achievement.month_streak'));
-    }
-    if (onTimeStreak >= (30 * m) && !child.achievements.includes('fast_worker')) {
-        child.achievements.push('fast_worker');
-        unlocked.push(__('achievement.fast_worker'));
-    }
-    if (noPenaltyStreak >= (30 * m) && !child.achievements.includes('perfect_zeroes')) {
-        child.achievements.push('perfect_zeroes');
-        unlocked.push(__('achievement.perfect_zeroes'));
-    }
-
-    // Check early bird using 7-day morning streak
-    const morningStreak = calculateBlockStreak(child, 'morning');
-    if (morningStreak >= 7 && !child.achievements.includes('early_bird')) {
-        child.achievements.push('early_bird');
-        unlocked.push(__('achievement.early_bird'));
-    }
-
-    // test achievements
-    child.tenDayTests.forEach(t => {
-        if (t.completed && t.totalScore === 9 && !child.achievements.includes('test_9')) {
-            child.achievements.push('test_9');
-            unlocked.push(__('achievement.test_9'));
         }
     });
-
-    // savings
-    if (child.totalEarned >= (100 * m) && !child.achievements.includes('savings_100')) {
-        child.achievements.push('savings_100');
-        unlocked.push(__('achievement.savings_100'));
-    }
-    if (child.totalEarned >= (500 * m) && !child.achievements.includes('savings_50')) {
-        child.achievements.push('savings_50');
-        unlocked.push(__('achievement.savings_50'));
-    }
-
-    // stars
-    const currentStarsCheck = child.totalStars || child.stars || 0;
-    if (currentStarsCheck >= (100 * m) && !child.achievements.includes('stars_100')) {
-        child.achievements.push('stars_100');
-        unlocked.push(__('achievement.stars_100'));
-    }
-    if (currentStarsCheck >= (300 * m) && !child.achievements.includes('stars_300')) {
-        child.achievements.push('stars_300');
-        unlocked.push(__('achievement.stars_300'));
-    }
-    if (currentStarsCheck >= (500 * m) && !child.achievements.includes('stars_500')) {
-        child.achievements.push('stars_500');
-        unlocked.push(__('achievement.stars_500'));
-    }
-    if (currentStarsCheck >= (1000 * m) && !child.achievements.includes('stars_1000')) {
-        child.achievements.push('stars_1000');
-        unlocked.push(__('achievement.stars_1000'));
-    }
-    if (currentStarsCheck >= (2000 * m) && !child.achievements.includes('stars_2000')) {
-        child.achievements.push('stars_2000');
-        unlocked.push(__('achievement.stars_2000'));
-    }
-
-    // bonus task achievements and total tasks
-    let totalTasksCompleted = 0;
-    let bonusCount = 0;
-    let bonus3Count = 0;
-    let bonus5Count = 0;
-    let bonus10Count = 0;
-    Object.values(child.dailyLogs).forEach(log => {
-        Object.entries(log.tasks).forEach(([taskId, taskLog]) => {
-            if (taskLog.status === 'completed' && taskLog.confirmed) {
-                totalTasksCompleted++;
-                const bonusTask = child.bonusTasks.find(t => t.id === taskId);
-                if (bonusTask) {
-                    bonusCount++;
-                    if (bonusTask.bonusPrice === 3) {
-                        bonus3Count++;
-                    }
-                    if (bonusTask.bonusPrice === 5) {
-                        bonus5Count++;
-                    }
-                    if (bonusTask.bonusPrice === 10) {
-                        bonus10Count++;
-                    }
-                }
-            }
-        });
-    });
-
-    if (bonus3Count >= (10 * m) && !child.achievements.includes('bonus_3')) {
-        child.achievements.push('bonus_3');
-        unlocked.push(__('achievement.bonus_3'));
-    }
-    if (bonus5Count >= (10 * m) && !child.achievements.includes('bonus_5')) {
-        child.achievements.push('bonus_5');
-        unlocked.push(__('achievement.bonus_5'));
-    }
-    if (bonus10Count >= (10 * m) && !child.achievements.includes('bonus_10')) {
-        child.achievements.push('bonus_10');
-        unlocked.push(__('achievement.bonus_10'));
-    }
-    if (totalTasksCompleted >= (50 * m) && !child.achievements.includes('marksman')) {
-        child.achievements.push('marksman');
-        unlocked.push(__('achievement.marksman'));
-    }
-    if (bonusCount >= (10 * m) && !child.achievements.includes('helper')) {
-        child.achievements.push('helper');
-        unlocked.push(__('achievement.helper'));
-    }
 
     let prestigeTriggered = false;
     let newTier = child.achievementTier;
     let goldPrize = 0;
     let starPrize = 0;
 
-    // Check if ALL achievements are unlocked
     if (child.achievements.length >= ACHIEVEMENTS.length) {
         prestigeTriggered = true;
         
         const t = child.achievementTier || 0;
-        goldPrize = 200 + 100 * t;
-        starPrize = 200 + 100 * t;
+        if (t === 0) {
+            goldPrize = 200;
+            starPrize = 200;
+        } else if (t === 1) {
+            goldPrize = 300;
+            starPrize = 300;
+        } else if (t === 2) {
+            goldPrize = 500;
+            starPrize = 500;
+        } else {
+            goldPrize = 1000;
+            starPrize = 1000;
+        }
         
-        child.balance += goldPrize;
-        child.totalEarned += goldPrize;
+        child.balance = (child.balance || 0) + goldPrize;
+        child.totalEarned = (child.totalEarned || 0) + goldPrize;
         child.stars = (child.stars || 0) + starPrize;
         child.totalStars = (child.totalStars || 0) + starPrize;
         
         child.achievementTier += 1;
         newTier = child.achievementTier;
-        child.achievements = []; // Reset achievements
+        child.achievements = [];
+        child.tierStartDate = getToday();
     }
 
     if (unlocked.length > 0 || prestigeTriggered) {
