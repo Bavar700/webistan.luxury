@@ -823,6 +823,12 @@ body {
 
 .btn-outline:hover { background: var(--primary); color: white; }
 
+#btn-exit-parent:hover {
+    background: var(--danger) !important;
+    color: white !important;
+    border-color: var(--danger) !important;
+}
+
 .btn-danger {
     background: linear-gradient(135deg, var(--danger), var(--secondary));
     color: white;
