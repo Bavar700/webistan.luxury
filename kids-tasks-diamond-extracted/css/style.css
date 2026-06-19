@@ -1357,63 +1357,41 @@ body {
 /* ===== ACHIEVEMENTS ===== */
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
-    gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
 }
 
 .achievement-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     text-align: center;
-    padding: 8px 4px;
-    background: var(--bg);
-    border-radius: var(--radius-xs);
-    transition: var(--transition);
-    cursor: default;
+    padding: 10px 8px;
+    background: var(--bg-card, #ffffff);
+    border-radius: var(--radius-md, 12px);
+    border: 1px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    position: relative;
+    overflow: hidden;
 }
 
-.achievement-item.locked { opacity: 0.35; filter: grayscale(1); }
+.achievement-item.locked {
+    opacity: 0.8;
+}
+.achievement-item.locked .achievement-icon {
+    filter: grayscale(1) opacity(0.5);
+}
+
 .achievement-item.unlocked {
-    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
-    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
-    border: 1.5px solid #F59E0B;
     transform: scale(1.02);
 }
 
-.achievement-item .achievement-icon { font-size: 24px; display: block; margin-bottom: 3px; }
-.achievement-item .achievement-name { font-size: 9px; font-weight: 600; color: var(--text-secondary); line-height: 1.2; }
+.achievement-item .achievement-icon { font-size: 28px; display: block; margin-bottom: 4px; }
+.achievement-item .achievement-name { font-size: 11px; font-weight: 700; color: var(--text); line-height: 1.2; text-align: center; }
 
-/* Prestige Tiers */
-.tier-badge {
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 12px;
-    margin-left: 6px;
-    font-weight: 600;
-}
-.tier-silver { color: #64748b; background: #f1f5f9; }
-.tier-gold { color: #b45309; background: #fef3c7; border: 1px solid #fcd34d; }
-.tier-diamond { color: #1d4ed8; background: #dbeafe; border: 1px solid #93c5fd; }
-
-.achievements-grid.tier-silver .achievement-item.unlocked {
-    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-    box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
-    border: 1.5px solid #94a3b8;
-}
-.achievements-grid.tier-silver .achievement-item.unlocked .achievement-icon {
-    filter: drop-shadow(0 2px 4px rgba(100, 116, 139, 0.3));
-}
-.achievements-grid.tier-gold .achievement-item.unlocked {
-    background: linear-gradient(135deg, #fffbeb, #fde68a);
-    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
-    border: 2px solid #F59E0B;
-}
-.achievements-grid.tier-gold .achievement-item.unlocked .achievement-icon { filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.6)); }
-.achievements-grid.tier-diamond .achievement-item.unlocked {
-    background: linear-gradient(135deg, #eff6ff, #bfdbfe);
-    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
-    border: 2px solid #60a5fa;
-}
-.achievements-grid.tier-diamond .achievement-item.unlocked .achievement-icon { filter: hue-rotate(180deg) drop-shadow(0 2px 6px rgba(59, 130, 246, 0.6)); }
-
+/* Achievements Board Container Reset (Borders and frames removed) */
 /* ===== PROOF SECTION (Photo + Explanation) ===== */
 .timer-proof-section {
     margin-top: 8px;
@@ -3395,7 +3373,7 @@ input.flatpickr-input[readonly]:focus {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.07em;
-    text-transform: uppercase;
+    
     color: rgba(255, 255, 255, 0.65);
     margin-bottom: 6px;
 }
@@ -3863,4 +3841,281 @@ input::-webkit-credentials-auto-fill-button {
 .punish-input-mode:focus {
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
     border-color: var(--danger) !important;
+}
+
+/* Epic Prestige Chest Animation Styles */
+.prestige-starburst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 900px;
+    height: 900px;
+    background: repeating-conic-gradient(
+        from 0deg,
+        rgba(255, 215, 0, 0.12) 0deg 15deg,
+        transparent 15deg 30deg
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: starburstRotate 24s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.prestige-chest-box {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    margin: 20px 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.prestige-chest-box:hover {
+    transform: scale(1.08);
+}
+
+.prestige-chest-box.locked:hover {
+    animation: floatChest 2s ease-in-out infinite;
+}
+
+.chest-lid {
+    position: absolute;
+    font-size: 105px;
+    top: 15px;
+    z-index: 3;
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom center;
+    user-select: none;
+}
+
+.chest-base {
+    position: absolute;
+    font-size: 105px;
+    bottom: 35px;
+    z-index: 1;
+    transition: all 0.6s ease;
+    user-select: none;
+}
+
+.chest-lock {
+    position: absolute;
+    font-size: 42px;
+    top: 80px;
+    z-index: 4;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    user-select: none;
+}
+
+.chest-click-prompt {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    animation: promptPulse 1.2s infinite alternate;
+    z-index: 10;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.prestige-chest-box.unlocking {
+    animation: chestShake 0.12s infinite;
+}
+
+.prestige-chest-box.unlocking .chest-click-prompt,
+.prestige-chest-box.opened .chest-click-prompt {
+    display: none;
+}
+
+.prestige-chest-box.opened .chest-lid {
+    transform: translateY(-90px) rotate(-18deg) scale(0.6);
+    opacity: 0;
+}
+
+.prestige-chest-box.opened .chest-lock {
+    transform: translateY(30px) scale(0);
+    opacity: 0;
+}
+
+.prestige-chest-box.opened .chest-base {
+    transform: scale(1.08);
+}
+
+.prestige-light-beam {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(
+        circle,
+        rgba(253, 224, 71, 0.95) 0%,
+        rgba(245, 158, 11, 0.4) 40%,
+        rgba(253, 224, 71, 0) 70%
+    );
+    border-radius: 50%;
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+    mix-blend-mode: screen;
+}
+
+.prestige-chest-box.opened .prestige-light-beam {
+    transform: translate(-50%, -50%) scale(1.95);
+    opacity: 1;
+    animation: beamGlow 4s ease-in-out infinite alternate;
+}
+
+/* Animations */
+@keyframes floatChest {
+    0% { transform: translateY(0px) scale(1.08); }
+    50% { transform: translateY(-12px) scale(1.08); }
+    100% { transform: translateY(0px) scale(1.08); }
+}
+
+@keyframes chestShake {
+    0% { transform: translate(2px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1.5deg); }
+    20% { transform: translate(-3px, 0px) rotate(1.5deg); }
+    30% { transform: translate(0px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1.5deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(2px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes starburstRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes beamGlow {
+    0% { transform: translate(-50%, -50%) scale(1.85); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) scale(2.1); opacity: 1; }
+}
+
+@keyframes promptPulse {
+    from {
+        transform: translateX(-50%) scale(0.96);
+        opacity: 0.7;
+    }
+    to {
+        transform: translateX(-50%) scale(1.06);
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Achievements Board Container Reset (Remove background, borders, and shadows from wrapper) */
+.achievements-board-card,
+.achievements-board-card.tier-silver,
+.achievements-board-card.tier-gold,
+.achievements-board-card.tier-platinum,
+.achievements-board-card.tier-diamond {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+    padding: 0 !important;
+}
+
+/* Prestige Era Title Styling */
+@keyframes textShineSweep {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.prestige-era-title {
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    margin-top: 36px;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+    font-family: var(--font-fun);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: textShineSweep 4s linear infinite;
+}
+
+/* Silver Era Title */
+.prestige-era-title.tier-silver-text {
+    background-image: linear-gradient(120deg, #94a3b8 20%, #cbd5e1 40%, #ffffff 50%, #cbd5e1 60%, #94a3b8 80%);
+    filter: drop-shadow(0 2px 8px rgba(148, 163, 184, 0.4));
+}
+
+/* Gold Era Title */
+.prestige-era-title.tier-gold-text {
+    background-image: linear-gradient(120deg, #d97706 20%, #fbbf24 40%, #ffffff 50%, #fbbf24 60%, #b45309 80%);
+    filter: drop-shadow(0 2px 8px rgba(251, 191, 36, 0.5));
+}
+
+/* Platinum Era Title */
+.prestige-era-title.tier-platinum-text {
+    background-image: linear-gradient(120deg, #6366f1 20%, #a5b4fc 40%, #ffffff 50%, #a5b4fc 60%, #4338ca 80%);
+    filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.5));
+}
+
+/* Diamond Era Title */
+.prestige-era-title.tier-diamond-text {
+    background-image: linear-gradient(120deg, #0284c7 20%, #38bdf8 40%, #ffffff 50%, #38bdf8 60%, #0369a1 80%);
+    filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.5));
+}
+
+
+/* Superprize Title Sweeping Shine animation */
+.grand-prize-title-text {
+    font-size: 36px !important; 
+    font-weight: 900 !important; 
+    background: linear-gradient(120deg, #FFD700 0%, #FFA500 35%, #ffffff 50%, #FFA500 65%, #FF8C00 100%) !important;
+    background-size: 200% auto !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 8px !important; 
+    text-align: center !important;
+    letter-spacing: 1.5px !important;
+    display: block !important;
+    animation: superprizeTextShine 3.5s linear infinite !important;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.15) !important;
+}
+
+@keyframes superprizeTextShine {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
 }

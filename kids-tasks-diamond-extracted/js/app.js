@@ -1784,6 +1784,7 @@ function completeTimer() {
             || child.bonusTasks.find(t => t.id === timerTaskId);
         tl.timeSpent = task ? task.duration : 0;
         tl.completedAt = new Date().toISOString();
+        tl.completedBeforeTimerExpired = (timerRemaining > 0);
         saveState();
     }
 
@@ -2266,7 +2267,7 @@ function submitConfirm() {
         }
 
         const todayDay = new Date(today + 'T12:00:00').getDay();
-        const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+        const activeRegularTasks = child.tasks.filter(t => t.type !== 'bonus' && t.type !== 'optional' && !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
         const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
             const tl2 = log.tasks[t.id];
             return tl2 && tl2.status === 'completed' && tl2.confirmed;
@@ -2610,7 +2611,7 @@ function confirmTaskDirectly(taskId) {
         
         // Handle routine completions / daily reward
         const todayDay = new Date(today + 'T12:00:00').getDay();
-        const activeRegularTasks = child.tasks.filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
+        const activeRegularTasks = child.tasks.filter(t => t.type !== 'bonus' && t.type !== 'optional' && !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(todayDay)));
         const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
             const tl2 = log.tasks[t.id];
             return tl2 && tl2.status === 'completed' && tl2.confirmed;
@@ -2822,7 +2823,7 @@ function renderCalendar() {
                 cell.classList.add('excused');
             } else {
                 const dateDayOfWeek = new Date(dateStr + 'T12:00:00').getDay();
-                const activeRegularTasks = (child.tasks || []).filter(t => !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(dateDayOfWeek)));
+                const activeRegularTasks = (child.tasks || []).filter(t => t.type !== 'bonus' && t.type !== 'optional' && !t.isBonus && (t.type !== 'daily' || !t.days || t.days.includes(dateDayOfWeek)));
                 const allDone = activeRegularTasks.length > 0 && activeRegularTasks.every(t => {
                     const tl = log.tasks[t.id];
                     return tl && (tl.status === 'completed' || tl.status === 'skipped');
@@ -3127,32 +3128,68 @@ function renderAchievements() {
     let tierName = '';
     if (child.achievementTier === 0) {
         tierClass = 'tier-silver';
-        tierName = __('tier.silver');
+        tierName = __('tier.silver') || 'Даври Нуқра';
     } else if (child.achievementTier === 1) {
         tierClass = 'tier-gold';
-        tierName = __('tier.gold');
+        tierName = __('tier.gold') || 'Даври Тилло';
+    } else if (child.achievementTier === 2) {
+        tierClass = 'tier-platinum';
+        tierName = __('tier.platinum') || 'Даври Платина';
     } else {
         tierClass = 'tier-diamond';
-        tierName = __('tier.diamond');
+        tierName = __('tier.diamond') || 'Даври Алмос';
     }
 
     const titleEl = document.getElementById('achievements-title');
     if (titleEl) {
-        titleEl.innerHTML = `${__('achievements.title')} <span class="tier-badge ${tierClass}">(${tierName})</span>`;
-        // Remove data-i18n so applyStaticTranslations doesn't overwrite the badge HTML,
-        // but keep the stable #achievements-title id so this re-runs on every render.
+        titleEl.innerHTML = `<h2 class="prestige-era-title ${tierClass}-text">${tierName}</h2>`;
         titleEl.removeAttribute('data-i18n');
+    }
+
+    const cardEl = document.getElementById('achievements-card');
+    if (cardEl) {
+        cardEl.className = 'achievements-board-card ' + tierClass;
     }
 
     container.className = `achievements-grid ${tierClass}`;
 
+    let fillColor = '#94a3b8';
+    if (child.achievementTier === 1) fillColor = '#F59E0B';
+    else if (child.achievementTier === 2) fillColor = '#6366F1';
+    else if (child.achievementTier >= 3) fillColor = '#3B82F6';
+
     container.innerHTML = ACHIEVEMENTS.map(a => {
         const unlocked = earned.includes(a.id);
+        const progress = getAchievementProgress(child, a.id);
+        const pct = progress.target > 0 ? Math.min(100, (progress.current / progress.target) * 100) : 0;
         const nameKey = `achievement.${a.id}`;
-        const displayName = __(nameKey);
+        const displayName = __(nameKey) || a.name;
+        
+        let progressHtml = '';
+        if (unlocked) {
+            progressHtml = `
+                <div class="achievement-progress-text" style="font-size: 10px; font-weight: 700; color: #10B981; margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 3px;">
+                    <span>✅ ${__('achievement_modal.status_unlocked') || 'Ба даст оварда шуд'}</span>
+                </div>
+            `;
+        } else {
+            progressHtml = `
+                <div class="achievement-progress-wrapper" style="width: 100%; margin-top: 6px;">
+                    <div class="achievement-progress-text" style="display: flex; justify-content: space-between; font-size: 9px; font-weight: 600; color: var(--text-secondary); margin-bottom: 3px;">
+                        <span>${progress.current} / ${progress.target}</span>
+                        <span>${Math.round(pct)}%</span>
+                    </div>
+                    <div class="achievement-progress-bar" style="background: rgba(0, 0, 0, 0.05); border-radius: 4px; height: 5px; overflow: hidden; width: 100%;">
+                        <div class="achievement-progress-fill" style="width: ${pct}%; background: ${fillColor}; height: 100%; border-radius: 4px; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+            `;
+        }
+
         return `<div class="achievement-item ${unlocked ? 'unlocked' : 'locked'}" onclick="showAchievementDetails('${a.id}')" style="cursor: pointer;">
-            <span class="achievement-icon">${a.icon}</span>
-            <span class="achievement-name">${displayName}</span>
+            <span class="achievement-icon" style="font-size: 28px; margin-bottom: 4px;">${a.icon}</span>
+            <span class="achievement-name" style="font-size: 11px; font-weight: 700; display: block; margin-bottom: 2px;">${displayName}</span>
+            ${progressHtml}
         </div>`;
     }).join('');
 
@@ -3191,17 +3228,7 @@ function renderAchievements() {
                 "></div>
                 
                 <div style="font-size: 48px; margin-bottom: 12px; animation: float 3s ease-in-out infinite;">👑</div>
-                <h3 style="
-                    font-size: 36px; 
-                    font-weight: 800; 
-                    background: linear-gradient(to right, #FFD700, #FFA500, #FF8C00);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    margin-bottom: 8px; 
-                    text-align: center;
-                    letter-spacing: 1px;
-                    display: block;
-                ">
+                <h3 class="grand-prize-title-text">
                     ${__('achievements.grand_prize') || 'Шоҳҷоиза'}
                 </h3>
                 <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; padding: 0 10px; line-height: 1.4;">
@@ -3287,15 +3314,15 @@ function showAchievementDetails(id) {
     
     const child = getCurrentChild();
     const earned = child && child.achievements ? child.achievements.includes(id) : false;
+    const progress = getAchievementProgress(child, id);
     
     const displayName = __(`achievement.${id}`) || a.name;
-    const displayDesc = __(`achievement.desc.${id}`) || a.desc;
+    let displayDesc = __(`achievement.desc.${id}`) || a.desc;
+    displayDesc = displayDesc.replace(/N/g, progress.target);
     
     document.getElementById('achievement-modal-title').textContent = __('achievement_modal.title') || 'Муваффақият';
     document.getElementById('achievement-modal-icon').textContent = a.icon;
     document.getElementById('achievement-modal-name').textContent = displayName;
-    
-    const progress = getAchievementProgress(child, id);
     
     const descBox = document.getElementById('achievement-modal-desc-box');
     if (descBox) {
@@ -6804,45 +6831,229 @@ function setupEventListeners() {
 }
 
 // ===== PRESTIGE MODAL =====
+function triggerConfettiBurst(container) {
+    const colors = ['#FFD700', '#FFA500', '#FF8C00', '#A5B4FC', '#6366F1', '#60A5FA', '#3B82F6', '#818CF8', '#10B981', '#34D399'];
+    for (let i = 0; i < 80; i++) {
+        const p = document.createElement('div');
+        p.style.cssText = 'position: absolute; left: 50%; top: 50%; width: ' + (Math.random() * 8 + 6) + 'px; height: ' + (Math.random() * 8 + 6) + 'px; background-color: ' + colors[Math.floor(Math.random() * colors.length)] + '; border-radius: ' + (Math.random() > 0.5 ? '50%' : '2px') + '; opacity: 0.85; pointer-events: none; transform: translate(-50%, -50%) rotate(' + (Math.random() * 360) + 'deg);';
+        container.appendChild(p);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 260 + 80;
+        const xTarget = Math.cos(angle) * velocity;
+        const yTarget = Math.sin(angle) * velocity - 60;
+        
+        p.animate([
+            { transform: 'translate(-50%, -50%) translate(0, 0) rotate(0deg)', opacity: 1 },
+            { transform: 'translate(-50%, -50%) translate(' + xTarget + 'px, ' + yTarget + 'px) rotate(' + (Math.random() * 720) + 'deg)', opacity: 0 }
+        ], {
+            duration: Math.random() * 1200 + 800,
+            easing: 'cubic-bezier(0.25, 1, 0.50, 1)',
+            fill: 'forwards'
+        });
+    }
+}
+
+function triggerRainingPrizes(container) {
+    const symbols = ['🪙', '⭐', '✨', '🎉'];
+    const interval = setInterval(() => {
+        if (!document.getElementById('epic-prestige-overlay')) {
+            clearInterval(interval);
+            return;
+        }
+        
+        const p = document.createElement('div');
+        p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        p.style.cssText = 'position: absolute; top: -20px; left: ' + (Math.random() * 100) + '%; font-size: ' + (Math.random() * 16 + 16) + 'px; pointer-events: none; z-index: 4; opacity: 0.8;';
+        container.appendChild(p);
+        
+        p.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
+            { transform: 'translateY(105vh) rotate(' + (Math.random() * 360) + 'deg)', opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'linear',
+            fill: 'forwards'
+        });
+        
+        setTimeout(() => p.remove(), 5000);
+    }, 120);
+}
+
+function triggerFlyingCoinsAndStars(goldAmount, starAmount, sourceElement) {
+    const targetElement = document.getElementById('greeting-balance-text') || document.getElementById('cs-balance');
+    let targetX = window.innerWidth / 2;
+    let targetY = 50;
+    
+    if (targetElement) {
+        const rect = targetElement.getBoundingClientRect();
+        targetX = rect.left + rect.width / 2;
+        targetY = rect.top + rect.height / 2;
+    }
+    
+    const sourceRect = sourceElement.getBoundingClientRect();
+    const sourceX = sourceRect.left + sourceRect.width / 2;
+    const sourceY = sourceRect.top + sourceRect.height / 2;
+
+    const count = 12;
+    
+    const spawnParticle = (symbol, color) => {
+        const p = document.createElement('div');
+        p.textContent = symbol;
+        p.style.cssText = 'position: fixed; left: ' + sourceX + 'px; top: ' + sourceY + 'px; font-size: 24px; z-index: 100000; pointer-events: none; text-shadow: 0 0 8px ' + color + '; transform: translate(-50%, -50%);';
+        document.body.appendChild(p);
+
+        const explodeAngle = Math.random() * Math.PI * 2;
+        const explodeDist = Math.random() * 50 + 20;
+        const midX = sourceX + Math.cos(explodeAngle) * explodeDist;
+        const midY = sourceY + Math.sin(explodeAngle) * explodeDist - 40;
+
+        const anim = p.animate([
+            { left: sourceX + 'px', top: sourceY + 'px', transform: 'translate(-50%, -50%) scale(0.5)', opacity: 0 },
+            { left: midX + 'px', top: midY + 'px', transform: 'translate(-50%, -50%) scale(1.3)', opacity: 1, offset: 0.25 },
+            { left: targetX + 'px', top: targetY + 'px', transform: 'translate(-50%, -50%) scale(0.9)', opacity: 0.9, offset: 0.9 },
+            { left: targetX + 'px', top: targetY + 'px', transform: 'translate(-50%, -50%) scale(0.3)', opacity: 0 }
+        ], {
+            duration: Math.random() * 600 + 800,
+            easing: 'cubic-bezier(0.25, 1, 0.50, 1)',
+            fill: 'forwards'
+        });
+
+        anim.onfinish = () => {
+            p.remove();
+            if (targetElement) {
+                targetElement.animate([
+                    { transform: 'scale(1)' },
+                    { transform: 'scale(1.15)', textShadow: '0 0 15px ' + color },
+                    { transform: 'scale(1)' }
+                ], { duration: 150 });
+            }
+        };
+    };
+
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => spawnParticle('🪙', '#F59E0B'), i * 70);
+    }
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => spawnParticle('⭐', '#FCD34D'), i * 70 + 200);
+    }
+}
+
 function showPrestigeModal(newTier, goldPrize, starPrize) {
-    const modal = document.getElementById('prestige-modal');
-    if (!modal) return;
+    const oldModal = document.getElementById('prestige-modal');
+    if (oldModal) oldModal.classList.add('hidden');
+
+    const overlay = document.createElement('div');
+    overlay.id = 'epic-prestige-overlay';
+    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #111827 0%, #030712 100%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; font-family: inherit;';
+
+    const starburst = document.createElement('div');
+    starburst.className = 'prestige-starburst';
+    overlay.appendChild(starburst);
+
+    const header = document.createElement('div');
+    header.style.cssText = 'text-align: center; color: white; z-index: 10; margin-bottom: 20px; animation: fadeInDown 0.8s ease; padding: 0 15px;';
     
     let tierName = '';
-    if (newTier === 1) tierName = __('tier.gold') || 'Даври Тилло';
-    else if (newTier >= 2) tierName = __('tier.diamond') || 'Даври Алмос';
-    else tierName = 'Даври Нав';
+    let tierColor = '#FFD700';
+    if (newTier === 1) { tierName = __('tier.gold') || 'Даври Тилло'; tierColor = '#FFD700'; }
+    else if (newTier === 2) { tierName = __('tier.platinum') || 'Даври Платина'; tierColor = '#818CF8'; }
+    else if (newTier >= 3) { tierName = __('tier.diamond') || 'Даври Алмос'; tierColor = '#60A5FA'; }
+    else { tierName = 'Даври Нав'; tierColor = '#10B981'; }
 
-    const tNameEl = document.getElementById('prestige-tier-name');
-    if(tNameEl) tNameEl.textContent = tierName;
+    header.innerHTML = '<h1 style="font-size: 32px; font-weight: 800; margin-bottom: 8px; text-shadow: 0 0 15px rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1.5px; display: block;">👑 ' + (__('prestige.title') || 'Қаҳрамони мутлақ!') + '</h1>' +
+        '<p style="font-size: 16px; opacity: 0.9; margin: 0; max-width: 440px; line-height: 1.4; display: block;">' +
+        (newTier === 1 
+            ? 'Шумо ҳамаи муваффақиятҳоро ба даст овардед ва ба <strong style="color: ' + tierColor + '; text-shadow: 0 0 10px ' + tierColor + '80;">' + tierName + '</strong> гузаштед!'
+            : 'Поздравляем! Вы заработали все достижения текущей лиги и перешли на <strong style="color: ' + tierColor + '; text-shadow: 0 0 10px ' + tierColor + '80;">' + tierName + '</strong>!') +
+        '</p>';
+    overlay.appendChild(header);
+
+    const chestBox = document.createElement('div');
+    chestBox.className = 'prestige-chest-box locked';
+    chestBox.style.cursor = 'pointer';
+    chestBox.innerHTML = '<div class="prestige-light-beam"></div>' +
+        '<div class="chest-lid">🎁</div>' +
+        '<div class="chest-base">🧰</div>' +
+        '<div class="chest-lock">🔒</div>' +
+        '<div class="chest-click-prompt" style="color: white; font-weight: 800; font-size: 14px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">' + (__('prestige.click_to_unlock') || 'Барои кушодан клик кунед!') + '</div>';
+    overlay.appendChild(chestBox);
+
+    const prizeContainer = document.createElement('div');
+    prizeContainer.className = 'prestige-prize-box hidden';
+    prizeContainer.style.cssText = 'text-align: center; color: white; z-index: 10; margin-top: 30px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); padding: 18px 30px; border-radius: 24px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transform: scale(0.8); opacity: 0; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 12px 36px rgba(0,0,0,0.4);';
     
-    const pAmtEl = document.getElementById('prestige-prize-amount');
-    if(pAmtEl) pAmtEl.textContent = goldPrize;
+    let grade = '';
+    if (newTier === 1) grade = 'IV';
+    else if (newTier === 2) grade = 'III';
+    else if (newTier === 3) grade = 'II';
+    else if (newTier >= 4) grade = 'I';
 
-    const pStarAmtEl = document.getElementById('prestige-stars-amount');
-    if(pStarAmtEl) pStarAmtEl.textContent = starPrize;
+    const medalNotif = grade ? '<p style="font-weight: 700; color: #10B981; font-size: 15px; margin-top: 10px; text-shadow: 0 0 10px rgba(16,185,129,0.3);">' + (__('prestige.medal_unlocked', { grade: grade }) || ('Шумо соҳиби Медали дараҷаи ' + grade + ' гардидед! 🏅')) + '</p>' : '';
 
-    // Show medal unlocked grade
-    const medalNotifEl = document.getElementById('prestige-medal-notification');
-    if (medalNotifEl) {
-        let grade = '';
-        if (newTier === 1) grade = 'IV';
-        else if (newTier === 2) grade = 'III';
-        else if (newTier === 3) grade = 'II';
-        else if (newTier >= 4) grade = 'I';
+    prizeContainer.innerHTML = '<span style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); font-weight: 700;">' + (__('achievements.grand_prize_prize') || 'Ҷоиза:') + '</span>' +
+        '<h2 style="font-size: 32px; font-weight: 900; color: #FCD34D; text-shadow: 0 0 12px rgba(252,211,77,0.4); margin: 6px 0; display: flex; align-items: center; justify-content: center; gap: 18px;">' +
+            '<span>+' + goldPrize + ' 🪙</span>' +
+            '<span>+' + starPrize + ' ⭐</span>' +
+        '</h2>' +
+        medalNotif;
+    overlay.appendChild(prizeContainer);
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'btn btn-primary hidden';
+    closeBtn.style.cssText = 'margin-top: 25px; z-index: 10; width: 240px; opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4); font-weight: 800; font-size: 15px; padding: 12px 24px; border-radius: 14px;';
+    closeBtn.textContent = __('prestige.continue_btn') || 'Аъло! Давом медиҳем';
+    closeBtn.onclick = function() {
+        overlay.style.transition = 'opacity 0.5s ease';
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.remove();
+            if (typeof closePrestigeModal === 'function') closePrestigeModal();
+        }, 500);
+    };
+    overlay.appendChild(closeBtn);
+
+    document.body.appendChild(overlay);
+
+    const particleContainer = document.createElement('div');
+    particleContainer.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;';
+    overlay.appendChild(particleContainer);
+
+    chestBox.onclick = function() {
+        if (!chestBox.classList.contains('locked')) return;
         
-        if (grade) {
-            medalNotifEl.textContent = __('prestige.medal_unlocked', { grade: grade }) || `Шумо соҳиби Медали дараҷаи ${grade} гардидед! 🏅`;
-            medalNotifEl.style.display = 'block';
-        } else {
-            medalNotifEl.style.display = 'none';
-        }
-    }
+        chestBox.classList.remove('locked');
+        chestBox.classList.add('unlocking');
 
-    modal.classList.remove('hidden');
+        setTimeout(() => {
+            chestBox.classList.remove('unlocking');
+            chestBox.classList.add('opened');
+            
+            triggerConfettiBurst(particleContainer);
+            triggerRainingPrizes(particleContainer);
+            
+            prizeContainer.classList.remove('hidden');
+            setTimeout(() => {
+                prizeContainer.style.transform = 'scale(1)';
+                prizeContainer.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                triggerFlyingCoinsAndStars(goldPrize, starPrize, chestBox);
+            }, 600);
+
+            setTimeout(() => {
+                closeBtn.classList.remove('hidden');
+                setTimeout(() => {
+                    closeBtn.style.opacity = '1';
+                    closeBtn.style.transform = 'translateY(0)';
+                }, 50);
+            }, 1800);
+
+        }, 1200);
+    };
+    
     launchConfetti();
-    setTimeout(launchConfetti, 1000);
-    setTimeout(launchConfetti, 2000);
 }
 
 function closePrestigeModal() {
