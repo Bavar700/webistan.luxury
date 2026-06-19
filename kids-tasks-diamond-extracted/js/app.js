@@ -3887,6 +3887,8 @@ function updateTaskFormLabels() {
     if (optExam) optExam.textContent = __('task_form.type_exam');
     const optBonus = document.getElementById('task-type-option-bonus');
     if (optBonus) optBonus.textContent = __('task_form.type_bonus');
+    const optOptional = document.getElementById('task-type-option-optional');
+    if (optOptional) optOptional.textContent = __('task_form.type_optional');
 
     // Translate scheduler labels
     const startTimeLabel = document.getElementById('task-start-time-label');
