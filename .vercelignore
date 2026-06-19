@@ -1,8 +1,58 @@
-# Ignore everything by default
-*
+# Ignore zip files
+*.zip
 
-# Allow only the app subdirectory and vercel config
-!kids-tasks-diamond-extracted
-!kids-tasks-diamond-extracted/**
-!.vercel
-!.vercel/**
+# Ignore other directories in the workspace
+/Dandoni_Solim_Final_Backup_2026_05_20_1030/
+/Dandoni_Solim_IRON_BACKUP_2026_05_19/
+/Dandoni_Solim_IRON_BACKUP_2026_05_20/
+/GITHUB_RESTORE/
+/GOLDEN_COPIES_DO_NOT_DELETE/
+/Googoosh_Proposal/
+/Googoosh_Studio_v4/
+/Khalif.Dental/
+/Khalif_mobile/
+/Neksoz_Perfect/
+/Neksoz_backup_20260422_1003/
+/Ofarin_Old/
+/RESTORE_TEMP_4/
+/TRUE_Webistan_Luxury/
+/Temp_Archive_Clone/
+/Webistan.Luxury/
+/Webistan_Luxury_Archive/
+/Webistan_Luxury_Final/
+/Yaghnob.Heritage/
+/Yaghnob.Heritage_tmp_backup/
+/Yormand logo/
+/YormandSite/
+/allTj.online/
+/allTj_WP_Docker/
+/alltj_branding/
+/backups/
+/kids-tasks-diamond-extracted-backup-2026-06-05/
+/kids-tasks-for-ai/
+/kids-tasks-for-ai_Backup_2026_05_29/
+/kids-tasks-for-ai_Backup_2026_05_29_1807/
+/kids-tasks-for-ai_Backup_2026_05_31/
+/kids-tasks-for-ai_IRON_BACKUP_2026_05_29_1730/
+/kids-tasks-for-ai_IRON_BACKUP_2026_05_30_1206/
+/kids-tasks-for-ai_IRON_BACKUP_2026_05_31/
+/kids-tasks-for-ai_IRON_BACKUP_2026_06_01_0021/
+/master_zip/
+/neksoz/
+/neksoz-theme*/
+/neksoz_backup*/
+/neksoz_before_restore*/
+/neksoz-v*/
+/node_modules/
+/ocr/
+/ofarin/
+/proposals/
+/scratch/
+/temp_fixes/
+/voxel*/
+/zip_compare/
+/zip_test*/
+
+# Ignore build artifacts in kids-tasks-diamond-extracted
+kids-tasks-diamond-extracted/node_modules/
+kids-tasks-diamond-extracted/.next/
