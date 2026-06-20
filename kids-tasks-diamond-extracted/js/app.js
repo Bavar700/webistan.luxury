@@ -233,9 +233,7 @@ function showAuthOverlay() {
 
     const localText = document.getElementById('auth-local-text');
     if (localText) {
-        localText.textContent = currentLang === 'ru' 
-            ? 'Войти без интернета (локально)' 
-            : (currentLang === 'tg' ? 'Ворид шудан бе интернет (локалӣ)' : 'Login offline (local)');
+        localText.textContent = __('auth.login_offline');
     }
 
     if (!_authEventsSetupDone) {
@@ -342,12 +340,12 @@ function setupAuthOverlayEvents() {
         
         // Custom validation
         if (!email) {
-            errorMsg.textContent = currentLang === 'ru' ? 'Введите email' : (currentLang === 'tg' ? 'Email-ро ворид кунед' : 'Please enter email');
+            errorMsg.textContent = __('auth.email_required');
             errorMsg.classList.remove('hidden');
             return;
         }
         if (!password || password.length < 6) {
-            errorMsg.textContent = currentLang === 'ru' ? 'Пароль должен быть не менее 6 символов' : (currentLang === 'tg' ? 'Гузарвожа бояд на камтар аз 6 аломат бошад' : 'Password must be at least 6 characters');
+            errorMsg.textContent = __('auth.password_length_error');
             errorMsg.classList.remove('hidden');
             return;
         }
@@ -372,7 +370,7 @@ function setupAuthOverlayEvents() {
                 await checkAuthAndSetup();
             } else {
                 if (privacyCheckbox && !privacyCheckbox.checked) {
-                    throw new Error(currentLang === 'ru' ? 'Вы должны согласиться с политикой конфиденциальности!' : 'Шумо бояд ба сиёсати махфият розӣ шавед!');
+                    throw new Error(__('auth.privacy_required'));
                 }
                 const redirectToUrl = window.location.origin;
                 const { data, error } = await supabaseClient.auth.signUp({ 
@@ -1138,11 +1136,11 @@ function getDeadlineInfo(task) {
         const diffMins = Math.floor(diffMs / 60000);
         
         if (diffMins < 0) {
-            return { text: `${currentLang==='ru'?'Дедлайн прошёл':'Мӯҳлат гузашт'}: ${deadlineTimeStr}`, urgent: true, past: true, type: 'strict' };
+            return { text: `${__('task.deadline_passed')}: ${deadlineTimeStr}`, urgent: true, past: true, type: 'strict' };
         } else if (diffMins <= 60) {
-            return { text: `${currentLang==='ru'?'Дедлайн скоро':'Мӯҳлат ба наздикӣ'}: ${deadlineTimeStr} (${diffMins} ${currentLang==='ru'?'мин осталось':'дақиқа монд'})`, urgent: true, past: false, type: 'strict' };
+            return { text: `${__('task.deadline_soon')}: ${deadlineTimeStr} (${diffMins} ${__('task.mins_left')})`, urgent: true, past: false, type: 'strict' };
         } else {
-            return { text: `То ${deadlineDateStr} ${deadlineTimeStr}`, urgent: false, past: false, type: 'strict' };
+            return { text: __('task.until_template', { dateTime: `${deadlineDateStr} ${deadlineTimeStr}` }), urgent: false, past: false, type: 'strict' };
         }
     }
 
@@ -1368,6 +1366,12 @@ function renderTasks() {
         applyDailyReward(currentChildId, today);
     }
 
+    if (totalTasks === 0) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.innerHTML = getEmptyStateHTML('📋', __('empty_state.child_no_tasks'));
+        container.appendChild(emptyDiv);
+    }
+
     if (activeTaskId) {
         const timerModal = document.getElementById('timer-modal');
         // Only auto-show timer if the modal isn't already open
@@ -1382,6 +1386,16 @@ function renderTasks() {
     // Auto-render calendar at the bottom of the dashboard
     renderCalendar();
     attachRewardsPunishmentsListeners(container);
+}
+
+function getEmptyStateHTML(emoji, text, ctaHTML = '') {
+    return `
+        <div class="empty-state-card">
+            <div class="empty-state-emoji">${emoji}</div>
+            <div class="empty-state-text">${text}</div>
+            ${ctaHTML ? `<div class="empty-state-cta">${ctaHTML}</div>` : ''}
+        </div>
+    `;
 }
 
 function getTaskMetaBadgesHTML(task, tl = null) {
@@ -1654,7 +1668,7 @@ function showTimer(childId, task) {
             const deadlineDate = new Date(`${task.deadlineDate}T${task.deadlineTime}:00`);
             const remainingMins = Math.floor((deadlineDate.getTime() - now.getTime()) / 60000);
             if (remainingMins < task.duration) {
-                showToast('⚠️', currentLang==='ru' ? `Не хватит времени: таймер ${task.duration} мин, до дедлайна ${task.deadlineTime}!` : `Вақти кофӣ барои анҷом додани таймер (${task.duration} дақ) то мӯҳлат (${task.deadlineTime}) намондааст!`);
+                showToast('⚠️', __('timer.not_enough_time', { duration: task.duration, deadline: task.deadlineTime }));
                 return; // Block start
             }
         }
@@ -2649,13 +2663,11 @@ function confirmTaskDirectly(taskId) {
 function showParentRejectModal(task) {
     const confirmHeader = document.querySelector('#confirm-modal .modal-header h3');
     if (confirmHeader) {
-        confirmHeader.innerHTML = `<svg class="icon-svg" aria-hidden="true" style="color:var(--danger);"><use href="#icon-x"/></svg> ${currentLang === 'ru' ? 'Отклонение задания' : 'Рад кардани супориш'}`;
+        confirmHeader.innerHTML = `<svg class="icon-svg" aria-hidden="true" style="color:var(--danger);"><use href="#icon-x"/></svg> ${__('parent.reject_task_title')}`;
     }
 
     confirmTaskId = task.id;
-    const taskNameText = currentLang === 'ru' 
-        ? `Вы действительно хотите отклонить задание <strong>${task.emoji ? task.emoji + ' ' : ''}${task.name}</strong>?` 
-        : `Оё шумо дар ҳақиқат мехоҳед супориши <strong>${task.emoji ? task.emoji + ' ' : ''}${task.name}</strong>-ро рад кунед?`;
+    const taskNameText = __('parent.reject_task_confirm', { taskName: `${task.emoji ? task.emoji + ' ' : ''}${task.name}` });
     document.getElementById('confirm-task-name').innerHTML = taskNameText;
     
     // Hide PIN input
@@ -4281,7 +4293,7 @@ function deleteChild() {
     if (!child) return;
     
     // Use confirm for safety, but since we don't have a custom confirm modal yet, use native confirm
-    if (confirm(currentLang==='ru' ? "Удалить профиль ребёнка? Все данные будут удалены безвозвратно." : "Шумо мутмаин ҳастед, ки мехоҳед профили кӯдакро пурра нест кунед? Ҳамаи маълумот ва супоришҳои ӯ тоза мешаванд.")) {
+    if (confirm(__('parent.delete_child_confirm'))) {
         state.children = state.children.filter(c => c.id !== editingChildId);
         if (currentChildId === editingChildId) {
             currentChildId = state.children.length > 0 ? state.children[0].id : null;
@@ -4442,12 +4454,18 @@ function renderDreams() {
 
     // Render dreams list
     if (child.dreams.length === 0) {
-        listContainer.innerHTML = `
-            <div class="section-card" style="text-align: center; padding: 30px 20px;">
-                <div style="font-size: 48px; margin-bottom: 12px;">🌟</div>
-                <p style="color: var(--text-light); font-size: 14px;">${__('dream.list_empty')}</p>
-            </div>
-        `;
+        const ctaBtn = `<button class="btn btn-primary" id="btn-empty-add-dream" style="padding: 8px 16px; font-size: 13px;">${__('empty_state.child_no_dreams_cta')}</button>`;
+        listContainer.innerHTML = getEmptyStateHTML('🌟', __('empty_state.child_no_dreams'), ctaBtn);
+        const focusBtn = document.getElementById('btn-empty-add-dream');
+        if (focusBtn) {
+            focusBtn.addEventListener('click', () => {
+                const nameEl = document.getElementById('dream-input-name');
+                if (nameEl) {
+                    nameEl.focus();
+                    nameEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
         return;
     }
 
@@ -4838,13 +4856,15 @@ function renderParentDashboard() {
     if (!container) return;
     
     if (state.children.length === 0) {
+        const ctaBtn = `
+            <button class="btn btn-primary" id="btn-parent-add-child-first" style="width: 100%; max-width: 260px; height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 14px;">
+                <svg class="icon-svg" style="width:16px;height:16px;" aria-hidden="true"><use href="#icon-plus"/></svg>
+                ${__('empty_state.parent_no_children_cta')}
+            </button>
+        `;
         container.innerHTML = `
-            <div class="parent-overview" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center;">
-                <div class="empty-state" style="margin-bottom: 20px; font-size: 16px; color: var(--text-light);">${__('parent.no_children')}</div>
-                <button class="btn btn-primary" id="btn-parent-add-child-first" style="width: 100%; max-width: 260px; height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 14px; border-radius: var(--radius-md); box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);">
-                    <svg class="icon-svg" style="width:16px;height:16px;" aria-hidden="true"><use href="#icon-plus"/></svg>
-                    ${__('settings.add_child')}
-                </button>
+            <div class="parent-overview" style="padding: 20px;">
+                ${getEmptyStateHTML('👋', __('empty_state.parent_no_children'), ctaBtn)}
             </div>
         `;
         const addBtn = document.getElementById('btn-parent-add-child-first');
@@ -4870,13 +4890,13 @@ function renderParentDashboard() {
     // Top action buttons in 2x2 grid
     html += "<div class='section-card' style='margin-bottom:15px;'>";
     html += "<div class='parent-actions-grid'>";
-    html += "  <button class='btn btn-primary btn-parent-add-task' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; padding: 8px 12px; white-space: normal; text-align: center;'>";
-    html += "    " + __('settings.add_task') + "</button>";
-    html += "  <button class='btn btn-outline btn-parent-excuse-day' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; border-color: rgba(245, 158, 11, 0.3); color: var(--warning); padding: 8px 12px; white-space: normal; text-align: center;'>";
+    html += "  <button class='btn btn-primary btn-parent-add-task w-full' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; padding: 8px 12px; white-space: normal; text-align: center;'>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + __('settings.add_task') + "</button>";
+    html += "  <button class='btn btn-outline btn-parent-excuse-day w-full' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; border-color: rgba(245, 158, 11, 0.3); color: var(--warning); padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-skip'/></svg> " + __('excuse.title') + "</button>";
-    html += "  <button class='btn btn-secondary btn-parent-add-dream' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
+    html += "  <button class='btn btn-secondary btn-parent-add-dream w-full' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + (__('parent.add_dream_title_btn')) + "</button>";
-    html += "  <button class='btn btn-secondary btn-parent-add-rev-pun' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
+    html += "  <button class='btn btn-secondary btn-parent-add-rev-pun w-full' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    " + __('parent.add_rev_pun_btn') + "</button>";
     html += "</div>";
     html += "</div>";
@@ -5006,9 +5026,9 @@ function renderParentDashboard() {
         html += "</div></div>";
     }
 
-    // Regular tasks - render only if count > 0
+    // Regular tasks
+    html += "<div class='section-card'><h4>" + __('settings.daily_tasks') + "</h4>";
     if (selectedChild.tasks.length > 0) {
-        html += "<div class='section-card'><h4>" + __('settings.daily_tasks') + "</h4>";
         html += "<ul class='item-list'>";
         selectedChild.tasks.sort(function(a, b) { return a.order - b.order; }).forEach(function(task) {
             var iconName = 'icon-clock';
@@ -5029,8 +5049,11 @@ function renderParentDashboard() {
             html += "</li>";
         });
         html += "</ul>";
-        html += "</div>";
+    } else {
+        const ctaBtn = `<button class="btn btn-primary btn-empty-parent-add-task" style="padding: 8px 16px; font-size: 13px;">${__('empty_state.parent_no_tasks_cta')}</button>`;
+        html += getEmptyStateHTML('📋', __('empty_state.parent_no_tasks'), ctaBtn);
     }
+    html += "</div>";
 
     // Bonus tasks - render only if count > 0
     if (selectedChild.bonusTasks.length > 0) {
@@ -5084,12 +5107,12 @@ function renderParentDashboard() {
         html += "</div>";
     }
 
-    // ---- Dreams Management Section - render only if child has written dreams ----
+    // ---- Dreams Management Section ----
     if (!selectedChild.dreams) selectedChild.dreams = [];
     
+    html += "<div class='section-card' style='margin-top: 15px;'>";
+    html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--secondary);'><use href='#icon-sparkle'/></svg> " + __('dream.manage_title') + "</h4>";
     if (selectedChild.dreams.length > 0) {
-        html += "<div class='section-card' style='margin-top: 15px;'>";
-        html += "<h4 style='display:flex;align-items:center;gap:6px;'><svg class='icon-svg' aria-hidden='true' style='width:16px;height:16px;color:var(--secondary);'><use href='#icon-sparkle'/></svg> " + __('dream.manage_title') + "</h4>";
         html += "<ul class='item-list' style='margin-top:10px;list-style:none;padding:0;'>";
         selectedChild.dreams.forEach(function(dream) {
             var isApproved = dream.approved !== false && (dream.costGold > 0 || dream.costStars > 0);
@@ -5147,7 +5170,11 @@ function renderParentDashboard() {
             html += "</li>";
         });
         html += "</ul>";
+    } else {
+        const ctaBtn = `<button class="btn btn-secondary btn-empty-parent-add-dream" style="padding: 8px 16px; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2);">${__('empty_state.parent_no_dreams_cta')}</button>`;
+        html += getEmptyStateHTML('🌟', __('empty_state.parent_no_dreams'), ctaBtn);
     }
+    html += "</div>";
 
     // Rewards & Punishments Section
     if (!selectedChild.rewardsPunishments) selectedChild.rewardsPunishments = [];
@@ -5312,6 +5339,20 @@ function renderParentDashboard() {
     container.querySelector('.btn-parent-add-task').addEventListener('click', function() {
         showTaskModal(null, false);
     });
+
+    const emptyAddTaskBtn = container.querySelector('.btn-empty-parent-add-task');
+    if (emptyAddTaskBtn) {
+        emptyAddTaskBtn.addEventListener('click', function() {
+            showTaskModal(null, false);
+        });
+    }
+
+    const emptyAddDreamBtn = container.querySelector('.btn-empty-parent-add-dream');
+    if (emptyAddDreamBtn) {
+        emptyAddDreamBtn.addEventListener('click', function() {
+            showParentAddDreamModal();
+        });
+    }
 
     // Add reward/punishment
     const addRevPunBtn = container.querySelector('.btn-parent-add-rev-pun');
@@ -5785,7 +5826,14 @@ function renderWithdrawalHistory() {
     if (!container) return;
 
     if (!child.withdrawals || child.withdrawals.length === 0) {
-        container.innerHTML = `<p class="empty-state" style="color:var(--text-muted);font-size:14px;">${__('balance.no_withdrawals') || 'Таърихи ихроҷ холӣ аст'}</p>`;
+        const ctaBtn = `<button class="btn btn-primary" id="btn-empty-view-tasks" style="padding: 8px 16px; font-size: 13px;">${__('empty_state.child_no_withdrawals_cta')}</button>`;
+        container.innerHTML = getEmptyStateHTML('🪙', __('empty_state.child_no_withdrawals'), ctaBtn);
+        const routeBtn = document.getElementById('btn-empty-view-tasks');
+        if (routeBtn) {
+            routeBtn.addEventListener('click', () => {
+                navigateTo('routine');
+            });
+        }
         return;
     }
 
@@ -8498,11 +8546,7 @@ function renderRewardsPunishments(container, child) {
             </div>`;
         }
 
-        const descText = currentLang === 'ru' 
-            ? `Запрос на вывод ${req.amount} ${sym} был отклонен родителями.`
-            : (currentLang === 'en' 
-                ? `Your withdrawal request of ${req.amount} ${sym} was rejected by parents.`
-                : `Дархости ихроҷи шумо ба маблағи ${req.amount} ${sym} аз ҷониби волидон рад карда шуд.`);
+        const descText = __('balance.reject_withdrawal_desc', { amount: req.amount, sym: sym });
 
         const div = document.createElement('div');
         div.className = 'task-card';
