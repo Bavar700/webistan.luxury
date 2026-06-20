@@ -4102,17 +4102,15 @@ input::-webkit-credentials-auto-fill-button {
 .grand-prize-title-text {
     font-size: 36px !important; 
     font-weight: 900 !important; 
-    background: linear-gradient(120deg, #FFD700 0%, #FFA500 35%, #ffffff 50%, #FFA500 65%, #FF8C00 100%) !important;
     background-size: 200% auto !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
     margin-bottom: 8px !important; 
     text-align: center !important;
-    letter-spacing: 1.5px !important;
+    letter-spacing: normal !important;
     display: block !important;
     animation: superprizeTextShine 3.5s linear infinite !important;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.15) !important;
 }
 
 @keyframes superprizeTextShine {

@@ -3213,7 +3213,9 @@ function renderAchievements() {
                 progressFill: 'linear-gradient(90deg, #e2e8f0 0%, #94a3b8 100%)',
                 badgeBg: 'rgba(203, 213, 225, 0.2)',
                 badgeBorder: 'rgba(148, 163, 184, 0.3)',
-                textColor: '#64748b'
+                textColor: '#64748b',
+                titleGradient: 'linear-gradient(120deg, #94a3b8 20%, #cbd5e1 40%, #ffffff 50%, #cbd5e1 60%, #94a3b8 80%)',
+                titleShadow: '0 0 10px rgba(148, 163, 184, 0.15)'
             },
             { // 1: Gold
                 bgGradient: 'rgba(255, 215, 0, 0.1) 0%, rgba(218, 165, 32, 0.15) 100%',
@@ -3224,7 +3226,9 @@ function renderAchievements() {
                 progressFill: 'linear-gradient(90deg, #FFD700 0%, #FFA500 100%)',
                 badgeBg: 'rgba(255, 215, 0, 0.2)',
                 badgeBorder: 'rgba(255, 215, 0, 0.3)',
-                textColor: '#DAA520'
+                textColor: '#DAA520',
+                titleGradient: 'linear-gradient(120deg, #FFD700 0%, #FFA500 35%, #ffffff 50%, #FFA500 65%, #FF8C00 100%)',
+                titleShadow: '0 0 10px rgba(255, 215, 0, 0.15)'
             },
             { // 2: Platinum
                 bgGradient: 'rgba(99, 102, 241, 0.1) 0%, rgba(67, 56, 202, 0.15) 100%',
@@ -3235,7 +3239,9 @@ function renderAchievements() {
                 progressFill: 'linear-gradient(90deg, #818cf8 0%, #4f46e5 100%)',
                 badgeBg: 'rgba(99, 102, 241, 0.15)',
                 badgeBorder: 'rgba(99, 102, 241, 0.3)',
-                textColor: '#4f46e5'
+                textColor: '#4f46e5',
+                titleGradient: 'linear-gradient(120deg, #6366f1 20%, #a5b4fc 40%, #ffffff 50%, #a5b4fc 60%, #4338ca 80%)',
+                titleShadow: '0 0 10px rgba(99, 102, 241, 0.15)'
             },
             { // 3: Diamond
                 bgGradient: 'rgba(56, 189, 248, 0.1) 0%, rgba(3, 105, 161, 0.15) 100%',
@@ -3246,7 +3252,9 @@ function renderAchievements() {
                 progressFill: 'linear-gradient(90deg, #7dd3fc 0%, #0284c7 100%)',
                 badgeBg: 'rgba(56, 189, 248, 0.15)',
                 badgeBorder: 'rgba(56, 189, 248, 0.3)',
-                textColor: '#0284c7'
+                textColor: '#0284c7',
+                titleGradient: 'linear-gradient(120deg, #0284c7 20%, #38bdf8 40%, #ffffff 50%, #38bdf8 60%, #0369a1 80%)',
+                titleShadow: '0 0 10px rgba(56, 189, 248, 0.15)'
             }
         ];
         
@@ -3278,7 +3286,7 @@ function renderAchievements() {
                 "></div>
                 
                 <div style="font-size: 48px; margin-bottom: 12px; animation: float 3s ease-in-out infinite;">👑</div>
-                <h3 class="grand-prize-title-text">
+                <h3 class="grand-prize-title-text" style="background-image: ${theme.titleGradient} !important; text-shadow: ${theme.titleShadow} !important;">
                     ${__('achievements.grand_prize') || 'Шоҳҷоиза'}
                 </h3>
                 <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; padding: 0 10px; line-height: 1.4;">
