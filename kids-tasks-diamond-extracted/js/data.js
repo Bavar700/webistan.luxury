@@ -74,6 +74,7 @@ async function fetchRemoteState() {
                 if (error.code === 'PGRST116') {
                     console.log('No family state found, creating default...');
                     await saveRemoteState();
+                    safeStorage.removeItem('kids_tasks_onboarding_lang');
                     updateSyncStatus('online');
                     return state;
                 }
@@ -94,6 +95,21 @@ async function fetchRemoteState() {
                     }
                 }
                 
+                // Prioritize the locally selected onboarding language during auth boundaries
+                const onboardingLang = safeStorage.getItem('kids_tasks_onboarding_lang');
+                if (onboardingLang) {
+                    if (remoteState.language !== onboardingLang) {
+                        remoteState.language = onboardingLang;
+                        remoteState.version = (Number(remoteState.version) || 0) + 1;
+                        remoteState.lastUpdated = Date.now();
+                    }
+                    if (localState && localState.language !== onboardingLang) {
+                        localState.language = onboardingLang;
+                        localState.version = (Number(localState.version) || 0) + 1;
+                        localState.lastUpdated = Date.now();
+                    }
+                }
+
                 const remoteVersion = Number(remoteState.version) || 0;
                 const localVersion = (localState && Number(localState.version)) || 0;
                 const remoteTime = Number(remoteState.lastUpdated) || 0;
@@ -118,6 +134,9 @@ async function fetchRemoteState() {
                     console.log('Remote state is newer. Syncing from remote to local. Versions: remote=', remoteVersion, ', local=', localVersion);
                     const wasMigrated = migrateState(remoteState);
                     state = remoteState;
+                    if (state.language) {
+                        setLanguage(state.language);
+                    }
                     safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                     if (wasMigrated) {
                         saveState(true);
@@ -126,6 +145,9 @@ async function fetchRemoteState() {
                     console.log('Local state is newer. Syncing from local to remote. Versions: local=', localVersion, ', remote=', remoteVersion);
                     state = localState;
                     const wasMigrated = migrateState(state);
+                    if (state.language) {
+                        setLanguage(state.language);
+                    }
                     if (wasMigrated) {
                         saveState(true);
                     } else {
@@ -135,11 +157,15 @@ async function fetchRemoteState() {
                     console.log('Local and remote states are already in sync. Version:', localVersion);
                     const wasMigrated = migrateState(remoteState);
                     state = remoteState;
+                    if (state.language) {
+                        setLanguage(state.language);
+                    }
                     safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
                     if (wasMigrated) {
                         saveState(true);
                     }
                 }
+                safeStorage.removeItem('kids_tasks_onboarding_lang');
                 updateSyncStatus('online');
                 return state;
             }
@@ -732,10 +758,15 @@ function migrateState(stateObj) {
 function loadState() {
     try {
         const saved = safeStorage.getItem(STORAGE_KEY);
+        const onboardingLang = safeStorage.getItem('kids_tasks_onboarding_lang');
         if (saved) {
             state = JSON.parse(saved);
             // Auto-delete proof photos older than 7 days after confirmation (frees localStorage)
             cleanupOldPhotos();
+            // Prioritize explicitly selected onboarding language
+            if (onboardingLang) {
+                state.language = onboardingLang;
+            }
             // Set language if saved
             if (state.language) {
                 setLanguage(state.language);
@@ -756,15 +787,16 @@ function loadState() {
     window._isFirstLaunch = true;
 
     // Create default state
+    const onboardingLang = safeStorage.getItem('kids_tasks_onboarding_lang');
     state = {
         pin: DEFAULT_PIN,
-        language: 'en',
+        language: onboardingLang || 'en',
         children: [],
         lastUpdated: Date.now(),
         version: 1
     };
     currentChildId = null;
-    setLanguage('en');
+    setLanguage(state.language);
     saveState(true);
 }
 

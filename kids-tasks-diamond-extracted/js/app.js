@@ -106,10 +106,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         clearTimeout(loadingTimer);
         hideLoadingScreen();
     } else {
-        // No active session — show welcome (language selection) first, then auth
+        // No active session — show welcome first if they haven't completed onboarding
         clearTimeout(loadingTimer);
         hideLoadingScreen();
-        showWelcomeScreen();
+        if (safeStorage.getItem('kids_tasks_has_seen_onboarding') || safeStorage.getItem('hasSeenOnboarding')) {
+            initSupabase();
+            checkAuthAndSetup();
+        } else {
+            showWelcomeScreen();
+        }
     }
 });
 
@@ -193,6 +198,7 @@ let authMode = 'login'; // Keep track of auth mode globally/in file scope
 
 function showAuthOverlay() {
     hideLoadingScreen();
+    applyStaticTranslations();
     document.getElementById('auth-overlay').classList.remove('hidden');
     authMode = 'login'; // Reset to login mode every time overlay opens
     
@@ -928,14 +934,15 @@ function updateUI() {
         calCard.style.display = child ? 'block' : 'none';
     }
 
+    // Apply translations and navigation labels so the pages render in selected language
+    applyStaticTranslations();
+    updateNavLabels();
+
     if (!child) {
         // If there's no child, we still want to render the parent page so they can create one!
         if (currentPage === 'parent') {
             renderParentDashboard();
         }
-        // Apply translations and navigation labels so the empty state page renders nicely
-        applyStaticTranslations();
-        updateNavLabels();
         return;
     }
 
@@ -3505,6 +3512,13 @@ function renderSettings() {
                         </span>
                         <span class="settings-item-arrow">›</span>
                     </div>
+                    <div class="settings-item" id="btn-how-it-works" style="cursor: pointer;">
+                        <span class="settings-item-left">
+                            <svg class="icon-svg settings-item-icon" aria-hidden="true"><use href="#icon-sparkle"/></svg>
+                            <span class="settings-item-label">${__('settings.how_it_works')}</span>
+                        </span>
+                        <span class="settings-item-arrow">›</span>
+                    </div>
                     <div class="settings-item settings-lang-row">
                         <div class="lang-dropdown" id="lang-dropdown">
                             ${(() => {
@@ -3656,6 +3670,10 @@ function renderSettings() {
     }
 
     // Settings actions
+    document.getElementById('btn-how-it-works').addEventListener('click', () => {
+        showOnboardingCarousel(true);
+    });
+
     document.getElementById('btn-change-pin').addEventListener('click', () => {
         const newPin = prompt(__('settings.change_pin_prompt'));
         if (newPin && /^\d{4}$/.test(newPin)) {
@@ -6103,6 +6121,7 @@ function showWelcomeScreen() {
         : (window._isFirstLaunch ? 'en' : (state && state.language) || 'en');
     welcomeSelectedLang = savedLang;
     setLanguage(savedLang);
+    applyStaticTranslations();
     startBtn.classList.add('active');
     document.querySelectorAll('.welcome-lang-btn').forEach(b => b.classList.remove('selected'));
     const savedBtn = document.getElementById('welcome-btn-' + savedLang);
@@ -6124,8 +6143,16 @@ function showWelcomeScreen() {
             welcomeSelectedLang = btn.dataset.lang;
             startBtn.classList.add('active');
 
+            // Immediately save selection to localStorage
+            safeStorage.setItem('kids_tasks_onboarding_lang', welcomeSelectedLang);
+            if (state) {
+                state.language = welcomeSelectedLang;
+                saveState(false);
+            }
+
             // Update welcome UI text in the selected language (but keep native names on buttons)
             setLanguage(welcomeSelectedLang);
+            applyStaticTranslations();
             document.getElementById('welcome-greeting').textContent = __('welcome.title');
             document.getElementById('welcome-subtitle').textContent = __('welcome.subtitle');
             document.getElementById('welcome-lang-label').textContent = __('welcome.select_language');
@@ -6144,14 +6171,105 @@ function showWelcomeScreen() {
         state.language = welcomeSelectedLang;
         saveState();
 
-        // Hide welcome screen, then go to auth
+        // Hide welcome screen
         overlay.classList.add('hidden');
         window._isFirstLaunch = false;
         
-        // Initialize Supabase and check auth
-        initSupabase();
-        await checkAuthAndSetup();
+        // Always route to onboarding carousel first
+        showOnboardingCarousel(false);
     });
+}
+
+// ===== ONBOARDING CAROUSEL =====
+let currentOnboardingSlide = 0;
+
+function showOnboardingCarousel(isReplay = false) {
+    const screen = document.getElementById('onboarding-screen');
+    if (!screen) return;
+
+    screen.classList.remove('hidden');
+    currentOnboardingSlide = 0;
+    updateOnboardingSlide(isReplay);
+
+    // Get buttons
+    const nextBtn = document.getElementById('onboarding-next-btn');
+    const skipBtn = document.getElementById('onboarding-skip-btn');
+
+    // Re-bind click handlers by cloning to clean up old event listeners
+    const newNextBtn = nextBtn.cloneNode(true);
+    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+    const newSkipBtn = skipBtn.cloneNode(true);
+    skipBtn.parentNode.replaceChild(newSkipBtn, skipBtn);
+
+    newNextBtn.addEventListener('click', () => {
+        if (currentOnboardingSlide < 3) {
+            currentOnboardingSlide++;
+            updateOnboardingSlide(isReplay);
+        } else {
+            closeOnboarding(isReplay, true);
+        }
+    });
+
+    newSkipBtn.addEventListener('click', () => {
+        closeOnboarding(isReplay, false);
+    });
+
+    // Handle dots click
+    document.querySelectorAll('.onboarding-dot').forEach((dot, idx) => {
+        const newDot = dot.cloneNode(true);
+        dot.parentNode.replaceChild(newDot, dot);
+        newDot.addEventListener('click', () => {
+            currentOnboardingSlide = idx;
+            updateOnboardingSlide(isReplay);
+        });
+    });
+}
+
+function updateOnboardingSlide(isReplay) {
+    const slides = document.querySelectorAll('.onboarding-slide');
+    const dots = document.querySelectorAll('.onboarding-dot');
+
+    slides.forEach((slide, idx) => {
+        slide.classList.remove('active', 'prev-slide');
+        if (idx === currentOnboardingSlide) {
+            slide.classList.add('active');
+            slide.scrollTop = 0; // Reset scroll position to top when slide becomes active
+        } else if (idx < currentOnboardingSlide) {
+            slide.classList.add('prev-slide');
+        }
+    });
+
+    dots.forEach((dot, idx) => {
+        if (idx === currentOnboardingSlide) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+
+    const nextText = document.getElementById('onboarding-next-text');
+    if (nextText) {
+        if (currentOnboardingSlide === 3) {
+            nextText.textContent = __('onboarding.btn.get_started');
+        } else {
+            nextText.textContent = __('onboarding.btn.next');
+        }
+    }
+}
+
+function closeOnboarding(isReplay, didComplete = false) {
+    const screen = document.getElementById('onboarding-screen');
+    if (screen) {
+        screen.classList.add('hidden');
+    }
+    if (!isReplay) {
+        if (didComplete) {
+            safeStorage.setItem('kids_tasks_has_seen_onboarding', 'true');
+            safeStorage.setItem('hasSeenOnboarding', 'true');
+        }
+        initSupabase();
+        checkAuthAndSetup();
+    }
 }
 
 
@@ -7833,9 +7951,14 @@ function setupRealtimeSubscription(userId) {
                     
                     if (isRemoteNewer) {
                         console.log('Applying real-time update. Versions: remote=', remoteVersion, ', local=', localVersion);
+                        const oldLang = currentLang;
                         migrateState(remoteState);
                         state = remoteState;
                         safeStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                        
+                        if (state.language) {
+                            setLanguage(state.language);
+                        }
                         
                         if (state.children.length > 0) {
                             if (!state.children.some(c => c.id === currentChildId)) {
@@ -7843,7 +7966,11 @@ function setupRealtimeSubscription(userId) {
                             }
                         }
                         
-                        updateUI();
+                        if (state.language && state.language !== oldLang) {
+                            updateLanguageUI();
+                        } else {
+                            updateUI();
+                        }
                         if (currentPage === 'settings' && typeof renderSettings === 'function') {
                             renderSettings();
                         }
@@ -8413,10 +8540,10 @@ function renderRewardsPunishments(container, child) {
             : `🔴 ${__('revpun.punish_label') || 'Ҷарима аз волид'}`;
         
         const starsText = item.stars > 0 ? `⭐ +${item.stars} ` : '';
-        const goldText = item.gold > 0 ? `🪙 +${item.gold}смн` : '';
+        const goldText = item.gold > 0 ? `🪙 +${item.gold}` : '';
         const valueText = isReward 
             ? `${starsText}${goldText}`.trim()
-            : `⭐ -${item.stars} 🪙 -${item.gold}смн`.trim();
+            : `⭐ -${item.stars} 🪙 -${item.gold}`.trim();
         
         let photoHTML = '';
         if (item.photo) {
