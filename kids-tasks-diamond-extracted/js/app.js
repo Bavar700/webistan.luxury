@@ -4897,7 +4897,7 @@ function renderParentDashboard() {
     html += "  <button class='btn btn-secondary btn-parent-add-dream w-full' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(124, 58, 237, 0.1); color: var(--primary); border: 1px solid rgba(124, 58, 237, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
     html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-plus'/></svg> " + (__('parent.add_dream_title_btn')) + "</button>";
     html += "  <button class='btn btn-secondary btn-parent-add-rev-pun w-full' style='min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-size: 13px; background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); padding: 8px 12px; white-space: normal; text-align: center;'>";
-    html += "    " + __('parent.add_rev_pun_btn') + "</button>";
+    html += "    <svg class='icon-svg' style='width:14px;height:14px;' aria-hidden='true'><use href='#icon-scale'/></svg> " + __('parent.add_rev_pun_btn') + "</button>";
     html += "</div>";
     html += "</div>";
 
