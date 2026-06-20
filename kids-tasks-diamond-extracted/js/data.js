@@ -698,6 +698,15 @@ function migrateState(stateObj) {
         if (child.tasks) child.tasks.forEach(t => migrateTask(t, false));
         if (child.bonusTasks) child.bonusTasks.forEach(t => migrateTask(t, true));
 
+        if (!stateObj.gamificationReset20260620) {
+            child.achievements = [];
+            child.achievementTier = 0;
+            child.revokedAchievements = [];
+            child.revokedAchievementsDetails = {};
+            child.tierStartDate = getToday();
+            modified = true;
+        }
+
         // One-time fix for Yusufkhoja's balance due to historical non-deducted rejected tasks
         const cName = child.name || '';
         if ((cName.includes('Юсуф') || cName.toLowerCase().includes('yusuf')) && !child.yusufkhojaBalanceFixed) {
@@ -710,6 +719,13 @@ function migrateState(stateObj) {
             console.log("Migration: Yusufkhoja balance and stars corrected to 1.");
         }
     });
+
+    if (!stateObj.gamificationReset20260620) {
+        stateObj.gamificationReset20260620 = true;
+        modified = true;
+        console.log("Migration: Gamification reset to zero for all users.");
+    }
+
     return modified;
 }
 
@@ -1650,6 +1666,8 @@ function checkAchievements(childId) {
         child.achievementTier += 1;
         newTier = child.achievementTier;
         child.achievements = [];
+        child.revokedAchievements = [];
+        child.revokedAchievementsDetails = {};
         child.tierStartDate = getToday();
     }
 
