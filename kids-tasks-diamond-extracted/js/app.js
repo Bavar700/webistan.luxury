@@ -3203,16 +3203,66 @@ function renderAchievements() {
         const starPrizeValue = 200 + 100 * t;
         const pct = totalCount > 0 ? (currentCount / totalCount) * 100 : 0;
         
+        const tierThemes = [
+            { // 0: Silver
+                bgGradient: 'rgba(203, 213, 225, 0.1) 0%, rgba(148, 163, 184, 0.15) 100%',
+                border: 'rgba(148, 163, 184, 0.4)',
+                shadow: 'rgba(148, 163, 184, 0.08)',
+                radial: 'rgba(203, 213, 225, 0.2)',
+                progressBorder: 'rgba(148, 163, 184, 0.2)',
+                progressFill: 'linear-gradient(90deg, #e2e8f0 0%, #94a3b8 100%)',
+                badgeBg: 'rgba(203, 213, 225, 0.2)',
+                badgeBorder: 'rgba(148, 163, 184, 0.3)',
+                textColor: '#64748b'
+            },
+            { // 1: Gold
+                bgGradient: 'rgba(255, 215, 0, 0.1) 0%, rgba(218, 165, 32, 0.15) 100%',
+                border: 'rgba(255, 215, 0, 0.4)',
+                shadow: 'rgba(218, 165, 32, 0.08)',
+                radial: 'rgba(255,215,0,0.2)',
+                progressBorder: 'rgba(255,215,0,0.1)',
+                progressFill: 'linear-gradient(90deg, #FFD700 0%, #FFA500 100%)',
+                badgeBg: 'rgba(255, 215, 0, 0.2)',
+                badgeBorder: 'rgba(255, 215, 0, 0.3)',
+                textColor: '#DAA520'
+            },
+            { // 2: Platinum
+                bgGradient: 'rgba(99, 102, 241, 0.1) 0%, rgba(67, 56, 202, 0.15) 100%',
+                border: 'rgba(99, 102, 241, 0.4)',
+                shadow: 'rgba(67, 56, 202, 0.08)',
+                radial: 'rgba(99, 102, 241, 0.2)',
+                progressBorder: 'rgba(99, 102, 241, 0.2)',
+                progressFill: 'linear-gradient(90deg, #818cf8 0%, #4f46e5 100%)',
+                badgeBg: 'rgba(99, 102, 241, 0.15)',
+                badgeBorder: 'rgba(99, 102, 241, 0.3)',
+                textColor: '#4f46e5'
+            },
+            { // 3: Diamond
+                bgGradient: 'rgba(56, 189, 248, 0.1) 0%, rgba(3, 105, 161, 0.15) 100%',
+                border: 'rgba(56, 189, 248, 0.4)',
+                shadow: 'rgba(3, 105, 161, 0.08)',
+                radial: 'rgba(56, 189, 248, 0.2)',
+                progressBorder: 'rgba(56, 189, 248, 0.2)',
+                progressFill: 'linear-gradient(90deg, #7dd3fc 0%, #0284c7 100%)',
+                badgeBg: 'rgba(56, 189, 248, 0.15)',
+                badgeBorder: 'rgba(56, 189, 248, 0.3)',
+                textColor: '#0284c7'
+            }
+        ];
+        
+        const tierIdx = Math.min(3, t);
+        const theme = tierThemes[tierIdx];
+
         banner.innerHTML = `
             <div class="grand-prize-card" style="
-                background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(218, 165, 32, 0.15) 100%);
-                border: 2px dashed rgba(255, 215, 0, 0.4);
+                background: linear-gradient(135deg, ${theme.bgGradient});
+                border: 2px dashed ${theme.border};
                 border-radius: 16px;
                 padding: 20px;
                 text-align: center;
                 position: relative;
                 overflow: hidden;
-                box-shadow: 0 8px 32px rgba(218, 165, 32, 0.08);
+                box-shadow: 0 8px 32px ${theme.shadow};
                 transition: all 0.3s ease;
                 margin-top: 15px;
             ">
@@ -3223,7 +3273,7 @@ function renderAchievements() {
                     right: -50px;
                     width: 120px;
                     height: 120px;
-                    background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+                    background: radial-gradient(circle, ${theme.radial} 0%, transparent 70%);
                     pointer-events: none;
                 "></div>
                 
@@ -3239,10 +3289,10 @@ function renderAchievements() {
                 <div style="margin-bottom: 16px; padding: 0 10px;">
                     <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 6px;">
                         <span style="color: var(--text-secondary);">${__('achievement_modal.progress_label') || 'Пешрафт:'}</span>
-                        <span style="color: #DAA520;">${currentCount} / ${totalCount}</span>
+                        <span style="color: ${theme.textColor};">${currentCount} / ${totalCount}</span>
                     </div>
-                    <div class="progress-bar" style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; height: 8px; overflow: hidden; border: 1px solid rgba(255,215,0,0.1);">
-                        <div class="progress-fill" style="width: ${pct}%; background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); border-radius: 10px; transition: width 0.5s ease;"></div>
+                    <div class="progress-bar" style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; height: 8px; overflow: hidden; border: 1px solid ${theme.progressBorder};">
+                        <div class="progress-fill" style="width: ${pct}%; background: ${theme.progressFill}; border-radius: 10px; transition: width 0.5s ease;"></div>
                     </div>
                 </div>
                 
@@ -3250,14 +3300,14 @@ function renderAchievements() {
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
-                    background: rgba(255, 215, 0, 0.2);
+                    background: ${theme.badgeBg};
                     padding: 8px 16px;
                     border-radius: 20px;
-                    border: 1px solid rgba(255, 215, 0, 0.3);
+                    border: 1px solid ${theme.badgeBorder};
                     font-weight: 800;
-                    color: #DAA520;
+                    color: ${theme.textColor};
                     font-size: 16px;
-                    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+                    box-shadow: 0 4px 12px ${theme.shadow};
                 ">
                     <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">${__('achievements.grand_prize_prize') || 'Ҷоиза:'}</span>
                     <span style="display: flex; gap: 6px; align-items: center;">+${goldPrizeValue} 🪙 <span style="color: var(--text-secondary); font-weight: normal; font-size: 12px;">|</span> +${starPrizeValue} ⭐</span>

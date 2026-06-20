@@ -4064,7 +4064,7 @@ input::-webkit-credentials-auto-fill-button {
     text-align: center;
     margin-top: 36px;
     margin-bottom: 20px;
-    letter-spacing: 1.5px;
+    letter-spacing: normal;
     font-family: 'Nunito', 'Comic Neue', sans-serif !important;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
