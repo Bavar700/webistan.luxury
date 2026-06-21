@@ -3161,7 +3161,11 @@ function renderAchievements() {
 
     const titleEl = document.getElementById('achievements-title');
     if (titleEl) {
-        titleEl.innerHTML = `<h2 class="prestige-era-title ${tierClass}-text">${tierName}</h2>`;
+        titleEl.innerHTML = `
+            <div class="prestige-era-title-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; margin-top: 36px; margin-bottom: 24px;">
+                <h2 class="prestige-era-title ${tierClass}-text" style="margin-top: 0; margin-bottom: 0;">${tierName}</h2>
+                <div class="prestige-stars-indicator ${tierClass}-stars" style="margin-top: 2px; margin-bottom: 0;">★★★</div>
+            </div>`;
         titleEl.removeAttribute('data-i18n');
     }
 
@@ -6276,6 +6280,30 @@ function showOnboardingCarousel(isReplay = false) {
 function updateOnboardingSlide(isReplay) {
     const slides = document.querySelectorAll('.onboarding-slide');
     const dots = document.querySelectorAll('.onboarding-dot');
+
+    // Extract emoji and place it above title if present
+    slides.forEach(slide => {
+        const titleEl = slide.querySelector('.onboarding-slide-title');
+        if (titleEl) {
+            let iconEl = slide.querySelector('.onboarding-slide-icon');
+            const originalText = titleEl.textContent;
+            
+            // Match emoji characters at the end of the text
+            const emojiRegex = /[\p{Emoji_Presentation}\p{Emoji}\u200d\uFE0F]+$/u;
+            const match = originalText.match(emojiRegex);
+            if (match) {
+                const emoji = match[0];
+                const cleanText = originalText.replace(emoji, '').trim();
+                if (!iconEl) {
+                    iconEl = document.createElement('div');
+                    iconEl.className = 'onboarding-slide-icon';
+                    slide.insertBefore(iconEl, titleEl);
+                }
+                iconEl.textContent = emoji;
+                titleEl.textContent = cleanText;
+            }
+        }
+    });
 
     slides.forEach((slide, idx) => {
         slide.classList.remove('active', 'prev-slide');
