@@ -2890,7 +2890,7 @@ function showDayDetails(dateStr) {
 
     if (log.excused) {
         tasksHTML = `<div style="text-align:center; padding:16px; color:var(--text-secondary); font-size:14px;">
-            🙏 ${__('daydetails.excused') || 'Рӯзи узрнок'} — ${translateExcuseReason(log.excuseReason)}
+            🙏 ${__('daydetails.excused') || 'Сабаби узрнок'} — ${translateExcuseReason(log.excuseReason)}
         </div>`;
     } else {
         allTasks.forEach(t => {
